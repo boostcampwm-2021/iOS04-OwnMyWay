@@ -5,7 +5,7 @@
 <p align="center">
     <img src="https://img.shields.io/badge/Swift-v5.5-red?logo=swift" />
     <img src="https://img.shields.io/badge/Xcode-v13.0-blue?logo=Xcode" />
-    <img src="https://img.shields.io/badge/iOS-15.0-black?logo=apple" />  
+    <img src="https://img.shields.io/badge/iOS-13.0+-black?logo=apple" />  
 </p>
 
  ## OwnMyWay
