@@ -41,6 +41,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29E5FB38272F8BA500F35733 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DB22BB5D272F82770004444B /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		29E5FB3A272F8BC600F35733 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29E5FB3C272F8BD400F35733 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29E5FB3D272F8BDC00F35733 /* Usecase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Usecase;
+			sourceTree = "<group>";
+		};
+		29E5FB3E272F8BF300F35733 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		29E5FB3F272F8C0000F35733 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		29E5FB40272F8D0700F35733 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				DB22BB5F272F82770004444B /* Main.storyboard */,
+				DB22BB67272F82780004444B /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		DB22BB4D272F82770004444B = {
 			isa = PBXGroup;
 			children = (
@@ -61,12 +113,16 @@
 		DB22BB58272F82770004444B /* OwnMyWay */ = {
 			isa = PBXGroup;
 			children = (
+				29E5FB3F272F8C0000F35733 /* Model */,
+				29E5FB3E272F8BF300F35733 /* Repository */,
+				29E5FB3D272F8BDC00F35733 /* Usecase */,
+				29E5FB3C272F8BD400F35733 /* ViewModel */,
+				29E5FB38272F8BA500F35733 /* ViewController */,
+				29E5FB3A272F8BC600F35733 /* View */,
+				29E5FB40272F8D0700F35733 /* Storyboard */,
 				DB22BB59272F82770004444B /* AppDelegate.swift */,
 				DB22BB5B272F82770004444B /* SceneDelegate.swift */,
-				DB22BB5D272F82770004444B /* ViewController.swift */,
-				DB22BB5F272F82770004444B /* Main.storyboard */,
 				DB22BB65272F82780004444B /* Assets.xcassets */,
-				DB22BB67272F82780004444B /* LaunchScreen.storyboard */,
 				DB22BB6A272F82780004444B /* Info.plist */,
 				DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */,
 			);
