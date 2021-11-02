@@ -32,7 +32,7 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
 
     func didEnterTitle(text: String?) {
         guard let text = text else { return }
-        self.createTravelUsecase.configTravelTitle(text: text) { [weak self] result in
+        self.createTravelUsecase.configureTravelTitle(text: text) { [weak self] result in
             switch result {
             case .success(let title):
                 self?.travelTitle = title

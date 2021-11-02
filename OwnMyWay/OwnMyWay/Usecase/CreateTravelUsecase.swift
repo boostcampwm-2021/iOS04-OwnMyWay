@@ -13,7 +13,7 @@ enum CreateTravelError: Error {
 }
 
 protocol CreateTravelUsecase {
-    func configTravelTitle(text: String,
+    func configureTravelTitle(text: String,
                            completion: @escaping (Result<String, Error>) -> Void)
     func makeTravel(title: String,
                     startDate: Date,
@@ -29,7 +29,7 @@ class DefaultCreateTravelUsecase: CreateTravelUsecase {
         self.travelRepository = travelRepository
     }
 
-    func configTravelTitle(text: String,
+    func configureTravelTitle(text: String,
                            completion: @escaping (Result<String, Error>) -> Void) {
         if !text.isEmpty {
             completion(.success(text))
