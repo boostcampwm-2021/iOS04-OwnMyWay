@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol SerachLandmarkUsecase {
+protocol SearchLandmarkUsecase {
     func executeFetch(completion: @escaping ([LandmarkDTO]) -> Void)
 }
 
-class DefaultSearchLandmarkUsecase: SerachLandmarkUsecase {
+class DefaultSearchLandmarkUsecase: SearchLandmarkUsecase {
 
     let landmarkDTORepository: LandmarkDTORepository
 
