@@ -12,6 +12,17 @@ protocol TravelRepository {
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error>
     func fetchAll() -> Result<[Travel], Error>
     func findTravel(by objectID: NSManagedObjectID) -> Travel?
+    func addRecord(to travel: Travel,
+                   photoURL: URL,
+                   content: String,
+                   date: Date,
+                   latitude: Double,
+                   longitude: Double) -> Result<Record, Error>
+    func addLandmark(to travel: Travel,
+                     title: String,
+                     image: URL,
+                     latitude: Double,
+                     longitude: Double) -> Result<Landmark, Error>
 }
 
 class CoreDataTravelRepository: TravelRepository {
@@ -55,6 +66,52 @@ class CoreDataTravelRepository: TravelRepository {
             return nil
         }
         return travel
+    }
+
+    func addRecord(to travel: Travel,
+                   photoURL: URL,
+                   content: String,
+                   date: Date,
+                   latitude: Double,
+                   longitude: Double) -> Result<Record, Error> {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Record", in: context) else {
+            return .failure(NSError.init())
+        }
+        let record = Record(entity: entity, insertInto: context)
+        record.setValue(photoURL, forKey: "photoURL")
+        record.setValue(content, forKey: "content")
+        record.setValue(date, forKey: "date")
+        record.setValue(latitude, forKey: "latitude")
+        record.setValue(longitude, forKey: "longitude")
+        travel.addToRecords(record)
+        do {
+            try context.save()
+            return .success(record)
+        } catch let error {
+            return .failure(error)
+        }
+    }
+
+    func addLandmark(to travel: Travel,
+                     title: String,
+                     image: URL,
+                     latitude: Double,
+                     longitude: Double) -> Result<Landmark, Error> {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Landmark", in: context) else {
+            return .failure(NSError.init())
+        }
+        let landmark = Landmark(entity: entity, insertInto: context)
+        landmark.setValue(title, forKey: "title")
+        landmark.setValue(image, forKey: "image")
+        landmark.setValue(latitude, forKey: "latitude")
+        landmark.setValue(longitude, forKey: "longitude")
+        travel.addToLandmarks(landmark)
+        do {
+            try context.save()
+            return .success(landmark)
+        } catch let error {
+            return .failure(error)
+        }
     }
 
 }
