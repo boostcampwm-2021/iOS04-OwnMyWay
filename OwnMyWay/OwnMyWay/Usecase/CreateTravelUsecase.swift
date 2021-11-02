@@ -15,14 +15,10 @@ enum CreateTravelError: Error {
 protocol CreateTravelUsecase {
     func configTravelTitle(text: String,
                            completion: @escaping (Result<String, Error>) -> Void)
-    func configTravelDate(startDate: Date,
-                          endDate: Date,
-                          completion: @escaping (Date, Date) -> Void)
-    func makeTravel(isPossible: Bool,
-                    title: String,
+    func makeTravel(title: String,
                     startDate: Date,
                     endDate: Date,
-                    completion: @escaping (Result<Travel, Error>) -> Void)
+                    completion: @escaping (Travel) -> Void)
 }
 
 class DefaultCreateTravelUsecase: CreateTravelUsecase {
@@ -42,23 +38,17 @@ class DefaultCreateTravelUsecase: CreateTravelUsecase {
         }
     }
 
-    func configTravelDate(startDate: Date,
-                          endDate: Date,
-                          completion: @escaping (Date, Date) -> Void) {
-        completion(startDate, endDate) // 아무런 역할도 하지 않아요
-    }
-
-    func makeTravel(isPossible: Bool,
-                    title: String,
+    func makeTravel(title: String,
                     startDate: Date,
                     endDate: Date,
-                    completion: @escaping (Result<Travel, Error>) -> Void) {
-        if isPossible {
-            completion(self.travelRepository.addTravel(title: title,
+                    completion: @escaping (Travel) -> Void) {
+            switch self.travelRepository.addTravel(title: title,
                                                        startDate: startDate,
-                                                       endDate: endDate))
-        } else {
-            completion(.failure(CreateTravelError.impossibleTravel))
-        }
+                                                   endDate: endDate) {
+            case .success(let travel):
+                completion(travel)
+            case .failure(let error):
+                print(error)
+            }
     }
 }
