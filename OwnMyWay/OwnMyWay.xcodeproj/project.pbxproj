@@ -21,7 +21,7 @@
 		DB22BB73272F83DB0004444B /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DB22BB72272F83DB0004444B /* .swiftlint.yml */; };
 		DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* TravelRepository.swift */; };
 		DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B3273132A000487D33 /* LandmarkDTO.swift */; };
-		DB8831B627313C1500487D33 /* LandmarkDTORepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B527313C1500487D33 /* LandmarkDTORepository.swift */; };
+		DB8831BE2731990000487D33 /* LandmarkDTORepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LandmarkDTORepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,7 @@
 		DB22BB72272F83DB0004444B /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DB8831AD2730FDB500487D33 /* TravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRepository.swift; sourceTree = "<group>"; };
 		DB8831B3273132A000487D33 /* LandmarkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTO.swift; sourceTree = "<group>"; };
-		DB8831B527313C1500487D33 /* LandmarkDTORepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTORepository.swift; sourceTree = "<group>"; };
+		DB8831BD2731990000487D33 /* LandmarkDTORepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTORepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				DB8831AD2730FDB500487D33 /* TravelRepository.swift */,
-				DB8831B527313C1500487D33 /* LandmarkDTORepository.swift */,
+				DB8831BD2731990000487D33 /* LandmarkDTORepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -250,7 +250,7 @@
 				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
 				DB22BB5E272F82770004444B /* ViewController.swift in Sources */,
-				DB8831B627313C1500487D33 /* LandmarkDTORepository.swift in Sources */,
+				DB8831BE2731990000487D33 /* LandmarkDTORepository.swift in Sources */,
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
 				AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */,
 				DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */,
