@@ -11,7 +11,7 @@ import UIKit
 protocol TravelRepository {
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error>
     func fetchAll() -> Result<[Travel], Error>
-    func findTravelById(objectID: NSManagedObjectID) -> Travel?
+    func findTravel(by objectID: NSManagedObjectID) -> Travel?
 }
 
 class CoreDataTravelRepository: TravelRepository {
@@ -50,7 +50,7 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
-    func findTravelById(objectID: NSManagedObjectID) -> Travel? {
+    func findTravel(by objectID: NSManagedObjectID) -> Travel? {
         guard let travel = context.object(with: objectID) as? Travel else {
             return nil
         }
