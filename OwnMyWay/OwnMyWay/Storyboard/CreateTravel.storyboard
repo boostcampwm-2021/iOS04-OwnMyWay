@@ -44,14 +44,37 @@
                                     <action selector="didChangeTitle:" destination="Y6W-OH-hqX" eventType="valueChanged" id="YAr-Sr-Huf"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkc-3o-fy0">
+                                <rect key="frame" x="20.5" y="256.5" width="393.5" height="36"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="날짜">
+                                        <attributes>
+                                            <color key="NSColor" red="0.22745098039215686" green="0.45882352941176469" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="를 선택해주세요">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="nkc-3o-fy0" firstAttribute="trailing" secondItem="43Z-qy-ngV" secondAttribute="trailing" id="4x6-Xd-mvr"/>
+                            <constraint firstItem="nkc-3o-fy0" firstAttribute="top" secondItem="cs1-WO-d5D" secondAttribute="bottom" constant="50" id="ET1-tC-N0K"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.95" id="F4S-Dd-X24"/>
                             <constraint firstItem="43Z-qy-ngV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="bottom" multiplier="0.15" id="NZk-HN-5CP"/>
                             <constraint firstItem="43Z-qy-ngV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.05" id="R7N-EE-kgi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="43Z-qy-ngV" secondAttribute="trailing" id="T7W-2x-XZL"/>
+                            <constraint firstItem="nkc-3o-fy0" firstAttribute="leading" secondItem="43Z-qy-ngV" secondAttribute="leading" id="aeU-Xb-Hkh"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.05" id="g1P-dK-RS8"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="bottom" multiplier="0.2" id="wbD-h7-lcO"/>
                         </constraints>
