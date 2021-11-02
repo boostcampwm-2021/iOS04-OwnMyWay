@@ -14,4 +14,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func onbuttonpressed(_ sender: Any) {
+        let createTravelVC = CreateTravelViewController.instantiate()
+        self.navigationController?.pushViewController(createTravelVC, animated: true)
+    }
 }
