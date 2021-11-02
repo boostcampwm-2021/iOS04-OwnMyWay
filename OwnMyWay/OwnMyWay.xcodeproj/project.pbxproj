@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
-		AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB96172730F76100F23A46 /* PlusCell.xib */; };
 		29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */; };
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
+		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
+		AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB96172730F76100F23A46 /* PlusCell.xib */; };
 		DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
 		DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5B272F82770004444B /* SceneDelegate.swift */; };
 		DB22BB5E272F82770004444B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5D272F82770004444B /* ViewController.swift */; };
@@ -20,13 +20,14 @@
 		DB22BB69272F82780004444B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB22BB67272F82780004444B /* LaunchScreen.storyboard */; };
 		DB22BB73272F83DB0004444B /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DB22BB72272F83DB0004444B /* .swiftlint.yml */; };
 		DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* TravelRepository.swift */; };
+		DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B3273132A000487D33 /* LandmarkDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
-		AFFB96172730F76100F23A46 /* PlusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlusCell.xib; sourceTree = "<group>"; };
 		29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewModel.swift; sourceTree = "<group>"; };
 		29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelUsecase.swift; sourceTree = "<group>"; };
+		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
+		AFFB96172730F76100F23A46 /* PlusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlusCell.xib; sourceTree = "<group>"; };
 		DB22BB56272F82770004444B /* OwnMyWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OwnMyWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB22BB59272F82770004444B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB22BB5B272F82770004444B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +39,7 @@
 		DB22BB6A272F82780004444B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB22BB72272F83DB0004444B /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DB8831AD2730FDB500487D33 /* TravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRepository.swift; sourceTree = "<group>"; };
+		DB8831B3273132A000487D33 /* LandmarkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		29E5FB3F272F8C0000F35733 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DB8831B3273132A000487D33 /* LandmarkDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
 				DB22BB5E272F82770004444B /* ViewController.swift in Sources */,
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
