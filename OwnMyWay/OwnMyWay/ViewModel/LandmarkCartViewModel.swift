@@ -40,6 +40,7 @@ class LandmarkCartViewModel: LandmarkCartViewModelType, ObservableObject {
     }
 
     func didDeleteLandmark(of index: Int) {
+        guard index < landmarks.count else { return }
         self.landmarkCartUsecase.delete(of: landmarks[index])
     }
 }
