@@ -11,6 +11,7 @@
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
 		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
 		29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */; };
+		3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3F20606527314AAE0005D8F4 /* FSCalendar */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
 		AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB96172730F76100F23A46 /* PlusCell.xib */; };
 		DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +169,9 @@
 			dependencies = (
 			);
 			name = OwnMyWay;
+			packageProductDependencies = (
+				3F20606527314AAE0005D8F4 /* FSCalendar */,
+			);
 			productName = OwnMyWay;
 			productReference = DB22BB56272F82770004444B /* OwnMyWay.app */;
 			productType = "com.apple.product-type.application";
@@ -197,6 +202,7 @@
 			mainGroup = DB22BB4D272F82770004444B;
 			packageReferences = (
 				DB22BB70272F83560004444B /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = DB22BB57272F82770004444B /* Products */;
 			projectDirPath = "";
@@ -478,6 +484,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		DB22BB70272F83560004444B /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint";
@@ -487,6 +501,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F20606527314AAE0005D8F4 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */ = {
