@@ -39,7 +39,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cs1-WO-d5D">
                                 <rect key="frame" x="20.5" y="172.5" width="373" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <action selector="edtingTitleDidEnd:" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="za3-bb-la9"/>
                                 </connections>
