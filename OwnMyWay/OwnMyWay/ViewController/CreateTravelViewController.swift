@@ -74,16 +74,19 @@ extension CreateTravelViewController: FSCalendarDelegate {
             return
         }
         if let selectedDate = prevDate {
-            let from = selectedDate > date ? date : selectedDate
-            let to = selectedDate > date ? selectedDate : date
-            let alert = UIAlertController(title: "여행기간 확정", message: "여행 기간은 \(localize(date: from))부터 \(localize(date: to))입니다. 맞습니까?", preferredStyle: UIAlertController.Style.alert)
+            let startDate = selectedDate > date ? date : selectedDate
+            let endDate = selectedDate > date ? selectedDate : date
+            let message = "여행 기간을 \(localize(date: startDate))부터 \(localize(date: endDate))로 설정할까요?"
+            let alert = UIAlertController(title: "여행기간 확정",
+                                          message: message,
+                                          preferredStyle: .alert)
             let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
                 let day: TimeInterval = 60 * 60 * 24
-                for targetDate in stride(from: from, through: to, by: day) {
+                for targetDate in stride(from: startDate, through: endDate, by: day) {
                     calendar.select(targetDate)
                     self?.isSelectionComplete = true
                 }
-                self?.viewModel?.didEnterDate(from: from, to: to)
+                self?.viewModel?.didEnterDate(from: startDate, to: endDate)
             }
             let noAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
                 calendar.deselect(selectedDate)
