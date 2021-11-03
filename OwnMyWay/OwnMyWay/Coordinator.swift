@@ -5,21 +5,42 @@
 //  Created by 김우재 on 2021/11/03.
 //
 
-import Foundation
 import UIKit
 
-protocol Instantiable {
-    static func instantiate() -> Self
+protocol AppCoordinator {
+    func start()
 }
 
-extension Instantiable where Self: UIViewController {
-    static func instantiate(storyboardName: String) -> Self {
-        let vcName = String(describing: self)
-        let storyboard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
-        guard let vcInstance = storyboard.instantiateViewController(withIdentifier: vcName) as? Self
-        else {
-            return Self()
-        }
-        return vcInstance
+protocol HomeCoordinator {
+    func pushToCreateTravel()
+}
+
+protocol CreateTravelCoordinator {
+    func pushToAddLandmark()
+}
+
+class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinator {
+
+    var navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+
+    func start() {
+        let homeVC = HomeViewController.instantiate(storyboardName: "Home")
+        homeVC.coordinator = self
+        navigationController.pushViewController(homeVC, animated: false)
+    }
+
+    func pushToCreateTravel() {
+        let createTravelVC = CreateTravelViewController.instantiate(storyboardName: "CreateTravel")
+        createTravelVC.coordinator = self
+        navigationController.pushViewController(createTravelVC, animated: true)
+    }
+
+    func pushToAddLandmark() {
+        let addLandmarkVC = AddLandmarkViewController.instantiate(storyboardName: "AddLandmark")
+        navigationController.pushViewController(addLandmarkVC, animated: true)
     }
 }

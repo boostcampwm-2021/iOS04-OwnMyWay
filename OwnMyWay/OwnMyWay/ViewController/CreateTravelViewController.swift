@@ -7,9 +7,10 @@
 
 import UIKit
 
-class CreateTravelViewController: UIViewController {
+class CreateTravelViewController: UIViewController, Instantiable {
 
     private var viewModel: CreateTravelViewModelType?
+    var coordinator: CreateTravelCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,4 +21,5 @@ class CreateTravelViewController: UIViewController {
     @IBAction func didChangeTitle(_ sender: UITextField) {
         self.viewModel?.didEnterTitle(text: sender.text)
     }
+
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddLandmarkViewController: UIViewController {
+class AddLandmarkViewController: UIViewController, Instantiable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
