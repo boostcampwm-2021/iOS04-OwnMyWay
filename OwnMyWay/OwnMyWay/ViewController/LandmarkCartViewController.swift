@@ -11,22 +11,13 @@ import UIKit
 typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewController.Section,
                                                            Landmark>
 
-class LandmarkCartViewController: UIViewController, UICollectionViewDelegate {
-
-    static func instantiate() -> LandmarkCartViewController {
-        let storyboard = UIStoryboard(name: "LandmarkCart", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "LandmarkCartViewController")
-        guard let viewController = viewController as? Self
-        else { return LandmarkCartViewController() }
-        return viewController
-    }
+class LandmarkCartViewController: UIViewController, Instantiable {
 
     @IBOutlet weak var collectionView: UICollectionView!
     // usecase, viewModel 상위에서 주입
-    private var usecase: LandmarkCartUsecase?
     private var viewModel: LandmarkCartViewModelType?
     private var diffableDataSource: DataSource?
-    private var cancellableSet: Set<AnyCancellable>?
+    private var cancellable: AnyCancellable?
 
     enum Section: CaseIterable { case main }
 
@@ -35,12 +26,10 @@ class LandmarkCartViewController: UIViewController, UICollectionViewDelegate {
         self.registerNib()
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         // 아래는 상위에서 주입 받을 시 삭제해야하는 코드입니다.
-        self.usecase = DefaultLandmarkCartUsecase(travelRepository: CoreDataTravelRepository())
-        guard let usecase = self.usecase else { return }
+        let usecase = DefaultLandmarkCartUsecase(travelRepository: CoreDataTravelRepository())
         self.viewModel = LandmarkCartViewModel(landmarkCartUsecase: usecase)
         // 여기까지
         self.diffableDataSource = createMakeDiffableDataSource()
-        self.cancellableSet = Set<AnyCancellable>()
         self.configureCancellable()
     }
 
@@ -53,12 +42,12 @@ class LandmarkCartViewController: UIViewController, UICollectionViewDelegate {
 
     private func configureCancellable() {
         guard let viewModel = viewModel else { return }
-        self.cancellableSet?.insert(viewModel.landmarksPublisher.sink { [weak self] landmarks in
+        self.cancellable = viewModel.landmarksPublisher.sink { [weak self] landmarks in
             var snapshot = NSDiffableDataSourceSectionSnapshot<Landmark>()
             let snapshotItem = landmarks + [Landmark()]
             snapshot.append(snapshotItem)
             self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: false)
-        })
+        }
     }
 
     private func createCompositionalLayout() -> UICollectionViewLayout {
@@ -73,11 +62,11 @@ class LandmarkCartViewController: UIViewController, UICollectionViewDelegate {
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-
         section.contentInsets = NSDirectionalEdgeInsets(top: 10,
                                                         leading: 10,
                                                         bottom: 10,
                                                         trailing: 10)
+        
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
@@ -100,7 +89,7 @@ class LandmarkCartViewController: UIViewController, UICollectionViewDelegate {
                         withReuseIdentifier: LandmarkCardCell.identifier,
                         for: indexPath) as? LandmarkCardCell
                     else { return UICollectionViewCell() }
-                    cell.configure(title: item.title, image: item.image)
+                    cell.configure(landmark: item)
                     return cell
                 }
         }

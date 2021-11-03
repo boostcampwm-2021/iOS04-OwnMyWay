@@ -12,7 +12,7 @@ class AddLandmarkViewController: UIViewController, Instantiable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let cartVC = LandmarkCartViewController.instantiate()
+        let cartVC = LandmarkCartViewController.instantiate(storyboardName: "LandmarkCart")
         addChild(cartVC)
         self.cartView.addSubview(cartVC.view)
         cartVC.view.translatesAutoresizingMaskIntoConstraints = false

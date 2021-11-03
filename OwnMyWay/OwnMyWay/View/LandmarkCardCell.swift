@@ -13,15 +13,11 @@ class LandmarkCardCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    func configure(title: String?, image: URL?) {
-        guard let image = image, let data = try? Data(contentsOf: image) else {
+    func configure(landmark: Landmark) {
+        guard let image = landmark.image, let data = try? Data(contentsOf: image) else {
             return
         }
         self.imageView.image = UIImage(data: data)
-        self.titleLabel.text = title
+        self.titleLabel.text = landmark.title
     }
 }
