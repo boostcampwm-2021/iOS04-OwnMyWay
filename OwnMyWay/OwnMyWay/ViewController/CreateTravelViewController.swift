@@ -58,9 +58,10 @@ class CreateTravelViewController: UIViewController {
     }
 
     @IBAction func nextButtonDidTouched(_ sender: UIButton) {
-        self.viewModel?.didTouchNextButton() { _ in
+        self.viewModel?.didTouchNextButton(completion: { travel in
             // MARK: 화면 전환 로직이 들어갈 부분
-        }
+            _ = travel
+        })
     }
 
 }
