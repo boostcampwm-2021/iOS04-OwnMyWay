@@ -6,6 +6,8 @@
 //
 
 import Combine
+import CoreLocation
+import MapKit
 import UIKit
 
 typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewController.Section,
@@ -13,7 +15,8 @@ typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewContr
 
 class LandmarkCartViewController: UIViewController, Instantiable {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var mapView: MKMapView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     // usecase, viewModel 상위에서 주입
     private var viewModel: LandmarkCartViewModelType?
     private var diffableDataSource: DataSource?
@@ -66,7 +69,7 @@ class LandmarkCartViewController: UIViewController, Instantiable {
                                                         leading: 10,
                                                         bottom: 10,
                                                         trailing: 10)
-        
+
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
