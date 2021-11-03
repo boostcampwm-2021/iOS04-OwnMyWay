@@ -7,11 +7,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController, Instantiable {
+
+    var coordinator: HomeCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func onbuttonpressed(_ sender: Any) {
+        coordinator?.pushToCreateTravel()
+    }
 }

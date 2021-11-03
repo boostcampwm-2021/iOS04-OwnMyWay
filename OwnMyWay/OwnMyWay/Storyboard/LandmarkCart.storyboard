@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Landmark Cart View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="LandmarkCartViewController" id="Y6W-OH-hqX" customClass="LandmarkCartViewController" customModule="OwnMyWay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="556"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I0O-jn-R8L">
+                                <rect key="frame" x="0.0" y="414" width="414" height="142"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LnK-Nd-5i8">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="eHJ-Mt-RCI">
+                                        <rect key="frame" x="0.0" y="7" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="H5i-aW-9Gs">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QrM-0Q-WJS">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QrM-0Q-WJS" secondAttribute="height" multiplier="1:1" id="tp8-VL-pB3"/>
+                                </constraints>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cf9-TK-DuZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="I0O-jn-R8L" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Ea2-IQ-OpJ"/>
+                            <constraint firstItem="I0O-jn-R8L" firstAttribute="top" secondItem="QrM-0Q-WJS" secondAttribute="bottom" id="Nxf-kL-6Yj"/>
+                            <constraint firstAttribute="bottom" secondItem="I0O-jn-R8L" secondAttribute="bottom" id="UaP-Cx-cP5"/>
+                            <constraint firstItem="QrM-0Q-WJS" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="XE5-7d-4RP"/>
+                            <constraint firstAttribute="trailing" secondItem="QrM-0Q-WJS" secondAttribute="trailing" id="hhX-Vq-ksE"/>
+                            <constraint firstAttribute="trailing" secondItem="I0O-jn-R8L" secondAttribute="trailing" id="qkg-wX-4xd"/>
+                            <constraint firstItem="QrM-0Q-WJS" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="x8I-v9-mrx"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="414" height="556"/>
+                    <connections>
+                        <outlet property="collectionView" destination="I0O-jn-R8L" id="gp7-k6-DAS"/>
+                        <outlet property="mapView" destination="QrM-0Q-WJS" id="gZE-An-2sA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="108.69565217391305" y="-23.4375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
