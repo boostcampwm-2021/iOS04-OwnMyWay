@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,28 +37,29 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWb-8d-zlK">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QrM-0Q-WJS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
-                                <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="KWb-8d-zlK" secondAttribute="height" id="59U-X1-ovE"/>
+                                    <constraint firstAttribute="width" secondItem="QrM-0Q-WJS" secondAttribute="height" multiplier="1:1" id="tp8-VL-pB3"/>
                                 </constraints>
-                            </view>
+                            </mapView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="cf9-TK-DuZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="I0O-jn-R8L" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Ea2-IQ-OpJ"/>
-                            <constraint firstItem="KWb-8d-zlK" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="N6j-Ix-MAB"/>
+                            <constraint firstItem="I0O-jn-R8L" firstAttribute="top" secondItem="QrM-0Q-WJS" secondAttribute="bottom" id="Nxf-kL-6Yj"/>
                             <constraint firstAttribute="bottom" secondItem="I0O-jn-R8L" secondAttribute="bottom" id="UaP-Cx-cP5"/>
-                            <constraint firstItem="KWb-8d-zlK" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="XdH-QU-ZxT"/>
-                            <constraint firstAttribute="trailing" secondItem="KWb-8d-zlK" secondAttribute="trailing" id="ieB-DO-FgG"/>
-                            <constraint firstItem="I0O-jn-R8L" firstAttribute="top" secondItem="KWb-8d-zlK" secondAttribute="bottom" id="nqf-Ww-BMt"/>
+                            <constraint firstItem="QrM-0Q-WJS" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="XE5-7d-4RP"/>
+                            <constraint firstAttribute="trailing" secondItem="QrM-0Q-WJS" secondAttribute="trailing" id="hhX-Vq-ksE"/>
                             <constraint firstAttribute="trailing" secondItem="I0O-jn-R8L" secondAttribute="trailing" id="qkg-wX-4xd"/>
+                            <constraint firstItem="QrM-0Q-WJS" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="x8I-v9-mrx"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="414" height="556"/>
                     <connections>
                         <outlet property="collectionView" destination="I0O-jn-R8L" id="gp7-k6-DAS"/>
+                        <outlet property="mapView" destination="QrM-0Q-WJS" id="gZE-An-2sA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -68,9 +70,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
