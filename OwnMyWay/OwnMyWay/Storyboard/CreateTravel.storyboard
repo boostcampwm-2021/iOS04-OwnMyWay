@@ -70,6 +70,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="350" id="9gW-42-8Ls"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsMultipleSelection" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="gh3-qs-x8Q"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="9rS-Vn-KTD"/>
+                                </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzu-vs-UWO">
                                 <rect key="frame" x="182.5" y="816" width="49" height="31"/>
