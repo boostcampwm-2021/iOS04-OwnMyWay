@@ -15,7 +15,7 @@ protocol CreateTravelViewModelType {
     var isPossibleTitle: Bool? { get }
 
     func didEnterTitle(text: String?)
-    func didEnterDate(startDate: Date, endDate: Date)
+    func didEnterDate(from startDate: Date?, to endDate: Date?)
 }
 
 class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
@@ -43,9 +43,16 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
         }
     }
 
-    func didEnterDate(startDate: Date, endDate: Date) {
+    func didEnterDate(from startDate: Date?, to endDate: Date?) {
         self.travelStartDate = startDate
         self.travelEndDate = endDate
+        var isValid = false
+        if let startDate = startDate,
+           let endDate = endDate,
+           startDate < endDate {
+            isValid = true
+        }
+        self.isValidDate = isValid
     }
 
     func didTouchMakeButton(completion: @escaping (Travel) -> Void) {
