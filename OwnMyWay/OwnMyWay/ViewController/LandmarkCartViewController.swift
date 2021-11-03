@@ -131,7 +131,9 @@ extension LandmarkCartViewController {
         self.mapView.removeAnnotations(self.mapView.annotations)
         let annotations = landmarks.map { LandmarkAnnotation(landmark: $0) }
         self.mapView.addAnnotations(annotations)
-        self.mapView.setRegion(changeRegion(landmarks: landmarks), animated: true)
+        if !landmarks.isEmpty {
+            self.mapView.setRegion(changeRegion(landmarks: landmarks), animated: true)
+        }
     }
 
     private func changeRegion(landmarks: [Landmark]) -> MKCoordinateRegion {
