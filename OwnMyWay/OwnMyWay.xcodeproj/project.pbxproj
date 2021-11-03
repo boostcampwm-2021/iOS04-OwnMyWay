@@ -17,6 +17,7 @@
 		29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA37273253130040B70A /* LandmarkCartViewController.swift */; };
 		29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */; };
 		29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */; };
+		AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
 		AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
@@ -49,6 +50,7 @@
 		29E9BA37273253130040B70A /* LandmarkCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewController.swift; sourceTree = "<group>"; };
 		29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkCardCell.swift; sourceTree = "<group>"; };
 		29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandmarkCardCell.xib; sourceTree = "<group>"; };
+		AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotationView.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
 		AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartUsecase.swift; sourceTree = "<group>"; };
 		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				AFFB96172730F76100F23A46 /* PlusCell.xib */,
 				29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */,
 				29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */,
+				AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB8831C127319B6400487D33 /* SearchLandmarkUsecase.swift in Sources */,
+				AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */,
 				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
 				AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */,
