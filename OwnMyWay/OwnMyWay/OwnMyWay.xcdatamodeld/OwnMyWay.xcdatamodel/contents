@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Landmark" representedClassName="Landmark" syncable="YES" codeGenerationType="class">
+        <attribute name="image" optional="YES" attributeType="URI"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Travel" inverseName="landmarks" inverseEntity="Travel"/>
+    </entity>
+    <entity name="Record" representedClassName="Record" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="photoURL" optional="YES" attributeType="URI"/>
+        <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Travel" inverseName="records" inverseEntity="Travel"/>
+    </entity>
+    <entity name="Travel" representedClassName="Travel" syncable="YES" codeGenerationType="class">
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="landmarks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Landmark" inverseName="travel" inverseEntity="Landmark"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="travel" inverseEntity="Record"/>
+    </entity>
+    <elements>
+        <element name="Travel" positionX="-36" positionY="9" width="128" height="118"/>
+        <element name="Record" positionX="164.19140625" positionY="26.26171875" width="128" height="133"/>
+        <element name="Landmark" positionX="-20.21484375" positionY="165.78125" width="128" height="118"/>
+    </elements>
+</model>
