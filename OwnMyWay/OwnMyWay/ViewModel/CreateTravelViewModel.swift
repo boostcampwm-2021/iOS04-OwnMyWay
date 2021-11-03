@@ -9,10 +9,9 @@ import Combine
 import Foundation
 
 protocol CreateTravelViewModelType {
-    var travelTitle: String? { get }
-    var travelStartDate: Date? { get }
-    var travelEndDate: Date? { get }
-    var isPossibleTitle: Bool? { get }
+    var validatePublisher: Published<Bool?>.Publisher { get }
+    var startDatePublisher: Published<String?>.Publisher { get }
+    var endDatePublisher: Published<String?>.Publisher { get }
 
     func didEnterTitle(text: String?)
     func didEnterDate(from startDate: Date?, to endDate: Date?)
@@ -23,7 +22,25 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
     var travelTitle: String?
     var travelStartDate: Date?
     var travelEndDate: Date?
-    @Published var isPossibleTitle: Bool?
+    var isValidTitle: Bool = false {
+        didSet {
+            validateResult = isValidTitle && isValidDate
+        }
+    }
+
+    var isValidDate: Bool = false {
+        didSet {
+            validateResult = isValidTitle && isValidDate
+        }
+    }
+
+    @Published private var validateResult: Bool?
+    @Published private var startDate: String?
+    @Published private var endDate: String?
+
+    var validatePublisher: Published<Bool?>.Publisher { $validateResult }
+    var startDatePublisher: Published<String?>.Publisher { $startDate }
+    var endDatePublisher: Published<String?>.Publisher { $endDate }
 
     private let createTravelUsecase: CreateTravelUsecase
 
@@ -37,9 +54,9 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
             switch result {
             case .success(let title):
                 self?.travelTitle = title
-                self?.isPossibleTitle = true
+                self?.isValidTitle = true
             case .failure:
-                self?.isPossibleTitle = false
+                self?.isValidTitle = false
             }
         }
     }
