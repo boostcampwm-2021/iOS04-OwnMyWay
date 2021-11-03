@@ -13,9 +13,9 @@ protocol Instantiable {
 
 extension Instantiable where Self: UIViewController {
     static func instantiate(storyboardName: String) -> Self {
-        let vcName = String(describing: self)
+        let name = String(describing: self)
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-        guard let vcInstance = storyboard.instantiateViewController(withIdentifier: vcName) as? Self
+        guard let vcInstance = storyboard.instantiateViewController(withIdentifier: name) as? Self
         else {
             return Self()
         }
