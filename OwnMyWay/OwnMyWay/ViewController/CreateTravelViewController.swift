@@ -27,7 +27,7 @@ class CreateTravelViewController: UIViewController {
         self.viewModel = CreateTravelViewModel(createTravelUsecase: usecase)
     }
 
-    @IBAction func didChangeTitle(_ sender: UITextField) {
+    @IBAction func edtingTitleDidEnd(_ sender: UITextField) {
         self.viewModel?.didEnterTitle(text: sender.text)
     }
 }
