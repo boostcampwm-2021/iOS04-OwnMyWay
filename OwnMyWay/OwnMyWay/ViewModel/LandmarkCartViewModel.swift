@@ -11,6 +11,8 @@ import Foundation
 protocol LandmarkCartViewModelType {
     var landmarks: [Landmark] { get set }
 
+    var landmarksPublisher: Published<[Landmark]>.Publisher { get }
+
     func didAddLandmark(of landmark: Landmark)
     func didLinkLandmark(to travel: Travel, of landmark: Landmark, completion: (Error) -> Void)
     func didTouchBackButton(travel: Travel)
@@ -19,6 +21,7 @@ protocol LandmarkCartViewModelType {
 
 class LandmarkCartViewModel: LandmarkCartViewModelType, ObservableObject {
     @Published var landmarks: [Landmark]
+    var landmarksPublisher: Published<[Landmark]>.Publisher { $landmarks }
 
     private let landmarkCartUsecase: LandmarkCartUsecase
 

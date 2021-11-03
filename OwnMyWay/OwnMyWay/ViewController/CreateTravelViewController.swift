@@ -9,14 +9,7 @@ import Combine
 import FSCalendar
 import UIKit
 
-class CreateTravelViewController: UIViewController {
-    static func instantiate() -> CreateTravelViewController {
-        let storyboard = UIStoryboard(name: "CreateTravel", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "CreateTravelVC")
-        guard let viewController = viewController as? Self
-        else { return CreateTravelViewController() }
-        return viewController
-    }
+class CreateTravelViewController: UIViewController, Instantiable {
 
     @IBOutlet weak var travelTitleField: UITextField!
     @IBOutlet weak var calendarView: FSCalendar!
@@ -25,6 +18,7 @@ class CreateTravelViewController: UIViewController {
     private var prevDate: Date?
     private var isSelectionComplete: Bool = false
     private var viewModel: CreateTravelViewModelType?
+    var coordinator: CreateTravelCoordinator?
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
