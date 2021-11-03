@@ -14,7 +14,7 @@ class LandmarkAnnotationView: MKAnnotationView {
 
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        self.image = UIImage(systemName: "pencil") // 수정 필요
+        self.image = UIImage(named: "LandmarkPin")
         self.canShowCallout = true
         configure(annotation: annotation)
     }
