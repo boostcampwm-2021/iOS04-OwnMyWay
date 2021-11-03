@@ -68,7 +68,9 @@ class CreateTravelViewController: UIViewController {
 
 extension CreateTravelViewController: FSCalendarDelegate {
 
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+    func calendar(_ calendar: FSCalendar,
+                  didSelect date: Date,
+                  at monthPosition: FSCalendarMonthPosition) {
         if isSelectionComplete {
             initSelection()
             return
@@ -81,11 +83,11 @@ extension CreateTravelViewController: FSCalendarDelegate {
                                           message: message,
                                           preferredStyle: .alert)
             let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
-                let day: TimeInterval = 60 * 60 * 24
-                for targetDate in stride(from: startDate, through: endDate, by: day) {
-                    calendar.select(targetDate)
-                    self?.isSelectionComplete = true
+                let dayInterval: TimeInterval = 60 * 60 * 24
+                stride(from: startDate, through: endDate, by: dayInterval).forEach {
+                    calendar.select($0)
                 }
+                self?.isSelectionComplete = true
                 self?.viewModel?.didEnterDate(from: startDate, to: endDate)
             }
             let noAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
