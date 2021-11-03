@@ -19,8 +19,8 @@
 		AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB96172730F76100F23A46 /* PlusCell.xib */; };
 		DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
 		DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5B272F82770004444B /* SceneDelegate.swift */; };
-		DB22BB5E272F82770004444B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5D272F82770004444B /* ViewController.swift */; };
-		DB22BB61272F82770004444B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB22BB5F272F82770004444B /* Main.storyboard */; };
+		DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5D272F82770004444B /* HomeViewController.swift */; };
+		DB22BB61272F82770004444B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB22BB5F272F82770004444B /* Home.storyboard */; };
 		DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */; };
 		DB22BB66272F82780004444B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB22BB65272F82780004444B /* Assets.xcassets */; };
 		DB22BB69272F82780004444B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB22BB67272F82780004444B /* LaunchScreen.storyboard */; };
@@ -31,6 +31,7 @@
 		DB8831C127319B6400487D33 /* SearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */; };
 		DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */; };
 		DB8831C52732670F00487D33 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C42732670F00487D33 /* Coordinator.swift */; };
+		DB8831C72732861500487D33 /* Instantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C62732861500487D33 /* Instantiable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,8 +48,8 @@
 		DB22BB56272F82770004444B /* OwnMyWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OwnMyWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB22BB59272F82770004444B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB22BB5B272F82770004444B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DB22BB5D272F82770004444B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DB22BB60272F82770004444B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DB22BB5D272F82770004444B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DB22BB60272F82770004444B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		DB22BB63272F82770004444B /* OwnMyWay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OwnMyWay.xcdatamodel; sourceTree = "<group>"; };
 		DB22BB65272F82780004444B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB22BB68272F82780004444B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 		DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkUsecase.swift; sourceTree = "<group>"; };
 		DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewModel.swift; sourceTree = "<group>"; };
 		DB8831C42732670F00487D33 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		DB8831C62732861500487D33 /* Instantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instantiable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +78,10 @@
 		29E5FB38272F8BA500F35733 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				DB22BB5D272F82770004444B /* ViewController.swift */,
+				DB22BB5D272F82770004444B /* HomeViewController.swift */,
 				29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */,
 				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
+				DB8831C62732861500487D33 /* Instantiable.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -132,7 +135,7 @@
 		29E5FB40272F8D0700F35733 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				DB22BB5F272F82770004444B /* Main.storyboard */,
+				DB22BB5F272F82770004444B /* Home.storyboard */,
 				DB22BB67272F82780004444B /* LaunchScreen.storyboard */,
 				29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */,
 				29E9BA31273220C60040B70A /* AddLandmark.storyboard */,
@@ -242,7 +245,7 @@
 				DB22BB73272F83DB0004444B /* .swiftlint.yml in Resources */,
 				DB22BB69272F82780004444B /* LaunchScreen.storyboard in Resources */,
 				DB22BB66272F82780004444B /* Assets.xcassets in Resources */,
-				DB22BB61272F82770004444B /* Main.storyboard in Resources */,
+				DB22BB61272F82770004444B /* Home.storyboard in Resources */,
 				29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */,
 				29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
@@ -281,8 +284,9 @@
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
 				AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */,
 				29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */,
-				DB22BB5E272F82770004444B /* ViewController.swift in Sources */,
+				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				DB8831BE2731990000487D33 /* LandmarkDTORepository.swift in Sources */,
+				DB8831C72732861500487D33 /* Instantiable.swift in Sources */,
 				AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */,
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
 				AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */,
@@ -299,12 +303,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DB22BB5F272F82770004444B /* Main.storyboard */ = {
+		DB22BB5F272F82770004444B /* Home.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DB22BB60272F82770004444B /* Base */,
 			);
-			name = Main.storyboard;
+			name = Home.storyboard;
 			sourceTree = "<group>";
 		};
 		DB22BB67272F82780004444B /* LaunchScreen.storyboard */ = {
@@ -446,7 +450,6 @@
 				INFOPLIST_FILE = OwnMyWay/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -474,7 +477,6 @@
 				INFOPLIST_FILE = OwnMyWay/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

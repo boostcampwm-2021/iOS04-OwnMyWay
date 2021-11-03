@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController, Instantiable {
+
+    var coordinator: HomeCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +17,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onbuttonpressed(_ sender: Any) {
-        let createTravelVC = CreateTravelViewController.instantiate()
-        self.navigationController?.pushViewController(createTravelVC, animated: true)
+        coordinator?.pushToCreateTravel()
     }
 }
