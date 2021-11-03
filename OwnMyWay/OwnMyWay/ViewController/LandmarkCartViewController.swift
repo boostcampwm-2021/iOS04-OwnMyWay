@@ -170,8 +170,7 @@ extension LandmarkCartViewController: MKMapViewDelegate {
             annotationView?.configure(annotation: annotation)
             return annotationView
         default:
-            break
+            return nil
         }
-        return nil
     }
 }
