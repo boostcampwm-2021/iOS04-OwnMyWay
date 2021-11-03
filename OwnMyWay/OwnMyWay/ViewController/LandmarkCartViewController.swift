@@ -112,6 +112,19 @@ extension LandmarkCartViewController {
             LandmarkAnnotationView.self,
             forAnnotationViewWithReuseIdentifier: LandmarkAnnotationView.identifier
         )
+        self.mapView.setRegion(
+            MKCoordinateRegion(
+                center: CLLocationCoordinate2D(
+                    latitude: 37.24800,
+                    longitude: 127.07845
+                ),
+                span: MKCoordinateSpan(
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01
+                )
+            ),
+            animated: false
+        )
     }
 
     private func drawMap(landmarks: [Landmark]) {
