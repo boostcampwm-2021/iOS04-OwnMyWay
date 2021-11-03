@@ -12,7 +12,7 @@ protocol CreateTravelViewModelType {
     var travelTitle: String? { get }
     var travelStartDate: Date? { get }
     var travelEndDate: Date? { get }
-    var isPossible: Bool? { get }
+    var isPossibleTitle: Bool? { get }
 
     func didEnterTitle(text: String?)
     func didEnterDate(startDate: Date, endDate: Date)
@@ -22,7 +22,7 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
     var travelTitle: String?
     var travelStartDate: Date?
     var travelEndDate: Date?
-    @Published var isPossible: Bool?
+    @Published var isPossibleTitle: Bool?
 
     private let createTravelUsecase: CreateTravelUsecase
 
@@ -36,9 +36,9 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
             switch result {
             case .success(let title):
                 self?.travelTitle = title
-                self?.isPossible = true
+                self?.isPossibleTitle = true
             case .failure:
-                self?.isPossible = false
+                self?.isPossibleTitle = false
             }
         }
     }
