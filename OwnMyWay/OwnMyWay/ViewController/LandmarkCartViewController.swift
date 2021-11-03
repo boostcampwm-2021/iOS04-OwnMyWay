@@ -51,6 +51,8 @@ class LandmarkCartViewController: UIViewController, Instantiable {
             let snapshotItem = landmarks + [Landmark()]
             snapshot.append(snapshotItem)
             self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: false)
+
+            DispatchQueue.main.async { self?.drawMap(landmarks: landmarks) }
         }
     }
 
