@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onbuttonpressed(_ sender: Any) {
-        let createTravelVC = CreateTravelViewController.instantiate()
-        self.navigationController?.pushViewController(createTravelVC, animated: true)
+        let addLandmarkVC = AddLandmarkViewController.instantiate()
+        self.navigationController?.pushViewController(addLandmarkVC, animated: true)
     }
 }
