@@ -16,6 +16,8 @@ class CreateTravelViewController: UIViewController {
         return viewController
     }
 
+    @IBOutlet weak var nextButton: UIButton!
+    
     private var viewModel: CreateTravelViewModelType?
 
     override func viewDidLoad() {

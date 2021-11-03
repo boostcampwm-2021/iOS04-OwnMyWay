@@ -71,6 +71,11 @@
                                     <constraint firstAttribute="height" constant="350" id="9gW-42-8Ls"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzu-vs-UWO">
+                                <rect key="frame" x="182.5" y="816" width="49" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="다음"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -83,13 +88,18 @@
                             <constraint firstItem="43Z-qy-ngV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="bottom" multiplier="0.15" id="NZk-HN-5CP"/>
                             <constraint firstItem="43Z-qy-ngV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.05" id="R7N-EE-kgi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="43Z-qy-ngV" secondAttribute="trailing" id="T7W-2x-XZL"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="nzu-vs-UWO" secondAttribute="bottom" constant="15" id="XOy-y1-gds"/>
                             <constraint firstItem="nkc-3o-fy0" firstAttribute="leading" secondItem="43Z-qy-ngV" secondAttribute="leading" id="aeU-Xb-Hkh"/>
+                            <constraint firstItem="nzu-vs-UWO" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="fpq-HH-X3j"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.05" id="g1P-dK-RS8"/>
                             <constraint firstItem="LjK-w9-XFr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="taj-sN-yId"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="bottom" multiplier="0.2" id="wbD-h7-lcO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="새로운 기록" id="4xu-Sz-XCj"/>
+                    <connections>
+                        <outlet property="nextButton" destination="nzu-vs-UWO" id="OaX-vm-okw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
