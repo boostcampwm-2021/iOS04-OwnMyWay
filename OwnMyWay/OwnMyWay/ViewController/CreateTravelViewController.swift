@@ -16,6 +16,7 @@ class CreateTravelViewController: UIViewController {
         return viewController
     }
 
+    @IBOutlet weak var travelTitleField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
     private var viewModel: CreateTravelViewModelType?
