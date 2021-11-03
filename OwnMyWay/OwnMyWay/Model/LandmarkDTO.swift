@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK:- LandmarkDTO: JSON에서 뽑아주는 Landmark 형식, CoreData에서 사용하는 형식과 다름
-struct LandmarkDTO: Codable {
+// MARK: - LandmarkDTO: JSON에서 뽑아주는 Landmark 형식, CoreData에서 사용하는 형식과 다름
+struct LandmarkDTO: Decodable {
     let id: Int
     let title: String
     let image: String
