@@ -98,6 +98,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="새로운 기록" id="4xu-Sz-XCj"/>
                     <connections>
+                        <outlet property="calendarView" destination="LjK-w9-XFr" id="UwQ-pW-rWj"/>
                         <outlet property="nextButton" destination="nzu-vs-UWO" id="OaX-vm-okw"/>
                         <outlet property="travelTitleField" destination="cs1-WO-d5D" id="s5H-6S-EG9"/>
                     </connections>

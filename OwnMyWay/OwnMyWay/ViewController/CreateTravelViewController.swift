@@ -5,6 +5,7 @@
 //  Created by 유한준 on 2021/11/02.
 //
 
+import FSCalendar
 import UIKit
 
 class CreateTravelViewController: UIViewController {
@@ -17,6 +18,7 @@ class CreateTravelViewController: UIViewController {
     }
 
     @IBOutlet weak var travelTitleField: UITextField!
+    @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var nextButton: UIButton!
     
     private var viewModel: CreateTravelViewModelType?
