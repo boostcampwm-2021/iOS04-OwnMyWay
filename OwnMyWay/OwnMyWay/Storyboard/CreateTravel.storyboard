@@ -41,7 +41,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
-                                    <action selector="edtingTitleDidEnd:" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="za3-bb-la9"/>
+                                    <action selector="editingDidEnd:" destination="Y6W-OH-hqX" eventType="editingDidEndOnExit" id="DLp-40-bfH"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkc-3o-fy0">
