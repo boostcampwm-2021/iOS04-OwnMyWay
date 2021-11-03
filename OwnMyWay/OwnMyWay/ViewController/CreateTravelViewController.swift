@@ -52,9 +52,8 @@ class CreateTravelViewController: UIViewController, Instantiable {
     }
 
     @IBAction func nextButtonDidTouched(_ sender: UIButton) {
-        self.viewModel?.didTouchNextButton(completion: { travel in
-            // MARK: 화면 전환 로직이 들어갈 부분
-            _ = travel
+        self.viewModel?.didTouchNextButton(completion: { [weak self] _ in
+            self?.coordinator?.pushToAddLandmark()
         })
     }
 
