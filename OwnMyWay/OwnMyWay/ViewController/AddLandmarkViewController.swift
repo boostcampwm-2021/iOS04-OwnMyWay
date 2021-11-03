@@ -7,16 +7,8 @@
 
 import UIKit
 
-class AddLandmarkViewController: UIViewController {
+class AddLandmarkViewController: UIViewController, Instantiable {
     @IBOutlet weak var cartView: UIView!
-
-    static func instantiate() -> AddLandmarkViewController {
-        let storyboard = UIStoryboard(name: "AddLandmark", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "AddLandmarkViewController")
-        guard let viewController = viewController as? Self
-        else { return AddLandmarkViewController() }
-        return viewController
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
