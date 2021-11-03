@@ -11,9 +11,9 @@ import UIKit
 
 class CreateTravelViewController: UIViewController, Instantiable {
 
-    @IBOutlet weak var travelTitleField: UITextField!
-    @IBOutlet weak var calendarView: FSCalendar!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet private weak var travelTitleField: UITextField!
+    @IBOutlet private weak var calendarView: FSCalendar!
+    @IBOutlet private weak var nextButton: UIButton!
 
     private var prevDate: Date?
     private var isSelectionComplete: Bool = false
