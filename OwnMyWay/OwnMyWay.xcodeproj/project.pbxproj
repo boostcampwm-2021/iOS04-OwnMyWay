@@ -11,8 +11,6 @@
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
 		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
 		29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */; };
-		29E9BA2F273145040040B70A /* LandmarkCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2D273145040040B70A /* LandmarkCardCell.swift */; };
-		29E9BA30273145040040B70A /* LandmarkCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA2E273145040040B70A /* LandmarkCardCell.xib */; };
 		29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA31273220C60040B70A /* AddLandmark.storyboard */; };
 		29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA33273246600040B70A /* AddLandmarkViewController.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
@@ -32,6 +30,7 @@
 		DB8831BE2731990000487D33 /* LandmarkDTORepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LandmarkDTORepository.swift */; };
 		DB8831C127319B6400487D33 /* SearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */; };
 		DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */; };
+		DB8831C52732670F00487D33 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C42732670F00487D33 /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,8 +38,6 @@
 		29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelUsecase.swift; sourceTree = "<group>"; };
 		29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
 		29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateTravel.storyboard; sourceTree = "<group>"; };
-		29E9BA2D273145040040B70A /* LandmarkCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCardCell.swift; sourceTree = "<group>"; };
-		29E9BA2E273145040040B70A /* LandmarkCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandmarkCardCell.xib; sourceTree = "<group>"; };
 		29E9BA31273220C60040B70A /* AddLandmark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddLandmark.storyboard; sourceTree = "<group>"; };
 		29E9BA33273246600040B70A /* AddLandmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkViewController.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
@@ -62,6 +59,7 @@
 		DB8831BD2731990000487D33 /* LandmarkDTORepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTORepository.swift; sourceTree = "<group>"; };
 		DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkUsecase.swift; sourceTree = "<group>"; };
 		DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewModel.swift; sourceTree = "<group>"; };
+		DB8831C42732670F00487D33 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,8 +88,6 @@
 			children = (
 				AFFB96162730F76100F23A46 /* PlusCell.swift */,
 				AFFB96172730F76100F23A46 /* PlusCell.xib */,
-				29E9BA2D273145040040B70A /* LandmarkCardCell.swift */,
-				29E9BA2E273145040040B70A /* LandmarkCardCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,6 +172,7 @@
 				DB22BB65272F82780004444B /* Assets.xcassets */,
 				DB22BB6A272F82780004444B /* Info.plist */,
 				DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */,
+				DB8831C42732670F00487D33 /* Coordinator.swift */,
 			);
 			path = OwnMyWay;
 			sourceTree = "<group>";
@@ -249,7 +246,6 @@
 				29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */,
 				29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
-				29E9BA30273145040040B70A /* LandmarkCardCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,9 +286,9 @@
 				AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */,
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
 				AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */,
+				DB8831C52732670F00487D33 /* Coordinator.swift in Sources */,
 				DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */,
 				DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */,
-				29E9BA2F273145040040B70A /* LandmarkCardCell.swift in Sources */,
 				29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */,
 				29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */,
 				DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */,

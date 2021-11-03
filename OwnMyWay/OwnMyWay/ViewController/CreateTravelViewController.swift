@@ -8,13 +8,6 @@
 import UIKit
 
 class CreateTravelViewController: UIViewController {
-    static func instantiate() -> CreateTravelViewController {
-        let storyboard = UIStoryboard(name: "CreateTravel", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "CreateTravelVC")
-        guard let viewController = viewController as? Self
-        else { return CreateTravelViewController() }
-        return viewController
-    }
 
     private var viewModel: CreateTravelViewModelType?
 
