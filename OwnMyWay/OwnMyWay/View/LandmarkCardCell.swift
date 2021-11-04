@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class LandmarkCardCell: UICollectionViewCell {
     static let identifier: String = "LandmarkCardCell"
@@ -13,11 +14,22 @@ class LandmarkCardCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
 
+    override func prepareForReuse() {
+        self.imageView.image = nil
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.layer.cornerRadius = 10.0
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.layer.cornerRadius = 10.0
+    }
+
     func configure(landmark: Landmark) {
-        guard let image = landmark.image, let data = try? Data(contentsOf: image) else {
-            return
-        }
-        self.imageView.image = UIImage(data: data)
+        self.imageView.kf.setImage(with: landmark.image)
         self.titleLabel.text = landmark.title
     }
 }

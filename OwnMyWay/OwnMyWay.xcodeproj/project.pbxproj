@@ -11,14 +11,19 @@
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
 		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
 		29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */; };
-		3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3F20606527314AAE0005D8F4 /* FSCalendar */; };
 		29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA31273220C60040B70A /* AddLandmark.storyboard */; };
 		29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA33273246600040B70A /* AddLandmarkViewController.swift */; };
 		29E9BA36273251BE0040B70A /* LandmarkCart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */; };
 		29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA37273253130040B70A /* LandmarkCartViewController.swift */; };
 		29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */; };
 		29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */; };
+		3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3F20606527314AAE0005D8F4 /* FSCalendar */; };
+		3F20606827339FAB0005D8F4 /* NextButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F20606727339FAB0005D8F4 /* NextButton.xib */; };
+		3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2060692733A2610005D8F4 /* NextButton.swift */; };
 		AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */; };
+		AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */; };
+		AF6CBB692733F0C400E87533 /* SearchLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */; };
+		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
 		AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
@@ -38,6 +43,16 @@
 		DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */; };
 		DB8831C52732670F00487D33 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C42732670F00487D33 /* Coordinator.swift */; };
 		DB8831C72732861500487D33 /* Instantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C62732861500487D33 /* Instantiable.swift */; };
+		DBC39EEC2733929000FB7939 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EEB2733929000FB7939 /* Travel.swift */; };
+		DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */; };
+		DBC39F042733ABB200FB7939 /* TravelMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */; };
+		DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFF2733ABB200FB7939 /* RecordMO+CoreDataClass.swift */; };
+		DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F002733ABB200FB7939 /* RecordMO+CoreDataProperties.swift */; };
+		DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */; };
+		DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */; };
+		DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
+		DBC39F0C2733C42700FB7939 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F0B2733C42700FB7939 /* Record.swift */; };
+		DBC39F1527340F5E00FB7939 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DBC39F1427340F5E00FB7939 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +66,12 @@
 		29E9BA37273253130040B70A /* LandmarkCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewController.swift; sourceTree = "<group>"; };
 		29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkCardCell.swift; sourceTree = "<group>"; };
 		29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandmarkCardCell.xib; sourceTree = "<group>"; };
+		3F20606727339FAB0005D8F4 /* NextButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextButton.xib; sourceTree = "<group>"; };
+		3F2060692733A2610005D8F4 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotationView.swift; sourceTree = "<group>"; };
+		AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLandmark.storyboard; sourceTree = "<group>"; };
+		AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewController.swift; sourceTree = "<group>"; };
+		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
 		AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartUsecase.swift; sourceTree = "<group>"; };
 		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
@@ -73,6 +93,15 @@
 		DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewModel.swift; sourceTree = "<group>"; };
 		DB8831C42732670F00487D33 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB8831C62732861500487D33 /* Instantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instantiable.swift; sourceTree = "<group>"; };
+		DBC39EEB2733929000FB7939 /* Travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
+		DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TravelMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TravelMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DBC39EFF2733ABB200FB7939 /* RecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DBC39F002733ABB200FB7939 /* RecordMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LandmarkMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LandmarkMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DBC39F092733C41000FB7939 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
+		DBC39F0B2733C42700FB7939 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC39F1527340F5E00FB7939 /* Kingfisher in Frameworks */,
 				3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,8 +123,10 @@
 				DB22BB5D272F82770004444B /* HomeViewController.swift */,
 				29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */,
 				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
+				AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */,
 				29E9BA37273253130040B70A /* LandmarkCartViewController.swift */,
 				DB8831C62732861500487D33 /* Instantiable.swift */,
+				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -106,6 +138,8 @@
 				AFFB96172730F76100F23A46 /* PlusCell.xib */,
 				29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */,
 				29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */,
+				3F20606727339FAB0005D8F4 /* NextButton.xib */,
+				3F2060692733A2610005D8F4 /* NextButton.swift */,
 				AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */,
 			);
 			path = View;
@@ -143,7 +177,16 @@
 		29E5FB3F272F8C0000F35733 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */,
+				DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */,
+				DBC39EFF2733ABB200FB7939 /* RecordMO+CoreDataClass.swift */,
+				DBC39F002733ABB200FB7939 /* RecordMO+CoreDataProperties.swift */,
+				DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */,
+				DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */,
 				DB8831B3273132A000487D33 /* LandmarkDTO.swift */,
+				DBC39EEB2733929000FB7939 /* Travel.swift */,
+				DBC39F0B2733C42700FB7939 /* Record.swift */,
+				DBC39F092733C41000FB7939 /* Landmark.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +198,7 @@
 				DB22BB67272F82780004444B /* LaunchScreen.storyboard */,
 				29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */,
 				29E9BA31273220C60040B70A /* AddLandmark.storyboard */,
+				AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */,
 				29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */,
 			);
 			path = Storyboard;
@@ -216,6 +260,7 @@
 			name = OwnMyWay;
 			packageProductDependencies = (
 				3F20606527314AAE0005D8F4 /* FSCalendar */,
+				DBC39F1427340F5E00FB7939 /* Kingfisher */,
 			);
 			productName = OwnMyWay;
 			productReference = DB22BB56272F82770004444B /* OwnMyWay.app */;
@@ -248,6 +293,7 @@
 			packageReferences = (
 				DB22BB70272F83560004444B /* XCRemoteSwiftPackageReference "SwiftLint" */,
 				3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				DBC39F1327340F5E00FB7939 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = DB22BB57272F82770004444B /* Products */;
 			projectDirPath = "";
@@ -269,8 +315,10 @@
 				DB22BB69272F82780004444B /* LaunchScreen.storyboard in Resources */,
 				DB22BB66272F82780004444B /* Assets.xcassets in Resources */,
 				DB22BB61272F82770004444B /* Home.storyboard in Resources */,
+				3F20606827339FAB0005D8F4 /* NextButton.xib in Resources */,
 				29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */,
 				29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */,
+				AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,24 +354,36 @@
 				AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */,
 				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
+				3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */,
 				AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */,
 				29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
+				DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */,
 				DB8831BE2731990000487D33 /* LandmarkDTORepository.swift in Sources */,
+				DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */,
 				DB8831C72732861500487D33 /* Instantiable.swift in Sources */,
+				DBC39F042733ABB200FB7939 /* TravelMO+CoreDataProperties.swift in Sources */,
+				AF6CBB692733F0C400E87533 /* SearchLandmarkViewController.swift in Sources */,
 				AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */,
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
 				AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */,
 				DB8831C52732670F00487D33 /* Coordinator.swift in Sources */,
+				DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */,
+				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
+				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
 				DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */,
 				DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */,
+				DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */,
 				29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */,
 				29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */,
+				DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */,
 				DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */,
+				AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */,
 				29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */,
+				DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +619,14 @@
 				minimumVersion = 0.9.2;
 			};
 		};
+		DBC39F1327340F5E00FB7939 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -566,6 +634,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		DBC39F1427340F5E00FB7939 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DBC39F1327340F5E00FB7939 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 

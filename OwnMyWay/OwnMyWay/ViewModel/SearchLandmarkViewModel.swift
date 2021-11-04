@@ -9,37 +9,45 @@ import Combine
 import Foundation
 
 protocol SearchLandmarkViewModelType {
-    var landmarks: [LandmarkDTO]? { get }
-    var searchText: String? { get }
-
+    var landmarks: [Landmark] { get }
+    var landmarksPublisher: Published<[Landmark]>.Publisher { get }
+    var searchText: String { get set }
     func configure()
-    func didEnterSearchText(text: String?)
+    func didEnterSearchText(text: String)
 }
 
-class SearchLandmarkViewModel: SearchLandmarkViewModelType {
-
-    @Published var landmarks: [LandmarkDTO]?
-    var searchText: String?
+class SearchLandmarkViewModel: SearchLandmarkViewModelType, ObservableObject {
+    @Published var landmarks: [Landmark]
+    @Published var searchText: String
+    var landmarksPublisher: Published<[Landmark]>.Publisher { $landmarks }
+    var cancellable: AnyCancellable?
 
     private let searchLandmarkUsecase: SearchLandmarkUsecase
 
     init(searchLandmarkUsecase: SearchLandmarkUsecase) {
+        self.landmarks = []
         self.searchLandmarkUsecase = searchLandmarkUsecase
+        self.searchText = ""
+        self.cancellable = self.$searchText
+            .debounce(for: .seconds(0.2), scheduler: RunLoop.main)
+            .sink { [weak self] searchText in
+                self?.didEnterSearchText(text: searchText)
+            }
     }
 
     func configure() {
-        searchLandmarkUsecase.executeFetch { [weak self] landmarkDTOs in
-            self?.landmarks = landmarkDTOs
+        searchLandmarkUsecase.executeFetch { [weak self] landmarks in
+            self?.landmarks = landmarks
         }
     }
 
-    func didEnterSearchText(text: String?) {
-        guard let text = text else {
-            configure() // 검색어가 없을 경우 모든 결과 조회
-            return
-        }
-        searchLandmarkUsecase.executeSearch(searchText: text) { [weak self] searchResult in
-            self?.landmarks = searchResult
+    func didEnterSearchText(text: String) {
+        if text == "" {
+            configure()
+        } else {
+            searchLandmarkUsecase.executeSearch(searchText: text) { [weak self] searchResult in
+                self?.landmarks = searchResult
+            }
         }
     }
 }
