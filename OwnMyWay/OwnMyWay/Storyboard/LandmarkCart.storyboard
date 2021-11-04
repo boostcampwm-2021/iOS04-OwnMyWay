@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController storyboardIdentifier="LandmarkCartViewController" id="Y6W-OH-hqX" customClass="LandmarkCartViewController" customModule="OwnMyWay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="556"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="555"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="I0O-jn-R8L">
-                                <rect key="frame" x="0.0" y="414" width="414" height="142"/>
+                                <rect key="frame" x="0.0" y="414" width="414" height="141"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LnK-Nd-5i8">
                                     <size key="itemSize" width="128" height="128"/>
@@ -28,7 +28,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="eHJ-Mt-RCI">
-                                        <rect key="frame" x="0.0" y="7" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="6.5" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="H5i-aW-9Gs">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -49,14 +49,14 @@
                         <constraints>
                             <constraint firstItem="I0O-jn-R8L" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Ea2-IQ-OpJ"/>
                             <constraint firstItem="I0O-jn-R8L" firstAttribute="top" secondItem="QrM-0Q-WJS" secondAttribute="bottom" id="Nxf-kL-6Yj"/>
-                            <constraint firstAttribute="bottom" secondItem="I0O-jn-R8L" secondAttribute="bottom" id="UaP-Cx-cP5"/>
                             <constraint firstItem="QrM-0Q-WJS" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="XE5-7d-4RP"/>
+                            <constraint firstItem="I0O-jn-R8L" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="bDO-Aa-Htb"/>
                             <constraint firstAttribute="trailing" secondItem="QrM-0Q-WJS" secondAttribute="trailing" id="hhX-Vq-ksE"/>
                             <constraint firstAttribute="trailing" secondItem="I0O-jn-R8L" secondAttribute="trailing" id="qkg-wX-4xd"/>
                             <constraint firstItem="QrM-0Q-WJS" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="x8I-v9-mrx"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="414" height="556"/>
+                    <size key="freeformSize" width="414" height="555"/>
                     <connections>
                         <outlet property="collectionView" destination="I0O-jn-R8L" id="gp7-k6-DAS"/>
                         <outlet property="mapView" destination="QrM-0Q-WJS" id="gZE-An-2sA"/>
@@ -64,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="108.69565217391305" y="-23.4375"/>
+            <point key="canvasLocation" x="108.69565217391305" y="-23.772321428571427"/>
         </scene>
     </scenes>
     <resources>

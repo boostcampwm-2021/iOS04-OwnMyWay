@@ -13,7 +13,7 @@ class CreateTravelViewController: UIViewController, Instantiable {
 
     @IBOutlet private weak var travelTitleField: UITextField!
     @IBOutlet private weak var calendarView: FSCalendar!
-    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var nextButton: NextButton!
 
     private var prevDate: Date?
     private var isSelectionComplete: Bool = false
@@ -37,7 +37,7 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.viewModel?.validatePublisher
             .receive(on: RunLoop.main)
             .sink { isValid in
-                self.nextButton.isEnabled = isValid ?? false
+                self.nextButton.setAvailability(to: isValid ?? false)
             }
             .store(in: &cancellables)
     }
