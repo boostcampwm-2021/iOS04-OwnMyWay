@@ -12,24 +12,41 @@ import MapKit
 class LandmarkAnnotationView: MKAnnotationView {
     static let identifier = "LandmarkAnnotationView"
 
+    override var annotation: MKAnnotation? { didSet { configureDetailView() } }
+
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        self.image = UIImage(named: "LandmarkPin")
-        self.canShowCallout = true
-        configure(annotation: annotation)
+        configure()
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        configure()
     }
 
-    func configure(annotation: MKAnnotation?) {
-        guard let annotation = annotation as? LandmarkAnnotation,
-              let imgURL = annotation.image
+    func configure() {
+        self.canShowCallout = true
+        self.image = UIImage(named: "LandmarkPin")
+        configureDetailView()
+    }
+
+    func configureDetailView() {
+        guard let annotation = annotation as? LandmarkAnnotation, let image = annotation.image
         else { return }
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
-        imageView.image = UIImage(contentsOfFile: imgURL.path)
-        self.leftCalloutAccessoryView = imageView
+
+        let rect = CGRect(origin: .zero, size: CGSize(width: 300, height: 200))
+
+        let detailView = UIView()
+        detailView.translatesAutoresizingMaskIntoConstraints = false
+        let imageView = UIImageView(frame: rect)
+        imageView.image = UIImage(contentsOfFile: image.path)
+        detailView.addSubview(imageView)
+
+        detailCalloutAccessoryView = detailView
+        NSLayoutConstraint.activate([
+            detailView.widthAnchor.constraint(equalToConstant: rect.width),
+            detailView.heightAnchor.constraint(equalToConstant: rect.height)
+        ])
     }
 }
 

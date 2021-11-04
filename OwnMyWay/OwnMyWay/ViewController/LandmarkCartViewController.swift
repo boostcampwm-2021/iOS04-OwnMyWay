@@ -13,7 +13,7 @@ import UIKit
 typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewController.Section,
                                                            Landmark>
 
-class LandmarkCartViewController: UIViewController, Instantiable {
+class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
 
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -21,13 +21,20 @@ class LandmarkCartViewController: UIViewController, Instantiable {
     private var viewModel: LandmarkCartViewModelType?
     private var diffableDataSource: DataSource?
     private var cancellable: AnyCancellable?
+    private let locationManager: CLLocationManager = CLLocationManager()
 
     enum Section: CaseIterable { case main }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerNib()
-        self.initializeMapView()
+
+        self.mapView.delegate = self
+        self.initializeMapView(mapView: self.mapView)
+
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         // 아래는 상위에서 주입 받을 시 삭제해야하는 코드입니다.
         let usecase = DefaultLandmarkCartUsecase(travelRepository: CoreDataTravelRepository())
@@ -52,7 +59,12 @@ class LandmarkCartViewController: UIViewController, Instantiable {
             snapshot.append(snapshotItem)
             self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: false)
 
-            DispatchQueue.main.async { self?.drawMap(landmarks: landmarks) }
+            DispatchQueue.main.async {
+                guard let mapView = self?.mapView else { return }
+                let annotations = landmarks.map({ LandmarkAnnotation(landmark: $0) })
+                self?.drawLandmarkAnnotations(mapView: mapView, annotations: annotations)
+                self?.moveRegion(mapView: mapView, annotations: annotations, animated: true)
+            }
         }
     }
 
@@ -105,62 +117,6 @@ class LandmarkCartViewController: UIViewController, Instantiable {
 
 // MARK: - extension LandmarkCartViewController for MapView
 
-extension LandmarkCartViewController {
-    private func initializeMapView() {
-        self.mapView.delegate = self
-        self.mapView.register(
-            LandmarkAnnotationView.self,
-            forAnnotationViewWithReuseIdentifier: LandmarkAnnotationView.identifier
-        )
-        self.mapView.setRegion(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(
-                    latitude: 37.24800,
-                    longitude: 127.07845
-                ),
-                span: MKCoordinateSpan(
-                    latitudeDelta: 0.01,
-                    longitudeDelta: 0.01
-                )
-            ),
-            animated: false
-        )
-    }
-
-    private func drawMap(landmarks: [Landmark]) {
-        self.mapView.removeAnnotations(self.mapView.annotations)
-        let annotations = landmarks.map { LandmarkAnnotation(landmark: $0) }
-        self.mapView.addAnnotations(annotations)
-        if !landmarks.isEmpty {
-            self.mapView.setRegion(changeRegion(landmarks: landmarks), animated: true)
-        }
-    }
-
-    private func changeRegion(landmarks: [Landmark]) -> MKCoordinateRegion {
-        var minLatitude: Double = 1000
-        var maxLatitude: Double = -1000
-        var minLongitude: Double = 1000
-        var maxLongitude: Double = -1000
-
-        landmarks.forEach { landmark in
-            minLatitude = min(minLatitude, landmark.latitude)
-            maxLatitude = max(maxLatitude, landmark.latitude)
-            minLongitude = min(minLongitude, landmark.longitude)
-            maxLongitude = max(maxLongitude, landmark.longitude)
-        }
-
-        let centerLatitude = (minLatitude + maxLatitude) / 2
-        let centerLongitude = (minLongitude + maxLongitude) / 2
-        let center = CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude)
-        let span = max(center.latitude - minLatitude, center.longitude - minLongitude)
-
-        return MKCoordinateRegion(
-            center: center,
-            span: MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span)
-        )
-    }
-}
-
 extension LandmarkCartViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         switch annotation {
@@ -169,10 +125,37 @@ extension LandmarkCartViewController: MKMapViewDelegate {
                 withIdentifier: LandmarkAnnotationView.identifier,
                 for: annotation
             ) as? LandmarkAnnotationView
-            annotationView?.configure(annotation: annotation)
+            annotationView?.annotation = annotation
             return annotationView
         default:
             return nil
+        }
+    }
+}
+
+extension LandmarkCartViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard self.viewModel?.landmarks.isEmpty == true else { return }
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        self.mapView.setRegion(
+            MKCoordinateRegion(
+                center: locValue,
+                span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            ),
+            animated: false
+        )
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        return
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            manager.requestLocation()
+        default:
+            break
         }
     }
 }
