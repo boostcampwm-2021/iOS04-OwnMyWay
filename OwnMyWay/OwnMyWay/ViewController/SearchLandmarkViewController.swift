@@ -18,12 +18,15 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
     private var diffableDataSource: DataSource?
     private var cancellable: AnyCancellable?
 
+    var coordinator: SearchLandmarkCoordinator?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerNib()
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         self.diffableDataSource = createMakeDiffableDataSource()
         self.searchBar.delegate = self
+        self.collectionView.delegate = self
         self.configureCancellable()
     }
 
@@ -84,5 +87,17 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
 extension SearchLandmarkViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.viewModel?.searchText = searchText
+    }
+}
+
+// MARK: - SearchLandmarkViewController for UICollectionViewDelegate
+extension SearchLandmarkViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        self.dismiss(animated: true, completion: { [weak self] in
+            guard let landmark = self?.viewModel?.landmarks[indexPath.item]
+            else { return }
+            self?.coordinator?.popModal(landmark: landmark)
+        })
     }
 }

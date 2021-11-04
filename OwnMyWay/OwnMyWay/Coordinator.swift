@@ -23,7 +23,11 @@ protocol LandmarkCartCoordinator {
     func presentSearchLandmarkModally()
 }
 
-class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinator, LandmarkCartCoordinator {
+protocol SearchLandmarkCoordinator {
+    func popModal(landmark: Landmark)
+}
+
+class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinator, LandmarkCartCoordinator, SearchLandmarkCoordinator {
 
     var navigationController: UINavigationController
 
@@ -73,9 +77,17 @@ class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinat
         let viewModel = SearchLandmarkViewModel(searchLandmarkUsecase: usecase)
 
         searchLandmarkVC.bind(viewModel: viewModel)
+        searchLandmarkVC.coordinator = self
         navigationController.viewControllers.last?.present(
             searchLandmarkVC,
             animated: true
         )
+    }
+
+    func popModal(landmark: Landmark) {
+        guard let addVC = navigationController.viewControllers.last as? AddLandmarkViewController,
+        let cartVC = addVC.children.first as? LandmarkCartViewController
+        else { return }
+        cartVC.viewModel?.didAddLandmark(of: landmark)
     }
 }
