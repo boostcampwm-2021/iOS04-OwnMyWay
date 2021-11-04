@@ -13,7 +13,7 @@ struct LandmarkDTO: Decodable {
     let title: String
     let image: String
     let latitude, longitude: Double
-    
+
     func toLandmark() -> Landmark {
         let url = URL(string: self.image)
         return Landmark(

@@ -56,7 +56,7 @@ class CoreDataTravelRepository: TravelRepository {
     func fetchAll() -> Result<[Travel], Error> {
         do {
             let travels = try context.fetch(TravelMO.fetchRequest())
-            return .success(travels.map{ $0.toTravel() })
+            return .success(travels.map { $0.toTravel() })
         } catch let error {
             return .failure(error)
         }

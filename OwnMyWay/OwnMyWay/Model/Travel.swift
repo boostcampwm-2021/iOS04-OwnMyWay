@@ -16,32 +16,4 @@ struct Travel {
     var endDate: Date?
     var landmarks: [Landmark]
     var records: [Record]
-    
-}
-
-struct Landmark {
-    var uuid: UUID?
-    var image: URL?
-    var latitude: Double?
-    var longitude: Double?
-    var title: String?
-}
-
-struct Record {
-    var uuid: UUID?
-    var content: String?
-    var date: Date?
-    var latitude: Double?
-    var longitude: Double?
-    var photoURL: URL?
-}
-
-extension Landmark: Hashable {
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.uuid == rhs.uuid
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(uuid)
-    }
 }

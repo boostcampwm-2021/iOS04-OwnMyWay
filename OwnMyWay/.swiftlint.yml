@@ -16,6 +16,9 @@ identifier_name:
   min_length: 4
   excluded:
     - id
+    - url
+    - lhs
+    - rhs
 type_name:
   min_length: 4
 function_parameter_count: 6
@@ -23,3 +26,9 @@ function_parameter_count: 6
 excluded:
   - OwnMyWay/AppDelegate.swift
   - OwnMyWay/SceneDelegate.swift
+  - OwnMyWay/Model/TravelMO+CoreDataClass.swift
+  - OwnMyWay/Model/TravelMO+CoreDataProperties.swift
+  - OwnMyWay/Model/RecordMO+CoreDataClass.swift
+  - OwnMyWay/Model/RecordMO+CoreDataProperties.swift
+  - OwnMyWay/Model/LandmarkMO+CoreDataClass.swift
+  - OwnMyWay/Model/LandmarkMO+CoreDataProperties.swift
