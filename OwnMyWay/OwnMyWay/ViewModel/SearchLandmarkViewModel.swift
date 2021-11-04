@@ -31,7 +31,6 @@ class SearchLandmarkViewModel: SearchLandmarkViewModelType, ObservableObject {
         self.cancellable = self.$searchText
             .debounce(for: .seconds(0.2), scheduler: RunLoop.main)
             .sink { [weak self] searchText in
-                print(searchText)
                 self?.didEnterSearchText(text: searchText)
             }
     }
