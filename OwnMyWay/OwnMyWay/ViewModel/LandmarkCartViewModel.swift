@@ -28,7 +28,6 @@ class LandmarkCartViewModel: LandmarkCartViewModelType, ObservableObject {
     func didAddLandmark(of landmark: Landmark) {
         self.landmarkCartUsecase.addLandmark(to: self.travel, of: landmark) { landmark in
             self.travel.landmarks.append(landmark)
-            print(travel)
         }
     }
 }
