@@ -71,26 +71,7 @@ extension CreateTravelViewController: FSCalendarDelegate {
         if let selectedDate = prevDate {
             let startDate = selectedDate > date ? date : selectedDate
             let endDate = selectedDate > date ? selectedDate : date
-            let message = "여행 기간을 \(localize(date: startDate))부터 \(localize(date: endDate))로 설정할까요?"
-            let alert = UIAlertController(title: "여행기간 확정",
-                                          message: message,
-                                          preferredStyle: .alert)
-            let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
-                let dayInterval: TimeInterval = 60 * 60 * 24
-                stride(from: startDate, through: endDate, by: dayInterval).forEach {
-                    calendar.select($0)
-                }
-                self?.isSelectionComplete = true
-                self?.viewModel?.didEnterDate(from: startDate, to: endDate)
-            }
-            let noAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
-                calendar.deselect(selectedDate)
-                calendar.deselect(date)
-                self?.prevDate = nil
-            }
-            alert.addAction(yesAction)
-            alert.addAction(noAction)
-            present(alert, animated: true)
+            presentAlert(calendar: calendar, from: startDate, to: endDate)
         }
         prevDate = date
     }
@@ -98,7 +79,40 @@ extension CreateTravelViewController: FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar,
                   didDeselect date: Date,
                   at monthPosition: FSCalendarMonthPosition) {
-        initSelection()
+        if isSelectionComplete {
+            initSelection()
+            return
+        }
+        presentAlert(calendar: calendar, from: date, to: date)
+    }
+
+    private func presentAlert(calendar: FSCalendar, from startDate: Date, to endDate: Date) {
+        let alert = UIAlertController(title: "여행기간 확정",
+                                      message: alertMessage(startDate: startDate, endDate: endDate),
+                                      preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
+            let dayInterval: TimeInterval = 60 * 60 * 24
+            stride(from: startDate, through: endDate, by: dayInterval).forEach {
+                calendar.select($0)
+            }
+            self?.isSelectionComplete = true
+            self?.viewModel?.didEnterDate(from: startDate, to: endDate)
+        }
+        let noAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
+            calendar.deselect(startDate)
+            calendar.deselect(endDate)
+            self?.prevDate = nil
+        }
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true)
+    }
+
+    private func alertMessage(startDate: Date, endDate: Date) -> String {
+        if startDate == endDate {
+            return "여행 기간을 \(localize(date: startDate)) 당일치기로 설정할까요?"
+        }
+        return "여행 기간을 \(localize(date: startDate))부터 \(localize(date: endDate))로 설정할까요?"
     }
 
     private func initSelection() {

@@ -19,6 +19,7 @@
 		29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */; };
 		3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3F20606527314AAE0005D8F4 /* FSCalendar */; };
 		AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */; };
+		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
 		AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
@@ -61,6 +62,7 @@
 		29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkCardCell.swift; sourceTree = "<group>"; };
 		29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandmarkCardCell.xib; sourceTree = "<group>"; };
 		AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotationView.swift; sourceTree = "<group>"; };
+		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
 		AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartUsecase.swift; sourceTree = "<group>"; };
 		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
 				29E9BA37273253130040B70A /* LandmarkCartViewController.swift */,
 				DB8831C62732861500487D33 /* Instantiable.swift */,
+				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */,
 				DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */,
 				DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */,
+				AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */,
 				29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */,
 				DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */,
 			);
