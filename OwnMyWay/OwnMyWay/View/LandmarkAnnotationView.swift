@@ -31,15 +31,17 @@ class LandmarkAnnotationView: MKAnnotationView {
     }
 
     func configureDetailView() {
-        guard let annotation = annotation as? LandmarkAnnotation, let image = annotation.image
+        guard let annotation = annotation as? LandmarkAnnotation,
+              let url = annotation.image,
+              let data = try? Data(contentsOf: url)
         else { return }
 
         let rect = CGRect(origin: .zero, size: CGSize(width: 300, height: 200))
 
         let detailView = UIView()
-        detailView.translatesAutoresizingMaskIntoConstraints = false
         let imageView = UIImageView(frame: rect)
-        imageView.image = UIImage(contentsOfFile: image.path)
+        detailView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(data: data)
         detailView.addSubview(imageView)
 
         detailCalloutAccessoryView = detailView
