@@ -125,7 +125,7 @@ extension LandmarkCartViewController: MKMapViewDelegate {
                 withIdentifier: LandmarkAnnotationView.identifier,
                 for: annotation
             ) as? LandmarkAnnotationView
-            annotationView?.configure(annotation: annotation)
+            annotationView?.annotation = annotation
             return annotationView
         default:
             return nil
@@ -135,6 +135,7 @@ extension LandmarkCartViewController: MKMapViewDelegate {
 
 extension LandmarkCartViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard self.viewModel?.landmarks.isEmpty == true else { return }
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         self.mapView.setRegion(
             MKCoordinateRegion(
