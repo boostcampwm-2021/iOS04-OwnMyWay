@@ -9,6 +9,7 @@ import UIKit
 
 class AddLandmarkViewController: UIViewController, Instantiable {
     @IBOutlet weak var cartView: UIView!
+    @IBOutlet weak var contentView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,4 +22,15 @@ class AddLandmarkViewController: UIViewController, Instantiable {
         cartVC.view.trailingAnchor.constraint(equalTo: cartView.trailingAnchor).isActive = true
         cartVC.view.bottomAnchor.constraint(equalTo: cartView.bottomAnchor).isActive = true
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let mapViewHeight: CGFloat = UIScreen.main.bounds.width
+        let collectionViewHeight: CGFloat = 220
+        contentView.heightAnchor
+            .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
+            .isActive = true
+        view.layoutIfNeeded()
+    }
+
 }
