@@ -32,8 +32,8 @@ class DefaultLandmarkCartUsecase: LandmarkCartUsecase {
         )
 
         switch result {
-        case .success(let uuidLandmark):
-            completion(uuidLandmark)
+        case .success(let createLandmark):
+            completion(createLandmark)
         case .failure(let error):
             print(error)
         }

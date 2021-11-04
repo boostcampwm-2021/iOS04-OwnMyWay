@@ -8,15 +8,15 @@
 import UIKit
 
 class AddLandmarkViewController: UIViewController, Instantiable {
-    @IBOutlet weak var cartView: UIView!
-    var closure: ((UIView) -> Void)?
+    @IBOutlet private weak var cartView: UIView!
+    private var bindContainerVC: ((UIView) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.closure?(self.cartView)
+        self.bindContainerVC?(self.cartView)
     }
 
     func bind(closure: @escaping (UIView) -> Void) {
-        self.closure = closure
+        self.bindContainerVC = closure
     }
 }
