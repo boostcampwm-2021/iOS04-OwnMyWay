@@ -21,14 +21,20 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     private var viewModel: LandmarkCartViewModelType?
     private var diffableDataSource: DataSource?
     private var cancellable: AnyCancellable?
+    private let locationManager: CLLocationManager = CLLocationManager()
 
     enum Section: CaseIterable { case main }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.registerNib()
+
         self.mapView.delegate = self
         self.initializeMapView(mapView: self.mapView)
+
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         // 아래는 상위에서 주입 받을 시 삭제해야하는 코드입니다.
         let usecase = DefaultLandmarkCartUsecase(travelRepository: CoreDataTravelRepository())
@@ -123,6 +129,32 @@ extension LandmarkCartViewController: MKMapViewDelegate {
             return annotationView
         default:
             return nil
+        }
+    }
+}
+
+extension LandmarkCartViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        self.mapView.setRegion(
+            MKCoordinateRegion(
+                center: locValue,
+                span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            ),
+            animated: false
+        )
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        return
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            manager.requestLocation()
+        default:
+            break
         }
     }
 }
