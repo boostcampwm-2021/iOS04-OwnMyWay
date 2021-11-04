@@ -16,7 +16,7 @@ protocol HomeCoordinator {
 }
 
 protocol CreateTravelCoordinator {
-    func pushToAddLandmark()
+    func pushToAddLandmark(travel: Travel)
 }
 
 class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinator {
@@ -39,8 +39,24 @@ class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinat
         navigationController.pushViewController(createTravelVC, animated: true)
     }
 
-    func pushToAddLandmark() {
+    func pushToAddLandmark(travel: Travel) {
         let addLandmarkVC = AddLandmarkViewController.instantiate(storyboardName: "AddLandmark")
+        let cartVC = LandmarkCartViewController.instantiate(storyboardName: "LandmarkCart")
+
+        addLandmarkVC.bind { cartView in
+            addLandmarkVC.addChild(cartVC)
+            cartView.addSubview(cartVC.view)
+            cartVC.view.translatesAutoresizingMaskIntoConstraints = false
+            cartVC.view.topAnchor.constraint(equalTo: cartView.topAnchor).isActive = true
+            cartVC.view.leadingAnchor.constraint(equalTo: cartView.leadingAnchor).isActive = true
+            cartVC.view.trailingAnchor.constraint(equalTo: cartView.trailingAnchor).isActive = true
+            cartVC.view.bottomAnchor.constraint(equalTo: cartView.bottomAnchor).isActive = true
+        }
+
+        let usecase = DefaultLandmarkCartUsecase(travelRepository: CoreDataTravelRepository())
+        let viewModel = LandmarkCartViewModel(landmarkCartUsecase: usecase, travel: travel)
+        cartVC.bind(viewModel: viewModel)
+
         navigationController.pushViewController(addLandmarkVC, animated: true)
     }
 }
