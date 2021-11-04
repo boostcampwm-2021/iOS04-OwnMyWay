@@ -11,18 +11,17 @@ import UIKit
 protocol TravelRepository {
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error>
     func fetchAll() -> Result<[Travel], Error>
-    func findTravel(by objectID: NSManagedObjectID) -> Travel?
     func addRecord(to travel: Travel,
-                   photoURL: URL,
-                   content: String,
-                   date: Date,
-                   latitude: Double,
-                   longitude: Double) -> Result<Record, Error>
+                   photoURL: URL?,
+                   content: String?,
+                   date: Date?,
+                   latitude: Double?,
+                   longitude: Double?) -> Result<Record, Error>
     func addLandmark(to travel: Travel,
-                     title: String,
-                     image: URL,
-                     latitude: Double,
-                     longitude: Double) -> Result<Landmark, Error>
+                     title: String?,
+                     image: URL?,
+                     latitude: Double?,
+                     longitude: Double?) -> Result<Landmark, Error>
 }
 
 class CoreDataTravelRepository: TravelRepository {
@@ -37,16 +36,18 @@ class CoreDataTravelRepository: TravelRepository {
     }()
 
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error> {
-        guard let entity = NSEntityDescription.entity(forEntityName: "Travel", in: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "TravelMO", in: context) else {
             return .failure(NSError.init())
         }
-        let travel = Travel(entity: entity, insertInto: context)
+        let travel = TravelMO(entity: entity, insertInto: context)
+        travel.setValue(UUID(), forKey: "uuid")
+        travel.setValue(0, forKey: "flag")
         travel.setValue(title, forKey: "title")
         travel.setValue(startDate, forKey: "startDate")
         travel.setValue(endDate, forKey: "endDate")
         do {
             try context.save()
-            return .success(travel)
+            return .success(travel.toTravel())
         } catch let error {
             return .failure(error)
         }
@@ -54,61 +55,74 @@ class CoreDataTravelRepository: TravelRepository {
 
     func fetchAll() -> Result<[Travel], Error> {
         do {
-            let travels = try context.fetch(Travel.fetchRequest())
-            return .success(travels)
+            let travels = try context.fetch(TravelMO.fetchRequest())
+            return .success(travels.map{ $0.toTravel() })
         } catch let error {
             return .failure(error)
         }
     }
 
-    func findTravel(by objectID: NSManagedObjectID) -> Travel? {
-        guard let travel = context.object(with: objectID) as? Travel else {
+    func findTravel(by uuid: UUID) -> TravelMO? {
+        let request = TravelMO.fetchRequest()
+        let predicate = NSPredicate(format: "uuid == %@", uuid as CVarArg)
+        request.predicate = predicate
+        do {
+            let travels = try context.fetch(request)
+            return travels.first ?? nil
+        } catch {
             return nil
         }
-        return travel
     }
 
     func addRecord(to travel: Travel,
-                   photoURL: URL,
-                   content: String,
-                   date: Date,
-                   latitude: Double,
-                   longitude: Double) -> Result<Record, Error> {
-        guard let entity = NSEntityDescription.entity(forEntityName: "Record", in: context) else {
+                   photoURL: URL?,
+                   content: String?,
+                   date: Date?,
+                   latitude: Double?,
+                   longitude: Double?) -> Result<Record, Error> {
+        guard let travelMO = findTravel(by: travel.uuid ?? UUID()) else {
             return .failure(NSError.init())
         }
-        let record = Record(entity: entity, insertInto: context)
-        record.setValue(photoURL, forKey: "photoURL")
-        record.setValue(content, forKey: "content")
-        record.setValue(date, forKey: "date")
-        record.setValue(latitude, forKey: "latitude")
-        record.setValue(longitude, forKey: "longitude")
-        travel.addToRecords(record)
+
+        guard let entity = NSEntityDescription.entity(forEntityName: "RecordMO", in: context) else {
+            return .failure(NSError.init())
+        }
+        let recordMO = RecordMO(entity: entity, insertInto: context)
+        recordMO.setValue(UUID(), forKey: "uuid")
+        recordMO.setValue(photoURL, forKey: "photoURL")
+        recordMO.setValue(content, forKey: "content")
+        recordMO.setValue(date, forKey: "date")
+        recordMO.setValue(latitude, forKey: "latitude")
+        recordMO.setValue(longitude, forKey: "longitude")
+        travelMO.addToRecords(recordMO)
         do {
             try context.save()
-            return .success(record)
+            return .success(recordMO.toRecord())
         } catch let error {
             return .failure(error)
         }
     }
 
     func addLandmark(to travel: Travel,
-                     title: String,
-                     image: URL,
-                     latitude: Double,
-                     longitude: Double) -> Result<Landmark, Error> {
-        guard let entity = NSEntityDescription.entity(forEntityName: "Landmark", in: context) else {
+                     title: String?,
+                     image: URL?,
+                     latitude: Double?,
+                     longitude: Double?) -> Result<Landmark, Error> {
+        guard let travelMO = findTravel(by: travel.uuid ?? UUID()) else {
             return .failure(NSError.init())
         }
-        let landmark = Landmark(entity: entity, insertInto: context)
-        landmark.setValue(title, forKey: "title")
-        landmark.setValue(image, forKey: "image")
-        landmark.setValue(latitude, forKey: "latitude")
-        landmark.setValue(longitude, forKey: "longitude")
-        travel.addToLandmarks(landmark)
+        guard let entity = NSEntityDescription.entity(forEntityName: "LandmarkMO", in: context)
+        else { return .failure(NSError.init()) }
+        let landmarkMO = LandmarkMO(entity: entity, insertInto: context)
+        landmarkMO.setValue(UUID(), forKey: "uuid")
+        landmarkMO.setValue(title, forKey: "title")
+        landmarkMO.setValue(image, forKey: "image")
+        landmarkMO.setValue(latitude, forKey: "latitude")
+        landmarkMO.setValue(longitude, forKey: "longitude")
+        travelMO.addToLandmarks(landmarkMO)
         do {
             try context.save()
-            return .success(landmark)
+            return .success(landmarkMO.toLandmark())
         } catch let error {
             return .failure(error)
         }

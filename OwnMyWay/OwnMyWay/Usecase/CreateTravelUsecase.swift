@@ -48,7 +48,7 @@ class DefaultCreateTravelUsecase: CreateTravelUsecase {
             case .success(let travel):
                 completion(travel)
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
     }
 }

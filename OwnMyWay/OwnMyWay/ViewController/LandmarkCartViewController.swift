@@ -143,10 +143,10 @@ extension LandmarkCartViewController {
         var maxLongitude: Double = -1000
 
         landmarks.forEach { landmark in
-            minLatitude = min(minLatitude, landmark.latitude)
-            maxLatitude = max(maxLatitude, landmark.latitude)
-            minLongitude = min(minLongitude, landmark.longitude)
-            maxLongitude = max(maxLongitude, landmark.longitude)
+            minLatitude = min(minLatitude, landmark.latitude ?? 0)
+            maxLatitude = max(maxLatitude, landmark.latitude ?? 0)
+            minLongitude = min(minLongitude, landmark.longitude ?? 0)
+            maxLongitude = max(maxLongitude, landmark.longitude ?? 0)
         }
 
         let centerLatitude = (minLatitude + maxLatitude) / 2

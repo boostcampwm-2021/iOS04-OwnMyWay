@@ -41,8 +41,8 @@ class LandmarkAnnotation: NSObject, MKAnnotation {
 
     init(landmark: Landmark) {
         self.coordinate = CLLocationCoordinate2D(
-            latitude: landmark.latitude,
-            longitude: landmark.longitude
+            latitude: landmark.latitude ?? 0,
+            longitude: landmark.longitude ?? 0
         )
         self.image = landmark.image
         self.title = landmark.title
