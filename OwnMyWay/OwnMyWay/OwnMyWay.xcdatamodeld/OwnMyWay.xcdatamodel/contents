@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Landmark" representedClassName="Landmark" syncable="YES" codeGenerationType="class">
+    <entity name="LandmarkMO" representedClassName="LandmarkMO" syncable="YES">
         <attribute name="image" optional="YES" attributeType="URI"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Travel" inverseName="landmarks" inverseEntity="Travel"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelMO" inverseName="landmarks" inverseEntity="TravelMO"/>
     </entity>
-    <entity name="Record" representedClassName="Record" syncable="YES" codeGenerationType="class">
+    <entity name="RecordMO" representedClassName="RecordMO" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="photoURL" optional="YES" attributeType="URI"/>
-        <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Travel" inverseName="records" inverseEntity="Travel"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelMO" inverseName="records" inverseEntity="TravelMO"/>
     </entity>
-    <entity name="Travel" representedClassName="Travel" syncable="YES" codeGenerationType="class">
+    <entity name="TravelMO" representedClassName="TravelMO" syncable="YES">
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="flag" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="landmarks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Landmark" inverseName="travel" inverseEntity="Landmark"/>
-        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="travel" inverseEntity="Record"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="landmarks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LandmarkMO" inverseName="travel" inverseEntity="LandmarkMO"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecordMO" inverseName="travel" inverseEntity="RecordMO"/>
     </entity>
     <elements>
-        <element name="Travel" positionX="-36" positionY="9" width="128" height="118"/>
-        <element name="Record" positionX="164.19140625" positionY="26.26171875" width="128" height="133"/>
-        <element name="Landmark" positionX="-20.21484375" positionY="165.78125" width="128" height="118"/>
+        <element name="LandmarkMO" positionX="-20.21484375" positionY="165.78125" width="128" height="119"/>
+        <element name="RecordMO" positionX="164.19140625" positionY="26.26171875" width="128" height="134"/>
+        <element name="TravelMO" positionX="-36" positionY="9" width="128" height="134"/>
     </elements>
 </model>
