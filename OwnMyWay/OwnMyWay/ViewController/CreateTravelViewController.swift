@@ -52,8 +52,8 @@ class CreateTravelViewController: UIViewController, Instantiable {
     }
 
     @IBAction func nextButtonDidTouched(_ sender: UIButton) {
-        self.viewModel?.didTouchNextButton(completion: { [weak self] _ in
-            self?.coordinator?.pushToAddLandmark()
+        self.viewModel?.didTouchNextButton(completion: { [weak self] travel in
+            self?.coordinator?.pushToAddLandmark(travel: travel)
         })
     }
 

@@ -8,17 +8,15 @@
 import UIKit
 
 class AddLandmarkViewController: UIViewController, Instantiable {
-    @IBOutlet weak var cartView: UIView!
+    @IBOutlet private weak var cartView: UIView!
+    private var bindContainerVC: ((UIView) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let cartVC = LandmarkCartViewController.instantiate(storyboardName: "LandmarkCart")
-        addChild(cartVC)
-        self.cartView.addSubview(cartVC.view)
-        cartVC.view.translatesAutoresizingMaskIntoConstraints = false
-        cartVC.view.topAnchor.constraint(equalTo: cartView.topAnchor).isActive = true
-        cartVC.view.leadingAnchor.constraint(equalTo: cartView.leadingAnchor).isActive = true
-        cartVC.view.trailingAnchor.constraint(equalTo: cartView.trailingAnchor).isActive = true
-        cartVC.view.bottomAnchor.constraint(equalTo: cartView.bottomAnchor).isActive = true
+        self.bindContainerVC?(self.cartView)
+    }
+
+    func bind(closure: @escaping (UIView) -> Void) {
+        self.bindContainerVC = closure
     }
 }
