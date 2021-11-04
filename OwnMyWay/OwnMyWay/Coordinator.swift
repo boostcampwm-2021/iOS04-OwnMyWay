@@ -31,9 +31,7 @@ protocol SearchLandmarkCoordinator {
     func popModal(landmark: Landmark)
 }
 
-
-
-class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinator, LandmarkCartCoordinator, SearchLandmarkCoordinator {
+class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinator, LandmarkCartCoordinator, SearchLandmarkCoordinator, ReservedTravelCoordinator {
     var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {

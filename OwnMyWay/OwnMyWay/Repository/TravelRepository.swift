@@ -128,7 +128,7 @@ class CoreDataTravelRepository: TravelRepository {
             return .failure(error)
         }
     }
-    
+
     func deleteTravel(of travel: Travel) {
         guard let uuid = travel.uuid as CVarArg? else { return }
         let request = TravelMO.fetchRequest()
