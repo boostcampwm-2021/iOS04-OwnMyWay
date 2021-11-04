@@ -83,12 +83,17 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="9rS-Vn-KTD"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzu-vs-UWO">
-                                <rect key="frame" x="182.5" y="816" width="49" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzu-vs-UWO" customClass="NextButton" customModule="OwnMyWay" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="806" width="414" height="90"/>
+                                <color key="backgroundColor" name="IdentityBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="J6J-7r-rHE"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="다음"/>
                                 <connections>
-                                    <action selector="nextButtonDidTouched:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Elw-Mp-zSt"/>
+                                    <action selector="nextButtonDidTouched:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="mjv-dU-xE3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -97,16 +102,17 @@
                         <constraints>
                             <constraint firstItem="nkc-3o-fy0" firstAttribute="trailing" secondItem="43Z-qy-ngV" secondAttribute="trailing" id="4x6-Xd-mvr"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="LjK-w9-XFr" secondAttribute="trailing" constant="10" id="94N-cF-zOT"/>
+                            <constraint firstItem="nzu-vs-UWO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="A24-Y1-D45"/>
                             <constraint firstItem="nkc-3o-fy0" firstAttribute="top" secondItem="cs1-WO-d5D" secondAttribute="bottom" constant="50" id="ET1-tC-N0K"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.95" id="F4S-Dd-X24"/>
                             <constraint firstItem="LjK-w9-XFr" firstAttribute="top" secondItem="nkc-3o-fy0" secondAttribute="bottom" constant="10" id="Jvl-oa-6lX"/>
                             <constraint firstItem="43Z-qy-ngV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="bottom" multiplier="0.15" id="NZk-HN-5CP"/>
                             <constraint firstItem="43Z-qy-ngV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.05" id="R7N-EE-kgi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="43Z-qy-ngV" secondAttribute="trailing" id="T7W-2x-XZL"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="nzu-vs-UWO" secondAttribute="bottom" constant="15" id="XOy-y1-gds"/>
                             <constraint firstItem="nkc-3o-fy0" firstAttribute="leading" secondItem="43Z-qy-ngV" secondAttribute="leading" id="aeU-Xb-Hkh"/>
-                            <constraint firstItem="nzu-vs-UWO" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="fpq-HH-X3j"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="nzu-vs-UWO" secondAttribute="trailing" id="cF9-LI-OS7"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.05" id="g1P-dK-RS8"/>
+                            <constraint firstAttribute="bottom" secondItem="nzu-vs-UWO" secondAttribute="bottom" id="h5G-1k-DlY"/>
                             <constraint firstItem="LjK-w9-XFr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="taj-sN-yId"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="bottom" multiplier="0.2" id="wbD-h7-lcO"/>
                         </constraints>
@@ -114,7 +120,7 @@
                     <navigationItem key="navigationItem" title="새로운 기록" id="4xu-Sz-XCj"/>
                     <connections>
                         <outlet property="calendarView" destination="LjK-w9-XFr" id="UwQ-pW-rWj"/>
-                        <outlet property="nextButton" destination="nzu-vs-UWO" id="OaX-vm-okw"/>
+                        <outlet property="nextButton" destination="nzu-vs-UWO" id="kaw-FN-hOK"/>
                         <outlet property="travelTitleField" destination="cs1-WO-d5D" id="s5H-6S-EG9"/>
                     </connections>
                 </viewController>

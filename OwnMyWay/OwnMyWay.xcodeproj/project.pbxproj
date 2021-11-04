@@ -18,6 +18,8 @@
 		29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */; };
 		29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */; };
 		3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3F20606527314AAE0005D8F4 /* FSCalendar */; };
+		3F20606827339FAB0005D8F4 /* NextButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F20606727339FAB0005D8F4 /* NextButton.xib */; };
+		3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2060692733A2610005D8F4 /* NextButton.swift */; };
 		AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */; };
 		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
@@ -61,6 +63,8 @@
 		29E9BA37273253130040B70A /* LandmarkCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewController.swift; sourceTree = "<group>"; };
 		29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkCardCell.swift; sourceTree = "<group>"; };
 		29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandmarkCardCell.xib; sourceTree = "<group>"; };
+		3F20606727339FAB0005D8F4 /* NextButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextButton.xib; sourceTree = "<group>"; };
+		3F2060692733A2610005D8F4 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotationView.swift; sourceTree = "<group>"; };
 		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 				AFFB96172730F76100F23A46 /* PlusCell.xib */,
 				29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */,
 				29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */,
+				3F20606727339FAB0005D8F4 /* NextButton.xib */,
+				3F2060692733A2610005D8F4 /* NextButton.swift */,
 				AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */,
 			);
 			path = View;
@@ -299,6 +305,7 @@
 				DB22BB69272F82780004444B /* LaunchScreen.storyboard in Resources */,
 				DB22BB66272F82780004444B /* Assets.xcassets in Resources */,
 				DB22BB61272F82770004444B /* Home.storyboard in Resources */,
+				3F20606827339FAB0005D8F4 /* NextButton.xib in Resources */,
 				29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */,
 				29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
@@ -336,6 +343,7 @@
 				AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */,
 				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
+				3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */,
 				AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */,
 				29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
