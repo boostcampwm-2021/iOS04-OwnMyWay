@@ -12,9 +12,7 @@ enum LandmarkCartError: Error {
 }
 
 protocol LandmarkCartUsecase {
-    func addLandmark(to travel: Travel, of landmark: Landmark, completion: (Error) -> Void)
-    func delete(of travel: Travel)
-    func delete(of landmark: Landmark)
+    func addLandmark(to travel: Travel, of landmark: Landmark, completion: (Landmark) -> Void)
 }
 
 class DefaultLandmarkCartUsecase: LandmarkCartUsecase {
@@ -24,28 +22,20 @@ class DefaultLandmarkCartUsecase: LandmarkCartUsecase {
         self.travelRepository = travelRepository
     }
 
-    func addLandmark(to travel: Travel, of landmark: Landmark, completion: (Error) -> Void) {
-        guard let title = landmark.title, let image = landmark.image else { return }
-        let latitude = landmark.latitude, longitude = landmark.longitude
+    func addLandmark(to travel: Travel, of landmark: Landmark, completion: (Landmark) -> Void) {
+        let result = self.travelRepository.addLandmark(
+            to: travel,
+            title: landmark.title,
+            image: landmark.image,
+            latitude: landmark.latitude,
+            longitude: landmark.longitude
+        )
 
-        let result = self.travelRepository.addLandmark(to: travel,
-                                                       title: title,
-                                                       image: image,
-                                                       latitude: latitude,
-                                                       longitude: longitude)
         switch result {
-        case .success: break
-        case .failure: completion(LandmarkCartError.registerFail)
+        case .success(let createLandmark):
+            completion(createLandmark)
+        case .failure(let error):
+            print(error)
         }
-    }
-
-    func delete(of travel: Travel) {
-        // self.travelRepository.deleteTravel()
-        // 구현해주세요 우재님 ^_^
-    }
-
-    func delete(of landmark: Landmark) {
-//        self.travelRepository.deleteLandmark()
-//        구현해주세요 우재님 ^_^
     }
 }
