@@ -23,6 +23,8 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     private var cancellable: AnyCancellable?
     private let locationManager: CLLocationManager = CLLocationManager()
 
+    var coordinator: LandmarkCartCoordinator?
+
     enum Section: CaseIterable { case main }
 
     override func viewDidLoad() {
@@ -35,6 +37,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
 
+        self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         self.diffableDataSource = createMakeDiffableDataSource()
         self.configureCancellable()
@@ -117,6 +120,17 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
                 }
         }
         return dataSource
+    }
+}
+
+// MARK: - extension LandmarkCartViewController for UICollectionViewDelegate
+
+extension LandmarkCartViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == collectionView.numberOfItems(inSection: 0) - 1 {
+            // PlusCell 일 경우
+            self.coordinator?.presentSearchLandmarkModally()
+        }
     }
 }
 
