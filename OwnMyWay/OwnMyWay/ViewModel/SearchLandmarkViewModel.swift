@@ -9,27 +9,29 @@ import Combine
 import Foundation
 
 protocol SearchLandmarkViewModelType {
-    var landmarks: [LandmarkDTO]? { get }
+    var landmarks: [Landmark] { get }
+    var landmarksPublisher: Published<[Landmark]>.Publisher { get }
     var searchText: String? { get }
 
     func configure()
     func didEnterSearchText(text: String?)
 }
 
-class SearchLandmarkViewModel: SearchLandmarkViewModelType {
-
-    @Published var landmarks: [LandmarkDTO]?
+class SearchLandmarkViewModel: SearchLandmarkViewModelType, ObservableObject {
+    @Published var landmarks: [Landmark]
+    var landmarksPublisher: Published<[Landmark]>.Publisher { $landmarks }
     var searchText: String?
 
     private let searchLandmarkUsecase: SearchLandmarkUsecase
 
     init(searchLandmarkUsecase: SearchLandmarkUsecase) {
+        self.landmarks = []
         self.searchLandmarkUsecase = searchLandmarkUsecase
     }
 
     func configure() {
-        searchLandmarkUsecase.executeFetch { [weak self] landmarkDTOs in
-            self?.landmarks = landmarkDTOs
+        searchLandmarkUsecase.executeFetch { [weak self] landmarks in
+            self?.landmarks = landmarks
         }
     }
 
