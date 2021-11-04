@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class LandmarkCardCell: UICollectionViewCell {
     static let identifier: String = "LandmarkCardCell"
@@ -14,10 +15,7 @@ class LandmarkCardCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
 
     func configure(landmark: Landmark) {
-        guard let image = landmark.image, let data = try? Data(contentsOf: image) else {
-            return
-        }
-        self.imageView.image = UIImage(data: data)
+        self.imageView.kf.setImage(with: landmark.image)
         self.titleLabel.text = landmark.title
     }
 }
