@@ -67,7 +67,7 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
         var isValid = false
         if let startDate = startDate,
            let endDate = endDate,
-           startDate < endDate {
+           startDate <= endDate {
             isValid = true
         }
         self.isValidDate = isValid
