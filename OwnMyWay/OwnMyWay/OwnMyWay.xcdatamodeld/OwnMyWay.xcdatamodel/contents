@@ -23,8 +23,8 @@
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="landmarks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LandmarkMO" inverseName="travel" inverseEntity="LandmarkMO"/>
-        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecordMO" inverseName="travel" inverseEntity="RecordMO"/>
+        <relationship name="landmarks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LandmarkMO" inverseName="travel" inverseEntity="LandmarkMO"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RecordMO" inverseName="travel" inverseEntity="RecordMO"/>
     </entity>
     <elements>
         <element name="LandmarkMO" positionX="-20.21484375" positionY="165.78125" width="128" height="119"/>
