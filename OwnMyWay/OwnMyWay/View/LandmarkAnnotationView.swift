@@ -9,6 +9,8 @@ import CoreLocation
 import Foundation
 import MapKit
 
+import Kingfisher
+
 class LandmarkAnnotationView: MKAnnotationView {
     static let identifier = "LandmarkAnnotationView"
 
@@ -31,17 +33,14 @@ class LandmarkAnnotationView: MKAnnotationView {
     }
 
     func configureDetailView() {
-        guard let annotation = annotation as? LandmarkAnnotation,
-              let url = annotation.image,
-              let data = try? Data(contentsOf: url)
-        else { return }
+        guard let annotation = annotation as? LandmarkAnnotation else { return }
 
         let rect = CGRect(origin: .zero, size: CGSize(width: 300, height: 200))
 
         let detailView = UIView()
         let imageView = UIImageView(frame: rect)
         detailView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(data: data)
+        imageView.kf.setImage(with: annotation.image)
         detailView.addSubview(imageView)
 
         detailCalloutAccessoryView = detailView

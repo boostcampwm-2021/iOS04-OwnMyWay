@@ -17,7 +17,7 @@ struct LandmarkDTO: Decodable {
     func toLandmark() -> Landmark {
         let url = URL(string: self.image)
         return Landmark(
-            uuid: nil,
+            uuid: UUID(),
             image: url,
             latitude: self.latitude,
             longitude: self.longitude,
