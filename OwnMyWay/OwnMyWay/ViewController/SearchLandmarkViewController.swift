@@ -23,6 +23,7 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
         self.registerNib()
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         self.diffableDataSource = createMakeDiffableDataSource()
+        self.searchBar.delegate = self
         self.configureCancellable()
     }
 
@@ -76,5 +77,12 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
                 return cell
         }
         return dataSource
+    }
+}
+
+// MARK: - SearchLandmarkViewController for SerachBarDelegate
+extension SearchLandmarkViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.viewModel?.searchText = searchText
     }
 }

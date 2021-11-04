@@ -75,8 +75,7 @@ class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinat
         searchLandmarkVC.bind(viewModel: viewModel)
         navigationController.viewControllers.last?.present(
             searchLandmarkVC,
-            animated: true,
-            completion: { viewModel.configure() }
+            animated: true
         )
     }
 }
