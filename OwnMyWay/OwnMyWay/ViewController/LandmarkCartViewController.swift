@@ -18,10 +18,12 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var collectionView: UICollectionView!
     // usecase, viewModel 상위에서 주입
-    private var viewModel: LandmarkCartViewModelType?
+    private(set) var viewModel: LandmarkCartViewModelType?
     private var diffableDataSource: DataSource?
     private var cancellable: AnyCancellable?
     private let locationManager: CLLocationManager = CLLocationManager()
+
+    var coordinator: LandmarkCartCoordinator?
 
     enum Section: CaseIterable { case main }
 
@@ -35,14 +37,10 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
 
+        self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         self.diffableDataSource = createMakeDiffableDataSource()
         self.configureCancellable()
-
-        // 추후 삭제 요망 테스트용임.
-        self.viewModel?.didAddLandmark(of: Landmark(uuid: nil, image: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Seongsan_Ilchulbong_from_the_air.jpg/544px-Seongsan_Ilchulbong_from_the_air.jpg"), latitude: 33.458126, longitude: 126.94258, title: "성산일출봉"))
-        self.viewModel?.didAddLandmark(of: Landmark(uuid: nil, image: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Hallasan_2.jpg/600px-Hallasan_2.jpg"), latitude: 33.361425, longitude: 126.529418, title: "한라산"))
-        self.viewModel?.didAddLandmark(of: Landmark(uuid: nil, image: URL(string: "https://www.jejumobile.kr/datas/759a08edc464d3fd3d731a318afa7a71.jpg"), latitude: 33.290358, longitude: 126.351981, title: "헬로키티아일랜드"))
     }
 
     func bind(viewModel: LandmarkCartViewModelType) {
@@ -59,12 +57,12 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     private func configureCancellable() {
         guard let viewModel = viewModel else { return }
         self.cancellable = viewModel.travelPublisher.sink { [weak self] travel in
-            var snapshot = NSDiffableDataSourceSectionSnapshot<Landmark>()
-            let snapshotItem = travel.landmarks + [Landmark()]
-            snapshot.append(snapshotItem)
-            self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: false)
-
             DispatchQueue.main.async {
+                var snapshot = NSDiffableDataSourceSectionSnapshot<Landmark>()
+                let snapshotItem = travel.landmarks + [Landmark()]
+                snapshot.append(snapshotItem)
+                self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
+
                 guard let mapView = self?.mapView else { return }
                 let annotations = travel.landmarks.map({ LandmarkAnnotation(landmark: $0) })
                 self?.drawLandmarkAnnotations(mapView: mapView, annotations: annotations)
@@ -98,7 +96,6 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         let dataSource = DataSource(
             collectionView: self.collectionView) { collectionView, indexPath, item in
                 guard let viewModel = self.viewModel else { return UICollectionViewCell() }
-
                 switch indexPath.item {
                 case viewModel.travel.landmarks.count:
                     guard let cell = collectionView.dequeueReusableCell(
@@ -117,6 +114,17 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
                 }
         }
         return dataSource
+    }
+}
+
+// MARK: - extension LandmarkCartViewController for UICollectionViewDelegate
+
+extension LandmarkCartViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == collectionView.numberOfItems(inSection: 0) - 1 {
+            // PlusCell 일 경우
+            self.coordinator?.presentSearchLandmarkModally()
+        }
     }
 }
 
