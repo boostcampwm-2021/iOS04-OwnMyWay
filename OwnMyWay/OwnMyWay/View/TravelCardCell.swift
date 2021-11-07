@@ -11,10 +11,27 @@ class TravelCardCell: UICollectionViewCell {
     static let identifier = "TravelCardCell"
 
     @IBOutlet weak var travelTitleLabel: UILabel!
+    @IBOutlet weak var travelDateLabel: UILabel!
     @IBOutlet weak var backgroundButton: UIButton!
 
     func configure(travel: Travel) {
         self.travelTitleLabel.text = travel.title
+        self.travelDateLabel.text = format(travel: travel)
+        self.backgroundButton.layer.cornerRadius = 7
+        self.backgroundButton.clipsToBounds = true
+    }
+
+    private func format(travel: Travel) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        guard let startDate = travel.startDate,
+              let endDate = travel.endDate else {
+            return ""
+        }
+        if startDate == endDate {
+            return "\(formatter.string(from: startDate))"
+        }
+        return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
     }
 
 }
