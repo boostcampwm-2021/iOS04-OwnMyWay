@@ -8,8 +8,6 @@
 import Foundation
 
 protocol HomeViewModelType {
-    var reservedTravelCount: Int { get }
-
     var reservedTravelPublisher: Published<[Travel]>.Publisher { get }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { get }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
@@ -18,7 +16,6 @@ protocol HomeViewModelType {
 }
 
 class HomeViewModel: HomeViewModelType {
-    @Published private(set) var reservedTravelCount: Int
 
     @Published private var reservedTravels: [Travel]
     @Published private var ongoingTravels: [Travel]
@@ -31,8 +28,16 @@ class HomeViewModel: HomeViewModelType {
     private let homeUsecase: HomeUsecase
 
     init(homeUsecase: HomeUsecase) {
-        self.reservedTravelCount = 0
-        self.reservedTravels = []
+        let plusCard = Travel(
+            uuid: nil,
+            flag: 0,
+            title: "asd",
+            startDate: Date(),
+            endDate: Date(),
+            landmarks: [],
+            records: []
+        )
+        self.reservedTravels = [plusCard]
         self.ongoingTravels = []
         self.outdatedTravels = []
         self.homeUsecase = homeUsecase
@@ -40,9 +45,10 @@ class HomeViewModel: HomeViewModelType {
 
     func configure() {
         self.homeUsecase.executeFetch { [weak self] travels in
-            self?.reservedTravels = travels.filter { $0.flag == 0 }
-            self?.ongoingTravels = travels.filter { $0.flag == 1 }
-            self?.outdatedTravels = travels.filter { $0.flag == 2 }
+            guard let self = self else { return }
+            self.reservedTravels = travels.filter { $0.flag == 0 } + self.reservedTravels
+            self.ongoingTravels = travels.filter { $0.flag == 1 } + self.ongoingTravels
+            self.outdatedTravels = travels.filter { $0.flag == 2 } + self.outdatedTravels
         }
     }
 

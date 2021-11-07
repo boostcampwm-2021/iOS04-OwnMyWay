@@ -43,6 +43,8 @@ class HomeViewController: UIViewController, Instantiable {
     private func registerNib() {
         self.travelCollectionView.register(UINib(nibName: TravelCardCell.identifier, bundle: nil),
                                            forCellWithReuseIdentifier: TravelCardCell.identifier)
+        self.travelCollectionView.register(UINib(nibName: PlusCell.identifier, bundle: nil),
+                                           forCellWithReuseIdentifier: PlusCell.identifier)
         self.travelCollectionView.register(
             UINib(nibName: TravelSectionHeader.identifier,
                   bundle: nil),
@@ -52,6 +54,7 @@ class HomeViewController: UIViewController, Instantiable {
     }
 
     private func setTravelCollectionView() {
+        self.travelCollectionView.delegate = self
         self.travelCollectionView.collectionViewLayout = createCompositionalLayout()
         self.diffableDataSource = createDiffableDataSource()
     }
@@ -85,12 +88,12 @@ class HomeViewController: UIViewController, Instantiable {
 
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalWidth(1.0))
+                                              heightDimension: .fractionalWidth(0.8))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(180),
-                                               heightDimension: .absolute(180))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(300),
+                                               heightDimension: .absolute(240))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
@@ -100,7 +103,7 @@ class HomeViewController: UIViewController, Instantiable {
                                                         bottom: 10,
                                                         trailing: 10)
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .estimated(200))
+                                                heightDimension: .estimated(60))
         let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
@@ -114,36 +117,32 @@ class HomeViewController: UIViewController, Instantiable {
     private func createDiffableDataSource() -> HomeDataSource {
         let dataSource = HomeDataSource(
             collectionView: self.travelCollectionView) { collectionView, indexPath, item in
-                guard let viewModel = self.viewModel
-                else { return UICollectionViewCell() }
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: TravelCardCell.identifier,
-                    for: indexPath) as? TravelCardCell
-                else { return UICollectionViewCell() }
-                cell.configure(travel: item)
-                return cell
 
-//                switch (indexPath.section, indexPath.item) {
-//                case (0, viewModel.reservedTravelCount):
-//                    guard let cell = collectionView.dequeueReusableCell(
-//                        withReuseIdentifier: PlusCell.identifier,
-//                        for: indexPath) as? PlusCell
-//                    else { return UICollectionViewCell() }
-//                    cell.bind()
-//                    return cell
-//                default:
-//                    guard let cell = collectionView.dequeueReusableCell(
-//                        withReuseIdentifier: TravelCardCell.identifier,
-//                        for: indexPath) as? TravelCardCell
-//                    else { return UICollectionViewCell() }
-//                    cell.configure(travel: item)
-//                    return cell
-//                }
+                switch (indexPath.section, item.uuid) {
+                case (Section.reserved.rawValue, nil):
+                    guard let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: PlusCell.identifier,
+                        for: indexPath) as? PlusCell
+                    else { return UICollectionViewCell() }
+                    cell.bind()
+                    return cell
+                default:
+                    guard let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: TravelCardCell.identifier,
+                        for: indexPath) as? TravelCardCell
+                    else { return UICollectionViewCell() }
+                    cell.configure(travel: item)
+                    return cell
+                }
         }
-        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
-            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: TravelSectionHeader.identifier, for: indexPath) as? TravelSectionHeader else {
-                fatalError("Could not dequeue sectionHeader: \(TravelSectionHeader.identifier)")
-            }
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath)
+            -> UICollectionReusableView? in
+            guard let sectionHeader = collectionView
+                    .dequeueReusableSupplementaryView(
+                        ofKind: kind,
+                        withReuseIdentifier: TravelSectionHeader.identifier,
+                        for: indexPath) as? TravelSectionHeader
+            else { return UICollectionReusableView() }
             let title = ["예정된 여행", "진행중인 여행", "지난 여행"]
             sectionHeader.configure(sectionTitle: title[indexPath.section])
             return sectionHeader
@@ -154,4 +153,15 @@ class HomeViewController: UIViewController, Instantiable {
     @IBAction func onbuttonpressed(_ sender: Any) {
         coordinator?.pushToCreateTravel()
     }
+}
+
+extension HomeViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let travel = self.diffableDataSource?.itemIdentifier(for: indexPath) else { return }
+        if travel.uuid == nil {
+            coordinator?.pushToCreateTravel()
+        }
+    }
+
 }
