@@ -29,8 +29,8 @@ class HomeViewController: UIViewController, Instantiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUsecase()
+        self.registerNib()
         self.setTravelCollectionView()
-//        self.bindUI()
         self.configureCancellables()
         self.viewModel?.configure()
     }
@@ -40,59 +40,113 @@ class HomeViewController: UIViewController, Instantiable {
         self.viewModel = HomeViewModel(homeUsecase: usecase)
     }
 
+    private func registerNib() {
+        self.travelCollectionView.register(UINib(nibName: TravelCardCell.identifier, bundle: nil),
+                                           forCellWithReuseIdentifier: TravelCardCell.identifier)
+        self.travelCollectionView.register(
+            UINib(nibName: TravelSectionHeader.identifier,
+                  bundle: nil),
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: TravelSectionHeader.identifier
+        )
+    }
+
     private func setTravelCollectionView() {
+        self.travelCollectionView.collectionViewLayout = createCompositionalLayout()
         self.diffableDataSource = createDiffableDataSource()
-//        self.travelCollectionView.delegate = self
-//        self.travelCollectionView.dataSource = self
     }
 
     private func configureCancellables() {
-        guard let viewModel = viewModel,
-              var cancellables = cancellables
+        guard let viewModel = viewModel
         else { return }
+        var cancellables: Set<AnyCancellable> = []
         viewModel.reservedTravelPublisher.sink { [weak self] travels in
             var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
-            let reservedSnapshotItem = travels.filter { $0.flag == 0 }
-            snapshot.append(reservedSnapshotItem)
-            self?.diffableDataSource?.apply(snapshot, to: .ongoing, animatingDifferences: true)
+            let snapshotItem = travels
+            snapshot.append(snapshotItem)
+            self?.diffableDataSource?.apply(snapshot, to: .reserved, animatingDifferences: true)
         }.store(in: &cancellables)
 
         viewModel.ongoingTravelPublisher.sink { [weak self] travels in
             var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
-            let reservedSnapshotItem = travels.filter { $0.flag == 1 }
-            snapshot.append(reservedSnapshotItem)
+            let snapshotItem = travels
+            snapshot.append(snapshotItem)
             self?.diffableDataSource?.apply(snapshot, to: .ongoing, animatingDifferences: true)
         }.store(in: &cancellables)
 
         viewModel.outdatedTravelPublisher.sink { [weak self] travels in
             var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
-            let reservedSnapshotItem = travels.filter { $0.flag == 2 }
-            snapshot.append(reservedSnapshotItem)
-            self?.diffableDataSource?.apply(snapshot, to: .ongoing, animatingDifferences: true)
+            let snapshotItem = travels
+            snapshot.append(snapshotItem)
+            self?.diffableDataSource?.apply(snapshot, to: .outdated, animatingDifferences: true)
         }.store(in: &cancellables)
+        self.cancellables = cancellables
+    }
+
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalWidth(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(180),
+                                               heightDimension: .absolute(180))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10,
+                                                        leading: 10,
+                                                        bottom: 10,
+                                                        trailing: 10)
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                heightDimension: .estimated(200))
+        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [headerElement]
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
 
     private func createDiffableDataSource() -> HomeDataSource {
         let dataSource = HomeDataSource(
             collectionView: self.travelCollectionView) { collectionView, indexPath, item in
-                guard let viewModel = self.viewModel else { return UICollectionViewCell() }
+                guard let viewModel = self.viewModel
+                else { return UICollectionViewCell() }
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: TravelCardCell.identifier,
+                    for: indexPath) as? TravelCardCell
+                else { return UICollectionViewCell() }
+                cell.configure(travel: item)
+                return cell
 
-                switch (indexPath.section, indexPath.item) {
-                case (0, viewModel.reservedTravelCount):
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: PlusCell.identifier,
-                        for: indexPath) as? PlusCell
-                    else { return UICollectionViewCell() }
-                    cell.bind()
-                    return cell
-                default:
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: TravelCardCell.identifier,
-                        for: indexPath) as? TravelCardCell
-                    else { return UICollectionViewCell() }
-                    cell.setAppearance(travel: item)
-                    return cell
-                }
+//                switch (indexPath.section, indexPath.item) {
+//                case (0, viewModel.reservedTravelCount):
+//                    guard let cell = collectionView.dequeueReusableCell(
+//                        withReuseIdentifier: PlusCell.identifier,
+//                        for: indexPath) as? PlusCell
+//                    else { return UICollectionViewCell() }
+//                    cell.bind()
+//                    return cell
+//                default:
+//                    guard let cell = collectionView.dequeueReusableCell(
+//                        withReuseIdentifier: TravelCardCell.identifier,
+//                        for: indexPath) as? TravelCardCell
+//                    else { return UICollectionViewCell() }
+//                    cell.configure(travel: item)
+//                    return cell
+//                }
+        }
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView? in
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: TravelSectionHeader.identifier, for: indexPath) as? TravelSectionHeader else {
+                fatalError("Could not dequeue sectionHeader: \(TravelSectionHeader.identifier)")
+            }
+            let title = ["예정된 여행", "진행중인 여행", "지난 여행"]
+            sectionHeader.configure(sectionTitle: title[indexPath.section])
+            return sectionHeader
         }
         return dataSource
     }
@@ -101,24 +155,3 @@ class HomeViewController: UIViewController, Instantiable {
         coordinator?.pushToCreateTravel()
     }
 }
-
-//extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        // MARK: 하드코딩하면 안될거같음
-//        guard let myTravels = myTravels else {
-//            return 0
-//        }
-//        return myTravels[section].count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TravelCardCell", for: indexPath) as? TravelCardCell,
-//              let myTravels = myTravels else {
-//            return UICollectionViewCell()
-//        }
-//        cell.setAppearance(travel: myTravels[indexPath.section][indexPath.item])
-//        return cell
-//    }
-//
-//}
