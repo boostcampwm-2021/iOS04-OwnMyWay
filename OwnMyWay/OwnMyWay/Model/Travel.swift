@@ -17,3 +17,13 @@ struct Travel {
     var landmarks: [Landmark]
     var records: [Record]
 }
+
+extension Travel: Hashable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
+}
