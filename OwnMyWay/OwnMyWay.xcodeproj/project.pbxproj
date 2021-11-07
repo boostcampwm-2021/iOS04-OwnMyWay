@@ -20,6 +20,10 @@
 		3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3F20606527314AAE0005D8F4 /* FSCalendar */; };
 		3F20606827339FAB0005D8F4 /* NextButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F20606727339FAB0005D8F4 /* NextButton.xib */; };
 		3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2060692733A2610005D8F4 /* NextButton.swift */; };
+		3FB914BE273409530084FF1C /* TravelCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914BC273409530084FF1C /* TravelCardCell.swift */; };
+		3FB914BF273409530084FF1C /* TravelCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB914BD273409530084FF1C /* TravelCardCell.xib */; };
+		3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914C027340E410084FF1C /* HomeViewModel.swift */; };
+		3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914C22734129F0084FF1C /* HomeUsecase.swift */; };
 		AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */; };
 		AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */; };
 		AF6CBB692733F0C400E87533 /* SearchLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */; };
@@ -67,6 +71,10 @@
 		29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandmarkCardCell.xib; sourceTree = "<group>"; };
 		3F20606727339FAB0005D8F4 /* NextButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextButton.xib; sourceTree = "<group>"; };
 		3F2060692733A2610005D8F4 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
+		3FB914BC273409530084FF1C /* TravelCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelCardCell.swift; sourceTree = "<group>"; };
+		3FB914BD273409530084FF1C /* TravelCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TravelCardCell.xib; sourceTree = "<group>"; };
+		3FB914C027340E410084FF1C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		3FB914C22734129F0084FF1C /* HomeUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUsecase.swift; sourceTree = "<group>"; };
 		AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotationView.swift; sourceTree = "<group>"; };
 		AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLandmark.storyboard; sourceTree = "<group>"; };
 		AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +142,8 @@
 			children = (
 				AFFB96162730F76100F23A46 /* PlusCell.swift */,
 				AFFB96172730F76100F23A46 /* PlusCell.xib */,
+				3FB914BC273409530084FF1C /* TravelCardCell.swift */,
+				3FB914BD273409530084FF1C /* TravelCardCell.xib */,
 				29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */,
 				29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */,
 				3F20606727339FAB0005D8F4 /* NextButton.xib */,
@@ -149,6 +159,7 @@
 				29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */,
 				DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */,
 				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
+				3FB914C027340E410084FF1C /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -159,6 +170,7 @@
 				29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */,
 				DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */,
 				AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */,
+				3FB914C22734129F0084FF1C /* HomeUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -308,6 +320,7 @@
 				DB22BB73272F83DB0004444B /* .swiftlint.yml in Resources */,
 				29E9BA36273251BE0040B70A /* LandmarkCart.storyboard in Resources */,
 				29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */,
+				3FB914BF273409530084FF1C /* TravelCardCell.xib in Resources */,
 				DB22BB69272F82780004444B /* LaunchScreen.storyboard in Resources */,
 				DB22BB66272F82780004444B /* Assets.xcassets in Resources */,
 				DB22BB61272F82770004444B /* Home.storyboard in Resources */,
@@ -365,7 +378,9 @@
 				AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */,
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
 				AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */,
+				3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */,
 				DB8831C52732670F00487D33 /* Coordinator.swift in Sources */,
+				3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */,
 				DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */,
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
@@ -380,6 +395,7 @@
 				AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */,
 				29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */,
 				DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */,
+				3FB914BE273409530084FF1C /* TravelCardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +542,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
@@ -553,6 +570,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;

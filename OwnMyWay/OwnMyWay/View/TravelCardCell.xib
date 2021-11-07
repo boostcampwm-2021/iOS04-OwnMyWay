@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TravelCardCell" id="gTV-IL-0wX" customClass="TravelCardCell" customModule="OwnMyWay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="293" height="201"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="293" height="201"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여행 제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3b-Xe-6K0">
+                        <rect key="frame" x="114.5" y="90" width="64" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ily-lE-Yja">
+                        <rect key="frame" x="0.0" y="0.0" width="293" height="201"/>
+                        <color key="tintColor" systemColor="labelColor"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title=""/>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ily-lE-Yja" secondAttribute="bottom" id="13a-xR-g05"/>
+                <constraint firstItem="N3b-Xe-6K0" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="5Vt-al-UYQ"/>
+                <constraint firstAttribute="trailing" secondItem="ily-lE-Yja" secondAttribute="trailing" id="6hB-ah-4mS"/>
+                <constraint firstItem="ily-lE-Yja" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8te-jt-HTe"/>
+                <constraint firstItem="N3b-Xe-6K0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="GFp-Ad-Pmd"/>
+                <constraint firstItem="ily-lE-Yja" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wrG-L9-4vy"/>
+            </constraints>
+            <connections>
+                <outlet property="backgroundButton" destination="ily-lE-Yja" id="CPS-uu-M7o"/>
+                <outlet property="travelTitleLabel" destination="N3b-Xe-6K0" id="3RF-zE-GQy"/>
+            </connections>
+            <point key="canvasLocation" x="100.00000000000001" y="-105.13392857142857"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

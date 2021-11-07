@@ -38,6 +38,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         self.diffableDataSource = createMakeDiffableDataSource()
         self.configureCancellable()
+        self.setupLongGestureRecognizer()
 
         // 추후 삭제 요망 테스트용임.
         self.viewModel?.didAddLandmark(of: Landmark(uuid: nil, image: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Seongsan_Ilchulbong_from_the_air.jpg/544px-Seongsan_Ilchulbong_from_the_air.jpg"), latitude: 33.458126, longitude: 126.94258, title: "성산일출봉"))
@@ -118,6 +119,29 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         }
         return dataSource
     }
+}
+
+extension LandmarkCartViewController: UICollectionViewDelegate, UIGestureRecognizerDelegate {
+
+    private func setupLongGestureRecognizer() {
+        let recognizer = UILongPressGestureRecognizer(target: self,
+                                                      action: #selector(longPressRecognized(by:)))
+        recognizer.minimumPressDuration = 1
+        recognizer.delegate = self
+        recognizer.delaysTouchesBegan = true
+        collectionView.addGestureRecognizer(recognizer)
+    }
+
+    @objc func longPressRecognized(by recognizer: UILongPressGestureRecognizer) {
+        if recognizer.state != .began {
+            return
+        }
+        let position = recognizer.location(in: collectionView)
+        if let indexPath = collectionView.indexPathForItem(at: position) {
+            print("Long press at item: \(indexPath.item)")
+        }
+    }
+
 }
 
 // MARK: - extension LandmarkCartViewController for MapView
