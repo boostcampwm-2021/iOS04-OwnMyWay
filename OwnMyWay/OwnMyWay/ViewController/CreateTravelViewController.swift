@@ -110,9 +110,9 @@ extension CreateTravelViewController: FSCalendarDelegate {
 
     private func alertMessage(startDate: Date, endDate: Date) -> String {
         if startDate == endDate {
-            return "여행 기간을 \(localize(date: startDate)) 당일치기로 설정할까요?"
+            return "여행 기간을 \(startDate.localize())) 당일치기로 설정할까요?"
         }
-        return "여행 기간을 \(localize(date: startDate))부터 \(localize(date: endDate))로 설정할까요?"
+        return "여행 기간을 \(startDate.localize())부터 \(endDate.localize()))로 설정할까요?"
     }
 
     private func initSelection() {
@@ -128,18 +128,6 @@ extension CreateTravelViewController: FSCalendarDelegate {
         dateFormatter.timeZone = TimeZone(abbreviation: "KST")
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: date)
-    }
-
-}
-
-extension Date: Strideable {
-
-    public func distance(to other: Date) -> TimeInterval {
-        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
-    }
-
-    public func advanced(by interval: TimeInterval) -> Date {
-        return self + interval
     }
 
 }
