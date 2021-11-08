@@ -31,7 +31,7 @@ class HomeViewModel: HomeViewModelType {
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { $outdatedTravels }
 
     private let homeUsecase: HomeUsecase
-    private var coordinator: HomeCoordinatingDelegate
+    private weak var coordinator: HomeCoordinatingDelegate?
 
     init(homeUsecase: HomeUsecase, coordinator: HomeCoordinatingDelegate) {
         self.reservedTravels = []
@@ -53,15 +53,16 @@ class HomeViewModel: HomeViewModelType {
                 landmarks: [],
                 records: []
             )
-            self.reservedTravels = travels.filter { $0.flag == Travel.Section.reserved.index }
-                + [plusCard]
+            self.reservedTravels = [plusCard] + travels.filter {
+                $0.flag == Travel.Section.reserved.index
+            }
             self.ongoingTravels = travels.filter { $0.flag == Travel.Section.ongoing.index }
             self.outdatedTravels = travels.filter { $0.flag == Travel.Section.outdated.index }
         }
     }
-    
+
     func createButtonDidTouched() {
-        self.coordinator.pushToCreateTravel()
+        self.coordinator?.pushToCreateTravel()
     }
 
 }

@@ -27,7 +27,10 @@ class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
     }
 
     func pushToCreateTravel() {
-        print("🤷‍♂️🤷‍♂️🤷‍♂️")
-        // push to create travel
+        let createTravelCoordinator = CreateTravelCoordinator(
+            navigationController: self.navigationController
+        )
+        self.childCoordinators.append(createTravelCoordinator)
+        createTravelCoordinator.start()
     }
 }
