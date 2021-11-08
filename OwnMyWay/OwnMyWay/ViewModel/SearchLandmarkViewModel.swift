@@ -14,6 +14,11 @@ protocol SearchLandmarkViewModelType {
     var searchText: String { get set }
     func configure()
     func didEnterSearchText(text: String)
+    func landmarkCardDidTouched(index: Int)
+}
+
+protocol SearchLandmarkCoordinatingDelegate: AnyObject {
+    func dismissToAddLandmark(landmark: Landmark)
 }
 
 class SearchLandmarkViewModel: SearchLandmarkViewModelType, ObservableObject {
@@ -23,8 +28,13 @@ class SearchLandmarkViewModel: SearchLandmarkViewModelType, ObservableObject {
     var cancellable: AnyCancellable?
 
     private let searchLandmarkUsecase: SearchLandmarkUsecase
+    private weak var coordinator: SearchLandmarkCoordinatingDelegate?
 
-    init(searchLandmarkUsecase: SearchLandmarkUsecase) {
+    init(
+        searchLandmarkUsecase: SearchLandmarkUsecase,
+        coordinator: SearchLandmarkCoordinatingDelegate
+    ) {
+        self.coordinator = coordinator
         self.landmarks = []
         self.searchLandmarkUsecase = searchLandmarkUsecase
         self.searchText = ""
@@ -49,5 +59,10 @@ class SearchLandmarkViewModel: SearchLandmarkViewModelType, ObservableObject {
                 self?.landmarks = searchResult
             }
         }
+    }
+
+    func landmarkCardDidTouched(index: Int) {
+        guard landmarks.startIndex..<landmarks.endIndex ~= index else { return }
+        self.coordinator?.dismissToAddLandmark(landmark: landmarks[index])
     }
 }

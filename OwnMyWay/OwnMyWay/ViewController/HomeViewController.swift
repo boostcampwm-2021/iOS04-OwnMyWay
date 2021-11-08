@@ -18,20 +18,16 @@ class HomeViewController: UIViewController, Instantiable {
     private var diffableDataSource: HomeDataSource?
     private var cancellables: Set<AnyCancellable>?
 
-    var coordinator: HomeCoordinator?
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUsecase()
         self.registerNib()
         self.configureTravelCollectionView()
         self.configureCancellables()
         self.viewModel?.configure()
     }
 
-    private func setUsecase() {
-        let usecase = DefaultHomeUsecase(travelRepository: CoreDataTravelRepository())
-        self.viewModel = HomeViewModel(homeUsecase: usecase)
+    func bind(viewModel: HomeViewModelType) {
+        self.viewModel = viewModel
     }
 
     private func registerNib() {
@@ -155,10 +151,6 @@ class HomeViewController: UIViewController, Instantiable {
         }
         return dataSource
     }
-
-    @IBAction func onbuttonpressed(_ sender: Any) {
-        coordinator?.pushToCreateTravel()
-    }
 }
 
 extension HomeViewController: UICollectionViewDelegate {
@@ -166,8 +158,20 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let travel = self.diffableDataSource?.itemIdentifier(for: indexPath) else { return }
         if travel.flag == -1 {
-            coordinator?.pushToCreateTravel()
+            self.viewModel?.createButtonDidTouched()
+            return
         }
+        switch indexPath.section {
+        case Travel.Section.reserved.index:
+            self.viewModel?.reservedTravelDidTouched(index: indexPath.item)
+        case Travel.Section.ongoing.index:
+            return
+        case Travel.Section.outdated.index:
+            return
+        default:
+            return
+        }
+
     }
 
 }

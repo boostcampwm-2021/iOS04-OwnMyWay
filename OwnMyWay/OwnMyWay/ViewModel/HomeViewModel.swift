@@ -13,6 +13,13 @@ protocol HomeViewModelType {
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
 
     func configure()
+    func createButtonDidTouched()
+    func reservedTravelDidTouched(index: Int)
+}
+
+protocol HomeCoordinatingDelegate: AnyObject {
+    func pushToCreateTravel()
+    func pushToReservedTravel(travel: Travel)
 }
 
 class HomeViewModel: HomeViewModelType {
@@ -26,12 +33,14 @@ class HomeViewModel: HomeViewModelType {
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { $outdatedTravels }
 
     private let homeUsecase: HomeUsecase
+    private weak var coordinator: HomeCoordinatingDelegate?
 
-    init(homeUsecase: HomeUsecase) {
+    init(homeUsecase: HomeUsecase, coordinator: HomeCoordinatingDelegate) {
         self.reservedTravels = []
         self.ongoingTravels = []
         self.outdatedTravels = []
         self.homeUsecase = homeUsecase
+        self.coordinator = coordinator
     }
 
     func configure() {
@@ -46,11 +55,21 @@ class HomeViewModel: HomeViewModelType {
                 landmarks: [],
                 records: []
             )
-            self.reservedTravels = travels.filter { $0.flag == Travel.Section.reserved.index }
-                + [plusCard]
+            self.reservedTravels = [plusCard] + travels.filter {
+                $0.flag == Travel.Section.reserved.index
+            }
             self.ongoingTravels = travels.filter { $0.flag == Travel.Section.ongoing.index }
             self.outdatedTravels = travels.filter { $0.flag == Travel.Section.outdated.index }
         }
+    }
+
+    func createButtonDidTouched() {
+        self.coordinator?.pushToCreateTravel()
+    }
+
+    func reservedTravelDidTouched(index: Int) {
+        guard reservedTravels.startIndex + 1..<reservedTravels.endIndex ~= index else { return }
+        self.coordinator?.pushToReservedTravel(travel: reservedTravels[index])
     }
 
 }

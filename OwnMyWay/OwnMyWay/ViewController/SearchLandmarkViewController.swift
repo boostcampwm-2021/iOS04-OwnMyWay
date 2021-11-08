@@ -18,7 +18,7 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
     private var diffableDataSource: DataSource?
     private var cancellable: AnyCancellable?
 
-    var coordinator: SearchLandmarkCoordinator?
+    //var coordinator: SearchLandmarkCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,11 +93,6 @@ extension SearchLandmarkViewController: UISearchBarDelegate {
 // MARK: - SearchLandmarkViewController for UICollectionViewDelegate
 extension SearchLandmarkViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        self.dismiss(animated: true, completion: { [weak self] in
-            guard let landmark = self?.viewModel?.landmarks[indexPath.item]
-            else { return }
-            self?.coordinator?.popModal(landmark: landmark)
-        })
+        self.viewModel?.landmarkCardDidTouched(index: indexPath.item)
     }
 }

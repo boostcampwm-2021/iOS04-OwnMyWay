@@ -18,19 +18,16 @@ class CreateTravelViewController: UIViewController, Instantiable {
     private var prevDate: Date?
     private var isSelectionComplete: Bool = false
     private var viewModel: CreateTravelViewModelType?
-    var coordinator: CreateTravelCoordinator?
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUsecase()
         self.bindUI()
         self.configureCalendar()
     }
 
-    private func setUsecase() {
-        let usecase = DefaultCreateTravelUsecase(travelRepository: CoreDataTravelRepository())
-        self.viewModel = CreateTravelViewModel(createTravelUsecase: usecase)
+    func bind(viewModel: CreateTravelViewModelType) {
+        self.viewModel = viewModel
     }
 
     private func bindUI() {
@@ -52,9 +49,7 @@ class CreateTravelViewController: UIViewController, Instantiable {
     }
 
     @IBAction func nextButtonDidTouched(_ sender: UIButton) {
-        self.viewModel?.didTouchNextButton(completion: { [weak self] travel in
-            self?.coordinator?.pushToAddLandmark(travel: travel)
-        })
+        self.viewModel?.didTouchNextButton()
     }
 
 }

@@ -15,7 +15,11 @@ protocol CreateTravelViewModelType {
 
     func didEnterTitle(text: String?)
     func didEnterDate(from startDate: Date?, to endDate: Date?)
-    func didTouchNextButton(completion: @escaping (Travel) -> Void)
+    func didTouchNextButton()
+}
+
+protocol CreateTravelCoordinatingDelegate: AnyObject {
+    func pushToAddLandmark(travel: Travel)
 }
 
 class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
@@ -43,9 +47,11 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
     var endDatePublisher: Published<String?>.Publisher { $endDate }
 
     private let createTravelUsecase: CreateTravelUsecase
+    private weak var coordinator: CreateTravelCoordinatingDelegate?
 
-    init(createTravelUsecase: CreateTravelUsecase) {
+    init(createTravelUsecase: CreateTravelUsecase, coordinator: CreateTravelCoordinatingDelegate) {
         self.createTravelUsecase = createTravelUsecase
+        self.coordinator = coordinator
     }
 
     func didEnterTitle(text: String?) {
@@ -73,16 +79,18 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
         self.isValidDate = isValid
     }
 
-    func didTouchNextButton(completion: @escaping (Travel) -> Void) {
+    func didTouchNextButton() {
         guard let travelTitle = self.travelTitle,
               let startDate = self.travelStartDate,
               let endDate = self.travelEndDate
         else { return }
 
-        self.createTravelUsecase.makeTravel(title: travelTitle,
-                                            startDate: startDate,
-                                            endDate: endDate) { travel in
-            completion(travel)
+        self.createTravelUsecase.makeTravel(
+            title: travelTitle,
+            startDate: startDate,
+            endDate: endDate
+        ) { [weak self] travel in
+            self?.coordinator?.pushToAddLandmark(travel: travel)
         }
     }
 }

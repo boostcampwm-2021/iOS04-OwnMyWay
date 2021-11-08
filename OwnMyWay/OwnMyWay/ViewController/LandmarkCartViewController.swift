@@ -23,8 +23,6 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     private var cancellable: AnyCancellable?
     private let locationManager: CLLocationManager = CLLocationManager()
 
-    var coordinator: LandmarkCartCoordinator?
-
     enum Section: CaseIterable { case main }
 
     override func viewDidLoad() {
@@ -59,7 +57,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         self.cancellable = viewModel.travelPublisher.sink { [weak self] travel in
             DispatchQueue.main.async {
                 var snapshot = NSDiffableDataSourceSectionSnapshot<Landmark>()
-                let snapshotItem = travel.landmarks + [Landmark()]
+                let snapshotItem = [Landmark()] + travel.landmarks.reversed()
                 snapshot.append(snapshotItem)
                 self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
 
@@ -95,9 +93,8 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     private func createMakeDiffableDataSource() -> DataSource {
         let dataSource = DataSource(
             collectionView: self.collectionView) { collectionView, indexPath, item in
-                guard let viewModel = self.viewModel else { return UICollectionViewCell() }
                 switch indexPath.item {
-                case viewModel.travel.landmarks.count:
+                case 0: // plusCell
                     guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: PlusCell.identifier,
                         for: indexPath) as? PlusCell
@@ -121,9 +118,9 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
 
 extension LandmarkCartViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == collectionView.numberOfItems(inSection: 0) - 1 {
+        if indexPath.item == 0 {
             // PlusCell 일 경우
-            self.coordinator?.presentSearchLandmarkModally()
+            self.viewModel?.plusButtonDidTouched()
         }
     }
 }

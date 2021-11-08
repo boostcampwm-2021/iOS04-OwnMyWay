@@ -52,8 +52,9 @@
 		DB8831BE2731990000487D33 /* LandmarkDTORepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LandmarkDTORepository.swift */; };
 		DB8831C127319B6400487D33 /* SearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */; };
 		DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */; };
-		DB8831C52732670F00487D33 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C42732670F00487D33 /* Coordinator.swift */; };
 		DB8831C72732861500487D33 /* Instantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C62732861500487D33 /* Instantiable.swift */; };
+		DB9366602739086400B39BC1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB93665F2739086400B39BC1 /* Coordinator.swift */; };
+		DB936662273908BA00B39BC1 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB936661273908BA00B39BC1 /* HomeCoordinator.swift */; };
 		DBC39EEC2733929000FB7939 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EEB2733929000FB7939 /* Travel.swift */; };
 		DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */; };
 		DBC39F042733ABB200FB7939 /* TravelMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */; };
@@ -64,6 +65,12 @@
 		DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
 		DBC39F0C2733C42700FB7939 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F0B2733C42700FB7939 /* Record.swift */; };
 		DBC39F1527340F5E00FB7939 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DBC39F1427340F5E00FB7939 /* Kingfisher */; };
+		DBFC040C27390DD700031EDF /* CreateTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040B27390DD700031EDF /* CreateTravelCoordinator.swift */; };
+		DBFC040E2739128E00031EDF /* AddLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */; };
+		DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */; };
+		DBFC04122739170900031EDF /* LandmarkCartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */; };
+		DBFC041427391EDB00031EDF /* SearchLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */; };
+		DBFC0416273925FD00031EDF /* ReservedTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,8 +120,9 @@
 		DB8831BD2731990000487D33 /* LandmarkDTORepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTORepository.swift; sourceTree = "<group>"; };
 		DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkUsecase.swift; sourceTree = "<group>"; };
 		DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewModel.swift; sourceTree = "<group>"; };
-		DB8831C42732670F00487D33 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB8831C62732861500487D33 /* Instantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instantiable.swift; sourceTree = "<group>"; };
+		DB93665F2739086400B39BC1 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		DB936661273908BA00B39BC1 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DBC39EEB2733929000FB7939 /* Travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
 		DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TravelMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TravelMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -124,6 +132,12 @@
 		DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LandmarkMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DBC39F092733C41000FB7939 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
 		DBC39F0B2733C42700FB7939 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		DBFC040B27390DD700031EDF /* CreateTravelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelCoordinator.swift; sourceTree = "<group>"; };
+		DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkCoordinator.swift; sourceTree = "<group>"; };
+		DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkViewModel.swift; sourceTree = "<group>"; };
+		DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartCoordinator.swift; sourceTree = "<group>"; };
+		DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkCoordinator.swift; sourceTree = "<group>"; };
+		DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +202,7 @@
 				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
 				3FB914C027340E410084FF1C /* HomeViewModel.swift */,
 				29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */,
+				DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -272,14 +287,28 @@
 				29E5FB38272F8BA500F35733 /* ViewController */,
 				29E5FB3A272F8BC600F35733 /* View */,
 				29E5FB40272F8D0700F35733 /* Storyboard */,
+				DB93665E2739084D00B39BC1 /* Coordinator */,
 				DB22BB59272F82770004444B /* AppDelegate.swift */,
 				DB22BB5B272F82770004444B /* SceneDelegate.swift */,
 				DB22BB65272F82780004444B /* Assets.xcassets */,
 				DB22BB6A272F82780004444B /* Info.plist */,
 				DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */,
-				DB8831C42732670F00487D33 /* Coordinator.swift */,
 			);
 			path = OwnMyWay;
+			sourceTree = "<group>";
+		};
+		DB93665E2739084D00B39BC1 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DB93665F2739086400B39BC1 /* Coordinator.swift */,
+				DB936661273908BA00B39BC1 /* HomeCoordinator.swift */,
+				DBFC040B27390DD700031EDF /* CreateTravelCoordinator.swift */,
+				DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */,
+				DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */,
+				DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */,
+				DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,6 +425,7 @@
 			files = (
 				DB8831C127319B6400487D33 /* SearchLandmarkUsecase.swift in Sources */,
 				AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */,
+				DB9366602739086400B39BC1 /* Coordinator.swift in Sources */,
 				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
 				3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */,
@@ -406,6 +436,7 @@
 				29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */,
+				DBFC04122739170900031EDF /* LandmarkCartCoordinator.swift in Sources */,
 				DB8831BE2731990000487D33 /* LandmarkDTORepository.swift in Sources */,
 				DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */,
 				DB8831C72732861500487D33 /* Instantiable.swift in Sources */,
@@ -414,18 +445,21 @@
 				AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */,
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
 				AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */,
+				DB936662273908BA00B39BC1 /* HomeCoordinator.swift in Sources */,
+				DBFC040C27390DD700031EDF /* CreateTravelCoordinator.swift in Sources */,
 				3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */,
-				DB8831C52732670F00487D33 /* Coordinator.swift in Sources */,
 				3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */,
 				DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */,
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
+				DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */,
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
 				3FB914E92737DAC70084FF1C /* TravelSectionHeader.swift in Sources */,
 				29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */,
 				DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */,
 				DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */,
 				DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */,
+				DBFC0416273925FD00031EDF /* ReservedTravelCoordinator.swift in Sources */,
 				29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */,
 				29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */,
 				293646BA2738F6590030ED78 /* Date+.swift in Sources */,
@@ -433,8 +467,10 @@
 				DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */,
 				AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */,
 				29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */,
+				DBFC040E2739128E00031EDF /* AddLandmarkCoordinator.swift in Sources */,
 				29274EFD2734000500DDEBFF /* ReservedTravelViewModel.swift in Sources */,
 				DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */,
+				DBFC041427391EDB00031EDF /* SearchLandmarkCoordinator.swift in Sources */,
 				3FB914BE273409530084FF1C /* TravelCardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
