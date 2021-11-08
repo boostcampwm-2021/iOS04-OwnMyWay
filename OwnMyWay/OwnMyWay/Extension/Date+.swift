@@ -15,6 +15,17 @@ extension Date {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: self)
     }
+
+    func format(endDate: Date?) -> String {
+        guard let endDate = endDate,
+              self <= endDate else {
+            return ""
+        }
+        if self == endDate {
+            return "\(self.localize())"
+        }
+        return "\(self.localize()) ~ \(endDate.localize()))"
+    }
 }
 
 extension Date: Strideable {
