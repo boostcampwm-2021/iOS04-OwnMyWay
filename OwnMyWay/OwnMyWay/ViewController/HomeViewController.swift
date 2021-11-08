@@ -30,7 +30,7 @@ class HomeViewController: UIViewController, Instantiable {
         super.viewDidLoad()
         self.setUsecase()
         self.registerNib()
-        self.setTravelCollectionView()
+        self.configureTravelCollectionView()
         self.configureCancellables()
         self.viewModel?.configure()
     }
@@ -53,7 +53,7 @@ class HomeViewController: UIViewController, Instantiable {
         )
     }
 
-    private func setTravelCollectionView() {
+    private func configureTravelCollectionView() {
         self.travelCollectionView.delegate = self
         self.travelCollectionView.collectionViewLayout = createCompositionalLayout()
         self.diffableDataSource = createDiffableDataSource()
