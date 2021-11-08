@@ -14,10 +14,12 @@ protocol HomeViewModelType {
 
     func configure()
     func createButtonDidTouched()
+    func reservedTravelDidTouched(index: Int)
 }
 
 protocol HomeCoordinatingDelegate: AnyObject {
     func pushToCreateTravel()
+    func pushToReservedTravel(travel: Travel)
 }
 
 class HomeViewModel: HomeViewModelType {
@@ -63,6 +65,12 @@ class HomeViewModel: HomeViewModelType {
 
     func createButtonDidTouched() {
         self.coordinator?.pushToCreateTravel()
+    }
+
+    func reservedTravelDidTouched(index: Int) {
+        print(index, reservedTravels.startIndex, reservedTravels.endIndex)
+        guard reservedTravels.startIndex...reservedTravels.endIndex ~= index else { return }
+        self.coordinator?.pushToReservedTravel(travel: reservedTravels[index])
     }
 
 }

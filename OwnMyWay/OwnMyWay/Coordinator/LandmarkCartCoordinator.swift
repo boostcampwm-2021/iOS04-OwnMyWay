@@ -36,7 +36,11 @@ class LandmarkCartCoordinator: Coordinator, LandmarkCartCoordinatingDelegate {
     }
 
     func presentSearchLandmarkModally() {
-        print("Modal")
+        let searchLandmarkCoordinator = SearchLandmarkCoordinator(
+            navigationController: self.navigationController
+        )
+        self.childCoordinators.append(searchLandmarkCoordinator)
+        searchLandmarkCoordinator.start()
     }
 
 }

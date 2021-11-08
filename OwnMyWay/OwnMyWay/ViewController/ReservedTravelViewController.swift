@@ -15,7 +15,6 @@ class ReservedTravelViewController: UIViewController, Instantiable {
     @IBOutlet weak var startButton: NextButton!
     private var bindContainerVC: ((UIView) -> Void)?
     private var viewModel: ReservedTravelViewModelType?
-    var coordinator: ReservedTravelCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +70,7 @@ class ReservedTravelViewController: UIViewController, Instantiable {
         //  FIXME
         // 카트 뷰모델 거 직접 줘야하는데.. 고민중
         // 넘겨 받은 얘 진행중인 여행이 id로 다시 불러오는거 추천
-        self.coordinator?.pushToNowTravel(travel: viewModel.travel)
+        //self.coordinator?.pushToNowTravel(travel: viewModel.travel)
     }
 
     @objc func didTouchRemoveButton(_ sender: Any) {

@@ -16,14 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TtS-98-Tw7">
-                                <rect key="frame" x="173.5" y="831" width="67" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="onbuttonpressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eJO-Sg-ASK"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OwnMyWay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJz-Al-pp6">
                                 <rect key="frame" x="122" y="69" width="170" height="68"/>
                                 <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="20"/>
@@ -31,7 +23,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bTO-GI-HaZ">
-                                <rect key="frame" x="0.0" y="137" width="414" height="694"/>
+                                <rect key="frame" x="0.0" y="137" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="b8f-SU-BKb">
                                     <size key="itemSize" width="128" height="128"/>
@@ -41,7 +33,7 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eNc-P6-1HH">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="694"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="725"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                             </collectionView>
@@ -50,13 +42,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bTO-GI-HaZ" firstAttribute="top" secondItem="gJz-Al-pp6" secondAttribute="bottom" id="9Ig-Pz-0Q7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bTO-GI-HaZ" secondAttribute="bottom" id="INo-3q-aVt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bTO-GI-HaZ" secondAttribute="trailing" id="Tgj-7s-SjR"/>
                             <constraint firstItem="bTO-GI-HaZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="b4E-HW-RvD"/>
-                            <constraint firstItem="TtS-98-Tw7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dxz-0k-qXb"/>
                             <constraint firstItem="gJz-Al-pp6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nqy-CX-nEc"/>
-                            <constraint firstItem="TtS-98-Tw7" firstAttribute="top" secondItem="bTO-GI-HaZ" secondAttribute="bottom" id="oyN-VQ-FIc"/>
                             <constraint firstItem="gJz-Al-pp6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="utf-SJ-cFh"/>
-                            <constraint firstItem="TtS-98-Tw7" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="w2A-ab-wGh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TGK-mU-gOw"/>

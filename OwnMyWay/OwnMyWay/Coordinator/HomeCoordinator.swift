@@ -33,4 +33,13 @@ class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
         self.childCoordinators.append(createTravelCoordinator)
         createTravelCoordinator.start()
     }
+
+    func pushToReservedTravel(travel: Travel) {
+        let reservedTravelCoordinator = ReservedTravelCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        self.childCoordinators.append(reservedTravelCoordinator)
+        reservedTravelCoordinator.start()
+    }
 }
