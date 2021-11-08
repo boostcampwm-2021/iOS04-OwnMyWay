@@ -22,6 +22,7 @@ protocol TravelRepository {
                      image: URL?,
                      latitude: Double?,
                      longitude: Double?) -> Result<Landmark, Error>
+    func deleteTravel(of travel: Travel)
 }
 
 class CoreDataTravelRepository: TravelRepository {
@@ -128,4 +129,19 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
+    func deleteTravel(of travel: Travel) {
+        guard let uuid = travel.uuid as CVarArg? else { return }
+        let request = TravelMO.fetchRequest()
+        let predicate = NSPredicate(format: "uuid == %@", uuid)
+        request.predicate = predicate
+        if let travels = try? context.fetch(request) as [TravelMO] {
+            guard let travel = travels.first else { return }
+            context.delete(travel)
+            do {
+                try context.save()
+            } catch {
+                return
+            }
+        }
+    }
 }

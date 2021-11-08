@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29274EF92733FC4500DDEBFF /* ReservedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */; };
+		29274EFB2733FD2400DDEBFF /* ReservedTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */; };
+		29274EFD2734000500DDEBFF /* ReservedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */; };
+		29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFE273401AE00DDEBFF /* ReservedTravelUsecase.swift */; };
+		293646BA2738F6590030ED78 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646B92738F6590030ED78 /* Date+.swift */; };
 		29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */; };
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
 		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
@@ -58,9 +63,15 @@
 		DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */; };
 		DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
 		DBC39F0C2733C42700FB7939 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F0B2733C42700FB7939 /* Record.swift */; };
+		DBC39F1527340F5E00FB7939 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DBC39F1427340F5E00FB7939 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewController.swift; sourceTree = "<group>"; };
+		29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReservedTravel.storyboard; sourceTree = "<group>"; };
+		29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewModel.swift; sourceTree = "<group>"; };
+		29274EFE273401AE00DDEBFF /* ReservedTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelUsecase.swift; sourceTree = "<group>"; };
+		293646B92738F6590030ED78 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewModel.swift; sourceTree = "<group>"; };
 		29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelUsecase.swift; sourceTree = "<group>"; };
 		29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC39F1527340F5E00FB7939 /* Kingfisher in Frameworks */,
 				3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +139,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		293646B82738F3990030ED78 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				293646B92738F6590030ED78 /* Date+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		29E5FB38272F8BA500F35733 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +157,7 @@
 				29E9BA37273253130040B70A /* LandmarkCartViewController.swift */,
 				DB8831C62732861500487D33 /* Instantiable.swift */,
 				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
+				29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -166,6 +187,7 @@
 				DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */,
 				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
 				3FB914C027340E410084FF1C /* HomeViewModel.swift */,
+				29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -177,6 +199,7 @@
 				DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */,
 				AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */,
 				3FB914C22734129F0084FF1C /* HomeUsecase.swift */,
+				29274EFE273401AE00DDEBFF /* ReservedTravelUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -214,6 +237,7 @@
 				DB22BB67272F82780004444B /* LaunchScreen.storyboard */,
 				29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */,
 				29E9BA31273220C60040B70A /* AddLandmark.storyboard */,
+				29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */,
 				AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */,
 				29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */,
 			);
@@ -240,6 +264,7 @@
 		DB22BB58272F82770004444B /* OwnMyWay */ = {
 			isa = PBXGroup;
 			children = (
+				293646B82738F3990030ED78 /* Extension */,
 				29E5FB3F272F8C0000F35733 /* Model */,
 				29E5FB3E272F8BF300F35733 /* Repository */,
 				29E5FB3D272F8BDC00F35733 /* Usecase */,
@@ -276,6 +301,7 @@
 			name = OwnMyWay;
 			packageProductDependencies = (
 				3F20606527314AAE0005D8F4 /* FSCalendar */,
+				DBC39F1427340F5E00FB7939 /* Kingfisher */,
 			);
 			productName = OwnMyWay;
 			productReference = DB22BB56272F82770004444B /* OwnMyWay.app */;
@@ -308,6 +334,7 @@
 			packageReferences = (
 				DB22BB70272F83560004444B /* XCRemoteSwiftPackageReference "SwiftLint" */,
 				3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				DBC39F1327340F5E00FB7939 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = DB22BB57272F82770004444B /* Products */;
 			projectDirPath = "";
@@ -334,6 +361,7 @@
 				29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */,
 				29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */,
 				AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */,
+				29274EFB2733FD2400DDEBFF /* ReservedTravel.storyboard in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
 				3FB914EA2737DAC70084FF1C /* TravelSectionHeader.xib in Resources */,
 			);
@@ -374,6 +402,7 @@
 				AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */,
 				29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
+				29274EF92733FC4500DDEBFF /* ReservedTravelViewController.swift in Sources */,
 				29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */,
@@ -393,15 +422,18 @@
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
 				3FB914E92737DAC70084FF1C /* TravelSectionHeader.swift in Sources */,
+				29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */,
 				DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */,
 				DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */,
 				DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */,
 				29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */,
 				29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */,
+				293646BA2738F6590030ED78 /* Date+.swift in Sources */,
 				DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */,
 				DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */,
 				AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */,
 				29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */,
+				29274EFD2734000500DDEBFF /* ReservedTravelViewModel.swift in Sources */,
 				DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */,
 				3FB914BE273409530084FF1C /* TravelCardCell.swift in Sources */,
 			);
@@ -641,6 +673,14 @@
 				minimumVersion = 0.9.2;
 			};
 		};
+		DBC39F1327340F5E00FB7939 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -648,6 +688,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		DBC39F1427340F5E00FB7939 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DBC39F1327340F5E00FB7939 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 
