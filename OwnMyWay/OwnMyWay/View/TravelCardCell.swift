@@ -16,22 +16,8 @@ class TravelCardCell: UICollectionViewCell {
 
     func configure(travel: Travel) {
         self.travelTitleLabel.text = travel.title
-        self.travelDateLabel.text = format(travel: travel)
+        self.travelDateLabel.text = travel.startDate?.format(endDate: travel.endDate) ?? ""
         self.backgroundButton.layer.cornerRadius = 7
         self.backgroundButton.clipsToBounds = true
     }
-
-    private func format(travel: Travel) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        guard let startDate = travel.startDate,
-              let endDate = travel.endDate else {
-            return ""
-        }
-        if startDate == endDate {
-            return "\(formatter.string(from: startDate))"
-        }
-        return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
-    }
-
 }
