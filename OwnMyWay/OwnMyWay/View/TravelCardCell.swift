@@ -10,9 +10,9 @@ import UIKit
 class TravelCardCell: UICollectionViewCell {
     static let identifier = "TravelCardCell"
 
-    @IBOutlet weak var travelTitleLabel: UILabel!
-    @IBOutlet weak var travelDateLabel: UILabel!
-    @IBOutlet weak var backgroundButton: UIButton!
+    @IBOutlet private weak var travelTitleLabel: UILabel!
+    @IBOutlet private weak var travelDateLabel: UILabel!
+    @IBOutlet private weak var backgroundButton: UIButton!
 
     func configure(travel: Travel) {
         self.travelTitleLabel.text = travel.title
