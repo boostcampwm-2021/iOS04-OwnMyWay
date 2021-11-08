@@ -13,6 +13,11 @@ protocol HomeViewModelType {
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
 
     func configure()
+    func createButtonDidTouched()
+}
+
+protocol HomeCoordinatingDelegate: AnyObject {
+    func pushToCreateTravel()
 }
 
 class HomeViewModel: HomeViewModelType {
@@ -26,12 +31,14 @@ class HomeViewModel: HomeViewModelType {
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { $outdatedTravels }
 
     private let homeUsecase: HomeUsecase
+    private var coordinator: HomeCoordinatingDelegate
 
-    init(homeUsecase: HomeUsecase) {
+    init(homeUsecase: HomeUsecase, coordinator: HomeCoordinatingDelegate) {
         self.reservedTravels = []
         self.ongoingTravels = []
         self.outdatedTravels = []
         self.homeUsecase = homeUsecase
+        self.coordinator = coordinator
     }
 
     func configure() {
@@ -51,6 +58,10 @@ class HomeViewModel: HomeViewModelType {
             self.ongoingTravels = travels.filter { $0.flag == Travel.Section.ongoing.index }
             self.outdatedTravels = travels.filter { $0.flag == Travel.Section.outdated.index }
         }
+    }
+    
+    func createButtonDidTouched() {
+        self.coordinator.pushToCreateTravel()
     }
 
 }
