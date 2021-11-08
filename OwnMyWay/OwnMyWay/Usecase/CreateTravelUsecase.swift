@@ -19,6 +19,7 @@ protocol CreateTravelUsecase {
                     startDate: Date,
                     endDate: Date,
                     completion: @escaping (Travel) -> Void)
+    func updateTravel(to travel: Travel, completion: @escaping (Travel) -> Void)
 }
 
 class DefaultCreateTravelUsecase: CreateTravelUsecase {
@@ -50,5 +51,14 @@ class DefaultCreateTravelUsecase: CreateTravelUsecase {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+    }
+
+    func updateTravel(to travel: Travel, completion: @escaping (Travel) -> Void) {
+        switch self.travelRepository.updateTravel(to: travel) {
+        case .success(let travel):
+            completion(travel)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
     }
 }

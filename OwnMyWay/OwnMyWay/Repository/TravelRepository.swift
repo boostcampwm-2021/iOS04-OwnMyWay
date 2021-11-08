@@ -22,6 +22,7 @@ protocol TravelRepository {
                      image: URL?,
                      latitude: Double?,
                      longitude: Double?) -> Result<Landmark, Error>
+    func updateTravel(to travel: Travel) -> Result<Travel, Error>
     func deleteTravel(of travel: Travel)
 }
 
@@ -127,6 +128,29 @@ class CoreDataTravelRepository: TravelRepository {
         } catch let error {
             return .failure(error)
         }
+    }
+
+    func updateTravel(to travel: Travel) -> Result<Travel, Error> {
+        guard let uuid = travel.uuid as CVarArg? else { return .failure(NSError.init()) }
+        let request = TravelMO.fetchRequest()
+        let predicate = NSPredicate(format: "uuid == %@", uuid)
+        request.predicate = predicate
+
+        if let travels = try? context.fetch(request) as [TravelMO] {
+            guard let newTravel = travels.first else { return .failure(NSError.init()) }
+            newTravel.flag = Int64(travel.flag)
+            newTravel.title = travel.title
+            newTravel.startDate = travel.startDate
+            newTravel.endDate = travel.endDate
+
+            do {
+                try context.save()
+                return .success(newTravel.toTravel())
+            } catch let error {
+                return .failure(error)
+            }
+        }
+        return .failure(NSError.init())
     }
 
     func deleteTravel(of travel: Travel) {
