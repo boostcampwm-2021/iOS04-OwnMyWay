@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-typealias HomeDataSource = UICollectionViewDiffableDataSource <HomeViewController.Section, Travel>
+typealias HomeDataSource = UICollectionViewDiffableDataSource <Travel.Section, Travel>
 
 class HomeViewController: UIViewController, Instantiable {
 
@@ -19,12 +19,6 @@ class HomeViewController: UIViewController, Instantiable {
     private var cancellables: Set<AnyCancellable>?
 
     var coordinator: HomeCoordinator?
-
-    enum Section: Int, CaseIterable {
-        case reserved = 0
-        case ongoing = 1
-        case outdated = 2
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,21 +61,33 @@ class HomeViewController: UIViewController, Instantiable {
             var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
             let snapshotItem = travels
             snapshot.append(snapshotItem)
-            self?.diffableDataSource?.apply(snapshot, to: .reserved, animatingDifferences: true)
+            self?.diffableDataSource?.apply(
+                snapshot,
+                to: Travel.Section.reserved,
+                animatingDifferences: true
+            )
         }.store(in: &cancellables)
 
         viewModel.ongoingTravelPublisher.sink { [weak self] travels in
             var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
             let snapshotItem = travels
             snapshot.append(snapshotItem)
-            self?.diffableDataSource?.apply(snapshot, to: .ongoing, animatingDifferences: true)
+            self?.diffableDataSource?.apply(
+                snapshot,
+                to: Travel.Section.ongoing,
+                animatingDifferences: true
+            )
         }.store(in: &cancellables)
 
         viewModel.outdatedTravelPublisher.sink { [weak self] travels in
             var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
             let snapshotItem = travels
             snapshot.append(snapshotItem)
-            self?.diffableDataSource?.apply(snapshot, to: .outdated, animatingDifferences: true)
+            self?.diffableDataSource?.apply(
+                snapshot,
+                to: Travel.Section.outdated,
+                animatingDifferences: true
+            )
         }.store(in: &cancellables)
         self.cancellables = cancellables
     }
@@ -118,8 +124,8 @@ class HomeViewController: UIViewController, Instantiable {
         let dataSource = HomeDataSource(
             collectionView: self.travelCollectionView) { collectionView, indexPath, item in
 
-                switch (indexPath.section, item.uuid) {
-                case (Section.reserved.rawValue, nil):
+                switch (indexPath.section, item.flag) {
+                case (Travel.Section.reserved.index, -1):
                     guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: PlusCell.identifier,
                         for: indexPath) as? PlusCell
@@ -159,7 +165,7 @@ extension HomeViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let travel = self.diffableDataSource?.itemIdentifier(for: indexPath) else { return }
-        if travel.uuid == nil {
+        if travel.flag == -1 {
             coordinator?.pushToCreateTravel()
         }
     }

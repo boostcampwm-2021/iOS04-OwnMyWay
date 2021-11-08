@@ -28,16 +28,7 @@ class HomeViewModel: HomeViewModelType {
     private let homeUsecase: HomeUsecase
 
     init(homeUsecase: HomeUsecase) {
-        let plusCard = Travel(
-            uuid: nil,
-            flag: 0,
-            title: "asd",
-            startDate: Date(),
-            endDate: Date(),
-            landmarks: [],
-            records: []
-        )
-        self.reservedTravels = [plusCard]
+        self.reservedTravels = []
         self.ongoingTravels = []
         self.outdatedTravels = []
         self.homeUsecase = homeUsecase
@@ -46,9 +37,19 @@ class HomeViewModel: HomeViewModelType {
     func configure() {
         self.homeUsecase.executeFetch { [weak self] travels in
             guard let self = self else { return }
-            self.reservedTravels = travels.filter { $0.flag == 0 } + self.reservedTravels
-            self.ongoingTravels = travels.filter { $0.flag == 1 } + self.ongoingTravels
-            self.outdatedTravels = travels.filter { $0.flag == 2 } + self.outdatedTravels
+            let plusCard = Travel(
+                uuid: UUID(),
+                flag: -1,
+                title: "DummyBoy",
+                startDate: Date(),
+                endDate: Date(),
+                landmarks: [],
+                records: []
+            )
+            self.reservedTravels = travels.filter { $0.flag == Travel.Section.reserved.index }
+                + [plusCard]
+            self.ongoingTravels = travels.filter { $0.flag == Travel.Section.ongoing.index }
+            self.outdatedTravels = travels.filter { $0.flag == Travel.Section.outdated.index }
         }
     }
 

@@ -9,6 +9,17 @@ import Foundation
 import CoreData
 
 struct Travel {
+
+    enum Section: Int, CaseIterable {
+        case reserved = 0
+        case ongoing = 1
+        case outdated = 2
+
+        var index: Int {
+            return self.rawValue
+        }
+    }
+
     var uuid: UUID?
     var flag: Int // 0: 예정된 여행, 1: 진행중인 여행, 2:완료된 여행
     var title: String?
