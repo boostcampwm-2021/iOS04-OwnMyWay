@@ -9,11 +9,12 @@ import UIKit
 
 class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
 
-    var childCoordinators: [Coordinator] = []
-    var travel: Travel
+    var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
+    var travel: Travel
 
     init(navigationController: UINavigationController, travel: Travel) {
+        self.childCoordinators = []
         self.navigationController = navigationController
         self.travel = travel
     }
@@ -21,14 +22,13 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
     func start() {
         let addLandmarkVM = AddLandmarkViewModel(travel: self.travel, coordinator: self)
         let addLandmarkVC = AddLandmarkViewController.instantiate(storyboardName: "AddLandmark")
-        addLandmarkVC.bind(viewModel: addLandmarkVM)
         let landmarkCartCoordinator = LandmarkCartCoordinator(
             navigationController: self.navigationController,
             travel: self.travel
         )
         let cartVC = landmarkCartCoordinator.pass()
         self.childCoordinators.append(landmarkCartCoordinator)
-        addLandmarkVC.bind { cartView in
+        addLandmarkVC.bind(viewModel: addLandmarkVM) { cartView in
             addLandmarkVC.addChild(cartVC)
             cartView.addSubview(cartVC.view)
             cartVC.view.translatesAutoresizingMaskIntoConstraints = false

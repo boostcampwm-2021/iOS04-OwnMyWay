@@ -18,11 +18,8 @@ class AddLandmarkViewController: UIViewController, Instantiable {
         self.bindContainerVC?(self.cartView)
     }
 
-    func bind(viewModel: AddLandmarkViewModelType) {
+    func bind(viewModel: AddLandmarkViewModelType, closure: @escaping (UIView) -> Void) {
         self.viewModel = viewModel
-    }
-
-    func bind(closure: @escaping (UIView) -> Void) {
         self.bindContainerVC = closure
     }
 

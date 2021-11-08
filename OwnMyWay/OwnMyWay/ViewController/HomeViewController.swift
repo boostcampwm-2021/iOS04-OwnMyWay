@@ -163,7 +163,6 @@ extension HomeViewController: UICollectionViewDelegate {
         }
         switch indexPath.section {
         case Travel.Section.reserved.index:
-            print("reserved")
             self.viewModel?.reservedTravelDidTouched(index: indexPath.item)
         case Travel.Section.ongoing.index:
             return

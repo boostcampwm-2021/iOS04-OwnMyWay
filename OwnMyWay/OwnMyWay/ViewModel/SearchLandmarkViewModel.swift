@@ -62,7 +62,7 @@ class SearchLandmarkViewModel: SearchLandmarkViewModelType, ObservableObject {
     }
 
     func landmarkCardDidTouched(index: Int) {
-        guard landmarks.startIndex...landmarks.endIndex ~= index else { return }
+        guard landmarks.startIndex..<landmarks.endIndex ~= index else { return }
         self.coordinator?.dismissToAddLandmark(landmark: landmarks[index])
     }
 }

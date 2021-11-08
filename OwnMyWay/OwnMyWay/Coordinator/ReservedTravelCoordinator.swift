@@ -5,17 +5,17 @@
 //  Created by 김우재 on 2021/11/08.
 //
 
-import Foundation
 import UIKit
 
 class ReservedTravelCoordinator: Coordinator {
+
     var childCoordinators: [Coordinator]
-    var travel: Travel
     var navigationController: UINavigationController
+    var travel: Travel
 
     init(navigationController: UINavigationController, travel: Travel) {
-        self.navigationController = navigationController
         self.childCoordinators = []
+        self.navigationController = navigationController
         self.travel = travel
     }
 

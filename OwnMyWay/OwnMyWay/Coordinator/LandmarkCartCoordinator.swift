@@ -10,8 +10,8 @@ import UIKit
 class LandmarkCartCoordinator: Coordinator, LandmarkCartCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
-    var travel: Travel
     var navigationController: UINavigationController
+    var travel: Travel
 
     init(navigationController: UINavigationController, travel: Travel) {
         self.childCoordinators = []
