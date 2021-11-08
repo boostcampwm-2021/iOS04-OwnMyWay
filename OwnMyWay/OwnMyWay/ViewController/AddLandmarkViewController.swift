@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddLandmarkViewController: UIViewController, Instantiable {
+class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
     private var bindContainerVC: ((UIView) -> Void)?
@@ -21,6 +21,10 @@ class AddLandmarkViewController: UIViewController, Instantiable {
     func bind(viewModel: AddLandmarkViewModelType, closure: @escaping (UIView) -> Void) {
         self.viewModel = viewModel
         self.bindContainerVC = closure
+    }
+
+    func updateTravel(with travel: Travel) {
+        self.viewModel?.travelDidUpdate(travel: travel)
     }
 
     override func viewDidLayoutSubviews() {

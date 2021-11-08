@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReservedTravelViewController: UIViewController, Instantiable {
+class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdatable {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
@@ -26,6 +26,10 @@ class ReservedTravelViewController: UIViewController, Instantiable {
     func bind(viewModel: ReservedTravelViewModelType, closure: @escaping (UIView) -> Void) {
         self.viewModel = viewModel
         self.bindContainerVC = closure
+    }
+
+    func updateTravel(with travel: Travel) {
+        self.viewModel?.travelDidUpdate(travel: travel)
     }
 
     private func configureDescription() {
