@@ -8,7 +8,9 @@
 import Foundation
 
 protocol AddLandmarkViewModelType {
+    var travel: Travel { get }
     func nextButtonTouched()
+    func travelDidUpdate(travel: Travel)
 }
 
 protocol AddLandmarkCoordinatingDelegate: AnyObject {
@@ -16,9 +18,8 @@ protocol AddLandmarkCoordinatingDelegate: AnyObject {
 }
 
 class AddLandmarkViewModel: AddLandmarkViewModelType {
-
+    var travel: Travel
     private weak var coordinator: AddLandmarkCoordinatingDelegate?
-    private var travel: Travel
 
     init(travel: Travel, coordinator: AddLandmarkCoordinatingDelegate) {
         self.travel = travel
@@ -27,5 +28,9 @@ class AddLandmarkViewModel: AddLandmarkViewModelType {
 
     func nextButtonTouched() {
         self.coordinator?.pushToComplete(travel: travel)
+    }
+
+    func travelDidUpdate(travel: Travel) {
+        self.travel = travel
     }
 }

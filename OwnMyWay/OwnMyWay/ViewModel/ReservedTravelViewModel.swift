@@ -11,6 +11,7 @@ protocol ReservedTravelViewModelType {
     var travel: Travel { get }
     var isPossibleStart: Bool { get }
     func didDeleteTravel()
+    func travelDidUpdate(travel: Travel)
 }
 
 class ReservedTravelViewModel: ReservedTravelViewModelType, ObservableObject {
@@ -27,5 +28,9 @@ class ReservedTravelViewModel: ReservedTravelViewModelType, ObservableObject {
 
     func didDeleteTravel() {
         self.reservedTravelUsecase.deleteTravel(of: self.travel)
+    }
+
+    func travelDidUpdate(travel: Travel) {
+        self.travel = travel
     }
 }

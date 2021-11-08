@@ -13,12 +13,9 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    // usecase, viewModel 상위에서 주입
     private var viewModel: SearchLandmarkViewModelType?
     private var diffableDataSource: DataSource?
     private var cancellable: AnyCancellable?
-
-    //var coordinator: SearchLandmarkCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()

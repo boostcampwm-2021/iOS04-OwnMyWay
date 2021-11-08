@@ -32,11 +32,16 @@ class SearchLandmarkCoordinator: Coordinator, SearchLandmarkCoordinatingDelegate
     }
 
     func dismissToAddLandmark(landmark: Landmark) {
-        guard let addVC = navigationController.viewControllers.last as? AddLandmarkViewController,
-              let cartVC = addVC.children.first as? LandmarkCartViewController
+        guard let upperVC = navigationController
+                .viewControllers
+                .last as? TravelUpdatable & UIViewController,
+              let cartVC = upperVC.children.first as? LandmarkCartViewController
         else { return }
-        self.navigationController.viewControllers.last?.dismiss(animated: true) {
-            cartVC.viewModel?.didAddLandmark(of: landmark)
+
+        upperVC.dismiss(animated: true) {
+            guard let viewModel = cartVC.viewModel else { return }
+            viewModel.didAddLandmark(of: landmark)
+            upperVC.updateTravel(with: viewModel.travel)
         }
     }
 
