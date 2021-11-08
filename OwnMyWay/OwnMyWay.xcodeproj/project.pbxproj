@@ -66,6 +66,9 @@
 		DBC39F0C2733C42700FB7939 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F0B2733C42700FB7939 /* Record.swift */; };
 		DBC39F1527340F5E00FB7939 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DBC39F1427340F5E00FB7939 /* Kingfisher */; };
 		DBFC040C27390DD700031EDF /* CreateTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040B27390DD700031EDF /* CreateTravelCoordinator.swift */; };
+		DBFC040E2739128E00031EDF /* AddLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */; };
+		DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */; };
+		DBFC04122739170900031EDF /* LandmarkCartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +131,9 @@
 		DBC39F092733C41000FB7939 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
 		DBC39F0B2733C42700FB7939 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		DBFC040B27390DD700031EDF /* CreateTravelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelCoordinator.swift; sourceTree = "<group>"; };
+		DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkCoordinator.swift; sourceTree = "<group>"; };
+		DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkViewModel.swift; sourceTree = "<group>"; };
+		DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +198,7 @@
 				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
 				3FB914C027340E410084FF1C /* HomeViewModel.swift */,
 				29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */,
+				DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -292,6 +299,8 @@
 				DB93665F2739086400B39BC1 /* Coordinator.swift */,
 				DB936661273908BA00B39BC1 /* HomeCoordinator.swift */,
 				DBFC040B27390DD700031EDF /* CreateTravelCoordinator.swift */,
+				DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */,
+				DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -421,6 +430,7 @@
 				29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */,
+				DBFC04122739170900031EDF /* LandmarkCartCoordinator.swift in Sources */,
 				DB8831BE2731990000487D33 /* LandmarkDTORepository.swift in Sources */,
 				DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */,
 				DB8831C72732861500487D33 /* Instantiable.swift in Sources */,
@@ -436,6 +446,7 @@
 				DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */,
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
+				DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */,
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
 				3FB914E92737DAC70084FF1C /* TravelSectionHeader.swift in Sources */,
 				29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */,
@@ -449,6 +460,7 @@
 				DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */,
 				AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */,
 				29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */,
+				DBFC040E2739128E00031EDF /* AddLandmarkCoordinator.swift in Sources */,
 				29274EFD2734000500DDEBFF /* ReservedTravelViewModel.swift in Sources */,
 				DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */,
 				3FB914BE273409530084FF1C /* TravelCardCell.swift in Sources */,

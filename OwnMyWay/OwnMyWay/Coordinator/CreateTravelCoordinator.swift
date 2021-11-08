@@ -27,8 +27,11 @@ class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
     }
 
     func pushToAddLandmark(travel: Travel) {
-        #if DEBUG
-            print("push to add landmark")
-        #endif
+        let addLandmarkCoordinator = AddLandmarkCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        self.childCoordinators.append(addLandmarkCoordinator)
+        addLandmarkCoordinator.start()
     }
 }

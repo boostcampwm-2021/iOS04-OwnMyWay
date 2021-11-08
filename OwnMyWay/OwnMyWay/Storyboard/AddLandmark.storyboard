@@ -53,6 +53,9 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="다음"/>
+                                <connections>
+                                    <action selector="nextButtonDidTouched:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NOa-oR-KH5"/>
+                                </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1vW-P8-YdC">
                                 <rect key="frame" x="0.0" y="193.66666666666669" width="390" height="580.33333333333326"/>

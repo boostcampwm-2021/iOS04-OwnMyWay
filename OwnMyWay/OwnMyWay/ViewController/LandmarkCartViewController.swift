@@ -23,8 +23,6 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     private var cancellable: AnyCancellable?
     private let locationManager: CLLocationManager = CLLocationManager()
 
-    var coordinator: LandmarkCartCoordinator?
-
     enum Section: CaseIterable { case main }
 
     override func viewDidLoad() {
@@ -123,7 +121,7 @@ extension LandmarkCartViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == collectionView.numberOfItems(inSection: 0) - 1 {
             // PlusCell 일 경우
-            self.coordinator?.presentSearchLandmarkModally()
+            self.viewModel?.plusButtonDidTouched()
         }
     }
 }

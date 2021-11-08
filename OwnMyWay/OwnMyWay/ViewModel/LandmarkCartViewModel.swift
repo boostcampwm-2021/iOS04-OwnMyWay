@@ -12,6 +12,11 @@ protocol LandmarkCartViewModelType {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
     func didAddLandmark(of landmark: Landmark)
+    func plusButtonDidTouched()
+}
+
+protocol LandmarkCartCoordinatingDelegate: AnyObject {
+    func presentSearchLandmarkModally()
 }
 
 class LandmarkCartViewModel: LandmarkCartViewModelType, ObservableObject {
@@ -19,9 +24,15 @@ class LandmarkCartViewModel: LandmarkCartViewModelType, ObservableObject {
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
     private let landmarkCartUsecase: LandmarkCartUsecase
+    private weak var coordinator: LandmarkCartCoordinatingDelegate?
 
-    init(landmarkCartUsecase: LandmarkCartUsecase, travel: Travel) {
+    init(
+        landmarkCartUsecase: LandmarkCartUsecase,
+        coordinator: LandmarkCartCoordinatingDelegate,
+        travel: Travel
+    ) {
         self.travel = travel
+        self.coordinator = coordinator
         self.landmarkCartUsecase = landmarkCartUsecase
     }
 
@@ -29,5 +40,9 @@ class LandmarkCartViewModel: LandmarkCartViewModelType, ObservableObject {
         self.landmarkCartUsecase.addLandmark(to: self.travel, of: landmark) { landmark in
             self.travel.landmarks.append(landmark)
         }
+    }
+
+    func plusButtonDidTouched() {
+        self.coordinator?.presentSearchLandmarkModally()
     }
 }

@@ -11,10 +11,15 @@ class AddLandmarkViewController: UIViewController, Instantiable {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
     private var bindContainerVC: ((UIView) -> Void)?
+    private var viewModel: AddLandmarkViewModelType?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bindContainerVC?(self.cartView)
+    }
+
+    func bind(viewModel: AddLandmarkViewModelType) {
+        self.viewModel = viewModel
     }
 
     func bind(closure: @escaping (UIView) -> Void) {
@@ -31,4 +36,7 @@ class AddLandmarkViewController: UIViewController, Instantiable {
         view.layoutIfNeeded()
     }
 
+    @IBAction func nextButtonDidTouched(_ sender: Any) {
+        self.viewModel?.nextButtonTouched()
+    }
 }
