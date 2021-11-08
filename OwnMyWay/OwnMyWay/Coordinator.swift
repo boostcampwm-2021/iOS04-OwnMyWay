@@ -59,12 +59,12 @@ class DefaultCoordinator: AppCoordinator, HomeCoordinator, CreateTravelCoordinat
         let reservedTravelUsecase = DefaultReservedTravelUsecase(
             travelRepository: CoreDataTravelRepository()
         )
-        let reserverTravleViewModel = ReservedTravelViewModel(
+        let reservedTravelViewModel = ReservedTravelViewModel(
             reservedTravelUsecase: reservedTravelUsecase,
             travel: travel
         )
 
-        reservedTravelVC.bind(viewModel: reserverTravleViewModel) { cartView in
+        reservedTravelVC.bind(viewModel: reservedTravelViewModel) { cartView in
             reservedTravelVC.addChild(cartVC)
             cartView.addSubview(cartVC.view)
             cartVC.view.translatesAutoresizingMaskIntoConstraints = false
