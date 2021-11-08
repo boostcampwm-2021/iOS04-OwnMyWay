@@ -35,7 +35,7 @@ class ReservedTravelViewController: UIViewController, Instantiable {
         }
         self.navigationItem.title = viewModel.travel.title
         if let startDate = viewModel.travel.startDate, let endDate = viewModel.travel.endDate {
-            self.dateLabel.text = "\(startDate) ~ \(endDate)"
+            self.dateLabel.text = "\(startDate.localize()) ~ \(endDate.localize())"
         }
         self.travelTypeLabel.text = "예정된 여행"
 
@@ -68,6 +68,7 @@ class ReservedTravelViewController: UIViewController, Instantiable {
         guard let viewModel = self.viewModel else {
             return
         }
+        //  FIXME
         // 카트 뷰모델 거 직접 줘야하는데.. 고민중
         // 넘겨 받은 얘 진행중인 여행이 id로 다시 불러오는거 추천
         self.coordinator?.pushToNowTravel(travel: viewModel.travel)
