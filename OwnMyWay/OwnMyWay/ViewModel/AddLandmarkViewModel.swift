@@ -30,7 +30,7 @@ class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
     }
 
     func didTouchNextButton() {
-        self.coordinator?.pushToCompleteCreation(travel: travel)
+        self.coordinatingDelegate?.pushToCompleteCreation(travel: travel)
     }
 
     func didTouchBackButton() {

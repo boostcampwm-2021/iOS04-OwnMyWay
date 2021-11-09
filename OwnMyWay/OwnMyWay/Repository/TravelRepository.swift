@@ -114,6 +114,14 @@ class CoreDataTravelRepository: TravelRepository {
         landmarkMO.setValue(longitude, forKey: "longitude")
         travelMO.addToLandmarks(landmarkMO)
 
+        do {
+            try context.save()
+            return .success(landmarkMO.toLandmark())
+        } catch let error {
+            return .failure(error)
+        }
+    }
+
     func addRecord(
         to travel: Travel,
         photoURL: URL?,
