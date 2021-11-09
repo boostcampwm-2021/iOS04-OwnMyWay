@@ -14,20 +14,35 @@ protocol ReservedTravelViewModelType {
     func travelDidUpdate(travel: Travel)
 }
 
+protocol ReservedTravelCoordinatingDelegate: AnyObject {
+    func popToHome()
+}
+
 class ReservedTravelViewModel: ReservedTravelViewModelType, ObservableObject {
     var travel: Travel
     var isPossibleStart: Bool
 
     private let reservedTravelUsecase: ReservedTravelUsecase
+    private weak var coordinator: ReservedTravelCoordinatingDelegate?
 
-    init(reservedTravelUsecase: ReservedTravelUsecase, travel: Travel) {
+    init(
+        reservedTravelUsecase: ReservedTravelUsecase,
+        travel: Travel,
+        coordinator: ReservedTravelCoordinatingDelegate
+    ) {
         self.travel = travel
         self.reservedTravelUsecase = reservedTravelUsecase
-        self.isPossibleStart = travel.startDate == Date()
+        if let startDate = travel.startDate {
+            self.isPossibleStart = startDate <= Date()
+        } else {
+            self.isPossibleStart = false
+        }
+        self.coordinator = coordinator
     }
 
     func didDeleteTravel() {
         self.reservedTravelUsecase.deleteTravel(of: self.travel)
+        self.coordinator?.popToHome()
     }
 
     func travelDidUpdate(travel: Travel) {
