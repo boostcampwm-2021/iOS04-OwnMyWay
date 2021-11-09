@@ -37,7 +37,6 @@
 		AF6CBB692733F0C400E87533 /* SearchLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */; };
 		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
-		AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
 		AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB96172730F76100F23A46 /* PlusCell.xib */; };
 		DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
@@ -104,7 +103,6 @@
 		AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewController.swift; sourceTree = "<group>"; };
 		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
-		AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartUsecase.swift; sourceTree = "<group>"; };
 		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
 		AFFB96172730F76100F23A46 /* PlusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlusCell.xib; sourceTree = "<group>"; };
 		DB22BB56272F82770004444B /* OwnMyWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OwnMyWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,7 +213,6 @@
 			children = (
 				29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */,
 				DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */,
-				AFB62668273132EA007BF780 /* LandmarkCartUsecase.swift */,
 				3FB914C22734129F0084FF1C /* HomeUsecase.swift */,
 				29274EFE273401AE00DDEBFF /* ReservedTravelUsecase.swift */,
 			);
@@ -432,7 +429,6 @@
 				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
 				3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */,
-				AFB62669273132EA007BF780 /* LandmarkCartUsecase.swift in Sources */,
 				29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				29274EF92733FC4500DDEBFF /* ReservedTravelViewController.swift in Sources */,

@@ -25,9 +25,7 @@ class LandmarkCartCoordinator: Coordinator, LandmarkCartCoordinatingDelegate {
 
     func pass() -> LandmarkCartViewController {
         let cartVC = LandmarkCartViewController.instantiate(storyboardName: "LandmarkCart")
-        let usecase = DefaultLandmarkCartUsecase(travelRepository: CoreDataTravelRepository())
         let viewModel = LandmarkCartViewModel(
-            landmarkCartUsecase: usecase,
             coordinator: self,
             travel: travel
         )
