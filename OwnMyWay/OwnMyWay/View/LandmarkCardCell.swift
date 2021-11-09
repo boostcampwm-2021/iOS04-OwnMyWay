@@ -28,7 +28,7 @@ class LandmarkCardCell: UICollectionViewCell {
         self.layer.cornerRadius = 10.0
     }
 
-    func bind(with landmark: Landmark) {
+    func configure(with landmark: Landmark) {
         self.imageView.kf.setImage(with: landmark.image)
         self.titleLabel.text = landmark.title
     }

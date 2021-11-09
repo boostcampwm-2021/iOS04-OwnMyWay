@@ -9,24 +9,6 @@ import UIKit
 
 class NextButton: UIButton {
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.configureBackgroundColor()
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.configureBackgroundColor()
-    }
-
-    private func configureBackgroundColor() {
-        guard let backgroundColor = UIColor(named: "IdentityBlue") else {
-            return
-        }
-        self.layoutIfNeeded()
-        self.setBackgroundColor(backgroundColor, for: .normal)
-    }
-
     func setAvailability(to isEnable: Bool) {
         self.isEnabled = isEnable
         self.backgroundColor = isEnable ? UIColor(named: "IdentityBlue") ?? .blue : .gray
