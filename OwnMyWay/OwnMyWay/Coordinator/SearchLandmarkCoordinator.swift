@@ -19,8 +19,11 @@ class SearchLandmarkCoordinator: Coordinator, SearchLandmarkCoordinatingDelegate
 
     func start() {
         let repository = DefaultLandmarkDTORepository()
-        let usecase = DefaultSearchLandmarkUsecase(landmarkDTORepository: repository)
-        let viewModel = SearchLandmarkViewModel(searchLandmarkUsecase: usecase, coordinator: self)
+        let usecase = DefaultSearchLandmarkUsecase(repository: repository)
+        let viewModel = DefaultSearchLandmarkViewModel(
+            usecase: usecase,
+            coordinatingDelegate: self
+        )
         let searchLandmarkVC = SearchLandmarkViewController.instantiate(
             storyboardName: "SearchLandmark"
         )

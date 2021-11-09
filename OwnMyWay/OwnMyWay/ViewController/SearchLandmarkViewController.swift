@@ -10,30 +10,36 @@ import UIKit
 
 class SearchLandmarkViewController: UIViewController, Instantiable {
 
+    // MARK: IBOutlet
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    private var viewModel: SearchLandmarkViewModelType?
+    // MARK: Internal Variable
+    private var viewModel: SearchLandmarkViewModel?
     private var diffableDataSource: DataSource?
     private var cancellable: AnyCancellable?
 
+    // MARK: Override Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.registerNib()
-        self.collectionView.collectionViewLayout = createCompositionalLayout()
-        self.diffableDataSource = createMakeDiffableDataSource()
+        self.configureNibs()
+        self.collectionView.collectionViewLayout = configureCompositionalLayout()
+        self.diffableDataSource = configureDiffableDataSource()
         self.searchBar.delegate = self
         self.collectionView.delegate = self
         self.configureCancellable()
     }
 
-    func bind(viewModel: SearchLandmarkViewModelType) {
+    // MARK: Internal Function
+    func bind(viewModel: SearchLandmarkViewModel) {
         self.viewModel = viewModel
     }
 
-    private func registerNib() {
-        self.collectionView.register(UINib(nibName: LandmarkCardCell.identifier, bundle: nil),
-                                     forCellWithReuseIdentifier: LandmarkCardCell.identifier)
+    private func configureNibs() {
+        self.collectionView.register(
+            UINib(nibName: LandmarkCardCell.identifier, bundle: nil),
+            forCellWithReuseIdentifier: LandmarkCardCell.identifier
+        )
     }
 
     private func configureCancellable() {
@@ -44,37 +50,40 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
         }
     }
 
-    private func createCompositionalLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                              heightDimension: .fractionalWidth(0.7))
+    private func configureCompositionalLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.7)
+        )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 5, leading: 5, bottom: 5, trailing: 5
+        )
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalWidth(0.7))
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.7)
+        )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10,
-                                                        leading: 10,
-                                                        bottom: 10,
-                                                        trailing: 10)
-
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 10, leading: 10, bottom: 10, trailing: 10
+        )
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
 
-    private func createMakeDiffableDataSource() -> DataSource {
+    private func configureDiffableDataSource() -> DataSource {
         let dataSource = DataSource(
             collectionView: self.collectionView
         ) { collectionView, indexPath, item in
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: LandmarkCardCell.identifier,
-                    for: indexPath
-                ) as? LandmarkCardCell
-                else { return UICollectionViewCell() }
-                cell.configure(landmark: item)
-                return cell
+
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LandmarkCardCell.identifier, for: indexPath
+            ) as? LandmarkCardCell
+            else { return UICollectionViewCell() }
+
+            cell.configure(with: item)
+            return cell
         }
         return dataSource
     }
@@ -83,13 +92,13 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
 // MARK: - SearchLandmarkViewController for SerachBarDelegate
 extension SearchLandmarkViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.viewModel?.searchText = searchText
+        self.viewModel?.didChangeSearchText(with: searchText)
     }
 }
 
 // MARK: - SearchLandmarkViewController for UICollectionViewDelegate
 extension SearchLandmarkViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.viewModel?.landmarkCardDidTouched(index: indexPath.item)
+        self.viewModel?.didTouchLandmarkCard(at: indexPath.item)
     }
 }

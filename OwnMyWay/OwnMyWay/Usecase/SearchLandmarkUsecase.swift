@@ -9,19 +9,19 @@ import Foundation
 
 protocol SearchLandmarkUsecase {
     func executeFetch(completion: @escaping ([Landmark]) -> Void)
-    func executeSearch(searchText: String, completion: @escaping ([Landmark]) -> Void)
+    func executeSearch(by text: String, completion: @escaping ([Landmark]) -> Void)
 }
 
-class DefaultSearchLandmarkUsecase: SearchLandmarkUsecase {
+struct DefaultSearchLandmarkUsecase: SearchLandmarkUsecase {
 
-    let landmarkDTORepository: LandmarkDTORepository
+    private let repository: LandmarkDTORepository
 
-    init(landmarkDTORepository: LandmarkDTORepository) {
-        self.landmarkDTORepository = landmarkDTORepository
+    init(repository: LandmarkDTORepository) {
+        self.repository = repository
     }
 
     func executeFetch(completion: @escaping ([Landmark]) -> Void) {
-        landmarkDTORepository.fetchLandmarkDTOs { result in
+        repository.fetchLandmarkDTOs { result in
             switch result {
             case .success(let landmarks):
                 completion(landmarks)
@@ -31,13 +31,14 @@ class DefaultSearchLandmarkUsecase: SearchLandmarkUsecase {
         }
     }
 
-    func executeSearch(searchText: String, completion: @escaping ([Landmark]) -> Void) {
-        landmarkDTORepository.fetchLandmarkDTOs { result in
+    func executeSearch(by text: String, completion: @escaping ([Landmark]) -> Void) {
+        repository.fetchLandmarkDTOs { result in
             switch result {
             case .success(let landmarkDTOs):
                 let searchResult = landmarkDTOs.filter {
-                    guard let title = $0.title else { return false }
-                    return title.contains(searchText)
+                    guard let title = $0.title
+                    else { return false }
+                    return title.contains(text)
                 }
                 completion(searchResult)
             case .failure(let error):

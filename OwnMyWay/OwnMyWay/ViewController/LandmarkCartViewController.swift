@@ -106,7 +106,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
                         withReuseIdentifier: LandmarkCardCell.identifier,
                         for: indexPath) as? LandmarkCardCell
                     else { return UICollectionViewCell() }
-                    cell.configure(landmark: item)
+                    cell.configure(with: item)
                     return cell
                 }
         }
