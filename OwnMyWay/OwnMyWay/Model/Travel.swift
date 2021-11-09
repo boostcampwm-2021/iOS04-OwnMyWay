@@ -20,6 +20,13 @@ struct Travel {
         }
     }
 
+    static func dummy() -> Travel {
+        return Travel(
+            uuid: UUID(), flag: 0, title: nil,
+            startDate: nil, endDate: nil, landmarks: [], records: []
+        )
+    }
+
     var uuid: UUID?
     var flag: Int // 0: 예정된 여행, 1: 진행중인 여행, 2:완료된 여행
     var title: String?
