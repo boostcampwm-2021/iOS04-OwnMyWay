@@ -10,6 +10,7 @@ import UIKit
 
 protocol TravelRepository {
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error>
+    func save(travel: Travel)
     func fetchAll() -> Result<[Travel], Error>
     func addRecord(to travel: Travel,
                    photoURL: URL?,
@@ -53,6 +54,29 @@ class CoreDataTravelRepository: TravelRepository {
         } catch let error {
             return .failure(error)
         }
+    }
+
+    func save(travel: Travel) {
+        guard let entity = NSEntityDescription.entity(forEntityName: "TravelMO", in: context) else {
+            return
+        }
+        let travelMO = TravelMO(entity: entity, insertInto: context)
+        travelMO.setValue(travelMO.uuid, forKey: "uuid")
+        travelMO.setValue(Travel.Section.reserved.index, forKey: "flag")
+        travelMO.setValue(travelMO.title, forKey: "title")
+        travelMO.setValue(travelMO.startDate, forKey: "startDate")
+        travelMO.setValue(travelMO.endDate, forKey: "endDate")
+        travel.landmarks.forEach {
+            let landmark = $0
+            let landmarkMO = LandmarkMO(entity: entity, insertInto: context)
+            landmarkMO.setValue(UUID(), forKey: "uuid")
+            landmarkMO.setValue(landmark.title, forKey: "title")
+            landmarkMO.setValue(landmark.image, forKey: "image")
+            landmarkMO.setValue(landmark.latitude, forKey: "latitude")
+            landmarkMO.setValue(landmark.longitude, forKey: "longitude")
+            travelMO.addToLandmarks(landmarkMO)
+        }
+        try? context.save()
     }
 
     func fetchAll() -> Result<[Travel], Error> {

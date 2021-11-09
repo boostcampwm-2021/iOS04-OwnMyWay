@@ -7,10 +7,16 @@
 
 import UIKit
 
-class CompleteCreationViewController: UIViewController {
+class CompleteCreationViewController: UIViewController, Instantiable {
+
+    private var viewModel: CompleteCreationViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    func bind(viewModel: CompleteCreationViewModel) {
+        self.viewModel = viewModel
     }
 
 }
