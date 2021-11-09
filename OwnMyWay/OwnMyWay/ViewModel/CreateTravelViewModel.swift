@@ -13,6 +13,7 @@ protocol CreateTravelViewModelType {
     var startDatePublisher: Published<String?>.Publisher { get }
     var endDatePublisher: Published<String?>.Publisher { get }
 
+    func didUpdateTravel(travel: Travel)
     func didEnterTitle(text: String?)
     func didEnterDate(from startDate: Date?, to endDate: Date?)
     func didTouchNextButton()
@@ -48,19 +49,24 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
 
     private let createTravelUsecase: CreateTravelUsecase
     private weak var coordinator: CreateTravelCoordinatingDelegate?
-    private var travel: Travel?
+    private var travel: Travel
 
     init(createTravelUsecase: CreateTravelUsecase, coordinator: CreateTravelCoordinatingDelegate) {
         self.createTravelUsecase = createTravelUsecase
         self.coordinator = coordinator
-
-        self.createTravelUsecase.makeTravel(
+        self.travel = Travel(
+            uuid: nil,
+            flag: 0,
             title: "",
             startDate: Date(),
-            endDate: Date()
-        ) { [weak self] travel in
-            self?.travel = travel
-        }
+            endDate: Date(),
+            landmarks: [],
+            records: []
+        )
+    }
+
+    func didUpdateTravel(travel: Travel) {
+        self.travel = travel
     }
 
     func didEnterTitle(text: String?) {
@@ -89,13 +95,9 @@ class CreateTravelViewModel: CreateTravelViewModelType, ObservableObject {
     }
 
     func didTouchNextButton() {
-        guard var travel = self.travel else { return }
-        travel.title = self.travelTitle
-        travel.startDate = self.travelStartDate
-        travel.endDate = self.travelEndDate
-
-        self.createTravelUsecase.updateTravel(to: travel) { [weak self] newTravel in
-            self?.coordinator?.pushToAddLandmark(travel: newTravel)
-        }
+        self.travel.title = self.travelTitle
+        self.travel.startDate = self.travelStartDate
+        self.travel.endDate = self.travelEndDate
+        self.coordinator?.pushToAddLandmark(travel: self.travel)
     }
 }
