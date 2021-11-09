@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReservedTravelCoordinator: Coordinator {
+class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -22,7 +22,11 @@ class ReservedTravelCoordinator: Coordinator {
     func start() {
         let repository = CoreDataTravelRepository()
         let usecase = DefaultReservedTravelUsecase(travelRepository: repository)
-        let reservedVM = ReservedTravelViewModel(reservedTravelUsecase: usecase, travel: travel)
+        let reservedVM = ReservedTravelViewModel(
+            reservedTravelUsecase: usecase,
+            travel: travel,
+            coordinator: self
+        )
         let reservedVC = ReservedTravelViewController.instantiate(storyboardName: "ReservedTravel")
         let landmarkCartCoordinator = LandmarkCartCoordinator(
             navigationController: self.navigationController,
@@ -42,4 +46,13 @@ class ReservedTravelCoordinator: Coordinator {
         self.navigationController.pushViewController(reservedVC, animated: true)
     }
 
+    func popToHome() {
+        guard let homeVC = self
+                .navigationController
+                .viewControllers
+                .first as? TravelFetchable
+        else { return }
+        homeVC.fetchTravel()
+        self.navigationController.popToRootViewController(animated: true)
+    }
 }

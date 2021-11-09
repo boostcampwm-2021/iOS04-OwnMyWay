@@ -105,9 +105,9 @@ extension CreateTravelViewController: FSCalendarDelegate {
 
     private func alertMessage(startDate: Date, endDate: Date) -> String {
         if startDate == endDate {
-            return "여행 기간을 \(startDate.localize())) 당일치기로 설정할까요?"
+            return "여행 기간을 \(startDate.localize()) 당일치기로 설정할까요?"
         }
-        return "여행 기간을 \(startDate.localize())부터 \(endDate.localize()))로 설정할까요?"
+        return "여행 기간을 \(startDate.localize())부터 \(endDate.localize())로 설정할까요?"
     }
 
     private func initSelection() {

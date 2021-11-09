@@ -12,6 +12,7 @@
 		29274EFD2734000500DDEBFF /* ReservedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */; };
 		29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFE273401AE00DDEBFF /* ReservedTravelUsecase.swift */; };
 		293646BA2738F6590030ED78 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646B92738F6590030ED78 /* Date+.swift */; };
+		293646BC27395BAA0030ED78 /* TravelFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646BB27395BAA0030ED78 /* TravelFetchable.swift */; };
 		29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */; };
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
 		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
@@ -80,6 +81,7 @@
 		29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewModel.swift; sourceTree = "<group>"; };
 		29274EFE273401AE00DDEBFF /* ReservedTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelUsecase.swift; sourceTree = "<group>"; };
 		293646B92738F6590030ED78 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		293646BB27395BAA0030ED78 /* TravelFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelFetchable.swift; sourceTree = "<group>"; };
 		29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewModel.swift; sourceTree = "<group>"; };
 		29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelUsecase.swift; sourceTree = "<group>"; };
 		29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				DB8831C62732861500487D33 /* Instantiable.swift */,
 				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
 				AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */,
+				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				DB8831BE2731990000487D33 /* LandmarkDTORepository.swift in Sources */,
 				DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */,
 				DB8831C72732861500487D33 /* Instantiable.swift in Sources */,
+				293646BC27395BAA0030ED78 /* TravelFetchable.swift in Sources */,
 				DBC39F042733ABB200FB7939 /* TravelMO+CoreDataProperties.swift in Sources */,
 				AF6CBB692733F0C400E87533 /* SearchLandmarkViewController.swift in Sources */,
 				AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */,

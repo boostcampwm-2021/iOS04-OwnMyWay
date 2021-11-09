@@ -24,7 +24,7 @@ extension Date {
         if self == endDate {
             return "\(self.localize())"
         }
-        return "\(self.localize()) ~ \(endDate.localize()))"
+        return "\(self.localize()) ~ \(endDate.localize())"
     }
 }
 
