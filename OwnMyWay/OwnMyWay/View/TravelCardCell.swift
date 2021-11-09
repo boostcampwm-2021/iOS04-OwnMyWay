@@ -15,7 +15,7 @@ class TravelCardCell: UICollectionViewCell {
     @IBOutlet private weak var travelDateLabel: UILabel!
     @IBOutlet private weak var backgroundButton: UIButton!
 
-    func configure(travel: Travel) {
+    func bind(with travel: Travel) {
         self.travelTitleLabel.text = travel.title
         self.travelDateLabel.text = travel.startDate?.format(endDate: travel.endDate) ?? ""
         if let landmark = travel.landmarks.randomElement() {

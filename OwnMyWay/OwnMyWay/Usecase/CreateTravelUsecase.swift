@@ -13,22 +13,20 @@ enum CreateTravelError: Error {
 }
 
 protocol CreateTravelUsecase {
-    func configureTravelTitle(text: String,
-                              completion: @escaping (Result<String, Error>) -> Void)
+    func executeTitleValidation(
+        with title: String,
+        completion: @escaping (Result<String, Error>) -> Void
+    )
 }
 
-class DefaultCreateTravelUsecase: CreateTravelUsecase {
+struct DefaultCreateTravelUsecase: CreateTravelUsecase {
 
-    let travelRepository: TravelRepository
-
-    init(travelRepository: TravelRepository) {
-        self.travelRepository = travelRepository
-    }
-
-    func configureTravelTitle(text: String,
-                              completion: @escaping (Result<String, Error>) -> Void) {
-        if !text.isEmpty {
-            completion(.success(text))
+    func executeTitleValidation(
+        with title: String,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) {
+        if !title.isEmpty {
+            completion(.success(title))
         } else {
             completion(.failure(CreateTravelError.nilTitle))
         }

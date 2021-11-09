@@ -15,26 +15,26 @@ class CreateTravelViewController: UIViewController, Instantiable {
     @IBOutlet private weak var calendarView: FSCalendar!
     @IBOutlet private weak var nextButton: NextButton!
 
+    private var viewModel: CreateTravelViewModel?
+    private var cancellables: Set<AnyCancellable> = []
     private var prevDate: Date?
     private var isSelectionComplete: Bool = false
-    private var viewModel: CreateTravelViewModelType?
-    private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.bindUI()
+        self.configureCancellable()
         self.configureCalendar()
     }
 
-    func bind(viewModel: CreateTravelViewModelType) {
+    func bind(viewModel: CreateTravelViewModel) {
         self.viewModel = viewModel
     }
 
-    func update(travel: Travel) {
-        self.viewModel?.didUpdateTravel(travel: travel)
+    func travelDidChanged(to travel: Travel) {
+        self.viewModel?.travelDidChanged(to: travel)
     }
 
-    private func bindUI() {
+    private func configureCancellable() {
         self.viewModel?.validatePublisher
             .receive(on: RunLoop.main)
             .sink { isValid in
@@ -47,12 +47,12 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.calendarView.placeholderType = FSCalendarPlaceholderType.none
     }
 
-    @IBAction func editingDidEnd(_ sender: UITextField) {
+    @IBAction func didEnterTitle(_ sender: UITextField) {
         self.viewModel?.didEnterTitle(text: sender.text)
         sender.resignFirstResponder()
     }
 
-    @IBAction func nextButtonDidTouched(_ sender: UIButton) {
+    @IBAction func didTouchNextButton(_ sender: UIButton) {
         self.viewModel?.didTouchNextButton()
     }
 

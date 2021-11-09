@@ -18,9 +18,12 @@ class SearchLandmarkCoordinator: Coordinator, SearchLandmarkCoordinatingDelegate
     }
 
     func start() {
-        let repository = DefaultLandmarkDTORepository()
-        let usecase = DefaultSearchLandmarkUsecase(landmarkDTORepository: repository)
-        let viewModel = SearchLandmarkViewModel(searchLandmarkUsecase: usecase, coordinator: self)
+        let repository = LocalJSONLandmarkRepository()
+        let usecase = DefaultSearchLandmarkUsecase(repository: repository)
+        let viewModel = DefaultSearchLandmarkViewModel(
+            usecase: usecase,
+            coordinatingDelegate: self
+        )
         let searchLandmarkVC = SearchLandmarkViewController.instantiate(
             storyboardName: "SearchLandmark"
         )
@@ -40,8 +43,8 @@ class SearchLandmarkCoordinator: Coordinator, SearchLandmarkCoordinatingDelegate
 
         upperVC.dismiss(animated: true) {
             guard let viewModel = cartVC.viewModel else { return }
-            viewModel.didAddLandmark(of: landmark)
-            upperVC.updateTravel(with: viewModel.travel)
+            viewModel.didAddLandmark(with: landmark)
+            upperVC.didUpdateTravel(to: viewModel.travel)
         }
     }
 

@@ -54,7 +54,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="다음"/>
                                 <connections>
-                                    <action selector="nextButtonDidTouched:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="NOa-oR-KH5"/>
+                                    <action selector="didTouchNextButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="yn9-GM-xgz"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1vW-P8-YdC">

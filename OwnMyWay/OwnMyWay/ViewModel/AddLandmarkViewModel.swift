@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol AddLandmarkViewModelType {
+protocol AddLandmarkViewModel {
     var travel: Travel { get }
-    func nextButtonTouched()
-    func backButtonTouched()
-    func travelDidUpdate(travel: Travel)
+    func didTouchNextButton()
+    func didTouchBackButton()
+    func didUpdateTravel(to travel: Travel)
 }
 
 protocol AddLandmarkCoordinatingDelegate: AnyObject {
@@ -19,24 +19,25 @@ protocol AddLandmarkCoordinatingDelegate: AnyObject {
     func popToCreateTravel(travel: Travel)
 }
 
-class AddLandmarkViewModel: AddLandmarkViewModelType {
-    var travel: Travel
-    private weak var coordinator: AddLandmarkCoordinatingDelegate?
+class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
 
-    init(travel: Travel, coordinator: AddLandmarkCoordinatingDelegate) {
+    private(set) var travel: Travel
+    private weak var coordinatingDelegate: AddLandmarkCoordinatingDelegate?
+
+    init(travel: Travel, coordinatingDelegate: AddLandmarkCoordinatingDelegate) {
         self.travel = travel
-        self.coordinator = coordinator
+        self.coordinatingDelegate = coordinatingDelegate
     }
 
-    func nextButtonTouched() {
+    func didTouchNextButton() {
         self.coordinator?.pushToCompleteCreation(travel: travel)
     }
 
-    func backButtonTouched() {
-        self.coordinator?.popToCreateTravel(travel: travel)
+    func didTouchBackButton() {
+        self.coordinatingDelegate?.popToCreateTravel(travel: travel)
     }
 
-    func travelDidUpdate(travel: Travel) {
+    func didUpdateTravel(to travel: Travel) {
         self.travel = travel
     }
 }

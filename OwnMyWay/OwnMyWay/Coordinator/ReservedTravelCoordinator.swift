@@ -21,11 +21,11 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
 
     func start() {
         let repository = CoreDataTravelRepository()
-        let usecase = DefaultReservedTravelUsecase(travelRepository: repository)
-        let reservedVM = ReservedTravelViewModel(
-            reservedTravelUsecase: usecase,
+        let usecase = DefaultReservedTravelUsecase(repository: repository)
+        let reservedVM = DefaultReservedTravelViewModel(
+            usecase: usecase,
             travel: travel,
-            coordinator: self
+            coordinatingDelegate: self
         )
         let reservedVC = ReservedTravelViewController.instantiate(storyboardName: "ReservedTravel")
         let landmarkCartCoordinator = LandmarkCartCoordinator(

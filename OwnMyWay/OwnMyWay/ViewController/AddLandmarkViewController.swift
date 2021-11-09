@@ -10,13 +10,33 @@ import UIKit
 class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
+
     private var bindContainerVC: ((UIView) -> Void)?
-    private var viewModel: AddLandmarkViewModelType?
+    private var viewModel: AddLandmarkViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.bindContainerVC?(self.cartView)
         self.configureNavigation()
+        self.bindContainerVC?(self.cartView)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let mapViewHeight: CGFloat = UIScreen.main.bounds.width
+        let collectionViewHeight: CGFloat = 220
+        self.contentView.heightAnchor
+            .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
+            .isActive = true
+        self.view.layoutIfNeeded()
+    }
+
+    func bind(viewModel: AddLandmarkViewModel, closure: @escaping (UIView) -> Void) {
+        self.viewModel = viewModel
+        self.bindContainerVC = closure
+    }
+
+    func didUpdateTravel(to travel: Travel) {
+        self.viewModel?.didUpdateTravel(to: travel)
     }
 
     private func configureNavigation() {
@@ -24,34 +44,16 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
             image: UIImage(systemName: "chevron.backward"),
             style: .plain,
             target: self,
-            action: #selector(backButtonTouched)
+            action: #selector(backButtonAction)
         )
     }
 
-    @objc private func backButtonTouched() {
-        self.viewModel?.backButtonTouched()
+    @objc private func backButtonAction() {
+        self.viewModel?.didTouchBackButton()
     }
 
-    func bind(viewModel: AddLandmarkViewModelType, closure: @escaping (UIView) -> Void) {
-        self.viewModel = viewModel
-        self.bindContainerVC = closure
+    @IBAction func didTouchNextButton(_ sender: Any) {
+        self.viewModel?.didTouchNextButton()
     }
 
-    func updateTravel(with travel: Travel) {
-        self.viewModel?.travelDidUpdate(travel: travel)
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let mapViewHeight: CGFloat = UIScreen.main.bounds.width
-        let collectionViewHeight: CGFloat = 220
-        contentView.heightAnchor
-            .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
-            .isActive = true
-        view.layoutIfNeeded()
-    }
-
-    @IBAction func nextButtonDidTouched(_ sender: Any) {
-        self.viewModel?.nextButtonTouched()
-    }
 }

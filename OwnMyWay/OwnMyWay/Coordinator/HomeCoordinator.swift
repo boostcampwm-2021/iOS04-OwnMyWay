@@ -19,8 +19,8 @@ class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
 
     func start() {
         let repository = CoreDataTravelRepository()
-        let usecase = DefaultHomeUsecase(travelRepository: repository)
-        let homeVM = HomeViewModel(homeUsecase: usecase, coordinator: self)
+        let usecase = DefaultHomeUsecase(repository: repository)
+        let homeVM = DefaultHomeViewModel(usecase: usecase, coordinatingDelegate: self)
         let homeVC = HomeViewController.instantiate(storyboardName: "Home")
         homeVC.bind(viewModel: homeVM)
         navigationController.pushViewController(homeVC, animated: false)

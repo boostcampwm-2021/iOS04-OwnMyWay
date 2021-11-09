@@ -14,7 +14,7 @@ protocol Coordinatable {
 }
 
 protocol MapAvailable {
-    func initializeMapView(mapView: MKMapView)
+    func configureMapView(with mapView: MKMapView)
     func moveRegion(mapView: MKMapView, points: [Coordinatable], animated: Bool)
     func moveRegion(mapView: MKMapView, annotations: [MKAnnotation], animated: Bool)
     func drawRecordAnnotations(mapView: MKMapView, annotations: [MKAnnotation])
@@ -22,7 +22,7 @@ protocol MapAvailable {
 }
 
 extension MapAvailable {
-    func initializeMapView(mapView: MKMapView) {
+    func configureMapView(with mapView: MKMapView) {
         mapView.register(
             LandmarkAnnotationView.self,
             forAnnotationViewWithReuseIdentifier: LandmarkAnnotationView.identifier
