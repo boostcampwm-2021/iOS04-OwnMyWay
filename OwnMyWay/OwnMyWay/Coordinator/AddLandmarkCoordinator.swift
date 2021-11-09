@@ -49,7 +49,7 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
         guard let createTravelVC = self.navigationController.children.secondLast
                 as? CreateTravelViewController else { return }
 
-        createTravelVC.update(travel: travel)
+        createTravelVC.travelDidChanged(to: travel)
         self.navigationController.popViewController(animated: true)
     }
 }
