@@ -11,6 +11,7 @@ import UIKit
 protocol TravelRepository {
     func fetchAllTravels() -> Result<[Travel], Error>
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error>
+    func save(travel: Travel)
     func addLandmark(
         to travel: Travel,
         title: String?,
@@ -66,6 +67,31 @@ class CoreDataTravelRepository: TravelRepository {
         } catch let error {
             return .failure(error)
         }
+    }
+
+    func save(travel: Travel) {
+        guard let travelEntity = NSEntityDescription.entity(forEntityName: "TravelMO", in: context),
+              let landmarkEntity = NSEntityDescription.entity(
+                forEntityName: "LandmarkMO", in: context
+              )
+        else { return }
+        let travelMO = TravelMO(entity: travelEntity, insertInto: context)
+        travelMO.setValue(travel.uuid, forKey: "uuid")
+        travelMO.setValue(Travel.Section.reserved.index, forKey: "flag")
+        travelMO.setValue(travel.title, forKey: "title")
+        travelMO.setValue(travel.startDate, forKey: "startDate")
+        travelMO.setValue(travel.endDate, forKey: "endDate")
+        travel.landmarks.forEach {
+            let landmark = $0
+            let landmarkMO = LandmarkMO(entity: landmarkEntity, insertInto: context)
+            landmarkMO.setValue(UUID(), forKey: "uuid")
+            landmarkMO.setValue(landmark.title, forKey: "title")
+            landmarkMO.setValue(landmark.image, forKey: "image")
+            landmarkMO.setValue(landmark.latitude, forKey: "latitude")
+            landmarkMO.setValue(landmark.longitude, forKey: "longitude")
+            travelMO.addToLandmarks(landmarkMO)
+        }
+        try? context.save()
     }
 
     func addLandmark(

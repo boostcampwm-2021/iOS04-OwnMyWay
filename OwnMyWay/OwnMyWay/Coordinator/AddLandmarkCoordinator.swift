@@ -42,9 +42,12 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
         navigationController.pushViewController(addLandmarkVC, animated: true)
     }
 
-    func pushToComplete(travel: Travel) {
-        print(travel)
-        // push to complete
+    func pushToCompleteCreation(travel: Travel) {
+        let completeCreationCoordinator = CompleteCreationCoordinator(
+            navigationController: self.navigationController, travel: travel
+        )
+        self.childCoordinators.append(completeCreationCoordinator)
+        completeCreationCoordinator.start()
     }
 
     func popToCreateTravel(travel: Travel) {

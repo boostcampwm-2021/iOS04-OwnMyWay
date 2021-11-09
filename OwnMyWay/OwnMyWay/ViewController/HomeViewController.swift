@@ -136,14 +136,14 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
                         withReuseIdentifier: PlusCell.identifier,
                         for: indexPath) as? PlusCell
                     else { return UICollectionViewCell() }
-                    cell.bind()
+                    cell.configure()
                     return cell
                 default:
                     guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: TravelCardCell.identifier,
                         for: indexPath) as? TravelCardCell
                     else { return UICollectionViewCell() }
-                    cell.bind(with: item)
+                    cell.configure(with: item)
                     return cell
                 }
         }
