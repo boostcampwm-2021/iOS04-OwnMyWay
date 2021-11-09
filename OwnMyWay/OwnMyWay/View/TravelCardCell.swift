@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TravelCardCell: UICollectionViewCell {
     static let identifier = "TravelCardCell"
@@ -17,6 +18,9 @@ class TravelCardCell: UICollectionViewCell {
     func configure(travel: Travel) {
         self.travelTitleLabel.text = travel.title
         self.travelDateLabel.text = travel.startDate?.format(endDate: travel.endDate) ?? ""
+        if let landmark = travel.landmarks.randomElement() {
+            self.backgroundButton.kf.setImage(with: landmark.image, for: .normal)
+        }
         self.backgroundButton.layer.cornerRadius = 7
         self.backgroundButton.clipsToBounds = true
     }
