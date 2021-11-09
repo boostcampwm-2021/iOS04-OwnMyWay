@@ -46,8 +46,7 @@ class DefaultHomeViewModel: HomeViewModel {
     func viewDidLoad() {
         self.usecase.executeFetch { [weak self] travels in
             guard let self = self else { return }
-            var plusCard = Travel.dummy()
-            plusCard.flag = -1
+            let plusCard = Travel.dummy(section: .plusButton)
             self.reservedTravels = [plusCard] + travels.filter {
                 $0.flag == Travel.Section.reserved.index
             }

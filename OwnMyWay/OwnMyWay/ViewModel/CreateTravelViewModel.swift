@@ -52,7 +52,7 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
     init(usecase: CreateTravelUsecase, coordinatingDelegate: CreateTravelCoordinatingDelegate) {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
-        self.travel = Travel.dummy()
+        self.travel = Travel.dummy(section: .reserved)
     }
 
     func travelDidChanged(to travel: Travel) {

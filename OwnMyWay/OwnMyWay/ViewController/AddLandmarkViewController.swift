@@ -24,10 +24,10 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
         super.viewDidLayoutSubviews()
         let mapViewHeight: CGFloat = UIScreen.main.bounds.width
         let collectionViewHeight: CGFloat = 220
-        contentView.heightAnchor
+        self.contentView.heightAnchor
             .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
             .isActive = true
-        view.layoutIfNeeded()
+        self.view.layoutIfNeeded()
     }
 
     func bind(viewModel: AddLandmarkViewModel, closure: @escaping (UIView) -> Void) {

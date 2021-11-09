@@ -20,7 +20,9 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
     }
 
     func start() {
-        let addLandmarkVM = DefaultAddLandmarkViewModel(travel: self.travel, coordinatingDelegate: self)
+        let addLandmarkVM = DefaultAddLandmarkViewModel(
+            travel: self.travel, coordinatingDelegate: self
+        )
         let addLandmarkVC = AddLandmarkViewController.instantiate(storyboardName: "AddLandmark")
         let landmarkCartCoordinator = LandmarkCartCoordinator(
             navigationController: self.navigationController,

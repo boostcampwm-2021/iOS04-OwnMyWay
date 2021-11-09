@@ -11,6 +11,7 @@ import CoreData
 struct Travel {
 
     enum Section: Int, CaseIterable {
+        case plusButton = -1
         case reserved = 0
         case ongoing = 1
         case outdated = 2
@@ -20,9 +21,9 @@ struct Travel {
         }
     }
 
-    static func dummy() -> Travel {
+    static func dummy(section: Section) -> Travel {
         return Travel(
-            uuid: UUID(), flag: 0, title: nil,
+            uuid: UUID(), flag: section.index, title: nil,
             startDate: nil, endDate: nil, landmarks: [], records: []
         )
     }
