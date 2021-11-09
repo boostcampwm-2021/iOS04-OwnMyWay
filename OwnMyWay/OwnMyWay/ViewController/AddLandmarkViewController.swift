@@ -37,7 +37,7 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
         self.bindContainerVC = closure
     }
 
-    func updateTravel(with travel: Travel) {
+    func didUpdateTravel(to travel: Travel) {
         self.viewModel?.travelDidUpdate(travel: travel)
     }
 

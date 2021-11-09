@@ -44,7 +44,7 @@ class SearchLandmarkCoordinator: Coordinator, SearchLandmarkCoordinatingDelegate
         upperVC.dismiss(animated: true) {
             guard let viewModel = cartVC.viewModel else { return }
             viewModel.didAddLandmark(of: landmark)
-            upperVC.updateTravel(with: viewModel.travel)
+            upperVC.didUpdateTravel(to: viewModel.travel)
         }
     }
 

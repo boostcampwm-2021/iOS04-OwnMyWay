@@ -8,17 +8,18 @@
 import Foundation
 
 protocol ReservedTravelUsecase {
-    func deleteTravel(of travel: Travel)
+    func executeDeletion(of travel: Travel)
 }
 
 class DefaultReservedTravelUsecase: ReservedTravelUsecase {
-    let travelRepository: TravelRepository
 
-    init(travelRepository: TravelRepository) {
-        self.travelRepository = travelRepository
+    let repository: TravelRepository
+
+    init(repository: TravelRepository) {
+        self.repository = repository
     }
 
-    func deleteTravel(of travel: Travel) {
-        self.travelRepository.delete(travel: travel)
+    func executeDeletion(of travel: Travel) {
+        self.repository.delete(travel: travel)
     }
 }
