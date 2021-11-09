@@ -159,6 +159,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="여행 추가 완료하기"/>
+                                <connections>
+                                    <action selector="didTouchCompleteButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="xd4-6d-IeB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>

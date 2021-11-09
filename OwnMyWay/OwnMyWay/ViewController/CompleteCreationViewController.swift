@@ -19,4 +19,8 @@ class CompleteCreationViewController: UIViewController, Instantiable {
         self.viewModel = viewModel
     }
 
+    @IBAction func didTouchCompleteButton(_ sender: UIButton) {
+        self.viewModel?.didTouchCompleteButton()
+    }
+
 }

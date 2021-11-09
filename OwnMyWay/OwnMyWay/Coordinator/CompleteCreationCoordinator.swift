@@ -33,6 +33,13 @@ class CompleteCreationCoordinator: Coordinator, CompleteCreationCoordinatingDele
     }
 
     func popToHome() {
+        guard let homeVC = self
+                .navigationController
+                .viewControllers
+                .first as? TravelFetchable
+        else { return }
+        homeVC.fetchTravel()
+        self.navigationController.popToRootViewController(animated: true)
     }
 
 }

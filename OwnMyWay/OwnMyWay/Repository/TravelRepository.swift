@@ -57,18 +57,20 @@ class CoreDataTravelRepository: TravelRepository {
     }
 
     func save(travel: Travel) {
-        guard let entity = NSEntityDescription.entity(forEntityName: "TravelMO", in: context) else {
-            return
-        }
-        let travelMO = TravelMO(entity: entity, insertInto: context)
-        travelMO.setValue(travelMO.uuid, forKey: "uuid")
+        guard let travelEntity = NSEntityDescription.entity(forEntityName: "TravelMO", in: context),
+              let landmarkEntity = NSEntityDescription.entity(
+                forEntityName: "LandmarkMO", in: context
+              )
+        else { return }
+        let travelMO = TravelMO(entity: travelEntity, insertInto: context)
+        travelMO.setValue(travel.uuid, forKey: "uuid")
         travelMO.setValue(Travel.Section.reserved.index, forKey: "flag")
-        travelMO.setValue(travelMO.title, forKey: "title")
-        travelMO.setValue(travelMO.startDate, forKey: "startDate")
-        travelMO.setValue(travelMO.endDate, forKey: "endDate")
+        travelMO.setValue(travel.title, forKey: "title")
+        travelMO.setValue(travel.startDate, forKey: "startDate")
+        travelMO.setValue(travel.endDate, forKey: "endDate")
         travel.landmarks.forEach {
             let landmark = $0
-            let landmarkMO = LandmarkMO(entity: entity, insertInto: context)
+            let landmarkMO = LandmarkMO(entity: landmarkEntity, insertInto: context)
             landmarkMO.setValue(UUID(), forKey: "uuid")
             landmarkMO.setValue(landmark.title, forKey: "title")
             landmarkMO.setValue(landmark.image, forKey: "image")
