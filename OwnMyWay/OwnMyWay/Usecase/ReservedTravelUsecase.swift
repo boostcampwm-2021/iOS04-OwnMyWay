@@ -19,6 +19,6 @@ class DefaultReservedTravelUsecase: ReservedTravelUsecase {
     }
 
     func deleteTravel(of travel: Travel) {
-        self.travelRepository.deleteTravel(of: travel)
+        self.travelRepository.delete(travel: travel)
     }
 }

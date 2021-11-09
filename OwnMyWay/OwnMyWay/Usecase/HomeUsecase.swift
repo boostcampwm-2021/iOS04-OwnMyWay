@@ -20,7 +20,7 @@ class DefaultHomeUsecase: HomeUsecase {
     }
 
     func executeFetch(completion: @escaping ([Travel]) -> Void) {
-        let result = travelRepository.fetchAll()
+        let result = travelRepository.fetchAllTravels()
         switch result {
         case .success(let travels):
             completion(travels)
