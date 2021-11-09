@@ -23,6 +23,8 @@
 		29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA37273253130040B70A /* LandmarkCartViewController.swift */; };
 		29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */; };
 		29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */; };
+		3F113A0D273A56E000EA91AA /* CompleteCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */; };
+		3F113A11273A571100EA91AA /* CompleteCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F113A10273A571100EA91AA /* CompleteCreation.storyboard */; };
 		3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3F20606527314AAE0005D8F4 /* FSCalendar */; };
 		3F20606827339FAB0005D8F4 /* NextButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F20606727339FAB0005D8F4 /* NextButton.xib */; };
 		3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2060692733A2610005D8F4 /* NextButton.swift */; };
@@ -91,6 +93,8 @@
 		29E9BA37273253130040B70A /* LandmarkCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewController.swift; sourceTree = "<group>"; };
 		29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkCardCell.swift; sourceTree = "<group>"; };
 		29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandmarkCardCell.xib; sourceTree = "<group>"; };
+		3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCreationViewController.swift; sourceTree = "<group>"; };
+		3F113A10273A571100EA91AA /* CompleteCreation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CompleteCreation.storyboard; sourceTree = "<group>"; };
 		3F20606727339FAB0005D8F4 /* NextButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextButton.xib; sourceTree = "<group>"; };
 		3F2060692733A2610005D8F4 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		3FB914BC273409530084FF1C /* TravelCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelCardCell.swift; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
 				AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */,
 				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
+				3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */,
 				AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */,
 				29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */,
+				3F113A10273A571100EA91AA /* CompleteCreation.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -396,6 +402,7 @@
 				29274EFB2733FD2400DDEBFF /* ReservedTravel.storyboard in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
 				3FB914EA2737DAC70084FF1C /* TravelSectionHeader.xib in Resources */,
+				3F113A11273A571100EA91AA /* CompleteCreation.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +452,7 @@
 				293646BC27395BAA0030ED78 /* TravelFetchable.swift in Sources */,
 				DBC39F042733ABB200FB7939 /* TravelMO+CoreDataProperties.swift in Sources */,
 				AF6CBB692733F0C400E87533 /* SearchLandmarkViewController.swift in Sources */,
+				3F113A0D273A56E000EA91AA /* CompleteCreationViewController.swift in Sources */,
 				AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */,
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
 				AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */,
