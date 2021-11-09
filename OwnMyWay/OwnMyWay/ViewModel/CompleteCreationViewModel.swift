@@ -32,7 +32,7 @@ class DefaultCompleteCreationViewModel: CompleteCreationViewModel {
     }
 
     func didTouchCompleteButton() {
-        self.usecase.executeCreate(travel: travel)
+        self.usecase.executeCreation(travel: travel)
         self.coordinatingDelegate?.popToHome()
     }
 
