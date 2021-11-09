@@ -10,7 +10,7 @@ import UIKit
 
 typealias HomeDataSource = UICollectionViewDiffableDataSource <Travel.Section, Travel>
 
-class HomeViewController: UIViewController, Instantiable {
+class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     @IBOutlet private weak var travelCollectionView: UICollectionView!
 
@@ -86,6 +86,10 @@ class HomeViewController: UIViewController, Instantiable {
             )
         }.store(in: &cancellables)
         self.cancellables = cancellables
+    }
+    
+    func fetchTravel() {
+        self.viewModel?.configure()
     }
 
     private func createCompositionalLayout() -> UICollectionViewLayout {
