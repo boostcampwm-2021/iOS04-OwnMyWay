@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol HomeViewModelType {
+protocol HomeViewModel {
     var reservedTravelPublisher: Published<[Travel]>.Publisher { get }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { get }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
 
-    func configure()
-    func createButtonDidTouched()
-    func reservedTravelDidTouched(index: Int)
+    func viewDidLoad()
+    func didTouchCreateButton()
+    func didTouchReservedTravel(at index: Int)
 }
 
 protocol HomeCoordinatingDelegate: AnyObject {
@@ -22,39 +22,32 @@ protocol HomeCoordinatingDelegate: AnyObject {
     func pushToReservedTravel(travel: Travel)
 }
 
-class HomeViewModel: HomeViewModelType {
-
-    @Published private var reservedTravels: [Travel]
-    @Published private var ongoingTravels: [Travel]
-    @Published private var outdatedTravels: [Travel]
+class DefaultHomeViewModel: HomeViewModel {
 
     var reservedTravelPublisher: Published<[Travel]>.Publisher { $reservedTravels }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { $ongoingTravels }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { $outdatedTravels }
 
-    private let homeUsecase: HomeUsecase
-    private weak var coordinator: HomeCoordinatingDelegate?
+    private let usecase: HomeUsecase
+    private weak var coordinatingDelegate: HomeCoordinatingDelegate?
 
-    init(homeUsecase: HomeUsecase, coordinator: HomeCoordinatingDelegate) {
+    @Published private var reservedTravels: [Travel]
+    @Published private var ongoingTravels: [Travel]
+    @Published private var outdatedTravels: [Travel]
+
+    init(usecase: HomeUsecase, coordinatingDelegate: HomeCoordinatingDelegate) {
+        self.usecase = usecase
+        self.coordinatingDelegate = coordinatingDelegate
         self.reservedTravels = []
         self.ongoingTravels = []
         self.outdatedTravels = []
-        self.homeUsecase = homeUsecase
-        self.coordinator = coordinator
     }
 
-    func configure() {
-        self.homeUsecase.executeFetch { [weak self] travels in
+    func viewDidLoad() {
+        self.usecase.executeFetch { [weak self] travels in
             guard let self = self else { return }
-            let plusCard = Travel(
-                uuid: UUID(),
-                flag: -1,
-                title: "DummyBoy",
-                startDate: Date(),
-                endDate: Date(),
-                landmarks: [],
-                records: []
-            )
+            var plusCard = Travel.dummy()
+            plusCard.flag = -1
             self.reservedTravels = [plusCard] + travels.filter {
                 $0.flag == Travel.Section.reserved.index
             }
@@ -63,13 +56,13 @@ class HomeViewModel: HomeViewModelType {
         }
     }
 
-    func createButtonDidTouched() {
-        self.coordinator?.pushToCreateTravel()
+    func didTouchCreateButton() {
+        self.coordinatingDelegate?.pushToCreateTravel()
     }
 
-    func reservedTravelDidTouched(index: Int) {
+    func didTouchReservedTravel(at index: Int) {
         guard reservedTravels.startIndex + 1..<reservedTravels.endIndex ~= index else { return }
-        self.coordinator?.pushToReservedTravel(travel: reservedTravels[index])
+        self.coordinatingDelegate?.pushToReservedTravel(travel: reservedTravels[index])
     }
 
 }

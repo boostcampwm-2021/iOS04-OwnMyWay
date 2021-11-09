@@ -13,14 +13,14 @@ protocol HomeUsecase {
 
 class DefaultHomeUsecase: HomeUsecase {
 
-    let travelRepository: TravelRepository
+    let repository: TravelRepository
 
-    init(travelRepository: TravelRepository) {
-        self.travelRepository = travelRepository
+    init(repository: TravelRepository) {
+        self.repository = repository
     }
 
     func executeFetch(completion: @escaping ([Travel]) -> Void) {
-        let result = travelRepository.fetchAllTravels()
+        let result = repository.fetchAllTravels()
         switch result {
         case .success(let travels):
             completion(travels)
