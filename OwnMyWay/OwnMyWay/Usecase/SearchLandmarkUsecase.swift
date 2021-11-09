@@ -14,14 +14,14 @@ protocol SearchLandmarkUsecase {
 
 struct DefaultSearchLandmarkUsecase: SearchLandmarkUsecase {
 
-    private let repository: LandmarkDTORepository
+    private let repository: LandmarkRepository
 
-    init(repository: LandmarkDTORepository) {
+    init(repository: LandmarkRepository) {
         self.repository = repository
     }
 
     func executeFetch(completion: @escaping ([Landmark]) -> Void) {
-        repository.fetchLandmarkDTOs { result in
+        repository.fetchLandmarks { result in
             switch result {
             case .success(let landmarks):
                 completion(landmarks)
@@ -32,7 +32,7 @@ struct DefaultSearchLandmarkUsecase: SearchLandmarkUsecase {
     }
 
     func executeSearch(by text: String, completion: @escaping ([Landmark]) -> Void) {
-        repository.fetchLandmarkDTOs { result in
+        repository.fetchLandmarks { result in
             switch result {
             case .success(let landmarkDTOs):
                 let searchResult = landmarkDTOs.filter {

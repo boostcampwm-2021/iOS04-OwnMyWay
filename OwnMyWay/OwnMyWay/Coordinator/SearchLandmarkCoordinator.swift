@@ -18,7 +18,7 @@ class SearchLandmarkCoordinator: Coordinator, SearchLandmarkCoordinatingDelegate
     }
 
     func start() {
-        let repository = DefaultLandmarkDTORepository()
+        let repository = LocalJSONLandmarkRepository()
         let usecase = DefaultSearchLandmarkUsecase(repository: repository)
         let viewModel = DefaultSearchLandmarkViewModel(
             usecase: usecase,
