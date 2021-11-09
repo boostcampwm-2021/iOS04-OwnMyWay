@@ -78,7 +78,7 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
     }
 
     @objc func didTouchRemoveButton(_ sender: Any) {
-        presentAlert()
+        self.presentAlert()
     }
 
     private func presentAlert() {
@@ -91,6 +91,6 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         let noAction = UIAlertAction(title: "아니오", style: .cancel)
         alert.addAction(yesAction)
         alert.addAction(noAction)
-        present(alert, animated: true)
+        self.present(alert, animated: true)
     }
 }
