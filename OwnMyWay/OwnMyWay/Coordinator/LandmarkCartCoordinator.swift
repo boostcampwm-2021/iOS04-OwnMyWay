@@ -25,8 +25,8 @@ class LandmarkCartCoordinator: Coordinator, LandmarkCartCoordinatingDelegate {
 
     func pass() -> LandmarkCartViewController {
         let cartVC = LandmarkCartViewController.instantiate(storyboardName: "LandmarkCart")
-        let viewModel = LandmarkCartViewModel(
-            coordinator: self,
+        let viewModel = DefaultLandmarkCartViewModel(
+            coordinatingDelegate: self,
             travel: travel
         )
         cartVC.bind(viewModel: viewModel)

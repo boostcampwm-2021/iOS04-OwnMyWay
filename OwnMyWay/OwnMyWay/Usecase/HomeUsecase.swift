@@ -11,7 +11,7 @@ protocol HomeUsecase {
     func executeFetch(completion: @escaping ([Travel]) -> Void)
 }
 
-class DefaultHomeUsecase: HomeUsecase {
+struct DefaultHomeUsecase: HomeUsecase {
 
     let repository: TravelRepository
 

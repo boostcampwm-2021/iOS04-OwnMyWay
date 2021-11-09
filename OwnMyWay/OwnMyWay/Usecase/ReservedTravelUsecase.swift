@@ -11,7 +11,7 @@ protocol ReservedTravelUsecase {
     func executeDeletion(of travel: Travel)
 }
 
-class DefaultReservedTravelUsecase: ReservedTravelUsecase {
+struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
 
     let repository: TravelRepository
 

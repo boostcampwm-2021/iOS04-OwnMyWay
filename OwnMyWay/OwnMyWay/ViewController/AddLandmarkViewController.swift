@@ -10,35 +10,14 @@ import UIKit
 class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
+
     private var bindContainerVC: ((UIView) -> Void)?
-    private var viewModel: AddLandmarkViewModelType?
+    private var viewModel: AddLandmarkViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.bindContainerVC?(self.cartView)
         self.configureNavigation()
-    }
-
-    private func configureNavigation() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(backButtonTouched)
-        )
-    }
-
-    @objc private func backButtonTouched() {
-        self.viewModel?.backButtonTouched()
-    }
-
-    func bind(viewModel: AddLandmarkViewModelType, closure: @escaping (UIView) -> Void) {
-        self.viewModel = viewModel
-        self.bindContainerVC = closure
-    }
-
-    func didUpdateTravel(to travel: Travel) {
-        self.viewModel?.travelDidUpdate(travel: travel)
+        self.bindContainerVC?(self.cartView)
     }
 
     override func viewDidLayoutSubviews() {
@@ -51,7 +30,30 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
         view.layoutIfNeeded()
     }
 
-    @IBAction func nextButtonDidTouched(_ sender: Any) {
-        self.viewModel?.nextButtonTouched()
+    func bind(viewModel: AddLandmarkViewModel, closure: @escaping (UIView) -> Void) {
+        self.viewModel = viewModel
+        self.bindContainerVC = closure
     }
+
+    func didUpdateTravel(to travel: Travel) {
+        self.viewModel?.didUpdateTravel(to: travel)
+    }
+
+    private func configureNavigation() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.backward"),
+            style: .plain,
+            target: self,
+            action: #selector(backButtonAction)
+        )
+    }
+
+    @objc private func backButtonAction() {
+        self.viewModel?.didTouchBackButton()
+    }
+
+    @IBAction func didTouchNextButton(_ sender: Any) {
+        self.viewModel?.didTouchNextButton()
+    }
+
 }

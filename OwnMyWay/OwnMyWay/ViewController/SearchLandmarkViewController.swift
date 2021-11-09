@@ -82,7 +82,7 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
             ) as? LandmarkCardCell
             else { return UICollectionViewCell() }
 
-            cell.configure(with: item)
+            cell.bind(with: item)
             return cell
         }
         return dataSource
