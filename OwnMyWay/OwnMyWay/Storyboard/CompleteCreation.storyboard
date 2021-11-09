@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqO-Z0-h8O">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="53.5" y="376.5" width="307" height="143.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="모든">
                                         <attributes>
@@ -153,10 +154,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRn-1C-vAR" customClass="NextButton" customModule="OwnMyWay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="826" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="806" width="414" height="90"/>
+                                <color key="backgroundColor" name="IdentityBlue"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="YE5-hX-yCa"/>
+                                    <constraint firstAttribute="height" constant="90" id="YE5-hX-yCa"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="여행 추가 완료하기"/>
                                 <connections>
@@ -168,11 +171,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="PRn-1C-vAR" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="5ie-Yy-rez"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="pqO-Z0-h8O" secondAttribute="bottom" id="9fH-bs-nRi"/>
+                            <constraint firstItem="pqO-Z0-h8O" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="9sd-XU-sKr"/>
+                            <constraint firstItem="pqO-Z0-h8O" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="ApU-jr-Y6M"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="PRn-1C-vAR" secondAttribute="trailing" id="Vch-Jq-9Yk"/>
-                            <constraint firstItem="pqO-Z0-h8O" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="hcU-px-TRG"/>
-                            <constraint firstItem="pqO-Z0-h8O" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="llw-PF-KBl"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pqO-Z0-h8O" secondAttribute="trailing" id="n3f-bw-bA5"/>
                             <constraint firstItem="PRn-1C-vAR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="uCf-jH-tey"/>
                         </constraints>
                     </view>
@@ -183,6 +184,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="IdentityBlue">
+            <color red="0.22699999809265137" green="0.45899999141693115" blue="0.92900002002716064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

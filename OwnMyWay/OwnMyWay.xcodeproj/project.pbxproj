@@ -29,7 +29,6 @@
 		3F113A15273A5AA300EA91AA /* CompleteCreationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A14273A5AA300EA91AA /* CompleteCreationUsecase.swift */; };
 		3F113A17273A5FD600EA91AA /* CompleteCreationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A16273A5FD600EA91AA /* CompleteCreationCoordinator.swift */; };
 		3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3F20606527314AAE0005D8F4 /* FSCalendar */; };
-		3F20606827339FAB0005D8F4 /* NextButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F20606727339FAB0005D8F4 /* NextButton.xib */; };
 		3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2060692733A2610005D8F4 /* NextButton.swift */; };
 		3FB914BE273409530084FF1C /* TravelCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914BC273409530084FF1C /* TravelCardCell.swift */; };
 		3FB914BF273409530084FF1C /* TravelCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB914BD273409530084FF1C /* TravelCardCell.xib */; };
@@ -101,7 +100,6 @@
 		3F113A12273A59C500EA91AA /* CompleteCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCreationViewModel.swift; sourceTree = "<group>"; };
 		3F113A14273A5AA300EA91AA /* CompleteCreationUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCreationUsecase.swift; sourceTree = "<group>"; };
 		3F113A16273A5FD600EA91AA /* CompleteCreationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCreationCoordinator.swift; sourceTree = "<group>"; };
-		3F20606727339FAB0005D8F4 /* NextButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextButton.xib; sourceTree = "<group>"; };
 		3F2060692733A2610005D8F4 /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		3FB914BC273409530084FF1C /* TravelCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelCardCell.swift; sourceTree = "<group>"; };
 		3FB914BD273409530084FF1C /* TravelCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TravelCardCell.xib; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 				3FB914BD273409530084FF1C /* TravelCardCell.xib */,
 				29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */,
 				29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */,
-				3F20606727339FAB0005D8F4 /* NextButton.xib */,
 				3F2060692733A2610005D8F4 /* NextButton.swift */,
 				AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */,
 				3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */,
@@ -404,7 +401,6 @@
 				DB22BB69272F82780004444B /* LaunchScreen.storyboard in Resources */,
 				DB22BB66272F82780004444B /* Assets.xcassets in Resources */,
 				DB22BB61272F82770004444B /* Home.storyboard in Resources */,
-				3F20606827339FAB0005D8F4 /* NextButton.xib in Resources */,
 				29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */,
 				29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */,
 				AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */,
