@@ -18,9 +18,11 @@ class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
-        let usecase = DefaultCreateTravelUsecase(travelRepository: repository)
-        let createTravelVM = CreateTravelViewModel(createTravelUsecase: usecase, coordinator: self)
+        let usecase = DefaultCreateTravelUsecase()
+        let createTravelVM = DefaultCreateTravelViewModel(
+            usecase: usecase,
+            coordinatingDelegate: self
+        )
         let createTravelVC = CreateTravelViewController.instantiate(storyboardName: "CreateTravel")
         createTravelVC.bind(viewModel: createTravelVM)
         navigationController.pushViewController(createTravelVC, animated: true)

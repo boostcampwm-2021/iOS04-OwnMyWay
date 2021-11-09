@@ -42,7 +42,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
-                                    <action selector="editingDidEnd:" destination="Y6W-OH-hqX" eventType="editingDidEndOnExit" id="DLp-40-bfH"/>
+                                    <action selector="didEnterTitle:" destination="Y6W-OH-hqX" eventType="editingDidEndOnExit" id="zic-LR-aqf"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkc-3o-fy0">
@@ -93,7 +93,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="다음"/>
                                 <connections>
-                                    <action selector="nextButtonDidTouched:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="mjv-dU-xE3"/>
+                                    <action selector="didTouchNextButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4Bk-5C-bbJ"/>
                                 </connections>
                             </button>
                         </subviews>

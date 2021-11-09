@@ -11,16 +11,16 @@ protocol HomeUsecase {
     func executeFetch(completion: @escaping ([Travel]) -> Void)
 }
 
-class DefaultHomeUsecase: HomeUsecase {
+struct DefaultHomeUsecase: HomeUsecase {
 
-    let travelRepository: TravelRepository
+    let repository: TravelRepository
 
-    init(travelRepository: TravelRepository) {
-        self.travelRepository = travelRepository
+    init(repository: TravelRepository) {
+        self.repository = repository
     }
 
     func executeFetch(completion: @escaping ([Travel]) -> Void) {
-        let result = travelRepository.fetchAll()
+        let result = repository.fetchAllTravels()
         switch result {
         case .success(let travels):
             completion(travels)

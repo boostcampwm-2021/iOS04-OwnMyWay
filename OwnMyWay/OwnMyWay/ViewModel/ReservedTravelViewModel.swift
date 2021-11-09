@@ -7,45 +7,46 @@
 
 import Foundation
 
-protocol ReservedTravelViewModelType {
+protocol ReservedTravelViewModel {
     var travel: Travel { get }
     var isPossibleStart: Bool { get }
     func didDeleteTravel()
-    func travelDidUpdate(travel: Travel)
+    func didUpdateTravel(to travel: Travel)
 }
 
 protocol ReservedTravelCoordinatingDelegate: AnyObject {
     func popToHome()
 }
 
-class ReservedTravelViewModel: ReservedTravelViewModelType, ObservableObject {
-    var travel: Travel
-    var isPossibleStart: Bool
+class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject {
+    private(set) var travel: Travel
+    private(set) var isPossibleStart: Bool
 
-    private let reservedTravelUsecase: ReservedTravelUsecase
-    private weak var coordinator: ReservedTravelCoordinatingDelegate?
+    private let usecase: ReservedTravelUsecase
+    private weak var coordinatingDelegate: ReservedTravelCoordinatingDelegate?
 
     init(
-        reservedTravelUsecase: ReservedTravelUsecase,
+        usecase: ReservedTravelUsecase,
         travel: Travel,
-        coordinator: ReservedTravelCoordinatingDelegate
+        coordinatingDelegate: ReservedTravelCoordinatingDelegate
     ) {
         self.travel = travel
-        self.reservedTravelUsecase = reservedTravelUsecase
+        self.usecase = usecase
         if let startDate = travel.startDate {
             self.isPossibleStart = startDate <= Date()
         } else {
             self.isPossibleStart = false
         }
-        self.coordinator = coordinator
+        self.coordinatingDelegate = coordinatingDelegate
     }
 
     func didDeleteTravel() {
-        self.reservedTravelUsecase.deleteTravel(of: self.travel)
-        self.coordinator?.popToHome()
+        self.usecase.executeDeletion(of: self.travel)
+        self.coordinatingDelegate?.popToHome()
     }
 
-    func travelDidUpdate(travel: Travel) {
+    func didUpdateTravel(to travel: Travel) {
         self.travel = travel
+        // TODO: usecase -> repository update 구현해야함
     }
 }

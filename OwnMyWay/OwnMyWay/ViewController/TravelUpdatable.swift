@@ -8,5 +8,5 @@
 import Foundation
 
 protocol TravelUpdatable {
-    func updateTravel(with travel: Travel)
+    func didUpdateTravel(to travel: Travel)
 }

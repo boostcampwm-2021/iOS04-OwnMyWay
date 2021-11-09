@@ -20,7 +20,9 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
     }
 
     func start() {
-        let addLandmarkVM = AddLandmarkViewModel(travel: self.travel, coordinator: self)
+        let addLandmarkVM = DefaultAddLandmarkViewModel(
+            travel: self.travel, coordinatingDelegate: self
+        )
         let addLandmarkVC = AddLandmarkViewController.instantiate(storyboardName: "AddLandmark")
         let landmarkCartCoordinator = LandmarkCartCoordinator(
             navigationController: self.navigationController,
@@ -49,7 +51,7 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
         guard let createTravelVC = self.navigationController.children.secondLast
                 as? CreateTravelViewController else { return }
 
-        createTravelVC.update(travel: travel)
+        createTravelVC.travelDidChanged(to: travel)
         self.navigationController.popViewController(animated: true)
     }
 }
