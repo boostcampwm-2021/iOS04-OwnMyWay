@@ -10,11 +10,13 @@ import Foundation
 protocol AddLandmarkViewModelType {
     var travel: Travel { get }
     func nextButtonTouched()
+    func backButtonTouched()
     func travelDidUpdate(travel: Travel)
 }
 
 protocol AddLandmarkCoordinatingDelegate: AnyObject {
     func pushToComplete(travel: Travel)
+    func popToCreateTravel(travel: Travel)
 }
 
 class AddLandmarkViewModel: AddLandmarkViewModelType {
@@ -28,6 +30,10 @@ class AddLandmarkViewModel: AddLandmarkViewModelType {
 
     func nextButtonTouched() {
         self.coordinator?.pushToComplete(travel: travel)
+    }
+
+    func backButtonTouched() {
+        self.coordinator?.popToCreateTravel(travel: travel)
     }
 
     func travelDidUpdate(travel: Travel) {

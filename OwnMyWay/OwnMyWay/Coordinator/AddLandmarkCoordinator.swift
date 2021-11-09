@@ -41,7 +41,22 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
     }
 
     func pushToComplete(travel: Travel) {
-        print("🤷‍♂️🤷‍♂️🤷‍♂️🤷‍♂️🤷‍♂️")
+        print(travel)
         // push to complete
+    }
+
+    func popToCreateTravel(travel: Travel) {
+        guard let createTravelVC = self.navigationController.children.secondLast
+                as? CreateTravelViewController else { return }
+
+        createTravelVC.update(travel: travel)
+        self.navigationController.popViewController(animated: true)
+    }
+}
+
+fileprivate extension Array {
+    var secondLast: Element? {
+        guard self.count >= 2 else { return nil }
+        return self[self.count - 2]
     }
 }

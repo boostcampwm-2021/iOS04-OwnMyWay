@@ -30,6 +30,10 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.viewModel = viewModel
     }
 
+    func update(travel: Travel) {
+        self.viewModel?.didUpdateTravel(travel: travel)
+    }
+
     private func bindUI() {
         self.viewModel?.validatePublisher
             .receive(on: RunLoop.main)

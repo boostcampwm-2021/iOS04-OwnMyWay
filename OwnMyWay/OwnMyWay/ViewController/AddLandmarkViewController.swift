@@ -16,6 +16,20 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bindContainerVC?(self.cartView)
+        self.configureNavigation()
+    }
+
+    private func configureNavigation() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.backward"),
+            style: .plain,
+            target: self,
+            action: #selector(backButtonTouched)
+        )
+    }
+
+    @objc private func backButtonTouched() {
+        self.viewModel?.backButtonTouched()
     }
 
     func bind(viewModel: AddLandmarkViewModelType, closure: @escaping (UIView) -> Void) {

@@ -23,23 +23,18 @@ class LandmarkCartViewModel: LandmarkCartViewModelType, ObservableObject {
     @Published private(set) var travel: Travel
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
-    private let landmarkCartUsecase: LandmarkCartUsecase
     private weak var coordinator: LandmarkCartCoordinatingDelegate?
 
     init(
-        landmarkCartUsecase: LandmarkCartUsecase,
         coordinator: LandmarkCartCoordinatingDelegate,
         travel: Travel
     ) {
         self.travel = travel
         self.coordinator = coordinator
-        self.landmarkCartUsecase = landmarkCartUsecase
     }
 
     func didAddLandmark(of landmark: Landmark) {
-        self.landmarkCartUsecase.addLandmark(to: self.travel, of: landmark) { landmark in
-            self.travel.landmarks.append(landmark)
-        }
+        self.travel.landmarks.append(landmark)
     }
 
     func plusButtonDidTouched() {

@@ -15,10 +15,6 @@ enum CreateTravelError: Error {
 protocol CreateTravelUsecase {
     func configureTravelTitle(text: String,
                               completion: @escaping (Result<String, Error>) -> Void)
-    func makeTravel(title: String,
-                    startDate: Date,
-                    endDate: Date,
-                    completion: @escaping (Travel) -> Void)
 }
 
 class DefaultCreateTravelUsecase: CreateTravelUsecase {
@@ -36,19 +32,5 @@ class DefaultCreateTravelUsecase: CreateTravelUsecase {
         } else {
             completion(.failure(CreateTravelError.nilTitle))
         }
-    }
-
-    func makeTravel(title: String,
-                    startDate: Date,
-                    endDate: Date,
-                    completion: @escaping (Travel) -> Void) {
-            switch self.travelRepository.addTravel(title: title,
-                                                       startDate: startDate,
-                                                   endDate: endDate) {
-            case .success(let travel):
-                completion(travel)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
     }
 }
