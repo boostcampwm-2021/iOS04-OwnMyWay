@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecordCardCell" id="gTV-IL-0wX" customClass="RecordCardCell" customModule="OwnMyWay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="550"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="419" height="550"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hpl-NH-3cr">
+                        <rect key="frame" x="0.0" y="0.0" width="419" height="419"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Hpl-NH-3cr" secondAttribute="height" multiplier="1:1" id="bmS-US-Ous"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RKH-8D-fc5">
+                        <rect key="frame" x="24" y="443" width="371" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" systemColor="systemGray3Color"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-0Q-0kk">
+                        <rect key="frame" x="24" y="480.5" width="371" height="69.5"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="pnh-0Q-0kk" secondAttribute="bottom" id="5iU-ct-SFb"/>
+                <constraint firstItem="pnh-0Q-0kk" firstAttribute="top" secondItem="RKH-8D-fc5" secondAttribute="bottom" constant="24" id="LtP-0U-aHx"/>
+                <constraint firstItem="RKH-8D-fc5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="24" id="NbN-bK-412"/>
+                <constraint firstAttribute="trailing" secondItem="Hpl-NH-3cr" secondAttribute="trailing" id="WER-Pg-kjR"/>
+                <constraint firstItem="Hpl-NH-3cr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="WUV-fA-37e"/>
+                <constraint firstItem="pnh-0Q-0kk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="24" id="aoz-Rd-630"/>
+                <constraint firstAttribute="trailing" secondItem="RKH-8D-fc5" secondAttribute="trailing" constant="24" id="ceZ-it-jsa"/>
+                <constraint firstItem="RKH-8D-fc5" firstAttribute="top" secondItem="Hpl-NH-3cr" secondAttribute="bottom" constant="24" id="fOt-b0-AR9"/>
+                <constraint firstAttribute="trailing" secondItem="pnh-0Q-0kk" secondAttribute="trailing" constant="24" id="gdu-fy-HeQ"/>
+                <constraint firstItem="Hpl-NH-3cr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jsm-yO-O0g"/>
+            </constraints>
+            <size key="customSize" width="361" height="571"/>
+            <connections>
+                <outlet property="recordCardImageView" destination="Hpl-NH-3cr" id="owB-K9-d03"/>
+                <outlet property="recordContentLabel" destination="pnh-0Q-0kk" id="VFn-aF-CQS"/>
+                <outlet property="recordDesciptionLabel" destination="RKH-8D-fc5" id="nUJ-cG-FLW"/>
+            </connections>
+            <point key="canvasLocation" x="357.24637681159425" y="266.51785714285711"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
