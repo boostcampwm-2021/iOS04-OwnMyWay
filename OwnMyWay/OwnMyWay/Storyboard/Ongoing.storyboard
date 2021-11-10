@@ -46,16 +46,32 @@
                                     <constraint firstItem="am4-CT-v8e" firstAttribute="width" secondItem="jiu-0b-HQa" secondAttribute="width" id="vtO-Po-On3"/>
                                 </constraints>
                             </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="89f-99-tcf">
+                                <rect key="frame" x="0.0" y="44" width="414" height="792"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bC9-KT-HRU">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="I8r-Zn-376" secondAttribute="trailing" id="04c-gl-NNk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="89f-99-tcf" secondAttribute="trailing" id="1ge-gg-4sK"/>
                             <constraint firstItem="I8r-Zn-376" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="E5o-GN-dCU"/>
                             <constraint firstAttribute="bottom" secondItem="I8r-Zn-376" secondAttribute="bottom" id="Vtx-AT-ndV"/>
+                            <constraint firstItem="89f-99-tcf" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="hSW-O6-pvr"/>
+                            <constraint firstItem="I8r-Zn-376" firstAttribute="top" secondItem="89f-99-tcf" secondAttribute="bottom" id="nRg-yI-enr"/>
+                            <constraint firstItem="89f-99-tcf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="qxG-4j-TdT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="89f-99-tcf" id="41S-He-sBw"/>
                         <outlet property="finishButtonHeightConstraint" destination="ZYv-ZD-oOG" id="OnT-WG-e8g"/>
                     </connections>
                 </viewController>

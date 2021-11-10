@@ -10,29 +10,31 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapCell" id="gTV-IL-0wX" customClass="MapCell" customModule="OwnMyWay" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="346" height="277"/>
+            <rect key="frame" x="0.0" y="0.0" width="346" height="346"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="346" height="277"/>
+                <rect key="frame" x="0.0" y="0.0" width="346" height="346"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9FQ-wX-lrX">
-                        <rect key="frame" x="0.0" y="0.0" width="346" height="277"/>
+                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9FQ-wX-lrX">
+                        <rect key="frame" x="0.0" y="0.0" width="346" height="346"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="9FQ-wX-lrX" secondAttribute="height" id="Lv7-Nf-e2R"/>
+                        </constraints>
                     </mapView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="9FQ-wX-lrX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CT9-Qg-LbA"/>
-                <constraint firstAttribute="bottom" secondItem="9FQ-wX-lrX" secondAttribute="bottom" id="Pd4-ez-kQK"/>
                 <constraint firstAttribute="trailing" secondItem="9FQ-wX-lrX" secondAttribute="trailing" id="WgL-dd-fWu"/>
                 <constraint firstItem="9FQ-wX-lrX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XYm-as-c7K"/>
             </constraints>
-            <size key="customSize" width="346" height="277"/>
+            <size key="customSize" width="346" height="346"/>
             <connections>
                 <outlet property="mapView" destination="9FQ-wX-lrX" id="n2a-0Y-u1p"/>
             </connections>
-            <point key="canvasLocation" x="155.07246376811597" y="181.80803571428569"/>
+            <point key="canvasLocation" x="155.07246376811597" y="204.91071428571428"/>
         </collectionViewCell>
     </objects>
 </document>

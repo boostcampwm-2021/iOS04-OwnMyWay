@@ -9,8 +9,9 @@ import Combine
 import Foundation
 
 protocol OngoingViewModel {
+    var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
-
+    
     func didUpdateTravel(to travel: Travel)
     func didTouchAddRecordButton()
     func didTouchBackButton()
@@ -27,7 +28,7 @@ protocol OngoingCoordinatingDelegate: AnyObject {
 class DefaultOngoingViewModel: OngoingViewModel {
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
-    @Published private var travel: Travel
+    @Published private(set) var travel: Travel
 
     private let usecase: OngoingUsecase
     private weak var coordinatingDelegate: OngoingCoordinatingDelegate?
