@@ -52,10 +52,10 @@ class DefaultOngoingViewModel: OngoingViewModel {
         self.coordinatingDelegate?.pushToAddRecord(travel: self.travel)
     }
 
-    func didTouchAddRecordButton() {}
     func didTouchRecordCell(at record: Record) {
         self.coordinatingDelegate?.pushToDetailRecord(record: record)
     }
+
     func didTouchBackButton() {}
     func didTouchEditTravelButton() {}
 
