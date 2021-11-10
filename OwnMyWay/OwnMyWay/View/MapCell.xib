@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="346" height="346"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9FQ-wX-lrX">
+                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9FQ-wX-lrX">
                         <rect key="frame" x="0.0" y="0.0" width="346" height="346"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="9FQ-wX-lrX" secondAttribute="height" id="Lv7-Nf-e2R"/>
@@ -29,6 +29,7 @@
                 <constraint firstItem="9FQ-wX-lrX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CT9-Qg-LbA"/>
                 <constraint firstAttribute="trailing" secondItem="9FQ-wX-lrX" secondAttribute="trailing" id="WgL-dd-fWu"/>
                 <constraint firstItem="9FQ-wX-lrX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XYm-as-c7K"/>
+                <constraint firstAttribute="bottom" secondItem="9FQ-wX-lrX" secondAttribute="bottom" id="ff6-8L-kF0"/>
             </constraints>
             <size key="customSize" width="346" height="346"/>
             <connections>
