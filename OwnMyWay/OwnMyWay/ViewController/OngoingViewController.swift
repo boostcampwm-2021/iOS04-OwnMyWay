@@ -88,11 +88,11 @@ extension OngoingViewController: UICollectionViewDelegate {
                 snapshot.appendItems(recordList, toSection: date.toKorean())
             }
 
-            snapshot.appendSections(["11월 27일"])
-            snapshot.appendItems([Record(uuid: UUID(), content: "test1", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test2", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 27일")
-
-            snapshot.appendSections(["11월 28일"])
-            snapshot.appendItems([Record(uuid: UUID(), content: "test3", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test4", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 28일")
+//            snapshot.appendSections(["11월 27일"])
+//            snapshot.appendItems([Record(uuid: UUID(), content: "test1", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test2", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 27일")
+//
+//            snapshot.appendSections(["11월 28일"])
+//            snapshot.appendItems([Record(uuid: UUID(), content: "test3", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test4", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 28일")
 
             self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
         }.store(in: &cancellables)
@@ -101,17 +101,12 @@ extension OngoingViewController: UICollectionViewDelegate {
     private func configureCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { index, _ in
             let size = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(10)
+                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500)
             )
             let item = NSCollectionLayoutItem(layoutSize: size)
             let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [item])
-//            if index != 0 {
-//                group.contentInsets = NSDirectionalEdgeInsets(
-//                    top: 10, leading: 20, bottom: 10, trailing: 20
-//                )
-//            }
             let section = NSCollectionLayoutSection(group: group)
-
+            section.interGroupSpacing = 20
             if index != 0 {
                 let headerSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(30)

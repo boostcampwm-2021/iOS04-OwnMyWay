@@ -14,10 +14,12 @@ class RecordCardCell: UICollectionViewCell {
     @IBOutlet private weak var recordCardImageView: UIImageView!
     @IBOutlet private weak var recordContentLabel: UILabel!
     @IBOutlet private weak var recordDesciptionLabel: UILabel!
-    
+
     func configure(with record: Record) {
-        self.recordCardImageView.setImage(with: record.photoURL)
-        self.recordContentLabel.text = record.content
+        //self.recordCardImageView.setImage(with: record.photoURL)
+        //self.recordContentLabel.text = record.content
+
+//        self.recordCardImageView.backgroundColor = .green
 //        self.recordTimeButton.setTitle(record.date?.time(), for: .normal)
 //        self.recordLocationButton.setTitle("루브르", for: .normal)
     }
