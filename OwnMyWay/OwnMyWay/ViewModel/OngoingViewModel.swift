@@ -14,6 +14,7 @@ protocol OngoingViewModel {
 
     func didUpdateTravel(to travel: Travel)
     func didTouchAddRecordButton()
+    func didTouchRecordCell(at record: Record)
     func didTouchBackButton()
     func didTouchEditTravelButton()
     func didTouchFinishButton()
@@ -23,6 +24,7 @@ protocol OngoingCoordinatingDelegate: AnyObject {
     func popToHome()
     func pushToAddRecord()
     func pushToEditTravel()
+    func pushToDetailRecord(record: Record)
 }
 
 class DefaultOngoingViewModel: OngoingViewModel {
@@ -45,6 +47,9 @@ class DefaultOngoingViewModel: OngoingViewModel {
 
     func didUpdateTravel(to travel: Travel) {}
     func didTouchAddRecordButton() {}
+    func didTouchRecordCell(at record: Record) {
+        self.coordinatingDelegate?.pushToDetailRecord(record: record)
+    }
     func didTouchBackButton() {}
     func didTouchEditTravelButton() {}
     func didTouchFinishButton() {}

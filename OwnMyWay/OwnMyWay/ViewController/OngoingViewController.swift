@@ -88,11 +88,11 @@ extension OngoingViewController: UICollectionViewDelegate {
                 snapshot.appendItems(recordList, toSection: date.toKorean())
             }
 
-//            snapshot.appendSections(["11월 27일"])
-//            snapshot.appendItems([Record(uuid: UUID(), content: "test1", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test2", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 27일")
-//
-//            snapshot.appendSections(["11월 28일"])
-//            snapshot.appendItems([Record(uuid: UUID(), content: "test3", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test4", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 28일")
+            snapshot.appendSections(["11월 27일"])
+            snapshot.appendItems([Record(uuid: UUID(), content: "test1", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test2", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 27일")
+
+            snapshot.appendSections(["11월 28일"])
+            snapshot.appendItems([Record(uuid: UUID(), content: "test3", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test4", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 28일")
 
             self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
         }.store(in: &cancellables)
@@ -162,5 +162,13 @@ extension OngoingViewController: UICollectionViewDelegate {
             return sectionHeader
         }
         return dataSource
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let record = self.diffableDataSource?.itemIdentifier(for: indexPath)
+        else { return }
+
+        self.viewModel?.didTouchRecordCell(at: record)
+
     }
 }
