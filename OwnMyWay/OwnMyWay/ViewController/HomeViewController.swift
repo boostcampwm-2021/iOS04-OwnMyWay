@@ -186,7 +186,7 @@ extension HomeViewController: UICollectionViewDelegate {
         case Travel.Section.ongoing.index:
             self.viewModel?.didTouchOngoingTravel(at: indexPath.item)
         case Travel.Section.outdated.index:
-            return
+            self.viewModel?.didTouchOutdatedTravel(at: indexPath.item)
         default:
             return
         }

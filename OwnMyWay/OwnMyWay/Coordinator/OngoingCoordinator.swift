@@ -42,4 +42,13 @@ class OngoingCoordinator: Coordinator, OngoingCoordinatingDelegate {
 
     // FIXME: travel 추가하기
     func pushToEditTravel() {}
+
+    func moveToOutdated(travel: Travel) {
+        self.navigationController.popToRootViewController(animated: true)
+        let outdatedTravelCoordinator = OutdatedTravelCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        outdatedTravelCoordinator.start()
+    }
 }

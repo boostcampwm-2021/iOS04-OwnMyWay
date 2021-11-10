@@ -53,6 +53,11 @@
 		AF82FDAE273BEB5700A094B6 /* AddRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDAD273BEB5700A094B6 /* AddRecordCoordinator.swift */; };
 		AF82FDB0273BEC0900A094B6 /* AddRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDAF273BEC0900A094B6 /* AddRecordUsecase.swift */; };
 		AF82FDB2273BEC1300A094B6 /* AddRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */; };
+		AF82FDB4273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB3273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift */; };
+		AF82FDB8273BF3C600A094B6 /* OutdatedTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */; };
+		AF82FDBA273BF3D900A094B6 /* OutdatedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */; };
+		AF82FDBC273BF3E300A094B6 /* OutdatedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */; };
+		AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */; };
 		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
@@ -156,6 +161,11 @@
 		AF82FDAD273BEB5700A094B6 /* AddRecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordCoordinator.swift; sourceTree = "<group>"; };
 		AF82FDAF273BEC0900A094B6 /* AddRecordUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordUsecase.swift; sourceTree = "<group>"; };
 		AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewModel.swift; sourceTree = "<group>"; };
+		AF82FDB3273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelCoordinator.swift; sourceTree = "<group>"; };
+		AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutdatedTravel.storyboard; sourceTree = "<group>"; };
+		AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewController.swift; sourceTree = "<group>"; };
+		AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewModel.swift; sourceTree = "<group>"; };
+		AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelUsecase.swift; sourceTree = "<group>"; };
 		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
 		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
@@ -246,6 +256,7 @@
 				3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */,
 				AF1108E1273B88A5009FE728 /* OngoingViewController.swift */,
 				AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */,
+				AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -285,6 +296,7 @@
 				3F113A12273A59C500EA91AA /* CompleteCreationViewModel.swift */,
 				AF1108E3273B8C04009FE728 /* OngoingViewModel.swift */,
 				AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */,
+				AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -299,6 +311,7 @@
 				3F113A14273A5AA300EA91AA /* CompleteCreationUsecase.swift */,
 				AF1108E5273B8C18009FE728 /* OngoingUsecase.swift */,
 				AF82FDAF273BEC0900A094B6 /* AddRecordUsecase.swift */,
+				AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -342,6 +355,7 @@
 				3F113A10273A571100EA91AA /* CompleteCreation.storyboard */,
 				AF1108DF273B8872009FE728 /* Ongoing.storyboard */,
 				AF82FDA7273BEB1700A094B6 /* AddRecord.storyboard */,
+				AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -407,6 +421,7 @@
 				3F113A16273A5FD600EA91AA /* CompleteCreationCoordinator.swift */,
 				AF1108E7273B8C2D009FE728 /* OngoingCoordinator.swift */,
 				AF82FDAD273BEB5700A094B6 /* AddRecordCoordinator.swift */,
+				AF82FDB3273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -502,6 +517,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF82FDB8273BF3C600A094B6 /* OutdatedTravel.storyboard in Resources */,
 				DB22BB73272F83DB0004444B /* .swiftlint.yml in Resources */,
 				29E9BA36273251BE0040B70A /* LandmarkCart.storyboard in Resources */,
 				29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */,
@@ -595,10 +611,12 @@
 				DBFC040C27390DD700031EDF /* CreateTravelCoordinator.swift in Sources */,
 				AF6C7917273942E800FAB0FE /* TravelUpdatable.swift in Sources */,
 				3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */,
+				AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */,
 				294897BF273BA993003185E7 /* RecordCardCell.swift in Sources */,
 				3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */,
 				DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */,
 				3F113A17273A5FD600EA91AA /* CompleteCreationCoordinator.swift in Sources */,
+				AF82FDB4273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift in Sources */,
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
 				DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */,
@@ -609,8 +627,10 @@
 				DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */,
 				DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */,
 				DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */,
+				AF82FDBA273BF3D900A094B6 /* OutdatedTravelViewController.swift in Sources */,
 				DBFC0416273925FD00031EDF /* ReservedTravelCoordinator.swift in Sources */,
 				29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */,
+				AF82FDBC273BF3E300A094B6 /* OutdatedTravelViewModel.swift in Sources */,
 				29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */,
 				293646BA2738F6590030ED78 /* Date+.swift in Sources */,
 				DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */,

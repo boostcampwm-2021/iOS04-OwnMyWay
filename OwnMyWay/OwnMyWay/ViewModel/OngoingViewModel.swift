@@ -23,6 +23,7 @@ protocol OngoingCoordinatingDelegate: AnyObject {
     func popToHome()
     func pushToAddRecord(travel: Travel)
     func pushToEditTravel()
+    func moveToOutdated(travel: Travel)
 }
 
 class DefaultOngoingViewModel: OngoingViewModel {
@@ -51,5 +52,10 @@ class DefaultOngoingViewModel: OngoingViewModel {
 
     func didTouchBackButton() {}
     func didTouchEditTravelButton() {}
-    func didTouchFinishButton() {}
+
+    func didTouchFinishButton() {
+        self.travel.flag = Travel.Section.outdated.index
+        self.usecase.executeFlagUpdate(of: self.travel)
+        self.coordinatingDelegate?.moveToOutdated(travel: self.travel)
+    }
 }
