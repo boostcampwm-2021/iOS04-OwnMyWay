@@ -26,6 +26,14 @@ extension Date {
         }
         return "\(self.localize()) ~ \(endDate.localize())"
     }
+
+    func time() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: self)
+    }
 }
 
 extension Date: Strideable {

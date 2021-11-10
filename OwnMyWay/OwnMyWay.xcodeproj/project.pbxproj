@@ -14,6 +14,8 @@
 		293646BA2738F6590030ED78 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646B92738F6590030ED78 /* Date+.swift */; };
 		293646BC27395BAA0030ED78 /* TravelFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646BB27395BAA0030ED78 /* TravelFetchable.swift */; };
 		294897BC273B5D71003185E7 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897BB273B5D71003185E7 /* UIImageView+.swift */; };
+		294897BF273BA993003185E7 /* RecordCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897BD273BA993003185E7 /* RecordCardCell.swift */; };
+		294897C0273BA993003185E7 /* RecordCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294897BE273BA993003185E7 /* RecordCardCell.xib */; };
 		29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */; };
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
 		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
@@ -92,6 +94,8 @@
 		293646B92738F6590030ED78 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		293646BB27395BAA0030ED78 /* TravelFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelFetchable.swift; sourceTree = "<group>"; };
 		294897BB273B5D71003185E7 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		294897BD273BA993003185E7 /* RecordCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCardCell.swift; sourceTree = "<group>"; };
+		294897BE273BA993003185E7 /* RecordCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordCardCell.xib; sourceTree = "<group>"; };
 		29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewModel.swift; sourceTree = "<group>"; };
 		29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelUsecase.swift; sourceTree = "<group>"; };
 		29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 				AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */,
 				3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */,
 				3FB914E82737DAC70084FF1C /* TravelSectionHeader.xib */,
+				294897BD273BA993003185E7 /* RecordCardCell.swift */,
+				294897BE273BA993003185E7 /* RecordCardCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -424,6 +430,7 @@
 				AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */,
 				29274EFB2733FD2400DDEBFF /* ReservedTravel.storyboard in Resources */,
 				AF1108E0273B8872009FE728 /* Ongoing.storyboard in Resources */,
+				294897C0273BA993003185E7 /* RecordCardCell.xib in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
 				3FB914EA2737DAC70084FF1C /* TravelSectionHeader.xib in Resources */,
 				3F113A11273A571100EA91AA /* CompleteCreation.storyboard in Resources */,
@@ -489,6 +496,7 @@
 				DBFC040C27390DD700031EDF /* CreateTravelCoordinator.swift in Sources */,
 				AF6C7917273942E800FAB0FE /* TravelUpdatable.swift in Sources */,
 				3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */,
+				294897BF273BA993003185E7 /* RecordCardCell.swift in Sources */,
 				3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */,
 				DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */,
 				3F113A17273A5FD600EA91AA /* CompleteCreationCoordinator.swift in Sources */,
