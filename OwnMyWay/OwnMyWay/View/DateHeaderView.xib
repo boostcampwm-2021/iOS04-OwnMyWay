@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021년 11월 10일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYG-L5-oJO">
-                    <rect key="frame" x="0.0" y="21.5" width="399" height="21"/>
+                    <rect key="frame" x="0.0" y="30" width="399" height="14"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" systemColor="systemGrayColor"/>
                     <nil key="highlightedColor"/>
@@ -23,9 +23,10 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <constraints>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="sYG-L5-oJO" secondAttribute="bottom" constant="20" id="4aX-lO-A9V"/>
                 <constraint firstItem="sYG-L5-oJO" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="KFo-dd-bFM"/>
-                <constraint firstItem="sYG-L5-oJO" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="dje-IM-kPX"/>
                 <constraint firstAttribute="trailing" secondItem="sYG-L5-oJO" secondAttribute="trailing" id="h24-3H-hSi"/>
+                <constraint firstItem="sYG-L5-oJO" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="30" id="h8C-lX-XVY"/>
             </constraints>
             <connections>
                 <outlet property="dateLabel" destination="sYG-L5-oJO" id="4cL-wD-xTi"/>
