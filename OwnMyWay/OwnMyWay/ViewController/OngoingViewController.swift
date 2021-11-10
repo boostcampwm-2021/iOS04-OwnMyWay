@@ -88,11 +88,11 @@ extension OngoingViewController: UICollectionViewDelegate {
                 snapshot.appendItems(recordList, toSection: date.toKorean())
             }
 
-//            snapshot.appendSections(["11월 27일"])
-//            snapshot.appendItems([Record(uuid: UUID(), content: "test1", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test2", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 27일")
+//            snapshot.appendSections(["2021년 11월 27일"])
+//            snapshot.appendItems([Record(uuid: UUID(), content: "test1", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test2", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "2021년 11월 27일")
 //
-//            snapshot.appendSections(["11월 28일"])
-//            snapshot.appendItems([Record(uuid: UUID(), content: "test3", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test4", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 28일")
+//            snapshot.appendSections(["2021년 11월 28일"])
+//            snapshot.appendItems([Record(uuid: UUID(), content: "test3", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test4", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "2021년 11월 28일")
 
             self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
         }.store(in: &cancellables)
@@ -105,8 +105,13 @@ extension OngoingViewController: UICollectionViewDelegate {
             )
             let item = NSCollectionLayoutItem(layoutSize: size)
             let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [item])
+            if index != 0 {
+                group.contentInsets = NSDirectionalEdgeInsets(
+                    top: 0, leading: 30, bottom: 0, trailing: 30
+                )
+            }
             let section = NSCollectionLayoutSection(group: group)
-            section.interGroupSpacing = 20
+            section.interGroupSpacing = 30
             if index != 0 {
                 let headerSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(30)

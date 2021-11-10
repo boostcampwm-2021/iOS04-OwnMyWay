@@ -4,66 +4,52 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecordCardCell" id="gTV-IL-0wX" customClass="RecordCardCell" customModule="OwnMyWay" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="419" height="550"/>
+            <rect key="frame" x="0.0" y="0.0" width="419" height="360"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="419" height="550"/>
+                <rect key="frame" x="0.0" y="0.0" width="419" height="360"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="airplane" translatesAutoresizingMaskIntoConstraints="NO" id="Hpl-NH-3cr">
-                        <rect key="frame" x="10" y="10" width="399" height="299.5"/>
+                        <rect key="frame" x="20" y="20" width="379" height="284.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Hpl-NH-3cr" secondAttribute="height" multiplier="4:3" id="SXx-Nv-GKC"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RKH-8D-fc5">
-                        <rect key="frame" x="24" y="333.5" width="371" height="13.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" systemColor="systemGray3Color"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-0Q-0kk">
-                        <rect key="frame" x="24" y="371" width="371" height="179"/>
-                        <string key="text">bonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoonbonmoon</string>
-                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="My First Travel to Jeju-Island!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-0Q-0kk">
+                        <rect key="frame" x="24" y="319.5" width="371" height="25.5"/>
+                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="RKH-8D-fc5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="24" id="0CK-aJ-VFt"/>
-                <constraint firstItem="Hpl-NH-3cr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="5Bj-gY-kQz"/>
-                <constraint firstItem="RKH-8D-fc5" firstAttribute="top" secondItem="Hpl-NH-3cr" secondAttribute="bottom" constant="24" id="5aZ-bk-Gnd"/>
-                <constraint firstAttribute="trailing" secondItem="RKH-8D-fc5" secondAttribute="trailing" constant="24" id="9gv-k8-E9T"/>
-                <constraint firstAttribute="bottom" secondItem="pnh-0Q-0kk" secondAttribute="bottom" id="BJH-UZ-umj"/>
+                <constraint firstItem="Hpl-NH-3cr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="5Bj-gY-kQz"/>
+                <constraint firstAttribute="bottom" secondItem="pnh-0Q-0kk" secondAttribute="bottom" constant="15" id="BJH-UZ-umj"/>
                 <constraint firstItem="pnh-0Q-0kk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="24" id="HVW-3E-2Ie"/>
-                <constraint firstItem="pnh-0Q-0kk" firstAttribute="top" secondItem="RKH-8D-fc5" secondAttribute="bottom" constant="24" id="NL2-aA-rtp"/>
-                <constraint firstItem="Hpl-NH-3cr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="TSr-GO-0R8"/>
-                <constraint firstAttribute="trailing" secondItem="Hpl-NH-3cr" secondAttribute="trailing" constant="10" id="kUa-rb-5oh"/>
+                <constraint firstItem="Hpl-NH-3cr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="TSr-GO-0R8"/>
+                <constraint firstAttribute="trailing" secondItem="Hpl-NH-3cr" secondAttribute="trailing" constant="20" id="kUa-rb-5oh"/>
+                <constraint firstItem="pnh-0Q-0kk" firstAttribute="top" secondItem="Hpl-NH-3cr" secondAttribute="bottom" constant="15" id="mFR-v6-TlE"/>
                 <constraint firstAttribute="trailing" secondItem="pnh-0Q-0kk" secondAttribute="trailing" constant="24" id="p1J-ao-gnm"/>
             </constraints>
-            <size key="customSize" width="361" height="571"/>
+            <size key="customSize" width="361" height="381"/>
             <connections>
                 <outlet property="recordCardImageView" destination="Hpl-NH-3cr" id="owB-K9-d03"/>
                 <outlet property="recordContentLabel" destination="pnh-0Q-0kk" id="VFn-aF-CQS"/>
-                <outlet property="recordDesciptionLabel" destination="RKH-8D-fc5" id="nUJ-cG-FLW"/>
             </connections>
-            <point key="canvasLocation" x="357.24637681159425" y="266.51785714285711"/>
+            <point key="canvasLocation" x="357.24637681159425" y="202.23214285714286"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="airplane" width="640" height="445"/>
-        <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>
