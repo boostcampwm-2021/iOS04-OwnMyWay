@@ -64,7 +64,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
                 let snapshotItem = [Landmark()] + travel.landmarks.reversed()
                 snapshot.append(snapshotItem)
                 self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
-                
+
                 guard let mapView = self?.mapView else { return }
                 let annotations = travel.landmarks.map({ LandmarkAnnotation(landmark: $0) })
                 self?.drawLandmarkAnnotations(mapView: mapView, annotations: annotations)

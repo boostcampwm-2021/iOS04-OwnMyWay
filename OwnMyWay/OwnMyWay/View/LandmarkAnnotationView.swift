@@ -9,7 +9,6 @@ import CoreLocation
 import Foundation
 import MapKit
 
-
 class LandmarkAnnotationView: MKAnnotationView {
     static let identifier = "LandmarkAnnotationView"
 

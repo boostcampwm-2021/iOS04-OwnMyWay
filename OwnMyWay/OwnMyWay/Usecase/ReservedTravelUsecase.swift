@@ -28,7 +28,7 @@ struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
     func executeLandmarkAddition(of travel: Travel) {
         guard let newLandmark = travel.landmarks.last
         else { return }
-        _ = self.repository.addLandmark(
+        self.repository.addLandmark(
             to: travel,
             title: newLandmark.title,
             image: newLandmark.image,
@@ -38,6 +38,6 @@ struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
     }
 
     func executeFlagUpdate(of travel: Travel) {
-        _ = self.repository.update(travel: travel)
+        self.repository.update(travel: travel)
     }
 }

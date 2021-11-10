@@ -12,7 +12,7 @@ protocol TravelRepository {
     func fetchAllTravels() -> Result<[Travel], Error>
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error>
     func save(travel: Travel)
-    func addLandmark(
+    @discardableResult func addLandmark(
         to travel: Travel,
         title: String?,
         image: URL?,
@@ -27,7 +27,7 @@ protocol TravelRepository {
         latitude: Double?,
         longitude: Double?
     ) -> Result<Record, Error>
-    func update(travel: Travel) -> Result<Travel, Error>
+    @discardableResult func update(travel: Travel) -> Result<Travel, Error>
     func delete(travel: Travel)
 }
 
@@ -94,6 +94,7 @@ class CoreDataTravelRepository: TravelRepository {
         try? context.save()
     }
 
+    @discardableResult
     func addLandmark(
         to travel: Travel,
         title: String?,
@@ -152,6 +153,7 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
+    @discardableResult
     func update(travel: Travel) -> Result<Travel, Error> {
         guard let uuid = travel.uuid as CVarArg?
         else { return .failure(NSError.init()) }
