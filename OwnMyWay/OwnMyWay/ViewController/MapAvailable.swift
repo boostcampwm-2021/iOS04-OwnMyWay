@@ -46,55 +46,41 @@ extension MapAvailable {
     func moveRegion(mapView: MKMapView, points: [Coordinatable], animated: Bool) {
         guard !points.isEmpty else { return }
 
-        var minLatitude: Double = 1000
-        var maxLatitude: Double = -1000
-        var minLongitude: Double = 1000
-        var maxLongitude: Double = -1000
-
+        var zoomRect = MKMapRect.null
         points.forEach { point in
-            minLatitude = min(minLatitude, point.latitude)
-            maxLatitude = max(maxLatitude, point.latitude)
-            minLongitude = min(minLongitude, point.longitude)
-            maxLongitude = max(maxLongitude, point.longitude)
+            let annotationPoint = MKMapPoint(
+                CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+            )
+            let pointRect = MKMapRect(
+                x: annotationPoint.x, y: annotationPoint.y, width: 0.1, height: 0.1
+            )
+            zoomRect = zoomRect.union(pointRect)
         }
 
-        let centerLatitude = (minLatitude + maxLatitude) / 2
-        let centerLongitude = (minLongitude + maxLongitude) / 2
-        let center = CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude)
-        let span = max(center.latitude - minLatitude, center.longitude - minLongitude)
-        let region = MKCoordinateRegion(
-            center: center,
-            span: MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span)
+        mapView.setVisibleMapRect(
+            zoomRect,
+            edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50),
+            animated: true
         )
-
-        mapView.setRegion(region, animated: animated)
     }
 
     func moveRegion(mapView: MKMapView, annotations: [MKAnnotation], animated: Bool) {
         guard !annotations.isEmpty else { return }
 
-        var minLatitude: Double = 1000
-        var maxLatitude: Double = -1000
-        var minLongitude: Double = 1000
-        var maxLongitude: Double = -1000
-
+        var zoomRect = MKMapRect.null
         annotations.forEach { annotation in
-            minLatitude = min(minLatitude, annotation.coordinate.latitude)
-            maxLatitude = max(maxLatitude, annotation.coordinate.latitude)
-            minLongitude = min(minLongitude, annotation.coordinate.longitude)
-            maxLongitude = max(maxLongitude, annotation.coordinate.longitude)
+            let annotationPoint = MKMapPoint(annotation.coordinate)
+            let pointRect = MKMapRect(
+                x: annotationPoint.x, y: annotationPoint.y, width: 0.1, height: 0.1
+            )
+            zoomRect = zoomRect.union(pointRect)
         }
 
-        let centerLatitude = (minLatitude + maxLatitude) / 2
-        let centerLongitude = (minLongitude + maxLongitude) / 2
-        let center = CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude)
-        let span = max(center.latitude - minLatitude, center.longitude - minLongitude)
-        let region = MKCoordinateRegion(
-            center: center,
-            span: MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span)
+        mapView.setVisibleMapRect(
+            zoomRect,
+            edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50),
+            animated: true
         )
-
-        mapView.setRegion(region, animated: animated)
     }
 
     func drawRecordAnnotations(mapView: MKMapView, annotations: [MKAnnotation]) {
