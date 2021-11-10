@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,12 +16,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="293" height="201"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ily-lE-Yja">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="huJ-9l-55E">
                         <rect key="frame" x="0.0" y="0.0" width="293" height="201"/>
-                        <color key="tintColor" systemColor="labelColor"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" image="airplane" title=""/>
-                    </button>
+                    </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zjq-bw-Je3">
                         <rect key="frame" x="109.5" y="80.5" width="74.5" height="40"/>
                         <subviews>
@@ -44,25 +40,19 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="ily-lE-Yja" secondAttribute="bottom" id="13a-xR-g05"/>
                 <constraint firstItem="zjq-bw-Je3" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="5OM-Ab-j92"/>
-                <constraint firstAttribute="trailing" secondItem="ily-lE-Yja" secondAttribute="trailing" id="6hB-ah-4mS"/>
-                <constraint firstItem="ily-lE-Yja" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8te-jt-HTe"/>
+                <constraint firstItem="huJ-9l-55E" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7uL-3A-b8T"/>
+                <constraint firstAttribute="bottom" secondItem="huJ-9l-55E" secondAttribute="bottom" id="W56-jB-K9f"/>
                 <constraint firstItem="zjq-bw-Je3" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="YBv-25-STl"/>
-                <constraint firstItem="ily-lE-Yja" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wrG-L9-4vy"/>
+                <constraint firstItem="huJ-9l-55E" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="mhK-CF-4jF"/>
+                <constraint firstAttribute="trailing" secondItem="huJ-9l-55E" secondAttribute="trailing" id="z0e-Qs-Bqk"/>
             </constraints>
             <connections>
-                <outlet property="backgroundButton" destination="ily-lE-Yja" id="CPS-uu-M7o"/>
+                <outlet property="travelCardImageView" destination="huJ-9l-55E" id="cCO-XH-Idb"/>
                 <outlet property="travelDateLabel" destination="ETS-b2-b2D" id="wki-hs-3Wg"/>
                 <outlet property="travelTitleLabel" destination="N3b-Xe-6K0" id="bgn-zl-5tK"/>
             </connections>
             <point key="canvasLocation" x="99.275362318840592" y="-105.46875"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="airplane" width="640" height="445"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
