@@ -8,7 +8,8 @@
 import Foundation
 
 protocol OngoingUsecase {
-
+    func executeFetch()
+    func executeFinishingTravel()
 }
 
 struct DefaultOngoingUsecase: OngoingUsecase {
@@ -19,4 +20,6 @@ struct DefaultOngoingUsecase: OngoingUsecase {
         self.repository = repository
     }
 
+    func executeFetch() {}
+    func executeFinishingTravel() {}
 }
