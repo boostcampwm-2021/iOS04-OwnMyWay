@@ -57,19 +57,20 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     }
 
     private func configureCancellable() {
-        self.viewModel?.travelPublisher.sink { [weak self] travel in
-            DispatchQueue.main.async {
+        self.viewModel?.travelPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] travel in
                 var snapshot = NSDiffableDataSourceSectionSnapshot<Landmark>()
                 let snapshotItem = [Landmark()] + travel.landmarks.reversed()
                 snapshot.append(snapshotItem)
                 self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
-
+                
                 guard let mapView = self?.mapView else { return }
                 let annotations = travel.landmarks.map({ LandmarkAnnotation(landmark: $0) })
                 self?.drawLandmarkAnnotations(mapView: mapView, annotations: annotations)
                 self?.moveRegion(mapView: mapView, annotations: annotations, animated: true)
             }
-        }.store(in: &cancellables)
+            .store(in: &cancellables)
     }
 
     private func configureCompositionalLayout() -> UICollectionViewLayout {

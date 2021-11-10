@@ -53,38 +53,47 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
     }
 
     private func configureCancellable() {
-        viewModel?.reservedTravelPublisher.sink { [weak self] travels in
-            var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
-            let snapshotItem = travels
-            snapshot.append(snapshotItem)
-            self?.diffableDataSource?.apply(
-                snapshot,
-                to: Travel.Section.reserved,
-                animatingDifferences: true
-            )
-        }.store(in: &cancellables)
+        viewModel?.reservedTravelPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] travels in
+                var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
+                let snapshotItem = travels
+                snapshot.append(snapshotItem)
+                self?.diffableDataSource?.apply(
+                    snapshot,
+                    to: Travel.Section.reserved,
+                    animatingDifferences: true
+                )
+            }
+            .store(in: &cancellables)
 
-        viewModel?.ongoingTravelPublisher.sink { [weak self] travels in
-            var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
-            let snapshotItem = travels
-            snapshot.append(snapshotItem)
-            self?.diffableDataSource?.apply(
-                snapshot,
-                to: Travel.Section.ongoing,
-                animatingDifferences: true
-            )
-        }.store(in: &cancellables)
+        viewModel?.ongoingTravelPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] travels in
+                var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
+                let snapshotItem = travels
+                snapshot.append(snapshotItem)
+                self?.diffableDataSource?.apply(
+                    snapshot,
+                    to: Travel.Section.ongoing,
+                    animatingDifferences: true
+                )
+            }
+            .store(in: &cancellables)
 
-        viewModel?.outdatedTravelPublisher.sink { [weak self] travels in
-            var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
-            let snapshotItem = travels
-            snapshot.append(snapshotItem)
-            self?.diffableDataSource?.apply(
-                snapshot,
-                to: Travel.Section.outdated,
-                animatingDifferences: true
-            )
-        }.store(in: &cancellables)
+        viewModel?.outdatedTravelPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] travels in
+                var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
+                let snapshotItem = travels
+                snapshot.append(snapshotItem)
+                self?.diffableDataSource?.apply(
+                    snapshot,
+                    to: Travel.Section.outdated,
+                    animatingDifferences: true
+                )
+            }
+            .store(in: &cancellables)
     }
 
     func fetchTravel() {
@@ -93,7 +102,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     private func configureCompositionalLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.8)
+            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(
@@ -101,7 +110,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         )
 
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(300), heightDimension: .absolute(240)
+            widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalWidth(0.5)
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize, subitems: [item]

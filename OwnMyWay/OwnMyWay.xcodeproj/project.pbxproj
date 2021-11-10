@@ -13,6 +13,7 @@
 		29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFE273401AE00DDEBFF /* ReservedTravelUsecase.swift */; };
 		293646BA2738F6590030ED78 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646B92738F6590030ED78 /* Date+.swift */; };
 		293646BC27395BAA0030ED78 /* TravelFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646BB27395BAA0030ED78 /* TravelFetchable.swift */; };
+		294897BC273B5D71003185E7 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897BB273B5D71003185E7 /* UIImageView+.swift */; };
 		29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */; };
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
 		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
@@ -85,6 +86,7 @@
 		29274EFE273401AE00DDEBFF /* ReservedTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelUsecase.swift; sourceTree = "<group>"; };
 		293646B92738F6590030ED78 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		293646BB27395BAA0030ED78 /* TravelFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelFetchable.swift; sourceTree = "<group>"; };
+		294897BB273B5D71003185E7 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewModel.swift; sourceTree = "<group>"; };
 		29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelUsecase.swift; sourceTree = "<group>"; };
 		29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				293646B92738F6590030ED78 /* Date+.swift */,
+				294897BB273B5D71003185E7 /* UIImageView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
 				DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */,
+				294897BC273B5D71003185E7 /* UIImageView+.swift in Sources */,
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
 				3FB914E92737DAC70084FF1C /* TravelSectionHeader.swift in Sources */,
 				29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */,
@@ -644,8 +648,11 @@
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OwnMyWay/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Access to Location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Access to Location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -672,8 +679,11 @@
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OwnMyWay/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Access to Location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Access to Location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
