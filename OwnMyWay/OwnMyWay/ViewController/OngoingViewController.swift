@@ -18,4 +18,13 @@ class OngoingViewController: UIViewController, Instantiable {
     func bind(viewModel: OngoingViewModel) {
         self.viewModel = viewModel
     }
+
+    @IBAction func didTouchAddRecordButton(_ sender: UIButton) {
+        self.viewModel?.didTouchAddRecordButton()
+    }
+
+    @IBAction func didTouchFinishButton(_ sender: UIButton) {
+        self.viewModel?.didTouchFinishButton()
+    }
+
 }
