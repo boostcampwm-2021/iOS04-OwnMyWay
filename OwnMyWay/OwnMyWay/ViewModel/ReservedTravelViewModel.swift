@@ -13,6 +13,7 @@ protocol ReservedTravelViewModel {
     func didDeleteTravel()
     func didUpdateTravel(to travel: Travel)
     func didTouchBackButton()
+    func didTouchStartButton()
 }
 
 protocol ReservedTravelCoordinatingDelegate: AnyObject {
@@ -48,10 +49,15 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
 
     func didUpdateTravel(to travel: Travel) {
         self.travel = travel // 자기자신에 업데이트
-        self.usecase.executeUpdate(of: travel) // coreData에 업데이트
+        self.usecase.executeLandmarkAddition(of: travel) // coreData에 업데이트
     }
 
     func didTouchBackButton() {
         self.coordinatingDelegate?.popToHome()
+    }
+
+    func didTouchStartButton() {
+        self.travel.flag = Travel.Section.ongoing.index // 자기자신에 업데이트
+        self.usecase.executeFlagUpdate(of: travel) // coreData에 업데이트
     }
 }

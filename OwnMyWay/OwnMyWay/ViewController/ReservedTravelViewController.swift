@@ -96,12 +96,7 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
     }
 
     @IBAction func didTouchStartButton(_ sender: Any) {
-        guard let viewModel = self.viewModel else {
-            return
-        }
-        //  FIXME
-        // 카트 뷰모델 거 직접 줘야하는데.. 고민중
-        // 넘겨 받은 얘 진행중인 여행이 id로 다시 불러오는거 추천
+        self.viewModel?.didTouchStartButton()
         //self.coordinator?.pushToNowTravel(travel: viewModel.travel)
     }
 

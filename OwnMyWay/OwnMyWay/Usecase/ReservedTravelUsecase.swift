@@ -9,7 +9,8 @@ import Foundation
 
 protocol ReservedTravelUsecase {
     func executeDeletion(of travel: Travel)
-    func executeUpdate(of travel: Travel)
+    func executeLandmarkAddition(of travel: Travel)
+    func executeFlagUpdate(of travel: Travel)
 }
 
 struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
@@ -24,7 +25,7 @@ struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
         self.repository.delete(travel: travel)
     }
 
-    func executeUpdate(of travel: Travel) {
+    func executeLandmarkAddition(of travel: Travel) {
         guard let newLandmark = travel.landmarks.last
         else { return }
         _ = self.repository.addLandmark(
@@ -34,5 +35,9 @@ struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
             latitude: newLandmark.latitude,
             longitude: newLandmark.longitude
         )
+    }
+
+    func executeFlagUpdate(of travel: Travel) {
+        _ = self.repository.update(travel: travel)
     }
 }
