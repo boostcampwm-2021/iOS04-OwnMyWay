@@ -11,13 +11,13 @@ class DateHeaderView: UICollectionReusableView {
     static let identifier = "DateHeaderView"
 
     @IBOutlet weak var dateLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    func configure(with date: Date) {
-        self.dateLabel.text = date.toKorean()
+    func configure(with text: String) {
+        self.dateLabel.text = text
     }
 }

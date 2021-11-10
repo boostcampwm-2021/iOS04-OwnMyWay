@@ -76,10 +76,25 @@ extension OngoingViewController: UICollectionViewDelegate {
 
     private func configureCancellable() {
         viewModel?.travelPublisher.sink { [weak self] travel in
-            var snapshot = NSDiffableDataSourceSectionSnapshot<Record>()
-            let snapshotItem = [Record.dummy()] + travel.records
-            snapshot.append(snapshotItem)
-            self?.diffableDataSource?.apply(snapshot, to: "", animatingDifferences: true)
+            var snapshot = NSDiffableDataSourceSnapshot<String, Record>()
+            let recordListList = travel.classifyRecords()
+
+            snapshot.appendSections(["map"])
+            snapshot.appendItems([Record.dummy()], toSection: "map")
+            recordListList.forEach { recordList in
+                guard let date = recordList.first?.date
+                else { return }
+                snapshot.appendSections([date.toKorean()])
+                snapshot.appendItems(recordList, toSection: date.toKorean())
+            }
+
+            snapshot.appendSections(["11월 27일"])
+            snapshot.appendItems([Record(uuid: UUID(), content: "test1", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test2", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 27일")
+
+            snapshot.appendSections(["11월 28일"])
+            snapshot.appendItems([Record(uuid: UUID(), content: "test3", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test4", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "11월 28일")
+
+            self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
         }.store(in: &cancellables)
     }
 
@@ -90,11 +105,11 @@ extension OngoingViewController: UICollectionViewDelegate {
             )
             let item = NSCollectionLayoutItem(layoutSize: size)
             let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [item])
-            if index != 0 {
-                group.contentInsets = NSDirectionalEdgeInsets(
-                    top: 10, leading: 20, bottom: 10, trailing: 20
-                )
-            }
+//            if index != 0 {
+//                group.contentInsets = NSDirectionalEdgeInsets(
+//                    top: 10, leading: 20, bottom: 10, trailing: 20
+//                )
+//            }
             let section = NSCollectionLayoutSection(group: group)
 
             if index != 0 {
@@ -116,9 +131,9 @@ extension OngoingViewController: UICollectionViewDelegate {
     private func configureDiffableDataSource() -> OngoingDataSource {
         let dataSource = OngoingDataSource(
             collectionView: self.collectionView
-        ) { collectionView, indexPath, _ in
+        ) { collectionView, indexPath, item in
             switch indexPath.section {
-            case 0: // MapView
+            case 0:
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: MapCell.identifier, for: indexPath
                 ) as? MapCell,
@@ -128,18 +143,27 @@ extension OngoingViewController: UICollectionViewDelegate {
                 return cell
 
             default:
-                // TODO: here
-                return UICollectionViewCell()
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: RecordCardCell.identifier, for: indexPath
+                ) as? RecordCardCell
+                else { return UICollectionViewCell() }
+                cell.configure(with: item)
+                return cell
             }
         }
-        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+
+        dataSource.supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) in
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: DateHeaderView.identifier,
                 for: indexPath
             ) as? DateHeaderView
             else { return UICollectionReusableView() }
-            sectionHeader.configure(with: Date())
+
+            guard let title = self?.diffableDataSource?.sectionIdentifier(for: indexPath.section)
+            else { return UICollectionReusableView() }
+
+            sectionHeader.configure(with: title)
             return sectionHeader
         }
         return dataSource
