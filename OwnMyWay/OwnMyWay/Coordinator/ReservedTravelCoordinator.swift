@@ -42,6 +42,7 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
             cartVC.view.leadingAnchor.constraint(equalTo: cartView.leadingAnchor).isActive = true
             cartVC.view.trailingAnchor.constraint(equalTo: cartView.trailingAnchor).isActive = true
             cartVC.view.bottomAnchor.constraint(equalTo: cartView.bottomAnchor).isActive = true
+            cartVC.didMove(toParent: reservedVC)
         }
         self.navigationController.pushViewController(reservedVC, animated: true)
     }

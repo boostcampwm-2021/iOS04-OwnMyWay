@@ -38,6 +38,7 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
             cartVC.view.leadingAnchor.constraint(equalTo: cartView.leadingAnchor).isActive = true
             cartVC.view.trailingAnchor.constraint(equalTo: cartView.trailingAnchor).isActive = true
             cartVC.view.bottomAnchor.constraint(equalTo: cartView.bottomAnchor).isActive = true
+            cartVC.didMove(toParent: addLandmarkVC)
         }
         navigationController.pushViewController(addLandmarkVC, animated: true)
     }
