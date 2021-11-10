@@ -23,9 +23,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="S3T-0E-OxG"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="여행 시작하기"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="여행 시작하기✈️"/>
+                                <state key="disabled" title="여행가는 날이 되어야 시작할 수 있어요😭"/>
                                 <connections>
                                     <action selector="didTouchStartButton:" destination="huH-Wq-zax" eventType="touchUpInside" id="HXx-oG-S9x"/>
                                 </connections>

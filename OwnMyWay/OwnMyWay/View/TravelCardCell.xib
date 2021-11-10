@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="293" height="201"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="huJ-9l-55E">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="airplane" translatesAutoresizingMaskIntoConstraints="NO" id="huJ-9l-55E">
                         <rect key="frame" x="0.0" y="0.0" width="293" height="201"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zjq-bw-Je3">
@@ -55,4 +55,7 @@
             <point key="canvasLocation" x="99.275362318840592" y="-105.46875"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="airplane" width="640" height="445"/>
+    </resources>
 </document>

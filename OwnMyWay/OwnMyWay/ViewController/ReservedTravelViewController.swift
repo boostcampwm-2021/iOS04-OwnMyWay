@@ -22,6 +22,7 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         self.configureDescription()
         self.configureStartButton()
         self.bindContainerVC?(self.cartView)
+
     }
 
     override func viewDidLayoutSubviews() {
@@ -51,13 +52,26 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         }
         self.travelTypeLabel.text = "예정된 여행"
 
-        let removeButton = UIBarButtonItem(
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.backward"),
+            style: .plain,
+            target: self,
+            action: #selector(backButtonAction)
+        )
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "삭제",
             style: .plain,
             target: self,
-            action: #selector(didTouchRemoveButton(_:))
+            action: #selector(removeButtonAction)
         )
-        self.navigationItem.rightBarButtonItem = removeButton
+    }
+
+    @objc private func backButtonAction() {
+        self.viewModel?.didTouchBackButton()
+    }
+
+    @objc func removeButtonAction() {
+        self.presentAlert()
     }
 
     private func configureStartButton() {
@@ -81,17 +95,8 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         self.present(alert, animated: true)
     }
 
-    @objc func didTouchRemoveButton(_ sender: Any) {
-        self.presentAlert()
-    }
-
     @IBAction func didTouchStartButton(_ sender: Any) {
-        guard let viewModel = self.viewModel else {
-            return
-        }
-        //  FIXME
-        // 카트 뷰모델 거 직접 줘야하는데.. 고민중
-        // 넘겨 받은 얘 진행중인 여행이 id로 다시 불러오는거 추천
+        self.viewModel?.didTouchStartButton()
         //self.coordinator?.pushToNowTravel(travel: viewModel.travel)
     }
 
