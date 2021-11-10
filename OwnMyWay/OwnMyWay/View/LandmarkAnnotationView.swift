@@ -9,7 +9,6 @@ import CoreLocation
 import Foundation
 import MapKit
 
-import Kingfisher
 
 class LandmarkAnnotationView: MKAnnotationView {
     static let identifier = "LandmarkAnnotationView"
@@ -40,7 +39,9 @@ class LandmarkAnnotationView: MKAnnotationView {
         let detailView = UIView()
         let imageView = UIImageView(frame: rect)
         detailView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.kf.setImage(with: annotation.image)
+        imageView.setImage(with: annotation.image)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         detailView.addSubview(imageView)
 
         detailCalloutAccessoryView = detailView
