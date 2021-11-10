@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class LandmarkCardCell: UICollectionViewCell {
     static let identifier: String = "LandmarkCardCell"
@@ -29,7 +28,7 @@ class LandmarkCardCell: UICollectionViewCell {
     }
 
     func configure(with landmark: Landmark) {
-        self.imageView.kf.setImage(with: landmark.image)
+        self.imageView.setImage(with: landmark.image)
         self.titleLabel.text = landmark.title
     }
 }
