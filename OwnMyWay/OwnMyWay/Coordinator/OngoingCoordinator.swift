@@ -49,6 +49,7 @@ class OngoingCoordinator: Coordinator, OngoingCoordinatingDelegate {
             navigationController: self.navigationController,
             travel: travel
         )
+        self.childCoordinators.append(outdatedTravelCoordinator)
         outdatedTravelCoordinator.start()
     }
 }
