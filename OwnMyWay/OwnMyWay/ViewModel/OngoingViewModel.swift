@@ -22,8 +22,9 @@ protocol OngoingViewModel {
 
 protocol OngoingCoordinatingDelegate: AnyObject {
     func popToHome()
-    func pushToAddRecord()
+    func pushToAddRecord(travel: Travel)
     func pushToEditTravel()
+    func moveToOutdated(travel: Travel)
     func pushToDetailRecord(record: Record)
 }
 
@@ -46,11 +47,21 @@ class DefaultOngoingViewModel: OngoingViewModel {
     }
 
     func didUpdateTravel(to travel: Travel) {}
+
+    func didTouchAddRecordButton() {
+        self.coordinatingDelegate?.pushToAddRecord(travel: self.travel)
+    }
+
     func didTouchAddRecordButton() {}
     func didTouchRecordCell(at record: Record) {
         self.coordinatingDelegate?.pushToDetailRecord(record: record)
     }
     func didTouchBackButton() {}
     func didTouchEditTravelButton() {}
-    func didTouchFinishButton() {}
+
+    func didTouchFinishButton() {
+        self.travel.flag = Travel.Section.outdated.index
+        self.usecase.executeFlagUpdate(of: self.travel)
+        self.coordinatingDelegate?.moveToOutdated(travel: self.travel)
+    }
 }

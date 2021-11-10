@@ -10,6 +10,7 @@ import Foundation
 protocol OngoingUsecase {
     func executeFetch()
     func executeFinishingTravel()
+    func executeFlagUpdate(of travel: Travel)
 }
 
 struct DefaultOngoingUsecase: OngoingUsecase {
@@ -22,4 +23,8 @@ struct DefaultOngoingUsecase: OngoingUsecase {
 
     func executeFetch() {}
     func executeFinishingTravel() {}
+
+    func executeFlagUpdate(of travel: Travel) {
+        self.repository.update(travel: travel)
+    }
 }

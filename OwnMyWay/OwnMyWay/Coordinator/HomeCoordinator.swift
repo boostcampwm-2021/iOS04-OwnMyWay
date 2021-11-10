@@ -50,4 +50,12 @@ class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
         self.childCoordinators.append(ongoingCoordinator)
         ongoingCoordinator.start()
     }
+
+    func pushToOutdatedTravel(travel: Travel) {
+        let outdatedTravelCoordinator = OutdatedTravelCoordinator(
+            navigationController: self.navigationController, travel: travel
+        )
+        self.childCoordinators.append(outdatedTravelCoordinator)
+        outdatedTravelCoordinator.start()
+    }
 }
