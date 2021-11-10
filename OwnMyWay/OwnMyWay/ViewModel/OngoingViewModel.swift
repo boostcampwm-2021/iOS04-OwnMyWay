@@ -11,7 +11,7 @@ import Foundation
 protocol OngoingViewModel {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
-    
+
     func didUpdateTravel(to travel: Travel)
     func didTouchAddRecordButton()
     func didTouchBackButton()

@@ -53,3 +53,12 @@ extension Date: Strideable {
         return self + interval
     }
 }
+//
+//extension Optional: Comparable where Wrapped: Comparable {
+//    public static func < (lhs: Optional<Wrapped>, rhs: Optional<Wrapped>) -> Bool {
+//        switch lhs {
+//        case .some(let v): return v < rhs
+//        case .none: return false
+//        }
+//    }
+//}

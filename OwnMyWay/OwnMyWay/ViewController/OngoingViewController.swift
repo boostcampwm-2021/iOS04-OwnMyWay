@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-typealias OngoingDataSource = UICollectionViewDiffableDataSource <Int, Record>
+typealias OngoingDataSource = UICollectionViewDiffableDataSource <String, Record>
 
 class OngoingViewController: UIViewController, Instantiable {
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
@@ -57,6 +57,15 @@ extension OngoingViewController: UICollectionViewDelegate {
             UINib(nibName: MapCell.identifier, bundle: nil),
             forCellWithReuseIdentifier: MapCell.identifier
         )
+        self.collectionView.register(
+            UINib(nibName: RecordCardCell.identifier, bundle: nil),
+            forCellWithReuseIdentifier: RecordCardCell.identifier
+        )
+        self.collectionView.register(
+            UINib(nibName: DateHeaderView.identifier, bundle: nil),
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: DateHeaderView.identifier
+        )
     }
 
     private func configureTravelCollectionView() {
@@ -70,7 +79,7 @@ extension OngoingViewController: UICollectionViewDelegate {
             var snapshot = NSDiffableDataSourceSectionSnapshot<Record>()
             let snapshotItem = [Record.dummy()] + travel.records
             snapshot.append(snapshotItem)
-            self?.diffableDataSource?.apply(snapshot, to: 0, animatingDifferences: true)
+            self?.diffableDataSource?.apply(snapshot, to: "", animatingDifferences: true)
         }.store(in: &cancellables)
     }
 
@@ -87,16 +96,18 @@ extension OngoingViewController: UICollectionViewDelegate {
                 )
             }
             let section = NSCollectionLayoutSection(group: group)
-            
-            let headerSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(30)
-            )
-            let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: headerSize,
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top
-            )
-            section.boundarySupplementaryItems = [headerElement]
+
+            if index != 0 {
+                let headerSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(30)
+                )
+                let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: headerSize,
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .top
+                )
+                section.boundarySupplementaryItems = [headerElement]
+            }
             return section
         }
         return layout
@@ -117,18 +128,18 @@ extension OngoingViewController: UICollectionViewDelegate {
                 return cell
 
             default:
+                // TODO: here
                 return UICollectionViewCell()
             }
         }
         dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
-                withReuseIdentifier: TravelSectionHeader.identifier,
+                withReuseIdentifier: DateHeaderView.identifier,
                 for: indexPath
-            ) as? TravelSectionHeader
+            ) as? DateHeaderView
             else { return UICollectionReusableView() }
-            let title = ["예정된 여행", "진행중인 여행", "지난 여행"]
-            sectionHeader.configure(sectionTitle: title[indexPath.section])
+            sectionHeader.configure(with: Date())
             return sectionHeader
         }
         return dataSource
