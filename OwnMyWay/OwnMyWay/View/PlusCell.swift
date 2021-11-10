@@ -13,7 +13,7 @@ class PlusCell: UICollectionViewCell {
     private var dashedLayer: CAShapeLayer?
 
     func configure() {
-        drawDottedLayer()
+        self.drawDottedLayer()
     }
 
     private func drawDottedLayer() {
