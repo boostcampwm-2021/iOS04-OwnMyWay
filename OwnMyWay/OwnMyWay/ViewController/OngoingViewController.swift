@@ -51,7 +51,7 @@ class OngoingViewController: UIViewController, Instantiable {
 }
 
 extension OngoingViewController: UICollectionViewDelegate {
-    
+
     private func configureNibs() {
         self.collectionView.register(
             UINib(nibName: MapCell.identifier, bundle: nil),
@@ -75,12 +75,28 @@ extension OngoingViewController: UICollectionViewDelegate {
     }
 
     private func configureCompositionalLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout {
-            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0))
+        let layout = UICollectionViewCompositionalLayout { index, _ in
+            let size = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(10)
+            )
             let item = NSCollectionLayoutItem(layoutSize: size)
             let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [item])
+            if index != 0 {
+                group.contentInsets = NSDirectionalEdgeInsets(
+                    top: 10, leading: 20, bottom: 10, trailing: 20
+                )
+            }
             let section = NSCollectionLayoutSection(group: group)
+            
+            let headerSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(30)
+            )
+            let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: headerSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+            section.boundarySupplementaryItems = [headerElement]
             return section
         }
         return layout
@@ -103,6 +119,17 @@ extension OngoingViewController: UICollectionViewDelegate {
             default:
                 return UICollectionViewCell()
             }
+        }
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: TravelSectionHeader.identifier,
+                for: indexPath
+            ) as? TravelSectionHeader
+            else { return UICollectionReusableView() }
+            let title = ["예정된 여행", "진행중인 여행", "지난 여행"]
+            sectionHeader.configure(sectionTitle: title[indexPath.section])
+            return sectionHeader
         }
         return dataSource
     }
