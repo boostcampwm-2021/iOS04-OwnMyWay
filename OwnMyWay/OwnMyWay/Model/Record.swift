@@ -14,4 +14,18 @@ struct Record {
     var latitude: Double?
     var longitude: Double?
     var photoURL: URL?
+    
+    static func dummy() -> Record {
+        return Record(uuid: UUID(), content: nil, date: nil, latitude: nil, longitude: nil, photoURL: nil)
+    }
+}
+
+extension Record: Hashable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
 }
