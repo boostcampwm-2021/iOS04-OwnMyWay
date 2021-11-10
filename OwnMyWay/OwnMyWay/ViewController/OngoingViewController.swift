@@ -168,4 +168,12 @@ extension OngoingViewController: UICollectionViewDelegate {
         }
         return dataSource
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let record = self.diffableDataSource?.itemIdentifier(for: indexPath)
+        else { return }
+
+        self.viewModel?.didTouchRecordCell(at: record)
+
+    }
 }

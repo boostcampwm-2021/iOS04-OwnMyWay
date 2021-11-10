@@ -23,7 +23,7 @@ extension Date {
         dateFormatter.dateFormat = "yyyy년 MM월 dd일"
         return dateFormatter.string(from: self)
     }
-    
+
     func format(endDate: Date?) -> String {
         guard let endDate = endDate,
               self <= endDate else {

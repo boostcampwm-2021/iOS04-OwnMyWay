@@ -32,9 +32,32 @@ class OngoingCoordinator: Coordinator, OngoingCoordinatingDelegate {
 
     func popToHome() {}
 
-    // FIXME: travel 추가하기
-    func pushToAddRecord() {}
+    func pushToAddRecord(travel: Travel) {
+        let addRecordCoordinator = AddRecordCoordinator(
+            navigationController: self.navigationController, travel: travel
+        )
+        self.childCoordinators.append(addRecordCoordinator)
+        addRecordCoordinator.start()
+    }
 
     // FIXME: travel 추가하기
     func pushToEditTravel() {}
+
+    func pushToDetailRecord(record: Record) {
+        let detailRecordCoordinator = DetailRecordCoordinator(
+            navigationController: self.navigationController, record: record
+        )
+        self.childCoordinators.append(detailRecordCoordinator)
+        detailRecordCoordinator.start()
+    }
+
+    func moveToOutdated(travel: Travel) {
+        self.navigationController.popToRootViewController(animated: true)
+        let outdatedTravelCoordinator = OutdatedTravelCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        self.childCoordinators.append(outdatedTravelCoordinator)
+        outdatedTravelCoordinator.start()
+    }
 }

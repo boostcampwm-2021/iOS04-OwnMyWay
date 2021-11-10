@@ -63,6 +63,7 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
             navigationController: self.navigationController,
             travel: travel
         )
+        self.childCoordinators.append(ongoingCoordinator)
         ongoingCoordinator.start()
     }
 
