@@ -15,11 +15,13 @@ protocol HomeViewModel {
     func viewDidLoad()
     func didTouchCreateButton()
     func didTouchReservedTravel(at index: Int)
+    func didTouchOngoingTravel(at index: Int)
 }
 
 protocol HomeCoordinatingDelegate: AnyObject {
     func pushToCreateTravel()
     func pushToReservedTravel(travel: Travel)
+    func pushToOngoingTravel(travel: Travel)
 }
 
 class DefaultHomeViewModel: HomeViewModel {
@@ -64,4 +66,8 @@ class DefaultHomeViewModel: HomeViewModel {
         self.coordinatingDelegate?.pushToReservedTravel(travel: reservedTravels[index])
     }
 
+    func didTouchOngoingTravel(at index: Int) {
+        guard ongoingTravels.startIndex + 1..<ongoingTravels.endIndex ~= index else { return }
+        self.coordinatingDelegate?.pushToOngoingTravel(travel: ongoingTravels[index])
+    }
 }
