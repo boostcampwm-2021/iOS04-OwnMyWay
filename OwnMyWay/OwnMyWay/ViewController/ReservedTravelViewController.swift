@@ -22,6 +22,7 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         self.configureDescription()
         self.configureStartButton()
         self.bindContainerVC?(self.cartView)
+
     }
 
     override func viewDidLayoutSubviews() {
@@ -51,13 +52,26 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         }
         self.travelTypeLabel.text = "예정된 여행"
 
-        let removeButton = UIBarButtonItem(
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.backward"),
+            style: .plain,
+            target: self,
+            action: #selector(backButtonAction)
+        )
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "삭제",
             style: .plain,
             target: self,
-            action: #selector(didTouchRemoveButton(_:))
+            action: #selector(removeButtonAction)
         )
-        self.navigationItem.rightBarButtonItem = removeButton
+    }
+
+    @objc private func backButtonAction() {
+        self.viewModel?.didTouchBackButton()
+    }
+
+    @objc func removeButtonAction() {
+        self.presentAlert()
     }
 
     private func configureStartButton() {
@@ -79,10 +93,6 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         alert.addAction(yesAction)
         alert.addAction(noAction)
         self.present(alert, animated: true)
-    }
-
-    @objc func didTouchRemoveButton(_ sender: Any) {
-        self.presentAlert()
     }
 
     @IBAction func didTouchStartButton(_ sender: Any) {
