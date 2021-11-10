@@ -8,11 +8,22 @@
 import UIKit
 
 class OngoingViewController: UIViewController, Instantiable {
+    @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
 
     private var viewModel: OngoingViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.configureButtonConstraint()
+    }
+
+    private func configureButtonConstraint() {
+        let bottomPadding = self.view.safeAreaInsets.bottom
+        self.finishButtonHeightConstraint.constant = 60 + bottomPadding
     }
 
     func bind(viewModel: OngoingViewModel) {

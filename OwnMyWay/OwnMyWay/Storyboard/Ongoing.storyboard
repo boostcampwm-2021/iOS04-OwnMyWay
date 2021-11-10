@@ -17,44 +17,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jiu-0b-HQa">
-                                <rect key="frame" x="0.0" y="802" width="207" height="60"/>
-                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I8r-Zn-376">
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jiu-0b-HQa">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="60"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="여행 종료하기"/>
+                                        <connections>
+                                            <action selector="didTouchFinishButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="yFx-lc-T4c"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="am4-CT-v8e">
+                                        <rect key="frame" x="207" y="0.0" width="207" height="60"/>
+                                        <color key="backgroundColor" name="IdentityBlue"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="게시물 추가하기"/>
+                                        <connections>
+                                            <action selector="didTouchAddRecordButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6eX-gD-Wl9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="YfO-9P-FRZ"/>
+                                    <constraint firstAttribute="height" constant="60" id="ZYv-ZD-oOG"/>
+                                    <constraint firstItem="am4-CT-v8e" firstAttribute="width" secondItem="jiu-0b-HQa" secondAttribute="width" id="vtO-Po-On3"/>
                                 </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="여행 종료하기"/>
-                                <connections>
-                                    <action selector="didTouchFinishButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="yFx-lc-T4c"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="am4-CT-v8e">
-                                <rect key="frame" x="207" y="802" width="207" height="60"/>
-                                <color key="backgroundColor" name="IdentityBlue"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="6sb-xW-hAU"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="게시물 추가하기"/>
-                                <connections>
-                                    <action selector="didTouchAddRecordButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6eX-gD-Wl9"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="jiu-0b-HQa" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottomMargin" id="5fP-WW-BqY"/>
-                            <constraint firstItem="am4-CT-v8e" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottomMargin" id="IeC-jv-b9a"/>
-                            <constraint firstItem="am4-CT-v8e" firstAttribute="width" secondItem="jiu-0b-HQa" secondAttribute="width" id="Lq3-z8-6kG"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="am4-CT-v8e" secondAttribute="trailing" id="Uuw-ys-6bt"/>
-                            <constraint firstItem="am4-CT-v8e" firstAttribute="leading" secondItem="jiu-0b-HQa" secondAttribute="trailing" id="f0U-rU-kjE"/>
-                            <constraint firstItem="jiu-0b-HQa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sWD-Tb-kJI"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="I8r-Zn-376" secondAttribute="trailing" id="04c-gl-NNk"/>
+                            <constraint firstItem="I8r-Zn-376" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="E5o-GN-dCU"/>
+                            <constraint firstAttribute="bottom" secondItem="I8r-Zn-376" secondAttribute="bottom" id="Vtx-AT-ndV"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="finishButtonHeightConstraint" destination="ZYv-ZD-oOG" id="OnT-WG-e8g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -67,9 +70,6 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
