@@ -67,7 +67,7 @@ class DefaultHomeViewModel: HomeViewModel {
     }
 
     func didTouchOngoingTravel(at index: Int) {
-        guard ongoingTravels.startIndex + 1..<ongoingTravels.endIndex ~= index else { return }
+        guard ongoingTravels.startIndex..<ongoingTravels.endIndex ~= index else { return }
         self.coordinatingDelegate?.pushToOngoingTravel(travel: ongoingTravels[index])
     }
 }
