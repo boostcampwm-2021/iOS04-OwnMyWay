@@ -30,7 +30,15 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
         navigationController.pushViewController(ongoingVC, animated: true)
     }
 
-    func popToHome() {}
+    func popToHome() {
+        guard let homeVC = self
+                .navigationController
+                .viewControllers
+                .first as? TravelFetchable
+        else { return }
+        homeVC.fetchTravel()
+        self.navigationController.popToRootViewController(animated: true)
+    }
 
     func pushToAddRecord(travel: Travel) {
         let addRecordCoordinator = AddRecordCoordinator(

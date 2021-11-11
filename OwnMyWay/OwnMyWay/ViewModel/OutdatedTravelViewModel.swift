@@ -8,16 +8,20 @@
 import Foundation
 
 protocol OutdatedTravelViewModel {
+    var travel: Travel { get }
+    var travelPublisher: Published<Travel>.Publisher { get }
 
+    func didTouchBackButton()
 }
 
 protocol OutdatedTravelCoordinatingDelegate: AnyObject {
-
+    func popToHome()
 }
 
 class DefaultOutdatedTravelViewModel: OutdatedTravelViewModel {
+    @Published private(set) var travel: Travel
+    var travelPublisher: Published<Travel>.Publisher { $travel }
 
-    private var travel: Travel
     private let usecase: OutdatedTravelUsecase
     private weak var coordinatingDelegate: OutdatedTravelCoordinatingDelegate?
 
@@ -31,4 +35,7 @@ class DefaultOutdatedTravelViewModel: OutdatedTravelViewModel {
         self.coordinatingDelegate = coordinatingDelegate
     }
 
+    func didTouchBackButton() {
+        self.coordinatingDelegate?.popToHome()
+    }
 }

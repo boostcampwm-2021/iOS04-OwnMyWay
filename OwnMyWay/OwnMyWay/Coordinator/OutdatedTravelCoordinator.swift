@@ -29,4 +29,14 @@ class OutdatedTravelCoordinator: Coordinator, OutdatedTravelCoordinatingDelegate
         outdatedVC.bind(viewModel: outdatedVM)
         navigationController.pushViewController(outdatedVC, animated: true)
     }
+
+    func popToHome() {
+        guard let homeVC = self
+                .navigationController
+                .viewControllers
+                .first as? TravelFetchable
+        else { return }
+        homeVC.fetchTravel()
+        self.navigationController.popToRootViewController(animated: true)
+    }
 }
