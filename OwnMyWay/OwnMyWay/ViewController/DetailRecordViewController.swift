@@ -10,7 +10,7 @@ import UIKit
 class DetailRecordViewController: UIViewController, Instantiable {
 
     private var viewModel: DetailRecordViewModel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = self.viewModel?.record.content

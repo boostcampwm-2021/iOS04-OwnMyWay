@@ -191,7 +191,8 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             ) as? DateHeaderView
             else { return UICollectionReusableView() }
 
-            guard let title = self?.diffableDataSource?.sectionIdentifier(for: indexPath.section)
+            guard let title = self?.diffableDataSource?.snapshot()
+                    .sectionIdentifiers[indexPath.section]
             else { return UICollectionReusableView() }
 
             sectionHeader.configure(with: title)
