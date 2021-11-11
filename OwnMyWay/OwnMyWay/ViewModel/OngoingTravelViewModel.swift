@@ -62,7 +62,10 @@ class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
         self.coordinatingDelegate?.pushToDetailRecord(record: record)
     }
 
-    func didTouchBackButton() {}
+    func didTouchBackButton() {
+        self.coordinatingDelegate?.popToHome()
+    }
+
     func didTouchEditTravelButton() {}
 
     func didTouchFinishButton() {
