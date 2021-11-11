@@ -1,5 +1,5 @@
 //
-//  OngoingViewModel.swift.swift
+//  OngoingViewModel.swift
 //  OwnMyWay
 //
 //  Created by 강현준 on 2021/11/10.
@@ -8,11 +8,13 @@
 import Combine
 import Foundation
 
-protocol OngoingViewModel {
+protocol OngoingTravelViewModel {
+    var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
 
     func didUpdateTravel(to travel: Travel)
     func didTouchAddRecordButton()
+    func didTouchRecordCell(at record: Record)
     func didTouchBackButton()
     func didTouchEditTravelButton()
     func didTouchFinishButton()
@@ -20,21 +22,23 @@ protocol OngoingViewModel {
 
 protocol OngoingCoordinatingDelegate: AnyObject {
     func popToHome()
-    func pushToAddRecord()
+    func pushToAddRecord(travel: Travel)
     func pushToEditTravel()
+    func moveToOutdated(travel: Travel)
+    func pushToDetailRecord(record: Record)
 }
 
-class DefaultOngoingViewModel: OngoingViewModel {
+class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
-    @Published private var travel: Travel
+    @Published private(set) var travel: Travel
 
-    private let usecase: OngoingUsecase
+    private let usecase: OngoingTravelUsecase
     private weak var coordinatingDelegate: OngoingCoordinatingDelegate?
 
     init(
         travel: Travel,
-        usecase: OngoingUsecase,
+        usecase: OngoingTravelUsecase,
         coordinatingDelegate: OngoingCoordinatingDelegate
     ) {
         self.travel = travel
@@ -43,8 +47,21 @@ class DefaultOngoingViewModel: OngoingViewModel {
     }
 
     func didUpdateTravel(to travel: Travel) {}
-    func didTouchAddRecordButton() {}
+
+    func didTouchAddRecordButton() {
+        self.coordinatingDelegate?.pushToAddRecord(travel: self.travel)
+    }
+
+    func didTouchRecordCell(at record: Record) {
+        self.coordinatingDelegate?.pushToDetailRecord(record: record)
+    }
+
     func didTouchBackButton() {}
     func didTouchEditTravelButton() {}
-    func didTouchFinishButton() {}
+
+    func didTouchFinishButton() {
+        self.travel.flag = Travel.Section.outdated.index
+        self.usecase.executeFlagUpdate(of: self.travel)
+        self.coordinatingDelegate?.moveToOutdated(travel: self.travel)
+    }
 }

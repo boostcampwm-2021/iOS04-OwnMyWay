@@ -46,3 +46,22 @@ extension Travel: Hashable {
         hasher.combine(uuid)
     }
 }
+
+extension Travel {
+    func classifyRecords() -> [[Record]] {
+        let dict = Dictionary(grouping: self.records) { $0.date?.localize() }.sorted(by: {
+            guard let lhs = $0.key, let rhs = $1.key
+            else { return true }
+            return lhs < rhs
+        })
+        var array: [[Record]] = []
+        dict.forEach { _, value in
+            array.append(value.sorted(by: {
+                guard let lhs = $0.date, let rhs = $1.date
+                else { return true }
+                return lhs < rhs
+            }))
+        }
+        return array
+    }
+}

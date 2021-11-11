@@ -56,4 +56,15 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
         homeVC.fetchTravel()
         self.navigationController.popToRootViewController(animated: true)
     }
+
+    func moveToOngoing(travel: Travel) {
+        self.navigationController.popToRootViewController(animated: true)
+        let ongoingCoordinator = OngoingTravelCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        self.childCoordinators.append(ongoingCoordinator)
+        ongoingCoordinator.start()
+    }
+
 }

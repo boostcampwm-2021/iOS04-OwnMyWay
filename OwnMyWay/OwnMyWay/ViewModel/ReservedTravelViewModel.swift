@@ -18,6 +18,7 @@ protocol ReservedTravelViewModel {
 
 protocol ReservedTravelCoordinatingDelegate: AnyObject {
     func popToHome()
+    func moveToOngoing(travel: Travel)
 }
 
 class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject {
@@ -58,6 +59,7 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
 
     func didTouchStartButton() {
         self.travel.flag = Travel.Section.ongoing.index // 자기자신에 업데이트
-        self.usecase.executeFlagUpdate(of: travel) // coreData에 업데이트
+        self.usecase.executeFlagUpdate(of: self.travel) // coreData에 업데이트
+        self.coordinatingDelegate?.moveToOngoing(travel: self.travel)
     }
 }
