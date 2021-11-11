@@ -30,6 +30,8 @@
   본 서비스에 사용된 오픈소스의 라이센스는 아래와 같습니다.
 
   - SwiftLint 0.45.0 (MIT)
+  - Kingfisher 7.1.1 (MIT)
+  - FSCalendar 2.8.2 (MIT)
  
   ## 문의
   
