@@ -19,6 +19,7 @@ protocol MapAvailable {
     func moveRegion(mapView: MKMapView, annotations: [MKAnnotation], animated: Bool)
     func drawRecordAnnotations(mapView: MKMapView, annotations: [MKAnnotation])
     func drawLandmarkAnnotations(mapView: MKMapView, annotations: [MKAnnotation])
+    func drawLocationPath(mapView: MKMapView, locations: [Location])
 }
 
 extension MapAvailable {
@@ -30,20 +31,6 @@ extension MapAvailable {
         mapView.register(
             RecordAnnotationView.self,
             forAnnotationViewWithReuseIdentifier: RecordAnnotationView.identifier
-        )
-
-        mapView.setRegion(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(
-                    latitude: 37.24800,
-                    longitude: 127.07845
-                ),
-                span: MKCoordinateSpan(
-                    latitudeDelta: 0.01,
-                    longitudeDelta: 0.01
-                )
-            ),
-            animated: false
         )
     }
 
@@ -98,4 +85,18 @@ extension MapAvailable {
         mapView.removeAnnotations(deleteSet)
         mapView.addAnnotations(annotations)
     }
+
+    func drawLocationPath(mapView: MKMapView, locations: [Location]) {
+        let overlays = mapView.overlays
+        mapView.removeOverlays(overlays)
+        let coordinates = locations.map {
+            CLLocationCoordinate2D(
+                latitude: $0.latitude ?? 0, longitude: $0.longitude ?? 0
+            )
+        }
+        let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        mapView.addOverlay(polyline, level: .aboveRoads)
+        mapView.layoutIfNeeded()
+    }
+
 }

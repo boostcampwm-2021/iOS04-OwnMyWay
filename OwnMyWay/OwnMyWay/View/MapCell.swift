@@ -20,6 +20,8 @@ class MapCell: UICollectionViewCell, MapAvailable {
 
     func configure(with travel: Travel, delegate: MKMapViewDelegate) {
         self.mapView.delegate = delegate
+        self.mapView.showsUserLocation = true
+        self.mapView.userTrackingMode = .follow
 
         let landmarkAnnotations = travel.landmarks.map {
             LandmarkAnnotation.init(landmark: $0)
@@ -36,11 +38,6 @@ class MapCell: UICollectionViewCell, MapAvailable {
             mapView: self.mapView,
             annotations: recordAnnotations
         )
-
-        self.moveRegion(
-            mapView: self.mapView,
-            annotations: landmarkAnnotations + recordAnnotations,
-            animated: true
-        )
     }
+
 }
