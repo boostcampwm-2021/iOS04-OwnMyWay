@@ -18,6 +18,7 @@ protocol OngoingTravelViewModel {
     func didTouchBackButton()
     func didTouchEditTravelButton()
     func didTouchFinishButton()
+    func didUpdateCoordinate(latitude: Double, longitude: Double)
 }
 
 protocol OngoingCoordinatingDelegate: AnyObject {
@@ -70,4 +71,12 @@ class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
         self.usecase.executeFlagUpdate(of: self.travel)
         self.coordinatingDelegate?.moveToOutdated(travel: self.travel)
     }
+
+    func didUpdateCoordinate(latitude: Double, longitude: Double) {
+        self.travel.locations.append(Location(latitude: latitude, longitude: longitude))
+        self.usecase.executeLocationUpdate(
+            of: self.travel, latitude: latitude, longitude: longitude
+        )
+    }
+
 }
