@@ -11,11 +11,12 @@ class PlusCell: UICollectionViewCell {
     static let identifier = "PlusCell"
 
     private var dashedLayer: CAShapeLayer?
-
-    func configure() {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         self.drawDottedLayer()
     }
-
+    
     private func drawDottedLayer() {
         self.dashedLayer?.removeFromSuperlayer()
 
