@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol OngoingUsecase {
+protocol OngoingTravelUsecase {
     func executeFetch()
     func executeFinishingTravel()
     func executeFlagUpdate(of travel: Travel)
 }
 
-struct DefaultOngoingUsecase: OngoingUsecase {
+struct DefaultOngoingTravelUsecase: OngoingTravelUsecase {
 
     private let repository: TravelRepository
 

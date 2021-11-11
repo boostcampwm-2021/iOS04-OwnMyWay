@@ -8,15 +8,15 @@
 import Combine
 import UIKit
 
-typealias OngoingDataSource = UICollectionViewDiffableDataSource <String, Record>
+typealias OngoingTravelDataSource = UICollectionViewDiffableDataSource <String, Record>
 
-class OngoingViewController: UIViewController, Instantiable {
+class OngoingTravelViewController: UIViewController, Instantiable {
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    private var viewModel: OngoingViewModel?
-    private var diffableDataSource: OngoingDataSource?
+    private var viewModel: OngoingTravelViewModel?
+    private var diffableDataSource: OngoingTravelDataSource?
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class OngoingViewController: UIViewController, Instantiable {
         self.finishButtonHeightConstraint.constant = 60 + bottomPadding
     }
 
-    func bind(viewModel: OngoingViewModel) {
+    func bind(viewModel: OngoingTravelViewModel) {
         self.viewModel = viewModel
     }
 
@@ -50,7 +50,7 @@ class OngoingViewController: UIViewController, Instantiable {
 
 }
 
-extension OngoingViewController: UICollectionViewDelegate {
+extension OngoingTravelViewController: UICollectionViewDelegate {
 
     private func configureNibs() {
         self.collectionView.register(
@@ -128,8 +128,8 @@ extension OngoingViewController: UICollectionViewDelegate {
         return layout
     }
 
-    private func configureDiffableDataSource() -> OngoingDataSource {
-        let dataSource = OngoingDataSource(
+    private func configureDiffableDataSource() -> OngoingTravelDataSource {
+        let dataSource = OngoingTravelDataSource(
             collectionView: self.collectionView
         ) { collectionView, indexPath, item in
             switch indexPath.section {

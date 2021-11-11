@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol OngoingViewModel {
+protocol OngoingTravelViewModel {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
 
@@ -28,17 +28,17 @@ protocol OngoingCoordinatingDelegate: AnyObject {
     func pushToDetailRecord(record: Record)
 }
 
-class DefaultOngoingViewModel: OngoingViewModel {
+class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
     @Published private(set) var travel: Travel
 
-    private let usecase: OngoingUsecase
+    private let usecase: OngoingTravelUsecase
     private weak var coordinatingDelegate: OngoingCoordinatingDelegate?
 
     init(
         travel: Travel,
-        usecase: OngoingUsecase,
+        usecase: OngoingTravelUsecase,
         coordinatingDelegate: OngoingCoordinatingDelegate
     ) {
         self.travel = travel

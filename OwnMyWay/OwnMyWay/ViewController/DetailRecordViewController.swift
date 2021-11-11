@@ -15,7 +15,7 @@ class DetailRecordViewController: UIViewController, Instantiable {
         super.viewDidLoad()
         self.navigationItem.title = self.viewModel?.record.content
     }
-    
+
     func bind(viewModel: DetailRecordViewModel) {
         self.viewModel = viewModel
     }

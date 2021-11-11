@@ -16,7 +16,14 @@ struct Record {
     var photoURL: URL?
 
     static func dummy() -> Record {
-        return Record(uuid: UUID(), content: nil, date: nil, latitude: nil, longitude: nil, photoURL: nil)
+        return Record(
+            uuid: UUID(),
+            content: nil,
+            date: nil,
+            latitude: nil,
+            longitude: nil,
+            photoURL: nil
+        )
     }
 }
 

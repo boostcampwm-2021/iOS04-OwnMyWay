@@ -44,7 +44,7 @@ class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
     }
 
     func pushToOngoingTravel(travel: Travel) {
-        let ongoingCoordinator = OngoingCoordinator(
+        let ongoingCoordinator = OngoingTravelCoordinator(
             navigationController: self.navigationController, travel: travel
         )
         self.childCoordinators.append(ongoingCoordinator)

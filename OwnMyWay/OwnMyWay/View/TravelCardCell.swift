@@ -24,4 +24,3 @@ class TravelCardCell: UICollectionViewCell {
         self.travelCardImageView.clipsToBounds = true
     }
 }
-

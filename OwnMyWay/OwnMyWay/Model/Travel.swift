@@ -62,7 +62,6 @@ extension Travel {
                 return lhs < rhs
             }))
         }
-        print(array)
         return array
     }
 }

@@ -59,7 +59,7 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
 
     func moveToOngoing(travel: Travel) {
         self.navigationController.popToRootViewController(animated: true)
-        let ongoingCoordinator = OngoingCoordinator(
+        let ongoingCoordinator = OngoingTravelCoordinator(
             navigationController: self.navigationController,
             travel: travel
         )

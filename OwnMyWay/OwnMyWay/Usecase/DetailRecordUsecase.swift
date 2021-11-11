@@ -8,13 +8,13 @@
 import Foundation
 
 protocol DetailRecordUsecase {
-    
+
 }
 
 struct DefaultDetailRecordUsecase: DetailRecordUsecase {
-    
+
     private let repository: TravelRepository
-    
+
     init(repository: TravelRepository) {
         self.repository = repository
     }

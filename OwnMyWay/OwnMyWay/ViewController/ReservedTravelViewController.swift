@@ -97,7 +97,6 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
 
     @IBAction func didTouchStartButton(_ sender: Any) {
         self.viewModel?.didTouchStartButton()
-        //self.coordinator?.pushToNowTravel(travel: viewModel.travel)
     }
 
 }

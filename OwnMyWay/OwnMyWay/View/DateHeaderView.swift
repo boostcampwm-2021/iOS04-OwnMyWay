@@ -10,12 +10,7 @@ import UIKit
 class DateHeaderView: UICollectionReusableView {
     static let identifier = "DateHeaderView"
 
-    @IBOutlet weak var dateLabel: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet private weak var dateLabel: UILabel!
 
     func configure(with text: String) {
         self.dateLabel.text = text
