@@ -70,6 +70,8 @@
 		DB1D5CB2273CE17800B30448 /* LocationMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */; };
 		DB1D5CB3273CE17800B30448 /* LocationMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */; };
 		DB1D5CB7273CE1C100B30448 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CB6273CE1C100B30448 /* Location.swift */; };
+		DB1D5CD3273CEB8B00B30448 /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* TravelRepository.swift */; };
+		DB1D5CD4273CEB9300B30448 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
 		DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
 		DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5B272F82770004444B /* SceneDelegate.swift */; };
 		DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5D272F82770004444B /* HomeViewController.swift */; };
@@ -83,11 +85,7 @@
 		DB2823BD273BC0C2007D8801 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */; };
 		DB2823BE273BC0C2007D8801 /* DateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */; };
 		DB2823C6273BCBD1007D8801 /* OwnMyWayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823C5273BCBD1007D8801 /* OwnMyWayTests.swift */; };
-		DB2823CC273BCBE4007D8801 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EEB2733929000FB7939 /* Travel.swift */; };
-		DB2823CD273BCC0A007D8801 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F0B2733C42700FB7939 /* Record.swift */; };
-		DB2823CE273BCC0E007D8801 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
 		DB2823CF273BCD1A007D8801 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646B92738F6590030ED78 /* Date+.swift */; };
-		DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* TravelRepository.swift */; };
 		DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B3273132A000487D33 /* LandmarkDTO.swift */; };
 		DB8831BE2731990000487D33 /* LandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LandmarkRepository.swift */; };
 		DB8831C127319B6400487D33 /* SearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */; };
@@ -603,6 +601,7 @@
 				AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */,
 				294897C2273BECE6003185E7 /* DetailRecordCoordinator.swift in Sources */,
 				AF1108E4273B8C04009FE728 /* OngoingTravelViewModel.swift in Sources */,
+				DB1D5CD3273CEB8B00B30448 /* TravelRepository.swift in Sources */,
 				DB9366602739086400B39BC1 /* Coordinator.swift in Sources */,
 				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
@@ -654,7 +653,6 @@
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
 				3FB914E92737DAC70084FF1C /* TravelSectionHeader.swift in Sources */,
 				29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */,
-				DB8831AE2730FDB500487D33 /* TravelRepository.swift in Sources */,
 				DB1D5CB2273CE17800B30448 /* LocationMO+CoreDataClass.swift in Sources */,
 				DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */,
 				DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */,
@@ -684,10 +682,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB2823C6273BCBD1007D8801 /* OwnMyWayTests.swift in Sources */,
-				DB2823CC273BCBE4007D8801 /* Travel.swift in Sources */,
 				DB2823CF273BCD1A007D8801 /* Date+.swift in Sources */,
-				DB2823CD273BCC0A007D8801 /* Record.swift in Sources */,
-				DB2823CE273BCC0E007D8801 /* Landmark.swift in Sources */,
+				DB1D5CD4273CEB9300B30448 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

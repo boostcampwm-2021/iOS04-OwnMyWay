@@ -27,6 +27,11 @@ protocol TravelRepository {
         latitude: Double?,
         longitude: Double?
     ) -> Result<Record, Error>
+    func addLocation(
+        to travel: Travel,
+        latitude: Double?,
+        longitude: Double?
+    ) -> Result<Location, Error>
     @discardableResult func update(travel: Travel) -> Result<Travel, Error>
     func delete(travel: Travel)
 }
@@ -148,6 +153,29 @@ class CoreDataTravelRepository: TravelRepository {
         do {
             try context.save()
             return .success(recordMO.toRecord())
+        } catch let error {
+            return .failure(error)
+        }
+    }
+
+    func addLocation(
+        to travel: Travel,
+        latitude: Double?,
+        longitude: Double?
+    ) -> Result<Location, Error> {
+        guard let travelMO = findTravel(by: travel.uuid ?? UUID())
+        else { return .failure(NSError.init()) }
+        guard let entity = NSEntityDescription.entity(forEntityName: "LocationMO", in: context)
+        else { return .failure(NSError.init()) }
+
+        let locationMO = LocationMO(entity: entity, insertInto: context)
+        locationMO.setValue(latitude, forKey: "latitude")
+        locationMO.setValue(longitude, forKey: "longitude")
+        travelMO.addToLocations(locationMO)
+
+        do {
+            try context.save()
+            return .success(locationMO.toLocation())
         } catch let error {
             return .failure(error)
         }
