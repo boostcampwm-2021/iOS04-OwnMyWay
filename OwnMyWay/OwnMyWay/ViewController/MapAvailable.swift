@@ -96,7 +96,6 @@ extension MapAvailable {
         }
         let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
         mapView.addOverlay(polyline, level: .aboveRoads)
-        mapView.layoutIfNeeded()
     }
 
 }
