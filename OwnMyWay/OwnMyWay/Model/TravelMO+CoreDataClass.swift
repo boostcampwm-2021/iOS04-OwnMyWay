@@ -12,15 +12,25 @@ import CoreData
 @objc(TravelMO)
 public class TravelMO: NSManagedObject {
     func toTravel() -> Travel {
-        return Travel(
+        var result = Travel(
             uuid: self.uuid,
             flag: Int(self.flag),
             title: self.title,
             startDate: self.startDate,
             endDate: self.endDate,
-            landmarks: self.landmarks?.allObjects as? [Landmark] ?? [],
-            records: self.records?.allObjects as? [Record] ?? []
+            landmarks: [],
+            records: [],
+            locations: []
         )
+        guard let landmarks = self.landmarks?.array as? [LandmarkMO],
+              let records = self.records?.array as? [RecordMO],
+              let locations = self.locations?.array as? [LocationMO]
+        else { return result }
+
+        result.landmarks = landmarks.map{ $0.toLandmark() }
+        result.records = records.map{ $0.toRecord() }
+        result.locations = locations.map { $0.toLocation() }
+        return result
     }
     
     func fromTravel(travel: Travel) {
@@ -29,7 +39,8 @@ public class TravelMO: NSManagedObject {
         self.title = travel.title
         self.startDate = travel.startDate
         self.endDate = travel.endDate
-        self.landmarks = NSSet(array: travel.landmarks)
-        self.records = NSSet(array: travel.records)
+        self.landmarks = NSOrderedSet(array: travel.landmarks)
+        self.records = NSOrderedSet(array: travel.records)
+        self.locations = NSOrderedSet(array: travel.locations)
     }
 }

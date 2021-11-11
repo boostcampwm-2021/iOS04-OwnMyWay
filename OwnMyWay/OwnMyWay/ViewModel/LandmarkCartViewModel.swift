@@ -8,26 +8,36 @@
 import Combine
 import Foundation
 
-protocol LandmarkCartViewModelType {
+protocol LandmarkCartViewModel {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
-    func didAddLandmark(of landmark: Landmark)
+    func didAddLandmark(with landmark: Landmark)
+    func didTouchPlusButton()
 }
 
-class LandmarkCartViewModel: LandmarkCartViewModelType, ObservableObject {
+protocol LandmarkCartCoordinatingDelegate: AnyObject {
+    func presentSearchLandmarkModally()
+}
+
+class DefaultLandmarkCartViewModel: LandmarkCartViewModel, ObservableObject {
     @Published private(set) var travel: Travel
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
-    private let landmarkCartUsecase: LandmarkCartUsecase
+    private weak var coordinatingDelegate: LandmarkCartCoordinatingDelegate?
 
-    init(landmarkCartUsecase: LandmarkCartUsecase, travel: Travel) {
+    init(
+        coordinatingDelegate: LandmarkCartCoordinatingDelegate,
+        travel: Travel
+    ) {
+        self.coordinatingDelegate = coordinatingDelegate
         self.travel = travel
-        self.landmarkCartUsecase = landmarkCartUsecase
     }
 
-    func didAddLandmark(of landmark: Landmark) {
-        self.landmarkCartUsecase.addLandmark(to: self.travel, of: landmark) { landmark in
-            self.travel.landmarks.append(landmark)
-        }
+    func didAddLandmark(with landmark: Landmark) {
+        self.travel.landmarks.append(landmark)
+    }
+
+    func didTouchPlusButton() {
+        self.coordinatingDelegate?.presentSearchLandmarkModally()
     }
 }

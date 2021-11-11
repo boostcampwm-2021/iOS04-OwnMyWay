@@ -15,25 +15,26 @@ class CreateTravelViewController: UIViewController, Instantiable {
     @IBOutlet private weak var calendarView: FSCalendar!
     @IBOutlet private weak var nextButton: NextButton!
 
+    private var viewModel: CreateTravelViewModel?
+    private var cancellables: Set<AnyCancellable> = []
     private var prevDate: Date?
     private var isSelectionComplete: Bool = false
-    private var viewModel: CreateTravelViewModelType?
-    var coordinator: CreateTravelCoordinator?
-    private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUsecase()
-        self.bindUI()
+        self.configureCancellable()
         self.configureCalendar()
     }
 
-    private func setUsecase() {
-        let usecase = DefaultCreateTravelUsecase(travelRepository: CoreDataTravelRepository())
-        self.viewModel = CreateTravelViewModel(createTravelUsecase: usecase)
+    func bind(viewModel: CreateTravelViewModel) {
+        self.viewModel = viewModel
     }
 
-    private func bindUI() {
+    func travelDidChanged(to travel: Travel) {
+        self.viewModel?.travelDidChanged(to: travel)
+    }
+
+    private func configureCancellable() {
         self.viewModel?.validatePublisher
             .receive(on: RunLoop.main)
             .sink { isValid in
@@ -46,15 +47,13 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.calendarView.placeholderType = FSCalendarPlaceholderType.none
     }
 
-    @IBAction func editingDidEnd(_ sender: UITextField) {
+    @IBAction func didEnterTitle(_ sender: UITextField) {
         self.viewModel?.didEnterTitle(text: sender.text)
         sender.resignFirstResponder()
     }
 
-    @IBAction func nextButtonDidTouched(_ sender: UIButton) {
-        self.viewModel?.didTouchNextButton(completion: { [weak self] travel in
-            self?.coordinator?.pushToAddLandmark(travel: travel)
-        })
+    @IBAction func didTouchNextButton(_ sender: UIButton) {
+        self.viewModel?.didTouchNextButton()
     }
 
 }
@@ -110,9 +109,9 @@ extension CreateTravelViewController: FSCalendarDelegate {
 
     private func alertMessage(startDate: Date, endDate: Date) -> String {
         if startDate == endDate {
-            return "여행 기간을 \(localize(date: startDate)) 당일치기로 설정할까요?"
+            return "여행 기간을 \(startDate.localize()) 당일치기로 설정할까요?"
         }
-        return "여행 기간을 \(localize(date: startDate))부터 \(localize(date: endDate))로 설정할까요?"
+        return "여행 기간을 \(startDate.localize())부터 \(endDate.localize())로 설정할까요?"
     }
 
     private func initSelection() {
@@ -128,18 +127,6 @@ extension CreateTravelViewController: FSCalendarDelegate {
         dateFormatter.timeZone = TimeZone(abbreviation: "KST")
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: date)
-    }
-
-}
-
-extension Date: Strideable {
-
-    public func distance(to other: Date) -> TimeInterval {
-        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
-    }
-
-    public func advanced(by interval: TimeInterval) -> Date {
-        return self + interval
     }
 
 }

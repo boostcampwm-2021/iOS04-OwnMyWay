@@ -8,46 +8,74 @@
 import Combine
 import Foundation
 
-protocol SearchLandmarkViewModelType {
-    var landmarks: [Landmark] { get }
+protocol SearchLandmarkViewModel {
     var landmarksPublisher: Published<[Landmark]>.Publisher { get }
-    var searchText: String { get set }
-    func configure()
-    func didEnterSearchText(text: String)
+
+    func viewDidLoad()
+    func didChangeSearchText(with text: String)
+    func didTouchLandmarkCard(at index: Int)
 }
 
-class SearchLandmarkViewModel: SearchLandmarkViewModelType, ObservableObject {
-    @Published var landmarks: [Landmark]
-    @Published var searchText: String
+protocol SearchLandmarkCoordinatingDelegate: AnyObject {
+    func dismissToAddLandmark(landmark: Landmark)
+}
+
+class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject {
+
     var landmarksPublisher: Published<[Landmark]>.Publisher { $landmarks }
-    var cancellable: AnyCancellable?
 
-    private let searchLandmarkUsecase: SearchLandmarkUsecase
+    private let usecase: SearchLandmarkUsecase
+    private weak var coordinatingDelegate: SearchLandmarkCoordinatingDelegate?
 
-    init(searchLandmarkUsecase: SearchLandmarkUsecase) {
+    @Published private var landmarks: [Landmark]
+    @Published private var searchText: String
+    private var cancellables: Set<AnyCancellable>
+
+    init(
+        usecase: SearchLandmarkUsecase,
+        coordinatingDelegate: SearchLandmarkCoordinatingDelegate
+    ) {
+        self.usecase = usecase
+        self.coordinatingDelegate = coordinatingDelegate
         self.landmarks = []
-        self.searchLandmarkUsecase = searchLandmarkUsecase
         self.searchText = ""
-        self.cancellable = self.$searchText
-            .debounce(for: .seconds(0.2), scheduler: RunLoop.main)
-            .sink { [weak self] searchText in
-                self?.didEnterSearchText(text: searchText)
-            }
+        self.cancellables = []
+        self.bind()
     }
 
-    func configure() {
-        searchLandmarkUsecase.executeFetch { [weak self] landmarks in
+    func viewDidLoad() {
+        usecase.executeFetch { [weak self] landmarks in
             self?.landmarks = landmarks
         }
     }
 
-    func didEnterSearchText(text: String) {
-        if text == "" {
-            configure()
+    func didChangeSearchText(with text: String) {
+        self.searchText = text
+    }
+
+    func didTouchLandmarkCard(at index: Int) {
+        guard landmarks.startIndex..<landmarks.endIndex ~= index else { return }
+        self.coordinatingDelegate?.dismissToAddLandmark(landmark: landmarks[index])
+    }
+
+    // MARK: Internal Private Functions
+    private func search(with text: String) {
+        if text.isEmpty {
+            usecase.executeFetch { [weak self] landmarks in
+                self?.landmarks = landmarks
+            }
         } else {
-            searchLandmarkUsecase.executeSearch(searchText: text) { [weak self] searchResult in
+            usecase.executeSearch(by: text) { [weak self] searchResult in
                 self?.landmarks = searchResult
             }
         }
+    }
+
+    private func bind() {
+        self.$searchText
+            .debounce(for: .seconds(0.2), scheduler: RunLoop.main)
+            .sink { [weak self] searchText in
+                self?.search(with: searchText)
+            }.store(in: &cancellables)
     }
 }

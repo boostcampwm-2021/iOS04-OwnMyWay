@@ -8,6 +8,11 @@
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelMO" inverseName="landmarks" inverseEntity="TravelMO"/>
     </entity>
+    <entity name="LocationMO" representedClassName="LocationMO" syncable="YES">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelMO" inverseName="locations" inverseEntity="TravelMO"/>
+    </entity>
     <entity name="RecordMO" representedClassName="RecordMO" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -23,12 +28,14 @@
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="landmarks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LandmarkMO" inverseName="travel" inverseEntity="LandmarkMO"/>
-        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecordMO" inverseName="travel" inverseEntity="RecordMO"/>
+        <relationship name="landmarks" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="LandmarkMO" inverseName="travel" inverseEntity="LandmarkMO"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="LocationMO" inverseName="travel" inverseEntity="LocationMO"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RecordMO" inverseName="travel" inverseEntity="RecordMO"/>
     </entity>
     <elements>
-        <element name="LandmarkMO" positionX="-20.21484375" positionY="165.78125" width="128" height="119"/>
-        <element name="RecordMO" positionX="164.19140625" positionY="26.26171875" width="128" height="134"/>
-        <element name="TravelMO" positionX="-36" positionY="9" width="128" height="134"/>
+        <element name="LandmarkMO" positionX="-51.3515625" positionY="221.359375" width="128" height="133"/>
+        <element name="RecordMO" positionX="290.28125" positionY="9.48828125" width="128" height="148"/>
+        <element name="TravelMO" positionX="-36" positionY="9" width="128" height="163"/>
+        <element name="LocationMO" positionX="223.796875" positionY="216.45703125" width="128" height="88"/>
     </elements>
 </model>

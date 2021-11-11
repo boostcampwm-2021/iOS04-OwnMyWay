@@ -12,8 +12,9 @@ class PlusCell: UICollectionViewCell {
 
     private var dashedLayer: CAShapeLayer?
 
-    func bind() {
-        drawDottedLayer()
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.drawDottedLayer()
     }
 
     private func drawDottedLayer() {

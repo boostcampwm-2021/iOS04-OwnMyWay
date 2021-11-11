@@ -9,8 +9,6 @@ import CoreLocation
 import Foundation
 import MapKit
 
-import Kingfisher
-
 class LandmarkAnnotationView: MKAnnotationView {
     static let identifier = "LandmarkAnnotationView"
 
@@ -18,18 +16,18 @@ class LandmarkAnnotationView: MKAnnotationView {
 
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        configure()
+        self.configure()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        configure()
+        self.configure()
     }
 
     func configure() {
         self.canShowCallout = true
         self.image = UIImage(named: "LandmarkPin")
-        configureDetailView()
+        self.configureDetailView()
     }
 
     func configureDetailView() {
@@ -40,10 +38,12 @@ class LandmarkAnnotationView: MKAnnotationView {
         let detailView = UIView()
         let imageView = UIImageView(frame: rect)
         detailView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.kf.setImage(with: annotation.image)
+        imageView.setImage(with: annotation.image)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         detailView.addSubview(imageView)
 
-        detailCalloutAccessoryView = detailView
+        self.detailCalloutAccessoryView = detailView
         NSLayoutConstraint.activate([
             detailView.widthAnchor.constraint(equalToConstant: rect.width),
             detailView.heightAnchor.constraint(equalToConstant: rect.height)

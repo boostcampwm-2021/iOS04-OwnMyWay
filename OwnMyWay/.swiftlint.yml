@@ -32,3 +32,5 @@ excluded:
   - OwnMyWay/Model/RecordMO+CoreDataProperties.swift
   - OwnMyWay/Model/LandmarkMO+CoreDataClass.swift
   - OwnMyWay/Model/LandmarkMO+CoreDataProperties.swift
+  - OwnMyWay/Model/LocationMO+CoreDataClass.swift
+  - OwnMyWay/Model/LocationMO+CoreDataProperties.swift

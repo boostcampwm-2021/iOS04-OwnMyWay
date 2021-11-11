@@ -7,28 +7,53 @@
 
 import UIKit
 
-class AddLandmarkViewController: UIViewController, Instantiable {
+class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
+
     private var bindContainerVC: ((UIView) -> Void)?
+    private var viewModel: AddLandmarkViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureNavigation()
         self.bindContainerVC?(self.cartView)
-    }
-
-    func bind(closure: @escaping (UIView) -> Void) {
-        self.bindContainerVC = closure
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let mapViewHeight: CGFloat = UIScreen.main.bounds.width
         let collectionViewHeight: CGFloat = 220
-        contentView.heightAnchor
+        self.contentView.heightAnchor
             .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
             .isActive = true
-        view.layoutIfNeeded()
+        self.view.layoutIfNeeded()
+    }
+
+    func bind(viewModel: AddLandmarkViewModel, closure: @escaping (UIView) -> Void) {
+        self.viewModel = viewModel
+        self.bindContainerVC = closure
+    }
+
+    func didUpdateTravel(to travel: Travel) {
+        self.viewModel?.didUpdateTravel(to: travel)
+    }
+
+    private func configureNavigation() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.backward"),
+            style: .plain,
+            target: self,
+            action: #selector(backButtonAction)
+        )
+    }
+
+    @objc private func backButtonAction() {
+        self.viewModel?.didTouchBackButton()
+    }
+
+    @IBAction func didTouchNextButton(_ sender: Any) {
+        self.viewModel?.didTouchNextButton()
     }
 
 }

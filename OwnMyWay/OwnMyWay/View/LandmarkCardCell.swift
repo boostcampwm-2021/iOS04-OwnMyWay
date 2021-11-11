@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class LandmarkCardCell: UICollectionViewCell {
     static let identifier: String = "LandmarkCardCell"
@@ -28,8 +27,8 @@ class LandmarkCardCell: UICollectionViewCell {
         self.layer.cornerRadius = 10.0
     }
 
-    func configure(landmark: Landmark) {
-        self.imageView.kf.setImage(with: landmark.image)
+    func configure(with landmark: Landmark) {
+        self.imageView.setImage(with: landmark.image)
         self.titleLabel.text = landmark.title
     }
 }

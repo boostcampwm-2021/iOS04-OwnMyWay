@@ -17,49 +17,51 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
 
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var collectionView: UICollectionView!
-    // usecase, viewModel 상위에서 주입
-    private(set) var viewModel: LandmarkCartViewModelType?
-    private var diffableDataSource: DataSource?
-    private var cancellable: AnyCancellable?
-    private let locationManager: CLLocationManager = CLLocationManager()
 
-    var coordinator: LandmarkCartCoordinator?
+    private(set) var viewModel: LandmarkCartViewModel?
+    private var diffableDataSource: DataSource?
+    private var cancellables: Set<AnyCancellable> = []
+    private let locationManager: CLLocationManager = CLLocationManager()
 
     enum Section: CaseIterable { case main }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.registerNib()
+        self.configureNibs()
 
         self.mapView.delegate = self
-        self.initializeMapView(mapView: self.mapView)
+        self.configureMapView(with: self.mapView)
 
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
 
         self.collectionView.delegate = self
-        self.collectionView.collectionViewLayout = createCompositionalLayout()
-        self.diffableDataSource = createMakeDiffableDataSource()
+        self.collectionView.collectionViewLayout = configureCompositionalLayout()
+        self.diffableDataSource = configureDiffableDataSource()
         self.configureCancellable()
     }
 
-    func bind(viewModel: LandmarkCartViewModelType) {
+    func bind(viewModel: LandmarkCartViewModel) {
         self.viewModel = viewModel
     }
 
-    private func registerNib() {
-        self.collectionView.register(UINib(nibName: LandmarkCardCell.identifier, bundle: nil),
-                                     forCellWithReuseIdentifier: LandmarkCardCell.identifier)
-        self.collectionView.register(UINib(nibName: PlusCell.identifier, bundle: nil),
-                                     forCellWithReuseIdentifier: PlusCell.identifier)
+    private func configureNibs() {
+        self.collectionView.register(
+            UINib(nibName: LandmarkCardCell.identifier, bundle: nil),
+            forCellWithReuseIdentifier: LandmarkCardCell.identifier
+        )
+        self.collectionView.register(
+            UINib(nibName: PlusCell.identifier, bundle: nil),
+            forCellWithReuseIdentifier: PlusCell.identifier
+        )
     }
 
     private func configureCancellable() {
-        guard let viewModel = viewModel else { return }
-        self.cancellable = viewModel.travelPublisher.sink { [weak self] travel in
-            DispatchQueue.main.async {
+        self.viewModel?.travelPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] travel in
                 var snapshot = NSDiffableDataSourceSectionSnapshot<Landmark>()
-                let snapshotItem = travel.landmarks + [Landmark()]
+                let snapshotItem = [Landmark()] + travel.landmarks.reversed()
                 snapshot.append(snapshotItem)
                 self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
 
@@ -68,48 +70,53 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
                 self?.drawLandmarkAnnotations(mapView: mapView, annotations: annotations)
                 self?.moveRegion(mapView: mapView, annotations: annotations, animated: true)
             }
-        }
+            .store(in: &cancellables)
     }
 
-    private func createCompositionalLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalWidth(1.0))
+    private func configureCompositionalLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0)
+        )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 5, leading: 5, bottom: 5, trailing: 5
+        )
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(180),
-                                               heightDimension: .absolute(180))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(180), heightDimension: .absolute(180)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize, subitems: [item]
+        )
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10,
-                                                        leading: 10,
-                                                        bottom: 10,
-                                                        trailing: 10)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 10, leading: 10, bottom: 10, trailing: 10
+        )
 
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+        return UICollectionViewCompositionalLayout(section: section)
     }
 
-    private func createMakeDiffableDataSource() -> DataSource {
+    private func configureDiffableDataSource() -> DataSource {
         let dataSource = DataSource(
-            collectionView: self.collectionView) { collectionView, indexPath, item in
-                guard let viewModel = self.viewModel else { return UICollectionViewCell() }
+            collectionView: self.collectionView
+        ) { collectionView, indexPath, item in
                 switch indexPath.item {
-                case viewModel.travel.landmarks.count:
+                case 0: // plusCell
                     guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: PlusCell.identifier,
-                        for: indexPath) as? PlusCell
+                        for: indexPath
+                    ) as? PlusCell
                     else { return UICollectionViewCell() }
-                    cell.bind()
                     return cell
                 default:
                     guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: LandmarkCardCell.identifier,
-                        for: indexPath) as? LandmarkCardCell
+                        for: indexPath
+                    ) as? LandmarkCardCell
                     else { return UICollectionViewCell() }
-                    cell.configure(landmark: item)
+                    cell.configure(with: item)
                     return cell
                 }
         }
@@ -121,9 +128,9 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
 
 extension LandmarkCartViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == collectionView.numberOfItems(inSection: 0) - 1 {
+        if indexPath.item == 0 {
             // PlusCell 일 경우
-            self.coordinator?.presentSearchLandmarkModally()
+            self.viewModel?.didTouchPlusButton()
         }
     }
 }
