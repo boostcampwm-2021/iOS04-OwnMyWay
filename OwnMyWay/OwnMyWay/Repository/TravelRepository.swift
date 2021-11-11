@@ -27,7 +27,7 @@ protocol TravelRepository {
         latitude: Double?,
         longitude: Double?
     ) -> Result<Record, Error>
-    func addLocation(
+    @discardableResult func addLocation(
         to travel: Travel,
         latitude: Double?,
         longitude: Double?

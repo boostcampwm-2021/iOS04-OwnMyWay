@@ -19,6 +19,7 @@ class OngoingTravelViewController: UIViewController, Instantiable {
     private var viewModel: OngoingTravelViewModel?
     private var diffableDataSource: OngoingTravelDataSource?
     private var cancellables: Set<AnyCancellable> = []
+    private let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class OngoingTravelViewController: UIViewController, Instantiable {
         self.configureNibs()
         self.configureTravelCollectionView()
         self.configureCancellable()
+        self.configureLocationManager()
     }
 
     override func viewWillLayoutSubviews() {
@@ -33,9 +35,23 @@ class OngoingTravelViewController: UIViewController, Instantiable {
         self.configureButtonConstraint()
     }
 
+    func bind(viewModel: OngoingTravelViewModel) {
+        self.viewModel = viewModel
+    }
+
     private func configureButtonConstraint() {
         let bottomPadding = self.view.safeAreaInsets.bottom
         self.finishButtonHeightConstraint.constant = 60 + bottomPadding
+    }
+
+    private func configureLocationManager() {
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.distanceFilter = 10
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.allowsBackgroundLocationUpdates = true
+        self.locationManager.pausesLocationUpdatesAutomatically = false
+        self.locationManager.startUpdatingLocation()
     }
 
     private func configureNavigation() {
@@ -49,10 +65,6 @@ class OngoingTravelViewController: UIViewController, Instantiable {
         )
     }
 
-    func bind(viewModel: OngoingTravelViewModel) {
-        self.viewModel = viewModel
-    }
-
     @objc private func backButtonAction() {
         self.viewModel?.didTouchBackButton()
     }
@@ -62,6 +74,7 @@ class OngoingTravelViewController: UIViewController, Instantiable {
     }
 
     @IBAction func didTouchFinishButton(_ sender: UIButton) {
+        self.locationManager.stopUpdatingLocation()
         self.viewModel?.didTouchFinishButton()
     }
 
@@ -93,6 +106,14 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
 
     private func configureCancellable() {
         viewModel?.travelPublisher.sink { [weak self] travel in
+            if let mapCell = self?.collectionView.cellForItem(
+                at: IndexPath(item: 0, section: 0)
+            ) as? MapCell {
+                mapCell.drawLocationPath(
+                    mapView: mapCell.mapView, locations: travel.locations
+                )
+            }
+
             var snapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
 
@@ -185,7 +206,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
         else { return }
 
         self.viewModel?.didTouchRecordCell(at: record)
-
     }
 }
 
@@ -212,4 +232,26 @@ extension OngoingTravelViewController: MKMapViewDelegate {
             return nil
         }
     }
+
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard let polyline = overlay as? MKPolyline else { return MKOverlayRenderer() }
+        let polylineRenderer = MKPolylineRenderer(polyline: polyline)
+        polylineRenderer.strokeColor = .orange
+        polylineRenderer.lineWidth = 5
+        polylineRenderer.alpha = 1
+        polylineRenderer.lineCap = .round
+        return polylineRenderer
+    }
+}
+
+extension OngoingTravelViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let lastLocation = locations.last
+        guard let latitude = lastLocation?.coordinate.latitude,
+              let longitude = lastLocation?.coordinate.longitude
+        else { return }
+        self.viewModel?.didUpdateCoordinate(latitude: latitude, longitude: longitude)
+    }
+
 }
