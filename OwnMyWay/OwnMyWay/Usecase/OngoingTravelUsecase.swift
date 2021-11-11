@@ -11,6 +11,7 @@ protocol OngoingTravelUsecase {
     func executeFetch()
     func executeFinishingTravel()
     func executeFlagUpdate(of travel: Travel)
+    func executeLocationUpdate(of travel: Travel, latitude: Double, longitude: Double)
 }
 
 struct DefaultOngoingTravelUsecase: OngoingTravelUsecase {
@@ -27,4 +28,11 @@ struct DefaultOngoingTravelUsecase: OngoingTravelUsecase {
     func executeFlagUpdate(of travel: Travel) {
         self.repository.update(travel: travel)
     }
+
+    func executeLocationUpdate(of travel: Travel, latitude: Double, longitude: Double) {
+        self.repository.addLocation(
+            to: travel, latitude: latitude, longitude: longitude
+        )
+    }
+
 }
