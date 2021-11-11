@@ -44,6 +44,10 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: TravelSectionHeader.identifier
         )
+        self.travelCollectionView.register(
+            UINib(nibName: CommentCell.identifier, bundle: nil),
+            forCellWithReuseIdentifier: CommentCell.identifier
+        )
     }
 
     private func configureTravelCollectionView() {
@@ -101,6 +105,39 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
     }
 
     private func configureCompositionalLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { _, _  in
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
+            )
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(100)
+            )
+            let group = NSCollectionLayoutGroup.horizontal(
+                layoutSize: groupSize, subitems: [item]
+            )
+
+            let section = NSCollectionLayoutSection(group: group)
+            section.orthogonalScrollingBehavior = .continuous
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 10, leading: 10, bottom: 10, trailing: 10
+            )
+            section.interGroupSpacing = 10
+            let headerSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)
+            )
+            let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: headerSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+            section.boundarySupplementaryItems = [headerElement]
+            return section
+        }
+    }
+
+    private func reservedLayoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)
         )
@@ -130,8 +167,40 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
             alignment: .top
         )
         section.boundarySupplementaryItems = [headerElement]
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+
+        return section
+    }
+
+    private func defaultLayoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(100)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize, subitems: [item]
+        )
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 10, leading: 10, bottom: 10, trailing: 10
+        )
+                section.interGroupSpacing = 10
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)
+        )
+        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [headerElement]
+
+        return section
     }
 
     private func configureDiffableDataSource() -> HomeDataSource {
@@ -145,7 +214,20 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
                         withReuseIdentifier: PlusCell.identifier,
                         for: indexPath) as? PlusCell
                     else { return UICollectionViewCell() }
-                    cell.configure()
+                    return cell
+                case (Travel.Section.ongoing.index, -1):
+                    guard let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: CommentCell.identifier,
+                        for: indexPath) as? CommentCell
+                    else { return UICollectionViewCell() }
+                    cell.configure(text: "진행중인 여행이 없어요 🤷")
+                    return cell
+                case (Travel.Section.outdated.index, -1):
+                    guard let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: CommentCell.identifier,
+                        for: indexPath) as? CommentCell
+                    else { return UICollectionViewCell() }
+                    cell.configure(text: "지난 여행이 없어요 🤷‍♂️")
                     return cell
                 default:
                     guard let cell = collectionView.dequeueReusableCell(
@@ -156,18 +238,25 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
                     return cell
                 }
         }
-        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
-            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: TravelSectionHeader.identifier,
-                for: indexPath
-            ) as? TravelSectionHeader
-            else { return UICollectionReusableView() }
-            let title = ["예정된 여행", "진행중인 여행", "지난 여행"]
-            sectionHeader.configure(sectionTitle: title[indexPath.section])
-            return sectionHeader
-        }
+        dataSource.supplementaryViewProvider = configureSupplementaryView(
+            collectionView:kind:indexPath:
+        )
         return dataSource
+    }
+
+    private func configureSupplementaryView(
+        collectionView: UICollectionView, kind: String, indexPath: IndexPath
+    ) -> UICollectionReusableView? {
+        guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: TravelSectionHeader.identifier,
+            for: indexPath
+        ) as? TravelSectionHeader
+        else { return UICollectionReusableView() }
+
+        let title = ["예정된 여행", "진행중인 여행", "지난 여행"]
+        sectionHeader.configure(sectionTitle: title[indexPath.section])
+        return sectionHeader
     }
 }
 
@@ -176,8 +265,11 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let travel = self.diffableDataSource?.itemIdentifier(for: indexPath)
         else { return }
-        if travel.flag == -1 {
+        if indexPath.section == Travel.Section.reserved.index,
+           travel.flag == Travel.Section.dummy.index {
             self.viewModel?.didTouchCreateButton()
+            return
+        } else if travel.flag == Travel.Section.dummy.index {
             return
         }
         switch indexPath.section {

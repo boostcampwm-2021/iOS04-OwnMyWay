@@ -109,7 +109,6 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
                         for: indexPath
                     ) as? PlusCell
                     else { return UICollectionViewCell() }
-                    cell.configure()
                     return cell
                 default:
                     guard let cell = collectionView.dequeueReusableCell(
