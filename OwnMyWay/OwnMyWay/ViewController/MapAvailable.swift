@@ -27,6 +27,10 @@ extension MapAvailable {
             LandmarkAnnotationView.self,
             forAnnotationViewWithReuseIdentifier: LandmarkAnnotationView.identifier
         )
+        mapView.register(
+            RecordAnnotationView.self,
+            forAnnotationViewWithReuseIdentifier: RecordAnnotationView.identifier
+        )
 
         mapView.setRegion(
             MKCoordinateRegion(
@@ -84,7 +88,9 @@ extension MapAvailable {
     }
 
     func drawRecordAnnotations(mapView: MKMapView, annotations: [MKAnnotation]) {
-        // 추후 구현
+        let deleteSet = mapView.annotations.filter({ $0 is RecordAnnotation })
+        mapView.removeAnnotations(deleteSet)
+        mapView.addAnnotations(annotations)
     }
 
     func drawLandmarkAnnotations(mapView: MKMapView, annotations: [MKAnnotation]) {

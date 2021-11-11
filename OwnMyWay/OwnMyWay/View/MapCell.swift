@@ -18,16 +18,29 @@ class MapCell: UICollectionViewCell, MapAvailable {
         self.configureMapView(with: self.mapView)
     }
 
-    func configure(with travel: Travel) {
+    func configure(with travel: Travel, delegate: MKMapViewDelegate) {
+        self.mapView.delegate = delegate
+
         let landmarkAnnotations = travel.landmarks.map {
             LandmarkAnnotation.init(landmark: $0)
         }
+        let recordAnnotations = travel.records.map {
+            RecordAnnotation.init(record: $0)
+        }
+
         self.drawLandmarkAnnotations(
             mapView: self.mapView,
             annotations: landmarkAnnotations
         )
+        self.drawRecordAnnotations(
+            mapView: self.mapView,
+            annotations: recordAnnotations
+        )
+
         self.moveRegion(
-            mapView: self.mapView, annotations: landmarkAnnotations, animated: true
+            mapView: self.mapView,
+            annotations: landmarkAnnotations + recordAnnotations,
+            animated: true
         )
     }
 }
