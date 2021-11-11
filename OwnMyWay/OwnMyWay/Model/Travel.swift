@@ -24,7 +24,8 @@ struct Travel {
     static func dummy(section: Section) -> Travel {
         return Travel(
             uuid: UUID(), flag: section.index, title: nil,
-            startDate: nil, endDate: nil, landmarks: [], records: []
+            startDate: nil, endDate: nil,
+            landmarks: [], records: [], locations: []
         )
     }
 
@@ -35,6 +36,7 @@ struct Travel {
     var endDate: Date?
     var landmarks: [Landmark]
     var records: [Record]
+    var locations: [Location]
 }
 
 extension Travel: Hashable {

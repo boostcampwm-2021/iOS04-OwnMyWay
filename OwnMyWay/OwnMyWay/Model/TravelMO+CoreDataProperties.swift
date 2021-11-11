@@ -2,7 +2,7 @@
 //  TravelMO+CoreDataProperties.swift
 //  OwnMyWay
 //
-//  Created by 강현준 on 2021/11/08.
+//  Created by 김우재 on 2021/11/11.
 //
 //
 
@@ -23,6 +23,7 @@ extension TravelMO {
     @NSManaged public var uuid: UUID?
     @NSManaged public var landmarks: NSOrderedSet?
     @NSManaged public var records: NSOrderedSet?
+    @NSManaged public var locations: NSOrderedSet?
 
 }
 
@@ -93,6 +94,41 @@ extension TravelMO {
 
     @objc(removeRecords:)
     @NSManaged public func removeFromRecords(_ values: NSOrderedSet)
+
+}
+
+// MARK: Generated accessors for locations
+extension TravelMO {
+
+    @objc(insertObject:inLocationsAtIndex:)
+    @NSManaged public func insertIntoLocations(_ value: LocationMO, at idx: Int)
+
+    @objc(removeObjectFromLocationsAtIndex:)
+    @NSManaged public func removeFromLocations(at idx: Int)
+
+    @objc(insertLocations:atIndexes:)
+    @NSManaged public func insertIntoLocations(_ values: [LocationMO], at indexes: NSIndexSet)
+
+    @objc(removeLocationsAtIndexes:)
+    @NSManaged public func removeFromLocations(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInLocationsAtIndex:withObject:)
+    @NSManaged public func replaceLocations(at idx: Int, with value: LocationMO)
+
+    @objc(replaceLocationsAtIndexes:withLocations:)
+    @NSManaged public func replaceLocations(at indexes: NSIndexSet, with values: [LocationMO])
+
+    @objc(addLocationsObject:)
+    @NSManaged public func addToLocations(_ value: LocationMO)
+
+    @objc(removeLocationsObject:)
+    @NSManaged public func removeFromLocations(_ value: LocationMO)
+
+    @objc(addLocations:)
+    @NSManaged public func addToLocations(_ values: NSOrderedSet)
+
+    @objc(removeLocations:)
+    @NSManaged public func removeFromLocations(_ values: NSOrderedSet)
 
 }
 
