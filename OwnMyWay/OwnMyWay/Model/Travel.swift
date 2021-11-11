@@ -11,7 +11,7 @@ import CoreData
 struct Travel {
 
     enum Section: Int, CaseIterable {
-        case plusButton = -1
+        case dummy = -1
         case reserved = 0
         case ongoing = 1
         case outdated = 2
