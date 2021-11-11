@@ -19,14 +19,17 @@ public class TravelMO: NSManagedObject {
             startDate: self.startDate,
             endDate: self.endDate,
             landmarks: [],
-            records: []
+            records: [],
+            locations: []
         )
         guard let landmarks = self.landmarks?.array as? [LandmarkMO],
-              let records = self.records?.array as? [RecordMO]
+              let records = self.records?.array as? [RecordMO],
+              let locations = self.locations?.array as? [LocationMO]
         else { return result }
 
         result.landmarks = landmarks.map{ $0.toLandmark() }
         result.records = records.map{ $0.toRecord() }
+        result.locations = locations.map { $0.toLocation() }
         return result
     }
     
@@ -38,5 +41,6 @@ public class TravelMO: NSManagedObject {
         self.endDate = travel.endDate
         self.landmarks = NSOrderedSet(array: travel.landmarks)
         self.records = NSOrderedSet(array: travel.records)
+        self.locations = NSOrderedSet(array: travel.locations)
     }
 }
