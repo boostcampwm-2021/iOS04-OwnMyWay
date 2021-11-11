@@ -17,8 +17,8 @@ class RecordCardCell: UICollectionViewCell {
     func configure(with record: Record) {
         self.configureBorderAndShadow()
 
-        //self.recordCardImageView.setImage(with: record.photoURL)
-        //self.recordContentLabel.text = record.content
+        self.recordCardImageView.setImage(with: record.photoURL)
+        self.recordContentLabel.text = record.content
 
 //        self.recordCardImageView.backgroundColor = .green
 //        self.recordTimeButton.setTitle(record.date?.time(), for: .normal)

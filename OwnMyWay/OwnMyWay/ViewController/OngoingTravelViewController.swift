@@ -6,6 +6,7 @@
 //
 
 import Combine
+import MapKit
 import UIKit
 
 typealias OngoingTravelDataSource = UICollectionViewDiffableDataSource <String, Record>
@@ -87,13 +88,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
                 snapshot.appendSections([date.toKorean()])
                 snapshot.appendItems(recordList, toSection: date.toKorean())
             }
-
-            snapshot.appendSections(["2021년 11월 27일"])
-            snapshot.appendItems([Record(uuid: UUID(), content: "test1", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test2", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "2021년 11월 27일")
-
-            snapshot.appendSections(["2021년 11월 28일"])
-            snapshot.appendItems([Record(uuid: UUID(), content: "test3", date: Date(), latitude: 10, longitude: 10, photoURL: nil), Record(uuid: UUID(), content: "test4", date: Date(), latitude: 10, longitude: 10, photoURL: nil)], toSection: "2021년 11월 28일")
-
             self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
         }.store(in: &cancellables)
     }
@@ -139,7 +133,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
                 ) as? MapCell,
                       let travel = self.viewModel?.travel
                 else { return UICollectionViewCell() }
-                cell.configure(with: travel)
+                cell.configure(with: travel, delegate: self)
                 return cell
 
             default:
@@ -170,10 +164,36 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let record = self.diffableDataSource?.itemIdentifier(for: indexPath)
+        guard let record = self.diffableDataSource?.itemIdentifier(for: indexPath),
+              indexPath.section != 0
         else { return }
 
         self.viewModel?.didTouchRecordCell(at: record)
 
+    }
+}
+
+// MARK: - extension OngoingTravelViewController for MKMapViewDelegate
+
+extension OngoingTravelViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        switch annotation {
+        case is LandmarkAnnotation:
+            let annotationView = mapView.dequeueReusableAnnotationView(
+                withIdentifier: LandmarkAnnotationView.identifier,
+                for: annotation
+            ) as? LandmarkAnnotationView
+            annotationView?.annotation = annotation
+            return annotationView
+        case is RecordAnnotation:
+            let annotationView = mapView.dequeueReusableAnnotationView(
+                withIdentifier: RecordAnnotationView.identifier,
+                for: annotation
+            ) as? RecordAnnotationView
+            annotationView?.annotation = annotation
+            return annotationView
+        default:
+            return nil
+        }
     }
 }
