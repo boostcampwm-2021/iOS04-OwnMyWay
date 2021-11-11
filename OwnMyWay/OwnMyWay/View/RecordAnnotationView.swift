@@ -16,18 +16,18 @@ class RecordAnnotationView: MKAnnotationView {
 
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        configure()
+        self.configure()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        configure()
+        self.configure()
     }
 
     func configure() {
         self.canShowCallout = true
         self.image = UIImage(named: "RecordPin")
-        configureDetailView()
+        self.configureDetailView()
     }
 
     func configureDetailView() {
@@ -43,7 +43,7 @@ class RecordAnnotationView: MKAnnotationView {
         imageView.clipsToBounds = true
         detailView.addSubview(imageView)
 
-        detailCalloutAccessoryView = detailView
+        self.detailCalloutAccessoryView = detailView
         NSLayoutConstraint.activate([
             detailView.widthAnchor.constraint(equalToConstant: rect.width),
             detailView.heightAnchor.constraint(equalToConstant: rect.height)
