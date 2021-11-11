@@ -21,6 +21,8 @@
 		294897C6273BF181003185E7 /* DetailRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C5273BF181003185E7 /* DetailRecordViewModel.swift */; };
 		294897C8273BF1F1003185E7 /* DetailRecord.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 294897C7273BF1F1003185E7 /* DetailRecord.storyboard */; };
 		294897CA273BF3D7003185E7 /* DetailRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C9273BF3D7003185E7 /* DetailRecordUsecase.swift */; };
+		294897CD273CDCF1003185E7 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897CB273CDCF1003185E7 /* CommentCell.swift */; };
+		294897CE273CDCF1003185E7 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294897CC273CDCF1003185E7 /* CommentCell.xib */; };
 		29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */; };
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
 		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
@@ -137,6 +139,8 @@
 		294897C5273BF181003185E7 /* DetailRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewModel.swift; sourceTree = "<group>"; };
 		294897C7273BF1F1003185E7 /* DetailRecord.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailRecord.storyboard; sourceTree = "<group>"; };
 		294897C9273BF3D7003185E7 /* DetailRecordUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordUsecase.swift; sourceTree = "<group>"; };
+		294897CB273CDCF1003185E7 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		294897CC273CDCF1003185E7 /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewModel.swift; sourceTree = "<group>"; };
 		29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelUsecase.swift; sourceTree = "<group>"; };
 		29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 				DB2823B8273BA83D007D8801 /* MapCell.xib */,
 				DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */,
 				DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */,
+				294897CB273CDCF1003185E7 /* CommentCell.swift */,
+				294897CC273CDCF1003185E7 /* CommentCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -544,6 +550,7 @@
 			files = (
 				294897C8273BF1F1003185E7 /* DetailRecord.storyboard in Resources */,
 				AF82FDB8273BF3C600A094B6 /* OutdatedTravel.storyboard in Resources */,
+				294897CE273CDCF1003185E7 /* CommentCell.xib in Resources */,
 				DB22BB73272F83DB0004444B /* .swiftlint.yml in Resources */,
 				29E9BA36273251BE0040B70A /* LandmarkCart.storyboard in Resources */,
 				29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */,
@@ -678,6 +685,7 @@
 				AF82FDAE273BEB5700A094B6 /* AddRecordCoordinator.swift in Sources */,
 				DBFC041427391EDB00031EDF /* SearchLandmarkCoordinator.swift in Sources */,
 				3FB914BE273409530084FF1C /* TravelCardCell.swift in Sources */,
+				294897CD273CDCF1003185E7 /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
