@@ -23,6 +23,7 @@ class OngoingTravelViewController: UIViewController, Instantiable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureNavigation()
         self.configureNibs()
         self.configureTravelCollectionView()
         self.configureCancellable()
@@ -54,6 +55,17 @@ class OngoingTravelViewController: UIViewController, Instantiable {
         self.locationManager.startUpdatingLocation()
     }
 
+    private func configureNavigation() {
+        self.navigationItem.title = viewModel?.travel.title
+
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.backward"),
+            style: .plain,
+            target: self,
+            action: #selector(backButtonAction)
+        )
+    }
+
     private func drawMapCell() {
         guard let mapCell = self.collectionView.cellForItem(
             at: IndexPath(item: 0, section: 0)
@@ -62,6 +74,10 @@ class OngoingTravelViewController: UIViewController, Instantiable {
         mapCell.drawLocationPath(
             mapView: mapCell.mapView, locations: viewModel?.travel.locations ?? []
         )
+    }
+
+    @objc private func backButtonAction() {
+        self.viewModel?.didTouchBackButton()
     }
 
     @IBAction func didTouchAddRecordButton(_ sender: UIButton) {
