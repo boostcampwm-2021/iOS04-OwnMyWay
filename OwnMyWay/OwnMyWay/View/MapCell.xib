@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,6 +23,18 @@
                             <constraint firstAttribute="width" secondItem="9FQ-wX-lrX" secondAttribute="height" id="Lv7-Nf-e2R"/>
                         </constraints>
                     </mapView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eee-7d-xlG">
+                        <rect key="frame" x="20" y="20" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="4qb-1d-UAG"/>
+                            <constraint firstAttribute="width" constant="44" id="KtS-gH-2zj"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="paperplane.circle" catalog="system"/>
+                        <connections>
+                            <action selector="didTouchTrackingButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Ftm-yk-kej"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -29,7 +42,9 @@
                 <constraint firstItem="9FQ-wX-lrX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CT9-Qg-LbA"/>
                 <constraint firstAttribute="trailing" secondItem="9FQ-wX-lrX" secondAttribute="trailing" id="WgL-dd-fWu"/>
                 <constraint firstItem="9FQ-wX-lrX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XYm-as-c7K"/>
-                <constraint firstAttribute="bottom" secondItem="9FQ-wX-lrX" secondAttribute="bottom" id="ff6-8L-kF0"/>
+                <constraint firstItem="eee-7d-xlG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="aM3-Q5-wXi"/>
+                <constraint firstItem="eee-7d-xlG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="c21-oz-Fl8"/>
+                <constraint firstAttribute="bottom" secondItem="9FQ-wX-lrX" secondAttribute="bottom" priority="750" id="ff6-8L-kF0"/>
             </constraints>
             <size key="customSize" width="346" height="346"/>
             <connections>
@@ -38,4 +53,7 @@
             <point key="canvasLocation" x="155.07246376811597" y="204.91071428571428"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="paperplane.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>
