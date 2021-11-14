@@ -13,6 +13,7 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var travelTypeLabel: UILabel!
     @IBOutlet private weak var startButton: NextButton!
+    @IBOutlet weak var startButtonHeightConstraint: NSLayoutConstraint!
 
     private var bindContainerVC: ((UIView) -> Void)?
     private var viewModel: ReservedTravelViewModel?
@@ -22,7 +23,11 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         self.configureDescription()
         self.configureStartButton()
         self.bindContainerVC?(self.cartView)
+    }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.configureButtonConstraint()
     }
 
     override func viewDidLayoutSubviews() {
@@ -42,6 +47,11 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
 
     func didUpdateTravel(to travel: Travel) {
         self.viewModel?.didUpdateTravel(to: travel)
+    }
+
+    private func configureButtonConstraint() {
+        let bottomPadding = self.view.safeAreaInsets.bottom
+        self.startButtonHeightConstraint.constant = 60 + bottomPadding
     }
 
     private func configureDescription() {

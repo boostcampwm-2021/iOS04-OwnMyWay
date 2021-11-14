@@ -94,10 +94,10 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzu-vs-UWO" customClass="NextButton" customModule="OwnMyWay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="806" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
                                 <color key="backgroundColor" name="IdentityBlue"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="J6J-7r-rHE"/>
+                                    <constraint firstAttribute="height" constant="60" id="J6J-7r-rHE"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
@@ -131,6 +131,7 @@
                     <connections>
                         <outlet property="calendarView" destination="LjK-w9-XFr" id="UwQ-pW-rWj"/>
                         <outlet property="nextButton" destination="nzu-vs-UWO" id="kaw-FN-hOK"/>
+                        <outlet property="nextButtonHeightConstraint" destination="J6J-7r-rHE" id="XcU-ug-Bon"/>
                         <outlet property="travelTitleField" destination="cs1-WO-d5D" id="s5H-6S-EG9"/>
                     </connections>
                 </viewController>
