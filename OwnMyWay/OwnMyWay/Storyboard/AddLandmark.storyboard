@@ -22,7 +22,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="방문할 ">
                                         <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="NSColor" systemColor="labelColor"/>
                                             <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -36,7 +36,7 @@
                                     </fragment>
                                     <fragment content="를 추가해주세요">
                                         <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="NSColor" systemColor="labelColor"/>
                                             <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>

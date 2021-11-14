@@ -30,7 +30,7 @@
                                     </fragment>
                                     <fragment content="을 입력해주세요">
                                         <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="NSColor" systemColor="labelColor"/>
                                             <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -58,7 +58,7 @@
                                     </fragment>
                                     <fragment content="를 선택해주세요">
                                         <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="NSColor" systemColor="labelColor"/>
                                             <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
