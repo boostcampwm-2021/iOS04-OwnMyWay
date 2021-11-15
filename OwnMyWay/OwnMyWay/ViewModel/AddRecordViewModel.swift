@@ -10,6 +10,7 @@ import Foundation
 
 protocol AddRecordViewModel {
     func didEnterTitle(text: String?)
+    func didTouchBackButton()
     // TODO: Photo 들어왔을 때 처리 함수 추가
 }
 
@@ -69,6 +70,10 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didEnterTitle(text: String?) {
         // TODO: 1~20자 사이일 경우 vaild
+    }
+
+    func didTouchBackButton() {
+        self.coordinatingDelegate?.popToParent(with: nil)
     }
 
     private func checkValidation() {
