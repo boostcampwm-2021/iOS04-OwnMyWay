@@ -9,6 +9,8 @@ import Combine
 import Foundation
 
 protocol AddRecordViewModel {
+    var validatePublisher: Published<Bool?>.Publisher { get }
+
     func didEnterTitle(text: String?)
     func didTouchBackButton()
     func didTouchSubmitButton()
@@ -20,13 +22,13 @@ protocol AddRecordCoordinatingDelegate: AnyObject {
 }
 
 class DefaultAddRecordViewModel: AddRecordViewModel {
+    var validatePublisher: Published<Bool?>.Publisher { $validateResult }
 
     private var travel: Travel
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
 
     @Published private var validateResult: Bool?
-
     private var recordTitle: String?
     private var recordDate: Date?
     private var recordCoordinate: (Double, Double)?
@@ -92,7 +94,6 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         // TODO: usecase를 통해 coreData 업데이트가 필요함
         self.coordinatingDelegate?.popToParent(with: record)
     }
-
 
     private func checkValidation() {
         validateResult
