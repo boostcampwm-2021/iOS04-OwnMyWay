@@ -8,6 +8,7 @@
 import Combine
 import MapKit
 import UIKit
+import OSLog
 
 typealias OngoingTravelDataSource = UICollectionViewDiffableDataSource <String, Record>
 
@@ -19,7 +20,6 @@ class OngoingTravelViewController: UIViewController, Instantiable {
     private var viewModel: OngoingTravelViewModel?
     private var diffableDataSource: OngoingTravelDataSource?
     private var cancellables: Set<AnyCancellable> = []
-    private let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +27,23 @@ class OngoingTravelViewController: UIViewController, Instantiable {
         self.configureNibs()
         self.configureTravelCollectionView()
         self.configureCancellable()
-        self.configureLocationManager()
+        LocationManager.shared.currentTravel(to: self.viewModel?.travel)
+        LocationManager.shared.requestWhenInUseAuthorization()
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.configureButtonConstraint()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LocationManager.shared.delegate = self
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        LocationManager.shared.delegate = LocationManager.shared
     }
 
     func bind(viewModel: OngoingTravelViewModel) {
@@ -42,16 +53,6 @@ class OngoingTravelViewController: UIViewController, Instantiable {
     private func configureButtonConstraint() {
         let bottomPadding = self.view.safeAreaInsets.bottom
         self.finishButtonHeightConstraint.constant = 60 + bottomPadding
-    }
-
-    private func configureLocationManager() {
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.distanceFilter = 10
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.allowsBackgroundLocationUpdates = true
-        self.locationManager.pausesLocationUpdatesAutomatically = false
-        self.locationManager.startUpdatingLocation()
     }
 
     private func configureNavigation() {
@@ -74,7 +75,6 @@ class OngoingTravelViewController: UIViewController, Instantiable {
     }
 
     @IBAction func didTouchFinishButton(_ sender: UIButton) {
-        self.locationManager.stopUpdatingLocation()
         self.viewModel?.didTouchFinishButton()
     }
 
@@ -106,17 +106,16 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
 
     private func configureCancellable() {
         viewModel?.travelPublisher.sink { [weak self] travel in
-            if let mapCell = self?.collectionView.cellForItem(
+            guard let self = self else { return }
+
+            if let mapCell = self.collectionView.cellForItem(
                 at: IndexPath(item: 0, section: 0)
             ) as? MapCell {
-                mapCell.drawLocationPath(
-                    mapView: mapCell.mapView, locations: travel.locations
-                )
+                mapCell.configure(with: travel, mapDelegate: self, buttonDelegate: self)
             }
 
             var snapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
-
             snapshot.appendSections(["map"])
             snapshot.appendItems([Record.dummy()], toSection: "map")
             recordListList.forEach { recordList in
@@ -125,7 +124,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
                 snapshot.appendSections([date.toKorean()])
                 snapshot.appendItems(recordList, toSection: date.toKorean())
             }
-            self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+            self.diffableDataSource?.apply(snapshot, animatingDifferences: true)
         }.store(in: &cancellables)
     }
 
@@ -162,15 +161,17 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
     private func configureDiffableDataSource() -> OngoingTravelDataSource {
         let dataSource = OngoingTravelDataSource(
             collectionView: self.collectionView
-        ) { collectionView, indexPath, item in
+        ) { [weak self] collectionView, indexPath, item in
+            guard let self = self else { return UICollectionViewCell() }
+
             switch indexPath.section {
             case 0:
-                guard let cell = collectionView.dequeueReusableCell(
+                guard let travel = self.viewModel?.travel,
+                      let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: MapCell.identifier, for: indexPath
-                ) as? MapCell,
-                      let travel = self.viewModel?.travel
+                ) as? MapCell
                 else { return UICollectionViewCell() }
-                cell.configure(with: travel, delegate: self)
+                cell.configure(with: travel, mapDelegate: self, buttonDelegate: self)
                 return cell
 
             default:
@@ -245,8 +246,38 @@ extension OngoingTravelViewController: MKMapViewDelegate {
     }
 }
 
-extension OngoingTravelViewController: CLLocationManagerDelegate {
+// MARK: - extension OngoingTravelViewController for ButtonDelegate
 
+extension OngoingTravelViewController: ButtonDelegate {
+    func didTouchTrackingButton() {
+        if LocationManager.shared.authorizationStatus == .authorizedAlways {
+            switch LocationManager.shared.isUpdatingLocation {
+            case true: LocationManager.shared.stopUpdatingLocation()
+            case false: LocationManager.shared.startUpdatingLocation()
+            }
+
+        } else {
+            let alert = UIAlertController(
+                title: "권한 설정이 필요합니다.",
+                message: "Setting -> OnwMyWay App -> 위치 -> 항상 허용",
+                preferredStyle: .alert
+            )
+            let action = UIAlertAction(title: "이동", style: .default) { _ in
+                guard let url = URL(string: UIApplication.openSettingsURLString)
+                else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true)
+        }
+    }
+}
+
+// MARK: - extension OngoingTravelViewController for CLLocationManagerDelegate
+
+extension OngoingTravelViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let lastLocation = locations.last
         guard let latitude = lastLocation?.coordinate.latitude,
@@ -255,4 +286,12 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
         self.viewModel?.didUpdateCoordinate(latitude: latitude, longitude: longitude)
     }
 
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse:
+            manager.requestAlwaysAuthorization()
+        default:
+            break
+        }
+    }
 }

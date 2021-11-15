@@ -66,6 +66,7 @@
 		AF82FDBC273BF3E300A094B6 /* OutdatedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */; };
 		AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */; };
 		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
+		AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA5E25A2742294100DD94D9 /* LocationManager.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
 		AFF88422273CDD49004FCE5C /* RecordAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
@@ -170,6 +171,7 @@
 		AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewModel.swift; sourceTree = "<group>"; };
 		AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelUsecase.swift; sourceTree = "<group>"; };
 		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
+		AFA5E25A2742294100DD94D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
 		AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAnnotationView.swift; sourceTree = "<group>"; };
 		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
 				AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */,
 				AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */,
+				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				AF82FDB4273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift in Sources */,
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
+				AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */,
 				DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */,
 				294897BC273B5D71003185E7 /* UIImageView+.swift in Sources */,
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
