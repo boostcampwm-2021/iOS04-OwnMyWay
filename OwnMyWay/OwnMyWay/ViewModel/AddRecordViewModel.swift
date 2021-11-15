@@ -11,6 +11,7 @@ import Foundation
 protocol AddRecordViewModel {
     func didEnterTitle(text: String?)
     func didTouchBackButton()
+    func didTouchSubmitButton()
     // TODO: Photo 들어왔을 때 처리 함수 추가
 }
 
@@ -75,6 +76,23 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     func didTouchBackButton() {
         self.coordinatingDelegate?.popToParent(with: nil)
     }
+
+    func didTouchSubmitButton() {
+        guard let recordTitle = self.recordTitle,
+              let date = self.recordDate,
+              let coordinate = self.recordCoordinate,
+              let place = self.recordPlace,
+              let content = self.recordContent
+        else { return }
+        let record = Record(
+            uuid: nil, title: recordTitle, content: content,
+            date: date, latitude: coordinate.0, longitude: coordinate.1,
+            photoURLs: recordPhotos, placeDescription: place
+        )
+        // TODO: usecase를 통해 coreData 업데이트가 필요함
+        self.coordinatingDelegate?.popToParent(with: record)
+    }
+
 
     private func checkValidation() {
         validateResult
