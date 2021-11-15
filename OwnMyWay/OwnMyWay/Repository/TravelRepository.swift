@@ -159,6 +159,7 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
+    @discardableResult
     func addLocation(
         to travel: Travel,
         latitude: Double?,

@@ -20,6 +20,11 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
         self.bindContainerVC?(self.cartView)
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.bindContainerVC = nil
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let mapViewHeight: CGFloat = UIScreen.main.bounds.width

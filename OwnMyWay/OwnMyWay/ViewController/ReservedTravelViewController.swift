@@ -25,6 +25,11 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         self.bindContainerVC?(self.cartView)
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.bindContainerVC = nil
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.configureButtonConstraint()

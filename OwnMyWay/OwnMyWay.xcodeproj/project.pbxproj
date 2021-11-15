@@ -253,12 +253,12 @@
 				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
 				AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */,
 				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
+				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
 				3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */,
 				AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */,
 				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
 				AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */,
 				AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */,
-				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
