@@ -58,7 +58,7 @@ class AddRecordViewController: UIViewController, Instantiable {
     }
 
     @IBAction func didChangeTitle(_ sender: UITextField) {
-        self.viewModel?.didEnterTitle(text: sender.text)
+        self.viewModel?.didEnterTitle(with: sender.text)
     }
 
 }

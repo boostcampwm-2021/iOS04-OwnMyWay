@@ -11,7 +11,7 @@ import Foundation
 protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
 
-    func didEnterTitle(text: String?)
+    func didEnterTitle(with text: String?)
     func didTouchBackButton()
     func didTouchSubmitButton()
     // TODO: Photo 들어왔을 때 처리 함수 추가
@@ -71,7 +71,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.coordinatingDelegate = coordinatingDelegate
     }
 
-    func didEnterTitle(text: String?) {
+    func didEnterTitle(with text: String?) {
         self.isValidTitle = self.usecase.executeValidation(title: text)
     }
 
