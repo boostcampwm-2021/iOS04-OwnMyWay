@@ -10,6 +10,7 @@ import Foundation
 protocol AddRecordUsecase {
     func executeValidationTitle(with title: String?) -> Bool
     func executeValidationDate(with date: Date?) -> Bool
+    func executeValidationCoordinate(with coordinate: Location) -> Bool
 }
 
 struct DefaultAddRecordUsecase: AddRecordUsecase {
@@ -26,6 +27,13 @@ struct DefaultAddRecordUsecase: AddRecordUsecase {
 
     func executeValidationDate(with date: Date?) -> Bool {
         return date != nil
+    }
+
+    func executeValidationCoordinate(with coordinate: Location) -> Bool {
+        guard let latitude = coordinate.latitude,
+              let longitude = coordinate.longitude
+        else { return false }
+        return (-90...90) ~= latitude && (-180...180) ~= longitude
     }
 
 }
