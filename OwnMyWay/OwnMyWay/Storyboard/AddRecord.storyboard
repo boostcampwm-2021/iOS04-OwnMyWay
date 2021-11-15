@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,22 +12,59 @@
         <!--Add Record View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="AddRecordViewController" id="Y6W-OH-hqX" customClass="AddRecordViewController" customModule="OwnMyWay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddRecordViewController" modalPresentationStyle="fullScreen" id="Y6W-OH-hqX" customClass="AddRecordViewController" customModule="OwnMyWay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목 입력" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4M-j0-aRw">
+                                <rect key="frame" x="20" y="64" width="374" height="30"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제목을 입력해주세요" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Fp1-Qy-IFd">
+                                <rect key="frame" x="20" y="114" width="374" height="25.5"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xx5-H0-fDI">
+                                <rect key="frame" x="20" y="144.5" width="374" height="1"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="03n-Dq-v9k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBrownColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="M4M-j0-aRw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="3y7-PT-zFa"/>
+                            <constraint firstItem="Xx5-H0-fDI" firstAttribute="leading" secondItem="Fp1-Qy-IFd" secondAttribute="leading" id="F84-KB-9nK"/>
+                            <constraint firstItem="M4M-j0-aRw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="LYq-fa-99F"/>
+                            <constraint firstItem="Fp1-Qy-IFd" firstAttribute="top" secondItem="M4M-j0-aRw" secondAttribute="bottom" constant="20" id="RJA-ce-vv3"/>
+                            <constraint firstItem="Xx5-H0-fDI" firstAttribute="trailing" secondItem="Fp1-Qy-IFd" secondAttribute="trailing" id="cXu-ts-qHp"/>
+                            <constraint firstItem="Fp1-Qy-IFd" firstAttribute="leading" secondItem="M4M-j0-aRw" secondAttribute="leading" id="gec-Td-l37"/>
+                            <constraint firstItem="Fp1-Qy-IFd" firstAttribute="trailing" secondItem="M4M-j0-aRw" secondAttribute="trailing" id="qgQ-e1-uQN"/>
+                            <constraint firstItem="Xx5-H0-fDI" firstAttribute="top" secondItem="Fp1-Qy-IFd" secondAttribute="bottom" constant="5" id="u5E-iw-00M"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="M4M-j0-aRw" secondAttribute="trailing" constant="20" id="xub-fh-yfo"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="53"/>
+            <point key="canvasLocation" x="131.8840579710145" y="52.901785714285715"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
