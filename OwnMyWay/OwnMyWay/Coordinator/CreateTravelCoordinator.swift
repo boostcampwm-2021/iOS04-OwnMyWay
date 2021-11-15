@@ -25,7 +25,7 @@ class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
         )
         let createTravelVC = CreateTravelViewController.instantiate(storyboardName: "CreateTravel")
         createTravelVC.bind(viewModel: createTravelVM)
-        navigationController.pushViewController(createTravelVC, animated: true)
+        self.navigationController.pushViewController(createTravelVC, animated: true)
     }
 
     func pushToAddLandmark(travel: Travel) {

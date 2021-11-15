@@ -40,7 +40,7 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
             cartVC.view.bottomAnchor.constraint(equalTo: cartView.bottomAnchor).isActive = true
             cartVC.didMove(toParent: addLandmarkVC)
         }
-        navigationController.pushViewController(addLandmarkVC, animated: true)
+        self.navigationController.pushViewController(addLandmarkVC, animated: true)
     }
 
     func pushToCompleteCreation(travel: Travel) {
@@ -52,17 +52,9 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
     }
 
     func popToCreateTravel(travel: Travel) {
-        guard let createTravelVC = self.navigationController.children.secondLast
+        guard let createTravelVC = self.navigationController.children.last
                 as? CreateTravelViewController else { return }
 
         createTravelVC.travelDidChanged(to: travel)
-        self.navigationController.popViewController(animated: true)
-    }
-}
-
-fileprivate extension Array {
-    var secondLast: Element? {
-        guard self.count >= 2 else { return nil }
-        return self[self.count - 2]
     }
 }

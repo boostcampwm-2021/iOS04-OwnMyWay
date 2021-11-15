@@ -14,14 +14,22 @@ class AddLandmarkViewController: UIViewController,
 
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
+    @IBOutlet private weak var nextButtonHeightConstraint: NSLayoutConstraint!
 
     private var bindContainerVC: ((UIView) -> Void)?
     private var viewModel: AddLandmarkViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureNavigation()
         self.bindContainerVC?(self.cartView)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.bindContainerVC = nil
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -32,6 +40,11 @@ class AddLandmarkViewController: UIViewController,
             .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
             .isActive = true
         self.view.layoutIfNeeded()
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.configureButtonConstraint()
     }
 
     func bind(viewModel: AddLandmarkViewModel, closure: @escaping (UIView) -> Void) {
@@ -46,18 +59,9 @@ class AddLandmarkViewController: UIViewController,
     func didDeleteLandmark(at landmark: Landmark) {
         self.viewModel?.didDeleteLandmark(at: landmark)
     }
-
-    private func configureNavigation() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(backButtonAction)
-        )
-    }
-
-    @objc private func backButtonAction() {
-        self.viewModel?.didTouchBackButton()
+    private func configureButtonConstraint() {
+        let bottomPadding = self.view.safeAreaInsets.bottom
+        self.nextButtonHeightConstraint.constant = 60 + bottomPadding
     }
 
     @IBAction func didTouchNextButton(_ sender: Any) {

@@ -42,7 +42,7 @@ class CoreDataTravelRepository: TravelRepository {
 
     private lazy var context: NSManagedObjectContext = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return NSManagedObjectContext.init(.privateQueue)
+            return NSManagedObjectContext.init(concurrencyType: .privateQueueConcurrencyType)
         }
         let newContext = appDelegate.persistentContainer.newBackgroundContext()
         newContext.automaticallyMergesChangesFromParent = true
@@ -162,6 +162,7 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
+    @discardableResult
     func addLocation(
         to travel: Travel,
         latitude: Double?,

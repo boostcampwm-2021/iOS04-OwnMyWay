@@ -9,14 +9,26 @@ import UIKit
 
 class CompleteCreationViewController: UIViewController, Instantiable {
 
+    @IBOutlet private weak var nextButtonHeightConstraint: NSLayoutConstraint!
+
     private var viewModel: CompleteCreationViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.configureButtonConstraint()
+    }
+
     func bind(viewModel: CompleteCreationViewModel) {
         self.viewModel = viewModel
+    }
+
+    private func configureButtonConstraint() {
+        let bottomPadding = self.view.safeAreaInsets.bottom
+        self.nextButtonHeightConstraint.constant = 60 + bottomPadding
     }
 
     @IBAction func didTouchCompleteButton(_ sender: UIButton) {

@@ -17,6 +17,7 @@ class ReservedTravelViewController: UIViewController,
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var travelTypeLabel: UILabel!
     @IBOutlet private weak var startButton: NextButton!
+    @IBOutlet weak var startButtonHeightConstraint: NSLayoutConstraint!
 
     private var bindContainerVC: ((UIView) -> Void)?
     private var viewModel: ReservedTravelViewModel?
@@ -26,7 +27,19 @@ class ReservedTravelViewController: UIViewController,
         self.configureDescription()
         self.configureStartButton()
         self.bindContainerVC?(self.cartView)
+    }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.bindContainerVC = nil
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.configureButtonConstraint()
     }
 
     override func viewDidLayoutSubviews() {
@@ -52,20 +65,18 @@ class ReservedTravelViewController: UIViewController,
         self.viewModel?.didDeleteLandmark(at: landmark)
     }
 
+    private func configureButtonConstraint() {
+        let bottomPadding = self.view.safeAreaInsets.bottom
+        self.startButtonHeightConstraint.constant = 60 + bottomPadding
+    }
+
     private func configureDescription() {
-        self.navigationItem.title = viewModel?.travel.title
+        self.navigationController?.navigationItem.title = viewModel?.travel.title
         if let startDate = viewModel?.travel.startDate,
             let endDate = viewModel?.travel.endDate {
             self.dateLabel.text = "\(startDate.format(endDate: endDate))"
         }
         self.travelTypeLabel.text = "예정된 여행"
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(backButtonAction)
-        )
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "삭제",
             style: .plain,

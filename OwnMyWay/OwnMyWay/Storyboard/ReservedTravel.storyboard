@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -18,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UeF-cM-4L1" customClass="NextButton" customModule="OwnMyWay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="826" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
                                 <color key="backgroundColor" name="IdentityBlue"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="S3T-0E-OxG"/>
+                                    <constraint firstAttribute="height" constant="60" id="S3T-0E-OxG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -33,7 +34,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xd0-MR-UpT">
-                                <rect key="frame" x="0.0" y="146" width="414" height="680"/>
+                                <rect key="frame" x="0.0" y="146" width="414" height="690"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTP-Ji-1pk">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="621"/>
@@ -98,6 +99,7 @@
                         <outlet property="contentView" destination="MTP-Ji-1pk" id="Gr3-6D-k26"/>
                         <outlet property="dateLabel" destination="MrJ-rw-UQQ" id="NrO-s5-2U0"/>
                         <outlet property="startButton" destination="UeF-cM-4L1" id="Qdl-fT-i49"/>
+                        <outlet property="startButtonHeightConstraint" destination="S3T-0E-OxG" id="QfO-G6-9J8"/>
                         <outlet property="travelTypeLabel" destination="oor-ah-6We" id="DDI-tU-ymR"/>
                     </connections>
                 </viewController>

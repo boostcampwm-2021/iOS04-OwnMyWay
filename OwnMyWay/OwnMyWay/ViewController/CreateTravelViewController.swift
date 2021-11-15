@@ -14,6 +14,7 @@ class CreateTravelViewController: UIViewController, Instantiable {
     @IBOutlet private weak var travelTitleField: UITextField!
     @IBOutlet private weak var calendarView: FSCalendar!
     @IBOutlet private weak var nextButton: NextButton!
+    @IBOutlet private weak var nextButtonHeightConstraint: NSLayoutConstraint!
 
     private var viewModel: CreateTravelViewModel?
     private var cancellables: Set<AnyCancellable> = []
@@ -26,6 +27,11 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.configureCalendar()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.configureButtonConstraint()
+    }
+
     func bind(viewModel: CreateTravelViewModel) {
         self.viewModel = viewModel
     }
@@ -34,11 +40,16 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.viewModel?.travelDidChanged(to: travel)
     }
 
+    private func configureButtonConstraint() {
+        let bottomPadding = self.view.safeAreaInsets.bottom
+        self.nextButtonHeightConstraint.constant = 60 + bottomPadding
+    }
+
     private func configureCancellable() {
         self.viewModel?.validatePublisher
             .receive(on: RunLoop.main)
-            .sink { isValid in
-                self.nextButton.setAvailability(to: isValid ?? false)
+            .sink { [weak self] isValid in
+                self?.nextButton.setAvailability(to: isValid ?? false)
             }
             .store(in: &cancellables)
     }

@@ -6,9 +6,8 @@
 //
 //
 
-import Foundation
 import CoreData
-
+import Foundation
 
 extension LandmarkMO {
 

@@ -67,6 +67,7 @@
 		AF82FDBC273BF3E300A094B6 /* OutdatedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */; };
 		AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */; };
 		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
+		AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA5E25A2742294100DD94D9 /* LocationManager.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
 		AFF88422273CDD49004FCE5C /* RecordAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
@@ -75,7 +76,6 @@
 		DB1D5CB3273CE17800B30448 /* LocationMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */; };
 		DB1D5CB7273CE1C100B30448 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CB6273CE1C100B30448 /* Location.swift */; };
 		DB1D5CD3273CEB8B00B30448 /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* TravelRepository.swift */; };
-		DB1D5CD4273CEB9300B30448 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
 		DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
 		DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5B272F82770004444B /* SceneDelegate.swift */; };
 		DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5D272F82770004444B /* HomeViewController.swift */; };
@@ -88,8 +88,8 @@
 		DB2823BA273BA83D007D8801 /* MapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2823B8273BA83D007D8801 /* MapCell.xib */; };
 		DB2823BD273BC0C2007D8801 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */; };
 		DB2823BE273BC0C2007D8801 /* DateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */; };
-		DB2823C6273BCBD1007D8801 /* OwnMyWayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823C5273BCBD1007D8801 /* OwnMyWayTests.swift */; };
-		DB2823CF273BCD1A007D8801 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646B92738F6590030ED78 /* Date+.swift */; };
+		DB7C12A92742336A00ED30F3 /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */; };
+		DB7C12AA2742336A00ED30F3 /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A82742336A00ED30F3 /* RecordMO+CoreDataProperties.swift */; };
 		DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B3273132A000487D33 /* LandmarkDTO.swift */; };
 		DB8831BE2731990000487D33 /* LandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LandmarkRepository.swift */; };
 		DB8831C127319B6400487D33 /* SearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */; };
@@ -100,8 +100,6 @@
 		DBC39EEC2733929000FB7939 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EEB2733929000FB7939 /* Travel.swift */; };
 		DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */; };
 		DBC39F042733ABB200FB7939 /* TravelMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */; };
-		DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFF2733ABB200FB7939 /* RecordMO+CoreDataClass.swift */; };
-		DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F002733ABB200FB7939 /* RecordMO+CoreDataProperties.swift */; };
 		DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */; };
 		DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */; };
 		DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
@@ -114,16 +112,6 @@
 		DBFC041427391EDB00031EDF /* SearchLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */; };
 		DBFC0416273925FD00031EDF /* ReservedTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DB2823C7273BCBD1007D8801 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DB22BB4E272F82770004444B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DB22BB55272F82770004444B;
-			remoteInfo = OwnMyWay;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +173,7 @@
 		AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewModel.swift; sourceTree = "<group>"; };
 		AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelUsecase.swift; sourceTree = "<group>"; };
 		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
+		AFA5E25A2742294100DD94D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
 		AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAnnotationView.swift; sourceTree = "<group>"; };
 		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
@@ -206,8 +195,8 @@
 		DB2823B8273BA83D007D8801 /* MapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapCell.xib; sourceTree = "<group>"; };
 		DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateHeaderView.xib; sourceTree = "<group>"; };
-		DB2823C3273BCBD1007D8801 /* OwnMyWayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OwnMyWayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB2823C5273BCBD1007D8801 /* OwnMyWayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnMyWayTests.swift; sourceTree = "<group>"; };
+		DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordMO+CoreDataClass.swift"; path = "../../RecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DB7C12A82742336A00ED30F3 /* RecordMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordMO+CoreDataProperties.swift"; path = "../../RecordMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DB8831AD2730FDB500487D33 /* TravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRepository.swift; sourceTree = "<group>"; };
 		DB8831B3273132A000487D33 /* LandmarkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTO.swift; sourceTree = "<group>"; };
 		DB8831BD2731990000487D33 /* LandmarkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRepository.swift; sourceTree = "<group>"; };
@@ -219,8 +208,6 @@
 		DBC39EEB2733929000FB7939 /* Travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
 		DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TravelMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TravelMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DBC39EFF2733ABB200FB7939 /* RecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DBC39F002733ABB200FB7939 /* RecordMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LandmarkMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LandmarkMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DBC39F092733C41000FB7939 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
@@ -240,13 +227,6 @@
 			files = (
 				DBC39F1527340F5E00FB7939 /* Kingfisher in Frameworks */,
 				3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DB2823C0273BCBD1007D8801 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +256,7 @@
 				AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */,
 				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
 				2985B1E427427AE900428098 /* LandmarkDeletable.swift */,
+				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
 				3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */,
 				AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */,
 				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
@@ -359,8 +340,8 @@
 			children = (
 				DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */,
 				DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */,
-				DBC39EFF2733ABB200FB7939 /* RecordMO+CoreDataClass.swift */,
-				DBC39F002733ABB200FB7939 /* RecordMO+CoreDataProperties.swift */,
+				DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */,
+				DB7C12A82742336A00ED30F3 /* RecordMO+CoreDataProperties.swift */,
 				DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */,
 				DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */,
 				DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */,
@@ -398,7 +379,6 @@
 			children = (
 				DB22BB72272F83DB0004444B /* .swiftlint.yml */,
 				DB22BB58272F82770004444B /* OwnMyWay */,
-				DB2823C4273BCBD1007D8801 /* OwnMyWayTests */,
 				DB22BB57272F82770004444B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -407,7 +387,6 @@
 			isa = PBXGroup;
 			children = (
 				DB22BB56272F82770004444B /* OwnMyWay.app */,
-				DB2823C3273BCBD1007D8801 /* OwnMyWayTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -431,14 +410,6 @@
 				DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */,
 			);
 			path = OwnMyWay;
-			sourceTree = "<group>";
-		};
-		DB2823C4273BCBD1007D8801 /* OwnMyWayTests */ = {
-			isa = PBXGroup;
-			children = (
-				DB2823C5273BCBD1007D8801 /* OwnMyWayTests.swift */,
-			);
-			path = OwnMyWayTests;
 			sourceTree = "<group>";
 		};
 		DB93665E2739084D00B39BC1 /* Coordinator */ = {
@@ -485,24 +456,6 @@
 			productReference = DB22BB56272F82770004444B /* OwnMyWay.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DB2823C2273BCBD1007D8801 /* OwnMyWayTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DB2823CB273BCBD1007D8801 /* Build configuration list for PBXNativeTarget "OwnMyWayTests" */;
-			buildPhases = (
-				DB2823BF273BCBD1007D8801 /* Sources */,
-				DB2823C0273BCBD1007D8801 /* Frameworks */,
-				DB2823C1273BCBD1007D8801 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DB2823C8273BCBD1007D8801 /* PBXTargetDependency */,
-			);
-			name = OwnMyWayTests;
-			productName = OwnMyWayTests;
-			productReference = DB2823C3273BCBD1007D8801 /* OwnMyWayTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -515,10 +468,6 @@
 				TargetAttributes = {
 					DB22BB55272F82770004444B = {
 						CreatedOnToolsVersion = 13.0;
-					};
-					DB2823C2273BCBD1007D8801 = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = DB22BB55272F82770004444B;
 					};
 				};
 			};
@@ -541,7 +490,6 @@
 			projectRoot = "";
 			targets = (
 				DB22BB55272F82770004444B /* OwnMyWay */,
-				DB2823C2273BCBD1007D8801 /* OwnMyWayTests */,
 			);
 		};
 /* End PBXProject section */
@@ -573,13 +521,6 @@
 				3FB914EA2737DAC70084FF1C /* TravelSectionHeader.xib in Resources */,
 				3F113A11273A571100EA91AA /* CompleteCreation.storyboard in Resources */,
 				AF82FDA8273BEB1700A094B6 /* AddRecord.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DB2823C1273BCBD1007D8801 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +566,7 @@
 				3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */,
 				29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
+				DB7C12AA2742336A00ED30F3 /* RecordMO+CoreDataProperties.swift in Sources */,
 				29274EF92733FC4500DDEBFF /* ReservedTravelViewController.swift in Sources */,
 				DB1D5CB3273CE17800B30448 /* LocationMO+CoreDataProperties.swift in Sources */,
 				29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */,
@@ -632,6 +574,7 @@
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */,
 				DBFC04122739170900031EDF /* LandmarkCartCoordinator.swift in Sources */,
+				DB7C12A92742336A00ED30F3 /* RecordMO+CoreDataClass.swift in Sources */,
 				DB8831BE2731990000487D33 /* LandmarkRepository.swift in Sources */,
 				DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */,
 				DB8831C72732861500487D33 /* Instantiable.swift in Sources */,
@@ -658,11 +601,11 @@
 				AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */,
 				294897BF273BA993003185E7 /* RecordCardCell.swift in Sources */,
 				3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */,
-				DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */,
 				3F113A17273A5FD600EA91AA /* CompleteCreationCoordinator.swift in Sources */,
 				AF82FDB4273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift in Sources */,
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
+				AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */,
 				DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */,
 				294897BC273B5D71003185E7 /* UIImageView+.swift in Sources */,
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
@@ -670,7 +613,6 @@
 				29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */,
 				DB1D5CB2273CE17800B30448 /* LocationMO+CoreDataClass.swift in Sources */,
 				DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */,
-				DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */,
 				AF82FDBA273BF3D900A094B6 /* OutdatedTravelViewController.swift in Sources */,
 				DBFC0416273925FD00031EDF /* ReservedTravelCoordinator.swift in Sources */,
 				29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */,
@@ -693,25 +635,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DB2823BF273BCBD1007D8801 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DB2823C6273BCBD1007D8801 /* OwnMyWayTests.swift in Sources */,
-				DB2823CF273BCD1A007D8801 /* Date+.swift in Sources */,
-				DB1D5CD4273CEB9300B30448 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DB2823C8273BCBD1007D8801 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DB22BB55272F82770004444B /* OwnMyWay */;
-			targetProxy = DB2823C7273BCBD1007D8801 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DB22BB5F272F82770004444B /* Home.storyboard */ = {
@@ -784,7 +708,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -839,7 +763,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -867,6 +791,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -898,6 +823,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -908,52 +834,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		DB2823C9273BCBD1007D8801 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = iOS04.OwnMyWayTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OwnMyWay.app/OwnMyWay";
-			};
-			name = Debug;
-		};
-		DB2823CA273BCBD1007D8801 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = iOS04.OwnMyWayTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OwnMyWay.app/OwnMyWay";
 			};
 			name = Release;
 		};
@@ -974,15 +854,6 @@
 			buildConfigurations = (
 				DB22BB6E272F82780004444B /* Debug */,
 				DB22BB6F272F82780004444B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DB2823CB273BCBD1007D8801 /* Build configuration list for PBXNativeTarget "OwnMyWayTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DB2823C9273BCBD1007D8801 /* Debug */,
-				DB2823CA273BCBD1007D8801 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
