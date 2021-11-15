@@ -43,7 +43,10 @@ extension MapAvailable {
                 CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
             )
             let pointRect = MKMapRect(
-                x: annotationPoint.x, y: annotationPoint.y, width: 0.1, height: 0.1
+                x: annotationPoint.x - 5000,
+                y: annotationPoint.y - 5000,
+                width: 10000,
+                height: 10000
             )
             zoomRect = zoomRect.union(pointRect)
         }
@@ -62,7 +65,10 @@ extension MapAvailable {
         annotations.forEach { annotation in
             let annotationPoint = MKMapPoint(annotation.coordinate)
             let pointRect = MKMapRect(
-                x: annotationPoint.x, y: annotationPoint.y, width: 0.1, height: 0.1
+                x: annotationPoint.x - 5000,
+                y: annotationPoint.y - 5000,
+                width: 10000,
+                height: 10000
             )
             zoomRect = zoomRect.union(pointRect)
         }
