@@ -44,6 +44,7 @@ class CoreDataTravelRepository: TravelRepository {
         }
         let newContext = appDelegate.persistentContainer.newBackgroundContext()
         newContext.automaticallyMergesChangesFromParent = true
+        newContext.retainsRegisteredObjects = true
         return newContext
     }()
 
