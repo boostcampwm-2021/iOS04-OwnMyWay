@@ -74,12 +74,12 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didEnterTitle(with text: String?) {
         self.recordTitle = text
-        self.isValidTitle = self.usecase.executeValidation(title: text)
+        self.isValidTitle = self.usecase.executeValidationTitle(with: text)
     }
 
     func didEnterTime(with date: Date?) {
         self.recordDate = date
-        self.isValidDate = self.usecase.executeValidation(date: date)
+        self.isValidDate = self.usecase.executeValidationDate(with: date)
     }
 
     func didTouchBackButton() {

@@ -8,8 +8,8 @@
 import Foundation
 
 protocol AddRecordUsecase {
-    func executeValidation(title: String?) -> Bool
-    func executeValidation(date: Date?) -> Bool
+    func executeValidationTitle(with title: String?) -> Bool
+    func executeValidationDate(with date: Date?) -> Bool
 }
 
 struct DefaultAddRecordUsecase: AddRecordUsecase {
@@ -20,11 +20,11 @@ struct DefaultAddRecordUsecase: AddRecordUsecase {
         self.repository = repository
     }
 
-    func executeValidation(title: String?) -> Bool {
+    func executeValidationTitle(with title: String?) -> Bool {
         return (1...20) ~= (title ?? "").count
     }
 
-    func executeValidation(date: Date?) -> Bool {
+    func executeValidationDate(with date: Date?) -> Bool {
         return date != nil
     }
 
