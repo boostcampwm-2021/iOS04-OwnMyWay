@@ -15,6 +15,7 @@ protocol AddRecordViewModel {
     func didEnterTime(with date: Date?)
     func didEnterCoordinate(of location: Location)
     func didEnterContent(with text: String?)
+    func didEnterPhotoURL(with url: URL)
     func didTouchBackButton()
     func didTouchSubmitButton()
     // TODO: Photo 들어왔을 때 처리 함수 추가
@@ -95,6 +96,15 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didTouchBackButton() {
         self.coordinatingDelegate?.popToParent(with: nil)
+    }
+
+    func didEnterPhotoURL(with url: URL) {
+        self.usecase.executePickingPhoto(with: url) { [weak self] url, error in
+            guard error == nil,
+                  let copiedURL = url
+            else { return }
+            self?.recordPhotos.append(copiedURL)
+        }
     }
 
     func didTouchSubmitButton() {

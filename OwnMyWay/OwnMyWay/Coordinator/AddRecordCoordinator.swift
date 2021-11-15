@@ -21,7 +21,10 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
 
     func start() {
         let repository = CoreDataTravelRepository()
-        let usecase = DefaultAddRecordUsecase(repository: repository)
+        let usecase = DefaultAddRecordUsecase(
+            repository: repository,
+            imageFileManager: ImageFileManager(fileManager: FileManager.default)
+        )
         let addRecordVM = DefaultAddRecordViewModel(
             travel: self.travel, usecase: usecase, coordinatingDelegate: self
         )
