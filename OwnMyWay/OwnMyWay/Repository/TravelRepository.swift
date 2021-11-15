@@ -14,6 +14,7 @@ protocol TravelRepository {
     func save(travel: Travel)
     @discardableResult func addLandmark(
         to travel: Travel,
+        uuid: UUID?,
         title: String?,
         image: URL?,
         latitude: Double?,
@@ -34,6 +35,7 @@ protocol TravelRepository {
     ) -> Result<Location, Error>
     @discardableResult func update(travel: Travel) -> Result<Travel, Error>
     func delete(travel: Travel)
+    func deleteLandmark(at landmark: Landmark)
 }
 
 class CoreDataTravelRepository: TravelRepository {
@@ -44,6 +46,7 @@ class CoreDataTravelRepository: TravelRepository {
         }
         let newContext = appDelegate.persistentContainer.newBackgroundContext()
         newContext.automaticallyMergesChangesFromParent = true
+        newContext.retainsRegisteredObjects = true
         return newContext
     }()
 
@@ -102,6 +105,7 @@ class CoreDataTravelRepository: TravelRepository {
     @discardableResult
     func addLandmark(
         to travel: Travel,
+        uuid: UUID?,
         title: String?,
         image: URL?,
         latitude: Double?,
@@ -113,7 +117,7 @@ class CoreDataTravelRepository: TravelRepository {
         else { return .failure(NSError.init()) }
 
         let landmarkMO = LandmarkMO(entity: entity, insertInto: context)
-        landmarkMO.setValue(UUID(), forKey: "uuid")
+        landmarkMO.setValue(uuid, forKey: "uuid")
         landmarkMO.setValue(title, forKey: "title")
         landmarkMO.setValue(image, forKey: "image")
         landmarkMO.setValue(latitude, forKey: "latitude")
@@ -185,6 +189,7 @@ class CoreDataTravelRepository: TravelRepository {
     func update(travel: Travel) -> Result<Travel, Error> {
         guard let uuid = travel.uuid as CVarArg?
         else { return .failure(NSError.init()) }
+
         let request = TravelMO.fetchRequest()
         let predicate = NSPredicate(format: "uuid == %@", uuid)
         request.predicate = predicate
@@ -218,6 +223,24 @@ class CoreDataTravelRepository: TravelRepository {
 
         context.delete(travel)
 
+        do {
+            try context.save()
+        } catch {
+            return
+        }
+    }
+
+    func deleteLandmark(at landmark: Landmark) {
+        guard let uuid = landmark.uuid as CVarArg?
+        else { return }
+
+        let request = LandmarkMO.fetchRequest()
+        let predicate = NSPredicate(format: "uuid == %@", uuid)
+        request.predicate = predicate
+        guard let landmarks = try? context.fetch(request) as [LandmarkMO],
+              let landmark = landmarks.first
+        else { return }
+        context.delete(landmark)
         do {
             try context.save()
         } catch {
