@@ -21,7 +21,6 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     private(set) var viewModel: LandmarkCartViewModel?
     private var diffableDataSource: DataSource?
     private var cancellables: Set<AnyCancellable> = []
-    private let locationManager: CLLocationManager = CLLocationManager()
 
     enum Section: CaseIterable { case main }
 
@@ -31,9 +30,6 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
 
         self.mapView.delegate = self
         self.configureMapView(with: self.mapView)
-
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
 
         self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = configureCompositionalLayout()
@@ -149,33 +145,6 @@ extension LandmarkCartViewController: MKMapViewDelegate {
             return annotationView
         default:
             return nil
-        }
-    }
-}
-
-extension LandmarkCartViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard self.viewModel?.travel.landmarks.isEmpty == true else { return }
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        self.mapView.setRegion(
-            MKCoordinateRegion(
-                center: locValue,
-                span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-            ),
-            animated: false
-        )
-    }
-
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        return
-    }
-
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedAlways, .authorizedWhenInUse:
-            manager.requestLocation()
-        default:
-            break
         }
     }
 }

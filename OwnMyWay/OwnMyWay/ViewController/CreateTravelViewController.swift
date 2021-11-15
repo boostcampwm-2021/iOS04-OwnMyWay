@@ -48,8 +48,8 @@ class CreateTravelViewController: UIViewController, Instantiable {
     private func configureCancellable() {
         self.viewModel?.validatePublisher
             .receive(on: RunLoop.main)
-            .sink { isValid in
-                self.nextButton.setAvailability(to: isValid ?? false)
+            .sink { [weak self] isValid in
+                self?.nextButton.setAvailability(to: isValid ?? false)
             }
             .store(in: &cancellables)
     }
