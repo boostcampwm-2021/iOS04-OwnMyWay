@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreLocation
-import OSLog
 
 class LocationManager: CLLocationManager {
     private let repository = CoreDataTravelRepository()
