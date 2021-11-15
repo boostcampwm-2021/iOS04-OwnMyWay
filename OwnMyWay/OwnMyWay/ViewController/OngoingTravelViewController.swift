@@ -8,7 +8,6 @@
 import Combine
 import MapKit
 import UIKit
-import OSLog
 
 typealias OngoingTravelDataSource = UICollectionViewDiffableDataSource <String, Record>
 
@@ -20,6 +19,7 @@ class OngoingTravelViewController: UIViewController, Instantiable {
     private var viewModel: OngoingTravelViewModel?
     private var diffableDataSource: OngoingTravelDataSource?
     private var cancellables: Set<AnyCancellable> = []
+    private let mapDummy = Record.dummy()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,13 +111,13 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             if let mapCell = self.collectionView.cellForItem(
                 at: IndexPath(item: 0, section: 0)
             ) as? MapCell {
-                mapCell.configure(with: travel, mapDelegate: self, buttonDelegate: self)
+                mapCell.configure(with: travel)
             }
 
             var snapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
             snapshot.appendSections(["map"])
-            snapshot.appendItems([Record.dummy()], toSection: "map")
+            snapshot.appendItems([self.mapDummy], toSection: "map")
             recordListList.forEach { recordList in
                 guard let date = recordList.first?.date
                 else { return }
@@ -171,7 +171,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
                     withReuseIdentifier: MapCell.identifier, for: indexPath
                 ) as? MapCell
                 else { return UICollectionViewCell() }
-                cell.configure(with: travel, mapDelegate: self, buttonDelegate: self)
+                cell.configure(with: travel)
                 return cell
 
             default:
@@ -208,70 +208,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
         else { return }
 
         self.viewModel?.didTouchRecordCell(at: record)
-    }
-}
-
-// MARK: - extension OngoingTravelViewController for MKMapViewDelegate
-
-extension OngoingTravelViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        switch annotation {
-        case is LandmarkAnnotation:
-            let annotationView = mapView.dequeueReusableAnnotationView(
-                withIdentifier: LandmarkAnnotationView.identifier,
-                for: annotation
-            ) as? LandmarkAnnotationView
-            annotationView?.annotation = annotation
-            return annotationView
-        case is RecordAnnotation:
-            let annotationView = mapView.dequeueReusableAnnotationView(
-                withIdentifier: RecordAnnotationView.identifier,
-                for: annotation
-            ) as? RecordAnnotationView
-            annotationView?.annotation = annotation
-            return annotationView
-        default:
-            return nil
-        }
-    }
-
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        guard let polyline = overlay as? MKPolyline else { return MKOverlayRenderer() }
-        let polylineRenderer = MKPolylineRenderer(polyline: polyline)
-        polylineRenderer.strokeColor = .orange
-        polylineRenderer.lineWidth = 5
-        polylineRenderer.alpha = 1
-        polylineRenderer.lineCap = .round
-        return polylineRenderer
-    }
-}
-
-// MARK: - extension OngoingTravelViewController for ButtonDelegate
-
-extension OngoingTravelViewController: ButtonDelegate {
-    func didTouchTrackingButton() {
-        if LocationManager.shared.authorizationStatus == .authorizedAlways {
-            switch LocationManager.shared.isUpdatingLocation {
-            case true: LocationManager.shared.stopUpdatingLocation()
-            case false: LocationManager.shared.startUpdatingLocation()
-            }
-
-        } else {
-            let alert = UIAlertController(
-                title: "권한 설정이 필요합니다.",
-                message: "Setting -> OnwMyWay App -> 위치 -> 항상 허용",
-                preferredStyle: .alert
-            )
-            let action = UIAlertAction(title: "이동", style: .default) { _ in
-                guard let url = URL(string: UIApplication.openSettingsURLString)
-                else { return }
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
-            }
-            alert.addAction(action)
-            self.present(alert, animated: true)
-        }
     }
 }
 
