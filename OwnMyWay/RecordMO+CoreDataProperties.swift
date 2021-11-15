@@ -27,6 +27,6 @@ extension RecordMO {
 
 }
 
-extension RecordMO : Identifiable {
+extension RecordMO: Identifiable {
 
 }
