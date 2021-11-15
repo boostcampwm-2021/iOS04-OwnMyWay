@@ -30,6 +30,17 @@ class ImageFileManager {
         completion(destinationURL, nil)
     }
 
+    func removePhoto(at url: URL, completion: (Bool, Error?) -> Void) {
+        do {
+            if self.photoExists(at: url) {
+                try self.fileManager.removeItem(at: url)
+            }
+        } catch let error {
+            completion(false, error)
+        }
+        completion(true, nil)
+    }
+
     private func photoExists(at url: URL) -> Bool {
         return self.fileManager.fileExists(atPath: url.absoluteString)
     }
