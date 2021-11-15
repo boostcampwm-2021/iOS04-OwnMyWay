@@ -13,6 +13,7 @@ protocol AddRecordViewModel {
 
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
+    func didEnterCoordinate(at location: Location)
     func didTouchBackButton()
     func didTouchSubmitButton()
     // TODO: Photo 들어왔을 때 처리 함수 추가
@@ -32,7 +33,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     @Published private var validateResult: Bool?
     private var recordTitle: String?
     private var recordDate: Date?
-    private var recordCoordinate: (Double, Double)?
+    private var recordCoordinate: Location?
     private var recordPlace: String?
     private var recordContent: String?
     private var recordPhotos: [URL] = []
@@ -82,6 +83,11 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.isValidDate = self.usecase.executeValidationDate(with: date)
     }
 
+    func didEnterCoordinate(at location: Location) {
+        self.recordCoordinate = location
+        self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
+    }
+
     func didTouchBackButton() {
         self.coordinatingDelegate?.popToParent(with: nil)
     }
@@ -89,13 +95,14 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     func didTouchSubmitButton() {
         guard let recordTitle = self.recordTitle,
               let date = self.recordDate,
-              let coordinate = self.recordCoordinate,
+              let latitude = self.recordCoordinate?.latitude,
+              let longtitude = self.recordCoordinate?.longitude,
               let place = self.recordPlace,
               let content = self.recordContent
         else { return }
         let record = Record(
             uuid: nil, title: recordTitle, content: content,
-            date: date, latitude: coordinate.0, longitude: coordinate.1,
+            date: date, latitude: latitude, longitude: longtitude,
             photoURLs: recordPhotos, placeDescription: place
         )
         // TODO: usecase를 통해 coreData 업데이트가 필요함
