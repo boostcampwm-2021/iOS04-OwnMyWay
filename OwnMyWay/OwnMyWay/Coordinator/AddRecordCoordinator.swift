@@ -27,6 +27,6 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
         )
         let addRecordVC = AddRecordViewController.instantiate(storyboardName: "AddRecord")
         addRecordVC.bind(viewModel: addRecordVM)
-        navigationController.pushViewController(addRecordVC, animated: true)
+        self.navigationController.viewControllers.last?.present(addRecordVC, animated: true)
     }
 }

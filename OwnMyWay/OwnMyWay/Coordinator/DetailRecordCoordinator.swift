@@ -27,6 +27,6 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
         )
         let detailRecordVC = DetailRecordViewController.instantiate(storyboardName: "DetailRecord")
         detailRecordVC.bind(viewModel: detailRecordVM)
-        navigationController.pushViewController(detailRecordVC, animated: true)
+        self.navigationController.pushViewController(detailRecordVC, animated: true)
     }
 }

@@ -23,7 +23,7 @@ class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
         let homeVM = DefaultHomeViewModel(usecase: usecase, coordinatingDelegate: self)
         let homeVC = HomeViewController.instantiate(storyboardName: "Home")
         homeVC.bind(viewModel: homeVM)
-        navigationController.pushViewController(homeVC, animated: false)
+        self.navigationController.pushViewController(homeVC, animated: false)
     }
 
     func pushToCreateTravel() {

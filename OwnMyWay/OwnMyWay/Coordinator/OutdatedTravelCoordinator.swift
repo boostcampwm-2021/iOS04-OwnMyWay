@@ -27,7 +27,7 @@ class OutdatedTravelCoordinator: Coordinator, OutdatedTravelCoordinatingDelegate
         )
         let outdatedVC = OutdatedTravelViewController.instantiate(storyboardName: "OutdatedTravel")
         outdatedVC.bind(viewModel: outdatedVM)
-        navigationController.pushViewController(outdatedVC, animated: true)
+        self.navigationController.pushViewController(outdatedVC, animated: true)
     }
 
     func popToHome() {

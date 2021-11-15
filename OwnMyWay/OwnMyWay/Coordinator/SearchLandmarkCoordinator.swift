@@ -28,7 +28,7 @@ class SearchLandmarkCoordinator: Coordinator, SearchLandmarkCoordinatingDelegate
             storyboardName: "SearchLandmark"
         )
         searchLandmarkVC.bind(viewModel: viewModel)
-        navigationController.viewControllers.last?.present(
+        self.navigationController.viewControllers.last?.present(
             searchLandmarkVC,
             animated: true
         )
