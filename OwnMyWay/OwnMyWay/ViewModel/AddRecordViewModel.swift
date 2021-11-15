@@ -12,6 +12,7 @@ protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
 
     func didEnterTitle(with text: String?)
+    func didEnterTime(with date: Date?)
     func didTouchBackButton()
     func didTouchSubmitButton()
     // TODO: Photo 들어왔을 때 처리 함수 추가
@@ -73,6 +74,11 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didEnterTitle(with text: String?) {
         self.isValidTitle = self.usecase.executeValidation(title: text)
+    }
+
+    func didEnterTime(with date: Date?) {
+        self.recordDate = date
+        self.isValidDate = self.usecase.executeValidation(date: date)
     }
 
     func didTouchBackButton() {
