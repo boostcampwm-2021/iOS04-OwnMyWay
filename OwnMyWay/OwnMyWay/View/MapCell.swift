@@ -44,6 +44,10 @@ class MapCell: UICollectionViewCell, MapAvailable {
             mapView: self.mapView,
             annotations: recordAnnotations
         )
+        self.drawLocationPath(
+            mapView: self.mapView,
+            locations: travel.locations
+        )
     }
 
     @IBAction func didTouchTrackingButton(_ sender: Any) {
