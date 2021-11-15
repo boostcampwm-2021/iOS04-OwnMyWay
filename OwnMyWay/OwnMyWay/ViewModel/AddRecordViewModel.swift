@@ -33,27 +33,27 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     private var recordPhotos: [URL] = []
     private var isValidTitle: Bool = false {
         didSet {
-            checkValidation()
+            self.checkValidation()
         }
     }
     private var isValidDate: Bool = false {
         didSet {
-            checkValidation()
+            self.checkValidation()
         }
     }
     private var isValidCoordinate: Bool = false {
         didSet {
-            checkValidation()
+            self.checkValidation()
         }
     }
     private var isValidPlace: Bool = false {
         didSet {
-            checkValidation()
+            self.checkValidation()
         }
     }
     private var isValidPhotos: Bool = false {
         didSet {
-            checkValidation()
+            self.checkValidation()
         }
     }
 
