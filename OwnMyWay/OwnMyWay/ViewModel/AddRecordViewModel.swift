@@ -73,6 +73,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     }
 
     func didEnterTitle(with text: String?) {
+        self.recordTitle = text
         self.isValidTitle = self.usecase.executeValidation(title: text)
     }
 
