@@ -12,6 +12,7 @@ protocol ReservedTravelViewModel {
     var isPossibleStart: Bool { get }
     func didDeleteTravel()
     func didUpdateTravel(to travel: Travel)
+    func didDeleteLandmark(at landmark: Landmark)
     func didTouchBackButton()
     func didTouchStartButton()
 }
@@ -51,6 +52,12 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
     func didUpdateTravel(to travel: Travel) {
         self.travel = travel // 자기자신에 업데이트
         self.usecase.executeLandmarkAddition(of: travel) // coreData에 업데이트
+    }
+
+    func didDeleteLandmark(at landmark: Landmark) {
+        guard let index = self.travel.landmarks.firstIndex(of: landmark) else { return }
+        self.travel.landmarks.remove(at: index)
+        self.usecase.executeLandmarkDeletion(at: landmark)
     }
 
     func didTouchBackButton() {
