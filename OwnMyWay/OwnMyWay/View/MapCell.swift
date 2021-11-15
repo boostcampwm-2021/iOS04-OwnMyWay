@@ -55,7 +55,7 @@ class MapCell: UICollectionViewCell, MapAvailable {
         } else {
             let alert = UIAlertController(
                 title: "권한 설정이 필요합니다.",
-                message: "Setting -> OnwMyWay App -> 위치 -> 항상 허용",
+                message: "Setting -> OnwMyWay -> 위치 -> 항상 허용",
                 preferredStyle: .alert
             )
             let action = UIAlertAction(title: "이동", style: .default) { _ in

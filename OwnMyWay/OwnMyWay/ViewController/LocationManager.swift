@@ -5,13 +5,13 @@
 //  Created by 강현준 on 2021/11/15.
 //
 
-import UIKit
 import CoreLocation
+import UIKit
 
 class LocationManager: CLLocationManager {
     private let repository = CoreDataTravelRepository()
     private var travel: Travel?
-    var isUpdatingLocation = false
+    private(set) var isUpdatingLocation = false
 
     static let shared = LocationManager()
 
@@ -22,12 +22,12 @@ class LocationManager: CLLocationManager {
 
     override func startUpdatingLocation() {
         super.startUpdatingLocation()
-        isUpdatingLocation = true
+        self.isUpdatingLocation = true
     }
 
     override func stopUpdatingLocation() {
         super.stopUpdatingLocation()
-        isUpdatingLocation = false
+        self.isUpdatingLocation = false
     }
 
     func currentTravel(to travel: Travel?) {
