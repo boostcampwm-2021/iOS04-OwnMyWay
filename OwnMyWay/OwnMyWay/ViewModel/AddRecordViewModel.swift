@@ -14,6 +14,7 @@ protocol AddRecordViewModel {
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
     func didEnterCoordinate(of location: Location)
+    func didEnterContent(with text: String?)
     func didTouchBackButton()
     func didTouchSubmitButton()
     // TODO: Photo 들어왔을 때 처리 함수 추가
@@ -88,6 +89,10 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
     }
 
+    func didEnterContent(with text: String?) {
+        self.recordContent = text
+    }
+
     func didTouchBackButton() {
         self.coordinatingDelegate?.popToParent(with: nil)
     }
@@ -97,11 +102,10 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
               let date = self.recordDate,
               let latitude = self.recordCoordinate?.latitude,
               let longtitude = self.recordCoordinate?.longitude,
-              let place = self.recordPlace,
-              let content = self.recordContent
+              let place = self.recordPlace
         else { return }
         let record = Record(
-            uuid: nil, title: recordTitle, content: content,
+            uuid: nil, title: recordTitle, content: self.recordContent,
             date: date, latitude: latitude, longitude: longtitude,
             photoURLs: recordPhotos, placeDescription: place
         )
