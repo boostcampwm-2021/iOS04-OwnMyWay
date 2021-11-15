@@ -7,7 +7,11 @@
 
 import UIKit
 
-class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable {
+class AddLandmarkViewController: UIViewController,
+                                 Instantiable,
+                                 TravelUpdatable,
+                                 LandmarkDeletable {
+
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
 
@@ -37,6 +41,10 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
 
     func didUpdateTravel(to travel: Travel) {
         self.viewModel?.didUpdateTravel(to: travel)
+    }
+
+    func didDeleteLandmark(at landmark: Landmark) {
+        self.viewModel?.didDeleteLandmark(at: landmark)
     }
 
     private func configureNavigation() {
