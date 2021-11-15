@@ -30,6 +30,13 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         self.configureButtonConstraint()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.isMovingFromParent {
+            print("아버지")
+            self.viewModel?.didTouchBackButton()
+        }
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let mapViewHeight: CGFloat = UIScreen.main.bounds.width
@@ -55,19 +62,12 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
     }
 
     private func configureDescription() {
-        self.navigationItem.title = viewModel?.travel.title
+        self.navigationController?.navigationItem.title = viewModel?.travel.title
         if let startDate = viewModel?.travel.startDate,
             let endDate = viewModel?.travel.endDate {
             self.dateLabel.text = "\(startDate.format(endDate: endDate))"
         }
         self.travelTypeLabel.text = "예정된 여행"
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(backButtonAction)
-        )
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "삭제",
             style: .plain,
