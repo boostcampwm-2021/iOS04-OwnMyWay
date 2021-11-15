@@ -45,8 +45,11 @@ class MapCell: UICollectionViewCell, MapAvailable {
     @IBAction func didTouchTrackingButton(_ sender: Any) {
         if LocationManager.shared.authorizationStatus == .authorizedAlways {
             switch LocationManager.shared.isUpdatingLocation {
-            case true: LocationManager.shared.stopUpdatingLocation()
-            case false: LocationManager.shared.startUpdatingLocation()
+            case true:
+                LocationManager.shared.stopUpdatingLocation()
+            case false:
+                self.mapView.setUserTrackingMode(.follow, animated: true)
+                LocationManager.shared.startUpdatingLocation()
             }
 
         } else {
@@ -68,6 +71,10 @@ class MapCell: UICollectionViewCell, MapAvailable {
             else { return }
             lastVC.children.last?.present(alert, animated: true)
         }
+    }
+
+    @IBAction func didTouchLocationButton(_ sender: Any) {
+        self.mapView.setUserTrackingMode(.follow, animated: true)
     }
 }
 
