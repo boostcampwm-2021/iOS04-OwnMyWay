@@ -33,7 +33,6 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if self.isMovingFromParent {
-            print("아버지")
             self.viewModel?.didTouchBackButton()
         }
     }
