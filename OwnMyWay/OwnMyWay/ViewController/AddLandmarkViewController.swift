@@ -23,6 +23,9 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.bindContainerVC = nil
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -33,13 +36,6 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
             .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
             .isActive = true
         self.view.layoutIfNeeded()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if self.isMovingFromParent {
-            self.viewModel?.didTouchBackButton()
-        }
     }
 
     override func viewWillLayoutSubviews() {

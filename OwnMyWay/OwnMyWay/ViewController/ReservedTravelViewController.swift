@@ -28,6 +28,9 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.bindContainerVC = nil
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
     }
 
     override func viewWillLayoutSubviews() {
@@ -35,12 +38,6 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
         self.configureButtonConstraint()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if self.isMovingFromParent {
-            self.viewModel?.didTouchBackButton()
-        }
-    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let mapViewHeight: CGFloat = UIScreen.main.bounds.width
