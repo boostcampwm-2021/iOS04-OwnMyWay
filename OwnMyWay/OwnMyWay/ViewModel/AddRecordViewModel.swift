@@ -14,7 +14,7 @@ protocol AddRecordViewModel {
 }
 
 protocol AddRecordCoordinatingDelegate: AnyObject {
-    func dismissToParent(with record: Record)
+    func popToParent(with record: Record?)
 }
 
 class DefaultAddRecordViewModel: AddRecordViewModel {

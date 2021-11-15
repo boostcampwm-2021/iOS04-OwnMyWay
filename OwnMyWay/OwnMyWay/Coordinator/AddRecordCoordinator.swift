@@ -30,7 +30,8 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
         self.navigationController.pushViewController(addRecordVC, animated: true)
     }
 
-    func dismissToParent(with record: Record) {
+    func popToParent(with record: Record?) {
         // TODO: Ongoing Fetch 또는 Record를 append 하는 방식 중 택1
+        self.navigationController.popViewController(animated: true)
     }
 }
