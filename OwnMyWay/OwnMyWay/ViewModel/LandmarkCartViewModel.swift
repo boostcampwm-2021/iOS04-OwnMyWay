@@ -47,7 +47,7 @@ class DefaultLandmarkCartViewModel: LandmarkCartViewModel, ObservableObject {
     func didDeleteLandmark(where index: Int) -> Landmark {
         return self.travel.landmarks.remove(at: index)
     }
-    
+
     func findLandmark(index: Int) -> Landmark {
         return self.travel.landmarks[index]
     }

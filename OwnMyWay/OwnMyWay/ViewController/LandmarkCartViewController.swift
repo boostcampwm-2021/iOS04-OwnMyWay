@@ -153,8 +153,7 @@ extension LandmarkCartViewController: UICollectionViewDelegate {
         if indexPath.item == 0 {
             // PlusCell 일 경우
             self.viewModel?.didTouchPlusButton()
-        }
-        else {
+        } else {
             guard let viewModel = self.viewModel else { return }
             self.presentAlert(index: viewModel.travel.landmarks.count - indexPath.item)
         }
