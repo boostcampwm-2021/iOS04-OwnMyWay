@@ -10,6 +10,7 @@ import UIKit
 class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable {
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
+    @IBOutlet private weak var nextButtonHeightConstraint: NSLayoutConstraint!
 
     private var bindContainerVC: ((UIView) -> Void)?
     private var viewModel: AddLandmarkViewModel?
@@ -30,6 +31,11 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
         self.view.layoutIfNeeded()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.configureButtonConstraint()
+    }
+
     func bind(viewModel: AddLandmarkViewModel, closure: @escaping (UIView) -> Void) {
         self.viewModel = viewModel
         self.bindContainerVC = closure
@@ -37,6 +43,11 @@ class AddLandmarkViewController: UIViewController, Instantiable, TravelUpdatable
 
     func didUpdateTravel(to travel: Travel) {
         self.viewModel?.didUpdateTravel(to: travel)
+    }
+
+    private func configureButtonConstraint() {
+        let bottomPadding = self.view.safeAreaInsets.bottom
+        self.nextButtonHeightConstraint.constant = 60 + bottomPadding
     }
 
     private func configureNavigation() {
