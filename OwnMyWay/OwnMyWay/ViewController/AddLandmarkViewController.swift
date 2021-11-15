@@ -59,6 +59,7 @@ class AddLandmarkViewController: UIViewController,
     func didDeleteLandmark(at landmark: Landmark) {
         self.viewModel?.didDeleteLandmark(at: landmark)
     }
+
     private func configureButtonConstraint() {
         let bottomPadding = self.view.safeAreaInsets.bottom
         self.nextButtonHeightConstraint.constant = 60 + bottomPadding
