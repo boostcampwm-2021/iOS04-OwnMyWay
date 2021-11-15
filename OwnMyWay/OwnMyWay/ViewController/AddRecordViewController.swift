@@ -5,15 +5,18 @@
 //  Created by 강현준 on 2021/11/10.
 //
 
+import Combine
 import UIKit
 
 class AddRecordViewController: UIViewController, Instantiable {
 
     private var viewModel: AddRecordViewModel?
+    private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureNavigation()
+        self.configureCancellable()
     }
 
     func bind(viewModel: AddRecordViewModel) {
@@ -35,6 +38,15 @@ class AddRecordViewController: UIViewController, Instantiable {
             target: self,
             action: #selector(submitButtonAction)
         )
+    }
+
+    private func configureCancellable() {
+        self.viewModel?.validatePublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] isValid in
+                self?.navigationItem.rightBarButtonItem?.isEnabled = isValid ?? false
+            }
+            .store(in: &cancellables)
     }
 
     @objc private func backButtonAction() {
