@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -64,6 +65,52 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시각 및 장소 설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGm-9q-R7i">
+                                <rect key="frame" x="20" y="410.5" width="374" height="30"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hG-Xk-Rug">
+                                <rect key="frame" x="20" y="445.5" width="374" height="40"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BLp-OV-mYv">
+                                        <rect key="frame" x="0.0" y="0.5" width="25" height="39"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="2FE-wI-DUz"/>
+                                        </constraints>
+                                        <imageReference key="image" image="clock" catalog="system" symbolScale="default"/>
+                                    </imageView>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="fOw-Xa-aTO">
+                                        <rect key="frame" x="25" y="0.0" width="349" height="40"/>
+                                    </datePicker>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ll1-0m-0Wh"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m1z-ge-sEu">
+                                <rect key="frame" x="20" y="490.5" width="374" height="40"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin.and.ellipse" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bcz-pq-hmh">
+                                        <rect key="frame" x="0.0" y="-0.5" width="25" height="40.5"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="Ihy-7p-i5m"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="위치" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Tf-Ok-pKM">
+                                        <rect key="frame" x="25" y="0.0" width="349" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Nx9-CC-dG1"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -72,12 +119,21 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NAf-T0-D30" secondAttribute="trailing" constant="20" id="2Vk-wK-mDy"/>
                             <constraint firstItem="M4M-j0-aRw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="3y7-PT-zFa"/>
                             <constraint firstItem="Xx5-H0-fDI" firstAttribute="leading" secondItem="Fp1-Qy-IFd" secondAttribute="leading" id="F84-KB-9nK"/>
+                            <constraint firstItem="iGm-9q-R7i" firstAttribute="top" secondItem="NAf-T0-D30" secondAttribute="bottom" constant="40" id="FvL-G9-OhF"/>
+                            <constraint firstItem="9hG-Xk-Rug" firstAttribute="top" secondItem="iGm-9q-R7i" secondAttribute="bottom" constant="5" id="JEk-Fu-gLK"/>
+                            <constraint firstItem="iGm-9q-R7i" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="LDK-5V-7QK"/>
                             <constraint firstItem="M4M-j0-aRw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="LYq-fa-99F"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="iGm-9q-R7i" secondAttribute="trailing" constant="20" id="Od9-VC-AiP"/>
                             <constraint firstItem="Fp1-Qy-IFd" firstAttribute="top" secondItem="M4M-j0-aRw" secondAttribute="bottom" constant="20" id="RJA-ce-vv3"/>
                             <constraint firstItem="kTj-IL-Iyk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="VHU-Fa-Ftu"/>
+                            <constraint firstItem="m1z-ge-sEu" firstAttribute="top" secondItem="9hG-Xk-Rug" secondAttribute="bottom" constant="5" id="at1-ha-qKa"/>
                             <constraint firstItem="NAf-T0-D30" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="bxd-bA-fzP"/>
                             <constraint firstItem="Xx5-H0-fDI" firstAttribute="trailing" secondItem="Fp1-Qy-IFd" secondAttribute="trailing" id="cXu-ts-qHp"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9hG-Xk-Rug" secondAttribute="trailing" constant="20" id="eoi-bf-Z3W"/>
+                            <constraint firstItem="m1z-ge-sEu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="f7R-TT-Jbw"/>
                             <constraint firstItem="Fp1-Qy-IFd" firstAttribute="leading" secondItem="M4M-j0-aRw" secondAttribute="leading" id="gec-Td-l37"/>
+                            <constraint firstItem="9hG-Xk-Rug" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="hs2-uu-m0G"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="m1z-ge-sEu" secondAttribute="trailing" constant="20" id="lJc-Xt-W5n"/>
                             <constraint firstItem="Fp1-Qy-IFd" firstAttribute="trailing" secondItem="M4M-j0-aRw" secondAttribute="trailing" id="qgQ-e1-uQN"/>
                             <constraint firstItem="kTj-IL-Iyk" firstAttribute="top" secondItem="Xx5-H0-fDI" secondAttribute="bottom" constant="40" id="tY6-5u-a8X"/>
                             <constraint firstItem="NAf-T0-D30" firstAttribute="top" secondItem="kTj-IL-Iyk" secondAttribute="bottom" constant="5" id="typ-M7-qt0"/>
@@ -92,6 +148,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="clock" catalog="system" width="128" height="121"/>
+        <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
