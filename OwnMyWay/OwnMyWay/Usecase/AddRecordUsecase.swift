@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AddRecordUsecase {
-
+    func executeValidation(title: String?) -> Bool
 }
 
 struct DefaultAddRecordUsecase: AddRecordUsecase {
@@ -17,6 +17,10 @@ struct DefaultAddRecordUsecase: AddRecordUsecase {
 
     init(repository: TravelRepository) {
         self.repository = repository
+    }
+
+    func executeValidation(title: String?) -> Bool {
+        return (1...20) ~= (title ?? "").count 
     }
 
 }

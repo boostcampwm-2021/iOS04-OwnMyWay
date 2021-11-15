@@ -72,7 +72,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     }
 
     func didEnterTitle(text: String?) {
-        // TODO: 1~20자 사이일 경우 vaild
+        self.isValidTitle = self.usecase.executeValidation(title: text)
     }
 
     func didTouchBackButton() {
