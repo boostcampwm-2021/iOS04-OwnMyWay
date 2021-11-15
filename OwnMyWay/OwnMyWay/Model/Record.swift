@@ -9,20 +9,17 @@ import Foundation
 
 struct Record {
     var uuid: UUID?
+    var title: String?
     var content: String?
     var date: Date?
     var latitude: Double?
     var longitude: Double?
-    var photoURL: URL?
+    var photoURLs: [URL]?
+    var placeDescription: String?
 
     static func dummy() -> Record {
         return Record(
-            uuid: UUID(),
-            content: nil,
-            date: nil,
-            latitude: nil,
-            longitude: nil,
-            photoURL: nil
+            uuid: UUID()
         )
     }
 }

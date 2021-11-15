@@ -18,7 +18,9 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="photoURL" optional="YES" attributeType="URI"/>
+        <attribute name="photoURLs" optional="YES" attributeType="Transformable" customClassName="[URL]"/>
+        <attribute name="placeDescription" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelMO" inverseName="records" inverseEntity="TravelMO"/>
     </entity>
@@ -34,8 +36,8 @@
     </entity>
     <elements>
         <element name="LandmarkMO" positionX="-51.3515625" positionY="221.359375" width="128" height="133"/>
-        <element name="RecordMO" positionX="290.28125" positionY="9.48828125" width="128" height="148"/>
+        <element name="LocationMO" positionX="289.9140625" positionY="246.36328125" width="128" height="88"/>
+        <element name="RecordMO" positionX="290.28125" positionY="9.48828125" width="128" height="178"/>
         <element name="TravelMO" positionX="-36" positionY="9" width="128" height="163"/>
-        <element name="LocationMO" positionX="223.796875" positionY="216.45703125" width="128" height="88"/>
     </elements>
 </model>

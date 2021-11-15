@@ -40,7 +40,7 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
             cartVC.view.bottomAnchor.constraint(equalTo: cartView.bottomAnchor).isActive = true
             cartVC.didMove(toParent: addLandmarkVC)
         }
-        navigationController.pushViewController(addLandmarkVC, animated: true)
+        self.navigationController.pushViewController(addLandmarkVC, animated: true)
     }
 
     func pushToCompleteCreation(travel: Travel) {

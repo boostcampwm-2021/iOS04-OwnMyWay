@@ -27,7 +27,7 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
         )
         let ongoingVC = OngoingTravelViewController.instantiate(storyboardName: "OngoingTravel")
         ongoingVC.bind(viewModel: ongoingVM)
-        navigationController.pushViewController(ongoingVC, animated: true)
+        self.navigationController.pushViewController(ongoingVC, animated: true)
     }
 
     func popToHome() {
