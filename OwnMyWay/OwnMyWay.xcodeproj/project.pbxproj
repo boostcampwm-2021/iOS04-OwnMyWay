@@ -86,6 +86,8 @@
 		DB2823BA273BA83D007D8801 /* MapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2823B8273BA83D007D8801 /* MapCell.xib */; };
 		DB2823BD273BC0C2007D8801 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */; };
 		DB2823BE273BC0C2007D8801 /* DateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */; };
+		DB7C12A92742336A00ED30F3 /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */; };
+		DB7C12AA2742336A00ED30F3 /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A82742336A00ED30F3 /* RecordMO+CoreDataProperties.swift */; };
 		DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B3273132A000487D33 /* LandmarkDTO.swift */; };
 		DB8831BE2731990000487D33 /* LandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LandmarkRepository.swift */; };
 		DB8831C127319B6400487D33 /* SearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */; };
@@ -96,8 +98,6 @@
 		DBC39EEC2733929000FB7939 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EEB2733929000FB7939 /* Travel.swift */; };
 		DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */; };
 		DBC39F042733ABB200FB7939 /* TravelMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */; };
-		DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFF2733ABB200FB7939 /* RecordMO+CoreDataClass.swift */; };
-		DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F002733ABB200FB7939 /* RecordMO+CoreDataProperties.swift */; };
 		DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */; };
 		DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */; };
 		DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
@@ -191,6 +191,8 @@
 		DB2823B8273BA83D007D8801 /* MapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapCell.xib; sourceTree = "<group>"; };
 		DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateHeaderView.xib; sourceTree = "<group>"; };
+		DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordMO+CoreDataClass.swift"; path = "../../RecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DB7C12A82742336A00ED30F3 /* RecordMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordMO+CoreDataProperties.swift"; path = "../../RecordMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DB8831AD2730FDB500487D33 /* TravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRepository.swift; sourceTree = "<group>"; };
 		DB8831B3273132A000487D33 /* LandmarkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTO.swift; sourceTree = "<group>"; };
 		DB8831BD2731990000487D33 /* LandmarkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRepository.swift; sourceTree = "<group>"; };
@@ -202,8 +204,6 @@
 		DBC39EEB2733929000FB7939 /* Travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
 		DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TravelMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TravelMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DBC39EFF2733ABB200FB7939 /* RecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DBC39F002733ABB200FB7939 /* RecordMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LandmarkMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LandmarkMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DBC39F092733C41000FB7939 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
@@ -334,8 +334,8 @@
 			children = (
 				DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */,
 				DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */,
-				DBC39EFF2733ABB200FB7939 /* RecordMO+CoreDataClass.swift */,
-				DBC39F002733ABB200FB7939 /* RecordMO+CoreDataProperties.swift */,
+				DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */,
+				DB7C12A82742336A00ED30F3 /* RecordMO+CoreDataProperties.swift */,
 				DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */,
 				DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */,
 				DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */,
@@ -560,6 +560,7 @@
 				3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */,
 				29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
+				DB7C12AA2742336A00ED30F3 /* RecordMO+CoreDataProperties.swift in Sources */,
 				29274EF92733FC4500DDEBFF /* ReservedTravelViewController.swift in Sources */,
 				DB1D5CB3273CE17800B30448 /* LocationMO+CoreDataProperties.swift in Sources */,
 				29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */,
@@ -567,6 +568,7 @@
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */,
 				DBFC04122739170900031EDF /* LandmarkCartCoordinator.swift in Sources */,
+				DB7C12A92742336A00ED30F3 /* RecordMO+CoreDataClass.swift in Sources */,
 				DB8831BE2731990000487D33 /* LandmarkRepository.swift in Sources */,
 				DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */,
 				DB8831C72732861500487D33 /* Instantiable.swift in Sources */,
@@ -592,7 +594,6 @@
 				AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */,
 				294897BF273BA993003185E7 /* RecordCardCell.swift in Sources */,
 				3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */,
-				DBC39F052733ABB200FB7939 /* RecordMO+CoreDataClass.swift in Sources */,
 				3F113A17273A5FD600EA91AA /* CompleteCreationCoordinator.swift in Sources */,
 				AF82FDB4273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift in Sources */,
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
@@ -604,7 +605,6 @@
 				29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */,
 				DB1D5CB2273CE17800B30448 /* LocationMO+CoreDataClass.swift in Sources */,
 				DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */,
-				DBC39F062733ABB200FB7939 /* RecordMO+CoreDataProperties.swift in Sources */,
 				AF82FDBA273BF3D900A094B6 /* OutdatedTravelViewController.swift in Sources */,
 				DBFC0416273925FD00031EDF /* ReservedTravelCoordinator.swift in Sources */,
 				29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */,

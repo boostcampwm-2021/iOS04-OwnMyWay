@@ -29,4 +29,8 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
         addRecordVC.bind(viewModel: addRecordVM)
         self.navigationController.viewControllers.last?.present(addRecordVC, animated: true)
     }
+
+    func dismissToParent(with record: Record) {
+        // TODO: Ongoing Fetch 또는 Record를 append 하는 방식 중 택1
+    }
 }

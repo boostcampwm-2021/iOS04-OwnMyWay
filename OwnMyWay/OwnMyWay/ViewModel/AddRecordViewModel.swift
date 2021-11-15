@@ -5,14 +5,15 @@
 //  Created by 강현준 on 2021/11/10.
 //
 
+import Combine
 import Foundation
 
 protocol AddRecordViewModel {
-
+    
 }
 
 protocol AddRecordCoordinatingDelegate: AnyObject {
-
+    func dismissToParent(with record: Record)
 }
 
 class DefaultAddRecordViewModel: AddRecordViewModel {
@@ -20,6 +21,15 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     private var travel: Travel
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
+
+    @Published private var validateResult: Bool?
+
+    private var recordTitle: String?
+    private var recordDate: Date?
+    private var recordCoordinate: (Double, Double)?
+    private var recordPlace: String?
+    private var recordContent: String?
+    private var recordImages: [URL] = []
 
     init(
         travel: Travel,
