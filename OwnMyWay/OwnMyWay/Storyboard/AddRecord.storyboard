@@ -27,6 +27,9 @@
                                 <rect key="frame" x="20" y="114" width="374" height="25.5"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="didChangeTitle:" destination="Y6W-OH-hqX" eventType="editingChanged" id="Yhv-YM-mQ8"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xx5-H0-fDI">
                                 <rect key="frame" x="20" y="144.5" width="374" height="1"/>

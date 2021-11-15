@@ -57,4 +57,8 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.viewModel?.didTouchSubmitButton()
     }
 
+    @IBAction func didChangeTitle(_ sender: UITextField) {
+        self.viewModel?.didEnterTitle(text: sender.text)
+    }
+
 }
