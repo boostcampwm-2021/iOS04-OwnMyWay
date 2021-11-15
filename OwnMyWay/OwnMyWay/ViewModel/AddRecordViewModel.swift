@@ -13,7 +13,7 @@ protocol AddRecordViewModel {
 
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
-    func didEnterCoordinate(at location: Location)
+    func didEnterCoordinate(of location: Location)
     func didTouchBackButton()
     func didTouchSubmitButton()
     // TODO: Photo 들어왔을 때 처리 함수 추가
@@ -83,7 +83,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.isValidDate = self.usecase.executeValidationDate(with: date)
     }
 
-    func didEnterCoordinate(at location: Location) {
+    func didEnterCoordinate(of location: Location) {
         self.recordCoordinate = location
         self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
     }
