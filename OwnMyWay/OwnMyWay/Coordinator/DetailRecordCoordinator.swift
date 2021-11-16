@@ -12,18 +12,20 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
     var record: Record
+    var travel: Travel
 
-    init(navigationController: UINavigationController, record: Record) {
+    init(navigationController: UINavigationController, record: Record, travel: Travel) {
         self.childCoordinators = []
         self.navigationController = navigationController
         self.record = record
+        self.travel = travel
     }
 
     func start() {
         let repository = CoreDataTravelRepository()
         let usecase = DefaultDetailRecordUsecase(repository: repository)
         let detailRecordVM = DefaultDetailRecordViewModel(
-            record: self.record, usecase: usecase, coordinatingDelegate: self
+            record: self.record, travel: self.travel, usecase: usecase, coordinatingDelegate: self
         )
         let detailRecordVC = DetailRecordViewController.instantiate(storyboardName: "DetailRecord")
         detailRecordVC.bind(viewModel: detailRecordVM)

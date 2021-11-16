@@ -26,7 +26,7 @@ protocol OngoingCoordinatingDelegate: AnyObject {
     func pushToAddRecord(record: Record?)
     func pushToEditTravel()
     func moveToOutdated(travel: Travel)
-    func pushToDetailRecord(record: Record)
+    func pushToDetailRecord(record: Record, travel: Travel)
 }
 
 class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
@@ -60,7 +60,7 @@ class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
     }
 
     func didTouchRecordCell(at record: Record) {
-        self.coordinatingDelegate?.pushToDetailRecord(record: record)
+        self.coordinatingDelegate?.pushToDetailRecord(record: record, travel: self.travel)
     }
 
     func didTouchBackButton() {

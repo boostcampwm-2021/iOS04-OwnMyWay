@@ -51,9 +51,9 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
     // FIXME: travel 추가하기
     func pushToEditTravel() {}
 
-    func pushToDetailRecord(record: Record) {
+    func pushToDetailRecord(record: Record, travel: Travel) {
         let detailRecordCoordinator = DetailRecordCoordinator(
-            navigationController: self.navigationController, record: record
+            navigationController: self.navigationController, record: record, travel: travel
         )
         self.childCoordinators.append(detailRecordCoordinator)
         detailRecordCoordinator.start()

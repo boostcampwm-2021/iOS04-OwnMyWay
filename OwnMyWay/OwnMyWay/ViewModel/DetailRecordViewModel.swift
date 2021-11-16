@@ -23,16 +23,19 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
     var recordPublisher: Published<Record>.Publisher { $record }
 
     @Published private(set) var record: Record
+    private var travel: Travel
 
     private let usecase: DetailRecordUsecase
     private weak var coordinatingDelegate: DetailRecordCoordinatingDelegate?
 
     init(
         record: Record,
+        travel: Travel,
         usecase: DetailRecordUsecase,
         coordinatingDelegate: DetailRecordCoordinatingDelegate
     ) {
         self.record = record
+        self.travel = travel
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
     }
