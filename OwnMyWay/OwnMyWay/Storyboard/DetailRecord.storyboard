@@ -170,6 +170,7 @@
                     </view>
                     <connections>
                         <outlet property="contentLabel" destination="vOP-N9-lrv" id="cRy-h5-zq4"/>
+                        <outlet property="imageScrollView" destination="Raa-wO-QXk" id="k6y-mN-pQX"/>
                         <outlet property="imageStackView" destination="sYp-Nq-Jix" id="ZSg-hf-MG0"/>
                         <outlet property="locationLabel" destination="kmo-sY-7qK" id="XsG-2H-0lV"/>
                         <outlet property="pageControl" destination="gbb-bY-geS" id="sks-Ll-wrJ"/>
