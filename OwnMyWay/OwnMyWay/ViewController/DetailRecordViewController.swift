@@ -52,6 +52,7 @@ class DetailRecordViewController: UIViewController, Instantiable {
         }
 
         let editAction = UIAlertAction(title: "수정하기", style: .default) { _ in
+            self.viewModel?.didTouchEditButton()
         }
 
         let shareAction = UIAlertAction(title: "공유하기", style: .default) { _ in
@@ -85,7 +86,7 @@ class DetailRecordViewController: UIViewController, Instantiable {
             self.configurePageControl(record: record)
         }.store(in: &self.cancellables)
     }
-    
+
     private func configurePageControl(record: Record) {
         guard let numberOfPages = record.photoURLs?.count else { return }
         self.pageControl.numberOfPages = numberOfPages

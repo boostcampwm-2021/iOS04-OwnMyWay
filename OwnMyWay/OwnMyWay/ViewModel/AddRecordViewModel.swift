@@ -19,7 +19,7 @@ protocol AddRecordCoordinatingDelegate: AnyObject {
 
 class DefaultAddRecordViewModel: AddRecordViewModel {
 
-    private var travel: Travel
+    private var record: Record?
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
 
@@ -58,11 +58,11 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     }
 
     init(
-        travel: Travel,
+        record: Record?,
         usecase: AddRecordUsecase,
         coordinatingDelegate: AddRecordCoordinatingDelegate
     ) {
-        self.travel = travel
+        self.record = record
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
     }

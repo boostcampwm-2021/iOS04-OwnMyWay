@@ -40,9 +40,9 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
         self.navigationController.popToRootViewController(animated: true)
     }
 
-    func pushToAddRecord(travel: Travel) {
+    func pushToAddRecord(record: Record?) {
         let addRecordCoordinator = AddRecordCoordinator(
-            navigationController: self.navigationController, travel: travel
+            navigationController: self.navigationController, record: record
         )
         self.childCoordinators.append(addRecordCoordinator)
         addRecordCoordinator.start()

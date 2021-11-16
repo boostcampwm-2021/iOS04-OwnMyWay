@@ -10,9 +10,13 @@ import Foundation
 protocol DetailRecordViewModel {
     var record: Record { get }
     var recordPublisher: Published<Record>.Publisher { get }
+
+    func didTouchEditButton()
 }
 
-protocol DetailRecordCoordinatingDelegate: AnyObject { }
+protocol DetailRecordCoordinatingDelegate: AnyObject {
+    func pushToAddRecord(record: Record)
+}
 
 class DefaultDetailRecordViewModel: DetailRecordViewModel {
 
@@ -31,5 +35,9 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
         self.record = record
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
+    }
+
+    func didTouchEditButton() {
+        self.coordinatingDelegate?.pushToAddRecord(record: self.record)
     }
 }

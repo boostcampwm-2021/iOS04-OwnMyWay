@@ -29,4 +29,13 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
         detailRecordVC.bind(viewModel: detailRecordVM)
         self.navigationController.pushViewController(detailRecordVC, animated: true)
     }
+
+    func pushToAddRecord(record: Record) {
+        let addRecordCoordinator = AddRecordCoordinator(
+            navigationController: self.navigationController, record: record
+        )
+        self.childCoordinators.append(addRecordCoordinator)
+        addRecordCoordinator.start()
+    }
+
 }
