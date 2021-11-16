@@ -123,7 +123,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     }
 
     private func presentAlert(index: Int) {
-        guard let landmark = self.viewModel?.findLandmark(index: index) else { return }
+        guard let landmark = self.viewModel?.findLandmark(at: index) else { return }
         let alert = UIAlertController(title: "관광 명소 삭제",
                                       message: "\(landmark.title ?? "관광지")을(를) 정말 삭제하실건가요?",
                                       preferredStyle: .alert)
@@ -133,7 +133,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
                     .last as? LandmarkDeletable & UIViewController,
                   let viewModel = self?.viewModel
             else { return }
-            upperVC.didDeleteLandmark(at: viewModel.didDeleteLandmark(where: index))
+            upperVC.didDeleteLandmark(at: viewModel.didDeleteLandmark(at: index))
         }
         let noAction = UIAlertAction(title: "아니오", style: .cancel)
         alert.addAction(yesAction)

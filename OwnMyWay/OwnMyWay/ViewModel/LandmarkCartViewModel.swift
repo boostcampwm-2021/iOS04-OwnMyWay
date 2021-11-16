@@ -12,9 +12,9 @@ protocol LandmarkCartViewModel {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
     func didAddLandmark(with landmark: Landmark)
-    func didDeleteLandmark(where index: Int) -> Landmark
+    func didDeleteLandmark(at index: Int) -> Landmark
     func didTouchPlusButton()
-    func findLandmark(index: Int) -> Landmark
+    func findLandmark(at index: Int) -> Landmark
 }
 
 protocol LandmarkCartCoordinatingDelegate: AnyObject {
@@ -44,11 +44,11 @@ class DefaultLandmarkCartViewModel: LandmarkCartViewModel, ObservableObject {
         self.coordinatingDelegate?.presentSearchLandmarkModally()
     }
 
-    func didDeleteLandmark(where index: Int) -> Landmark {
+    func didDeleteLandmark(at index: Int) -> Landmark {
         return self.travel.landmarks.remove(at: index)
     }
 
-    func findLandmark(index: Int) -> Landmark {
+    func findLandmark(at index: Int) -> Landmark {
         return self.travel.landmarks[index]
     }
 }
