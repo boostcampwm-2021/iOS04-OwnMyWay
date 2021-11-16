@@ -152,9 +152,16 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
         results.forEach { [weak self] result in
             guard let assetId = result.assetIdentifier else { return }
             let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
-            print(assetResults.firstObject?.creationDate)
-            print(assetResults.firstObject?.location?.coordinate)
-
+            let date = assetResults.firstObject?.creationDate ?? Date()
+            self?.viewModel?.didEnterTime(with: date)
+            self?.datePicker.date = date
+            if let latitude = assetResults.firstObject?.location?.coordinate.latitude.magnitude,
+               let longitude = assetResults.firstObject?.location?.coordinate.longitude.magnitude {
+                self?.getAddressFromCoordinates(latitude: latitude, longitude: longitude) { title in
+                    self?.viewModel?.didEnterCoordinate(of: Location(latitude: latitude, longitude: longitude))
+                    self?.locationButton.setTitle(title, for: .normal)
+                }
+            }
             for type in supportedPhotoExtensions {
                 if result.itemProvider.hasRepresentationConforming(toTypeIdentifier: type, fileOptions: .init()) {
                     result.itemProvider.loadFileRepresentation(forTypeIdentifier: type) { url, error in
