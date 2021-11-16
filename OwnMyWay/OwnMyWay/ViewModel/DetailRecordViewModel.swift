@@ -11,14 +11,15 @@ protocol DetailRecordViewModel {
     var record: Record { get }
     var recordPublisher: Published<Record>.Publisher { get }
 
+    func didTouchBackButton()
+    func didTouchDeleteButton()
     func didTouchEditButton()
     func didUpdateRecord(record: Record)
-    func didTouchDeleteButton()
 }
 
 protocol DetailRecordCoordinatingDelegate: AnyObject {
     func pushToAddRecord(record: Record)
-    func popToParent(with travel: Travel)
+    func popToParent(with travel: Travel, isPopable: Bool)
 }
 
 class DefaultDetailRecordViewModel: DetailRecordViewModel {
@@ -42,7 +43,11 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
     }
-
+    
+    func didTouchBackButton() {
+        self.coordinatingDelegate?.popToParent(with: self.travel, isPopable: false)
+    }
+    
     func didTouchEditButton() {
         self.coordinatingDelegate?.pushToAddRecord(record: self.record)
     }
@@ -58,8 +63,9 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
 
     func didTouchDeleteButton() {
         self.usecase.executeRecordDeletion(at: self.record)
-        let index = self.travel.records?.firstIndex(where: {$0 == self.record})
+        guard let index = self.travel.records.firstIndex(where: { $0 == self.record })
+        else { return }
         self.travel.records.remove(at: index)
-        self.coordinatingDelegate?.popToParent(with: self.travel)
+        self.coordinatingDelegate?.popToParent(with: self.travel, isPopable: true)
     }
 }

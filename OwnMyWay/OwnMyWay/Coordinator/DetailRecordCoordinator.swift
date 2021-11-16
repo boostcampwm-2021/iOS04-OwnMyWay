@@ -32,8 +32,10 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
         self.navigationController.pushViewController(detailRecordVC, animated: true)
     }
 
-    func popToParent(with travel: Travel) {
-        self.navigationController.popViewController(animated: true)
+    func popToParent(with travel: Travel, isPopable: Bool) {
+        if isPopable {
+            self.navigationController.popViewController(animated: true)
+        }
         guard let parentVC = navigationController
                 .viewControllers
                 .last as? TravelUpdatable & UIViewController
