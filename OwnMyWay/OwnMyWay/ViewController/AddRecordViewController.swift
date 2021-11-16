@@ -272,8 +272,9 @@ extension AddRecordViewController {
             return
         }
     }
-    
-    fileprivate extension CGRect {
+}
+
+fileprivate extension CGRect {
     mutating func move(horizontal: CGFloat, vertical: CGFloat) {
         self = CGRect(
             origin: CGPoint(x: self.origin.x + horizontal, y: self.origin.y + vertical),
@@ -284,5 +285,4 @@ extension AddRecordViewController {
     mutating func moveToZero() {
         self = CGRect(origin: .zero, size: self.size)
     }
-}
 }
