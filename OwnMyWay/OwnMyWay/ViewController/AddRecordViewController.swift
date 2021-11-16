@@ -23,6 +23,9 @@ let supportedPhotoExtensions = [
 
 class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet weak var photoCollectionView: UICollectionView!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var contentTextField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
 
     private var viewModel: AddRecordViewModel?
     private var dataSource: [URL] = []
