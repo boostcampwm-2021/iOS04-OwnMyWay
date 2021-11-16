@@ -81,10 +81,6 @@ class AddRecordViewController: UIViewController, Instantiable {
             .store(in: &cancellables)
     }
 
-    @objc private func backButtonAction() {
-        self.viewModel?.didTouchBackButton()
-    }
-
     @objc private func submitButtonAction() {
         self.viewModel?.didTouchSubmitButton()
     }
