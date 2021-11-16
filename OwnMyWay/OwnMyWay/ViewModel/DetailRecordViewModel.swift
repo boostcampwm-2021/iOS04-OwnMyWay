@@ -12,6 +12,7 @@ protocol DetailRecordViewModel {
     var recordPublisher: Published<Record>.Publisher { get }
 
     func didTouchEditButton()
+    func didUpdateRecord(record: Record)
 }
 
 protocol DetailRecordCoordinatingDelegate: AnyObject {
@@ -42,5 +43,14 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
 
     func didTouchEditButton() {
         self.coordinatingDelegate?.pushToAddRecord(record: self.record)
+    }
+
+    func didUpdateRecord(record: Record) {
+        self.record = record
+        self.usecase.executeRecordUpdate(record: record)
+
+        guard let index = self.travel.records.firstIndex(where: { $0.uuid == record.uuid })
+        else { return }
+        self.travel.records[index] = record
     }
 }

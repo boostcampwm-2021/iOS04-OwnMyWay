@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailRecordUsecase {
-
+    func executeRecordUpdate(record: Record)
 }
 
 struct DefaultDetailRecordUsecase: DetailRecordUsecase {
@@ -19,4 +19,7 @@ struct DefaultDetailRecordUsecase: DetailRecordUsecase {
         self.repository = repository
     }
 
+    func executeRecordUpdate(record: Record) {
+        self.repository.updateRecord(at: record)
+    }
 }

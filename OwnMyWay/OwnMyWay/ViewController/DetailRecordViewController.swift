@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-class DetailRecordViewController: UIViewController, Instantiable {
+class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatable {
 
     @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var imageStackView: UIStackView!
@@ -30,6 +30,10 @@ class DetailRecordViewController: UIViewController, Instantiable {
 
     func bind(viewModel: DetailRecordViewModel) {
         self.viewModel = viewModel
+    }
+
+    func didUpdateRecord(record: Record) {
+        self.viewModel?.didUpdateRecord(record: record)
     }
 
     private func configureScrollView() {
