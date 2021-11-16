@@ -42,6 +42,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     private var recordCoordinate: Location?
     private var recordPlace: String?
     private var recordContent: String?
+    private var plusCard: URL?
     private var isValidTitle: Bool = false {
         didSet {
             self.checkValidation()
@@ -76,7 +77,11 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.travel = travel
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
+        self.plusCard = Bundle.main.url(forResource: "addImage", withExtension: "png")
         self.recordPhotos = []
+        if let plusCard = plusCard {
+            self.recordPhotos.append(plusCard)
+        }
     }
 
     func didEnterTitle(with text: String?) {

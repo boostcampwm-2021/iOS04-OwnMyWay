@@ -50,6 +50,7 @@
 		3FB987982742C3C0008F0E08 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987972742C3BF008F0E08 /* ImageFileManager.swift */; };
 		3FB987A5274373CB008F0E08 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987A3274373CB008F0E08 /* PhotoCell.swift */; };
 		3FB987A6274373CB008F0E08 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB987A4274373CB008F0E08 /* PhotoCell.xib */; };
+		3FB987A827439030008F0E08 /* addImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB987A727439030008F0E08 /* addImage.png */; };
 		AF1108E0273B8872009FE728 /* OngoingTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */; };
 		AF1108E2273B88A5009FE728 /* OngoingTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */; };
 		AF1108E4273B8C04009FE728 /* OngoingTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */; };
@@ -159,6 +160,7 @@
 		3FB987972742C3BF008F0E08 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		3FB987A3274373CB008F0E08 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		3FB987A4274373CB008F0E08 /* PhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
+		3FB987A727439030008F0E08 /* addImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImage.png; sourceTree = "<group>"; };
 		AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OngoingTravel.storyboard; sourceTree = "<group>"; };
 		AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelViewController.swift; sourceTree = "<group>"; };
 		AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelViewModel.swift; sourceTree = "<group>"; };
@@ -383,6 +385,14 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		3FB987A927439114008F0E08 /* BundleImage */ = {
+			isa = PBXGroup;
+			children = (
+				3FB987A727439030008F0E08 /* addImage.png */,
+			);
+			path = BundleImage;
+			sourceTree = "<group>";
+		};
 		DB22BB4D272F82770004444B = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +413,7 @@
 		DB22BB58272F82770004444B /* OwnMyWay */ = {
 			isa = PBXGroup;
 			children = (
+				3FB987A927439114008F0E08 /* BundleImage */,
 				293646B82738F3990030ED78 /* Extension */,
 				29E5FB3F272F8C0000F35733 /* Model */,
 				29E5FB3E272F8BF300F35733 /* Repository */,
@@ -519,6 +530,7 @@
 				DB22BB66272F82780004444B /* Assets.xcassets in Resources */,
 				DB22BB61272F82770004444B /* Home.storyboard in Resources */,
 				29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */,
+				3FB987A827439030008F0E08 /* addImage.png in Resources */,
 				29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */,
 				AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */,
 				DB2823BA273BA83D007D8801 /* MapCell.xib in Resources */,
