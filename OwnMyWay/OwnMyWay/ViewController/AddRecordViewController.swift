@@ -8,13 +8,11 @@
 import Combine
 import UIKit
 
-private typealias AddRecordDataSource = UICollectionViewDiffableDataSource <URL.Section, URL>
-
 class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet weak var photoCollectionView: UICollectionView!
 
     private var viewModel: AddRecordViewModel?
-    private var diffableDataSource: AddRecordDataSource?
+    private var dataSource: [URL] = []
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -38,21 +36,7 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     private func configurePhotoCollectionView() {
         self.photoCollectionView.delegate = self
-        self.diffableDataSource = self.configureDiffableDataSource()
-    }
-
-    private func configureDiffableDataSource() -> AddRecordDataSource {
-        let dataSource = AddRecordDataSource(
-            collectionView: self.photoCollectionView
-        ) { collectionView, indexPath, item in
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PhotoCell.identifier, for: indexPath
-            ) as? PhotoCell
-            else { return UICollectionViewCell() }
-            cell.configure(url: item)
-            return cell
-        }
-        return dataSource
+        self.photoCollectionView.dataSource = self
     }
 
     private func configureNavigation() {
@@ -79,6 +63,15 @@ class AddRecordViewController: UIViewController, Instantiable {
                 self?.navigationItem.rightBarButtonItem?.isEnabled = isValid ?? false
             }
             .store(in: &cancellables)
+
+        self.viewModel?.photoPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] photos in
+                print(photos)
+                self?.dataSource = photos
+                self?.photoCollectionView.reloadData()
+            }
+            .store(in: &cancellables)
     }
 
     @objc private func backButtonAction() {
@@ -95,19 +88,26 @@ class AddRecordViewController: UIViewController, Instantiable {
 
 }
 
-extension AddRecordViewController: UICollectionViewDelegate {
+extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView, numberOfItemsInSection section: Int
+    ) -> Int {
+        return self.dataSource.count
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: PhotoCell.identifier, for: indexPath
+        ) as? PhotoCell
+        else { return UICollectionViewCell() }
+        cell.configure(url: self.dataSource[indexPath.item])
+        return cell
+    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.item)
-    }
-
-}
-
-fileprivate extension URL {
-
-    enum Section: Int, CaseIterable {
-        case dummy = -1
-        case main = 0
     }
 
 }

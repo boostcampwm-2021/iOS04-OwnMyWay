@@ -10,6 +10,7 @@ import Foundation
 
 protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
+    var photoPublisher: Published<[URL]>.Publisher { get }
 
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
@@ -28,18 +29,19 @@ protocol AddRecordCoordinatingDelegate: AnyObject {
 
 class DefaultAddRecordViewModel: AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
+    var photoPublisher: Published<[URL]>.Publisher { $recordPhotos }
 
     private var travel: Travel
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
 
     @Published private var validateResult: Bool?
+    @Published private var recordPhotos: [URL]
     private var recordTitle: String?
     private var recordDate: Date?
     private var recordCoordinate: Location?
     private var recordPlace: String?
     private var recordContent: String?
-    private var recordPhotos: [URL] = []
     private var isValidTitle: Bool = false {
         didSet {
             self.checkValidation()
@@ -74,6 +76,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.travel = travel
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
+        self.recordPhotos = []
     }
 
     func didEnterTitle(with text: String?) {
