@@ -9,6 +9,13 @@ import UIKit
 
 class DetailRecordViewController: UIViewController, Instantiable {
 
+    @IBOutlet weak var imageStackView: UIStackView!
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
+    
     private var viewModel: DetailRecordViewModel?
 
     override func viewDidLoad() {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,14 +38,20 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="labelColor"/>
                                                     </stackView>
+                                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="gbb-bY-geS">
+                                                        <rect key="frame" x="0.0" y="388" width="414" height="26"/>
+                                                    </pageControl>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="sYp-Nq-Jix" firstAttribute="trailing" secondItem="ftR-z3-1I4" secondAttribute="trailing" id="0QB-Pw-vZq"/>
                                                     <constraint firstAttribute="width" secondItem="Raa-wO-QXk" secondAttribute="height" multiplier="1:1" id="7gp-Q5-cH3"/>
                                                     <constraint firstItem="sYp-Nq-Jix" firstAttribute="bottom" secondItem="ftR-z3-1I4" secondAttribute="bottom" id="E5v-kz-V7a"/>
                                                     <constraint firstItem="sYp-Nq-Jix" firstAttribute="top" secondItem="ftR-z3-1I4" secondAttribute="top" id="EW1-JH-4hY"/>
+                                                    <constraint firstItem="We6-vb-Iv2" firstAttribute="trailing" secondItem="gbb-bY-geS" secondAttribute="trailing" id="Lvj-PP-nRA"/>
                                                     <constraint firstItem="sYp-Nq-Jix" firstAttribute="height" secondItem="We6-vb-Iv2" secondAttribute="height" id="b3V-tL-bRP"/>
+                                                    <constraint firstItem="gbb-bY-geS" firstAttribute="bottom" secondItem="We6-vb-Iv2" secondAttribute="bottom" id="cDP-BO-5fD"/>
                                                     <constraint firstItem="sYp-Nq-Jix" firstAttribute="leading" secondItem="ftR-z3-1I4" secondAttribute="leading" id="dkW-D1-aap"/>
+                                                    <constraint firstItem="gbb-bY-geS" firstAttribute="leading" secondItem="We6-vb-Iv2" secondAttribute="leading" id="orS-vC-f2e"/>
                                                 </constraints>
                                                 <viewLayoutGuide key="contentLayoutGuide" id="ftR-z3-1I4"/>
                                                 <viewLayoutGuide key="frameLayoutGuide" id="We6-vb-Iv2"/>
@@ -162,6 +168,14 @@
                             <constraint firstItem="VfQ-cV-aCt" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="wML-28-dXk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="contentLabel" destination="vOP-N9-lrv" id="cRy-h5-zq4"/>
+                        <outlet property="imageStackView" destination="sYp-Nq-Jix" id="ZSg-hf-MG0"/>
+                        <outlet property="locationLabel" destination="kmo-sY-7qK" id="XsG-2H-0lV"/>
+                        <outlet property="pageControl" destination="gbb-bY-geS" id="sks-Ll-wrJ"/>
+                        <outlet property="timeLabel" destination="yMb-xP-VbV" id="6ap-hv-TzX"/>
+                        <outlet property="titleLabel" destination="9BM-qp-Ijj" id="O0E-F5-7CU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
