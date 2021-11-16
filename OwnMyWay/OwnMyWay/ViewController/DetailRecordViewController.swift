@@ -17,10 +17,10 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
-    
+
     private var viewModel: DetailRecordViewModel?
     private var cancellables: Set<AnyCancellable> = []
-    
+
     let documentInteractionController = UIDocumentInteractionController()
 
     override func viewDidLoad() {
@@ -29,6 +29,13 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         self.configureSettingButton()
         self.configureDocumentInteractionController()
         self.configureCancellable()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
     }
 
     func bind(viewModel: DetailRecordViewModel) {
@@ -42,10 +49,13 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     private func configureScrollView() {
         self.imageScrollView.delegate = self
     }
-    
+
     private func configureDocumentInteractionController() {
         self.documentInteractionController.delegate = self
-        self.documentInteractionController.url = Bundle.main.url(forResource: "iPhone", withExtension: "png")
+        self.documentInteractionController.url = Bundle.main.url(
+            forResource: "iPhone",
+            withExtension: "png"
+        )
     }
 
     private func configureSettingButton() {
@@ -59,16 +69,21 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
 
     @objc private func didTouchSettingButton() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { _ in
-            self.viewModel?.didTouchDeleteButton()
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.presentAlert()
         }
 
-        let editAction = UIAlertAction(title: "수정하기", style: .default) { _ in
-            self.viewModel?.didTouchEditButton()
+        let editAction = UIAlertAction(title: "수정하기", style: .default) { [weak self] _ in
+            self?.viewModel?.didTouchEditButton()
         }
 
-        let shareAction = UIAlertAction(title: "공유하기", style: .default) { _ in
-            self.documentInteractionController.presentOptionsMenu(from: self.view.bounds, in: self.view, animated: true)
+        let shareAction = UIAlertAction(title: "공유하기", style: .default) { [weak self] _ in
+                // FIXME: 인스타 공유
+//            self?.documentInteractionController.presentOptionsMenu(
+//                from: self?.view.bounds,
+//                in: self?.view,
+//                animated: true
+//            )
         }
         let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
         actionSheet.addAction(deleteAction)
@@ -79,13 +94,13 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     }
 
     private func configureCancellable() {
-        self.viewModel?.recordPublisher.sink { record in
-            self.navigationItem.title = record.date?.localize()
-            self.titleLabel.text = record.title
-            self.timeLabel.text = record.date?.time()
-            self.locationLabel.text = record.placeDescription
-            self.contentLabel.text = record.content
-            self.imageStackView.removeAllArranged()
+        self.viewModel?.recordPublisher.sink { [weak self] record in
+            self?.navigationItem.title = record.date?.localize()
+            self?.titleLabel.text = record.title
+            self?.timeLabel.text = record.date?.time()
+            self?.locationLabel.text = record.placeDescription
+            self?.contentLabel.text = record.content
+            self?.imageStackView.removeAllArranged()
             record.photoURLs?.forEach { url in
                 let imageView = UIImageView()
                 imageView.setImage(with: url)
@@ -93,9 +108,9 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
                 NSLayoutConstraint.activate([
                     imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
                 ])
-                self.imageStackView.addArrangedSubview(imageView)
+                self?.imageStackView.addArrangedSubview(imageView)
             }
-            self.configurePageControl(record: record)
+            self?.configurePageControl(record: record)
         }.store(in: &self.cancellables)
     }
 
@@ -106,6 +121,19 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
 
     private func configurePageControlSelectedPage(currentPage: Int) {
         self.pageControl.currentPage = currentPage
+    }
+    
+    private func presentAlert() {
+        let alert = UIAlertController(title: "여행 기록 삭제",
+                                      message: "기록을 삭제하실건가요?\n소중한 기록은 삭제되면 되돌릴 수 없어요😭",
+                                      preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
+            self?.viewModel?.didTouchDeleteButton()
+        }
+        let noAction = UIAlertAction(title: "아니오", style: .cancel)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true)
     }
 }
 
@@ -120,7 +148,9 @@ extension DetailRecordViewController: UIScrollViewDelegate {
 
 // MARK: - UIDocumetntInteractionControllerDelegate
 extension DetailRecordViewController: UIDocumentInteractionControllerDelegate {
-    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+    func documentInteractionControllerViewControllerForPreview(
+        _ controller: UIDocumentInteractionController
+    ) -> UIViewController {
         self
     }
 }
