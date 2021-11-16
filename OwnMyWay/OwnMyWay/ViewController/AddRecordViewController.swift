@@ -27,7 +27,7 @@ class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet private weak var contentTextField: UITextField!
     @IBOutlet private weak var datePicker: UIDatePicker!
     @IBOutlet private weak var locationButton: UIButton!
-    
+
     private var viewModel: AddRecordViewModel?
     private var dataSource: [URL] = []
     private var cancellables: Set<AnyCancellable> = []
@@ -42,7 +42,14 @@ class AddRecordViewController: UIViewController, Instantiable {
             self?.titleTextField.text = record.title
             self?.datePicker.date = record.date ?? Date()
             self?.contentTextField.text = record.content
-            self?.locationButton.setTitle("\(record.latitude ?? 0), \(record.longitude ?? 0)", for: .normal)
+            guard let latitude = record.latitude,
+                  let longitude = record.longitude
+            else { return }
+            self?.getAddressFromCoordinates(
+                latitude: latitude, longitude: longitude
+            ) { [weak self] title in
+                self?.locationButton.setTitle(title, for: .normal)
+            }
         }
     }
 
@@ -162,4 +169,36 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
 
+}
+
+extension AddRecordViewController {
+
+    func getAddressFromCoordinates(latitude: Double,
+                                   longitude: Double,
+                                   completion: @escaping (String) -> Void) {
+        var center: CLLocationCoordinate2D = CLLocationCoordinate2D()
+        let geocoder: CLGeocoder = CLGeocoder()
+        center.latitude = latitude
+        center.longitude = longitude
+        let location: CLLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            guard error == nil,
+                  let placemark = placemarks?.first
+            else { return }
+            dump(placemark)
+            if let name = placemark.name {
+                print(name)
+                completion(name)
+                return
+            }
+            if let country = placemark.country,
+               let region = placemark.region {
+                print(country, region)
+                completion("\(country) \(region)")
+                return
+            }
+            completion("\(latitude), \(longitude)")
+            return
+        }
+    }
 }
