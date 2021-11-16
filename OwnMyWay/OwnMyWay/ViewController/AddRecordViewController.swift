@@ -121,7 +121,9 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
+        if indexPath.item == 0 {
+            self.openPicker()
+        }
     }
 
 }
