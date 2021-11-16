@@ -23,6 +23,7 @@ class DetailRecordViewController: UIViewController, Instantiable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureScrollView()
         self.configureCancellable()
     }
 
@@ -30,14 +31,8 @@ class DetailRecordViewController: UIViewController, Instantiable {
         self.viewModel = viewModel
     }
     
-    // FIXME: ViewModel record에 바인딩?
-    private func configurePageControl() {
-        guard let numberOfphotos = self.viewModel?.record.photoURLs?.count else { return }
-        self.pageControl.numberOfPages = numberOfphotos
-    }
-    
-    private func configurePageControlSelectedPage(currentPage: Int) {
-        self.pageControl.currentPage = currentPage
+    private func configureScrollView() {
+        self.imageScrollView.delegate = self
     }
 
     private func configureCancellable() {
@@ -57,18 +52,30 @@ class DetailRecordViewController: UIViewController, Instantiable {
                 ])
                 self.imageStackView.addArrangedSubview(imageView)
             }
+            self.configurePageControl(record: record)
         }.store(in: &self.cancellables)
+    }
+    
+    private func configurePageControl(record: Record) {
+        guard let numberOfPages = record.photoURLs?.count else { return }
+        self.pageControl.numberOfPages = numberOfPages
+    }
+
+    private func configurePageControlSelectedPage(currentPage: Int) {
+        self.pageControl.currentPage = currentPage
     }
 }
 
 // MARK: - UIScollViewDelegate
 extension DetailRecordViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentPage = Int(round(self.imageScrollView.contentOffset.x / self.imageScrollView.frame.size.width))
+        let value = self.imageScrollView.contentOffset.x / self.imageScrollView.frame.size.width
+        let currentPage = Int(round(value))
         self.configurePageControlSelectedPage(currentPage: currentPage)
     }
 }
 
+// MARK: - File extension for UIStackView
 fileprivate extension UIStackView {
     func removeAllArranged() {
         let subviews = self.arrangedSubviews
