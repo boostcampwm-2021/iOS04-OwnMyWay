@@ -48,6 +48,8 @@
 		3FB914E92737DAC70084FF1C /* TravelSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */; };
 		3FB914EA2737DAC70084FF1C /* TravelSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB914E82737DAC70084FF1C /* TravelSectionHeader.xib */; };
 		3FB987982742C3C0008F0E08 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987972742C3BF008F0E08 /* ImageFileManager.swift */; };
+		3FB987A5274373CB008F0E08 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987A3274373CB008F0E08 /* PhotoCell.swift */; };
+		3FB987A6274373CB008F0E08 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB987A4274373CB008F0E08 /* PhotoCell.xib */; };
 		AF1108E0273B8872009FE728 /* OngoingTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */; };
 		AF1108E2273B88A5009FE728 /* OngoingTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */; };
 		AF1108E4273B8C04009FE728 /* OngoingTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */; };
@@ -155,6 +157,8 @@
 		3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelSectionHeader.swift; sourceTree = "<group>"; };
 		3FB914E82737DAC70084FF1C /* TravelSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TravelSectionHeader.xib; sourceTree = "<group>"; };
 		3FB987972742C3BF008F0E08 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
+		3FB987A3274373CB008F0E08 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		3FB987A4274373CB008F0E08 /* PhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OngoingTravel.storyboard; sourceTree = "<group>"; };
 		AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelViewController.swift; sourceTree = "<group>"; };
 		AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelViewModel.swift; sourceTree = "<group>"; };
@@ -258,7 +262,6 @@
 				AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */,
 				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
 				2985B1E427427AE900428098 /* LandmarkDeletable.swift */,
-				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
 				3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */,
 				AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */,
 				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
@@ -292,6 +295,8 @@
 				DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */,
 				294897CB273CDCF1003185E7 /* CommentCell.swift */,
 				294897CC273CDCF1003185E7 /* CommentCell.xib */,
+				3FB987A3274373CB008F0E08 /* PhotoCell.swift */,
+				3FB987A4274373CB008F0E08 /* PhotoCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				AF1108E0273B8872009FE728 /* OngoingTravel.storyboard in Resources */,
 				DB2823BE273BC0C2007D8801 /* DateHeaderView.xib in Resources */,
 				294897C0273BA993003185E7 /* RecordCardCell.xib in Resources */,
+				3FB987A6274373CB008F0E08 /* PhotoCell.xib in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
 				3FB914EA2737DAC70084FF1C /* TravelSectionHeader.xib in Resources */,
 				3F113A11273A571100EA91AA /* CompleteCreation.storyboard in Resources */,
@@ -610,6 +616,7 @@
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
 				AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */,
+				3FB987A5274373CB008F0E08 /* PhotoCell.swift in Sources */,
 				DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */,
 				294897BC273B5D71003185E7 /* UIImageView+.swift in Sources */,
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
