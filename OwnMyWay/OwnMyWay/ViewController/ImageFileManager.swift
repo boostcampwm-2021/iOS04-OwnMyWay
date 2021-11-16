@@ -20,8 +20,8 @@ class ImageFileManager {
         guard let destinationURL = self.destinationURL()
         else { return }
         do {
-            if self.photoExists(at: source) {
-                try self.fileManager.removeItem(at: source)
+            if self.photoExists(at: destinationURL) {
+                try self.fileManager.removeItem(at: destinationURL)
             }
             try self.fileManager.copyItem(at: source, to: destinationURL)
         } catch let error {
