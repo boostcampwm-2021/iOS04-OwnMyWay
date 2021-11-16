@@ -22,20 +22,18 @@ protocol TravelRepository {
     ) -> Result<Landmark, Error>
     func addRecord(
         to travel: Travel,
-        photoURL: URL?,
-        content: String?,
-        date: Date?,
-        latitude: Double?,
-        longitude: Double?
-    ) -> Result<Record, Error>
+        with record: Record
+    ) -> Result<Travel, Error>
     @discardableResult func addLocation(
         to travel: Travel,
         latitude: Double?,
         longitude: Double?
     ) -> Result<Location, Error>
     @discardableResult func update(travel: Travel) -> Result<Travel, Error>
+    func updateRecord(at record: Record)
     func delete(travel: Travel)
     func deleteLandmark(at landmark: Landmark)
+    func deleteRecord(at record: Record)
 }
 
 class CoreDataTravelRepository: TravelRepository {
@@ -134,12 +132,8 @@ class CoreDataTravelRepository: TravelRepository {
 
     func addRecord(
         to travel: Travel,
-        photoURL: URL?,
-        content: String?,
-        date: Date?,
-        latitude: Double?,
-        longitude: Double?
-    ) -> Result<Record, Error> {
+        with record: Record
+    ) -> Result<Travel, Error> {
         guard let travelMO = findTravel(by: travel.uuid ?? UUID())
         else { return .failure(NSError.init()) }
         guard let entity = NSEntityDescription.entity(forEntityName: "RecordMO", in: context)
@@ -147,16 +141,18 @@ class CoreDataTravelRepository: TravelRepository {
 
         let recordMO = RecordMO(entity: entity, insertInto: context)
         recordMO.setValue(UUID(), forKey: "uuid")
-        recordMO.setValue(photoURL, forKey: "photoURL")
-        recordMO.setValue(content, forKey: "content")
-        recordMO.setValue(date, forKey: "date")
-        recordMO.setValue(latitude, forKey: "latitude")
-        recordMO.setValue(longitude, forKey: "longitude")
+        recordMO.setValue(record.photoURLs, forKey: "photoURLs")
+        recordMO.setValue(record.title, forKey: "title")
+        recordMO.setValue(record.placeDescription, forKey: "placeDescription")
+        recordMO.setValue(record.longitude, forKey: "longitude")
+        recordMO.setValue(record.latitude, forKey: "latitude")
+        recordMO.setValue(record.date, forKey: "date")
+        recordMO.setValue(record.content, forKey: "content")
         travelMO.addToRecords(recordMO)
 
         do {
             try context.save()
-            return .success(recordMO.toRecord())
+            return .success(travelMO.toTravel())
         } catch let error {
             return .failure(error)
         }
@@ -212,6 +208,32 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
+    func updateRecord(at record: Record) {
+        guard let uuid = record.uuid as CVarArg?
+        else { return }
+
+        let request = RecordMO.fetchRequest()
+        let predicate = NSPredicate(format: "uuid == %@", uuid)
+        request.predicate = predicate
+        guard let records = try? context.fetch(request) as [RecordMO],
+              let newRecord = records.first
+        else { return }
+
+        newRecord.title = record.title
+        newRecord.date = record.date
+        newRecord.latitude = record.latitude ?? 0
+        newRecord.longitude = record.longitude ?? 0
+        newRecord.placeDescription = record.placeDescription
+        newRecord.photoURLs = record.photoURLs
+        newRecord.content = record.content
+
+        do {
+            try context.save()
+        } catch {
+            return
+        }
+    }
+
     func delete(travel: Travel) {
         guard let uuid = travel.uuid as CVarArg?
         else { return }
@@ -242,6 +264,24 @@ class CoreDataTravelRepository: TravelRepository {
               let landmark = landmarks.first
         else { return }
         context.delete(landmark)
+        do {
+            try context.save()
+        } catch {
+            return
+        }
+    }
+
+    func deleteRecord(at record: Record) {
+        guard let uuid = record.uuid as CVarArg?
+        else { return }
+
+        let request = RecordMO.fetchRequest()
+        let predicate = NSPredicate(format: "uuid == %@", uuid)
+        request.predicate = predicate
+        guard let records = try? context.fetch(request) as [RecordMO],
+              let record = records.first
+        else { return }
+        context.delete(record)
         do {
             try context.save()
         } catch {

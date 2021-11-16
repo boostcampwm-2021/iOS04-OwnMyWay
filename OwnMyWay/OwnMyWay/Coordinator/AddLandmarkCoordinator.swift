@@ -11,7 +11,7 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var travel: Travel
+    private var travel: Travel
 
     init(navigationController: UINavigationController, travel: Travel) {
         self.childCoordinators = []

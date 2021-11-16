@@ -11,12 +11,12 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var travel: Travel
+    private var record: Record?
 
-    init(navigationController: UINavigationController, travel: Travel) {
+    init(navigationController: UINavigationController, record: Record?) {
         self.childCoordinators = []
         self.navigationController = navigationController
-        self.travel = travel
+        self.record = record
     }
 
     func start() {
@@ -26,15 +26,17 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
             imageFileManager: ImageFileManager(fileManager: FileManager.default)
         )
         let addRecordVM = DefaultAddRecordViewModel(
-            travel: self.travel, usecase: usecase, coordinatingDelegate: self
+            record: self.record, usecase: usecase, coordinatingDelegate: self
         )
         let addRecordVC = AddRecordViewController.instantiate(storyboardName: "AddRecord")
         addRecordVC.bind(viewModel: addRecordVM)
         self.navigationController.pushViewController(addRecordVC, animated: true)
     }
 
-    func popToParent(with record: Record?) {
-        // TODO: Ongoing Fetch 또는 Record를 append 하는 방식 중 택1
+    func popToParent(with record: Record) {
         self.navigationController.popViewController(animated: true)
+        guard let upperVC = self.navigationController.viewControllers.last
+                as? RecordUpdatable & UIViewController else { return }
+        upperVC.didUpdateRecord(record: record)
     }
 }

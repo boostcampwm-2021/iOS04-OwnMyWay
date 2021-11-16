@@ -12,6 +12,7 @@ protocol OngoingTravelUsecase {
     func executeFinishingTravel()
     func executeFlagUpdate(of travel: Travel)
     func executeLocationUpdate(of travel: Travel, latitude: Double, longitude: Double)
+    func executeRecordAddition(to travel: Travel, with record: Record, completion: (Travel) -> Void)
 }
 
 struct DefaultOngoingTravelUsecase: OngoingTravelUsecase {
@@ -35,4 +36,14 @@ struct DefaultOngoingTravelUsecase: OngoingTravelUsecase {
         )
     }
 
+    func executeRecordAddition(
+        to travel: Travel, with record: Record, completion: (Travel) -> Void
+    ) {
+        switch self.repository.addRecord(to: travel, with: record) {
+        case .success(let newTravel):
+            completion(newTravel)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
 }
