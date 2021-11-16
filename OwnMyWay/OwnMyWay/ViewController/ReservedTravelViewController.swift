@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdatable {
+class ReservedTravelViewController: UIViewController,
+                                    Instantiable,
+                                    TravelUpdatable,
+                                    LandmarkDeletable {
+
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
     @IBOutlet private weak var dateLabel: UILabel!
@@ -55,6 +59,10 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
 
     func didUpdateTravel(to travel: Travel) {
         self.viewModel?.didUpdateTravel(to: travel)
+    }
+
+    func didDeleteLandmark(at landmark: Landmark) {
+        self.viewModel?.didDeleteLandmark(at: landmark)
     }
 
     private func configureButtonConstraint() {

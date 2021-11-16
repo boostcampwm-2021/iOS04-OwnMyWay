@@ -15,6 +15,8 @@ typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewContr
 
 class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
 
+//    static let badgeElementKind = "badge-element-kind"
+
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var collectionView: UICollectionView!
 
@@ -70,6 +72,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     }
 
     private func configureCompositionalLayout() -> UICollectionViewLayout {
+
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0)
         )
@@ -86,7 +89,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         )
 
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 10, leading: 10, bottom: 10, trailing: 10
         )
@@ -118,6 +121,25 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         }
         return dataSource
     }
+
+    private func presentAlert(index: Int) {
+        guard let landmark = self.viewModel?.findLandmark(at: index) else { return }
+        let alert = UIAlertController(title: "관광 명소 삭제",
+                                      message: "\(landmark.title ?? "관광지")을(를) 정말 삭제하실건가요?",
+                                      preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
+            guard let upperVC = self?.navigationController?
+                    .viewControllers
+                    .last as? LandmarkDeletable & UIViewController,
+                  let viewModel = self?.viewModel
+            else { return }
+            upperVC.didDeleteLandmark(at: viewModel.didDeleteLandmark(at: index))
+        }
+        let noAction = UIAlertAction(title: "아니오", style: .cancel)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - extension LandmarkCartViewController for UICollectionViewDelegate
@@ -127,6 +149,9 @@ extension LandmarkCartViewController: UICollectionViewDelegate {
         if indexPath.item == 0 {
             // PlusCell 일 경우
             self.viewModel?.didTouchPlusButton()
+        } else {
+            guard let viewModel = self.viewModel else { return }
+            self.presentAlert(index: viewModel.travel.landmarks.count - indexPath.item)
         }
     }
 }
