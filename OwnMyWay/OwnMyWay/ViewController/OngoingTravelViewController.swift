@@ -223,3 +223,12 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
         }
     }
 }
+
+// MARK: - extension OngoingTravelViewController for RecordUpdatable
+
+extension OngoingTravelViewController: RecordUpdatable {
+
+    func didUpdateRecord(record: Record) {
+        self.viewModel?.didUpdateRecord(record: record)
+    }
+}

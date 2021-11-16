@@ -22,12 +22,8 @@ protocol TravelRepository {
     ) -> Result<Landmark, Error>
     func addRecord(
         to travel: Travel,
-        photoURL: URL?,
-        content: String?,
-        date: Date?,
-        latitude: Double?,
-        longitude: Double?
-    ) -> Result<Record, Error>
+        with record: Record
+    ) -> Result<Travel, Error>
     @discardableResult func addLocation(
         to travel: Travel,
         latitude: Double?,
@@ -135,12 +131,8 @@ class CoreDataTravelRepository: TravelRepository {
 
     func addRecord(
         to travel: Travel,
-        photoURL: URL?,
-        content: String?,
-        date: Date?,
-        latitude: Double?,
-        longitude: Double?
-    ) -> Result<Record, Error> {
+        with record: Record
+    ) -> Result<Travel, Error> {
         guard let travelMO = findTravel(by: travel.uuid ?? UUID())
         else { return .failure(NSError.init()) }
         guard let entity = NSEntityDescription.entity(forEntityName: "RecordMO", in: context)
@@ -148,16 +140,18 @@ class CoreDataTravelRepository: TravelRepository {
 
         let recordMO = RecordMO(entity: entity, insertInto: context)
         recordMO.setValue(UUID(), forKey: "uuid")
-        recordMO.setValue(photoURL, forKey: "photoURL")
-        recordMO.setValue(content, forKey: "content")
-        recordMO.setValue(date, forKey: "date")
-        recordMO.setValue(latitude, forKey: "latitude")
-        recordMO.setValue(longitude, forKey: "longitude")
+        recordMO.setValue(record.photoURLs, forKey: "photoURLs")
+        recordMO.setValue(record.title, forKey: "title")
+        recordMO.setValue(record.placeDescription, forKey: "placeDescription")
+        recordMO.setValue(record.longitude, forKey: "longitude")
+        recordMO.setValue(record.latitude, forKey: "latitude")
+        recordMO.setValue(record.date, forKey: "date")
+        recordMO.setValue(record.content, forKey: "content")
         travelMO.addToRecords(recordMO)
 
         do {
             try context.save()
-            return .success(recordMO.toRecord())
+            return .success(travelMO.toTravel())
         } catch let error {
             return .failure(error)
         }

@@ -32,9 +32,12 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
 
     func dismissToParent(with record: Record) {
         // TODO: Ongoing Fetch 또는 Record를 append 하는 방식 중 택1
-        guard let upperVC = navigationController.viewControllers.last as? RecordUpdatable & UIViewController
+
+        guard let upperVC = navigationController
+                .viewControllers
+                .last as? RecordUpdatable & UIViewController
         else { return }
-        
+
         upperVC.dismiss(animated: true) {
             upperVC.didUpdateRecord(record: record)
         }

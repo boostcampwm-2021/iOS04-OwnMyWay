@@ -19,6 +19,7 @@ protocol OngoingTravelViewModel {
     func didTouchEditTravelButton()
     func didTouchFinishButton()
     func didUpdateCoordinate(latitude: Double, longitude: Double)
+    func didUpdateRecord(record: Record)
 }
 
 protocol OngoingCoordinatingDelegate: AnyObject {
@@ -82,4 +83,9 @@ class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
         )
     }
 
+    func didUpdateRecord(record: Record) {
+        self.usecase.executeRecordAddition(to: self.travel, with: record) { [weak self] travel in
+            self?.travel = travel
+        }
+    }
 }
