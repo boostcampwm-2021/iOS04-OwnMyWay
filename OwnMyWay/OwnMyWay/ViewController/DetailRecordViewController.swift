@@ -24,15 +24,45 @@ class DetailRecordViewController: UIViewController, Instantiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureScrollView()
+        self.configureSettingButton()
         self.configureCancellable()
     }
 
     func bind(viewModel: DetailRecordViewModel) {
         self.viewModel = viewModel
     }
-    
+
     private func configureScrollView() {
         self.imageScrollView.delegate = self
+    }
+
+    private func configureSettingButton() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
+            style: .plain,
+            target: self,
+            action: #selector(didTouchSettingButton)
+        )
+    }
+
+    @objc private func didTouchSettingButton() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { _ in
+
+        }
+
+        let editAction = UIAlertAction(title: "수정하기", style: .default) { _ in
+        }
+
+        let shareAction = UIAlertAction(title: "공유하기", style: .default) { _ in
+
+        }
+        let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(shareAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true)
     }
 
     private func configureCancellable() {
