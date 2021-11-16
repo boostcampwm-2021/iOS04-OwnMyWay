@@ -11,7 +11,7 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var travel: Travel
+    private var travel: Travel
 
     init(navigationController: UINavigationController, travel: Travel) {
         self.childCoordinators = []
@@ -40,9 +40,9 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
         self.navigationController.popToRootViewController(animated: true)
     }
 
-    func pushToAddRecord(travel: Travel) {
+    func pushToAddRecord(record: Record?) {
         let addRecordCoordinator = AddRecordCoordinator(
-            navigationController: self.navigationController, travel: travel
+            navigationController: self.navigationController, record: record
         )
         self.childCoordinators.append(addRecordCoordinator)
         addRecordCoordinator.start()
@@ -51,9 +51,9 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
     // FIXME: travel 추가하기
     func pushToEditTravel() {}
 
-    func pushToDetailRecord(record: Record) {
+    func pushToDetailRecord(record: Record, travel: Travel) {
         let detailRecordCoordinator = DetailRecordCoordinator(
-            navigationController: self.navigationController, record: record
+            navigationController: self.navigationController, record: record, travel: travel
         )
         self.childCoordinators.append(detailRecordCoordinator)
         detailRecordCoordinator.start()

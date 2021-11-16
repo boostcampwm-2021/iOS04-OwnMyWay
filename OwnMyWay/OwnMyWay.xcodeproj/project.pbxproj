@@ -47,6 +47,7 @@
 		3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914C22734129F0084FF1C /* HomeUsecase.swift */; };
 		3FB914E92737DAC70084FF1C /* TravelSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */; };
 		3FB914EA2737DAC70084FF1C /* TravelSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB914E82737DAC70084FF1C /* TravelSectionHeader.xib */; };
+		AF0C3F1E2743825C007217AF /* RecordUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */; };
 		AF1108E0273B8872009FE728 /* OngoingTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */; };
 		AF1108E2273B88A5009FE728 /* OngoingTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */; };
 		AF1108E4273B8C04009FE728 /* OngoingTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */; };
@@ -153,6 +154,7 @@
 		3FB914C22734129F0084FF1C /* HomeUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUsecase.swift; sourceTree = "<group>"; };
 		3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelSectionHeader.swift; sourceTree = "<group>"; };
 		3FB914E82737DAC70084FF1C /* TravelSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TravelSectionHeader.xib; sourceTree = "<group>"; };
+		AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUpdatable.swift; sourceTree = "<group>"; };
 		AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OngoingTravel.storyboard; sourceTree = "<group>"; };
 		AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelViewController.swift; sourceTree = "<group>"; };
 		AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelViewModel.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */,
 				DB8831C62732861500487D33 /* Instantiable.swift */,
 				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
+				AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */,
 				AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */,
 				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
 				2985B1E427427AE900428098 /* LandmarkDeletable.swift */,
@@ -562,6 +565,7 @@
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
 				3F113A15273A5AA300EA91AA /* CompleteCreationUsecase.swift in Sources */,
 				AF1108E6273B8C18009FE728 /* OngoingTravelUsecase.swift in Sources */,
+				AF0C3F1E2743825C007217AF /* RecordUpdatable.swift in Sources */,
 				AF1108E2273B88A5009FE728 /* OngoingTravelViewController.swift in Sources */,
 				3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */,
 				29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */,

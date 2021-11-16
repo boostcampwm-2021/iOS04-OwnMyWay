@@ -19,14 +19,15 @@ protocol OngoingTravelViewModel {
     func didTouchEditTravelButton()
     func didTouchFinishButton()
     func didUpdateCoordinate(latitude: Double, longitude: Double)
+    func didUpdateRecord(record: Record)
 }
 
 protocol OngoingCoordinatingDelegate: AnyObject {
     func popToHome()
-    func pushToAddRecord(travel: Travel)
+    func pushToAddRecord(record: Record?)
     func pushToEditTravel()
     func moveToOutdated(travel: Travel)
-    func pushToDetailRecord(record: Record)
+    func pushToDetailRecord(record: Record, travel: Travel)
 }
 
 class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
@@ -44,7 +45,7 @@ class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
     ) {
         // FIXME: 임시 테스트 추가
         var tmpTravel = travel
-        tmpTravel.records = [Record(uuid: UUID(), content: "SungSanBong", date: Date(timeIntervalSinceNow: -86400), latitude: 33.458126, longitude: 126.94258, photoURLs: [URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Seongsan_Ilchulbong_from_the_air.jpg/544px-Seongsan_Ilchulbong_from_the_air.jpg")!]),
+        tmpTravel.records = [Record(uuid: UUID(), content: "SungSanBong", date: Date(timeIntervalSinceNow: -86400), latitude: 33.458126, longitude: 126.94258, photoURLs: [URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Seongsan_Ilchulbong_from_the_air.jpg/544px-Seongsan_Ilchulbong_from_the_air.jpg")!, URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Seongsan_Ilchulbong_from_the_air.jpg/544px-Seongsan_Ilchulbong_from_the_air.jpg")!, URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Seongsan_Ilchulbong_from_the_air.jpg/544px-Seongsan_Ilchulbong_from_the_air.jpg")!, URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Seongsan_Ilchulbong_from_the_air.jpg/544px-Seongsan_Ilchulbong_from_the_air.jpg")!]),
          Record(uuid: UUID(), content: "VENI VIDI VICI!", date: Date(timeIntervalSinceNow: 86400), latitude: 33.361425, longitude: 126.529418, photoURLs: [URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Hallasan_2.jpg/600px-Hallasan_2.jpg")!]),
          Record(uuid: UUID(), content: "HelloKitty is motchamchi", date: Date(), latitude: 33.2903582726355, longitude: 126.35198172436094, photoURLs: [URL(string: "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20190717_293%2F1563353611332Pkz6e_JPEG%2Fhellokitty_banner_2.jpg")!]),
          Record(uuid: UUID(), content: "I Love Teddy Bear!", date: Date(timeIntervalSinceNow: 86400), latitude: 33.25052535513408, longitude: 126.4121400108651, photoURLs: [URL(string: "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210806_79%2F1628217288477ciuOK_JPEG%2FIMG_1321.jpg")!])]
@@ -53,14 +54,16 @@ class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
         self.coordinatingDelegate = coordinatingDelegate
     }
 
-    func didUpdateTravel(to travel: Travel) {}
+    func didUpdateTravel(to travel: Travel) {
+        self.travel = travel
+    }
 
     func didTouchAddRecordButton() {
-        self.coordinatingDelegate?.pushToAddRecord(travel: self.travel)
+        self.coordinatingDelegate?.pushToAddRecord(record: nil)
     }
 
     func didTouchRecordCell(at record: Record) {
-        self.coordinatingDelegate?.pushToDetailRecord(record: record)
+        self.coordinatingDelegate?.pushToDetailRecord(record: record, travel: self.travel)
     }
 
     func didTouchBackButton() {
@@ -82,4 +85,9 @@ class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
         )
     }
 
+    func didUpdateRecord(record: Record) {
+        self.usecase.executeRecordAddition(to: self.travel, with: record) { [weak self] travel in
+            self?.travel = travel
+        }
+    }
 }
