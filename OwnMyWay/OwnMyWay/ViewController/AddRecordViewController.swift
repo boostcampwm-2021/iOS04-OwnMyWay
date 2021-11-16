@@ -22,11 +22,12 @@ let supportedPhotoExtensions = [
 ]
 
 class AddRecordViewController: UIViewController, Instantiable {
-    @IBOutlet weak var photoCollectionView: UICollectionView!
-    @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var contentTextField: UITextField!
-    @IBOutlet weak var datePicker: UIDatePicker!
-
+    @IBOutlet private weak var photoCollectionView: UICollectionView!
+    @IBOutlet private weak var titleTextField: UITextField!
+    @IBOutlet private weak var contentTextField: UITextField!
+    @IBOutlet private weak var datePicker: UIDatePicker!
+    @IBOutlet private weak var locationButton: UIButton!
+    
     private var viewModel: AddRecordViewModel?
     private var dataSource: [URL] = []
     private var cancellables: Set<AnyCancellable> = []
@@ -41,6 +42,7 @@ class AddRecordViewController: UIViewController, Instantiable {
             self?.titleTextField.text = record.title
             self?.datePicker.date = record.date ?? Date()
             self?.contentTextField.text = record.content
+            self?.locationButton.setTitle("\(record.latitude ?? 0), \(record.longitude ?? 0)", for: .normal)
         }
     }
 
