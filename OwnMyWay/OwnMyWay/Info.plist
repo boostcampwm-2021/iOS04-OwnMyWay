@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>&quot;사진에 접근해도 되겠습니까?&quot;</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Access to Location</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
