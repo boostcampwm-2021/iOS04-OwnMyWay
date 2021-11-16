@@ -15,14 +15,16 @@ class ImageFileManager {
         self.fileManager = fileManager
         self.appDirectory = "OwnMyWay"
         do {
-            try self.fileManager.createDirectory(at: self.destinationURL()!, withIntermediateDirectories: true)
-        } catch {
-            print("error")
+            try self.configureAppURL()
+        } catch let error {
+            print(error)
         }
     }
 
     func copyPhoto(from source: URL, completion: (URL?, Error?) -> Void) {
-        guard let destinationURL = self.destinationURL()?.appendingPathComponent(UUID().uuidString).appendingPathExtension(source.pathExtension)
+        guard let destinationURL = self.appURL()?
+                .appendingPathComponent(UUID().uuidString)
+                .appendingPathExtension(source.pathExtension)
         else { return }
         do {
             if self.photoExists(at: destinationURL) {
@@ -32,7 +34,6 @@ class ImageFileManager {
         } catch let error {
             completion(nil, error)
         }
-        print(destinationURL)
         completion(destinationURL, nil)
     }
 
@@ -47,15 +48,25 @@ class ImageFileManager {
         completion(true, nil)
     }
 
+    private func configureAppURL() throws {
+        guard let appURL = self.appURL(),
+              !self.fileManager.fileExists(atPath: appURL.absoluteString)
+        else { return }
+        try self.fileManager.createDirectory(at: appURL, withIntermediateDirectories: true)
+    }
+
     private func photoExists(at url: URL) -> Bool {
         return self.fileManager.fileExists(atPath: url.absoluteString)
     }
 
-    private func destinationURL() -> URL? {
-        let documentURL = self.fileManager.urls(
+    private func documentURL() -> URL? {
+        return self.fileManager.urls(
             for: .documentDirectory, in: .userDomainMask
         ).first
-        return documentURL?.appendingPathComponent(self.appDirectory)
+    }
+
+    private func appURL() -> URL? {
+        return self.documentURL()?.appendingPathComponent(self.appDirectory)
     }
 
 }
