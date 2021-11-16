@@ -176,11 +176,11 @@ extension AddRecordViewController {
     func getAddressFromCoordinates(latitude: Double,
                                    longitude: Double,
                                    completion: @escaping (String) -> Void) {
-        var center: CLLocationCoordinate2D = CLLocationCoordinate2D()
+        var center = CLLocationCoordinate2D()
         let geocoder: CLGeocoder = CLGeocoder()
         center.latitude = latitude
         center.longitude = longitude
-        let location: CLLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
+        let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             guard error == nil,
                   let placemark = placemarks?.first
