@@ -32,7 +32,6 @@ class ImageFileManager {
         } catch let error {
             completion(nil, error)
         }
-        print(destinationURL)
         completion(destinationURL, nil)
     }
 
