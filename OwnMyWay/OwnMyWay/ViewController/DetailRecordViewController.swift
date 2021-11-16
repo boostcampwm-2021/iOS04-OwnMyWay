@@ -17,14 +17,17 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
-
+    
     private var viewModel: DetailRecordViewModel?
     private var cancellables: Set<AnyCancellable> = []
+    
+    let documentInteractionController = UIDocumentInteractionController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureScrollView()
         self.configureSettingButton()
+        self.configureDocumentInteractionController()
         self.configureCancellable()
     }
 
@@ -39,6 +42,11 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     private func configureScrollView() {
         self.imageScrollView.delegate = self
     }
+    
+    private func configureDocumentInteractionController() {
+        self.documentInteractionController.delegate = self
+        self.documentInteractionController.url = Bundle.main.url(forResource: "iPhone", withExtension: "png")
+    }
 
     private func configureSettingButton() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -52,7 +60,7 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     @objc private func didTouchSettingButton() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { _ in
-
+            self.viewModel?.didTouchDeleteButton()
         }
 
         let editAction = UIAlertAction(title: "수정하기", style: .default) { _ in
@@ -60,7 +68,7 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         }
 
         let shareAction = UIAlertAction(title: "공유하기", style: .default) { _ in
-
+            self.documentInteractionController.presentOptionsMenu(from: self.view.bounds, in: self.view, animated: true)
         }
         let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
         actionSheet.addAction(deleteAction)
@@ -107,6 +115,13 @@ extension DetailRecordViewController: UIScrollViewDelegate {
         let value = self.imageScrollView.contentOffset.x / self.imageScrollView.frame.size.width
         let currentPage = Int(round(value))
         self.configurePageControlSelectedPage(currentPage: currentPage)
+    }
+}
+
+// MARK: - UIDocumetntInteractionControllerDelegate
+extension DetailRecordViewController: UIDocumentInteractionControllerDelegate {
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        self
     }
 }
 

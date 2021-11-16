@@ -32,6 +32,15 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
         self.navigationController.pushViewController(detailRecordVC, animated: true)
     }
 
+    func popToParent(with travel: Travel) {
+        self.navigationController.popViewController(animated: true)
+        guard let parentVC = navigationController
+                .viewControllers
+                .last as? TravelUpdatable & UIViewController
+        else { return }
+        parentVC.didUpdateTravel(to: travel)
+    }
+
     func pushToAddRecord(record: Record) {
         let addRecordCoordinator = AddRecordCoordinator(
             navigationController: self.navigationController, record: record

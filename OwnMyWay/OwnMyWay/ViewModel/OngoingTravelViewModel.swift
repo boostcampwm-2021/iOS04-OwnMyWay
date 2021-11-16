@@ -54,7 +54,9 @@ class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
         self.coordinatingDelegate = coordinatingDelegate
     }
 
-    func didUpdateTravel(to travel: Travel) {}
+    func didUpdateTravel(to travel: Travel) {
+        self.travel = travel
+    }
 
     func didTouchAddRecordButton() {
         self.coordinatingDelegate?.pushToAddRecord(record: nil)

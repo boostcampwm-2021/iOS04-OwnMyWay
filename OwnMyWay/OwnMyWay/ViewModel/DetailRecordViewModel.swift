@@ -13,10 +13,12 @@ protocol DetailRecordViewModel {
 
     func didTouchEditButton()
     func didUpdateRecord(record: Record)
+    func didTouchDeleteButton()
 }
 
 protocol DetailRecordCoordinatingDelegate: AnyObject {
     func pushToAddRecord(record: Record)
+    func popToParent(with travel: Travel)
 }
 
 class DefaultDetailRecordViewModel: DetailRecordViewModel {
@@ -52,5 +54,12 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
         guard let index = self.travel.records.firstIndex(where: { $0.uuid == record.uuid })
         else { return }
         self.travel.records[index] = record
+    }
+
+    func didTouchDeleteButton() {
+        self.usecase.executeRecordDeletion(at: self.record)
+        let index = self.travel.records?.firstIndex(where: {$0 == self.record})
+        self.travel.records.remove(at: index)
+        self.coordinatingDelegate?.popToParent(with: self.travel)
     }
 }

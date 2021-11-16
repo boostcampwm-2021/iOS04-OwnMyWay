@@ -33,6 +33,7 @@ protocol TravelRepository {
     func updateRecord(at record: Record)
     func delete(travel: Travel)
     func deleteLandmark(at landmark: Landmark)
+    func deleteRecord(at record: Record)
 }
 
 class CoreDataTravelRepository: TravelRepository {
@@ -263,6 +264,24 @@ class CoreDataTravelRepository: TravelRepository {
               let landmark = landmarks.first
         else { return }
         context.delete(landmark)
+        do {
+            try context.save()
+        } catch {
+            return
+        }
+    }
+
+    func deleteRecord(at record: Record) {
+        guard let uuid = record.uuid as CVarArg?
+        else { return }
+
+        let request = RecordMO.fetchRequest()
+        let predicate = NSPredicate(format: "uuid == %@", uuid)
+        request.predicate = predicate
+        guard let records = try? context.fetch(request) as [RecordMO],
+              let record = records.first
+        else { return }
+        context.delete(record)
         do {
             try context.save()
         } catch {
