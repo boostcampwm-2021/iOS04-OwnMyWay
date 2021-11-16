@@ -7,6 +7,20 @@
 
 import Combine
 import UIKit
+import PhotosUI
+import Photos
+
+let supportedPhotoExtensions = [
+    UTType.rawImage.identifier,
+    UTType.tiff.identifier,
+    UTType.bmp.identifier,
+    UTType.png.identifier,
+    UTType.heif.identifier,
+    UTType.heic.identifier,
+    UTType.jpeg.identifier,
+    UTType.webP.identifier,
+    UTType.gif.identifier
+]
 
 class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet weak var photoCollectionView: UICollectionView!
@@ -108,6 +122,45 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.item)
+    }
+
+}
+
+extension AddRecordViewController: PHPickerViewControllerDelegate {
+
+    func openPicker() {
+        var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
+        config.selectionLimit = 0
+        config.filter = PHPickerFilter.images
+
+        let pickerViewController = PHPickerViewController(configuration: config)
+        pickerViewController.delegate = self
+        self.present(pickerViewController, animated: true, completion: nil)
+    }
+
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        guard !results.isEmpty else {
+          dismiss(animated: true, completion: nil)
+          return
+        }
+        results.forEach { [weak self] result in
+            guard let assetId = result.assetIdentifier else { return }
+            let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
+            print(assetResults.firstObject?.creationDate)
+            print(assetResults.firstObject?.location?.coordinate)
+
+            for type in supportedPhotoExtensions {
+                if result.itemProvider.hasRepresentationConforming(toTypeIdentifier: type, fileOptions: .init()) {
+                    result.itemProvider.loadFileRepresentation(forTypeIdentifier: type) { url, error in
+                        guard error == nil,
+                              let url = url else { return }
+                        self?.viewModel?.didEnterPhotoURL(with: url)
+                    }
+                    break
+                }
+            }
+        }
+        dismiss(animated: true, completion: nil)
     }
 
 }

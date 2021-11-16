@@ -14,10 +14,15 @@ class ImageFileManager {
     init(fileManager: FileManager) {
         self.fileManager = fileManager
         self.appDirectory = "OwnMyWay"
+        do {
+            try self.fileManager.createDirectory(at: self.destinationURL()!, withIntermediateDirectories: true)
+        } catch {
+            print("error")
+        }
     }
 
     func copyPhoto(from source: URL, completion: (URL?, Error?) -> Void) {
-        guard let destinationURL = self.destinationURL()
+        guard let destinationURL = self.destinationURL()?.appendingPathComponent(UUID().uuidString).appendingPathExtension(source.pathExtension)
         else { return }
         do {
             if self.photoExists(at: destinationURL) {
@@ -27,6 +32,7 @@ class ImageFileManager {
         } catch let error {
             completion(nil, error)
         }
+        print(destinationURL)
         completion(destinationURL, nil)
     }
 
