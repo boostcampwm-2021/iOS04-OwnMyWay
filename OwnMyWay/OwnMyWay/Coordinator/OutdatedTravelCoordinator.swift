@@ -11,7 +11,7 @@ class OutdatedTravelCoordinator: Coordinator, OutdatedTravelCoordinatingDelegate
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var travel: Travel
+    private var travel: Travel
 
     init(navigationController: UINavigationController, travel: Travel) {
         self.childCoordinators = []

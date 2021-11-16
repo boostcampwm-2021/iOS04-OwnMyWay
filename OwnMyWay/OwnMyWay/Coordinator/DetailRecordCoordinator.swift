@@ -11,8 +11,8 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var record: Record
-    var travel: Travel
+    private var record: Record
+    private var travel: Travel
 
     init(navigationController: UINavigationController, record: Record, travel: Travel) {
         self.childCoordinators = []

@@ -11,7 +11,7 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var record: Record?
+    private var record: Record?
 
     init(navigationController: UINavigationController, record: Record?) {
         self.childCoordinators = []

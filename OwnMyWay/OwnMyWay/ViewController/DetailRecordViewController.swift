@@ -122,7 +122,7 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     private func configurePageControlSelectedPage(currentPage: Int) {
         self.pageControl.currentPage = currentPage
     }
-    
+
     private func presentAlert() {
         let alert = UIAlertController(title: "여행 기록 삭제",
                                       message: "기록을 삭제하실건가요?\n소중한 기록은 삭제되면 되돌릴 수 없어요😭",
@@ -133,7 +133,7 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         let noAction = UIAlertAction(title: "아니오", style: .cancel)
         alert.addAction(yesAction)
         alert.addAction(noAction)
-        present(alert, animated: true)
+        self.present(alert, animated: true)
     }
 }
 

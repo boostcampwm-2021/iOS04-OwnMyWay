@@ -43,11 +43,11 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
     }
-    
+
     func didTouchBackButton() {
         self.coordinatingDelegate?.popToParent(with: self.travel, isPopable: false)
     }
-    
+
     func didTouchEditButton() {
         self.coordinatingDelegate?.pushToAddRecord(record: self.record)
     }

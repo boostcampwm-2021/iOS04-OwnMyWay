@@ -23,7 +23,7 @@ struct DefaultDetailRecordUsecase: DetailRecordUsecase {
     func executeRecordUpdate(record: Record) {
         self.repository.updateRecord(at: record)
     }
-    
+
     func executeRecordDeletion(at record: Record) {
         self.repository.deleteRecord(at: record)
     }
