@@ -16,22 +16,19 @@ class OutdatedTravelViewController: UIViewController, Instantiable {
         self.configureNavigation()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
+    }
+
     private func configureNavigation() {
         self.navigationItem.title = viewModel?.travel.title
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(backButtonAction)
-        )
     }
 
     func bind(viewModel: OutdatedTravelViewModel) {
         self.viewModel = viewModel
     }
 
-    @objc private func backButtonAction() {
-        self.viewModel?.didTouchBackButton()
-    }
 }

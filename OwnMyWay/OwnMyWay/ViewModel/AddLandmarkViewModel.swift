@@ -12,6 +12,7 @@ protocol AddLandmarkViewModel {
     func didTouchNextButton()
     func didTouchBackButton()
     func didUpdateTravel(to travel: Travel)
+    func didDeleteLandmark(at landmark: Landmark)
 }
 
 protocol AddLandmarkCoordinatingDelegate: AnyObject {
@@ -39,5 +40,10 @@ class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
 
     func didUpdateTravel(to travel: Travel) {
         self.travel = travel
+    }
+
+    func didDeleteLandmark(at landmark: Landmark) {
+        guard let index = self.travel.landmarks.firstIndex(of: landmark) else { return }
+        self.travel.landmarks.remove(at: index)
     }
 }

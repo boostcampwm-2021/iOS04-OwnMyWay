@@ -44,6 +44,9 @@ class OngoingTravelViewController: UIViewController, Instantiable {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         LocationManager.shared.delegate = LocationManager.shared
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
     }
 
     func bind(viewModel: OngoingTravelViewModel) {
@@ -57,17 +60,6 @@ class OngoingTravelViewController: UIViewController, Instantiable {
 
     private func configureNavigation() {
         self.navigationItem.title = viewModel?.travel.title
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(backButtonAction)
-        )
-    }
-
-    @objc private func backButtonAction() {
-        self.viewModel?.didTouchBackButton()
     }
 
     @IBAction func didTouchAddRecordButton(_ sender: UIButton) {
