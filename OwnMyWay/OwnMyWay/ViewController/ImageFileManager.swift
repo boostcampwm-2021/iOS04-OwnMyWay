@@ -27,10 +27,9 @@ class ImageFileManager {
                 .appendingPathExtension(source.pathExtension)
         else { return }
         do {
-            if self.photoExists(at: destinationURL) {
-                try self.fileManager.removeItem(at: destinationURL)
+            if !self.photoExists(at: destinationURL) {
+                try self.fileManager.copyItem(at: source, to: destinationURL)
             }
-            try self.fileManager.copyItem(at: source, to: destinationURL)
         } catch let error {
             completion(nil, error)
         }
