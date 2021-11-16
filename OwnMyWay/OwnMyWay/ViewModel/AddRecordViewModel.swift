@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import MapKit
 
 protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
@@ -89,9 +90,9 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         guard let record = record
         else { return }
         self.recordPhotos = record.photoURLs ?? []
-        didEnterTitle(with: record.title)
-        didEnterTime(with: record.date)
-        didEnterCoordinate(of: Location(
+        self.didEnterTitle(with: record.title)
+        self.didEnterTime(with: record.date)
+        self.didEnterCoordinate(of: Location(
             latitude: record.latitude, longitude: record.longitude)
         )
         didEnterContent(with: record.content)
@@ -114,6 +115,15 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     func didEnterCoordinate(of location: Location) {
         self.recordCoordinate = location
         self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
+        guard let latitude = location.latitude,
+              let longitude = location.longitude
+        else { return }
+        self.getAddressFromCoordinates(
+            latitude: latitude, longitude: longitude
+        ) { [weak self] place in
+            self?.recordPlace = place
+            self?.isValidPlace = true
+        }
     }
 
     func didEnterContent(with text: String?) {
@@ -126,6 +136,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
                   let copiedURL = url
             else { return }
             self?.recordPhotos.append(copiedURL)
+            self?.isValidPhotos = true
         }
     }
 
@@ -148,7 +159,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
               let place = self.recordPlace
         else { return }
         let record = Record(
-            uuid: nil, title: recordTitle, content: self.recordContent,
+            uuid: UUID(), title: recordTitle, content: self.recordContent,
             date: date, latitude: latitude, longitude: longtitude,
             photoURLs: recordPhotos, placeDescription: place
         )
@@ -158,6 +169,38 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     private func checkValidation() {
         validateResult
-        = isValidTitle && isValidDate && isValidCoordinate && isValidPlace && isValidPhotos
+        = isValidTitle && isValidDate && isValidCoordinate && isValidPhotos
+    }
+}
+
+extension AddRecordViewModel {
+
+    func getAddressFromCoordinates(latitude: Double,
+                                   longitude: Double,
+                                   completion: @escaping (String) -> Void) {
+        var center = CLLocationCoordinate2D()
+        let geocoder: CLGeocoder = CLGeocoder()
+        center.latitude = latitude
+        center.longitude = longitude
+        let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            guard error == nil,
+                  let placemark = placemarks?.first
+            else { return }
+            dump(placemark)
+            if let name = placemark.name {
+                print(name)
+                completion(name)
+                return
+            }
+            if let country = placemark.country,
+               let region = placemark.region {
+                print(country, region)
+                completion("\(country) \(region)")
+                return
+            }
+            completion("\(latitude), \(longitude)")
+            return
+        }
     }
 }
