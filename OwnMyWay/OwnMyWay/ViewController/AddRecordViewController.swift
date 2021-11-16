@@ -8,7 +8,6 @@
 import Combine
 import UIKit
 import PhotosUI
-import Photos
 
 let supportedPhotoExtensions = [
     UTType.rawImage.identifier,
@@ -24,6 +23,9 @@ let supportedPhotoExtensions = [
 
 class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet weak var photoCollectionView: UICollectionView!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var contentTextField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
 
     private var viewModel: AddRecordViewModel?
     private var dataSource: [URL] = []
@@ -74,7 +76,6 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.viewModel?.photoPublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] photos in
-                print(photos)
                 self?.dataSource = photos
                 self?.photoCollectionView.reloadData()
             }
