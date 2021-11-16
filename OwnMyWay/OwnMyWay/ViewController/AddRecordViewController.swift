@@ -37,6 +37,11 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.configurePhotoCollectionView()
         self.configureNavigation()
         self.configureCancellable()
+        self.viewModel?.viewDidLoad { [weak self] record in
+            self?.titleTextField.text = record.title
+            self?.datePicker.date = record.date ?? Date()
+            self?.contentTextField.text = record.content
+        }
     }
 
     func bind(viewModel: AddRecordViewModel) {

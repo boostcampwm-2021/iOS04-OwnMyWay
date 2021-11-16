@@ -12,6 +12,7 @@ protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
     var photoPublisher: Published<[URL]>.Publisher { get }
 
+    func viewDidLoad(completion: (Record) -> Void)
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
     func didEnterCoordinate(of location: Location)
@@ -27,6 +28,7 @@ protocol AddRecordCoordinatingDelegate: AnyObject {
 }
 
 class DefaultAddRecordViewModel: AddRecordViewModel {
+
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
     var photoPublisher: Published<[URL]>.Publisher { $recordPhotos }
 
@@ -81,6 +83,13 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         if let plusCard = plusCard {
             self.recordPhotos.append(plusCard)
         }
+    }
+
+    func viewDidLoad(completion: (Record) -> Void) {
+        guard let record = record
+        else { return }
+        self.recordPhotos = record.photoURLs ?? []
+        completion(record)
     }
 
     func didEnterTitle(with text: String?) {
