@@ -89,6 +89,15 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         guard let record = record
         else { return }
         self.recordPhotos = record.photoURLs ?? []
+        didEnterTitle(with: record.title)
+        didEnterTime(with: record.date)
+        didEnterCoordinate(of: Location(
+            latitude: record.latitude, longitude: record.longitude)
+        )
+        didEnterContent(with: record.content)
+        record.photoURLs?.forEach { [weak self] url in
+            self?.didEnterPhotoURL(with: url)
+        }
         completion(record)
     }
 
