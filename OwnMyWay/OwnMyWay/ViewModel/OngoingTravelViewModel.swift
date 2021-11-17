@@ -16,7 +16,7 @@ protocol OngoingTravelViewModel {
     func didTouchAddRecordButton()
     func didTouchRecordCell(at record: Record)
     func didTouchBackButton()
-    func didTouchEditTravelButton()
+    func didTouchEditButton()
     func didTouchFinishButton()
     func didUpdateCoordinate(latitude: Double, longitude: Double)
     func didUpdateRecord(record: Record)
@@ -25,12 +25,13 @@ protocol OngoingTravelViewModel {
 protocol StartedCoordinatingDelegate: AnyObject {
     func popToHome()
     func pushToAddRecord(record: Record?)
-    func pushToEditTravel()
+    func pushToEditTravel(travel: Travel)
     func moveToOutdated(travel: Travel)
     func pushToDetailRecord(record: Record, travel: Travel)
 }
 
 class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewModel {
+
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
     @Published private(set) var travel: Travel
@@ -64,7 +65,9 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         self.coordinatingDelegate?.popToHome()
     }
 
-    func didTouchEditTravelButton() {}
+    func didTouchEditButton() {
+        self.coordinatingDelegate?.pushToEditTravel(travel: self.travel)
+    }
 
     func didTouchFinishButton() {
         self.travel.flag = Travel.Section.outdated.index
