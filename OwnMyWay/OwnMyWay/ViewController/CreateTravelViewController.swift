@@ -26,6 +26,7 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.configureCancellable()
         self.configureCalendar()
         self.configureGestureRecognizer()
+        self.travelTitleField.delegate = self
     }
 
     override func viewWillLayoutSubviews() {
@@ -57,6 +58,16 @@ class CreateTravelViewController: UIViewController, Instantiable {
 
     private func configureCalendar() {
         self.calendarView.placeholderType = FSCalendarPlaceholderType.none
+    }
+
+    private func configureGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func tapAction(_ gesture: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
 
     @IBAction func didChangeTitle(_ sender: UITextField) {
@@ -142,16 +153,11 @@ extension CreateTravelViewController: FSCalendarDelegate {
 
 }
 
-extension CreateTravelViewController {
+extension CreateTravelViewController: UITextFieldDelegate {
 
-    private func configureGestureRecognizer() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
-        tapGesture.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapGesture)
-    }
-
-    @objc private func tapAction(_ gesture: UITapGestureRecognizer) {
-        self.view.endEditing(true)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.travelTitleField.resignFirstResponder()
+        return true
     }
 
 }
