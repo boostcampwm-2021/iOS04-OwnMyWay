@@ -204,6 +204,6 @@ extension DetailRecordViewController: UIDocumentInteractionControllerDelegate {
 fileprivate extension UIStackView {
     func removeAllArranged() {
         let subviews = self.arrangedSubviews
-        subviews.forEach { self.removeArrangedSubview($0) }
+        subviews.forEach { $0.removeFromSuperview() }
     }
 }
