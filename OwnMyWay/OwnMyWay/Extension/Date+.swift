@@ -42,6 +42,10 @@ extension Date {
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: self)
     }
+
+    func dateTime() -> String {
+        return self.localize() + " " + self.time()
+    }
 }
 
 extension Date: Strideable {

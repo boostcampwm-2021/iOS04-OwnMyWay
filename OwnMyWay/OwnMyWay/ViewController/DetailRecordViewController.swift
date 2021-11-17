@@ -65,9 +65,9 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
 
     private func configureCancellable() {
         self.viewModel?.recordPublisher.sink { [weak self] record in
-            self?.navigationItem.title = record.date?.localize()
+            self?.navigationItem.title = "게시물"
             self?.titleLabel.text = record.title
-            self?.timeLabel.text = record.date?.time()
+            self?.timeLabel.text = record.date?.dateTime()
             self?.locationLabel.text = record.placeDescription
             self?.contentLabel.text = record.content
             self?.imageStackView.removeAllArranged()
