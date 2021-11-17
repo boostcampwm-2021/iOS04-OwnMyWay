@@ -27,6 +27,7 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.configureCalendar()
         self.configureGestureRecognizer()
         self.travelTitleField.delegate = self
+        self.configureLabels()
     }
 
     override func viewWillLayoutSubviews() {
@@ -60,6 +61,12 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.calendarView.placeholderType = FSCalendarPlaceholderType.none
     }
 
+    private func configureLabels() {
+        self.viewModel?.viewDidLoad { title, startDate, endDate in
+            // 여기 해주세용 ^0^
+        }
+    }
+    
     private func configureGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
         tapGesture.cancelsTouchesInView = false
