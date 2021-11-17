@@ -216,13 +216,44 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
 extension AddRecordViewController: PHPickerViewControllerDelegate {
 
     func openPicker() {
-        var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
-        config.selectionLimit = 0
-        config.filter = PHPickerFilter.images
+        let requiredAccessLevel: PHAccessLevel = .readWrite
+        PHPhotoLibrary.requestAuthorization(for: requiredAccessLevel) { [weak self] status in
 
-        let pickerViewController = PHPickerViewController(configuration: config)
-        pickerViewController.delegate = self
-        self.present(pickerViewController, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                switch status {
+                case .notDetermined, .restricted, .denied:
+                    let alert = UIAlertController(
+                        title: "권한 설정이 필요합니다.",
+                        message: "Setting -> OnwMyWay -> 사진 -> 선택한 사진 또는 모든 사진",
+                        preferredStyle: .alert
+                    )
+
+                    let moveAction = UIAlertAction(title: "이동", style: .default) { _ in
+                        guard let url = URL(string: UIApplication.openSettingsURLString)
+                        else { return }
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+
+                    let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+
+                    alert.addAction(moveAction)
+                    alert.addAction(cancelAction)
+
+                    self?.present(alert, animated: true)
+                default:
+                    var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
+
+                    config.selectionLimit = 0
+                    config.filter = PHPickerFilter.images
+
+                    let pickerViewController = PHPickerViewController(configuration: config)
+                    pickerViewController.delegate = self
+                    self?.present(pickerViewController, animated: true, completion: nil)
+                }
+            }
+        }
     }
 
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -240,8 +271,13 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                 longitude: assetResults.firstObject?.location?.coordinate.longitude.magnitude
             )
             for type in supportedPhotoExtensions {
-                if result.itemProvider.hasRepresentationConforming(toTypeIdentifier: type, fileOptions: .init()) {
-                    result.itemProvider.loadFileRepresentation(forTypeIdentifier: type) { url, error in
+                if result.itemProvider.hasRepresentationConforming(
+                    toTypeIdentifier: type,
+                    fileOptions: .init()
+                ) {
+                    result.itemProvider.loadFileRepresentation(
+                        forTypeIdentifier: type
+                    ) { url, error in
                         guard error == nil,
                               let url = url else { return }
                         self?.viewModel?.didEnterPhotoURL(with: url)
