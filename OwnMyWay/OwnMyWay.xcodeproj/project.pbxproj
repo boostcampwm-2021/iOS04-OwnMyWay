@@ -59,6 +59,8 @@
 		AF1108E6273B8C18009FE728 /* OngoingTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E5273B8C18009FE728 /* OngoingTravelUsecase.swift */; };
 		AF1108E8273B8C2D009FE728 /* OngoingTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E7273B8C2D009FE728 /* OngoingTravelCoordinator.swift */; };
 		AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */; };
+		AF623FE02744DC8600DC805D /* OutdatedMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF623FDE2744DC8600DC805D /* OutdatedMapCell.swift */; };
+		AF623FE12744DC8600DC805D /* OutdatedMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF623FDF2744DC8600DC805D /* OutdatedMapCell.xib */; };
 		AF6C7917273942E800FAB0FE /* TravelUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */; };
 		AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */; };
 		AF6CBB692733F0C400E87533 /* SearchLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */; };
@@ -171,6 +173,8 @@
 		AF1108E5273B8C18009FE728 /* OngoingTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelUsecase.swift; sourceTree = "<group>"; };
 		AF1108E7273B8C2D009FE728 /* OngoingTravelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelCoordinator.swift; sourceTree = "<group>"; };
 		AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotationView.swift; sourceTree = "<group>"; };
+		AF623FDE2744DC8600DC805D /* OutdatedMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedMapCell.swift; sourceTree = "<group>"; };
+		AF623FDF2744DC8600DC805D /* OutdatedMapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutdatedMapCell.xib; sourceTree = "<group>"; };
 		AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelUpdatable.swift; sourceTree = "<group>"; };
 		AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLandmark.storyboard; sourceTree = "<group>"; };
 		AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 				294897CC273CDCF1003185E7 /* CommentCell.xib */,
 				3FB987A3274373CB008F0E08 /* PhotoCell.swift */,
 				3FB987A4274373CB008F0E08 /* PhotoCell.xib */,
+				AF623FDE2744DC8600DC805D /* OutdatedMapCell.swift */,
+				AF623FDF2744DC8600DC805D /* OutdatedMapCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -532,6 +538,7 @@
 				29E9BA36273251BE0040B70A /* LandmarkCart.storyboard in Resources */,
 				29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */,
 				3FB914BF273409530084FF1C /* TravelCardCell.xib in Resources */,
+				AF623FE12744DC8600DC805D /* OutdatedMapCell.xib in Resources */,
 				DB22BB69272F82780004444B /* LaunchScreen.storyboard in Resources */,
 				DB22BB66272F82780004444B /* Assets.xcassets in Resources */,
 				DB22BB61272F82770004444B /* Home.storyboard in Resources */,
@@ -599,6 +606,7 @@
 				29274EF92733FC4500DDEBFF /* ReservedTravelViewController.swift in Sources */,
 				DB1D5CB3273CE17800B30448 /* LocationMO+CoreDataProperties.swift in Sources */,
 				29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */,
+				AF623FE02744DC8600DC805D /* OutdatedMapCell.swift in Sources */,
 				DB2823B9273BA83D007D8801 /* MapCell.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */,
