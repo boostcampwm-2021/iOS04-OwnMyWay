@@ -108,9 +108,11 @@ extension CreateTravelViewController: FSCalendarDelegate {
     }
 
     private func presentAlert(calendar: FSCalendar, from startDate: Date, to endDate: Date) {
-        let alert = UIAlertController(title: "여행기간 확정",
-                                      message: alertMessage(startDate: startDate, endDate: endDate),
-                                      preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "여행기간 확정",
+            message: self.alertMessage(startDate: startDate, endDate: endDate),
+            preferredStyle: .alert
+        )
         let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
             let dayInterval: TimeInterval = 60 * 60 * 24
             stride(from: startDate, through: endDate, by: dayInterval).forEach {
