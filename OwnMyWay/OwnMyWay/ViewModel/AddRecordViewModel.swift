@@ -21,7 +21,6 @@ protocol AddRecordViewModel {
     func didEnterPhotoURL(with url: URL)
     func didRemovePhotoURL(with url: URL)
     func didTouchSubmitButton()
-    // TODO: Photo 들어왔을 때 처리 함수 추가
 }
 
 protocol AddRecordCoordinatingDelegate: AnyObject {
@@ -33,12 +32,12 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
     var photoPublisher: Published<[URL]>.Publisher { $recordPhotos }
 
-    private var record: Record?
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
 
     @Published private var validateResult: Bool?
     @Published private var recordPhotos: [URL]
+    private var recordID: UUID?
     private var recordTitle: String?
     private var recordDate: Date?
     private var recordCoordinate: Location?
@@ -76,29 +75,33 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         usecase: AddRecordUsecase,
         coordinatingDelegate: AddRecordCoordinatingDelegate
     ) {
-        self.record = record
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
-        self.plusCard = Bundle.main.url(forResource: "addImage", withExtension: "png")
         self.recordPhotos = []
+        self.plusCard = Bundle.main.url(forResource: "addImage", withExtension: "png")
         if let plusCard = plusCard {
             self.recordPhotos.append(plusCard)
+        }
+
+        self.recordID = record?.uuid
+        self.didEnterTitle(with: record?.title)
+        self.didEnterTime(with: record?.date)
+        self.didEnterCoordinate(of: Location(
+            latitude: record?.latitude, longitude: record?.longitude)
+        )
+        self.didEnterContent(with: record?.content)
+        record?.photoURLs?.forEach { [weak self] url in
+            self?.didEnterPhotoURL(with: url)
         }
     }
 
     func viewDidLoad(completion: (Record) -> Void) {
-        guard let record = record
-        else { return }
-        self.recordPhotos = record.photoURLs ?? []
-        self.didEnterTitle(with: record.title)
-        self.didEnterTime(with: record.date)
-        self.didEnterCoordinate(of: Location(
-            latitude: record.latitude, longitude: record.longitude)
+        let record = Record(
+            uuid: nil, title: self.recordTitle, content: self.recordContent,
+            date: self.recordDate, latitude: self.recordCoordinate?.latitude,
+            longitude: self.recordCoordinate?.longitude, photoURLs: self.recordPhotos,
+            placeDescription: self.recordPlace
         )
-        didEnterContent(with: record.content)
-        record.photoURLs?.forEach { [weak self] url in
-            self?.didEnterPhotoURL(with: url)
-        }
         completion(record)
     }
 
@@ -158,8 +161,9 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
               let longtitude = self.recordCoordinate?.longitude,
               let place = self.recordPlace
         else { return }
+        self.recordPhotos.removeFirst()
         let record = Record(
-            uuid: self.record?.uuid ?? UUID(), title: recordTitle, content: self.recordContent,
+            uuid: self.recordID ?? UUID(), title: recordTitle, content: self.recordContent,
             date: date, latitude: latitude, longitude: longtitude,
             photoURLs: recordPhotos, placeDescription: place
         )
