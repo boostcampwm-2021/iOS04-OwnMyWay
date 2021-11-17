@@ -56,7 +56,6 @@ class OutdatedTravelViewController: UIViewController, Instantiable,
     }
 
     private func configureNavigation() {
-        self.navigationItem.title = viewModel?.travel.title
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "ellipsis"),
             style: .plain,
@@ -128,6 +127,8 @@ extension OutdatedTravelViewController: UICollectionViewDelegate {
     private func configureCancellable() {
         viewModel?.travelPublisher.sink { [weak self] travel in
             guard let self = self else { return }
+
+            self.navigationItem.title = travel.title
 
             if let mapCell = self.collectionView.cellForItem(
                 at: IndexPath(item: 0, section: 0)
