@@ -148,20 +148,16 @@ extension DetailRecordViewController: UIDocumentInteractionControllerDelegate {
     private func presentSharedPreview() {
         guard let viewModel = self.viewModel, let superView = self.view
         else { return }
-        let polaroidView = UIView(
-            frame: CGRect(
-                x: 0,
-                y: 0,
-                width: self.view.frame.width,
-                height: 6 * self.view.frame.width / 7
-            )
-        )
-        polaroidView.makePolaroid(with: viewModel.record)
+        let polaroidView = UIView()
         superView.addSubview(polaroidView)
+        polaroidView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             polaroidView.topAnchor.constraint(equalTo: superView.bottomAnchor),
-            polaroidView.leadingAnchor.constraint(equalTo: superView.leadingAnchor)
+            polaroidView.centerXAnchor.constraint(equalTo: superView.centerXAnchor),
+            polaroidView.widthAnchor.constraint(equalTo: superView.widthAnchor),
+            polaroidView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ])
+        polaroidView.makePolaroid(with: viewModel.record)
         let image = self.renderImage(view: polaroidView)
         polaroidView.removeFromSuperview()
         self.documentInteractionController.url = self.save(

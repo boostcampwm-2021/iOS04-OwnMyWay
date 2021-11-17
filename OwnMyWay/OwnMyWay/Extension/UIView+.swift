@@ -14,7 +14,6 @@ extension UIView {
         let titleLabel = UILabel()
         titleLabel.text = record.content
         titleLabel.font = UIFont(name: "Chalkduster", size: 17)
-        self.translatesAutoresizingMaskIntoConstraints = false
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(photoImageView)
@@ -40,7 +39,7 @@ extension UIView {
                 constant: -20
             ),
             photoImageView.heightAnchor.constraint(
-                equalTo: self.widthAnchor,
+                equalTo: photoImageView.widthAnchor,
                 multiplier: 0.75
             ),
             titleLabel.topAnchor.constraint(
@@ -60,5 +59,6 @@ extension UIView {
                 constant: -24
             )
         ])
+        self.layoutIfNeeded()
     }
 }
