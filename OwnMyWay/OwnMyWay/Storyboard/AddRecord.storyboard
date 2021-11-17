@@ -82,6 +82,9 @@
                                                     </imageView>
                                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="fOw-Xa-aTO">
                                                         <rect key="frame" x="25" y="0.0" width="373" height="40"/>
+                                                        <connections>
+                                                            <action selector="didChangeDate:" destination="Y6W-OH-hqX" eventType="valueChanged" id="zbf-Kj-XkC"/>
+                                                        </connections>
                                                     </datePicker>
                                                 </subviews>
                                                 <constraints>
@@ -122,6 +125,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="didChangeContent:" destination="Y6W-OH-hqX" eventType="editingChanged" id="UAC-Lq-eZG"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>

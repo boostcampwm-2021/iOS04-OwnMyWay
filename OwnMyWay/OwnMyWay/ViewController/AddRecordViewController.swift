@@ -34,8 +34,8 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureGestureRecognizer()
-        self.configureNotifications()
+//        self.configureGestureRecognizer()
+//        self.configureNotifications()
         self.configureNibs()
         self.configurePhotoCollectionView()
         self.configureNavigation()
@@ -106,6 +106,13 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.viewModel?.didEnterTitle(with: sender.text)
     }
 
+    @IBAction func didChangeContent(_ sender: UITextField) {
+        self.viewModel?.didEnterContent(with: sender.text)
+    }
+
+    @IBAction func didChangeDate(_ sender: UIDatePicker) {
+        self.viewModel?.didEnterTime(with: sender.date)
+    }
 }
 
 extension AddRecordViewController {
@@ -237,7 +244,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
 }
