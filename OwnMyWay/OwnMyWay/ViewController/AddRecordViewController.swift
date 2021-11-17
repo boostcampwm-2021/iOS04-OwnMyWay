@@ -97,6 +97,15 @@ class AddRecordViewController: UIViewController, Instantiable {
                 self?.locationButton.setTitle(place, for: .normal)
             }
             .store(in: &cancellables)
+
+        self.viewModel?.datePublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] date in
+                if let date = date {
+                    self?.datePicker.date = date
+                }
+            }
+            .store(in: &cancellables)
     }
 
     @objc private func submitButtonAction() {
@@ -222,7 +231,6 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
             let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
             let date = assetResults.firstObject?.creationDate ?? Date()
             self?.viewModel?.didEnterTime(with: date)
-            self?.datePicker.date = date
             self?.viewModel?.didEnterCoordinate(
                 latitude: assetResults.firstObject?.location?.coordinate.latitude.magnitude,
                 longitude: assetResults.firstObject?.location?.coordinate.longitude.magnitude

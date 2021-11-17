@@ -13,6 +13,7 @@ protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
     var photoPublisher: Published<[URL]>.Publisher { get }
     var placePublisher: Published<String?>.Publisher { get }
+    var datePublisher: Published<Date?>.Publisher { get }
 
     func viewDidLoad(completion: (Record) -> Void)
     func didEnterTitle(with text: String?)
@@ -33,6 +34,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
     var photoPublisher: Published<[URL]>.Publisher { $recordPhotos }
     var placePublisher: Published<String?>.Publisher { $recordPlace }
+    var datePublisher: Published<Date?>.Publisher { $recordDate }
 
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
@@ -40,6 +42,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     @Published private var validateResult: Bool?
     @Published private var recordPhotos: [URL]
     @Published private var recordPlace: String?
+    @Published private var recordDate: Date?
 
     private var recordID: UUID?
     private var recordTitle: String?
