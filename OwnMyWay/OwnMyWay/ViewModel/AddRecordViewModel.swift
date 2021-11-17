@@ -190,15 +190,12 @@ extension AddRecordViewModel {
             guard error == nil,
                   let placemark = placemarks?.first
             else { return }
-            dump(placemark)
             if let name = placemark.name {
-                print(name)
                 completion(name)
                 return
             }
             if let country = placemark.country,
                let region = placemark.region {
-                print(country, region)
                 completion("\(country) \(region)")
                 return
             }
