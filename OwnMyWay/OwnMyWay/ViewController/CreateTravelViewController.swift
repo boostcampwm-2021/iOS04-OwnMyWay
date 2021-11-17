@@ -25,6 +25,7 @@ class CreateTravelViewController: UIViewController, Instantiable {
         super.viewDidLoad()
         self.configureCancellable()
         self.configureCalendar()
+        self.configureLabels()
     }
 
     override func viewWillLayoutSubviews() {
@@ -56,6 +57,12 @@ class CreateTravelViewController: UIViewController, Instantiable {
 
     private func configureCalendar() {
         self.calendarView.placeholderType = FSCalendarPlaceholderType.none
+    }
+
+    private func configureLabels() {
+        self.viewModel?.viewDidLoad { title, startDate, endDate in
+            // 여기 해주세용 ^0^
+        }
     }
 
     @IBAction func didEnterTitle(_ sender: UITextField) {
