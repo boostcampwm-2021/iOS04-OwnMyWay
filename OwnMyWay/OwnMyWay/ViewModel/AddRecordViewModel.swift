@@ -48,7 +48,6 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     private var recordTitle: String?
     private var recordCoordinate: Location?
     private var recordContent: String?
-    private var plusCard: URL?
     private var isValidTitle: Bool = false {
         didSet {
             self.checkValidation()
@@ -83,19 +82,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
         self.recordPhotos = []
-        self.plusCard = Bundle.main.url(forResource: "addImage", withExtension: "png")
-        if let plusCard = plusCard {
-            self.recordPhotos.append(plusCard)
-        }
-
-        self.recordID = record?.uuid
-        self.didEnterTitle(with: record?.title)
-        self.didEnterTime(with: record?.date)
-        self.didEnterCoordinate(latitude: record?.latitude, longitude: record?.longitude)
-        self.didEnterContent(with: record?.content)
-        record?.photoURLs?.forEach { [weak self] url in
-            self?.didEnterPhotoURL(with: url)
-        }
+        self.configurePlusCard()
+        self.configureRecord(with: record)
     }
 
     func viewDidLoad(completion: (Record) -> Void) {
@@ -166,15 +154,41 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.coordinatingDelegate?.popToParent(with: record)
     }
 
+    private func configurePlusCard() {
+        if let plusCard = Bundle.main.url(forResource: "addImage", withExtension: "png") {
+            self.recordPhotos.append(plusCard)
+        }
+    }
+
+    private func configureRecord(with record: Record?) {
+        if let record = record {
+            self.recordID = record.uuid
+            self.didEnterTitle(with: record.title)
+            self.didEnterTime(with: record.date)
+            self.didEnterCoordinate(latitude: record.latitude, longitude: record.longitude)
+            self.didEnterContent(with: record.content)
+            record.photoURLs?.forEach { [weak self] url in
+                self?.didEnterPhotoURL(with: url)
+            }
+        }
+    }
+
     private func configurePlace(latitude: Double?, longitude: Double?) {
         guard let latitude = latitude,
               let longitude = longitude
-        else { return }
+        else {
+            self.recordPlace = "위치를 찾을 수 없어요. 직접 지정해주세요."
+            self.isValidPlace = false
+            return
+        }
         self.addressName(
             latitude: latitude, longitude: longitude
         ) { [weak self] place in
-            self?.recordPlace = place
-            self?.isValidPlace = true
+            guard let self = self,
+                  !self.isValidPlace
+            else { return }
+            self.recordPlace = place
+            self.isValidPlace = true
         }
     }
 
