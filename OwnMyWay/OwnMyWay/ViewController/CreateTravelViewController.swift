@@ -25,6 +25,7 @@ class CreateTravelViewController: UIViewController, Instantiable {
         super.viewDidLoad()
         self.configureCancellable()
         self.configureCalendar()
+        self.configureGestureRecognizer()
     }
 
     override func viewWillLayoutSubviews() {
@@ -141,7 +142,34 @@ extension CreateTravelViewController: FSCalendarDelegate {
 
 }
 
-extension FSCalendar {
+extension CreateTravelViewController {
+
+    private func configureGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+
+    private func deleteNotifications() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    @objc private func tapAction(_ gesture: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+
+}
+
+fileprivate extension FSCalendar {
 
     func deselectAll() {
         let dates = self.selectedDates
