@@ -46,7 +46,6 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     private var recordID: UUID?
     private var recordTitle: String?
-    private var recordDate: Date?
     private var recordCoordinate: Location?
     private var recordContent: String?
     private var plusCard: URL?
@@ -171,7 +170,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         guard let latitude = latitude,
               let longitude = longitude
         else { return }
-        self.getAddressFromCoordinates(
+        self.addressName(
             latitude: latitude, longitude: longitude
         ) { [weak self] place in
             self?.recordPlace = place
@@ -187,15 +186,14 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
 extension AddRecordViewModel {
 
-    func getAddressFromCoordinates(latitude: Double,
-                                   longitude: Double,
-                                   completion: @escaping (String) -> Void) {
-        var center = CLLocationCoordinate2D()
-        let geocoder: CLGeocoder = CLGeocoder()
-        center.latitude = latitude
-        center.longitude = longitude
-        let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+    func addressName(
+        latitude: Double, longitude: Double,
+        completion: @escaping (String) -> Void
+    ) {
+        let location = CLLocation(
+            latitude: latitude, longitude: longitude
+        )
+        CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
             guard error == nil,
                   let placemark = placemarks?.first
             else { return }
@@ -208,8 +206,9 @@ extension AddRecordViewModel {
                 completion("\(country) \(region)")
                 return
             }
-            completion("\(latitude), \(longitude)")
+            completion("위치를 찾을 수 없어요. 직접 지정해주세요.")
             return
         }
     }
+
 }
