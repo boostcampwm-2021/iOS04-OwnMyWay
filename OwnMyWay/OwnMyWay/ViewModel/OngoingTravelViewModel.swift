@@ -30,7 +30,7 @@ protocol OngoingCoordinatingDelegate: AnyObject {
     func pushToDetailRecord(record: Record, travel: Travel)
 }
 
-class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
+class DefaultOngoingTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewModel {
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
     @Published private(set) var travel: Travel

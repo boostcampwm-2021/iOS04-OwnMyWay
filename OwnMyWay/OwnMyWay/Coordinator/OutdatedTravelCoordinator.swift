@@ -7,8 +7,7 @@
 
 import UIKit
 
-class OutdatedTravelCoordinator: Coordinator, OutdatedTravelCoordinatingDelegate {
-
+class OutdatedTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
     private var travel: Travel
@@ -21,8 +20,8 @@ class OutdatedTravelCoordinator: Coordinator, OutdatedTravelCoordinatingDelegate
 
     func start() {
         let repository = CoreDataTravelRepository()
-        let usecase = DefaultOutdatedTravelUsecase(repository: repository)
-        let outdatedVM = DefaultOutdatedTravelViewModel(
+        let usecase = DefaultOngoingTravelUsecase(repository: repository)
+        let outdatedVM = DefaultOngoingTravelViewModel(
             travel: self.travel, usecase: usecase, coordinatingDelegate: self
         )
         let outdatedVC = OutdatedTravelViewController.instantiate(storyboardName: "OutdatedTravel")
@@ -39,4 +38,21 @@ class OutdatedTravelCoordinator: Coordinator, OutdatedTravelCoordinatingDelegate
         homeVC.fetchTravel()
         self.navigationController.popToRootViewController(animated: true)
     }
+    
+    func pushToAddRecord(record: Record?) {
+        <#code#>
+    }
+    
+    func pushToEditTravel() {
+        <#code#>
+    }
+    
+    func moveToOutdated(travel: Travel) {
+        <#code#>
+    }
+    
+    func pushToDetailRecord(record: Record, travel: Travel) {
+        <#code#>
+    }
+    
 }
