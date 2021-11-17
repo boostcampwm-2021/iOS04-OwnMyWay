@@ -14,7 +14,7 @@ protocol CreateTravelViewModel {
     var endDatePublisher: Published<String?>.Publisher { get }
 
     func travelDidChanged(to travel: Travel)
-    func didEnterTitle(text: String?)
+    func didChangeTitle(text: String?)
     func didEnterDate(from startDate: Date?, to endDate: Date?)
     func didTouchNextButton()
 }
@@ -59,7 +59,7 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
         self.travel = travel
     }
 
-    func didEnterTitle(text: String?) {
+    func didChangeTitle(text: String?) {
         guard let text = text else { return }
         self.usecase.executeTitleValidation(with: text) { [weak self] result in
             switch result {

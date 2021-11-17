@@ -58,9 +58,8 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.calendarView.placeholderType = FSCalendarPlaceholderType.none
     }
 
-    @IBAction func didEnterTitle(_ sender: UITextField) {
-        self.viewModel?.didEnterTitle(text: sender.text)
-        sender.resignFirstResponder()
+    @IBAction func didChangeTitle(_ sender: UITextField) {
+        self.viewModel?.didChangeTitle(text: sender.text)
     }
 
     @IBAction func didTouchNextButton(_ sender: UIButton) {

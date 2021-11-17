@@ -43,7 +43,7 @@
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
-                                    <action selector="didEnterTitle:" destination="Y6W-OH-hqX" eventType="editingDidEndOnExit" id="zic-LR-aqf"/>
+                                    <action selector="didChangeTitle:" destination="Y6W-OH-hqX" eventType="editingChanged" id="7Bv-A3-lnE"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adW-ws-vGt">
