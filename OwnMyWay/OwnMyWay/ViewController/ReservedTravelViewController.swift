@@ -71,7 +71,7 @@ class ReservedTravelViewController: UIViewController,
     }
 
     private func configureDescription() {
-        self.navigationController?.navigationItem.title = viewModel?.travel.title
+        self.navigationItem.title = viewModel?.travel.title
         if let startDate = viewModel?.travel.startDate,
             let endDate = viewModel?.travel.endDate {
             self.dateLabel.text = "\(startDate.format(endDate: endDate))"
