@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;사진에 접근해도 되겠습니까?&quot;</string>
+	<string>사진에 접근해도 되겠습니까? </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Access to Location</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
