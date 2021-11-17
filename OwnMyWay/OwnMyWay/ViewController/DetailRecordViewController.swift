@@ -52,10 +52,6 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
 
     private func configureDocumentInteractionController() {
         self.documentInteractionController.delegate = self
-        self.documentInteractionController.url = Bundle.main.url(
-            forResource: "iPhone",
-            withExtension: "png"
-        )
     }
 
     private func configureSettingButton() {
@@ -65,32 +61,6 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
             target: self,
             action: #selector(didTouchSettingButton)
         )
-    }
-
-    @objc private func didTouchSettingButton() {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
-            self?.presentAlert()
-        }
-
-        let editAction = UIAlertAction(title: "수정하기", style: .default) { [weak self] _ in
-            self?.viewModel?.didTouchEditButton()
-        }
-
-        let shareAction = UIAlertAction(title: "공유하기", style: .default) { [weak self] _ in
-                // FIXME: 인스타 공유
-//            self?.documentInteractionController.presentOptionsMenu(
-//                from: self?.view.bounds,
-//                in: self?.view,
-//                animated: true
-//            )
-        }
-        let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
-        actionSheet.addAction(deleteAction)
-        actionSheet.addAction(editAction)
-        actionSheet.addAction(shareAction)
-        actionSheet.addAction(cancelAction)
-        self.present(actionSheet, animated: true)
     }
 
     private func configureCancellable() {
@@ -135,6 +105,27 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         alert.addAction(noAction)
         self.present(alert, animated: true)
     }
+
+    @objc private func didTouchSettingButton() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.presentAlert()
+        }
+
+        let editAction = UIAlertAction(title: "수정하기", style: .default) { [weak self] _ in
+            self?.viewModel?.didTouchEditButton()
+        }
+
+        let shareAction = UIAlertAction(title: "공유하기", style: .default) { [weak self] _ in
+            self?.presentSharedPreview()
+        }
+        let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(shareAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true)
+    }
 }
 
 // MARK: - UIScollViewDelegate
@@ -146,12 +137,70 @@ extension DetailRecordViewController: UIScrollViewDelegate {
     }
 }
 
-// MARK: - UIDocumetntInteractionControllerDelegate
+// MARK: - UIDocumetntInteractionControllerDelegate & 공유기능
 extension DetailRecordViewController: UIDocumentInteractionControllerDelegate {
     func documentInteractionControllerViewControllerForPreview(
         _ controller: UIDocumentInteractionController
     ) -> UIViewController {
-        self
+        return self
+    }
+
+    private func presentSharedPreview() {
+        guard let viewModel = self.viewModel, let superView = self.view
+        else { return }
+        let polaroidView = UIView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: self.view.frame.width,
+                height: 6 * self.view.frame.width / 7
+            )
+        )
+        polaroidView.makePolaroid(with: viewModel.record)
+        superView.addSubview(polaroidView)
+        NSLayoutConstraint.activate([
+            polaroidView.topAnchor.constraint(equalTo: superView.bottomAnchor),
+            polaroidView.leadingAnchor.constraint(equalTo: superView.leadingAnchor)
+        ])
+        let image = self.renderImage(view: polaroidView)
+        polaroidView.removeFromSuperview()
+        self.documentInteractionController.url = self.save(
+            image: image,
+            // FIXME: title로 변경하는게 좋을 것 같아요 근데 지금 더미는 title이 nil이여서 확인차 content로 해놨어요
+            fileName: viewModel.record.content
+        )
+        self.documentInteractionController.presentPreview(animated: true)
+    }
+
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+
+    private func renderImage(view: UIView) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(
+            size: view.bounds.size
+        )
+        let image = renderer.image { _ in
+            view.drawHierarchy(
+                in: view.bounds,
+                afterScreenUpdates: true
+            )
+        }
+        return image
+    }
+
+    private func save(image: UIImage, fileName: String?) -> URL? {
+        guard let data = image.jpegData(compressionQuality: 1.0), let fileName = fileName
+        else { return nil }
+        let documentDirectory = self.getDocumentsDirectory()
+        let filePath = documentDirectory.appendingPathComponent("\(fileName).jpeg")
+        do {
+            try data.write(to: filePath)
+            return filePath
+        } catch {
+            return nil
+        }
     }
 }
 
