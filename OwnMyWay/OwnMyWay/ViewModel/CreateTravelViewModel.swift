@@ -55,7 +55,7 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
         self.coordinatingDelegate = coordinatingDelegate
         self.isEditingMode = travel == nil ? false : true
         self.travel = travel ?? Travel.dummy(section: .reserved)
-        self.didEnterTitle(text: travel?.title)
+        self.didChangeTitle(text: travel?.title)
         self.didEnterDate(from: travel?.startDate, to: travel?.endDate)
     }
 
