@@ -12,12 +12,19 @@ class MapCell: UICollectionViewCell, MapAvailable {
     static let identifier = "MapCell"
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var trackingButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.configureMapView(with: self.mapView)
         self.mapView.delegate = self
         self.mapView.showsUserLocation = true
+
+        let image = UIImage(systemName: "paperplane.circle")
+        let normalImage = image?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        let selectedImage = image?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+        self.trackingButton.setImage(normalImage, for: .normal)
+        self.trackingButton.setImage(selectedImage, for: .selected)
     }
 
     func configure(with travel: Travel) {
@@ -40,10 +47,20 @@ class MapCell: UICollectionViewCell, MapAvailable {
             mapView: self.mapView,
             locations: travel.locations
         )
+
+        if LocationManager.shared.authorizationStatus == .authorizedAlways {
+            switch LocationManager.shared.isUpdatingLocation {
+            case true:
+                self.trackingButton.isSelected = true
+            case false:
+                self.trackingButton.isSelected = false
+            }
+        }
     }
 
     @IBAction func didTouchTrackingButton(_ sender: Any) {
         if LocationManager.shared.authorizationStatus == .authorizedAlways {
+            self.trackingButton.isSelected.toggle()
             switch LocationManager.shared.isUpdatingLocation {
             case true:
                 LocationManager.shared.stopUpdatingLocation()
