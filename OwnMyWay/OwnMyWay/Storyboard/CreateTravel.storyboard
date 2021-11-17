@@ -38,16 +38,26 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cs1-WO-d5D">
-                                <rect key="frame" x="20.5" y="172.5" width="373" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="친구들과 제주도 3박 4일!" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cs1-WO-d5D">
+                                <rect key="frame" x="20.5" y="190.5" width="373" height="31.5"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <action selector="didEnterTitle:" destination="Y6W-OH-hqX" eventType="editingDidEndOnExit" id="zic-LR-aqf"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adW-ws-vGt">
+                                <rect key="frame" x="20.5" y="227" width="373" height="3"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="mOT-Ou-T44"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkc-3o-fy0">
-                                <rect key="frame" x="20.5" y="256.5" width="393.5" height="36"/>
+                                <rect key="frame" x="20.5" y="272" width="393.5" height="36"/>
                                 <attributedString key="attributedText">
                                     <fragment content="날짜">
                                         <attributes>
@@ -67,7 +77,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LjK-w9-XFr" customClass="FSCalendar">
-                                <rect key="frame" x="10" y="302.5" width="394" height="350"/>
+                                <rect key="frame" x="10" y="318" width="394" height="350"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" name="IdentityBlue"/>
                                 <constraints>
@@ -114,17 +124,20 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="LjK-w9-XFr" secondAttribute="trailing" constant="10" id="94N-cF-zOT"/>
                             <constraint firstItem="nzu-vs-UWO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="A24-Y1-D45"/>
                             <constraint firstItem="nkc-3o-fy0" firstAttribute="top" secondItem="cs1-WO-d5D" secondAttribute="bottom" constant="50" id="ET1-tC-N0K"/>
+                            <constraint firstItem="adW-ws-vGt" firstAttribute="leading" secondItem="cs1-WO-d5D" secondAttribute="leading" id="EvR-CY-CyM"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.95" id="F4S-Dd-X24"/>
                             <constraint firstItem="LjK-w9-XFr" firstAttribute="top" secondItem="nkc-3o-fy0" secondAttribute="bottom" constant="10" id="Jvl-oa-6lX"/>
+                            <constraint firstItem="cs1-WO-d5D" firstAttribute="top" secondItem="43Z-qy-ngV" secondAttribute="bottom" constant="25" id="LAq-0y-JiJ"/>
                             <constraint firstItem="43Z-qy-ngV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="bottom" multiplier="0.15" id="NZk-HN-5CP"/>
                             <constraint firstItem="43Z-qy-ngV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.05" id="R7N-EE-kgi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="43Z-qy-ngV" secondAttribute="trailing" id="T7W-2x-XZL"/>
                             <constraint firstItem="nkc-3o-fy0" firstAttribute="leading" secondItem="43Z-qy-ngV" secondAttribute="leading" id="aeU-Xb-Hkh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="nzu-vs-UWO" secondAttribute="trailing" id="cF9-LI-OS7"/>
                             <constraint firstItem="cs1-WO-d5D" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.05" id="g1P-dK-RS8"/>
+                            <constraint firstItem="adW-ws-vGt" firstAttribute="top" secondItem="cs1-WO-d5D" secondAttribute="bottom" constant="5" id="gT8-5z-lSX"/>
                             <constraint firstAttribute="bottom" secondItem="nzu-vs-UWO" secondAttribute="bottom" id="h5G-1k-DlY"/>
+                            <constraint firstItem="adW-ws-vGt" firstAttribute="trailing" secondItem="cs1-WO-d5D" secondAttribute="trailing" id="mdz-jg-b6M"/>
                             <constraint firstItem="LjK-w9-XFr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="taj-sN-yId"/>
-                            <constraint firstItem="cs1-WO-d5D" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="bottom" multiplier="0.2" id="wbD-h7-lcO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="새로운 기록" id="4xu-Sz-XCj"/>
