@@ -22,6 +22,7 @@ let supportedPhotoExtensions = [
 ]
 
 class AddRecordViewController: UIViewController, Instantiable {
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var photoCollectionView: UICollectionView!
     @IBOutlet private weak var titleTextField: UITextField!
     @IBOutlet private weak var contentTextField: UITextField!
@@ -34,8 +35,8 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.configureGestureRecognizer()
-//        self.configureNotifications()
+        self.configureGestureRecognizer()
+        self.configureNotifications()
         self.configureNibs()
         self.configurePhotoCollectionView()
         self.configureNavigation()
@@ -118,6 +119,7 @@ class AddRecordViewController: UIViewController, Instantiable {
 extension AddRecordViewController {
     private func configureGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
+        tapGesture.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapGesture)
     }
 
@@ -154,26 +156,21 @@ extension AddRecordViewController {
     }
 
     @objc private func keyboardWillShowAction(_ notification: Notification) {
-        let optDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
-        let optSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
-        guard let duration = optDuration as? Double,
-              let keyboard = (optSize as? NSValue)?.cgRectValue
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
         else { return }
-        let height = keyboard.height - self.view.safeAreaInsets.bottom
 
-        UIView.animate(withDuration: duration) {
-            self.view.frame.move(horizontal: 0, vertical: -height)
+        self.scrollView.contentInset.bottom = keyboardFrame.size.height
+        let firstResponder = self.view.firstResponder
+        if let textView = firstResponder as? UITextField {
+            self.scrollView.scrollRectToVisible(textView.frame, animated: true)
         }
     }
 
     @objc private func keyboardWillHideAction(_ notification: Notification) {
-        let optDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
-        guard let duration = optDuration as? Double
-        else { return }
-
-        UIView.animate(withDuration: duration) {
-            self.view.frame.moveToZero()
-        }
+        let zeroInset = UIEdgeInsets.zero
+        self.scrollView.contentInset = zeroInset
+        self.scrollView.scrollIndicatorInsets = zeroInset
     }
 }
 
@@ -281,15 +278,14 @@ extension AddRecordViewController {
     }
 }
 
-fileprivate extension CGRect {
-    mutating func move(horizontal: CGFloat, vertical: CGFloat) {
-        self = CGRect(
-            origin: CGPoint(x: self.origin.x + horizontal, y: self.origin.y + vertical),
-            size: self.size
-        )
-    }
+// MARK: - fileprivate extension for UIView
 
-    mutating func moveToZero() {
-        self = CGRect(origin: .zero, size: self.size)
+fileprivate extension UIView {
+    var firstResponder: UIView? {
+        guard !self.isFirstResponder else { return self }
+        for subview in subviews {
+            if let firstResponder = subview.firstResponder { return firstResponder }
+        }
+        return nil
     }
 }
