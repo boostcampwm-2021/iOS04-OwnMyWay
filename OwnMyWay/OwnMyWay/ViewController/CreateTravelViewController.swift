@@ -67,6 +67,7 @@ class CreateTravelViewController: UIViewController, Instantiable {
                   let startDate = startDate,
                   let endDate = endDate
             else { return }
+            self?.navigationItem.title = "기록 편집하기"
             self?.travelTitleField.text = title
             let dayInterval: TimeInterval = 60 * 60 * 24
             stride(from: startDate, through: endDate, by: dayInterval).forEach {
