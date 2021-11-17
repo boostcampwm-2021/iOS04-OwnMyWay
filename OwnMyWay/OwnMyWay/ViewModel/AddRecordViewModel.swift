@@ -12,6 +12,7 @@ import MapKit
 protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
     var photoPublisher: Published<[URL]>.Publisher { get }
+    var placePublisher: Published<String?>.Publisher { get }
 
     func viewDidLoad(completion: (Record) -> Void)
     func didEnterTitle(with text: String?)
@@ -31,17 +32,19 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
     var photoPublisher: Published<[URL]>.Publisher { $recordPhotos }
+    var placePublisher: Published<String?>.Publisher { $recordPlace }
 
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
 
     @Published private var validateResult: Bool?
     @Published private var recordPhotos: [URL]
+    @Published private var recordPlace: String?
+
     private var recordID: UUID?
     private var recordTitle: String?
     private var recordDate: Date?
     private var recordCoordinate: Location?
-    private var recordPlace: String?
     private var recordContent: String?
     private var plusCard: URL?
     private var isValidTitle: Bool = false {

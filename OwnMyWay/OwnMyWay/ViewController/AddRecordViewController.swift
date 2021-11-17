@@ -45,14 +45,7 @@ class AddRecordViewController: UIViewController, Instantiable {
             self?.titleTextField.text = record.title
             self?.datePicker.date = record.date ?? Date()
             self?.contentTextField.text = record.content
-            guard let latitude = record.latitude,
-                  let longitude = record.longitude
-            else { return }
-            self?.getAddressFromCoordinates(
-                latitude: latitude, longitude: longitude
-            ) { [weak self] title in
-                self?.locationButton.setTitle(title, for: .normal)
-            }
+            self?.locationButton.setTitle(record.placeDescription, for: .normal)
         }
     }
 
@@ -95,6 +88,13 @@ class AddRecordViewController: UIViewController, Instantiable {
             .sink { [weak self] photos in
                 self?.dataSource = photos
                 self?.photoCollectionView.reloadData()
+            }
+            .store(in: &cancellables)
+
+        self.viewModel?.placePublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] place in
+                self?.locationButton.setTitle(place, for: .normal)
             }
             .store(in: &cancellables)
     }
@@ -225,10 +225,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
             self?.datePicker.date = date
             if let latitude = assetResults.firstObject?.location?.coordinate.latitude.magnitude,
                let longitude = assetResults.firstObject?.location?.coordinate.longitude.magnitude {
-                self?.getAddressFromCoordinates(latitude: latitude, longitude: longitude) { title in
-                    self?.viewModel?.didEnterCoordinate(of: Location(latitude: latitude, longitude: longitude))
-                    self?.locationButton.setTitle(title, for: .normal)
-                }
+                self?.viewModel?.didEnterCoordinate(of: Location(latitude: latitude, longitude: longitude))
             }
             for type in supportedPhotoExtensions {
                 if result.itemProvider.hasRepresentationConforming(toTypeIdentifier: type, fileOptions: .init()) {
@@ -244,38 +241,6 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 
-}
-
-extension AddRecordViewController {
-
-    func getAddressFromCoordinates(latitude: Double,
-                                   longitude: Double,
-                                   completion: @escaping (String) -> Void) {
-        var center = CLLocationCoordinate2D()
-        let geocoder: CLGeocoder = CLGeocoder()
-        center.latitude = latitude
-        center.longitude = longitude
-        let location = CLLocation(latitude: center.latitude, longitude: center.longitude)
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-            guard error == nil,
-                  let placemark = placemarks?.first
-            else { return }
-            dump(placemark)
-            if let name = placemark.name {
-                print(name)
-                completion(name)
-                return
-            }
-            if let country = placemark.country,
-               let region = placemark.region {
-                print(country, region)
-                completion("\(country) \(region)")
-                return
-            }
-            completion("\(latitude), \(longitude)")
-            return
-        }
-    }
 }
 
 // MARK: - fileprivate extension for UIView
