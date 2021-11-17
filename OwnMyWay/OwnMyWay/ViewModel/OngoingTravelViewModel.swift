@@ -53,6 +53,11 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         self.travel = travel
     }
 
+    func didDeleteTravel() {
+        self.usecase.executeDeletion(of: self.travel)
+        self.coordinatingDelegate?.popToHome()
+    }
+
     func didTouchAddRecordButton() {
         self.coordinatingDelegate?.pushToAddRecord(record: nil)
     }
