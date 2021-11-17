@@ -78,10 +78,10 @@ class ReservedTravelViewController: UIViewController,
         }
         self.travelTypeLabel.text = "예정된 여행"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "삭제",
+            image: UIImage(systemName: "ellipsis"),
             style: .plain,
             target: self,
-            action: #selector(removeButtonAction)
+            action: #selector(self.didTouchSettingButton)
         )
     }
 
@@ -89,8 +89,19 @@ class ReservedTravelViewController: UIViewController,
         self.viewModel?.didTouchBackButton()
     }
 
-    @objc func removeButtonAction() {
-        self.presentAlert()
+    @objc func didTouchSettingButton() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.presentAlert()
+        }
+        let editAction = UIAlertAction(title: "수정하기", style: .default) { [weak self] _ in
+            self?.viewModel?.didTouchEditButton()
+        }
+        let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true)
     }
 
     private func configureStartButton() {
