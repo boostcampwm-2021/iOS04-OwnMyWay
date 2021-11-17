@@ -89,7 +89,6 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.viewModel?.placePublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] place in
-                print("bind에서 ", place)
                 self?.locationButton.setTitle(place, for: .normal)
             }
             .store(in: &cancellables)
