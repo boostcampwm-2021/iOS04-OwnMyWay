@@ -223,10 +223,10 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
             let date = assetResults.firstObject?.creationDate ?? Date()
             self?.viewModel?.didEnterTime(with: date)
             self?.datePicker.date = date
-            if let latitude = assetResults.firstObject?.location?.coordinate.latitude.magnitude,
-               let longitude = assetResults.firstObject?.location?.coordinate.longitude.magnitude {
-                self?.viewModel?.didEnterCoordinate(of: Location(latitude: latitude, longitude: longitude))
-            }
+            self?.viewModel?.didEnterCoordinate(
+                latitude: assetResults.firstObject?.location?.coordinate.latitude.magnitude,
+                longitude: assetResults.firstObject?.location?.coordinate.longitude.magnitude
+            )
             for type in supportedPhotoExtensions {
                 if result.itemProvider.hasRepresentationConforming(toTypeIdentifier: type, fileOptions: .init()) {
                     result.itemProvider.loadFileRepresentation(forTypeIdentifier: type) { url, error in

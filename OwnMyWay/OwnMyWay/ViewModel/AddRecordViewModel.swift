@@ -17,7 +17,7 @@ protocol AddRecordViewModel {
     func viewDidLoad(completion: (Record) -> Void)
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
-    func didEnterCoordinate(of location: Location)
+    func didEnterCoordinate(latitude: Double?, longitude: Double?)
     func didEnterContent(with text: String?)
     func didEnterPhotoURL(with url: URL)
     func didRemovePhotoURL(with url: URL)
@@ -89,9 +89,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.recordID = record?.uuid
         self.didEnterTitle(with: record?.title)
         self.didEnterTime(with: record?.date)
-        self.didEnterCoordinate(of: Location(
-            latitude: record?.latitude, longitude: record?.longitude)
-        )
+        self.didEnterCoordinate(latitude: record?.latitude, longitude: record?.longitude)
         self.didEnterContent(with: record?.content)
         record?.photoURLs?.forEach { [weak self] url in
             self?.didEnterPhotoURL(with: url)
@@ -118,18 +116,11 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.isValidDate = self.usecase.executeValidationDate(with: date)
     }
 
-    func didEnterCoordinate(of location: Location) {
+    func didEnterCoordinate(latitude: Double?, longitude: Double?) {
+        let location = Location(latitude: latitude, longitude: longitude)
         self.recordCoordinate = location
         self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
-        guard let latitude = location.latitude,
-              let longitude = location.longitude
-        else { return }
-        self.getAddressFromCoordinates(
-            latitude: latitude, longitude: longitude
-        ) { [weak self] place in
-            self?.recordPlace = place
-            self?.isValidPlace = true
-        }
+        self.configurePlace(latitude: latitude, longitude: longitude)
     }
 
     func didEnterContent(with text: String?) {
@@ -171,6 +162,18 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             photoURLs: recordPhotos, placeDescription: place
         )
         self.coordinatingDelegate?.popToParent(with: record)
+    }
+
+    private func configurePlace(latitude: Double?, longitude: Double?) {
+        guard let latitude = latitude,
+              let longitude = longitude
+        else { return }
+        self.getAddressFromCoordinates(
+            latitude: latitude, longitude: longitude
+        ) { [weak self] place in
+            self?.recordPlace = place
+            self?.isValidPlace = true
+        }
     }
 
     private func checkValidation() {
