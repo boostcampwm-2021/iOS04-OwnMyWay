@@ -21,13 +21,16 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
 
     func start() {
         let repository = CoreDataTravelRepository()
-        let usecase = DefaultAddRecordUsecase(repository: repository)
+        let usecase = DefaultAddRecordUsecase(
+            repository: repository,
+            imageFileManager: ImageFileManager(fileManager: FileManager.default)
+        )
         let addRecordVM = DefaultAddRecordViewModel(
             record: self.record, usecase: usecase, coordinatingDelegate: self
         )
         let addRecordVC = AddRecordViewController.instantiate(storyboardName: "AddRecord")
         addRecordVC.bind(viewModel: addRecordVM)
-        self.navigationController.viewControllers.last?.present(addRecordVC, animated: true)
+        self.navigationController.pushViewController(addRecordVC, animated: true)
     }
 
     func popToParent(with record: Record) {

@@ -140,7 +140,7 @@ class CoreDataTravelRepository: TravelRepository {
         else { return .failure(NSError.init()) }
 
         let recordMO = RecordMO(entity: entity, insertInto: context)
-        recordMO.setValue(UUID(), forKey: "uuid")
+        recordMO.setValue(record.uuid, forKey: "uuid")
         recordMO.setValue(record.photoURLs, forKey: "photoURLs")
         recordMO.setValue(record.title, forKey: "title")
         recordMO.setValue(record.placeDescription, forKey: "placeDescription")
