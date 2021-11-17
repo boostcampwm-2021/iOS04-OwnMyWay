@@ -47,10 +47,10 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adW-ws-vGt">
-                                <rect key="frame" x="20.5" y="227" width="373" height="3"/>
+                                <rect key="frame" x="20.5" y="227" width="373" height="2"/>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="3" id="mOT-Ou-T44"/>
+                                    <constraint firstAttribute="height" constant="2" id="mOT-Ou-T44"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
