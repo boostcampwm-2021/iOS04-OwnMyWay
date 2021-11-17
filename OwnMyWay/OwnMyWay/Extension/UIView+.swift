@@ -17,23 +17,23 @@ extension UIView {
         self.layer.shadowRadius = 3
         self.layer.masksToBounds = false
     }
-    
+
     func makePolaroid(with record: Record) {
         let photoImageView = UIImageView()
         photoImageView.setImage(with: record.photoURLs?.first)
-        
+
         let titleLabel = UILabel()
         titleLabel.text = record.content
         titleLabel.font = UIFont(name: "Chalkduster", size: 17)
-        
+
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.addSubview(photoImageView)
         self.addSubview(titleLabel)
-        
+
         self.makeShadow()
-        
+
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(
                 equalTo: self.topAnchor,
@@ -68,7 +68,7 @@ extension UIView {
                 constant: -24
             )
         ])
-        
+
         self.layoutIfNeeded()
     }
 }

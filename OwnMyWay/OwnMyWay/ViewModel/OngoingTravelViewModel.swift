@@ -22,7 +22,7 @@ protocol OngoingTravelViewModel {
     func didUpdateRecord(record: Record)
 }
 
-protocol OngoingCoordinatingDelegate: AnyObject {
+protocol StartedCoordinatingDelegate: AnyObject {
     func popToHome()
     func pushToAddRecord(record: Record?)
     func pushToEditTravel()
@@ -30,18 +30,18 @@ protocol OngoingCoordinatingDelegate: AnyObject {
     func pushToDetailRecord(record: Record, travel: Travel)
 }
 
-class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
+class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewModel {
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
     @Published private(set) var travel: Travel
 
-    private let usecase: OngoingTravelUsecase
-    private weak var coordinatingDelegate: OngoingCoordinatingDelegate?
+    private let usecase: StartedTravelUsecase
+    private weak var coordinatingDelegate: StartedCoordinatingDelegate?
 
     init(
         travel: Travel,
-        usecase: OngoingTravelUsecase,
-        coordinatingDelegate: OngoingCoordinatingDelegate
+        usecase: StartedTravelUsecase,
+        coordinatingDelegate: StartedCoordinatingDelegate
     ) {
         self.travel = travel
         self.usecase = usecase

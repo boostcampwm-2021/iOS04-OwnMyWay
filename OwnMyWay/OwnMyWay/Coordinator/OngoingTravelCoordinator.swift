@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
+class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -21,8 +21,8 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
 
     func start() {
         let repository = CoreDataTravelRepository()
-        let usecase = DefaultOngoingTravelUsecase(repository: repository)
-        let ongoingVM = DefaultOngoingTravelViewModel(
+        let usecase = DefaultStartedTravelUsecase(repository: repository)
+        let ongoingVM = DefaultStartedTravelViewModel(
             travel: self.travel, usecase: usecase, coordinatingDelegate: self
         )
         let ongoingVC = OngoingTravelViewController.instantiate(storyboardName: "OngoingTravel")
