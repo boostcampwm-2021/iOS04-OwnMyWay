@@ -9,6 +9,8 @@ import UIKit
 
 class CompleteEditingViewController: UIViewController, Instantiable {
 
+    @IBOutlet private weak var nextButtonHeightConstraint: NSLayoutConstraint!
+
     private var viewModel: CompleteEditingViewModel?
 
     override func viewDidLoad() {
@@ -17,11 +19,20 @@ class CompleteEditingViewController: UIViewController, Instantiable {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        self.configureButtonConstraint()
     }
 
     func bind(viewModel: CompleteEditingViewModel) {
         self.viewModel = viewModel
     }
 
-    // FIXME: 구현 요망
+    private func configureButtonConstraint() {
+        let bottomPadding = self.view.safeAreaInsets.bottom
+        self.nextButtonHeightConstraint.constant = 60 + bottomPadding
+    }
+
+    @IBAction func didTouchCompleteButton(_ sender: UIButton) {
+        self.viewModel?.didTouchCompleteButton()
+    }
+
 }

@@ -12,7 +12,7 @@ protocol CompleteEditingViewModel {
 }
 
 protocol CompleteEditingCoordinatingDelegate: AnyObject {
-    func popToHome()
+    func popToTravelViewController(travel: Travel)
 }
 
 class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
@@ -33,7 +33,7 @@ class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
 
     func didTouchCompleteButton() {
         self.usecase.executeUpdate(travel: travel)
-        self.coordinatingDelegate?.popToHome()
+        self.coordinatingDelegate?.popToTravelViewController(travel: travel)
     }
 
 }

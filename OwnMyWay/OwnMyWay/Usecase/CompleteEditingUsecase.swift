@@ -20,7 +20,7 @@ struct DefaultCompleteEditingUsecase: CompleteEditingUsecase {
     }
 
     func executeUpdate(travel: Travel) {
-        // FIXME: 구현 요망
+        self.repository.update(travel: travel)
     }
 
 }

@@ -32,11 +32,15 @@ class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelega
         self.navigationController.pushViewController(completeEditingVC, animated: true)
     }
 
-    func popToHome() {
-        // FIXME: 구현 요망
-        // travel CoreData 업데이트
-        // pop 2~3번
-        // pop후 새로운 화면에서 travel Fetch
+    func popToTravelViewController(travel: Travel) {
+        let viewControllers = self.navigationController.viewControllers
+        guard viewControllers.count >= 4
+        else { return }
+        let travelViewController = viewControllers[viewControllers.count - 4]
+        self.navigationController.popToViewController(travelViewController, animated: true)
+        if let travelVC = self.navigationController.viewControllers.last as? TravelUpdatable {
+            travelVC.didUpdateTravel(to: travel)
+        }
     }
 
 }
