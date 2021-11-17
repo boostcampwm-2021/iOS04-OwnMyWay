@@ -62,11 +62,19 @@ class CreateTravelViewController: UIViewController, Instantiable {
     }
 
     private func configureLabels() {
-        self.viewModel?.viewDidLoad { title, startDate, endDate in
-            // 여기 해주세용 ^0^
+        self.viewModel?.viewDidLoad { [weak self] title, startDate, endDate in
+            guard let title = title,
+                  let startDate = startDate,
+                  let endDate = endDate
+            else { return }
+            self?.travelTitleField.text = title
+            let dayInterval: TimeInterval = 60 * 60 * 24
+            stride(from: startDate, through: endDate, by: dayInterval).forEach {
+                self?.calendarView.select($0)
+            }
         }
     }
-    
+
     private func configureGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
         tapGesture.cancelsTouchesInView = false
