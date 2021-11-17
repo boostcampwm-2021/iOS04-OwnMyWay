@@ -159,11 +159,10 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
               let place = self.recordPlace
         else { return }
         let record = Record(
-            uuid: UUID(), title: recordTitle, content: self.recordContent,
+            uuid: self.record?.uuid ?? UUID(), title: recordTitle, content: self.recordContent,
             date: date, latitude: latitude, longitude: longtitude,
             photoURLs: recordPhotos, placeDescription: place
         )
-        // TODO: usecase를 통해 coreData 업데이트가 필요함
         self.coordinatingDelegate?.popToParent(with: record)
     }
 
