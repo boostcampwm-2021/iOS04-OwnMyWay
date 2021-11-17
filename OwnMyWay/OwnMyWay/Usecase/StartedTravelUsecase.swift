@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol OngoingTravelUsecase {
+protocol StartedTravelUsecase {
     func executeFetch()
     func executeFinishingTravel()
     func executeFlagUpdate(of travel: Travel)
@@ -15,7 +15,7 @@ protocol OngoingTravelUsecase {
     func executeRecordAddition(to travel: Travel, with record: Record, completion: (Travel) -> Void)
 }
 
-struct DefaultOngoingTravelUsecase: OngoingTravelUsecase {
+struct DefaultStartedTravelUsecase: StartedTravelUsecase {
 
     private let repository: TravelRepository
 

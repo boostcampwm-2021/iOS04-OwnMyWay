@@ -240,8 +240,12 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                 longitude: assetResults.firstObject?.location?.coordinate.longitude.magnitude
             )
             for type in supportedPhotoExtensions {
-                if result.itemProvider.hasRepresentationConforming(toTypeIdentifier: type, fileOptions: .init()) {
-                    result.itemProvider.loadFileRepresentation(forTypeIdentifier: type) { url, error in
+                if result.itemProvider.hasRepresentationConforming(
+                    toTypeIdentifier: type, fileOptions: .init()
+                ) {
+                    result.itemProvider.loadFileRepresentation(
+                        forTypeIdentifier: type
+                    ) { url, error in
                         guard error == nil,
                               let url = url else { return }
                         self?.viewModel?.didEnterPhotoURL(with: url)

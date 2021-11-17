@@ -11,31 +11,9 @@ protocol OutdatedTravelViewModel {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
 
+    func didUpdateTravel(to travel: Travel)
+    func didTouchAddRecordButton()
+    func didTouchRecordCell(at record: Record)
     func didTouchBackButton()
-}
-
-protocol OutdatedTravelCoordinatingDelegate: AnyObject {
-    func popToHome()
-}
-
-class DefaultOutdatedTravelViewModel: OutdatedTravelViewModel {
-    @Published private(set) var travel: Travel
-    var travelPublisher: Published<Travel>.Publisher { $travel }
-
-    private let usecase: OutdatedTravelUsecase
-    private weak var coordinatingDelegate: OutdatedTravelCoordinatingDelegate?
-
-    init(
-        travel: Travel,
-        usecase: OutdatedTravelUsecase,
-        coordinatingDelegate: OutdatedTravelCoordinatingDelegate
-    ) {
-        self.travel = travel
-        self.usecase = usecase
-        self.coordinatingDelegate = coordinatingDelegate
-    }
-
-    func didTouchBackButton() {
-        self.coordinatingDelegate?.popToHome()
-    }
+    func didUpdateRecord(record: Record)
 }
