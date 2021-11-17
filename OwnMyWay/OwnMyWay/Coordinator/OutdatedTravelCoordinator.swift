@@ -38,21 +38,24 @@ class OutdatedTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
         homeVC.fetchTravel()
         self.navigationController.popToRootViewController(animated: true)
     }
-    
+
     func pushToAddRecord(record: Record?) {
-        <#code#>
+        let addRecordCoordinator = AddRecordCoordinator(
+            navigationController: self.navigationController, record: record
+        )
+        self.childCoordinators.append(addRecordCoordinator)
+        addRecordCoordinator.start()
     }
-    
-    func pushToEditTravel() {
-        <#code#>
-    }
-    
-    func moveToOutdated(travel: Travel) {
-        <#code#>
-    }
-    
+
+    func pushToEditTravel() {}
+
+    func moveToOutdated(travel: Travel) { return }
+
     func pushToDetailRecord(record: Record, travel: Travel) {
-        <#code#>
+        let detailRecordCoordinator = DetailRecordCoordinator(
+            navigationController: self.navigationController, record: record, travel: travel
+        )
+        self.childCoordinators.append(detailRecordCoordinator)
+        detailRecordCoordinator.start()
     }
-    
 }

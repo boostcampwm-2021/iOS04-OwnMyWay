@@ -40,11 +40,11 @@ class OutdatedTravelViewController: UIViewController, Instantiable, TravelUpdata
     func bind(viewModel: OutdatedTravelViewModel) {
         self.viewModel = viewModel
     }
-    
+
     func didUpdateTravel(to travel: Travel) {
         self.viewModel?.didUpdateTravel(to: travel)
     }
-    
+
     func didUpdateRecord(record: Record) {
         self.viewModel?.didUpdateRecord(record: record)
     }
@@ -67,12 +67,10 @@ class OutdatedTravelViewController: UIViewController, Instantiable, TravelUpdata
 
 extension OutdatedTravelViewController: UICollectionViewDelegate {
     private func configureNibs() {
-        // FIXME: 후에 새로운 MapCell 추가합시다~
-        
-//        self.collectionView.register(
-//            UINib(nibName: MapCell.identifier, bundle: nil),
-//            forCellWithReuseIdentifier: MapCell.identifier
-//        )
+        self.collectionView.register(
+            UINib(nibName: OutdatedMapCell.identifier, bundle: nil),
+            forCellWithReuseIdentifier: OutdatedMapCell.identifier
+        )
         self.collectionView.register(
             UINib(nibName: RecordCardCell.identifier, bundle: nil),
             forCellWithReuseIdentifier: RecordCardCell.identifier
@@ -94,10 +92,9 @@ extension OutdatedTravelViewController: UICollectionViewDelegate {
         viewModel?.travelPublisher.sink { [weak self] travel in
             guard let self = self else { return }
 
-            // FIXME: 새로운 MAPCELL 넣기
             if let mapCell = self.collectionView.cellForItem(
                 at: IndexPath(item: 0, section: 0)
-            ) as? MapCell {
+            ) as? OutdatedMapCell {
                 mapCell.configure(with: travel)
             }
 
@@ -153,11 +150,10 @@ extension OutdatedTravelViewController: UICollectionViewDelegate {
 
             switch indexPath.section {
             case 0:
-                // FIXME: 새로운 MAPCELL 넣기
                 guard let travel = self.viewModel?.travel,
                       let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: MapCell.identifier, for: indexPath
-                ) as? MapCell
+                    withReuseIdentifier: OutdatedMapCell.identifier, for: indexPath
+                ) as? OutdatedMapCell
                 else { return UICollectionViewCell() }
                 cell.configure(with: travel)
                 return cell
