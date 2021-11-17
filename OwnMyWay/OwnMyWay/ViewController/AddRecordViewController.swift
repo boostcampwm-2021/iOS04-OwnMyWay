@@ -224,7 +224,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                 case .notDetermined, .restricted, .denied:
                     let alert = UIAlertController(
                         title: "권한 설정이 필요합니다.",
-                        message: "Setting -> OnwMyWay -> 사진 -> 선택한 사진 또는 모든 사진",
+                        message: "Setting -> OwnMyWay -> 사진 -> 선택한 사진 또는 모든 사진",
                         preferredStyle: .alert
                     )
 
