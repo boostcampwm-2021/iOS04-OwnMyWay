@@ -19,7 +19,7 @@ protocol CreateTravelViewModel {
 }
 
 protocol CreateTravelCoordinatingDelegate: AnyObject {
-    func pushToAddLandmark(travel: Travel)
+    func pushToAddLandmark(travel: Travel, isEditingMode: Bool)
 }
 
 class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
@@ -34,6 +34,7 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
     private var travelTitle: String?
     private var travelStartDate: Date?
     private var travelEndDate: Date?
+    private var isEditingMode: Bool
     private var isValidTitle: Bool = false {
         didSet {
             validateResult = isValidTitle && isValidDate
@@ -52,6 +53,7 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
     ) {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
+        self.isEditingMode = travel == nil ? false : true
         self.travel = travel ?? Travel.dummy(section: .reserved)
         self.didEnterTitle(text: travel?.title)
         self.didEnterDate(from: travel?.startDate, to: travel?.endDate)
@@ -94,6 +96,8 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
         self.travel.title = self.travelTitle
         self.travel.startDate = self.travelStartDate
         self.travel.endDate = self.travelEndDate
-        self.coordinatingDelegate?.pushToAddLandmark(travel: self.travel)
+        self.coordinatingDelegate?.pushToAddLandmark(
+            travel: self.travel, isEditingMode: self.isEditingMode
+        )
     }
 }
