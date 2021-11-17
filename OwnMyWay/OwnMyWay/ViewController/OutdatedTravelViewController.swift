@@ -8,7 +8,8 @@
 import Combine
 import UIKit
 
-class OutdatedTravelViewController: UIViewController, Instantiable, TravelUpdatable, RecordUpdatable {
+class OutdatedTravelViewController: UIViewController, Instantiable,
+                                        TravelUpdatable, RecordUpdatable {
 
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var collectionView: UICollectionView!

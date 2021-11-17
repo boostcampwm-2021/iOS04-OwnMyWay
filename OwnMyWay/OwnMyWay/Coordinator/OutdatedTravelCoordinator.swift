@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OutdatedTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
+class OutdatedTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
     private var travel: Travel
@@ -20,8 +20,8 @@ class OutdatedTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
 
     func start() {
         let repository = CoreDataTravelRepository()
-        let usecase = DefaultOngoingTravelUsecase(repository: repository)
-        let outdatedVM = DefaultOngoingTravelViewModel(
+        let usecase = DefaultStartedTravelUsecase(repository: repository)
+        let outdatedVM = DefaultStartedTravelViewModel(
             travel: self.travel, usecase: usecase, coordinatingDelegate: self
         )
         let outdatedVC = OutdatedTravelViewController.instantiate(storyboardName: "OutdatedTravel")
