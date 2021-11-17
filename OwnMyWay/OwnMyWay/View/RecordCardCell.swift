@@ -15,30 +15,9 @@ class RecordCardCell: UICollectionViewCell {
     @IBOutlet private weak var recordContentLabel: UILabel!
 
     func configure(with record: Record) {
-        self.configureBorderAndShadow()
+        self.makeShadow()
         guard let photos = record.photoURLs else { return }
         self.recordCardImageView.setImage(with: photos.first)
         self.recordContentLabel.text = record.content
-
-//        self.recordCardImageView.backgroundColor = .green
-//        self.recordTimeButton.setTitle(record.date?.time(), for: .normal)
-//        self.recordLocationButton.setTitle("루브르", for: .normal)
-
     }
-
-    func configureBorderAndShadow() {
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.systemGray6.cgColor
-        self.layer.shadowOpacity = 1
-        self.layer.shadowColor = UIColor.systemGray5.cgColor
-        self.layer.shadowOffset = CGSize(width: 3, height: 3)
-        self.layer.shadowRadius = 3
-        self.layer.masksToBounds = false
-    }
-
-    func configure(with record: Travel) {
-        self.recordCardImageView.setImage(with: record.landmarks.first?.image)
-        self.recordContentLabel.text = "I went to the Chumsungdae. It was GREAT!"
-    }
-
 }
