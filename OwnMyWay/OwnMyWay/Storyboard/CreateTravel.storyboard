@@ -24,14 +24,14 @@
                                     <fragment content="제목">
                                         <attributes>
                                             <color key="NSColor" red="0.22745098039215686" green="0.45882352941176469" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="을 입력해주세요">
                                         <attributes>
                                             <color key="NSColor" systemColor="labelColor"/>
-                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -61,15 +61,15 @@
                                 <attributedString key="attributedText">
                                     <fragment content="날짜">
                                         <attributes>
-                                            <color key="NSColor" red="0.22745098039215686" green="0.45882352941176469" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                            <color key="NSColor" red="0.28665497899999998" green="0.45387405159999999" blue="0.8981311917" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="를 선택해주세요">
                                         <attributes>
-                                            <color key="NSColor" systemColor="labelColor"/>
-                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -111,7 +111,9 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="다음"/>
+                                <buttonConfiguration key="configuration" style="plain" title="다음">
+                                    <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="didTouchNextButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4Bk-5C-bbJ"/>
                                 </connections>
