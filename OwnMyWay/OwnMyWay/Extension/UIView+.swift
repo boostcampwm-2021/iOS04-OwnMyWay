@@ -8,16 +8,7 @@
 import UIKit
 
 extension UIView {
-    func makePolaroid(with record: Record) {
-        let photoImageView = UIImageView()
-        photoImageView.setImage(with: record.photoURLs?.first)
-        let titleLabel = UILabel()
-        titleLabel.text = record.content
-        titleLabel.font = UIFont(name: "Chalkduster", size: 17)
-        photoImageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(photoImageView)
-        self.addSubview(titleLabel)
+    func makeShadow() {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.systemGray6.cgColor
         self.layer.shadowOpacity = 1
@@ -25,6 +16,24 @@ extension UIView {
         self.layer.shadowOffset = CGSize(width: 3, height: 3)
         self.layer.shadowRadius = 3
         self.layer.masksToBounds = false
+    }
+    
+    func makePolaroid(with record: Record) {
+        let photoImageView = UIImageView()
+        photoImageView.setImage(with: record.photoURLs?.first)
+        
+        let titleLabel = UILabel()
+        titleLabel.text = record.content
+        titleLabel.font = UIFont(name: "Chalkduster", size: 17)
+        
+        photoImageView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.addSubview(photoImageView)
+        self.addSubview(titleLabel)
+        
+        self.makeShadow()
+        
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(
                 equalTo: self.topAnchor,
@@ -59,6 +68,7 @@ extension UIView {
                 constant: -24
             )
         ])
+        
         self.layoutIfNeeded()
     }
 }
