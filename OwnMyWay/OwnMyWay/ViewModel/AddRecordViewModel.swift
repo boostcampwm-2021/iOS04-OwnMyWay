@@ -168,7 +168,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             self.didEnterCoordinate(latitude: record.latitude, longitude: record.longitude)
             self.didEnterContent(with: record.content)
             record.photoURLs?.forEach { [weak self] url in
-                self?.didEnterPhotoURL(with: url)
+                self?.recordPhotos.append(url)
+                self?.isValidPhotos = true
             }
         }
     }

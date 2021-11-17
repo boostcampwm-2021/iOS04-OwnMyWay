@@ -89,6 +89,7 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.viewModel?.placePublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] place in
+                print("bind에서 ", place)
                 self?.locationButton.setTitle(place, for: .normal)
             }
             .store(in: &cancellables)
@@ -261,15 +262,19 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
           dismiss(animated: true, completion: nil)
           return
         }
-        results.forEach { [weak self] result in
-            guard let assetId = result.assetIdentifier else { return }
+
+        if dataSource.count == 1 { // dummy만 있을 경우 (사진이 없을 때)
+            guard let assetId = results[0].assetIdentifier else { return }
             let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
             let date = assetResults.firstObject?.creationDate ?? Date()
-            self?.viewModel?.didEnterTime(with: date)
-            self?.viewModel?.didEnterCoordinate(
+            self.viewModel?.didEnterTime(with: date)
+            self.viewModel?.didEnterCoordinate(
                 latitude: assetResults.firstObject?.location?.coordinate.latitude.magnitude,
                 longitude: assetResults.firstObject?.location?.coordinate.longitude.magnitude
             )
+        }
+        results.forEach { [weak self] result in
+
             for type in supportedPhotoExtensions {
                 if result.itemProvider.hasRepresentationConforming(
                     toTypeIdentifier: type,
