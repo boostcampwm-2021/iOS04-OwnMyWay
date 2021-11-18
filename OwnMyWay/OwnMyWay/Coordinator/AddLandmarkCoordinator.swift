@@ -12,16 +12,18 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
     private var travel: Travel
+    private var isEditingMode: Bool
 
-    init(navigationController: UINavigationController, travel: Travel) {
+    init(navigationController: UINavigationController, travel: Travel, isEditingMode: Bool) {
         self.childCoordinators = []
         self.navigationController = navigationController
         self.travel = travel
+        self.isEditingMode = isEditingMode
     }
 
     func start() {
         let addLandmarkVM = DefaultAddLandmarkViewModel(
-            travel: self.travel, coordinatingDelegate: self
+            travel: self.travel, coordinatingDelegate: self, isEditingMode: self.isEditingMode
         )
         let addLandmarkVC = AddLandmarkViewController.instantiate(storyboardName: "AddLandmark")
         let landmarkCartCoordinator = LandmarkCartCoordinator(
@@ -49,6 +51,14 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
         )
         self.childCoordinators.append(completeCreationCoordinator)
         completeCreationCoordinator.start()
+    }
+
+    func pushToCompleteEditing(travel: Travel) {
+        let completeEditingCoordinator = CompleteEditingCoordinator(
+            navigationController: self.navigationController, travel: travel
+        )
+        self.childCoordinators.append(completeEditingCoordinator)
+        completeEditingCoordinator.start()
     }
 
     func popToCreateTravel(travel: Travel) {

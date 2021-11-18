@@ -11,7 +11,7 @@ import UIKit
 
 typealias OngoingTravelDataSource = UICollectionViewDiffableDataSource <String, Record>
 
-class OngoingTravelViewController: UIViewController, Instantiable, TravelUpdatable {
+class OngoingTravelViewController: UIViewController, Instantiable, TravelEditable {
 
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
 
@@ -64,7 +64,38 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelUpdatab
     }
 
     private func configureNavigation() {
-        self.navigationItem.title = viewModel?.travel.title
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
+            style: .plain,
+            target: self,
+            action: #selector(self.didTouchSettingButton)
+        )
+    }
+
+    private func presentAlert() {
+        let alert = UIAlertController(
+            title: "여행 삭제 실패",
+            message: "진행중인 여행은 삭제할 수 없어요\n여행을 먼저 종료하고 삭제해주세요",
+            preferredStyle: .alert
+        )
+        let action = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
+    }
+
+    @objc func didTouchSettingButton() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.presentAlert()
+        }
+        let editAction = UIAlertAction(title: "수정하기", style: .default) { [weak self] _ in
+            self?.viewModel?.didTouchEditButton()
+        }
+        let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true)
     }
 
     @IBAction func didTouchAddRecordButton(_ sender: UIButton) {
@@ -104,6 +135,8 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
     private func configureCancellable() {
         viewModel?.travelPublisher.sink { [weak self] travel in
             guard let self = self else { return }
+
+            self.navigationItem.title = travel.title
 
             if let mapCell = self.collectionView.cellForItem(
                 at: IndexPath(item: 0, section: 0)

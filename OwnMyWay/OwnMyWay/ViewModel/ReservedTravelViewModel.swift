@@ -10,21 +10,26 @@ import Foundation
 protocol ReservedTravelViewModel {
     var travel: Travel { get }
     var isPossibleStart: Bool { get }
+    var travelPublisher: Published<Travel>.Publisher { get }
+
     func didDeleteTravel()
     func didUpdateTravel(to travel: Travel)
     func didDeleteLandmark(at landmark: Landmark)
     func didTouchBackButton()
     func didTouchStartButton()
+    func didTouchEditButton()
 }
 
 protocol ReservedTravelCoordinatingDelegate: AnyObject {
     func popToHome()
     func moveToOngoing(travel: Travel)
+    func pushToEditTravel(travel: Travel)
 }
 
 class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject {
-    private(set) var travel: Travel
+    @Published private(set) var travel: Travel
     private(set) var isPossibleStart: Bool
+    var travelPublisher: Published<Travel>.Publisher { $travel }
 
     private let usecase: ReservedTravelUsecase
     private weak var coordinatingDelegate: ReservedTravelCoordinatingDelegate?
@@ -69,4 +74,9 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         self.usecase.executeFlagUpdate(of: self.travel) // coreData에 업데이트
         self.coordinatingDelegate?.moveToOngoing(travel: self.travel)
     }
+
+    func didTouchEditButton() {
+        self.coordinatingDelegate?.pushToEditTravel(travel: self.travel)
+    }
+
 }
