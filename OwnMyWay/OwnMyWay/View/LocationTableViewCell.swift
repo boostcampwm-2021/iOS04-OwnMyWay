@@ -8,16 +8,13 @@
 import UIKit
 
 class LocationTableViewCell: UITableViewCell {
+    static let identifier = "LocationTableViewCell"
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+
+    func configure(title: String?, subTitle: String?) {
+        self.titleLabel.text = title
+        self.subTitleLabel.text = subTitle
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }
