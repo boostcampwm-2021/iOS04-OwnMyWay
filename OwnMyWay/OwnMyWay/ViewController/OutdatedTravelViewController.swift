@@ -9,6 +9,7 @@ import Combine
 import UIKit
 
 class OutdatedTravelViewController: UIViewController, Instantiable,
+                                    TravelUpdatable,
                                     TravelEditable,
                                     RecordUpdatable {
 
@@ -41,6 +42,10 @@ class OutdatedTravelViewController: UIViewController, Instantiable,
 
     func bind(viewModel: OutdatedTravelViewModel) {
         self.viewModel = viewModel
+    }
+
+    func didEditTravel(to travel: Travel) {
+        self.viewModel?.didUpdateTravel(to: travel)
     }
 
     func didUpdateTravel(to travel: Travel) {

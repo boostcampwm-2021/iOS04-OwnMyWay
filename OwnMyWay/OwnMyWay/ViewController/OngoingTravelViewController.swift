@@ -11,7 +11,7 @@ import UIKit
 
 typealias OngoingTravelDataSource = UICollectionViewDiffableDataSource <String, Record>
 
-class OngoingTravelViewController: UIViewController, Instantiable, TravelEditable {
+class OngoingTravelViewController: UIViewController, Instantiable, TravelEditable, TravelUpdatable {
 
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
 
@@ -52,6 +52,10 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 
     func bind(viewModel: OngoingTravelViewModel) {
         self.viewModel = viewModel
+    }
+
+    func didEditTravel(to travel: Travel) {
+        self.viewModel?.didUpdateTravel(to: travel)
     }
 
     func didUpdateTravel(to travel: Travel) {

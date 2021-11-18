@@ -15,7 +15,7 @@ typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewContr
 
 class LandmarkCartViewController: UIViewController,
                                   Instantiable,
-                                  TravelEditable,
+                                  TravelUpdatable,
                                   MapAvailable {
 
 //    static let badgeElementKind = "badge-element-kind"

@@ -11,6 +11,7 @@ import UIKit
 class ReservedTravelViewController: UIViewController,
                                     Instantiable,
                                     TravelEditable,
+                                    TravelUpdatable,
                                     LandmarkDeletable {
 
     @IBOutlet private weak var contentView: UIView!
@@ -58,6 +59,13 @@ class ReservedTravelViewController: UIViewController,
     func bind(viewModel: ReservedTravelViewModel, closure: @escaping (UIView) -> Void) {
         self.viewModel = viewModel
         self.bindContainerVC = closure
+    }
+
+    func didEditTravel(to travel: Travel) {
+        if let cartVC = self.children.first as? LandmarkCartViewController {
+            cartVC.didUpdateTravel(to: travel)
+        }
+        self.viewModel?.didEditTravel(to: travel)
     }
 
     func didUpdateTravel(to travel: Travel) {

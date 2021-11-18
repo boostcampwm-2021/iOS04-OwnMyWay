@@ -195,10 +195,15 @@ class CoreDataTravelRepository: TravelRepository {
               let newTravel = travels.first
         else { return .failure(NSError.init()) }
 
+        newTravel.uuid = travel.uuid
         newTravel.flag = Int64(travel.flag)
         newTravel.title = travel.title
         newTravel.startDate = travel.startDate
         newTravel.endDate = travel.endDate
+        // FIXME: 세개 다 업데이트해줘야함!!
+//        newTravel.landmarks = NSOrderedSet(array: travel.landmarks)
+//        newTravel.locations = NSOrderedSet(array: travel.locations)
+//        newTravel.records = NSOrderedSet(array: travel.records)
 
         do {
             try context.save()
