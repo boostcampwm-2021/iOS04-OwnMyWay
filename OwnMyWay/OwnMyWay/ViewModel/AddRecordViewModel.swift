@@ -150,7 +150,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             latitude: self.recordCoordinate?.latitude,
             longitude: self.recordCoordinate?.longitude,
             photoURLs: self.recordPhotos,
-            placeDescription: self.recordPlace)
+            placeDescription: self.recordPlace
+        )
 
         self.usecase.executeRemovingPhoto(
             url: self.recordPhotos[index - 1],
@@ -194,14 +195,12 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didTouchBackButton() {
         self.tempPhotoURLs.forEach { [weak self] url in
-            print(url)
             self?.usecase.executeRemovingPhoto(url: url, record: nil) { _ in }
         }
     }
 
     private func configurePlusCard() {
         if let plusCard = Bundle.main.url(forResource: "addImage", withExtension: "png") {
-            // self.recordPhotos.append(plusCard)
             self.recordPhotos.insert(plusCard, at: 0)
         }
     }

@@ -44,7 +44,11 @@ struct DefaultAddRecordUsecase: AddRecordUsecase {
         self.imageFileManager.copyPhoto(from: url, completion: completion)
     }
 
-    func executeRemovingPhoto(url: URL, record: Record?, completion: (Result<Void, Error>) -> Void) {
+    func executeRemovingPhoto(
+        url: URL,
+        record: Record?,
+        completion: (Result<Void, Error>) -> Void
+    ) {
         self.imageFileManager.removePhoto(at: url) { result in
             switch result {
             case .success:
