@@ -20,7 +20,7 @@ protocol TravelRepository {
         latitude: Double?,
         longitude: Double?
     ) -> Result<Landmark, Error>
-    func addRecord(
+    @discardableResult func addRecord(
         to travel: Travel,
         with record: Record
     ) -> Result<Travel, Error>
@@ -130,6 +130,7 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
+    @discardableResult
     func addRecord(
         to travel: Travel,
         with record: Record
@@ -200,11 +201,23 @@ class CoreDataTravelRepository: TravelRepository {
         newTravel.title = travel.title
         newTravel.startDate = travel.startDate
         newTravel.endDate = travel.endDate
-        // FIXME: 세개 다 업데이트해줘야함!!
-//        newTravel.landmarks = NSOrderedSet(array: travel.landmarks)
-//        newTravel.locations = NSOrderedSet(array: travel.locations)
-//        newTravel.records = NSOrderedSet(array: travel.records)
-
+        newTravel.removeFromLandmarks(newTravel.landmarks ?? NSOrderedSet())
+        travel.landmarks.forEach { [weak self] landmark in
+            self?.addLandmark(
+                to: travel, uuid: landmark.uuid, title: landmark.title,
+                image: landmark.image, latitude: landmark.latitude, longitude: landmark.longitude
+            )
+        }
+        newTravel.removeFromRecords(newTravel.records ?? NSOrderedSet())
+        travel.records.forEach { [weak self] record in
+            self?.addRecord(to: travel, with: record)
+        }
+        newTravel.removeFromLocations(newTravel.locations ?? NSOrderedSet())
+        travel.locations.forEach { [weak self] location in
+            self?.addLocation(
+                to: travel, latitude: location.latitude, longitude: location.longitude
+            )
+        }
         do {
             try context.save()
             return .success(newTravel.toTravel())
