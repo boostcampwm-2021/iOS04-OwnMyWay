@@ -16,6 +16,7 @@ protocol AddRecordViewModel {
     var datePublisher: Published<Date?>.Publisher { get }
 
     func viewDidLoad(completion: (Record) -> Void)
+    func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double)
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
     func didEnterCoordinate(latitude: Double?, longitude: Double?)
@@ -23,10 +24,12 @@ protocol AddRecordViewModel {
     func didEnterPhotoURL(with url: URL)
     func didRemovePhotoURL(with url: URL)
     func didTouchSubmitButton()
+    func didTouchLocationButton()
 }
 
 protocol AddRecordCoordinatingDelegate: AnyObject {
     func popToParent(with record: Record)
+    func presentToSearchLocation()
 }
 
 class DefaultAddRecordViewModel: AddRecordViewModel {
@@ -96,6 +99,11 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         completion(record)
     }
 
+    func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double) {
+        self.recordCoordinate = Location(latitude: latitude, longitude: longitude)
+        self.recordPlace = recordPlace
+    }
+
     func didEnterTitle(with text: String?) {
         self.recordTitle = text
         self.isValidTitle = self.usecase.executeValidationTitle(with: text)
@@ -153,6 +161,10 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             photoURLs: recordPhotos, placeDescription: place
         )
         self.coordinatingDelegate?.popToParent(with: record)
+    }
+
+    func didTouchLocationButton() {
+        self.coordinatingDelegate?.presentToSearchLocation()
     }
 
     private func configurePlusCard() {

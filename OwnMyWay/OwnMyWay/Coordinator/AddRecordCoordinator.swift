@@ -39,4 +39,12 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
                 as? RecordUpdatable & UIViewController else { return }
         upperVC.didUpdateRecord(record: record)
     }
+
+    func presentToSearchLocation() {
+        let searchLocationCoordinator = SearchLocationCoordinator(
+            navigationController: self.navigationController
+        )
+        self.childCoordinators.append(searchLocationCoordinator)
+        searchLocationCoordinator.start()
+    }
 }
