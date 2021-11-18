@@ -9,6 +9,7 @@ import Combine
 import UIKit
 import PhotosUI
 
+@available(iOS 14.0, *)
 let supportedPhotoExtensions = [
     UTType.rawImage.identifier,
     UTType.tiff.identifier,
@@ -207,7 +208,14 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
+            if #available(iOS 14.0, *) {
             self.openPicker()
+            } else {
+                guard let url = URL(string: "https://apple.com"),
+                      UIApplication.shared.canOpenURL(url)
+                else { return }
+                UIApplication.shared.open(url, options: [:])
+            }
         }
     }
 
@@ -215,6 +223,7 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
 
 extension AddRecordViewController: PHPickerViewControllerDelegate {
 
+    @available (iOS 14.0, *)
     func openPicker() {
         let requiredAccessLevel: PHAccessLevel = .readWrite
         PHPhotoLibrary.requestAuthorization(for: requiredAccessLevel) { [weak self] status in
@@ -256,6 +265,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
         }
     }
 
+    @available (iOS 14.0, *)
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         guard !results.isEmpty else {
           dismiss(animated: true, completion: nil)

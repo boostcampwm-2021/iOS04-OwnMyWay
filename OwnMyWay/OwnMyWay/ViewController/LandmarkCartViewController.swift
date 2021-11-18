@@ -58,10 +58,11 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         self.viewModel?.travelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travel in
-                var snapshot = NSDiffableDataSourceSectionSnapshot<Landmark>()
+                var snapshot = NSDiffableDataSourceSnapshot<LandmarkCartViewController.Section, Landmark>()
+                snapshot.appendSections([.main])
                 let snapshotItem = [Landmark()] + travel.landmarks.reversed()
-                snapshot.append(snapshotItem)
-                self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
+                snapshot.appendItems(snapshotItem, toSection: .main)
+                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
 
                 guard let mapView = self?.mapView else { return }
                 let annotations = travel.landmarks.map({ LandmarkAnnotation(landmark: $0) })

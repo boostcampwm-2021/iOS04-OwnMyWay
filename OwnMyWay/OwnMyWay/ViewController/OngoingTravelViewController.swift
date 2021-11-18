@@ -220,12 +220,14 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
+
+        switch manager.fetchAuthorizationStatus() {
         case .authorizedWhenInUse:
             manager.requestAlwaysAuthorization()
         default:
             break
         }
+
     }
 }
 
