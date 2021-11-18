@@ -11,11 +11,9 @@ import MapKit
 
 protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
-    var photoPublisher: Published<[URL]>.Publisher { get }
-    var placePublisher: Published<String?>.Publisher { get }
-    var datePublisher: Published<Date?>.Publisher { get }
+    var recordPublisher: Published<Record>.Publisher { get }
+    var record: Record { get }
 
-    func viewDidLoad(completion: (Record) -> Void)
     func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double)
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
@@ -36,23 +34,16 @@ protocol AddRecordCoordinatingDelegate: AnyObject {
 class DefaultAddRecordViewModel: AddRecordViewModel {
 
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
-    var photoPublisher: Published<[URL]>.Publisher { $recordPhotos }
-    var placePublisher: Published<String?>.Publisher { $recordPlace }
-    var datePublisher: Published<Date?>.Publisher { $recordDate }
+    var recordPublisher: Published<Record>.Publisher { $record }
 
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
 
     @Published private var validateResult: Bool?
-    @Published private var recordPhotos: [URL]
-    @Published private var recordPlace: String?
-    @Published private var recordDate: Date?
-
-    private var recordID: UUID?
-    private var recordTitle: String?
-    private var recordCoordinate: Location?
-    private var recordContent: String?
+    @Published private(set) var record: Record
     private var tempPhotoURLs: [URL]
+    private var deletePhotoURLs: [URL]
+
     private var isValidTitle: Bool = false {
         didSet {
             self.checkValidation()
@@ -86,47 +77,41 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     ) {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
-        self.recordPhotos = []
         self.tempPhotoURLs = []
-        self.configurePlusCard()
-        self.configureRecord(with: record)
-    }
-
-    func viewDidLoad(completion: (Record) -> Void) {
-        let record = Record(
-            uuid: nil, title: self.recordTitle, content: self.recordContent,
-            date: self.recordDate, latitude: self.recordCoordinate?.latitude,
-            longitude: self.recordCoordinate?.longitude, photoURLs: self.recordPhotos,
-            placeDescription: self.recordPlace
-        )
-        completion(record)
+        self.deletePhotoURLs = []
+        self.record = record ?? Record(uuid: UUID(), title: nil, content: nil, date: nil, latitude: nil, longitude: nil, photoURLs: [], placeDescription: nil)
+        self.configureRecord()
     }
 
     func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double) {
-        self.recordCoordinate = Location(latitude: latitude, longitude: longitude)
-        self.recordPlace = recordPlace
+        self.record.placeDescription = recordPlace
+        self.record.latitude = latitude
+        self.record.longitude = longitude
+        self.isValidCoordinate = self.usecase.executeValidationCoordinate(
+            with: Location(latitude: latitude, longitude: longitude)
+        )
     }
 
     func didEnterTitle(with text: String?) {
-        self.recordTitle = text
+        self.record.title = text
         self.isValidTitle = self.usecase.executeValidationTitle(with: text)
     }
 
     func didEnterTime(with date: Date?) {
-        self.recordDate = date
+        self.record.date = date
         self.isValidDate = self.usecase.executeValidationDate(with: date)
     }
 
     func didEnterCoordinate(latitude: Double?, longitude: Double?) {
         let location = Location(latitude: latitude, longitude: longitude)
-        self.recordCoordinate = location
-        //self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
-        self.isValidCoordinate = true
+        self.record.latitude = latitude
+        self.record.longitude = longitude
+        self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
         self.configurePlace(latitude: latitude, longitude: longitude)
     }
 
     func didEnterContent(with text: String?) {
-        self.recordContent = text
+        self.record.content = text
     }
 
     func didEnterPhotoURL(with url: URL) {
@@ -134,58 +119,23 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             guard error == nil,
                   let copiedURL = url
             else { return }
-            self?.recordPhotos.append(copiedURL)
+            self?.record.photoURLs?.append(copiedURL)
             self?.tempPhotoURLs.append(copiedURL)
             self?.isValidPhotos = true
         }
     }
 
     func didRemovePhoto(at index: Int) {
-        self.recordPhotos.removeFirst() // FIXME: PLUSCARD 방식 통일해야하지 않을까 생각
-        let record = Record(
-            uuid: self.recordID,
-            title: self.recordTitle,
-            content: self.recordContent,
-            date: recordDate,
-            latitude: self.recordCoordinate?.latitude,
-            longitude: self.recordCoordinate?.longitude,
-            photoURLs: self.recordPhotos,
-            placeDescription: self.recordPlace
-        )
-
-        self.usecase.executeRemovingPhoto(
-            url: self.recordPhotos[index - 1],
-            record: record) { [weak self] result in
-                switch result {
-                case .success:
-                    self?.recordPhotos.remove(at: index - 1)
-                    self?.configurePlusCard()
-                case .failure(let error):
-                    self?.configurePlusCard()
-                    print(error)
-                }
-                self?.isValidPhotos = self?.recordPhotos.count == 1 ? false : true
-            }
+        guard let url = self.record.photoURLs?[index] else { return }
+        self.deletePhotoURLs.append(url)
+        self.record.photoURLs?.remove(at: index)
+        self.isValidPhotos = self.record.photoURLs?.count == 0 ? false : true
     }
 
     func didTouchSubmitButton() {
-        guard let recordTitle = self.recordTitle,
-              let date = self.recordDate,
-//              let latitude = self.recordCoordinate?.latitude,
-//              let longtitude = self.recordCoordinate?.longitude,
-              let place = self.recordPlace
-        else { return }
-        self.recordPhotos.removeFirst()
-        let record = Record(
-            uuid: self.recordID ?? UUID(),
-            title: recordTitle,
-            content: self.recordContent,
-            date: date,
-            latitude: self.recordCoordinate?.latitude,
-            longitude: self.recordCoordinate?.longitude,
-            photoURLs: recordPhotos,
-            placeDescription: place
-        )
+        self.deletePhotoURLs.forEach { [weak self] url in
+            self?.usecase.executeRemovingPhoto(url: url) { _ in }
+        }
         self.coordinatingDelegate?.popToParent(with: record)
     }
 
@@ -195,45 +145,31 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didTouchBackButton() {
         self.tempPhotoURLs.forEach { [weak self] url in
-            self?.usecase.executeRemovingPhoto(url: url, record: nil) { _ in }
+            self?.usecase.executeRemovingPhoto(url: url) { _ in }
         }
     }
 
-    private func configurePlusCard() {
-        if let plusCard = Bundle.main.url(forResource: "addImage", withExtension: "png") {
-            self.recordPhotos.insert(plusCard, at: 0)
-        }
-    }
-
-    private func configureRecord(with record: Record?) {
-        if let record = record {
-            self.recordID = record.uuid
-            self.didEnterTitle(with: record.title)
-            self.didEnterTime(with: record.date)
-            self.didEnterCoordinate(latitude: record.latitude, longitude: record.longitude)
-            self.didEnterContent(with: record.content)
-            record.photoURLs?.forEach { [weak self] url in
-                self?.recordPhotos.append(url)
-                self?.isValidPhotos = true
-            }
-        }
+    private func configureRecord() {
+        self.didEnterTitle(with: self.record.title)
+        self.didEnterTime(with: self.record.date)
+        self.didEnterCoordinate(latitude: self.record.latitude, longitude: self.record.longitude)
+        if record.photoURLs?.count != 0 { self.isValidPhotos = true }
     }
 
     private func configurePlace(latitude: Double?, longitude: Double?) {
         guard let latitude = latitude,
               let longitude = longitude
         else {
-            self.recordPlace = "위치정보 없음"
-            self.isValidPlace = true
+            self.record.placeDescription = "위치정보 없음"
+            self.isValidPlace = false
             return
         }
+
         self.addressName(
             latitude: latitude, longitude: longitude
         ) { [weak self] place in
-            guard let self = self,
-                  !self.isValidPlace
-            else { return }
-            self.recordPlace = place
+            guard let self = self else { return }
+            self.record.placeDescription = place
             self.isValidPlace = true
         }
     }

@@ -30,7 +30,6 @@ class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet private weak var locationButton: UIButton!
 
     private var viewModel: AddRecordViewModel?
-    private var dataSource: [URL] = []
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -41,7 +40,6 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.configurePhotoCollectionView()
         self.configureNavigation()
         self.configureCancellable()
-        self.configureModelValue()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -91,38 +89,16 @@ class AddRecordViewController: UIViewController, Instantiable {
             }
             .store(in: &cancellables)
 
-        self.viewModel?.photoPublisher
+        self.viewModel?.recordPublisher
             .receive(on: RunLoop.main)
-            .sink { [weak self] photos in
-                self?.dataSource = photos
+            .sink { [weak self] record in
                 self?.photoCollectionView.reloadData()
+                self?.locationButton.setTitle(record.placeDescription, for: .normal)
+                self?.datePicker.date = record.date ?? Date()
+                self?.titleTextField.text = record.title
+                self?.contentTextField.text = record.content
             }
             .store(in: &cancellables)
-
-        self.viewModel?.placePublisher
-            .receive(on: RunLoop.main)
-            .sink { [weak self] place in
-                self?.locationButton.setTitle(place, for: .normal)
-            }
-            .store(in: &cancellables)
-
-        self.viewModel?.datePublisher
-            .receive(on: RunLoop.main)
-            .sink { [weak self] date in
-                if let date = date {
-                    self?.datePicker.date = date
-                }
-            }
-            .store(in: &cancellables)
-    }
-
-    private func configureModelValue() {
-        self.viewModel?.viewDidLoad { [weak self] record in
-            self?.titleTextField.text = record.title
-            self?.datePicker.date = record.date ?? Date()
-            self?.contentTextField.text = record.content
-            self?.locationButton.setTitle(record.placeDescription, for: .normal)
-        }
     }
 
     @objc private func submitButtonAction() {
@@ -208,7 +184,7 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(
         _ collectionView: UICollectionView, numberOfItemsInSection section: Int
     ) -> Int {
-        return self.dataSource.count
+        return (self.viewModel?.record.photoURLs?.count ?? 0) + 1
     }
 
     func collectionView(
@@ -218,14 +194,25 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
             withReuseIdentifier: PhotoCell.identifier, for: indexPath
         ) as? PhotoCell
         else { return UICollectionViewCell() }
-        cell.configure(url: self.dataSource[indexPath.item])
-        return cell
+
+        switch indexPath.item {
+        case 0:
+            guard let url = Bundle.main.url(forResource: "addImage", withExtension: "png")
+            else { return UICollectionViewCell() }
+            cell.configure(url: url)
+            return cell
+        default:
+            guard let url = self.viewModel?.record.photoURLs?[indexPath.item - 1]
+            else { return UICollectionViewCell() }
+            cell.configure(url: url)
+            return cell
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case 0: self.openPicker()
-        default: self.viewModel?.didRemovePhoto(at: indexPath.item)
+        default: self.viewModel?.didRemovePhoto(at: indexPath.item - 1)
         }
     }
 }
@@ -279,7 +266,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
           return
         }
 
-        if dataSource.count == 1 { // dummy만 있을 경우 (사진이 없을 때)
+        if self.viewModel?.record.photoURLs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
             guard let assetId = results[0].assetIdentifier else { return }
             let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
             let date = assetResults.firstObject?.creationDate ?? Date()
@@ -289,8 +276,8 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                 longitude: assetResults.firstObject?.location?.coordinate.longitude.magnitude
             )
         }
-        results.forEach { [weak self] result in
 
+        results.forEach { [weak self] result in
             for type in supportedPhotoExtensions {
                 if result.itemProvider.hasRepresentationConforming(
                     toTypeIdentifier: type,
