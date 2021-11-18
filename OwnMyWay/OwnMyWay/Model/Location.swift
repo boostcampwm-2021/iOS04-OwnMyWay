@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Location {
+struct Location: Equatable {
     var latitude: Double?
     var longitude: Double?
 }

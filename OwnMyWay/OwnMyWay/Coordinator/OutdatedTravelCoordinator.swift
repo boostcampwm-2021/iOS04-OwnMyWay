@@ -47,7 +47,14 @@ class OutdatedTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
         addRecordCoordinator.start()
     }
 
-    func pushToEditTravel() {}
+    func pushToEditTravel(travel: Travel) {
+        let createTravelCoordinator = CreateTravelCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        self.childCoordinators.append(createTravelCoordinator)
+        createTravelCoordinator.start()
+    }
 
     func moveToOutdated(travel: Travel) { return }
 
