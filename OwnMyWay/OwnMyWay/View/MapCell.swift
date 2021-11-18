@@ -48,7 +48,7 @@ class MapCell: UICollectionViewCell, MapAvailable {
             locations: travel.locations
         )
 
-        if LocationManager.shared.authorizationStatus == .authorizedAlways {
+        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
             switch LocationManager.shared.isUpdatingLocation {
             case true:
                 self.trackingButton.isSelected = true
@@ -59,7 +59,7 @@ class MapCell: UICollectionViewCell, MapAvailable {
     }
 
     @IBAction func didTouchTrackingButton(_ sender: Any) {
-        if LocationManager.shared.authorizationStatus == .authorizedAlways {
+        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
             self.trackingButton.isSelected.toggle()
             switch LocationManager.shared.isUpdatingLocation {
             case true:

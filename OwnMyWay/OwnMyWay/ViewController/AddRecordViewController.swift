@@ -9,6 +9,7 @@ import Combine
 import UIKit
 import PhotosUI
 
+@available(iOS 14.0, *)
 let supportedPhotoExtensions = [
     UTType.rawImage.identifier,
     UTType.tiff.identifier,
@@ -224,14 +225,24 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
-        case 0: self.openPicker()
-        default: self.viewModel?.didRemovePhoto(at: indexPath.item)
+        case 0:
+            if #available(iOS 14.0, *) {
+                self.openPicker()
+            } else {
+                guard let url = URL(string: "https://apple.com"),
+                      UIApplication.shared.canOpenURL(url)
+                else { return }
+                UIApplication.shared.open(url, options: [:])
+            }
+        default:
+            self.viewModel?.didRemovePhoto(at: indexPath.item)
         }
     }
 }
 
 extension AddRecordViewController: PHPickerViewControllerDelegate {
 
+    @available (iOS 14.0, *)
     func openPicker() {
         let requiredAccessLevel: PHAccessLevel = .readWrite
         PHPhotoLibrary.requestAuthorization(for: requiredAccessLevel) { [weak self] status in
@@ -273,6 +284,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
         }
     }
 
+    @available (iOS 14.0, *)
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         guard !results.isEmpty else {
           dismiss(animated: true, completion: nil)
@@ -301,7 +313,9 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                     ) { url, error in
                         guard error == nil,
                               let url = url else { return }
-                        self?.viewModel?.didEnterPhotoURL(with: url)
+                        DispatchQueue.global().sync {
+                            self?.viewModel?.didEnterPhotoURL(with: url)
+                        }
                     }
                     break
                 }

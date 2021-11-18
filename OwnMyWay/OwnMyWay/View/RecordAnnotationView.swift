@@ -64,6 +64,6 @@ class RecordAnnotation: NSObject, MKAnnotation {
         )
         guard let photos = record.photoURLs else { return }
         self.image = photos.first ?? nil
-        self.title = record.content
+        self.title = record.title
     }
 }

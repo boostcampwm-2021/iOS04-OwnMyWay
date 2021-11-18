@@ -26,10 +26,24 @@ struct Record {
 
 extension Record: Hashable {
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.uuid == rhs.uuid
+        return lhs.uuid == rhs.uuid &&
+        lhs.title == rhs.title &&
+        lhs.content == rhs.content &&
+        lhs.date == rhs.date &&
+        lhs.latitude == rhs.latitude &&
+        lhs.longitude == rhs.longitude &&
+        lhs.photoURLs == rhs.photoURLs &&
+        lhs.placeDescription == rhs.placeDescription
     }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(uuid)
+        hasher.combine(title)
+        hasher.combine(content)
+        hasher.combine(date)
+        hasher.combine(latitude)
+        hasher.combine(longitude)
+        hasher.combine(photoURLs)
+        hasher.combine(placeDescription)
     }
 }
