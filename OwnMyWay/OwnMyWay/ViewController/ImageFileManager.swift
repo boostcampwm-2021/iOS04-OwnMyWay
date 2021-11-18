@@ -57,7 +57,7 @@ class ImageFileManager {
     }
 
     private func photoExists(at url: URL) -> Bool {
-        return self.fileManager.fileExists(atPath: url.absoluteString)
+        return self.fileManager.fileExists(atPath: url.path)
     }
 
     private func documentURL() -> URL? {

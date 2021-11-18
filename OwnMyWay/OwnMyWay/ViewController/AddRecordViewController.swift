@@ -44,6 +44,13 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.configureModelValue()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
+    }
+
     func bind(viewModel: AddRecordViewModel) {
         self.viewModel = viewModel
     }

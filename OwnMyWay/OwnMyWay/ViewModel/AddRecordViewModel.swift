@@ -23,6 +23,7 @@ protocol AddRecordViewModel {
     func didEnterPhotoURL(with url: URL)
     func didRemovePhoto(at index: Int) 
     func didTouchSubmitButton()
+    func didTouchBackButton()
 }
 
 protocol AddRecordCoordinatingDelegate: AnyObject {
@@ -48,6 +49,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     private var recordTitle: String?
     private var recordCoordinate: Location?
     private var recordContent: String?
+    private var tempPhotoURLs: [URL]
     private var isValidTitle: Bool = false {
         didSet {
             self.checkValidation()
@@ -82,6 +84,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
         self.recordPhotos = []
+        self.tempPhotoURLs = []
         self.configurePlusCard()
         self.configureRecord(with: record)
     }
@@ -124,6 +127,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
                   let copiedURL = url
             else { return }
             self?.recordPhotos.append(copiedURL)
+            self?.tempPhotoURLs.append(copiedURL)
             self?.isValidPhotos = true
         }
     }
@@ -164,11 +168,23 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         else { return }
         self.recordPhotos.removeFirst()
         let record = Record(
-            uuid: self.recordID ?? UUID(), title: recordTitle, content: self.recordContent,
-            date: date, latitude: self.recordCoordinate?.latitude, longitude: self.recordCoordinate?.longitude,
-            photoURLs: recordPhotos, placeDescription: place
+            uuid: self.recordID ?? UUID(),
+            title: recordTitle,
+            content: self.recordContent,
+            date: date,
+            latitude: self.recordCoordinate?.latitude,
+            longitude: self.recordCoordinate?.longitude,
+            photoURLs: recordPhotos,
+            placeDescription: place
         )
         self.coordinatingDelegate?.popToParent(with: record)
+    }
+
+    func didTouchBackButton() {
+        self.tempPhotoURLs.forEach { [weak self] url in
+            print(url)
+            self?.usecase.executeRemovingPhoto(url: url, record: nil) { _ in }
+        }
     }
 
     private func configurePlusCard() {
