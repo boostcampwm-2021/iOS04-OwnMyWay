@@ -34,13 +34,13 @@ class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelega
 
     func popToTravelViewController(travel: Travel) {
         let viewControllers = self.navigationController.viewControllers
-        guard viewControllers.count >= 4
-        else { return }
-        let travelViewController = viewControllers[viewControllers.count - 4]
-        self.navigationController.popToViewController(travelViewController, animated: true)
-        if let travelVC = self.navigationController.viewControllers.last as? TravelUpdatable {
-            travelVC.didUpdateTravel(to: travel)
+        let travelVC = viewControllers.first {
+            $0 is TravelEditableViewController
         }
+        guard let travelVC = travelVC as? TravelEditableViewController
+        else { return }
+        travelVC.didUpdateTravel(to: travel)
+        self.navigationController.popToViewController(travelVC, animated: true)
     }
 
 }
