@@ -9,7 +9,8 @@ import Combine
 import UIKit
 
 class OutdatedTravelViewController: UIViewController, Instantiable,
-                                        TravelUpdatable, RecordUpdatable {
+                                    TravelEditable,
+                                    RecordUpdatable {
 
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -56,7 +57,42 @@ class OutdatedTravelViewController: UIViewController, Instantiable,
     }
 
     private func configureNavigation() {
-        self.navigationItem.title = viewModel?.travel.title
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
+            style: .plain,
+            target: self,
+            action: #selector(self.didTouchSettingButton)
+        )
+    }
+
+    private func presentAlert() {
+        let alert = UIAlertController(
+            title: "여행 삭제",
+            message: "정말로 삭제하실건가요?\n 삭제된 여행은 되돌릴 수 없어요",
+            preferredStyle: .alert
+        )
+        let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
+            self?.viewModel?.didDeleteTravel()
+        }
+        let noAction = UIAlertAction(title: "아니오", style: .cancel)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        self.present(alert, animated: true)
+    }
+
+    @objc func didTouchSettingButton() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.presentAlert()
+        }
+        let editAction = UIAlertAction(title: "수정하기", style: .default) { [weak self] _ in
+            self?.viewModel?.didTouchEditButton()
+        }
+        let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true)
     }
 
     @IBAction func didTouchAddRecordButton(_ sender: Any) {
@@ -92,6 +128,8 @@ extension OutdatedTravelViewController: UICollectionViewDelegate {
     private func configureCancellable() {
         viewModel?.travelPublisher.sink { [weak self] travel in
             guard let self = self else { return }
+
+            self.navigationItem.title = travel.title
 
             if let mapCell = self.collectionView.cellForItem(
                 at: IndexPath(item: 0, section: 0)

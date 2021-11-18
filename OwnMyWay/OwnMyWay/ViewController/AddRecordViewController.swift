@@ -55,6 +55,12 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.viewModel = viewModel
     }
 
+    func update(recordPlace: String?, latitude: Double, longitude: Double) {
+        self.viewModel?.locationDidUpdate(
+            recordPlace: recordPlace, latitude: latitude, longitude: longitude
+        )
+    }
+
     private func configureNibs() {
         self.photoCollectionView.register(
             UINib(nibName: PhotoCell.identifier, bundle: nil),
@@ -133,6 +139,10 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     @IBAction func didChangeDate(_ sender: UIDatePicker) {
         self.viewModel?.didEnterTime(with: sender.date)
+    }
+
+    @IBAction func didChangeLocation(_ sender: Any) {
+        self.viewModel?.didTouchLocationButton()
     }
 }
 
