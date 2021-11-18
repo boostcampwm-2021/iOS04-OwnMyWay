@@ -13,7 +13,10 @@ import UIKit
 typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewController.Section,
                                                            Landmark>
 
-class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
+class LandmarkCartViewController: UIViewController,
+                                  Instantiable,
+                                  TravelEditable,
+                                  MapAvailable {
 
 //    static let badgeElementKind = "badge-element-kind"
 
@@ -41,6 +44,10 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
 
     func bind(viewModel: LandmarkCartViewModel) {
         self.viewModel = viewModel
+    }
+
+    func didUpdateTravel(to travel: Travel) {
+        self.viewModel?.didUpdateTravel(to: travel)
     }
 
     private func configureNibs() {

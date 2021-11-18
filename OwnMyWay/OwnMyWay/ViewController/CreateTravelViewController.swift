@@ -25,6 +25,9 @@ class CreateTravelViewController: UIViewController, Instantiable {
         super.viewDidLoad()
         self.configureCancellable()
         self.configureCalendar()
+        self.configureGestureRecognizer()
+        self.travelTitleField.delegate = self
+        self.configureLabels()
     }
 
     override func viewWillLayoutSubviews() {
@@ -58,9 +61,34 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.calendarView.placeholderType = FSCalendarPlaceholderType.none
     }
 
-    @IBAction func didEnterTitle(_ sender: UITextField) {
-        self.viewModel?.didEnterTitle(text: sender.text)
-        sender.resignFirstResponder()
+    private func configureLabels() {
+        self.viewModel?.viewDidLoad { [weak self] title, startDate, endDate in
+            guard let title = title,
+                  let startDate = startDate,
+                  let endDate = endDate
+            else { return }
+            self?.isSelectionComplete = true
+            self?.navigationItem.title = "기록 편집하기"
+            self?.travelTitleField.text = title
+            let dayInterval: TimeInterval = 60 * 60 * 24
+            stride(from: startDate, through: endDate, by: dayInterval).forEach {
+                self?.calendarView.select($0)
+            }
+        }
+    }
+
+    private func configureGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func tapAction(_ gesture: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+
+    @IBAction func didChangeTitle(_ sender: UITextField) {
+        self.viewModel?.didChangeTitle(text: sender.text)
     }
 
     @IBAction func didTouchNextButton(_ sender: UIButton) {
@@ -97,9 +125,11 @@ extension CreateTravelViewController: FSCalendarDelegate {
     }
 
     private func presentAlert(calendar: FSCalendar, from startDate: Date, to endDate: Date) {
-        let alert = UIAlertController(title: "여행기간 확정",
-                                      message: alertMessage(startDate: startDate, endDate: endDate),
-                                      preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "여행기간 확정",
+            message: self.alertMessage(startDate: startDate, endDate: endDate),
+            preferredStyle: .alert
+        )
         let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
             let dayInterval: TimeInterval = 60 * 60 * 24
             stride(from: startDate, through: endDate, by: dayInterval).forEach {
@@ -142,7 +172,16 @@ extension CreateTravelViewController: FSCalendarDelegate {
 
 }
 
-extension FSCalendar {
+extension CreateTravelViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.travelTitleField.resignFirstResponder()
+        return true
+    }
+
+}
+
+fileprivate extension FSCalendar {
 
     func deselectAll() {
         let dates = self.selectedDates

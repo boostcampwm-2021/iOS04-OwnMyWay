@@ -28,7 +28,8 @@ class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
 
     func pushToCreateTravel() {
         let createTravelCoordinator = CreateTravelCoordinator(
-            navigationController: self.navigationController
+            navigationController: self.navigationController,
+            travel: nil
         )
         self.childCoordinators.append(createTravelCoordinator)
         createTravelCoordinator.start()

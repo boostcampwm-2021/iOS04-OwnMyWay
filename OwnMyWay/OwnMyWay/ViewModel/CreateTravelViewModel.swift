@@ -10,34 +10,31 @@ import Foundation
 
 protocol CreateTravelViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
-    var startDatePublisher: Published<String?>.Publisher { get }
-    var endDatePublisher: Published<String?>.Publisher { get }
 
+    func viewDidLoad(completion: (String?, Date?, Date?) -> Void)
     func travelDidChanged(to travel: Travel)
-    func didEnterTitle(text: String?)
+    func didChangeTitle(text: String?)
     func didEnterDate(from startDate: Date?, to endDate: Date?)
     func didTouchNextButton()
 }
 
 protocol CreateTravelCoordinatingDelegate: AnyObject {
-    func pushToAddLandmark(travel: Travel)
+    func pushToAddLandmark(travel: Travel, isEditingMode: Bool)
 }
 
 class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
-    var startDatePublisher: Published<String?>.Publisher { $startDate }
-    var endDatePublisher: Published<String?>.Publisher { $endDate }
 
     private let usecase: CreateTravelUsecase
     private weak var coordinatingDelegate: CreateTravelCoordinatingDelegate?
 
     @Published private var validateResult: Bool?
-    @Published private var startDate: String?
-    @Published private var endDate: String?
+
     private var travel: Travel
     private var travelTitle: String?
     private var travelStartDate: Date?
     private var travelEndDate: Date?
+    private var isEditingMode: Bool
     private var isValidTitle: Bool = false {
         didSet {
             validateResult = isValidTitle && isValidDate
@@ -49,17 +46,28 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
         }
     }
 
-    init(usecase: CreateTravelUsecase, coordinatingDelegate: CreateTravelCoordinatingDelegate) {
+    init(
+        usecase: CreateTravelUsecase,
+        coordinatingDelegate: CreateTravelCoordinatingDelegate,
+        travel: Travel?
+    ) {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
-        self.travel = Travel.dummy(section: .reserved)
+        self.isEditingMode = travel == nil ? false : true
+        self.travel = travel ?? Travel.dummy(section: .reserved)
+        self.didChangeTitle(text: travel?.title)
+        self.didEnterDate(from: travel?.startDate, to: travel?.endDate)
+    }
+
+    func viewDidLoad(completion: (String?, Date?, Date?) -> Void) {
+        completion(self.travelTitle, self.travelStartDate, self.travelEndDate)
     }
 
     func travelDidChanged(to travel: Travel) {
         self.travel = travel
     }
 
-    func didEnterTitle(text: String?) {
+    func didChangeTitle(text: String?) {
         guard let text = text else { return }
         self.usecase.executeTitleValidation(with: text) { [weak self] result in
             switch result {
@@ -88,6 +96,8 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
         self.travel.title = self.travelTitle
         self.travel.startDate = self.travelStartDate
         self.travel.endDate = self.travelEndDate
-        self.coordinatingDelegate?.pushToAddLandmark(travel: self.travel)
+        self.coordinatingDelegate?.pushToAddLandmark(
+            travel: self.travel, isEditingMode: self.isEditingMode
+        )
     }
 }

@@ -67,4 +67,13 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
         ongoingCoordinator.start()
     }
 
+    func pushToEditTravel(travel: Travel) {
+        let createTravelCoordinator = CreateTravelCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        self.childCoordinators.append(createTravelCoordinator)
+        createTravelCoordinator.start()
+    }
+
 }
