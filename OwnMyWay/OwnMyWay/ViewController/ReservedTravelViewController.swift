@@ -61,6 +61,9 @@ class ReservedTravelViewController: UIViewController,
     }
 
     func didUpdateTravel(to travel: Travel) {
+        if let cartVC = self.children.first as? LandmarkCartViewController {
+            cartVC.didUpdateTravel(to: travel)
+        }
         self.viewModel?.didUpdateTravel(to: travel)
     }
 

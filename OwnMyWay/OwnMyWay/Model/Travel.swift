@@ -56,6 +56,7 @@ extension Travel: Hashable {
         hasher.combine(title)
         hasher.combine(startDate)
         hasher.combine(endDate)
+        hasher.combine(landmarks)
     }
 }
 
