@@ -32,7 +32,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="제목을 입력해주세요" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Fp1-Qy-IFd">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="제목을 입력해주세요 (20자 이내)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Fp1-Qy-IFd">
                                                         <rect key="frame" x="0.0" y="45" width="384" height="34"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -111,7 +111,7 @@
                                                                 <rect key="frame" x="25" y="0.0" width="359" height="40"/>
                                                                 <color key="tintColor" systemColor="labelColor"/>
                                                                 <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" title="위치"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="🤷‍♂️ 위치를 입력해주세요."/>
                                                                 <connections>
                                                                     <action selector="didChangeLocation:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jS5-UH-u92"/>
                                                                 </connections>

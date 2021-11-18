@@ -43,7 +43,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     @Published private var validateResult: Bool?
     @Published private(set) var record: Record
     private var tempPhotoURLs: [URL]
-    private var deletePhotoURLs: [URL]
+    private var deletedPhotoURLs: [URL]
 
     private var isValidTitle: Bool = false {
         didSet {
@@ -79,7 +79,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
         self.tempPhotoURLs = []
-        self.deletePhotoURLs = []
+        self.deletedPhotoURLs = []
         self.record = record ?? Record(
             uuid: UUID(), title: nil, content: nil,
             date: nil, latitude: nil, longitude: nil,
@@ -131,13 +131,13 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didRemovePhoto(at index: Int) {
         guard let url = self.record.photoURLs?[index] else { return }
-        self.deletePhotoURLs.append(url)
+        self.deletedPhotoURLs.append(url)
         self.record.photoURLs?.remove(at: index)
         self.isValidPhotos = self.record.photoURLs?.count == 0 ? false : true
     }
 
     func didTouchSubmitButton() {
-        self.deletePhotoURLs.forEach { [weak self] url in
+        self.deletedPhotoURLs.forEach { [weak self] url in
             self?.usecase.executeRemovingPhoto(url: url) { _ in }
         }
         self.coordinatingDelegate?.popToParent(with: record)
@@ -157,7 +157,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         guard let latitude = latitude,
               let longitude = longitude
         else {
-            self.record.placeDescription = "위치정보 없음"
+            self.record.placeDescription = "🤷‍♂️ 위치를 입력해주세요."
             self.isValidPlace = false
             return
         }

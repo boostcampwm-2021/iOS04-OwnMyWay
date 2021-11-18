@@ -65,7 +65,9 @@ class LandmarkCartViewController: UIViewController,
         self.viewModel?.travelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travel in
-                var snapshot = NSDiffableDataSourceSnapshot<LandmarkCartViewController.Section, Landmark>()
+                var snapshot = NSDiffableDataSourceSnapshot<
+                    LandmarkCartViewController.Section, Landmark
+                >()
                 snapshot.appendSections([.main])
                 let snapshotItem = [Landmark()] + travel.landmarks.reversed()
                 snapshot.appendItems(snapshotItem, toSection: .main)

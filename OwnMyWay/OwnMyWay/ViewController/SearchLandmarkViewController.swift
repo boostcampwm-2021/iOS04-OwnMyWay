@@ -44,7 +44,9 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
 
     private func configureCancellable() {
         self.cancellable = self.viewModel?.landmarksPublisher.sink { [weak self] items in
-            var snapshot = NSDiffableDataSourceSnapshot<LandmarkCartViewController.Section, Landmark>()
+            var snapshot = NSDiffableDataSourceSnapshot<
+                LandmarkCartViewController.Section, Landmark
+            >()
             snapshot.appendSections([.main])
             snapshot.appendItems(items, toSection: .main)
             self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
