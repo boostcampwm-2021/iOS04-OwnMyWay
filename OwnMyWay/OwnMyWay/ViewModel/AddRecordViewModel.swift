@@ -109,7 +109,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     func didEnterCoordinate(latitude: Double?, longitude: Double?) {
         let location = Location(latitude: latitude, longitude: longitude)
         self.recordCoordinate = location
-        self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
+        //self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
+        self.isValidCoordinate = true
         self.configurePlace(latitude: latitude, longitude: longitude)
     }
 
@@ -141,14 +142,14 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     func didTouchSubmitButton() {
         guard let recordTitle = self.recordTitle,
               let date = self.recordDate,
-              let latitude = self.recordCoordinate?.latitude,
-              let longtitude = self.recordCoordinate?.longitude,
+//              let latitude = self.recordCoordinate?.latitude,
+//              let longtitude = self.recordCoordinate?.longitude,
               let place = self.recordPlace
         else { return }
         self.recordPhotos.removeFirst()
         let record = Record(
             uuid: self.recordID ?? UUID(), title: recordTitle, content: self.recordContent,
-            date: date, latitude: latitude, longitude: longtitude,
+            date: date, latitude: self.recordCoordinate?.latitude, longitude: self.recordCoordinate?.longitude,
             photoURLs: recordPhotos, placeDescription: place
         )
         self.coordinatingDelegate?.popToParent(with: record)
@@ -168,7 +169,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             self.didEnterCoordinate(latitude: record.latitude, longitude: record.longitude)
             self.didEnterContent(with: record.content)
             record.photoURLs?.forEach { [weak self] url in
-                self?.didEnterPhotoURL(with: url)
+                self?.recordPhotos.append(url)
+                self?.isValidPhotos = true
             }
         }
     }
@@ -177,8 +179,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         guard let latitude = latitude,
               let longitude = longitude
         else {
-            self.recordPlace = "위치를 찾을 수 없어요. 직접 지정해주세요."
-            self.isValidPlace = false
+            self.recordPlace = "위치정보 없음"
+            self.isValidPlace = true
             return
         }
         self.addressName(

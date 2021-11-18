@@ -18,6 +18,6 @@ class RecordCardCell: UICollectionViewCell {
         self.makeShadow()
         guard let photos = record.photoURLs else { return }
         self.recordCardImageView.setImage(with: photos.first)
-        self.recordContentLabel.text = record.content
+        self.recordContentLabel.text = record.title
     }
 }

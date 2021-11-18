@@ -11,7 +11,9 @@ class ImageFileManager {
     private let fileManager: FileManager
     private let appDirectory: String
 
-    init(fileManager: FileManager) {
+    static let shared = ImageFileManager(fileManager: FileManager.default)
+
+    private init(fileManager: FileManager) {
         self.fileManager = fileManager
         self.appDirectory = "OwnMyWay"
         do {
