@@ -38,15 +38,15 @@ class ImageFileManager {
         completion(destinationURL, nil)
     }
 
-    func removePhoto(at url: URL, completion: (Bool, Error?) -> Void) {
+    func removePhoto(at url: URL, completion: (Result<Void, Error>) -> Void) {
         do {
             if self.photoExists(at: url) {
                 try self.fileManager.removeItem(at: url)
             }
         } catch let error {
-            completion(false, error)
+            completion(.failure(error))
         }
-        completion(true, nil)
+        completion(.success(()))
     }
 
     private func configureAppURL() throws {

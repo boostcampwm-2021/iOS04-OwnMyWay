@@ -206,11 +206,11 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
-            self.openPicker()
+        switch indexPath.item {
+        case 0: self.openPicker()
+        default: self.viewModel?.didRemovePhoto(at: indexPath.item)
         }
     }
-
 }
 
 extension AddRecordViewController: PHPickerViewControllerDelegate {
