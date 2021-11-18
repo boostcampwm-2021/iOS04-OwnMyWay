@@ -12,10 +12,12 @@ protocol AddLandmarkViewModel {
     func didTouchNextButton()
     func didTouchBackButton()
     func didUpdateTravel(to travel: Travel)
+    func didDeleteLandmark(at landmark: Landmark)
 }
 
 protocol AddLandmarkCoordinatingDelegate: AnyObject {
     func pushToCompleteCreation(travel: Travel)
+    func pushToCompleteEditing(travel: Travel)
     func popToCreateTravel(travel: Travel)
 }
 
@@ -23,14 +25,22 @@ class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
 
     private(set) var travel: Travel
     private weak var coordinatingDelegate: AddLandmarkCoordinatingDelegate?
+    private var isEditingMode: Bool
 
-    init(travel: Travel, coordinatingDelegate: AddLandmarkCoordinatingDelegate) {
+    init(
+        travel: Travel, coordinatingDelegate: AddLandmarkCoordinatingDelegate, isEditingMode: Bool
+    ) {
         self.travel = travel
         self.coordinatingDelegate = coordinatingDelegate
+        self.isEditingMode = isEditingMode
     }
 
     func didTouchNextButton() {
-        self.coordinatingDelegate?.pushToCompleteCreation(travel: travel)
+        if self.isEditingMode {
+            self.coordinatingDelegate?.pushToCompleteEditing(travel: travel)
+        } else {
+            self.coordinatingDelegate?.pushToCompleteCreation(travel: travel)
+        }
     }
 
     func didTouchBackButton() {
@@ -39,5 +49,10 @@ class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
 
     func didUpdateTravel(to travel: Travel) {
         self.travel = travel
+    }
+
+    func didDeleteLandmark(at landmark: Landmark) {
+        guard let index = self.travel.landmarks.firstIndex(of: landmark) else { return }
+        self.travel.landmarks.remove(at: index)
     }
 }

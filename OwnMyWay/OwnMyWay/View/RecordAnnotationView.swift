@@ -62,7 +62,8 @@ class RecordAnnotation: NSObject, MKAnnotation {
             latitude: record.latitude ?? 0,
             longitude: record.longitude ?? 0
         )
-        self.image = record.photoURL
-        self.title = record.content
+        guard let photos = record.photoURLs else { return }
+        self.image = photos.first ?? nil
+        self.title = record.title
     }
 }

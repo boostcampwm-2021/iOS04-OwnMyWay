@@ -11,27 +11,31 @@ class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
+    private var travel: Travel?
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, travel: Travel?) {
         self.childCoordinators = []
         self.navigationController = navigationController
+        self.travel = travel
     }
 
     func start() {
         let usecase = DefaultCreateTravelUsecase()
         let createTravelVM = DefaultCreateTravelViewModel(
             usecase: usecase,
-            coordinatingDelegate: self
+            coordinatingDelegate: self,
+            travel: self.travel
         )
         let createTravelVC = CreateTravelViewController.instantiate(storyboardName: "CreateTravel")
         createTravelVC.bind(viewModel: createTravelVM)
-        navigationController.pushViewController(createTravelVC, animated: true)
+        self.navigationController.pushViewController(createTravelVC, animated: true)
     }
 
-    func pushToAddLandmark(travel: Travel) {
+    func pushToAddLandmark(travel: Travel, isEditingMode: Bool) {
         let addLandmarkCoordinator = AddLandmarkCoordinator(
             navigationController: self.navigationController,
-            travel: travel
+            travel: travel,
+            isEditingMode: isEditingMode
         )
         self.childCoordinators.append(addLandmarkCoordinator)
         addLandmarkCoordinator.start()

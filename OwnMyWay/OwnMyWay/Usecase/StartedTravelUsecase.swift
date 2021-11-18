@@ -7,14 +7,16 @@
 
 import Foundation
 
-protocol OngoingTravelUsecase {
+protocol StartedTravelUsecase {
     func executeFetch()
     func executeFinishingTravel()
     func executeFlagUpdate(of travel: Travel)
+    func executeDeletion(of travel: Travel)
     func executeLocationUpdate(of travel: Travel, latitude: Double, longitude: Double)
+    func executeRecordAddition(to travel: Travel, with record: Record, completion: (Travel) -> Void)
 }
 
-struct DefaultOngoingTravelUsecase: OngoingTravelUsecase {
+struct DefaultStartedTravelUsecase: StartedTravelUsecase {
 
     private let repository: TravelRepository
 
@@ -24,6 +26,10 @@ struct DefaultOngoingTravelUsecase: OngoingTravelUsecase {
 
     func executeFetch() {}
     func executeFinishingTravel() {}
+
+    func executeDeletion(of travel: Travel) {
+        self.repository.delete(travel: travel)
+    }
 
     func executeFlagUpdate(of travel: Travel) {
         self.repository.update(travel: travel)
@@ -35,4 +41,14 @@ struct DefaultOngoingTravelUsecase: OngoingTravelUsecase {
         )
     }
 
+    func executeRecordAddition(
+        to travel: Travel, with record: Record, completion: (Travel) -> Void
+    ) {
+        switch self.repository.addRecord(to: travel, with: record) {
+        case .success(let newTravel):
+            completion(newTravel)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
 }

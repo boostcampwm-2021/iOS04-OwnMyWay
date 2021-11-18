@@ -13,7 +13,12 @@ import UIKit
 typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewController.Section,
                                                            Landmark>
 
-class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
+class LandmarkCartViewController: UIViewController,
+                                  Instantiable,
+                                  TravelEditable,
+                                  MapAvailable {
+
+//    static let badgeElementKind = "badge-element-kind"
 
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -21,7 +26,6 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     private(set) var viewModel: LandmarkCartViewModel?
     private var diffableDataSource: DataSource?
     private var cancellables: Set<AnyCancellable> = []
-    private let locationManager: CLLocationManager = CLLocationManager()
 
     enum Section: CaseIterable { case main }
 
@@ -32,9 +36,6 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         self.mapView.delegate = self
         self.configureMapView(with: self.mapView)
 
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-
         self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = configureCompositionalLayout()
         self.diffableDataSource = configureDiffableDataSource()
@@ -43,6 +44,10 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
 
     func bind(viewModel: LandmarkCartViewModel) {
         self.viewModel = viewModel
+    }
+
+    func didUpdateTravel(to travel: Travel) {
+        self.viewModel?.didUpdateTravel(to: travel)
     }
 
     private func configureNibs() {
@@ -60,10 +65,13 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         self.viewModel?.travelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travel in
-                var snapshot = NSDiffableDataSourceSectionSnapshot<Landmark>()
+                var snapshot = NSDiffableDataSourceSnapshot<
+                    LandmarkCartViewController.Section, Landmark
+                >()
+                snapshot.appendSections([.main])
                 let snapshotItem = [Landmark()] + travel.landmarks.reversed()
-                snapshot.append(snapshotItem)
-                self?.diffableDataSource?.apply(snapshot, to: .main, animatingDifferences: true)
+                snapshot.appendItems(snapshotItem, toSection: .main)
+                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
 
                 guard let mapView = self?.mapView else { return }
                 let annotations = travel.landmarks.map({ LandmarkAnnotation(landmark: $0) })
@@ -74,6 +82,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
     }
 
     private func configureCompositionalLayout() -> UICollectionViewLayout {
+
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0)
         )
@@ -90,7 +99,7 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         )
 
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 10, leading: 10, bottom: 10, trailing: 10
         )
@@ -122,6 +131,25 @@ class LandmarkCartViewController: UIViewController, Instantiable, MapAvailable {
         }
         return dataSource
     }
+
+    private func presentAlert(index: Int) {
+        guard let landmark = self.viewModel?.findLandmark(at: index) else { return }
+        let alert = UIAlertController(title: "관광 명소 삭제",
+                                      message: "\(landmark.title ?? "관광지")을(를) 정말 삭제하실건가요?",
+                                      preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
+            guard let upperVC = self?.navigationController?
+                    .viewControllers
+                    .last as? LandmarkDeletable & UIViewController,
+                  let viewModel = self?.viewModel
+            else { return }
+            upperVC.didDeleteLandmark(at: viewModel.didDeleteLandmark(at: index))
+        }
+        let noAction = UIAlertAction(title: "아니오", style: .cancel)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - extension LandmarkCartViewController for UICollectionViewDelegate
@@ -131,6 +159,9 @@ extension LandmarkCartViewController: UICollectionViewDelegate {
         if indexPath.item == 0 {
             // PlusCell 일 경우
             self.viewModel?.didTouchPlusButton()
+        } else {
+            guard let viewModel = self.viewModel else { return }
+            self.presentAlert(index: viewModel.travel.landmarks.count - indexPath.item)
         }
     }
 }
@@ -149,33 +180,6 @@ extension LandmarkCartViewController: MKMapViewDelegate {
             return annotationView
         default:
             return nil
-        }
-    }
-}
-
-extension LandmarkCartViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard self.viewModel?.travel.landmarks.isEmpty == true else { return }
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        self.mapView.setRegion(
-            MKCoordinateRegion(
-                center: locValue,
-                span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-            ),
-            animated: false
-        )
-    }
-
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        return
-    }
-
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedAlways, .authorizedWhenInUse:
-            manager.requestLocation()
-        default:
-            break
         }
     }
 }

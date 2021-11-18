@@ -5,24 +5,44 @@
 //  Created by 유한준 on 2021/11/04.
 //
 
+import Combine
 import UIKit
 
-class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdatable {
+class ReservedTravelViewController: UIViewController,
+                                    Instantiable,
+                                    TravelEditable,
+                                    LandmarkDeletable {
+
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var cartView: UIView!
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var travelTypeLabel: UILabel!
     @IBOutlet private weak var startButton: NextButton!
+    @IBOutlet weak var startButtonHeightConstraint: NSLayoutConstraint!
 
     private var bindContainerVC: ((UIView) -> Void)?
     private var viewModel: ReservedTravelViewModel?
+    private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureDescription()
         self.configureStartButton()
+        self.configureCancellable()
         self.bindContainerVC?(self.cartView)
+    }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.bindContainerVC = nil
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.configureButtonConstraint()
     }
 
     override func viewDidLayoutSubviews() {
@@ -41,37 +61,63 @@ class ReservedTravelViewController: UIViewController, Instantiable, TravelUpdata
     }
 
     func didUpdateTravel(to travel: Travel) {
+        if let cartVC = self.children.first as? LandmarkCartViewController {
+            cartVC.didUpdateTravel(to: travel)
+        }
         self.viewModel?.didUpdateTravel(to: travel)
     }
 
-    private func configureDescription() {
-        self.navigationItem.title = viewModel?.travel.title
-        if let startDate = viewModel?.travel.startDate,
-            let endDate = viewModel?.travel.endDate {
-            self.dateLabel.text = "\(startDate.format(endDate: endDate))"
-        }
-        self.travelTypeLabel.text = "예정된 여행"
+    func didDeleteLandmark(at landmark: Landmark) {
+        self.viewModel?.didDeleteLandmark(at: landmark)
+    }
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(backButtonAction)
-        )
+    private func configureButtonConstraint() {
+        let bottomPadding = self.view.safeAreaInsets.bottom
+        self.startButtonHeightConstraint.constant = 60 + bottomPadding
+    }
+
+    private func configureDescription() {
+        self.travelTypeLabel.text = "예정된 여행"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "삭제",
+            image: UIImage(systemName: "ellipsis"),
             style: .plain,
             target: self,
-            action: #selector(removeButtonAction)
+            action: #selector(self.didTouchSettingButton)
         )
+    }
+
+    private func configureCancellable() {
+        self.viewModel?.travelPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] travel in
+                let title = travel.title
+                self?.navigationItem.title = title
+
+                if let startDate = travel.startDate,
+                    let endDate = travel.endDate {
+                    self?.dateLabel.text = "\(startDate.format(endDate: endDate))"
+                }
+            }
+            .store(in: &cancellables)
     }
 
     @objc private func backButtonAction() {
         self.viewModel?.didTouchBackButton()
     }
 
-    @objc func removeButtonAction() {
-        self.presentAlert()
+    @objc func didTouchSettingButton() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.presentAlert()
+        }
+        let editAction = UIAlertAction(title: "수정하기", style: .default) { [weak self] _ in
+            self?.viewModel?.didTouchEditButton()
+        }
+        let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true)
     }
 
     private func configureStartButton() {

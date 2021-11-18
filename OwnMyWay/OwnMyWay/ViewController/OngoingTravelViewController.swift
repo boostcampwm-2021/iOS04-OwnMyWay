@@ -11,7 +11,8 @@ import UIKit
 
 typealias OngoingTravelDataSource = UICollectionViewDiffableDataSource <String, Record>
 
-class OngoingTravelViewController: UIViewController, Instantiable {
+class OngoingTravelViewController: UIViewController, Instantiable, TravelEditable {
+
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -19,7 +20,7 @@ class OngoingTravelViewController: UIViewController, Instantiable {
     private var viewModel: OngoingTravelViewModel?
     private var diffableDataSource: OngoingTravelDataSource?
     private var cancellables: Set<AnyCancellable> = []
-    private let locationManager = CLLocationManager()
+    private let mapDummy = Record.dummy()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,8 @@ class OngoingTravelViewController: UIViewController, Instantiable {
         self.configureNibs()
         self.configureTravelCollectionView()
         self.configureCancellable()
-        self.configureLocationManager()
+        LocationManager.shared.currentTravel(to: self.viewModel?.travel)
+        LocationManager.shared.requestWhenInUseAuthorization()
     }
 
     override func viewWillLayoutSubviews() {
@@ -35,8 +37,25 @@ class OngoingTravelViewController: UIViewController, Instantiable {
         self.configureButtonConstraint()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        LocationManager.shared.delegate = self
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        LocationManager.shared.delegate = LocationManager.shared
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
+    }
+
     func bind(viewModel: OngoingTravelViewModel) {
         self.viewModel = viewModel
+    }
+
+    func didUpdateTravel(to travel: Travel) {
+        self.viewModel?.didUpdateTravel(to: travel)
     }
 
     private func configureButtonConstraint() {
@@ -44,29 +63,39 @@ class OngoingTravelViewController: UIViewController, Instantiable {
         self.finishButtonHeightConstraint.constant = 60 + bottomPadding
     }
 
-    private func configureLocationManager() {
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.distanceFilter = 10
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.allowsBackgroundLocationUpdates = true
-        self.locationManager.pausesLocationUpdatesAutomatically = false
-        self.locationManager.startUpdatingLocation()
-    }
-
     private func configureNavigation() {
-        self.navigationItem.title = viewModel?.travel.title
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
             style: .plain,
             target: self,
-            action: #selector(backButtonAction)
+            action: #selector(self.didTouchSettingButton)
         )
     }
 
-    @objc private func backButtonAction() {
-        self.viewModel?.didTouchBackButton()
+    private func presentAlert() {
+        let alert = UIAlertController(
+            title: "여행 삭제 실패",
+            message: "진행중인 여행은 삭제할 수 없어요\n여행을 먼저 종료하고 삭제해주세요",
+            preferredStyle: .alert
+        )
+        let action = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
+    }
+
+    @objc func didTouchSettingButton() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] _ in
+            self?.presentAlert()
+        }
+        let editAction = UIAlertAction(title: "수정하기", style: .default) { [weak self] _ in
+            self?.viewModel?.didTouchEditButton()
+        }
+        let cancelAction = UIAlertAction(title: "취소하기", style: .cancel)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(cancelAction)
+        self.present(actionSheet, animated: true)
     }
 
     @IBAction func didTouchAddRecordButton(_ sender: UIButton) {
@@ -74,7 +103,6 @@ class OngoingTravelViewController: UIViewController, Instantiable {
     }
 
     @IBAction func didTouchFinishButton(_ sender: UIButton) {
-        self.locationManager.stopUpdatingLocation()
         self.viewModel?.didTouchFinishButton()
     }
 
@@ -106,26 +134,27 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
 
     private func configureCancellable() {
         viewModel?.travelPublisher.sink { [weak self] travel in
-            if let mapCell = self?.collectionView.cellForItem(
+            guard let self = self else { return }
+
+            self.navigationItem.title = travel.title
+
+            if let mapCell = self.collectionView.cellForItem(
                 at: IndexPath(item: 0, section: 0)
             ) as? MapCell {
-                mapCell.drawLocationPath(
-                    mapView: mapCell.mapView, locations: travel.locations
-                )
+                mapCell.configure(with: travel)
             }
 
             var snapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
-
             snapshot.appendSections(["map"])
-            snapshot.appendItems([Record.dummy()], toSection: "map")
+            snapshot.appendItems([self.mapDummy], toSection: "map")
             recordListList.forEach { recordList in
                 guard let date = recordList.first?.date
                 else { return }
                 snapshot.appendSections([date.toKorean()])
                 snapshot.appendItems(recordList, toSection: date.toKorean())
             }
-            self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+            self.diffableDataSource?.apply(snapshot, animatingDifferences: true)
         }.store(in: &cancellables)
     }
 
@@ -162,15 +191,17 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
     private func configureDiffableDataSource() -> OngoingTravelDataSource {
         let dataSource = OngoingTravelDataSource(
             collectionView: self.collectionView
-        ) { collectionView, indexPath, item in
+        ) { [weak self] collectionView, indexPath, item in
+            guard let self = self else { return UICollectionViewCell() }
+
             switch indexPath.section {
             case 0:
-                guard let cell = collectionView.dequeueReusableCell(
+                guard let travel = self.viewModel?.travel,
+                      let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: MapCell.identifier, for: indexPath
-                ) as? MapCell,
-                      let travel = self.viewModel?.travel
+                ) as? MapCell
                 else { return UICollectionViewCell() }
-                cell.configure(with: travel, delegate: self)
+                cell.configure(with: travel)
                 return cell
 
             default:
@@ -210,43 +241,9 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
     }
 }
 
-// MARK: - extension OngoingTravelViewController for MKMapViewDelegate
-
-extension OngoingTravelViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        switch annotation {
-        case is LandmarkAnnotation:
-            let annotationView = mapView.dequeueReusableAnnotationView(
-                withIdentifier: LandmarkAnnotationView.identifier,
-                for: annotation
-            ) as? LandmarkAnnotationView
-            annotationView?.annotation = annotation
-            return annotationView
-        case is RecordAnnotation:
-            let annotationView = mapView.dequeueReusableAnnotationView(
-                withIdentifier: RecordAnnotationView.identifier,
-                for: annotation
-            ) as? RecordAnnotationView
-            annotationView?.annotation = annotation
-            return annotationView
-        default:
-            return nil
-        }
-    }
-
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        guard let polyline = overlay as? MKPolyline else { return MKOverlayRenderer() }
-        let polylineRenderer = MKPolylineRenderer(polyline: polyline)
-        polylineRenderer.strokeColor = .orange
-        polylineRenderer.lineWidth = 5
-        polylineRenderer.alpha = 1
-        polylineRenderer.lineCap = .round
-        return polylineRenderer
-    }
-}
+// MARK: - extension OngoingTravelViewController for CLLocationManagerDelegate
 
 extension OngoingTravelViewController: CLLocationManagerDelegate {
-
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let lastLocation = locations.last
         guard let latitude = lastLocation?.coordinate.latitude,
@@ -255,4 +252,23 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
         self.viewModel?.didUpdateCoordinate(latitude: latitude, longitude: longitude)
     }
 
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+
+        switch manager.fetchAuthorizationStatus() {
+        case .authorizedWhenInUse:
+            manager.requestAlwaysAuthorization()
+        default:
+            break
+        }
+
+    }
+}
+
+// MARK: - extension OngoingTravelViewController for RecordUpdatable
+
+extension OngoingTravelViewController: RecordUpdatable {
+
+    func didUpdateRecord(record: Record) {
+        self.viewModel?.didUpdateRecord(record: record)
+    }
 }

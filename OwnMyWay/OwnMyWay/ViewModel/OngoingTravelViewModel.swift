@@ -16,58 +16,63 @@ protocol OngoingTravelViewModel {
     func didTouchAddRecordButton()
     func didTouchRecordCell(at record: Record)
     func didTouchBackButton()
-    func didTouchEditTravelButton()
+    func didTouchEditButton()
     func didTouchFinishButton()
     func didUpdateCoordinate(latitude: Double, longitude: Double)
+    func didUpdateRecord(record: Record)
 }
 
-protocol OngoingCoordinatingDelegate: AnyObject {
+protocol StartedCoordinatingDelegate: AnyObject {
     func popToHome()
-    func pushToAddRecord(travel: Travel)
-    func pushToEditTravel()
+    func pushToAddRecord(record: Record?)
+    func pushToEditTravel(travel: Travel)
     func moveToOutdated(travel: Travel)
-    func pushToDetailRecord(record: Record)
+    func pushToDetailRecord(record: Record, travel: Travel)
 }
 
-class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
+class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewModel {
+
     var travelPublisher: Published<Travel>.Publisher { $travel }
 
     @Published private(set) var travel: Travel
 
-    private let usecase: OngoingTravelUsecase
-    private weak var coordinatingDelegate: OngoingCoordinatingDelegate?
+    private let usecase: StartedTravelUsecase
+    private weak var coordinatingDelegate: StartedCoordinatingDelegate?
 
     init(
         travel: Travel,
-        usecase: OngoingTravelUsecase,
-        coordinatingDelegate: OngoingCoordinatingDelegate
+        usecase: StartedTravelUsecase,
+        coordinatingDelegate: StartedCoordinatingDelegate
     ) {
-        // FIXME: 임시 테스트 추가
-        var tmpTravel = travel
-        tmpTravel.records = [Record(uuid: UUID(), content: "SungSanBong", date: Date(timeIntervalSinceNow: -86400), latitude: 33.458126, longitude: 126.94258, photoURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Seongsan_Ilchulbong_from_the_air.jpg/544px-Seongsan_Ilchulbong_from_the_air.jpg")),
-         Record(uuid: UUID(), content: "VENI VIDI VICI!", date: Date(timeIntervalSinceNow: 86400), latitude: 33.361425, longitude: 126.529418, photoURL: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Hallasan_2.jpg/600px-Hallasan_2.jpg")),
-         Record(uuid: UUID(), content: "HelloKitty is motchamchi", date: Date(), latitude: 33.2903582726355, longitude: 126.35198172436094, photoURL: URL(string: "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20190717_293%2F1563353611332Pkz6e_JPEG%2Fhellokitty_banner_2.jpg")),
-         Record(uuid: UUID(), content: "I Love Teddy Bear!", date: Date(timeIntervalSinceNow: 86400), latitude: 33.25052535513408, longitude: 126.4121400108651, photoURL: URL(string: "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210806_79%2F1628217288477ciuOK_JPEG%2FIMG_1321.jpg"))]
-        self.travel = tmpTravel
+        self.travel = travel
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
     }
 
-    func didUpdateTravel(to travel: Travel) {}
+    func didUpdateTravel(to travel: Travel) {
+        self.travel = travel
+    }
+
+    func didDeleteTravel() {
+        self.usecase.executeDeletion(of: self.travel)
+        self.coordinatingDelegate?.popToHome()
+    }
 
     func didTouchAddRecordButton() {
-        self.coordinatingDelegate?.pushToAddRecord(travel: self.travel)
+        self.coordinatingDelegate?.pushToAddRecord(record: nil)
     }
 
     func didTouchRecordCell(at record: Record) {
-        self.coordinatingDelegate?.pushToDetailRecord(record: record)
+        self.coordinatingDelegate?.pushToDetailRecord(record: record, travel: self.travel)
     }
 
     func didTouchBackButton() {
         self.coordinatingDelegate?.popToHome()
     }
 
-    func didTouchEditTravelButton() {}
+    func didTouchEditButton() {
+        self.coordinatingDelegate?.pushToEditTravel(travel: self.travel)
+    }
 
     func didTouchFinishButton() {
         self.travel.flag = Travel.Section.outdated.index
@@ -82,4 +87,9 @@ class DefaultOngoingTravelViewModel: OngoingTravelViewModel {
         )
     }
 
+    func didUpdateRecord(record: Record) {
+        self.usecase.executeRecordAddition(to: self.travel, with: record) { [weak self] travel in
+            self?.travel = travel
+        }
+    }
 }

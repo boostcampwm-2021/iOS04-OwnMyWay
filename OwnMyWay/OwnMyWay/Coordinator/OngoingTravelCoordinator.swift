@@ -7,11 +7,11 @@
 
 import UIKit
 
-class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
+class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var travel: Travel
+    private var travel: Travel
 
     init(navigationController: UINavigationController, travel: Travel) {
         self.childCoordinators = []
@@ -21,13 +21,13 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
 
     func start() {
         let repository = CoreDataTravelRepository()
-        let usecase = DefaultOngoingTravelUsecase(repository: repository)
-        let ongoingVM = DefaultOngoingTravelViewModel(
+        let usecase = DefaultStartedTravelUsecase(repository: repository)
+        let ongoingVM = DefaultStartedTravelViewModel(
             travel: self.travel, usecase: usecase, coordinatingDelegate: self
         )
         let ongoingVC = OngoingTravelViewController.instantiate(storyboardName: "OngoingTravel")
         ongoingVC.bind(viewModel: ongoingVM)
-        navigationController.pushViewController(ongoingVC, animated: true)
+        self.navigationController.pushViewController(ongoingVC, animated: true)
     }
 
     func popToHome() {
@@ -40,20 +40,26 @@ class OngoingTravelCoordinator: Coordinator, OngoingCoordinatingDelegate {
         self.navigationController.popToRootViewController(animated: true)
     }
 
-    func pushToAddRecord(travel: Travel) {
+    func pushToAddRecord(record: Record?) {
         let addRecordCoordinator = AddRecordCoordinator(
-            navigationController: self.navigationController, travel: travel
+            navigationController: self.navigationController, record: record
         )
         self.childCoordinators.append(addRecordCoordinator)
         addRecordCoordinator.start()
     }
 
-    // FIXME: travel 추가하기
-    func pushToEditTravel() {}
+    func pushToEditTravel(travel: Travel) {
+        let createTravelCoordinator = CreateTravelCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        self.childCoordinators.append(createTravelCoordinator)
+        createTravelCoordinator.start()
+    }
 
-    func pushToDetailRecord(record: Record) {
+    func pushToDetailRecord(record: Record, travel: Travel) {
         let detailRecordCoordinator = DetailRecordCoordinator(
-            navigationController: self.navigationController, record: record
+            navigationController: self.navigationController, record: record, travel: travel
         )
         self.childCoordinators.append(detailRecordCoordinator)
         detailRecordCoordinator.start()

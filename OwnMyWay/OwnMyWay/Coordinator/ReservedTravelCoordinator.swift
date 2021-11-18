@@ -11,7 +11,7 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var travel: Travel
+    private var travel: Travel
 
     init(navigationController: UINavigationController, travel: Travel) {
         self.childCoordinators = []
@@ -65,6 +65,15 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
         )
         self.childCoordinators.append(ongoingCoordinator)
         ongoingCoordinator.start()
+    }
+
+    func pushToEditTravel(travel: Travel) {
+        let createTravelCoordinator = CreateTravelCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        self.childCoordinators.append(createTravelCoordinator)
+        createTravelCoordinator.start()
     }
 
 }

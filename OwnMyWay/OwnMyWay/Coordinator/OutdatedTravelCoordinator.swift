@@ -7,11 +7,10 @@
 
 import UIKit
 
-class OutdatedTravelCoordinator: Coordinator, OutdatedTravelCoordinatingDelegate {
-
+class OutdatedTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var travel: Travel
+    private var travel: Travel
 
     init(navigationController: UINavigationController, travel: Travel) {
         self.childCoordinators = []
@@ -21,13 +20,13 @@ class OutdatedTravelCoordinator: Coordinator, OutdatedTravelCoordinatingDelegate
 
     func start() {
         let repository = CoreDataTravelRepository()
-        let usecase = DefaultOutdatedTravelUsecase(repository: repository)
-        let outdatedVM = DefaultOutdatedTravelViewModel(
+        let usecase = DefaultStartedTravelUsecase(repository: repository)
+        let outdatedVM = DefaultStartedTravelViewModel(
             travel: self.travel, usecase: usecase, coordinatingDelegate: self
         )
         let outdatedVC = OutdatedTravelViewController.instantiate(storyboardName: "OutdatedTravel")
         outdatedVC.bind(viewModel: outdatedVM)
-        navigationController.pushViewController(outdatedVC, animated: true)
+        self.navigationController.pushViewController(outdatedVC, animated: true)
     }
 
     func popToHome() {
@@ -38,5 +37,32 @@ class OutdatedTravelCoordinator: Coordinator, OutdatedTravelCoordinatingDelegate
         else { return }
         homeVC.fetchTravel()
         self.navigationController.popToRootViewController(animated: true)
+    }
+
+    func pushToAddRecord(record: Record?) {
+        let addRecordCoordinator = AddRecordCoordinator(
+            navigationController: self.navigationController, record: record
+        )
+        self.childCoordinators.append(addRecordCoordinator)
+        addRecordCoordinator.start()
+    }
+
+    func pushToEditTravel(travel: Travel) {
+        let createTravelCoordinator = CreateTravelCoordinator(
+            navigationController: self.navigationController,
+            travel: travel
+        )
+        self.childCoordinators.append(createTravelCoordinator)
+        createTravelCoordinator.start()
+    }
+
+    func moveToOutdated(travel: Travel) { return }
+
+    func pushToDetailRecord(record: Record, travel: Travel) {
+        let detailRecordCoordinator = DetailRecordCoordinator(
+            navigationController: self.navigationController, record: record, travel: travel
+        )
+        self.childCoordinators.append(detailRecordCoordinator)
+        detailRecordCoordinator.start()
     }
 }

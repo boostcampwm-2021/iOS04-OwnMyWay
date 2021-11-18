@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,20 +25,64 @@
                             <constraint firstAttribute="width" secondItem="9FQ-wX-lrX" secondAttribute="height" id="Lv7-Nf-e2R"/>
                         </constraints>
                     </mapView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ut-jk-FlG">
+                        <rect key="frame" x="20" y="20" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="7sq-kK-SUJ"/>
+                            <constraint firstAttribute="width" constant="44" id="c29-CR-qTq"/>
+                        </constraints>
+                        <color key="tintColor" systemColor="systemGreenColor"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="scope" catalog="system"/>
+                        <connections>
+                            <action selector="didTouchLocationButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="lUr-qh-3ge"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eee-7d-xlG">
+                        <rect key="frame" x="64" y="20" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="4qb-1d-UAG"/>
+                            <constraint firstAttribute="width" constant="44" id="KtS-gH-2zj"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal">
+                            <imageReference key="image" image="paperplane.circle" catalog="system" symbolScale="large"/>
+                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                        </state>
+                        <state key="selected">
+                            <imageReference key="image" image="paperplane.circle" catalog="system" symbolScale="large"/>
+                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                        </state>
+                        <connections>
+                            <action selector="didTouchTrackingButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Ftm-yk-kej"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="9FQ-wX-lrX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CT9-Qg-LbA"/>
                 <constraint firstAttribute="trailing" secondItem="9FQ-wX-lrX" secondAttribute="trailing" id="WgL-dd-fWu"/>
+                <constraint firstItem="eee-7d-xlG" firstAttribute="leading" secondItem="5Ut-jk-FlG" secondAttribute="trailing" id="XHI-Te-tci"/>
                 <constraint firstItem="9FQ-wX-lrX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XYm-as-c7K"/>
-                <constraint firstAttribute="bottom" secondItem="9FQ-wX-lrX" secondAttribute="bottom" id="ff6-8L-kF0"/>
+                <constraint firstItem="eee-7d-xlG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="aM3-Q5-wXi"/>
+                <constraint firstAttribute="bottom" secondItem="9FQ-wX-lrX" secondAttribute="bottom" priority="750" id="ff6-8L-kF0"/>
+                <constraint firstItem="5Ut-jk-FlG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="qxO-Xe-tC5"/>
+                <constraint firstItem="5Ut-jk-FlG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="vf0-8Y-xHT"/>
             </constraints>
             <size key="customSize" width="346" height="346"/>
             <connections>
                 <outlet property="mapView" destination="9FQ-wX-lrX" id="n2a-0Y-u1p"/>
+                <outlet property="trackingButton" destination="eee-7d-xlG" id="IfP-c1-Brf"/>
             </connections>
             <point key="canvasLocation" x="155.07246376811597" y="204.91071428571428"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="paperplane.circle" catalog="system" width="128" height="121"/>
+        <image name="scope" catalog="system" width="128" height="122"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -22,6 +22,9 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         super.viewDidLoad()
         self.configureNibs()
         self.configureTravelCollectionView()
+        var snapshot = NSDiffableDataSourceSnapshot<Travel.Section, Travel>()
+        snapshot.appendSections([.reserved, .ongoing, .outdated])
+        self.diffableDataSource?.apply(snapshot, animatingDifferences: false)
         self.configureCancellable()
         self.viewModel?.viewDidLoad()
     }
@@ -60,42 +63,36 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         viewModel?.reservedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
-                let snapshotItem = travels
-                snapshot.append(snapshotItem)
-                self?.diffableDataSource?.apply(
-                    snapshot,
-                    to: Travel.Section.reserved,
-                    animatingDifferences: true
-                )
+                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
+                snapshot.deleteSections([.reserved])
+                snapshot.appendSections([.reserved])
+                snapshot.appendItems(travels, toSection: .reserved)
+                snapshot.moveSection(.reserved, beforeSection: .ongoing)
+                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &cancellables)
 
         viewModel?.ongoingTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
-                let snapshotItem = travels
-                snapshot.append(snapshotItem)
-                self?.diffableDataSource?.apply(
-                    snapshot,
-                    to: Travel.Section.ongoing,
-                    animatingDifferences: true
-                )
+                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
+                snapshot.deleteSections([.ongoing])
+                snapshot.appendSections([.ongoing])
+                snapshot.appendItems(travels, toSection: .ongoing)
+                snapshot.moveSection(.ongoing, afterSection: .reserved)
+                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &cancellables)
 
         viewModel?.outdatedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                var snapshot = NSDiffableDataSourceSectionSnapshot<Travel>()
-                let snapshotItem = travels
-                snapshot.append(snapshotItem)
-                self?.diffableDataSource?.apply(
-                    snapshot,
-                    to: Travel.Section.outdated,
-                    animatingDifferences: true
-                )
+                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
+                snapshot.deleteSections([.outdated])
+                snapshot.appendSections([.outdated])
+                snapshot.appendItems(travels, toSection: .outdated)
+                snapshot.moveSection(.outdated, afterSection: .ongoing)
+                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &cancellables)
     }
