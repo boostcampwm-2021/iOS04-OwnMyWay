@@ -21,6 +21,7 @@ extension UIView {
     func makePolaroid(with record: Record) {
         let photoImageView = UIImageView()
         photoImageView.contentMode = .scaleAspectFill
+        photoImageView.clipsToBounds = true
         photoImageView.setImage(with: record.photoURLs?.first)
 
         let titleLabel = UILabel()
