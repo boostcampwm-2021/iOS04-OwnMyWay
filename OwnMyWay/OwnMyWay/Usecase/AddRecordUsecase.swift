@@ -12,7 +12,7 @@ protocol AddRecordUsecase {
     func executeValidationDate(with date: Date?) -> Bool
     func executeValidationCoordinate(with coordinate: Location) -> Bool
     func executePickingPhoto(with url: URL, completion: (URL?, Error?) -> Void)
-    func executeRemovingPhoto(url: URL, record: Record, completion: (Result<Void, Error>) -> Void)
+    func executeRemovingPhoto(url: URL, record: Record?, completion: (Result<Void, Error>) -> Void)
 }
 
 struct DefaultAddRecordUsecase: AddRecordUsecase {
@@ -44,16 +44,21 @@ struct DefaultAddRecordUsecase: AddRecordUsecase {
         self.imageFileManager.copyPhoto(from: url, completion: completion)
     }
 
-    func executeRemovingPhoto(url: URL, record: Record, completion: (Result<Void, Error>) -> Void) {
+    func executeRemovingPhoto(
+        url: URL,
+        record: Record?,
+        completion: (Result<Void, Error>) -> Void
+    ) {
         self.imageFileManager.removePhoto(at: url) { result in
             switch result {
             case .success:
-                self.repository.updateRecord(at: record)
+                if let record = record {
+                    self.repository.updateRecord(at: record)
+                }
             case .failure(let error):
                 print(error)
             }
             completion(result)
         }
     }
-
 }

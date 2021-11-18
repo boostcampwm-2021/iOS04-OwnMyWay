@@ -45,8 +45,21 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.configureModelValue()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
+    }
+
     func bind(viewModel: AddRecordViewModel) {
         self.viewModel = viewModel
+    }
+
+    func update(recordPlace: String?, latitude: Double, longitude: Double) {
+        self.viewModel?.locationDidUpdate(
+            recordPlace: recordPlace, latitude: latitude, longitude: longitude
+        )
     }
 
     private func configureNibs() {
@@ -127,6 +140,10 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     @IBAction func didChangeDate(_ sender: UIDatePicker) {
         self.viewModel?.didEnterTime(with: sender.date)
+    }
+
+    @IBAction func didChangeLocation(_ sender: Any) {
+        self.viewModel?.didTouchLocationButton()
     }
 }
 

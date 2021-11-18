@@ -16,6 +16,7 @@ protocol AddRecordViewModel {
     var datePublisher: Published<Date?>.Publisher { get }
 
     func viewDidLoad(completion: (Record) -> Void)
+    func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double)
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
     func didEnterCoordinate(latitude: Double?, longitude: Double?)
@@ -23,10 +24,13 @@ protocol AddRecordViewModel {
     func didEnterPhotoURL(with url: URL)
     func didRemovePhoto(at index: Int) 
     func didTouchSubmitButton()
+    func didTouchLocationButton()
+    func didTouchBackButton()
 }
 
 protocol AddRecordCoordinatingDelegate: AnyObject {
     func popToParent(with record: Record)
+    func presentToSearchLocation()
 }
 
 class DefaultAddRecordViewModel: AddRecordViewModel {
@@ -48,6 +52,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     private var recordTitle: String?
     private var recordCoordinate: Location?
     private var recordContent: String?
+    private var tempPhotoURLs: [URL]
     private var isValidTitle: Bool = false {
         didSet {
             self.checkValidation()
@@ -82,6 +87,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
         self.recordPhotos = []
+        self.tempPhotoURLs = []
         self.configurePlusCard()
         self.configureRecord(with: record)
     }
@@ -94,6 +100,11 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             placeDescription: self.recordPlace
         )
         completion(record)
+    }
+
+    func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double) {
+        self.recordCoordinate = Location(latitude: latitude, longitude: longitude)
+        self.recordPlace = recordPlace
     }
 
     func didEnterTitle(with text: String?) {
@@ -124,6 +135,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
                   let copiedURL = url
             else { return }
             self?.recordPhotos.append(copiedURL)
+            self?.tempPhotoURLs.append(copiedURL)
             self?.isValidPhotos = true
         }
     }
@@ -138,7 +150,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             latitude: self.recordCoordinate?.latitude,
             longitude: self.recordCoordinate?.longitude,
             photoURLs: self.recordPhotos,
-            placeDescription: self.recordPlace)
+            placeDescription: self.recordPlace
+        )
 
         self.usecase.executeRemovingPhoto(
             url: self.recordPhotos[index - 1],
@@ -164,16 +177,30 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         else { return }
         self.recordPhotos.removeFirst()
         let record = Record(
-            uuid: self.recordID ?? UUID(), title: recordTitle, content: self.recordContent,
-            date: date, latitude: self.recordCoordinate?.latitude, longitude: self.recordCoordinate?.longitude,
-            photoURLs: recordPhotos, placeDescription: place
+            uuid: self.recordID ?? UUID(),
+            title: recordTitle,
+            content: self.recordContent,
+            date: date,
+            latitude: self.recordCoordinate?.latitude,
+            longitude: self.recordCoordinate?.longitude,
+            photoURLs: recordPhotos,
+            placeDescription: place
         )
         self.coordinatingDelegate?.popToParent(with: record)
     }
 
+    func didTouchLocationButton() {
+        self.coordinatingDelegate?.presentToSearchLocation()
+    }
+
+    func didTouchBackButton() {
+        self.tempPhotoURLs.forEach { [weak self] url in
+            self?.usecase.executeRemovingPhoto(url: url, record: nil) { _ in }
+        }
+    }
+
     private func configurePlusCard() {
         if let plusCard = Bundle.main.url(forResource: "addImage", withExtension: "png") {
-            // self.recordPhotos.append(plusCard)
             self.recordPhotos.insert(plusCard, at: 0)
         }
     }
