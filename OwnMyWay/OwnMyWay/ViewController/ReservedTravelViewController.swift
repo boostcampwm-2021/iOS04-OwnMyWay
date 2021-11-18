@@ -5,6 +5,7 @@
 //  Created by 유한준 on 2021/11/04.
 //
 
+import Combine
 import UIKit
 
 class ReservedTravelViewController: UIViewController,
@@ -21,11 +22,13 @@ class ReservedTravelViewController: UIViewController,
 
     private var bindContainerVC: ((UIView) -> Void)?
     private var viewModel: ReservedTravelViewModel?
+    private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureDescription()
         self.configureStartButton()
+        self.configureCancellable()
         self.bindContainerVC?(self.cartView)
     }
 
@@ -71,11 +74,6 @@ class ReservedTravelViewController: UIViewController,
     }
 
     private func configureDescription() {
-        self.navigationItem.title = viewModel?.travel.title
-        if let startDate = viewModel?.travel.startDate,
-            let endDate = viewModel?.travel.endDate {
-            self.dateLabel.text = "\(startDate.format(endDate: endDate))"
-        }
         self.travelTypeLabel.text = "예정된 여행"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "ellipsis"),
@@ -83,6 +81,21 @@ class ReservedTravelViewController: UIViewController,
             target: self,
             action: #selector(self.didTouchSettingButton)
         )
+    }
+
+    private func configureCancellable() {
+        self.viewModel?.travelPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] travel in
+                let title = travel.title
+                self?.navigationItem.title = title
+
+                if let startDate = travel.startDate,
+                    let endDate = travel.endDate {
+                    self?.dateLabel.text = "\(startDate.format(endDate: endDate))"
+                }
+            }
+            .store(in: &cancellables)
     }
 
     @objc private func backButtonAction() {

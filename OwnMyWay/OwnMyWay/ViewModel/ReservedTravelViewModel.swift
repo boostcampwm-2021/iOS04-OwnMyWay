@@ -10,6 +10,8 @@ import Foundation
 protocol ReservedTravelViewModel {
     var travel: Travel { get }
     var isPossibleStart: Bool { get }
+    var travelPublisher: Published<Travel>.Publisher { get }
+
     func didDeleteTravel()
     func didUpdateTravel(to travel: Travel)
     func didDeleteLandmark(at landmark: Landmark)
@@ -25,8 +27,9 @@ protocol ReservedTravelCoordinatingDelegate: AnyObject {
 }
 
 class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject {
-    private(set) var travel: Travel
+    @Published private(set) var travel: Travel
     private(set) var isPossibleStart: Bool
+    var travelPublisher: Published<Travel>.Publisher { $travel }
 
     private let usecase: ReservedTravelUsecase
     private weak var coordinatingDelegate: ReservedTravelCoordinatingDelegate?
