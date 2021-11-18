@@ -27,6 +27,7 @@ extension UIView {
         let titleLabel = UILabel()
         titleLabel.text = record.content
         titleLabel.font = UIFont(name: "Chalkduster", size: 17)
+        titleLabel.textColor = .black
 
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
