@@ -10,7 +10,7 @@ import UIKit
 
 class ReservedTravelViewController: UIViewController,
                                     Instantiable,
-                                    TravelEditableViewController,
+                                    TravelEditable,
                                     LandmarkDeletable {
 
     @IBOutlet private weak var contentView: UIView!

@@ -7,4 +7,4 @@
 
 import UIKit
 
-protocol TravelEditableViewController: UIViewController, TravelUpdatable {}
+protocol TravelEditable: TravelUpdatable {}

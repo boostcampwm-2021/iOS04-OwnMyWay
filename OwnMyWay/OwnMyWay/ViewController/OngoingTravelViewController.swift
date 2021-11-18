@@ -11,7 +11,7 @@ import UIKit
 
 typealias OngoingTravelDataSource = UICollectionViewDiffableDataSource <String, Record>
 
-class OngoingTravelViewController: UIViewController, Instantiable, TravelEditableViewController {
+class OngoingTravelViewController: UIViewController, Instantiable, TravelEditable {
 
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
 

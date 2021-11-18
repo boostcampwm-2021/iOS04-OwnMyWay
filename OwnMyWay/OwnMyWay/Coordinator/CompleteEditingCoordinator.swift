@@ -35,9 +35,9 @@ class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelega
     func popToTravelViewController(travel: Travel) {
         let viewControllers = self.navigationController.viewControllers
         let travelVC = viewControllers.first {
-            $0 is TravelEditableViewController
+            $0 is TravelEditable
         }
-        guard let travelVC = travelVC as? TravelEditableViewController
+        guard let travelVC = travelVC as? UIViewController & TravelEditable
         else { return }
         travelVC.didUpdateTravel(to: travel)
         self.navigationController.popToViewController(travelVC, animated: true)
