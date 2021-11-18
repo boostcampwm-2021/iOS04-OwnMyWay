@@ -162,8 +162,7 @@ extension DetailRecordViewController: UIDocumentInteractionControllerDelegate {
         polaroidView.removeFromSuperview()
         self.documentInteractionController.url = self.save(
             image: image,
-            // FIXME: title로 변경하는게 좋을 것 같아요 근데 지금 더미는 title이 nil이여서 확인차 content로 해놨어요
-            fileName: viewModel.record.content
+            fileName: viewModel.record.title
         )
         self.documentInteractionController.presentPreview(animated: true)
     }
