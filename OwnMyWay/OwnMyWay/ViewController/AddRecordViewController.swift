@@ -209,16 +209,17 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case 0:
-        if #available(iOS 14.0, *) {
-            self.openPicker()
+            if #available(iOS 14.0, *) {
+                self.openPicker()
             } else {
                 guard let url = URL(string: "https://apple.com"),
                       UIApplication.shared.canOpenURL(url)
                 else { return }
                 UIApplication.shared.open(url, options: [:])
             }
-        default: 
-        self.viewModel?.didRemovePhoto(at: indexPath.item)
+        default:
+            self.viewModel?.didRemovePhoto(at: indexPath.item)
+        }
     }
 }
 
