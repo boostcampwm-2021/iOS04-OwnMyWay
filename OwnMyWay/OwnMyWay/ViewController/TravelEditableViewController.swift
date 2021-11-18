@@ -7,4 +7,6 @@
 
 import UIKit
 
-protocol TravelEditable: TravelUpdatable {}
+protocol TravelEditable {
+    func didEditTravel(to travel: Travel)
+}

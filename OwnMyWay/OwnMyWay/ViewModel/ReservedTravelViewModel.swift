@@ -14,6 +14,7 @@ protocol ReservedTravelViewModel {
 
     func didDeleteTravel()
     func didUpdateTravel(to travel: Travel)
+    func didEditTravel(to travel: Travel)
     func didDeleteLandmark(at landmark: Landmark)
     func didTouchBackButton()
     func didTouchStartButton()
@@ -57,6 +58,10 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
     func didUpdateTravel(to travel: Travel) {
         self.travel = travel // 자기자신에 업데이트
         self.usecase.executeLandmarkAddition(of: travel) // coreData에 업데이트
+    }
+
+    func didEditTravel(to travel: Travel) {
+        self.travel = travel
     }
 
     func didDeleteLandmark(at landmark: Landmark) {
