@@ -207,8 +207,9 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
-            if #available(iOS 14.0, *) {
+        switch indexPath.item {
+        case 0:
+        if #available(iOS 14.0, *) {
             self.openPicker()
             } else {
                 guard let url = URL(string: "https://apple.com"),
@@ -216,9 +217,9 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
                 else { return }
                 UIApplication.shared.open(url, options: [:])
             }
-        }
+        default: 
+        self.viewModel?.didRemovePhoto(at: indexPath.item)
     }
-
 }
 
 extension AddRecordViewController: PHPickerViewControllerDelegate {
