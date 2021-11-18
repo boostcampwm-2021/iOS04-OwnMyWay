@@ -40,11 +40,22 @@ struct Travel {
 
 extension Travel: Hashable {
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.uuid == rhs.uuid
+        return lhs.uuid == rhs.uuid &&
+        lhs.flag == rhs.flag &&
+        lhs.title == rhs.title &&
+        lhs.startDate == rhs.startDate &&
+        lhs.endDate == rhs.endDate &&
+        lhs.landmarks == rhs.landmarks &&
+        lhs.records == rhs.records &&
+        lhs.locations == rhs.locations
     }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(uuid)
+        hasher.combine(flag)
+        hasher.combine(title)
+        hasher.combine(startDate)
+        hasher.combine(endDate)
     }
 }
 
