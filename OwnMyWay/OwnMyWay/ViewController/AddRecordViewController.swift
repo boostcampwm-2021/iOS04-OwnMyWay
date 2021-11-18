@@ -270,10 +270,15 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
             guard let assetId = results[0].assetIdentifier else { return }
             let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
             let date = assetResults.firstObject?.creationDate ?? Date()
+            let coordinate = assetResults.firstObject?.location?.coordinate
             self.viewModel?.didEnterTime(with: date)
             self.viewModel?.didEnterCoordinate(
-                latitude: assetResults.firstObject?.location?.coordinate.latitude.magnitude,
-                longitude: assetResults.firstObject?.location?.coordinate.longitude.magnitude
+                latitude: coordinate?.latitude.magnitude,
+                longitude: coordinate?.longitude.magnitude
+            )
+            self.viewModel?.configurePlace(
+                latitude: coordinate?.latitude.magnitude,
+                longitude: coordinate?.longitude.magnitude
             )
         }
 

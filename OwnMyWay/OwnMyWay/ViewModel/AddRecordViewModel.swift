@@ -20,10 +20,11 @@ protocol AddRecordViewModel {
     func didEnterCoordinate(latitude: Double?, longitude: Double?)
     func didEnterContent(with text: String?)
     func didEnterPhotoURL(with url: URL)
-    func didRemovePhoto(at index: Int) 
+    func didRemovePhoto(at index: Int)
     func didTouchSubmitButton()
     func didTouchLocationButton()
     func didTouchBackButton()
+    func configurePlace(latitude: Double?, longitude: Double?)
 }
 
 protocol AddRecordCoordinatingDelegate: AnyObject {
@@ -79,7 +80,11 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.coordinatingDelegate = coordinatingDelegate
         self.tempPhotoURLs = []
         self.deletePhotoURLs = []
-        self.record = record ?? Record(uuid: UUID(), title: nil, content: nil, date: nil, latitude: nil, longitude: nil, photoURLs: [], placeDescription: nil)
+        self.record = record ?? Record(
+            uuid: UUID(), title: nil, content: nil,
+            date: nil, latitude: nil, longitude: nil,
+            photoURLs: [], placeDescription: nil
+        )
         self.configureRecord()
     }
 
@@ -107,7 +112,6 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.record.latitude = latitude
         self.record.longitude = longitude
         self.isValidCoordinate = self.usecase.executeValidationCoordinate(with: location)
-        self.configurePlace(latitude: latitude, longitude: longitude)
     }
 
     func didEnterContent(with text: String?) {
@@ -149,14 +153,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         }
     }
 
-    private func configureRecord() {
-        self.didEnterTitle(with: self.record.title)
-        self.didEnterTime(with: self.record.date)
-        self.didEnterCoordinate(latitude: self.record.latitude, longitude: self.record.longitude)
-        if record.photoURLs?.count != 0 { self.isValidPhotos = true }
-    }
-
-    private func configurePlace(latitude: Double?, longitude: Double?) {
+    func configurePlace(latitude: Double?, longitude: Double?) {
         guard let latitude = latitude,
               let longitude = longitude
         else {
@@ -172,6 +169,13 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             self.record.placeDescription = place
             self.isValidPlace = true
         }
+    }
+
+    private func configureRecord() {
+        self.didEnterTitle(with: self.record.title)
+        self.didEnterTime(with: self.record.date)
+        self.didEnterCoordinate(latitude: self.record.latitude, longitude: self.record.longitude)
+        if record.photoURLs?.count != 0 { self.isValidPhotos = true }
     }
 
     private func checkValidation() {
