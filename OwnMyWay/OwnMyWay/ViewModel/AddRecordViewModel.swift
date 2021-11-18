@@ -22,9 +22,10 @@ protocol AddRecordViewModel {
     func didEnterCoordinate(latitude: Double?, longitude: Double?)
     func didEnterContent(with text: String?)
     func didEnterPhotoURL(with url: URL)
-    func didRemovePhotoURL(with url: URL)
+    func didRemovePhoto(at index: Int) 
     func didTouchSubmitButton()
     func didTouchLocationButton()
+    func didTouchBackButton()
 }
 
 protocol AddRecordCoordinatingDelegate: AnyObject {
@@ -51,6 +52,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     private var recordTitle: String?
     private var recordCoordinate: Location?
     private var recordContent: String?
+    private var tempPhotoURLs: [URL]
     private var isValidTitle: Bool = false {
         didSet {
             self.checkValidation()
@@ -85,6 +87,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
         self.recordPhotos = []
+        self.tempPhotoURLs = []
         self.configurePlusCard()
         self.configureRecord(with: record)
     }
@@ -132,19 +135,37 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
                   let copiedURL = url
             else { return }
             self?.recordPhotos.append(copiedURL)
+            self?.tempPhotoURLs.append(copiedURL)
             self?.isValidPhotos = true
         }
     }
 
-    func didRemovePhotoURL(with url: URL) {
-        guard let index = self.recordPhotos.firstIndex(of: url)
-        else { return }
-        self.usecase.executeRemovingPhoto(with: url) { [weak self] success, error in
-            guard error == nil,
-                  success
-            else { return }
-            self?.recordPhotos.remove(at: index)
-        }
+    func didRemovePhoto(at index: Int) {
+        self.recordPhotos.removeFirst() // FIXME: PLUSCARD 방식 통일해야하지 않을까 생각
+        let record = Record(
+            uuid: self.recordID,
+            title: self.recordTitle,
+            content: self.recordContent,
+            date: recordDate,
+            latitude: self.recordCoordinate?.latitude,
+            longitude: self.recordCoordinate?.longitude,
+            photoURLs: self.recordPhotos,
+            placeDescription: self.recordPlace
+        )
+
+        self.usecase.executeRemovingPhoto(
+            url: self.recordPhotos[index - 1],
+            record: record) { [weak self] result in
+                switch result {
+                case .success:
+                    self?.recordPhotos.remove(at: index - 1)
+                    self?.configurePlusCard()
+                case .failure(let error):
+                    self?.configurePlusCard()
+                    print(error)
+                }
+                self?.isValidPhotos = self?.recordPhotos.count == 1 ? false : true
+            }
     }
 
     func didTouchSubmitButton() {
@@ -156,9 +177,14 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         else { return }
         self.recordPhotos.removeFirst()
         let record = Record(
-            uuid: self.recordID ?? UUID(), title: recordTitle, content: self.recordContent,
-            date: date, latitude: self.recordCoordinate?.latitude, longitude: self.recordCoordinate?.longitude,
-            photoURLs: recordPhotos, placeDescription: place
+            uuid: self.recordID ?? UUID(),
+            title: recordTitle,
+            content: self.recordContent,
+            date: date,
+            latitude: self.recordCoordinate?.latitude,
+            longitude: self.recordCoordinate?.longitude,
+            photoURLs: recordPhotos,
+            placeDescription: place
         )
         self.coordinatingDelegate?.popToParent(with: record)
     }
@@ -167,9 +193,15 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.coordinatingDelegate?.presentToSearchLocation()
     }
 
+    func didTouchBackButton() {
+        self.tempPhotoURLs.forEach { [weak self] url in
+            self?.usecase.executeRemovingPhoto(url: url, record: nil) { _ in }
+        }
+    }
+
     private func configurePlusCard() {
         if let plusCard = Bundle.main.url(forResource: "addImage", withExtension: "png") {
-            self.recordPhotos.append(plusCard)
+            self.recordPhotos.insert(plusCard, at: 0)
         }
     }
 

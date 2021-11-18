@@ -44,6 +44,13 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.configureModelValue()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.isMovingFromParent {
+            self.viewModel?.didTouchBackButton()
+        }
+    }
+
     func bind(viewModel: AddRecordViewModel) {
         self.viewModel = viewModel
     }
@@ -216,11 +223,11 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
-            self.openPicker()
+        switch indexPath.item {
+        case 0: self.openPicker()
+        default: self.viewModel?.didRemovePhoto(at: indexPath.item)
         }
     }
-
 }
 
 extension AddRecordViewController: PHPickerViewControllerDelegate {
