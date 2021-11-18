@@ -284,7 +284,9 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                     ) { url, error in
                         guard error == nil,
                               let url = url else { return }
-                        self?.viewModel?.didEnterPhotoURL(with: url)
+                        DispatchQueue.global().sync {
+                            self?.viewModel?.didEnterPhotoURL(with: url)
+                        }
                     }
                     break
                 }
