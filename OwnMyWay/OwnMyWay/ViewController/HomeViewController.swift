@@ -145,7 +145,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         )
         section.interGroupSpacing = 25
         section.decorationItems = [
-            NSCollectionLayoutDecorationItem.background(elementKind: "homeBackground")
+            NSCollectionLayoutDecorationItem.background(elementKind: ElementKind.background)
         ]
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)
@@ -160,7 +160,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         let layout = UICollectionViewCompositionalLayout(section: section)
         layout.register(
             UINib(nibName: HomeBackgroundView.identifier, bundle: nil),
-            forDecorationViewOfKind: "homeBackground"
+            forDecorationViewOfKind: ElementKind.background
         )
 
         let config = UICollectionViewCompositionalLayoutConfiguration()
@@ -257,6 +257,14 @@ extension HomeViewController: UICollectionViewDelegate {
             return
         }
 
+    }
+
+}
+
+fileprivate extension HomeViewController {
+
+    struct ElementKind {
+        static let background = "homeBackground"
     }
 
 }
