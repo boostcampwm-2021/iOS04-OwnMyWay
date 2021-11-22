@@ -14,7 +14,8 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     @IBOutlet private weak var travelCollectionView: UICollectionView!
     @IBOutlet private weak var configureButton: UIButton!
-
+    @IBOutlet private weak var addTravelButton: UIButton!
+    
     private var viewModel: HomeViewModel?
     private var diffableDataSource: HomeDataSource?
     private var cancellables: Set<AnyCancellable> = []
@@ -22,6 +23,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureButton.setTitle("", for: .normal)
+        self.addTravelButton.setTitle("", for: .normal)
         self.configureNibs()
         self.configureTravelCollectionView()
         var snapshot = NSDiffableDataSourceSnapshot<Travel.Section, Travel>()
