@@ -34,7 +34,7 @@ class DefaultHomeViewModel: HomeViewModel {
 
     private let usecase: HomeUsecase
     private weak var coordinatingDelegate: HomeCoordinatingDelegate?
-    private var plusCard: Travel
+    private var reservedComment: Travel
     private var ongoingComment: Travel
     private var outdatedComment: Travel
 
@@ -48,7 +48,7 @@ class DefaultHomeViewModel: HomeViewModel {
         self.reservedTravels = []
         self.ongoingTravels = []
         self.outdatedTravels = []
-        self.plusCard = Travel.dummy(section: .dummy)
+        self.reservedComment = Travel.dummy(section: .dummy)
         self.ongoingComment = Travel.dummy(section: .dummy)
         self.outdatedComment = Travel.dummy(section: .dummy)
     }
@@ -56,9 +56,8 @@ class DefaultHomeViewModel: HomeViewModel {
     func viewDidLoad() {
         self.usecase.executeFetch { [weak self] travels in
             guard let self = self else { return }
-            self.reservedTravels = [self.plusCard] + travels.filter {
-                $0.flag == Travel.Section.reserved.index
-            }
+            let reserveds = travels.filter { $0.flag == Travel.Section.reserved.index }
+            self.reservedTravels = reserveds.isEmpty ? [self.reservedComment] : reserveds
             let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
             self.ongoingTravels = ongoings.isEmpty ? [self.ongoingComment] : ongoings
             let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }
@@ -71,7 +70,7 @@ class DefaultHomeViewModel: HomeViewModel {
     }
 
     func didTouchReservedTravel(at index: Int) {
-        guard reservedTravels.startIndex + 1..<reservedTravels.endIndex ~= index else { return }
+        guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else { return }
         self.coordinatingDelegate?.pushToReservedTravel(travel: reservedTravels[index])
     }
 
