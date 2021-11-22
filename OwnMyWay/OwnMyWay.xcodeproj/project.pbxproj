@@ -23,6 +23,7 @@
 		294897CA273BF3D7003185E7 /* DetailRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C9273BF3D7003185E7 /* DetailRecordUsecase.swift */; };
 		294897CD273CDCF1003185E7 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897CB273CDCF1003185E7 /* CommentCell.swift */; };
 		294897CE273CDCF1003185E7 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 294897CC273CDCF1003185E7 /* CommentCell.xib */; };
+		2984F58F274B348F00DDCA2D /* OMWSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2984F58E274B348F00DDCA2D /* OMWSegmentedControl.swift */; };
 		2985B1E527427AE900428098 /* LandmarkDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985B1E427427AE900428098 /* LandmarkDeletable.swift */; };
 		2985B1E727448DFD00428098 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985B1E627448DFC00428098 /* UIView+.swift */; };
 		29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */; };
@@ -151,6 +152,7 @@
 		294897C9273BF3D7003185E7 /* DetailRecordUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordUsecase.swift; sourceTree = "<group>"; };
 		294897CB273CDCF1003185E7 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		294897CC273CDCF1003185E7 /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
+		2984F58E274B348F00DDCA2D /* OMWSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMWSegmentedControl.swift; sourceTree = "<group>"; };
 		2985B1E427427AE900428098 /* LandmarkDeletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDeletable.swift; sourceTree = "<group>"; };
 		2985B1E627448DFC00428098 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewModel.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				AF623FDF2744DC8600DC805D /* OutdatedMapCell.xib */,
 				AF2F6CD627461D6900EA3601 /* LocationTableViewCell.swift */,
 				AF2F6CD727461D6900EA3601 /* LocationTableViewCell.xib */,
+				2984F58E274B348F00DDCA2D /* OMWSegmentedControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */,
 				AF2F6CD827461D6900EA3601 /* LocationTableViewCell.swift in Sources */,
 				3FF20BBA27461BC4007AFF78 /* TravelEditableViewController.swift in Sources */,
+				2984F58F274B348F00DDCA2D /* OMWSegmentedControl.swift in Sources */,
 				AFA6ED802744F811007B251C /* CompleteEditingViewModel.swift in Sources */,
 				DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */,
 				3F113A13273A59C500EA91AA /* CompleteCreationViewModel.swift in Sources */,
