@@ -33,7 +33,7 @@ class OMWSegmentedControl: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.blue.cgColor
+        self.layer.borderColor = self.selectorViewColor.cgColor
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
         self.updateView()
