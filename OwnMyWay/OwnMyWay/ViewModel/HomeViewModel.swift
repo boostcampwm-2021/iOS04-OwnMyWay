@@ -34,7 +34,6 @@ class DefaultHomeViewModel: HomeViewModel {
 
     private let usecase: HomeUsecase
     private weak var coordinatingDelegate: HomeCoordinatingDelegate?
-    private var plusCard: Travel
     private var ongoingComment: Travel
     private var outdatedComment: Travel
 
@@ -48,7 +47,6 @@ class DefaultHomeViewModel: HomeViewModel {
         self.reservedTravels = []
         self.ongoingTravels = []
         self.outdatedTravels = []
-        self.plusCard = Travel.dummy(section: .dummy)
         self.ongoingComment = Travel.dummy(section: .dummy)
         self.outdatedComment = Travel.dummy(section: .dummy)
     }
@@ -56,7 +54,7 @@ class DefaultHomeViewModel: HomeViewModel {
     func viewDidLoad() {
         self.usecase.executeFetch { [weak self] travels in
             guard let self = self else { return }
-            self.reservedTravels = [self.plusCard] + travels.filter {
+            self.reservedTravels = travels.filter {
                 $0.flag == Travel.Section.reserved.index
             }
             let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
