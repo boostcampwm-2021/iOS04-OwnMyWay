@@ -73,8 +73,6 @@
 		AF2F6CD927461D6900EA3601 /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF2F6CD727461D6900EA3601 /* LocationTableViewCell.xib */; };
 		AF2F6CDB274620BE00EA3601 /* SearchLocationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CDA274620BE00EA3601 /* SearchLocationCoordinator.swift */; };
 		AF2F6CDD2746215400EA3601 /* SearchLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */; };
-		AF623FE02744DC8600DC805D /* OutdatedMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF623FDE2744DC8600DC805D /* OutdatedMapCell.swift */; };
-		AF623FE12744DC8600DC805D /* OutdatedMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF623FDF2744DC8600DC805D /* OutdatedMapCell.xib */; };
 		AF6C7917273942E800FAB0FE /* TravelUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */; };
 		AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */; };
 		AF6CBB692733F0C400E87533 /* SearchLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */; };
@@ -205,8 +203,6 @@
 		AF2F6CD727461D6900EA3601 /* LocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
 		AF2F6CDA274620BE00EA3601 /* SearchLocationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationCoordinator.swift; sourceTree = "<group>"; };
 		AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewModel.swift; sourceTree = "<group>"; };
-		AF623FDE2744DC8600DC805D /* OutdatedMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedMapCell.swift; sourceTree = "<group>"; };
-		AF623FDF2744DC8600DC805D /* OutdatedMapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutdatedMapCell.xib; sourceTree = "<group>"; };
 		AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelUpdatable.swift; sourceTree = "<group>"; };
 		AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLandmark.storyboard; sourceTree = "<group>"; };
 		AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewController.swift; sourceTree = "<group>"; };
@@ -348,8 +344,6 @@
 				294897CC273CDCF1003185E7 /* CommentCell.xib */,
 				3FB987A3274373CB008F0E08 /* PhotoCell.swift */,
 				3FB987A4274373CB008F0E08 /* PhotoCell.xib */,
-				AF623FDE2744DC8600DC805D /* OutdatedMapCell.swift */,
-				AF623FDF2744DC8600DC805D /* OutdatedMapCell.xib */,
 				AF2F6CD627461D6900EA3601 /* LocationTableViewCell.swift */,
 				AF2F6CD727461D6900EA3601 /* LocationTableViewCell.xib */,
 				2984F58E274B348F00DDCA2D /* OMWSegmentedControl.swift */,
@@ -600,7 +594,6 @@
 				29E9BA36273251BE0040B70A /* LandmarkCart.storyboard in Resources */,
 				29E9BA3C273294DB0040B70A /* LandmarkCardCell.xib in Resources */,
 				3FB914BF273409530084FF1C /* TravelCardCell.xib in Resources */,
-				AF623FE12744DC8600DC805D /* OutdatedMapCell.xib in Resources */,
 				DB22BB69272F82780004444B /* LaunchScreen.storyboard in Resources */,
 				DB22BB66272F82780004444B /* Assets.xcassets in Resources */,
 				AFA6ED7C2744F77C007B251C /* CompleteEditing.storyboard in Resources */,
@@ -674,7 +667,6 @@
 				29274EF92733FC4500DDEBFF /* ReservedTravelViewController.swift in Sources */,
 				DB1D5CB3273CE17800B30448 /* LocationMO+CoreDataProperties.swift in Sources */,
 				29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */,
-				AF623FE02744DC8600DC805D /* OutdatedMapCell.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */,
 				DBFC04122739170900031EDF /* LandmarkCartCoordinator.swift in Sources */,
