@@ -16,10 +16,15 @@ typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewContr
 class LandmarkCartViewController: UIViewController,
                                   Instantiable,
                                   TravelUpdatable,
-                                  MapAvailable {
+                                  MapAvailable,
+                                  OMWSegmentedControlDelegate {
 
 //    static let badgeElementKind = "badge-element-kind"
 
+    @IBOutlet private weak var stackView: UIStackView!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var segmentedControlView: UIView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var collectionView: UICollectionView!
 
@@ -32,14 +37,14 @@ class LandmarkCartViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureNibs()
-
         self.mapView.delegate = self
         self.configureMapView(with: self.mapView)
-
         self.collectionView.delegate = self
         self.collectionView.collectionViewLayout = configureCompositionalLayout()
         self.diffableDataSource = configureDiffableDataSource()
         self.configureCancellable()
+        self.configureSegmentedControl()
+        self.configureDescriptionLable()
     }
 
     func bind(viewModel: LandmarkCartViewModel) {
@@ -61,6 +66,37 @@ class LandmarkCartViewController: UIViewController,
         )
     }
 
+    private func configureSegmentedControl() {
+        let segmentedControl = OMWSegmentedControl(
+            frame: CGRect(origin: .zero, size: self.segmentedControlView.frame.size),
+            buttonTitles: ["카드", "지도"]
+        )
+        self.segmentedControlView.addSubview(segmentedControl)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            segmentedControl.centerXAnchor.constraint(
+                equalTo: segmentedControlView.centerXAnchor
+            ),
+            segmentedControl.centerYAnchor.constraint(
+                equalTo: segmentedControlView.centerYAnchor
+            ),
+            segmentedControl.widthAnchor.constraint(
+                equalTo: segmentedControlView.widthAnchor,
+                multiplier: 0.6
+            ),
+            segmentedControl.heightAnchor.constraint(
+                equalTo: segmentedControlView.heightAnchor
+            )
+        ])
+        segmentedControl.delegate = self
+    }
+
+    private func configureDescriptionLable() {
+        if self.viewModel?.superVC == .reserved {
+            self.descriptionLabel.isHidden = true
+        }
+    }
+
     private func configureCancellable() {
         self.viewModel?.travelPublisher
             .receive(on: DispatchQueue.main)
@@ -80,11 +116,9 @@ class LandmarkCartViewController: UIViewController,
             }
             .store(in: &cancellables)
     }
-
     private func configureCompositionalLayout() -> UICollectionViewLayout {
-
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0)
+            widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.7)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(
@@ -92,19 +126,16 @@ class LandmarkCartViewController: UIViewController,
         )
 
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(180), heightDimension: .absolute(180)
+            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.7)
         )
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize, subitems: [item]
-        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 10, leading: 10, bottom: 10, trailing: 10
         )
-
-        return UICollectionViewCompositionalLayout(section: section)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
 
     private func configureDiffableDataSource() -> DataSource {
@@ -149,6 +180,16 @@ class LandmarkCartViewController: UIViewController,
         alert.addAction(yesAction)
         alert.addAction(noAction)
         present(alert, animated: true)
+    }
+
+    func change(to index: Int) {
+        switch index {
+        case 0:
+            self.scrollView.contentOffset.x = 0
+        case 1:
+            self.scrollView.contentOffset.x = self.view.frame.maxX
+        default: break
+        }
     }
 }
 

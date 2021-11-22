@@ -30,7 +30,7 @@ class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var photoCollectionView: UICollectionView!
     @IBOutlet private weak var titleTextField: UITextField!
-    @IBOutlet private weak var contentTextField: UITextField!
+    @IBOutlet private weak var contentTextView: UITextView!
     @IBOutlet private weak var datePicker: UIDatePicker!
     @IBOutlet private weak var locationButton: UIButton!
 
@@ -40,6 +40,7 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureTextView()
         self.configureGestureRecognizer()
         self.configureNotifications()
         self.configureNibs()
@@ -63,6 +64,12 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.viewModel?.locationDidUpdate(
             recordPlace: recordPlace, latitude: latitude, longitude: longitude
         )
+    }
+
+    private func configureTextView() {
+        self.contentTextView.layer.cornerRadius = 10
+        self.contentTextView.textContainerInset = .init(top: 20, left: 15, bottom: 20, right: 15)
+        self.contentTextView.delegate = self
     }
 
     private func configureNibs() {
@@ -102,7 +109,7 @@ class AddRecordViewController: UIViewController, Instantiable {
                 self?.locationButton.setTitle(record.placeDescription, for: .normal)
                 self?.datePicker.date = record.date ?? Date()
                 self?.titleTextField.text = record.title
-                self?.contentTextField.text = record.content
+                self?.contentTextView.text = record.content
             }
             .store(in: &cancellables)
     }
@@ -116,16 +123,25 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.viewModel?.didEnterTitle(with: sender.text)
     }
 
-    @IBAction func didChangeContent(_ sender: UITextField) {
-        self.viewModel?.didEnterContent(with: sender.text)
-    }
-
     @IBAction func didChangeDate(_ sender: UIDatePicker) {
         self.viewModel?.didEnterTime(with: sender.date)
     }
 
     @IBAction func didChangeLocation(_ sender: Any) {
         self.viewModel?.didTouchLocationButton()
+    }
+}
+
+extension AddRecordViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        self.viewModel?.didEnterContent(with: textView.text)
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        let scrollPoint: CGPoint = CGPoint.init(
+            x: 0, y: textView.frame.origin.y + textView.frame.height
+        )
+        self.scrollView.setContentOffset(scrollPoint, animated: true)
     }
 }
 

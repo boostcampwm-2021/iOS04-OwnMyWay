@@ -32,16 +32,6 @@ class AddLandmarkViewController: UIViewController,
         }
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let mapViewHeight: CGFloat = UIScreen.main.bounds.width
-        let collectionViewHeight: CGFloat = 220
-        self.contentView.heightAnchor
-            .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
-            .isActive = true
-        self.view.layoutIfNeeded()
-    }
-
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.configureButtonConstraint()
