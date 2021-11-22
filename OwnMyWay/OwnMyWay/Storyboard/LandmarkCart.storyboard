@@ -135,6 +135,7 @@
                         <outlet property="collectionView" destination="Jt9-7K-0ga" id="iD8-kT-hct"/>
                         <outlet property="descriptionLabel" destination="axY-Yj-cPb" id="xg8-eM-Aju"/>
                         <outlet property="mapView" destination="MUO-an-Ow9" id="gaA-qB-BQd"/>
+                        <outlet property="scrollView" destination="bB8-9h-HvR" id="Ydh-s2-VGl"/>
                         <outlet property="segmentedControlView" destination="yaM-CD-aBt" id="Zx4-XW-Ljs"/>
                         <outlet property="stackView" destination="uhE-Wt-tAQ" id="PkF-fP-fZp"/>
                     </connections>

@@ -16,13 +16,15 @@ typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewContr
 class LandmarkCartViewController: UIViewController,
                                   Instantiable,
                                   TravelUpdatable,
-                                  MapAvailable {
+                                  MapAvailable,
+                                  OMWSegmentedControlDelegate {
 
 //    static let badgeElementKind = "badge-element-kind"
 
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var segmentedControlView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var collectionView: UICollectionView!
 
@@ -86,6 +88,7 @@ class LandmarkCartViewController: UIViewController,
                 equalTo: segmentedControlView.heightAnchor
             )
         ])
+        segmentedControl.delegate = self
     }
 
     private func configureDescriptionLable() {
@@ -177,6 +180,16 @@ class LandmarkCartViewController: UIViewController,
         alert.addAction(yesAction)
         alert.addAction(noAction)
         present(alert, animated: true)
+    }
+
+    func change(to index: Int) {
+        switch index {
+        case 0:
+            self.scrollView.contentOffset.x = 0
+        case 1:
+            self.scrollView.contentOffset.x = self.view.frame.maxX
+        default: break
+        }
     }
 }
 
