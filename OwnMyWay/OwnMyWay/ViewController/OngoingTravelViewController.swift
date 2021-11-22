@@ -24,7 +24,6 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
     @IBOutlet private weak var trackingButton: UIButton!
     @IBOutlet private weak var userLocationButton: UIButton!
     @IBOutlet private weak var landmarkCollectionView: UICollectionView!
-
     private var viewModel: OngoingTravelViewModel?
     private var recordDataSource: RecordDataSource?
     private var landmarkDataSource: DataSource?
@@ -89,14 +88,8 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
     private func configureButton() {
         self.userLocationButton.layer.cornerRadius = 10
         self.trackingButton.configureTrackingButton()
-
         if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
-            switch LocationManager.shared.isUpdatingLocation {
-            case true:
-                self.trackingButton.isSelected = true
-            case false:
-                self.trackingButton.isSelected = false
-            }
+            self.trackingButton.isSelected = LocationManager.shared.isUpdatingLocation
         }
     }
 
@@ -366,21 +359,18 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-
         switch manager.fetchAuthorizationStatus() {
         case .authorizedWhenInUse:
             manager.requestAlwaysAuthorization()
         default:
             break
         }
-
     }
 }
 
 // MARK: - extension OngoingTravelViewController for RecordUpdatable
 
 extension OngoingTravelViewController: RecordUpdatable {
-
     func didUpdateRecord(record: Record) {
         self.viewModel?.didUpdateRecord(record: record)
     }
@@ -389,7 +379,6 @@ extension OngoingTravelViewController: RecordUpdatable {
 // MARK: - extension OngoingTravelViewController for OMWSegmentedControlDelegate
 
 extension OngoingTravelViewController: OMWSegmentedControlDelegate {
-
     func change(to index: Int) {
         switch index {
         case 0:
