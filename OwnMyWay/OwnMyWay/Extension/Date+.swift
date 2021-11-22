@@ -46,6 +46,16 @@ extension Date {
     func dateTime() -> String {
         return self.localize() + " " + self.time()
     }
+
+    // self가 현재로부터 얼만큼 전인지 string으로 알려주는 함수
+    func relativeDateTime() -> String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateTimeStyle = .named
+        formatter.unitsStyle = .short
+        return formatter.localizedString(for: self, relativeTo: Date())
+    }
+
 }
 
 extension Date: Strideable {
