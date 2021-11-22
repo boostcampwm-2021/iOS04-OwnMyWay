@@ -78,7 +78,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     private func configureTravelCollectionView() {
         self.travelCollectionView.delegate = self
-        self.travelCollectionView.collectionViewLayout = configureCompositionalLayout()
+        self.travelCollectionView.collectionViewLayout = createCompositionalLayout()
         self.diffableDataSource = configureDiffableDataSource()
     }
 
@@ -124,37 +124,49 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         self.navigationController?.isNavigationBarHidden = true
     }
 
-    private func configureCompositionalLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { _, _  in
-            let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
-            )
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-            let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(100)
-            )
-            let group = NSCollectionLayoutGroup.horizontal(
-                layoutSize: groupSize, subitems: [item]
-            )
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(100)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize, subitems: [item]
+        )
 
-            let section = NSCollectionLayoutSection(group: group)
-            section.orthogonalScrollingBehavior = .continuous
-            section.contentInsets = NSDirectionalEdgeInsets(
-                top: 10, leading: 10, bottom: 10, trailing: 10
-            )
-            section.interGroupSpacing = 10
-            let headerSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)
-            )
-            let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: headerSize,
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top
-            )
-            section.boundarySupplementaryItems = [headerElement]
-            return section
-        }
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 25, leading: 20, bottom: 40, trailing: 20
+        )
+        section.interGroupSpacing = 25
+        section.decorationItems = [
+            NSCollectionLayoutDecorationItem.background(elementKind: "homeBackground")
+        ]
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)
+        )
+        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [headerElement]
+
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        layout.register(
+            UINib(nibName: "HomeBackgroundView", bundle: nil),
+            forDecorationViewOfKind: "homeBackground"
+        )
+
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 30
+        layout.configuration = config
+
+        return layout
     }
 
     private func configureDiffableDataSource() -> HomeDataSource {
