@@ -65,6 +65,9 @@
                                 <buttonConfiguration key="configuration" style="plain">
                                     <backgroundConfiguration key="background" image="AddButton"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTouchCreateButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cNr-aE-KIL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -85,8 +88,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="TGK-mU-gOw"/>
                     <connections>
-                        <outlet property="addTravelButton" destination="yoc-4Z-nKU" id="KDb-TQ-Ikg"/>
                         <outlet property="configureButton" destination="mDb-bZ-nOw" id="2nD-LP-KGh"/>
+                        <outlet property="createButton" destination="yoc-4Z-nKU" id="KDb-TQ-Ikg"/>
                         <outlet property="travelCollectionView" destination="bTO-GI-HaZ" id="YQr-o5-4he"/>
                     </connections>
                 </viewController>
