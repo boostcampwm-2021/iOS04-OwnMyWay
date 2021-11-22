@@ -30,7 +30,7 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
             navigationController: self.navigationController,
             travel: self.travel
         )
-        let cartVC = landmarkCartCoordinator.pass()
+        let cartVC = landmarkCartCoordinator.pass(from: .create)
         self.childCoordinators.append(landmarkCartCoordinator)
         addLandmarkVC.bind(viewModel: addLandmarkVM) { cartView in
             addLandmarkVC.addChild(cartVC)
