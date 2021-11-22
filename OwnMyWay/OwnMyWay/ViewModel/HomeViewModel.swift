@@ -69,7 +69,7 @@ class DefaultHomeViewModel: HomeViewModel {
     }
 
     func didTouchReservedTravel(at index: Int) {
-        guard reservedTravels.startIndex + 1..<reservedTravels.endIndex ~= index else { return }
+        guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else { return }
         self.coordinatingDelegate?.pushToReservedTravel(travel: reservedTravels[index])
     }
 
