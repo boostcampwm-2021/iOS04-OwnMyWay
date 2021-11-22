@@ -25,6 +25,7 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 
     private var viewModel: OngoingTravelViewModel?
     private var recordDataSource: RecordDataSource?
+    private var landmarkDataSource: DataSource?
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
@@ -206,12 +207,18 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: DateHeaderView.identifier
         )
+        self.landmarkCollectionView.register(
+            UINib(nibName: LandmarkCardCell.identifier, bundle: nil),
+            forCellWithReuseIdentifier: LandmarkCardCell.identifier
+        )
     }
 
     private func configureCollectionViews() {
         self.recordCollectionView.delegate = self
         self.recordCollectionView.collectionViewLayout = configureRecordCompositionalLayout()
         self.recordDataSource = configureRecordDiffableDataSource()
+        self.landmarkCollectionView.collectionViewLayout = configureLandmarkCompositionalLayout()
+        self.landmarkDataSource = configureLandmarkDiffableDataSource()
     }
 
     private func configureCancellable() {
@@ -221,15 +228,22 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             self.navigationItem.title = travel.title
             (self.mapView as? OMWMapView)?.configure(with: travel)
 
-            var snapshot = NSDiffableDataSourceSnapshot<String, Record>()
+            var recordSnapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
             recordListList.forEach { recordList in
                 guard let date = recordList.first?.date
                 else { return }
-                snapshot.appendSections([date.toKorean()])
-                snapshot.appendItems(recordList, toSection: date.toKorean())
+                recordSnapshot.appendSections([date.toKorean()])
+                recordSnapshot.appendItems(recordList, toSection: date.toKorean())
             }
-            self.recordDataSource?.apply(snapshot, animatingDifferences: true)
+            self.recordDataSource?.apply(recordSnapshot, animatingDifferences: true)
+
+            var landmarkSnapshot = NSDiffableDataSourceSnapshot<
+                LandmarkCartViewController.Section, Landmark
+            >()
+            landmarkSnapshot.appendSections([.main])
+            landmarkSnapshot.appendItems(travel.landmarks, toSection: .main)
+            self.landmarkDataSource?.apply(landmarkSnapshot, animatingDifferences: true)
         }.store(in: &cancellables)
     }
 
@@ -286,6 +300,43 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
 
             sectionHeader.configure(with: title)
             return sectionHeader
+        }
+        return dataSource
+    }
+
+    private func configureLandmarkCompositionalLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.7)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 5, leading: 5, bottom: 5, trailing: 5
+        )
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.7)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 10, leading: 10, bottom: 10, trailing: 10
+        )
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+
+    private func configureLandmarkDiffableDataSource() -> DataSource {
+        let dataSource = DataSource(
+            collectionView: self.landmarkCollectionView
+        ) { collectionView, indexPath, item in
+
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LandmarkCardCell.identifier, for: indexPath
+            ) as? LandmarkCardCell
+            else { return UICollectionViewCell() }
+            cell.configure(with: item)
+            return cell
         }
         return dataSource
     }
