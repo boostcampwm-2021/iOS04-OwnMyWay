@@ -46,16 +46,6 @@ class ReservedTravelViewController: UIViewController,
         self.configureButtonConstraint()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let mapViewHeight: CGFloat = UIScreen.main.bounds.width
-        let collectionViewHeight: CGFloat = 220
-        contentView.heightAnchor
-            .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
-            .isActive = true
-        view.layoutIfNeeded()
-    }
-
     func bind(viewModel: ReservedTravelViewModel, closure: @escaping (UIView) -> Void) {
         self.viewModel = viewModel
         self.bindContainerVC = closure
@@ -85,7 +75,6 @@ class ReservedTravelViewController: UIViewController,
     }
 
     private func configureDescription() {
-        self.travelTypeLabel.text = "예정된 여행"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "ellipsis"),
             style: .plain,

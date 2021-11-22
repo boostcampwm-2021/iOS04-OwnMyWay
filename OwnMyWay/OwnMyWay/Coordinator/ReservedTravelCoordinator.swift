@@ -32,7 +32,7 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
             navigationController: self.navigationController,
             travel: travel
         )
-        let cartVC = landmarkCartCoordinator.pass()
+        let cartVC = landmarkCartCoordinator.pass(from: .reserved)
         self.childCoordinators.append(landmarkCartCoordinator)
         reservedVC.bind(viewModel: reservedVM) { cartView in
             reservedVC.addChild(cartVC)

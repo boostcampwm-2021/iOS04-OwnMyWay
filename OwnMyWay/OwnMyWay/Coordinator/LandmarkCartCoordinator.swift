@@ -23,11 +23,12 @@ class LandmarkCartCoordinator: Coordinator, LandmarkCartCoordinatingDelegate {
         fatalError("잘못된 접근입니다.")
     }
 
-    func pass() -> LandmarkCartViewController {
+    func pass(from superVC: SuperVC) -> LandmarkCartViewController {
         let cartVC = LandmarkCartViewController.instantiate(storyboardName: "LandmarkCart")
         let viewModel = DefaultLandmarkCartViewModel(
             coordinatingDelegate: self,
-            travel: travel
+            travel: travel,
+            superVC: superVC
         )
         cartVC.bind(viewModel: viewModel)
         return cartVC
