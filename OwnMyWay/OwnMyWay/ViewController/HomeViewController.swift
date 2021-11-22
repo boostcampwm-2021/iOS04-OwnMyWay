@@ -52,8 +52,9 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func configureButton() {
-        self.settingButton.setTitle("", for: .normal)
-        self.createButton.setTitle("", for: .normal)
+        let emptyTitle = ""
+        self.settingButton.setTitle(emptyTitle, for: .normal)
+        self.createButton.setTitle(emptyTitle, for: .normal)
     }
 
     private func configureNibs() {
