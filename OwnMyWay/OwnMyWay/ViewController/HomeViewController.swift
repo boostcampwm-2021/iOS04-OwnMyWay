@@ -10,7 +10,7 @@ import UIKit
 
 typealias HomeDataSource = UICollectionViewDiffableDataSource <Travel.Section, Travel>
 
-class HomeViewController: UIViewController, Instantiable, TravelFetchable {
+final class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     @IBOutlet private weak var travelCollectionView: UICollectionView!
     @IBOutlet private weak var settingButton: UIButton!
