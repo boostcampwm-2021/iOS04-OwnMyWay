@@ -26,6 +26,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         snapshot.appendSections([.reserved, .ongoing, .outdated])
         self.diffableDataSource?.apply(snapshot, animatingDifferences: false)
         self.configureCancellable()
+        self.configureNavigationBar()
         self.viewModel?.viewDidLoad()
     }
 
@@ -95,6 +96,10 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &cancellables)
+    }
+
+    private func configureNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = true
     }
 
     func fetchTravel() {
