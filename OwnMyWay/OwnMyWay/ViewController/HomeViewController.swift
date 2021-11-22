@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         self.viewModel?.viewDidLoad()
     }
 
+    // TODO: 멘토님한테 여쭤봐야지~
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
@@ -173,13 +174,13 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         let dataSource = HomeDataSource(
             collectionView: self.travelCollectionView
         ) { collectionView, indexPath, item in
-
                 switch (indexPath.section, item.flag) {
                 case (Travel.Section.reserved.index, -1):
                     guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: PlusCell.identifier,
-                        for: indexPath) as? PlusCell
+                        withReuseIdentifier: CommentCell.identifier,
+                        for: indexPath) as? CommentCell
                     else { return UICollectionViewCell() }
+                    cell.configure(text: "예정된 여행이 없어요 🤷‍♀️")
                     return cell
                 case (Travel.Section.ongoing.index, -1):
                     guard let cell = collectionView.dequeueReusableCell(
