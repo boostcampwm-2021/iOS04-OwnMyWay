@@ -22,6 +22,10 @@ let supportedPhotoExtensions = [
     UTType.gif.identifier
 ]
 
+enum TransitionType {
+    case cancel, submit
+}
+
 class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var photoCollectionView: UICollectionView!
@@ -32,6 +36,7 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     private var viewModel: AddRecordViewModel?
     private var cancellables: Set<AnyCancellable> = []
+    private var transitionType: TransitionType = .cancel
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +50,7 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if self.isMovingFromParent {
+        if self.isMovingFromParent && self.transitionType == .cancel {
             self.viewModel?.didTouchBackButton()
         }
     }
@@ -103,6 +108,7 @@ class AddRecordViewController: UIViewController, Instantiable {
     }
 
     @objc private func submitButtonAction() {
+        self.transitionType = .submit
         self.viewModel?.didTouchSubmitButton()
     }
 
