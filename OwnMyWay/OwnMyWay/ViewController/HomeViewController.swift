@@ -33,7 +33,6 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         self.viewModel?.viewDidLoad()
     }
 
-    // TODO: 멘토님한테 여쭤봐야지~
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
@@ -84,7 +83,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
     }
 
     private func configureCancellable() {
-        viewModel?.reservedTravelPublisher
+        self.viewModel?.reservedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
@@ -96,7 +95,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
             }
             .store(in: &cancellables)
 
-        viewModel?.ongoingTravelPublisher
+        self.viewModel?.ongoingTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
@@ -108,7 +107,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
             }
             .store(in: &cancellables)
 
-        viewModel?.outdatedTravelPublisher
+        self.viewModel?.outdatedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
