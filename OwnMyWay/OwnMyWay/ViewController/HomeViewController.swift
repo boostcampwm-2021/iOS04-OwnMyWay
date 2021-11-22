@@ -27,7 +27,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         self.configureTravelCollectionView()
         self.configureDataSource()
         self.configureCancellable()
-        self.configureNavigationBar()
         self.viewModel?.viewDidLoad()
     }
 
@@ -123,10 +122,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &cancellables)
-    }
-
-    private func configureNavigationBar() {
-        self.navigationController?.isNavigationBarHidden = true
     }
 
     private func createCompositionalLayout() -> UICollectionViewLayout {
