@@ -225,17 +225,16 @@
                                                         </attributedString>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="내용을 입력해주세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rnp-cy-GRZ">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Here comes the content" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="heF-yB-gah" userLabel="contentTextView">
                                                         <rect key="frame" x="0.0" y="49" width="384" height="200"/>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="200" id="0O5-yj-TZV"/>
+                                                            <constraint firstAttribute="height" constant="200" id="Zf8-M3-Qvi"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                        <connections>
-                                                            <action selector="didChangeContent:" destination="Y6W-OH-hqX" eventType="editingChanged" id="UAC-Lq-eZG"/>
-                                                        </connections>
-                                                    </textField>
+                                                        <color key="textColor" systemColor="labelColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -274,7 +273,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentTextField" destination="Rnp-cy-GRZ" id="Tlu-ZZ-JnV"/>
+                        <outlet property="contentTextView" destination="heF-yB-gah" id="8MS-oZ-jMd"/>
                         <outlet property="datePicker" destination="fOw-Xa-aTO" id="dc2-Fa-Yre"/>
                         <outlet property="locationButton" destination="YJV-ax-cwc" id="s2R-mo-ud1"/>
                         <outlet property="photoCollectionView" destination="UlI-PV-AlF" id="aH0-jb-AVu"/>
@@ -291,10 +290,13 @@
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="flag" catalog="system" width="128" height="121"/>
         <namedColor name="IdentityBlue">
-            <color red="0.0" green="0.68235294117647061" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.68199998140335083" blue="0.9100000262260437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
