@@ -159,7 +159,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
         let layout = UICollectionViewCompositionalLayout(section: section)
         layout.register(
-            UINib(nibName: "HomeBackgroundView", bundle: nil),
+            UINib(nibName: HomeBackgroundView.identifier, bundle: nil),
             forDecorationViewOfKind: "homeBackground"
         )
 

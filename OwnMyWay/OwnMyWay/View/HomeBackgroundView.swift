@@ -8,6 +8,8 @@
 import UIKit
 
 final class HomeBackgroundView: UICollectionReusableView {
+    static let identifier = "HomeBackgroundView"
+
     @IBOutlet private weak var backgroundView: UIView!
 
     override init(frame: CGRect) {
