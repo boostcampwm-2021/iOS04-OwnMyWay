@@ -10,12 +10,12 @@ import UIKit
 
 class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatable {
 
-    @IBOutlet weak var imageScrollView: UIScrollView!
-    @IBOutlet weak var imageStackView: UIStackView!
-    @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var timeAndLocationLabel: UILabel!
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet private weak var imageScrollView: UIScrollView!
+    @IBOutlet private weak var imageStackView: UIStackView!
+    @IBOutlet private weak var pageControl: UIPageControl!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var timeAndLocationLabel: UILabel!
+    @IBOutlet private weak var contentLabel: UILabel!
 
     private var viewModel: DetailRecordViewModel?
     private var cancellables: Set<AnyCancellable> = []

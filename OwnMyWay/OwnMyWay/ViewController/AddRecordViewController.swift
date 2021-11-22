@@ -71,7 +71,7 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.contentTextView.textContainerInset = .init(top: 20, left: 15, bottom: 20, right: 15)
         self.contentTextView.delegate = self
     }
-    
+
     private func configureNibs() {
         self.photoCollectionView.register(
             UINib(nibName: PhotoCell.identifier, bundle: nil),
