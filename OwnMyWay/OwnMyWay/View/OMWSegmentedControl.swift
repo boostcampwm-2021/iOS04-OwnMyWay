@@ -12,14 +12,14 @@ protocol OMWSegmentedControlDelegate: AnyObject {
 
 class OMWSegmentedControl: UIView {
 
-    private var buttonTitles: [String]!
-    private var buttons: [UIButton]!
-    private var selectorView: UIView!
+    private var buttonTitles: [String] = []
+    private var buttons: [UIButton] = []
+    private var selectorView: UIView = UIView()
 
-    var textColor: UIColor = UIColor(named: "IdentityBlue") ?? .blue
-    var ViewColor: UIColor = .white
-    var selectorViewColor: UIColor = UIColor(named: "IdentityBlue") ?? .blue
-    var selectorTextColor: UIColor = .white
+    private var textColor: UIColor = UIColor(named: "IdentityBlue") ?? .blue
+    private var viewColor: UIColor = .white
+    private var selectorViewColor: UIColor = UIColor(named: "IdentityBlue") ?? .blue
+    private var selectorTextColor: UIColor = .white
 
     weak var delegate: OMWSegmentedControlDelegate?
 
@@ -39,15 +39,17 @@ class OMWSegmentedControl: UIView {
         self.updateView()
     }
 
-    @objc func didTouchButton(sender:UIButton) {
-        for (buttonIndex, button) in buttons.enumerated() {
-            button.setTitleColor(textColor, for: .normal)
+    @objc func didTouchButton(_ sender: UIButton) {
+
+        for (buttonIndex, button) in self.buttons.enumerated() {
+            button.setTitleColor(self.textColor, for: .normal)
             if button == sender {
-                let selectorPosition = frame.width / CGFloat(buttonTitles.count) * CGFloat(buttonIndex)
+                let buttonCount = self.buttonTitles.count
+                let selectorPosition = frame.width / CGFloat(buttonCount) * CGFloat(buttonIndex)
                 self.selectedIndex = buttonIndex
                 self.delegate?.change(to: selectedIndex)
                 self.selectorView.frame.origin.x = selectorPosition
-                button.setTitleColor(selectorTextColor, for: .normal)
+                button.setTitleColor(self.selectorTextColor, for: .normal)
             }
         }
     }
@@ -75,26 +77,37 @@ extension OMWSegmentedControl {
 
     private func configureSelectorView() {
         let selectorWidth = frame.width / CGFloat(self.buttonTitles.count)
-        self.selectorView = UIView(frame: CGRect(x: 0, y: 0, width: selectorWidth, height: frame.height))
-        self.selectorView.backgroundColor = selectorViewColor
-        self.addSubview(selectorView)
+        self.selectorView = UIView(
+            frame:
+                CGRect(
+                    x: 0,
+                    y: 0,
+                    width: selectorWidth,
+                    height: frame.height
+                )
+        )
+        self.selectorView.backgroundColor = self.selectorViewColor
+        self.addSubview(self.selectorView)
     }
 
     private func createButton() {
         self.buttons = [UIButton]()
         self.buttons.removeAll()
-        self.subviews.forEach({$0.removeFromSuperview()})
-        for buttonTitle in buttonTitles {
+        self.subviews.forEach { $0.removeFromSuperview() }
+        self.buttonTitles.forEach { title in
             let button = UIButton(type: .system)
-            button.setTitle(buttonTitle, for: .normal)
-            button.addTarget(self, action:#selector(didTouchButton(sender:)), for: .touchUpInside)
+            button.setTitle(title, for: .normal)
+            button.addTarget(self, action: #selector(didTouchButton(_:)), for: .touchUpInside)
             button.layer.borderWidth = 0.5
-            button.layer.borderColor = textColor.cgColor
+            button.layer.borderColor = self.textColor.cgColor
             button.layer.masksToBounds = true
-            button.titleLabel?.font = UIFont(name: "Apple SD 산돌고딕 Neo", size: 15) ?? UIFont.systemFont(ofSize: 15)
-            button.setTitleColor(textColor, for: .normal)
+            button.titleLabel?.font = UIFont(
+                name: "Apple SD 산돌고딕 Neo",
+                size: 15
+            ) ?? UIFont.systemFont(ofSize: 15)
+            button.setTitleColor(self.textColor, for: .normal)
             self.buttons.append(button)
         }
-        self.buttons[0].setTitleColor(selectorTextColor, for: .normal)
+        self.buttons[0].setTitleColor(self.selectorTextColor, for: .normal)
     }
 }
