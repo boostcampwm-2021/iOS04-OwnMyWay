@@ -13,7 +13,7 @@ typealias HomeDataSource = UICollectionViewDiffableDataSource <Travel.Section, T
 class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     @IBOutlet private weak var travelCollectionView: UICollectionView!
-    @IBOutlet private weak var configureButton: UIButton!
+    @IBOutlet private weak var settingButton: UIButton!
     @IBOutlet private weak var createButton: UIButton!
 
     private var viewModel: HomeViewModel?
@@ -22,8 +22,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureButton.setTitle("", for: .normal)
-        self.createButton.setTitle("", for: .normal)
+        self.configureButton()
         self.configureNibs()
         self.configureTravelCollectionView()
         var snapshot = NSDiffableDataSourceSnapshot<Travel.Section, Travel>()
@@ -50,6 +49,11 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     func fetchTravel() {
         self.viewModel?.viewDidLoad()
+    }
+
+    private func configureButton() {
+        self.settingButton.setTitle("", for: .normal)
+        self.createButton.setTitle("", for: .normal)
     }
 
     private func configureNibs() {

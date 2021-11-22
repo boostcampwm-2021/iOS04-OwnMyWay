@@ -98,8 +98,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="TGK-mU-gOw"/>
                     <connections>
-                        <outlet property="configureButton" destination="mDb-bZ-nOw" id="2nD-LP-KGh"/>
                         <outlet property="createButton" destination="yoc-4Z-nKU" id="KDb-TQ-Ikg"/>
+                        <outlet property="settingButton" destination="mDb-bZ-nOw" id="2nD-LP-KGh"/>
                         <outlet property="travelCollectionView" destination="bTO-GI-HaZ" id="YQr-o5-4he"/>
                     </connections>
                 </viewController>
