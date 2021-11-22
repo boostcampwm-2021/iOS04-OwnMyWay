@@ -25,9 +25,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         self.configureButton()
         self.configureNibs()
         self.configureTravelCollectionView()
-        var snapshot = NSDiffableDataSourceSnapshot<Travel.Section, Travel>()
-        snapshot.appendSections([.reserved, .ongoing, .outdated])
-        self.diffableDataSource?.apply(snapshot, animatingDifferences: false)
+        self.configureDataSource()
         self.configureCancellable()
         self.configureNavigationBar()
         self.viewModel?.viewDidLoad()
@@ -79,8 +77,14 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
     private func configureTravelCollectionView() {
         self.travelCollectionView.delegate = self
-        self.travelCollectionView.collectionViewLayout = createCompositionalLayout()
-        self.diffableDataSource = configureDiffableDataSource()
+        self.travelCollectionView.collectionViewLayout = self.createCompositionalLayout()
+        self.diffableDataSource = self.createDiffableDataSource()
+    }
+
+    private func configureDataSource() {
+        var snapshot = NSDiffableDataSourceSnapshot<Travel.Section, Travel>()
+        snapshot.appendSections([.reserved, .ongoing, .outdated])
+        self.diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
 
     private func configureCancellable() {
@@ -170,7 +174,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         return layout
     }
 
-    private func configureDiffableDataSource() -> HomeDataSource {
+    private func createDiffableDataSource() -> HomeDataSource {
         let dataSource = HomeDataSource(
             collectionView: self.travelCollectionView
         ) { collectionView, indexPath, item in
