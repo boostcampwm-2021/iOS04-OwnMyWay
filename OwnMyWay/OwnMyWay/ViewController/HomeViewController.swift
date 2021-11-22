@@ -142,6 +142,15 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             layoutSize: groupSize, subitems: [item]
         )
 
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)
+        )
+        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(
@@ -151,14 +160,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         section.decorationItems = [
             NSCollectionLayoutDecorationItem.background(elementKind: ElementKind.background)
         ]
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)
-        )
-        let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
         section.boundarySupplementaryItems = [headerElement]
 
         let layout = UICollectionViewCompositionalLayout(section: section)
