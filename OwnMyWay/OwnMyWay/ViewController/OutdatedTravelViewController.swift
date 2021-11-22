@@ -16,7 +16,7 @@ class OutdatedTravelViewController: UIViewController, Instantiable,
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var collectionView: UICollectionView!
     private var viewModel: OutdatedTravelViewModel?
-    private var diffableDataSource: OngoingTravelDataSource?
+    private var diffableDataSource: RecordDataSource?
     private var cancellables: Set<AnyCancellable> = []
     private let mapDummy = Record.dummy()
 
@@ -186,8 +186,8 @@ extension OutdatedTravelViewController: UICollectionViewDelegate {
         return layout
     }
 
-    private func configureDiffableDataSource() -> OngoingTravelDataSource {
-        let dataSource = OngoingTravelDataSource(
+    private func configureDiffableDataSource() -> RecordDataSource {
+        let dataSource = RecordDataSource(
             collectionView: self.collectionView
         ) { [weak self] collectionView, indexPath, item in
             guard let self = self else { return UICollectionViewCell() }

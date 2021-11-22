@@ -9,24 +9,25 @@ import Combine
 import MapKit
 import UIKit
 
-typealias OngoingTravelDataSource = UICollectionViewDiffableDataSource <String, Record>
+typealias RecordDataSource = UICollectionViewDiffableDataSource <String, Record>
 
 class OngoingTravelViewController: UIViewController, Instantiable, TravelEditable, TravelUpdatable {
 
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var recordCollectionView: UICollectionView!
+    @IBOutlet private weak var mapView: MKMapView!
+    @IBOutlet private weak var landmarkCollectionView: UICollectionView!
 
     private var viewModel: OngoingTravelViewModel?
-    private var diffableDataSource: OngoingTravelDataSource?
+    private var recordDataSource: RecordDataSource?
     private var cancellables: Set<AnyCancellable> = []
-    private let mapDummy = Record.dummy()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureNavigation()
         self.configureNibs()
-        self.configureTravelCollectionView()
+        self.configureCollectionViews()
         self.configureCancellable()
         LocationManager.shared.currentTravel(to: self.viewModel?.travel)
         LocationManager.shared.requestWhenInUseAuthorization()
@@ -115,25 +116,21 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 extension OngoingTravelViewController: UICollectionViewDelegate {
 
     private func configureNibs() {
-        self.collectionView.register(
-            UINib(nibName: MapCell.identifier, bundle: nil),
-            forCellWithReuseIdentifier: MapCell.identifier
-        )
-        self.collectionView.register(
+        self.recordCollectionView.register(
             UINib(nibName: RecordCardCell.identifier, bundle: nil),
             forCellWithReuseIdentifier: RecordCardCell.identifier
         )
-        self.collectionView.register(
+        self.recordCollectionView.register(
             UINib(nibName: DateHeaderView.identifier, bundle: nil),
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: DateHeaderView.identifier
         )
     }
 
-    private func configureTravelCollectionView() {
-        self.collectionView.delegate = self
-        self.collectionView.collectionViewLayout = configureCompositionalLayout()
-        self.diffableDataSource = configureDiffableDataSource()
+    private func configureCollectionViews() {
+        self.recordCollectionView.delegate = self
+        self.recordCollectionView.collectionViewLayout = configureRecordCompositionalLayout()
+        self.recordDataSource = configureRecordDiffableDataSource()
     }
 
     private func configureCancellable() {
@@ -142,80 +139,55 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
 
             self.navigationItem.title = travel.title
 
-            if let mapCell = self.collectionView.cellForItem(
-                at: IndexPath(item: 0, section: 0)
-            ) as? MapCell {
-                mapCell.configure(with: travel)
-            }
-
             var snapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
-            snapshot.appendSections(["map"])
-            snapshot.appendItems([self.mapDummy], toSection: "map")
             recordListList.forEach { recordList in
                 guard let date = recordList.first?.date
                 else { return }
                 snapshot.appendSections([date.toKorean()])
                 snapshot.appendItems(recordList, toSection: date.toKorean())
             }
-            self.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+            self.recordDataSource?.apply(snapshot, animatingDifferences: true)
         }.store(in: &cancellables)
     }
 
-    private func configureCompositionalLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { index, _ in
+    private func configureRecordCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { _, _ in
             let size = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500)
             )
             let item = NSCollectionLayoutItem(layoutSize: size)
             let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitems: [item])
-            if index != 0 {
-                group.contentInsets = NSDirectionalEdgeInsets(
-                    top: 0, leading: 30, bottom: 0, trailing: 30
-                )
-            }
+            group.contentInsets = NSDirectionalEdgeInsets(
+                top: 0, leading: 30, bottom: 0, trailing: 30
+            )
             let section = NSCollectionLayoutSection(group: group)
             section.interGroupSpacing = 30
-            if index != 0 {
-                let headerSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
-                )
-                let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: headerSize,
-                    elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .top
-                )
-                section.boundarySupplementaryItems = [headerElement]
-            }
+
+            let headerSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
+            )
+            let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: headerSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+            section.boundarySupplementaryItems = [headerElement]
             return section
         }
         return layout
     }
 
-    private func configureDiffableDataSource() -> OngoingTravelDataSource {
-        let dataSource = OngoingTravelDataSource(
-            collectionView: self.collectionView
-        ) { [weak self] collectionView, indexPath, item in
-            guard let self = self else { return UICollectionViewCell() }
-
-            switch indexPath.section {
-            case 0:
-                guard let travel = self.viewModel?.travel,
-                      let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: MapCell.identifier, for: indexPath
-                ) as? MapCell
-                else { return UICollectionViewCell() }
-                cell.configure(with: travel)
-                return cell
-
-            default:
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: RecordCardCell.identifier, for: indexPath
-                ) as? RecordCardCell
-                else { return UICollectionViewCell() }
-                cell.configure(with: item)
-                return cell
-            }
+    private func configureRecordDiffableDataSource() -> RecordDataSource {
+        let dataSource = RecordDataSource(
+            collectionView: self.recordCollectionView
+        ) { collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: RecordCardCell.identifier, for: indexPath
+            ) as? RecordCardCell
+            else { return UICollectionViewCell() }
+            cell.configure(with: item)
+            return cell
         }
 
         dataSource.supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) in
@@ -226,7 +198,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             ) as? DateHeaderView
             else { return UICollectionReusableView() }
 
-            guard let title = self?.diffableDataSource?.snapshot()
+            guard let title = self?.recordDataSource?.snapshot()
                     .sectionIdentifiers[indexPath.section]
             else { return UICollectionReusableView() }
 
@@ -237,10 +209,8 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let record = self.diffableDataSource?.itemIdentifier(for: indexPath),
-              indexPath.section != 0
+        guard let record = self.recordDataSource?.itemIdentifier(for: indexPath)
         else { return }
-
         self.viewModel?.didTouchRecordCell(at: record)
     }
 }
