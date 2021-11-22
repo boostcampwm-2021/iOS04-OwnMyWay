@@ -22,9 +22,9 @@ class LandmarkCartViewController: UIViewController,
 //    static let badgeElementKind = "badge-element-kind"
 
     @IBOutlet private weak var stackView: UIStackView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var segmentedControlView: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var segmentedControlView: UIView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var mapView: MKMapView!
     @IBOutlet private weak var collectionView: UICollectionView!
 
