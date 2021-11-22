@@ -16,7 +16,11 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
 
     @IBOutlet private weak var recordCollectionView: UICollectionView!
+    @IBOutlet private weak var segmentedControl: UIView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var mapView: MKMapView!
+    @IBOutlet private weak var trackingButton: UIButton!
+    @IBOutlet private weak var userLocationButton: UIButton!
     @IBOutlet private weak var landmarkCollectionView: UICollectionView!
 
     private var viewModel: OngoingTravelViewModel?
@@ -29,6 +33,8 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
         self.configureNibs()
         self.configureCollectionViews()
         self.configureCancellable()
+        self.configureButton()
+        self.configureSegment()
         LocationManager.shared.currentTravel(to: self.viewModel?.travel)
         LocationManager.shared.requestWhenInUseAuthorization()
     }
@@ -77,6 +83,39 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
         )
     }
 
+    private func configureButton() {
+        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
+            switch LocationManager.shared.isUpdatingLocation {
+            case true:
+                self.trackingButton.isSelected = true
+            case false:
+                self.trackingButton.isSelected = false
+            }
+        }
+    }
+
+    private func configureSegment() {
+        let omwSegmentedControl = OMWSegmentedControl(
+            frame: CGRect(origin: .zero, size: self.segmentedControl.frame.size),
+            buttonTitles: ["게시물", "지도", "관광명소"]
+        )
+        omwSegmentedControl.delegate = self
+        self.segmentedControl.addSubview(omwSegmentedControl)
+        self.segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        self.segmentedControl.topAnchor.constraint(
+            equalTo: self.segmentedControl.topAnchor
+        ).isActive = true
+        self.segmentedControl.leadingAnchor.constraint(
+            equalTo: self.segmentedControl.leadingAnchor
+        ).isActive = true
+        self.segmentedControl.trailingAnchor.constraint(
+            equalTo: self.segmentedControl.trailingAnchor
+        ).isActive = true
+        self.segmentedControl.bottomAnchor.constraint(
+            equalTo: self.segmentedControl.bottomAnchor
+        ).isActive = true
+    }
+
     private func presentAlert() {
         let alert = UIAlertController(
             title: "여행 삭제 실패",
@@ -111,6 +150,38 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
         self.viewModel?.didTouchFinishButton()
     }
 
+    @IBAction func didTouchTrackingButton(_ sender: Any) {
+        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
+            self.trackingButton.isSelected.toggle()
+            switch LocationManager.shared.isUpdatingLocation {
+            case true:
+                LocationManager.shared.stopUpdatingLocation()
+            case false:
+                self.mapView.setUserTrackingMode(.follow, animated: true)
+                LocationManager.shared.startUpdatingLocation()
+            }
+
+        } else {
+            let alert = UIAlertController(
+                title: "권한 설정이 필요합니다.",
+                message: "Setting -> OwnMyWay -> 위치 -> 항상 허용",
+                preferredStyle: .alert
+            )
+            let action = UIAlertAction(title: "이동", style: .default) { _ in
+                guard let url = URL(string: UIApplication.openSettingsURLString)
+                else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true)
+        }
+    }
+
+    @IBAction func didTouchUserLocationButton(_ sender: Any) {
+        self.mapView.setUserTrackingMode(.follow, animated: true)
+    }
 }
 
 extension OngoingTravelViewController: UICollectionViewDelegate {
@@ -138,6 +209,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             guard let self = self else { return }
 
             self.navigationItem.title = travel.title
+            (self.mapView as? OMWMapView)?.configure(with: travel)
 
             var snapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
@@ -244,5 +316,29 @@ extension OngoingTravelViewController: RecordUpdatable {
 
     func didUpdateRecord(record: Record) {
         self.viewModel?.didUpdateRecord(record: record)
+    }
+}
+
+// MARK: - extension OngoingTravelViewController for OMWSegmentedControlDelegate
+
+extension OngoingTravelViewController: OMWSegmentedControlDelegate {
+
+    func change(to index: Int) {
+        switch index {
+        case 0:
+            self.scrollView.scrollRectToVisible(
+                self.recordCollectionView.frame, animated: true
+            )
+        case 1:
+            self.scrollView.scrollRectToVisible(
+                self.mapView.frame, animated: true
+            )
+        case 2:
+            self.scrollView.scrollRectToVisible(
+                self.landmarkCollectionView.frame, animated: true
+            )
+        default:
+            break
+        }
     }
 }
