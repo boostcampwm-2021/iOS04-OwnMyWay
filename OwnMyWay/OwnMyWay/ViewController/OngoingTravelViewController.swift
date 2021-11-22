@@ -84,6 +84,16 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
     }
 
     private func configureButton() {
+        self.userLocationButton.layer.cornerRadius = 10
+        self.trackingButton.layer.cornerRadius = 10
+        let image = UIImage(systemName: "record.circle")
+        let normalImage = image?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        let selectedImage = image?.withTintColor(.red, renderingMode: .alwaysOriginal)
+        self.trackingButton.setImage(normalImage, for: .normal)
+        self.trackingButton.setImage(selectedImage, for: .selected)
+        self.trackingButton.setTitleColor(.systemGray, for: .normal)
+        self.trackingButton.setTitleColor(.red, for: .selected)
+
         if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
             switch LocationManager.shared.isUpdatingLocation {
             case true:
