@@ -80,7 +80,7 @@ extension OMWSegmentedControl {
         self.selectorView = UIView(
             frame:
                 CGRect(
-                    x: 0,
+                    x: selectorWidth * CGFloat(selectedIndex),
                     y: 0,
                     width: selectorWidth,
                     height: frame.height
@@ -108,6 +108,6 @@ extension OMWSegmentedControl {
             button.setTitleColor(self.textColor, for: .normal)
             self.buttons.append(button)
         }
-        self.buttons[0].setTitleColor(self.selectorTextColor, for: .normal)
+        self.buttons[self.selectedIndex].setTitleColor(self.selectorTextColor, for: .normal)
     }
 }
