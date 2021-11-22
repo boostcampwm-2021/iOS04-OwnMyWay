@@ -29,11 +29,11 @@ protocol LandmarkCartCoordinatingDelegate: AnyObject {
 
 class DefaultLandmarkCartViewModel: LandmarkCartViewModel,
                                     ObservableObject {
-    
+
     @Published private(set) var travel: Travel
     var travelPublisher: Published<Travel>.Publisher { $travel }
     var superVC: SuperVC
-    
+
     private weak var coordinatingDelegate: LandmarkCartCoordinatingDelegate?
 
     init(
