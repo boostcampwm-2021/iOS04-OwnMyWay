@@ -14,7 +14,9 @@ typealias RecordDataSource = UICollectionViewDiffableDataSource <String, Record>
 class OngoingTravelViewController: UIViewController, Instantiable, TravelEditable, TravelUpdatable {
 
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!
-
+    @IBOutlet private weak var periodLabel: UILabel!
+    @IBOutlet private weak var emptyRecordLabel: UILabel!
+    @IBOutlet private weak var emptyLandmarkLabel: UILabel!
     @IBOutlet private weak var recordCollectionView: UICollectionView!
     @IBOutlet private weak var segmentedControl: UIView!
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -86,14 +88,7 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 
     private func configureButton() {
         self.userLocationButton.layer.cornerRadius = 10
-        self.trackingButton.layer.cornerRadius = 10
-        let image = UIImage(systemName: "record.circle")
-        let normalImage = image?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
-        let selectedImage = image?.withTintColor(.red, renderingMode: .alwaysOriginal)
-        self.trackingButton.setImage(normalImage, for: .normal)
-        self.trackingButton.setImage(selectedImage, for: .selected)
-        self.trackingButton.setTitleColor(.systemGray, for: .normal)
-        self.trackingButton.setTitleColor(.red, for: .selected)
+        self.trackingButton.configureTrackingButton()
 
         if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
             switch LocationManager.shared.isUpdatingLocation {
@@ -223,9 +218,15 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
 
     private func configureCancellable() {
         viewModel?.travelPublisher.sink { [weak self] travel in
-            guard let self = self else { return }
+            guard let self = self,
+                  let startDate = travel.startDate?.dotLocalize(),
+                  let endDate = travel.endDate?.dotLocalize()
+            else { return }
 
+            self.emptyRecordLabel.isHidden = !travel.records.isEmpty
+            self.emptyLandmarkLabel.isHidden = !travel.landmarks.isEmpty
             self.navigationItem.title = travel.title
+            self.periodLabel.text = startDate + " ~ " + endDate
             (self.mapView as? OMWMapView)?.configure(with: travel)
 
             var recordSnapshot = NSDiffableDataSourceSnapshot<String, Record>()
@@ -248,7 +249,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
     }
 
     private func configureRecordCompositionalLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { _, _ in
+        let layout = UICollectionViewCompositionalLayout { index, _ in
             let size = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500)
             )
@@ -259,6 +260,11 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             )
             let section = NSCollectionLayoutSection(group: group)
             section.interGroupSpacing = 30
+            if index + 1 == self.recordDataSource?.snapshot().numberOfSections {
+                section.contentInsets = NSDirectionalEdgeInsets(
+                    top: 0, leading: 0, bottom: 60, trailing: 0
+                )
+            }
 
             let headerSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)

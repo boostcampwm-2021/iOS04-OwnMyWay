@@ -55,6 +55,7 @@
 		3FB987A827439030008F0E08 /* addImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB987A727439030008F0E08 /* addImage.png */; };
 		3FF20BBA27461BC4007AFF78 /* TravelEditableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */; };
 		AF0BAA64274B82200091F642 /* OMWMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA63274B82200091F642 /* OMWMapView.swift */; };
+		AF0BAA68274BAB620091F642 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA67274BAB620091F642 /* UIButton+.swift */; };
 		AF0C3F1E2743825C007217AF /* RecordUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */; };
 		AF1108E0273B8872009FE728 /* OngoingTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */; };
 		AF1108E2273B88A5009FE728 /* OngoingTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */; };
@@ -182,6 +183,7 @@
 		3FB987A727439030008F0E08 /* addImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImage.png; sourceTree = "<group>"; };
 		3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelEditableViewController.swift; sourceTree = "<group>"; };
 		AF0BAA63274B82200091F642 /* OMWMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMWMapView.swift; sourceTree = "<group>"; };
+		AF0BAA67274BAB620091F642 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUpdatable.swift; sourceTree = "<group>"; };
 		AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OngoingTravel.storyboard; sourceTree = "<group>"; };
 		AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				294897BB273B5D71003185E7 /* UIImageView+.swift */,
 				2985B1E627448DFC00428098 /* UIView+.swift */,
 				DBA6F68D27461E0C00F3244E /* CLLocationManager+.swift */,
+				AF0BAA67274BAB620091F642 /* UIButton+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				DB8831BE2731990000487D33 /* LandmarkRepository.swift in Sources */,
 				DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */,
 				DB8831C72732861500487D33 /* Instantiable.swift in Sources */,
+				AF0BAA68274BAB620091F642 /* UIButton+.swift in Sources */,
 				2985B1E527427AE900428098 /* LandmarkDeletable.swift in Sources */,
 				293646BC27395BAA0030ED78 /* TravelFetchable.swift in Sources */,
 				DBC39F042733ABB200FB7939 /* TravelMO+CoreDataProperties.swift in Sources */,

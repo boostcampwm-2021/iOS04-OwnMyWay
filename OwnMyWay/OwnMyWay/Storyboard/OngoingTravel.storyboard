@@ -48,17 +48,17 @@
                                     <constraint firstItem="am4-CT-v8e" firstAttribute="width" secondItem="jiu-0b-HQa" secondAttribute="width" id="vtO-Po-On3"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1y9-6M-MQr">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1y9-6M-MQr">
                                 <rect key="frame" x="0.0" y="44" width="414" height="792"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021.04.12 ~ 2021.04.23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqs-4v-106">
-                                        <rect key="frame" x="133" y="0.0" width="148" height="18"/>
-                                        <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="13"/>
+                                        <rect key="frame" x="139.5" y="0.0" width="135" height="16"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxQ-jD-bnQ">
-                                        <rect key="frame" x="67" y="18" width="280" height="34"/>
+                                        <rect key="frame" x="67" y="28" width="280" height="34"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="280" id="DmH-8L-JvI"/>
@@ -66,13 +66,13 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yC-7M-NGa">
-                                        <rect key="frame" x="0.0" y="52" width="414" height="740"/>
+                                        <rect key="frame" x="0.0" y="74" width="414" height="718"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOk-wv-iEs">
-                                                <rect key="frame" x="0.0" y="0.0" width="1242" height="740"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="1242" height="718"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="89f-99-tcf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="740"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="718"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bC9-KT-HRU">
                                                             <size key="itemSize" width="128" height="128"/>
@@ -83,7 +83,7 @@
                                                         <cells/>
                                                     </collectionView>
                                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-bw-xKs" customClass="OMWMapView" customModule="OwnMyWay" customModuleProvider="target">
-                                                        <rect key="frame" x="414" y="0.0" width="414" height="740"/>
+                                                        <rect key="frame" x="414" y="0.0" width="414" height="718"/>
                                                     </mapView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86h-Fk-UvI">
                                                         <rect key="frame" x="690" y="10" width="118" height="43"/>
@@ -92,14 +92,16 @@
                                                             <constraint firstAttribute="height" constant="43" id="SdV-t4-PaL"/>
                                                             <constraint firstAttribute="width" constant="118" id="kZI-gI-O0V"/>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="16"/>
                                                         <color key="tintColor" systemColor="systemGrayColor"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                         <state key="normal" title="Tracking">
                                                             <color key="titleColor" systemColor="systemGrayColor"/>
-                                                            <imageReference key="image" image="record.circle" catalog="system" symbolScale="large"/>
+                                                            <imageReference key="image" image="circle.fill" catalog="system" symbolScale="small"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                                         </state>
-                                                        <state key="selected" title="Tracking">
-                                                            <imageReference key="image" image="record.circle" catalog="system" symbolScale="large"/>
+                                                        <state key="selected">
+                                                            <imageReference key="image" image="circle.fill" catalog="system" symbolScale="small"/>
                                                         </state>
                                                         <state key="highlighted">
                                                             <color key="titleColor" systemColor="systemGrayColor"/>
@@ -109,7 +111,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTj-i7-2hB">
-                                                        <rect key="frame" x="764" y="636" width="44" height="44"/>
+                                                        <rect key="frame" x="764" y="614" width="44" height="44"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="LOy-hh-7KF"/>
@@ -118,14 +120,14 @@
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal">
-                                                            <imageReference key="image" image="location.circle" catalog="system" symbolScale="large"/>
+                                                            <imageReference key="image" image="scope" catalog="system" symbolScale="large"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="didTouchUserLocationButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3j5-Ab-wfi"/>
                                                         </connections>
                                                     </button>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bm5-h6-oKq">
-                                                        <rect key="frame" x="828" y="0.0" width="414" height="740"/>
+                                                        <rect key="frame" x="828" y="0.0" width="414" height="718"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7qo-oT-CHb">
                                                             <size key="itemSize" width="128" height="128"/>
@@ -135,6 +137,18 @@
                                                         </collectionViewFlowLayout>
                                                         <cells/>
                                                     </collectionView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="어이구야! 아직 게시물을 추가하지 않았어요!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvW-1u-Dfk">
+                                                        <rect key="frame" x="600" y="348" width="42" height="21"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="아차차! 관광명소를 추가하지 않았어요" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXq-6w-xYA">
+                                                        <rect key="frame" x="600" y="348" width="42" height="21"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -150,10 +164,14 @@
                                                     <constraint firstItem="5pS-bw-xKs" firstAttribute="top" secondItem="wOk-wv-iEs" secondAttribute="top" id="WXf-Na-o8O"/>
                                                     <constraint firstAttribute="bottom" secondItem="Bm5-h6-oKq" secondAttribute="bottom" id="a2I-cr-LJX"/>
                                                     <constraint firstAttribute="bottom" secondItem="89f-99-tcf" secondAttribute="bottom" id="eKj-QD-6no"/>
+                                                    <constraint firstItem="CXq-6w-xYA" firstAttribute="centerX" secondItem="Bm5-h6-oKq" secondAttribute="centerX" id="eig-Ry-T6k"/>
+                                                    <constraint firstItem="YvW-1u-Dfk" firstAttribute="centerX" secondItem="89f-99-tcf" secondAttribute="centerX" id="ioV-ko-zcs"/>
                                                     <constraint firstItem="5pS-bw-xKs" firstAttribute="trailing" secondItem="Bm5-h6-oKq" secondAttribute="leading" id="mhP-nn-Vql"/>
+                                                    <constraint firstItem="CXq-6w-xYA" firstAttribute="centerY" secondItem="Bm5-h6-oKq" secondAttribute="centerY" id="p6X-Ta-psu"/>
                                                     <constraint firstItem="89f-99-tcf" firstAttribute="trailing" secondItem="5pS-bw-xKs" secondAttribute="leading" id="qbE-vX-a9s"/>
                                                     <constraint firstAttribute="bottom" secondItem="hTj-i7-2hB" secondAttribute="bottom" constant="60" id="qwb-47-rvz"/>
                                                     <constraint firstItem="Bm5-h6-oKq" firstAttribute="leading" secondItem="hTj-i7-2hB" secondAttribute="trailing" constant="20" id="sh4-fb-VgA"/>
+                                                    <constraint firstItem="YvW-1u-Dfk" firstAttribute="centerY" secondItem="89f-99-tcf" secondAttribute="centerY" id="tNJ-OY-TEh"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -188,9 +206,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emptyLandmarkLabel" destination="CXq-6w-xYA" id="utc-EB-C79"/>
+                        <outlet property="emptyRecordLabel" destination="YvW-1u-Dfk" id="5rl-LQ-SFu"/>
                         <outlet property="finishButtonHeightConstraint" destination="ZYv-ZD-oOG" id="OnT-WG-e8g"/>
                         <outlet property="landmarkCollectionView" destination="Bm5-h6-oKq" id="HeQ-OS-tEY"/>
                         <outlet property="mapView" destination="5pS-bw-xKs" id="O7W-Sg-9fo"/>
+                        <outlet property="periodLabel" destination="xqs-4v-106" id="H26-vV-cbO"/>
                         <outlet property="recordCollectionView" destination="89f-99-tcf" id="41S-He-sBw"/>
                         <outlet property="scrollView" destination="9yC-7M-NGa" id="Kk9-vu-Z7R"/>
                         <outlet property="segmentedControl" destination="jxQ-jD-bnQ" id="FKN-OY-w3I"/>
@@ -204,8 +225,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="location.circle" catalog="system" width="128" height="121"/>
-        <image name="record.circle" catalog="system" width="128" height="121"/>
+        <image name="circle.fill" catalog="system" width="128" height="121"/>
+        <image name="scope" catalog="system" width="128" height="122"/>
         <namedColor name="IdentityBlue">
             <color red="0.22699999809265137" green="0.45899999141693115" blue="0.92900002002716064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
