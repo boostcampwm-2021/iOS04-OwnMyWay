@@ -144,14 +144,28 @@
                                                             <constraint firstAttribute="width" constant="300" id="NQZ-qQ-GoI"/>
                                                         </constraints>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="어이구야!">
+                                                            <fragment content="어이구야! ">
                                                                 <attributes>
-                                                                    <color key="NSColor" red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content=" 아직 게시물을 추가하지 않았어요! ">
+                                                            <fragment content="아직 ">
+                                                                <attributes>
+                                                                    <color key="NSColor" systemColor="labelColor"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="게시물">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="을 추가하지 않았어요! ">
                                                                 <attributes>
                                                                     <color key="NSColor" systemColor="labelColor"/>
                                                                     <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
@@ -177,22 +191,43 @@
                                                         <attributedString key="attributedText">
                                                             <fragment content="아차차!">
                                                                 <attributes>
-                                                                    <color key="NSColor" red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content=" 아직 관광명소를 추가하지 않았어요! ">
+                                                            <fragment content=" 아직 ">
                                                                 <attributes>
                                                                     <color key="NSColor" systemColor="labelColor"/>
                                                                     <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content="🤭">
+                                                            <fragment content="관광명소">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="를 추가하지 않았어요! ">
+                                                                <attributes>
+                                                                    <color key="NSColor" systemColor="labelColor"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="🤭 ">
                                                                 <attributes>
                                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <font key="NSFont" size="30" name="AppleColorEmoji"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content=" 우측 상단의 버튼을 눌러 여행을 수정해보세요!">
+                                                                <attributes>
+                                                                    <color key="NSColor" systemColor="labelColor"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -278,7 +313,7 @@
         <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="scope" catalog="system" width="128" height="122"/>
         <namedColor name="IdentityBlue">
-            <color red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18000000715255737" green="0.66699999570846558" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
