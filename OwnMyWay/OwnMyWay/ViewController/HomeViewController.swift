@@ -13,6 +13,7 @@ typealias HomeDataSource = UICollectionViewDiffableDataSource <Travel.Section, T
 class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     @IBOutlet private weak var travelCollectionView: UICollectionView!
+    @IBOutlet private weak var configureButton: UIButton!
 
     private var viewModel: HomeViewModel?
     private var diffableDataSource: HomeDataSource?
@@ -20,6 +21,7 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureButton.setTitle("", for: .normal)
         self.configureNibs()
         self.configureTravelCollectionView()
         var snapshot = NSDiffableDataSourceSnapshot<Travel.Section, Travel>()
@@ -32,6 +34,10 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     func bind(viewModel: HomeViewModel) {
         self.viewModel = viewModel
+    }
+
+    func fetchTravel() {
+        self.viewModel?.viewDidLoad()
     }
 
     private func configureNibs() {
@@ -100,10 +106,6 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     private func configureNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
-    }
-
-    func fetchTravel() {
-        self.viewModel?.viewDidLoad()
     }
 
     private func configureCompositionalLayout() -> UICollectionViewLayout {
@@ -194,6 +196,9 @@ class HomeViewController: UIViewController, Instantiable, TravelFetchable {
         sectionHeader.configure(sectionTitle: title[indexPath.section])
         return sectionHeader
     }
+
+    @IBAction func didTouchSettingButton(_ sender: UIButton) {}
+
 }
 
 extension HomeViewController: UICollectionViewDelegate {
