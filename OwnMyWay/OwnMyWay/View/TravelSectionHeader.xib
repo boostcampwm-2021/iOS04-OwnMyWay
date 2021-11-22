@@ -2,8 +2,10 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,17 +16,19 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnh-i9-9jX">
-                    <rect key="frame" x="10" y="10" width="300" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <rect key="frame" x="0.0" y="30" width="320" height="20"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="25"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Nnh-i9-9jX" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="10" id="49x-YX-uqN"/>
-                <constraint firstItem="Nnh-i9-9jX" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="6km-n7-7In"/>
-                <constraint firstAttribute="trailing" secondItem="Nnh-i9-9jX" secondAttribute="trailing" constant="10" id="OuO-fb-3m4"/>
+                <constraint firstItem="Nnh-i9-9jX" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="49x-YX-uqN"/>
+                <constraint firstAttribute="trailing" secondItem="Nnh-i9-9jX" secondAttribute="trailing" id="OuO-fb-3m4"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="Nnh-i9-9jX" secondAttribute="bottom" id="bGK-hh-MdX"/>
+                <constraint firstItem="Nnh-i9-9jX" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="30" id="tTc-zG-88s"/>
             </constraints>
             <connections>
                 <outlet property="sectionTitleLabel" destination="Nnh-i9-9jX" id="owf-zw-v3k"/>
@@ -32,4 +36,9 @@
             <point key="canvasLocation" x="139" y="153"/>
         </collectionReusableView>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
