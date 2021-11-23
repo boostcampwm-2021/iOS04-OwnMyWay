@@ -283,24 +283,9 @@ extension HomeViewController: UICollectionViewDelegate, MessageCellDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let travel = self.diffableDataSource?.itemIdentifier(for: indexPath)
         else { return }
-        if indexPath.section == Travel.Section.reserved.index,
-           travel.flag == Travel.Section.dummy.index {
-            self.viewModel?.didTouchCreateButton()
-            return
-        } else if travel.flag == Travel.Section.dummy.index {
-            return
-        }
-        switch indexPath.section {
-        case Travel.Section.reserved.index:
-            self.viewModel?.didTouchReservedTravel(at: indexPath.item)
-        case Travel.Section.ongoing.index:
-            self.viewModel?.didTouchOngoingTravel(at: indexPath.item)
-        case Travel.Section.outdated.index:
-            self.viewModel?.didTouchOutdatedTravel(at: indexPath.item)
-        default:
-            return
-        }
-
+        self.viewModel?.didTouchTravel(
+            flag: travel.flag, item: indexPath.item
+        )
     }
 
     func didTouchButton() {
