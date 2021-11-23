@@ -37,7 +37,7 @@ protocol TravelRepository {
     ) -> Result<Location, Error>
     @discardableResult func update(travel: Travel) -> Result<Travel, Error>
     func updateRecord(at record: Record) -> Result<Void, Error>
-    func delete(travel: Travel)
+    func delete(travel: Travel) -> Result<Void, Error>
     func deleteLandmark(at landmark: Landmark)
     func deleteRecord(at record: Record)
 }
@@ -264,22 +264,23 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
-    func delete(travel: Travel) {
+    func delete(travel: Travel) -> Result<Void, Error> {
         guard let uuid = travel.uuid as CVarArg?
-        else { return }
+        else { return .failure(RepositoryError.uuidError) }
+
         let request = TravelMO.fetchRequest()
         let predicate = NSPredicate(format: "uuid == %@", uuid)
         request.predicate = predicate
         guard let travels = try? context.fetch(request) as [TravelMO],
               let travel = travels.first
-        else { return }
-
+        else { return .failure(RepositoryError.fetchError) }
         context.delete(travel)
 
         do {
             try context.save()
+            return .success(())
         } catch {
-            return
+            return .failure(RepositoryError.saveError)
         }
     }
 

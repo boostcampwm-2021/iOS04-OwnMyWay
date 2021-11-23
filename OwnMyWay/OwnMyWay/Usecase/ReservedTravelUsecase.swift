@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ReservedTravelUsecase {
-    func executeDeletion(of travel: Travel)
+    func executeDeletion(of travel: Travel) -> Result<Void, Error>
     func executeLandmarkAddition(of travel: Travel)
     func executeLandmarkDeletion(at landmark: Landmark)
     func executeFlagUpdate(of travel: Travel)
@@ -22,8 +22,8 @@ struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
         self.repository = repository
     }
 
-    func executeDeletion(of travel: Travel) {
-        self.repository.delete(travel: travel)
+    func executeDeletion(of travel: Travel) -> Result<Void, Error> {
+        return self.repository.delete(travel: travel)
     }
 
     func executeLandmarkAddition(of travel: Travel) {

@@ -12,7 +12,7 @@ protocol ReservedTravelViewModel {
     var isPossibleStart: Bool { get }
     var travelPublisher: Published<Travel>.Publisher { get }
 
-    func didDeleteTravel()
+    func didDeleteTravel() -> Result<Void, Error>
     func didUpdateTravel(to travel: Travel)
     func didEditTravel(to travel: Travel)
     func didDeleteLandmark(at landmark: Landmark)
@@ -50,9 +50,14 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         self.coordinatingDelegate = coordinatingDelegate
     }
 
-    func didDeleteTravel() {
-        self.usecase.executeDeletion(of: self.travel)
-        self.coordinatingDelegate?.popToHome()
+    func didDeleteTravel() -> Result<Void, Error> {
+        switch self.usecase.executeDeletion(of: self.travel) {
+        case .success:
+            self.coordinatingDelegate?.popToHome()
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 
     func didUpdateTravel(to travel: Travel) {

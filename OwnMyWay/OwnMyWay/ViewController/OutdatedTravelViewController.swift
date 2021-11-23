@@ -103,7 +103,14 @@ class OutdatedTravelViewController: UIViewController, Instantiable,
             preferredStyle: .alert
         )
         let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
-            self?.viewModel?.didDeleteTravel()
+            switch self?.viewModel?.didDeleteTravel() {
+            case .success:
+                break
+            case .failure(let error):
+                print(error)
+            case .none:
+                print("App 터졌다구~")
+            }
         }
         let noAction = UIAlertAction(title: "아니오", style: .cancel)
         alert.addAction(yesAction)

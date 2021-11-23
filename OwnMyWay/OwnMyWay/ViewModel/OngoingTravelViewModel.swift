@@ -53,9 +53,14 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         self.travel = travel
     }
 
-    func didDeleteTravel() {
-        self.usecase.executeDeletion(of: self.travel)
-        self.coordinatingDelegate?.popToHome()
+    func didDeleteTravel() -> Result<Void, Error> {
+        switch self.usecase.executeDeletion(of: self.travel) {
+        case .success:
+            self.coordinatingDelegate?.popToHome()
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 
     func didTouchAddRecordButton() {

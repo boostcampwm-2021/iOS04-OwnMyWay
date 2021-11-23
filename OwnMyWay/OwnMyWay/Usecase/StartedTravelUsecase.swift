@@ -11,7 +11,7 @@ protocol StartedTravelUsecase {
     func executeFetch()
     func executeFinishingTravel()
     func executeFlagUpdate(of travel: Travel)
-    func executeDeletion(of travel: Travel)
+    func executeDeletion(of travel: Travel) -> Result<Void, Error>
     func executeLocationUpdate(of travel: Travel, latitude: Double, longitude: Double)
     func executeRecordAddition(to travel: Travel, with record: Record, completion: (Travel) -> Void)
 }
@@ -27,8 +27,8 @@ struct DefaultStartedTravelUsecase: StartedTravelUsecase {
     func executeFetch() {}
     func executeFinishingTravel() {}
 
-    func executeDeletion(of travel: Travel) {
-        self.repository.delete(travel: travel)
+    func executeDeletion(of travel: Travel) -> Result<Void, Error> {
+        return self.repository.delete(travel: travel)
     }
 
     func executeFlagUpdate(of travel: Travel) {

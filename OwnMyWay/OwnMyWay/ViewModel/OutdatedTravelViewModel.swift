@@ -12,7 +12,7 @@ protocol OutdatedTravelViewModel {
     var travelPublisher: Published<Travel>.Publisher { get }
 
     func didUpdateTravel(to travel: Travel)
-    func didDeleteTravel()
+    func didDeleteTravel() -> Result<Void, Error>
     func didTouchAddRecordButton()
     func didTouchRecordCell(at record: Record)
     func didTouchBackButton()
