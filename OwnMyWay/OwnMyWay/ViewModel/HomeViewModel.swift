@@ -8,6 +8,7 @@
 import Foundation
 
 protocol HomeViewModel {
+    var messagePublisher: Published<Travel>.Publisher { get }
     var reservedTravelPublisher: Published<[Travel]>.Publisher { get }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { get }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
@@ -28,6 +29,7 @@ protocol HomeCoordinatingDelegate: AnyObject {
 
 class DefaultHomeViewModel: HomeViewModel {
 
+    var messagePublisher: Published<Travel>.Publisher { $travelMessage }
     var reservedTravelPublisher: Published<[Travel]>.Publisher { $reservedTravels }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { $ongoingTravels }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { $outdatedTravels }
@@ -38,6 +40,7 @@ class DefaultHomeViewModel: HomeViewModel {
     private let ongoingComment: Travel
     private let outdatedComment: Travel
 
+    @Published private var travelMessage: Travel
     @Published private var reservedTravels: [Travel]
     @Published private var ongoingTravels: [Travel]
     @Published private var outdatedTravels: [Travel]
@@ -48,6 +51,7 @@ class DefaultHomeViewModel: HomeViewModel {
         self.reservedTravels = []
         self.ongoingTravels = []
         self.outdatedTravels = []
+        self.travelMessage = Travel.dummy(section: .dummy)
         self.reservedComment = Travel.dummy(section: .dummy)
         self.ongoingComment = Travel.dummy(section: .dummy)
         self.outdatedComment = Travel.dummy(section: .dummy)

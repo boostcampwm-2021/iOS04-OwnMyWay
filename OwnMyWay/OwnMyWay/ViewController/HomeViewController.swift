@@ -72,6 +72,10 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             UINib(nibName: CommentCell.identifier, bundle: nil),
             forCellWithReuseIdentifier: CommentCell.identifier
         )
+        self.travelCollectionView.register(
+            UINib(nibName: MessageCell.identifier, bundle: nil
+                 ),
+            forCellWithReuseIdentifier: MessageCell.identifier)
     }
 
     private func configureTravelCollectionView() {
@@ -82,11 +86,23 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
     private func configureDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Travel.Section, Travel>()
-        snapshot.appendSections([.reserved, .ongoing, .outdated])
+        snapshot.appendSections([.dummy, .reserved, .ongoing, .outdated])
         self.diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
 
     private func configureCancellable() {
+        self.viewModel?.messagePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] travel in
+                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
+                snapshot.deleteSections([.dummy])
+                snapshot.appendSections([.dummy])
+                snapshot.appendItems([travel], toSection: .dummy)
+                snapshot.moveSection(.dummy, beforeSection: .reserved)
+                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+            }
+            .store(in: &self.cancellables)
+
         self.viewModel?.reservedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
@@ -97,7 +113,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
                 snapshot.moveSection(.reserved, beforeSection: .ongoing)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
-            .store(in: &cancellables)
+            .store(in: &self.cancellables)
 
         self.viewModel?.ongoingTravelPublisher
             .receive(on: DispatchQueue.main)
@@ -109,7 +125,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
                 snapshot.moveSection(.ongoing, afterSection: .reserved)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
-            .store(in: &cancellables)
+            .store(in: &self.cancellables)
 
         self.viewModel?.outdatedTravelPublisher
             .receive(on: DispatchQueue.main)
@@ -121,7 +137,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
                 snapshot.moveSection(.outdated, afterSection: .ongoing)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
-            .store(in: &cancellables)
+            .store(in: &self.cancellables)
     }
 
     private func createCompositionalLayout() -> UICollectionViewLayout {
@@ -174,41 +190,65 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         let dataSource = HomeDataSource(
             collectionView: self.travelCollectionView
         ) { collectionView, indexPath, item in
-                switch (indexPath.section, item.flag) {
-                case (Travel.Section.reserved.index, -1):
+            if item.flag == -1 {
+                if indexPath.section == 0 {
                     guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: CommentCell.identifier,
-                        for: indexPath) as? CommentCell
-                    else { return UICollectionViewCell() }
-                    cell.configure(text: "예정된 여행이 없어요 🤷‍♀️")
-                    return cell
-                case (Travel.Section.ongoing.index, -1):
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: CommentCell.identifier,
-                        for: indexPath) as? CommentCell
-                    else { return UICollectionViewCell() }
-                    cell.configure(text: "진행중인 여행이 없어요 🤷")
-                    return cell
-                case (Travel.Section.outdated.index, -1):
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: CommentCell.identifier,
-                        for: indexPath) as? CommentCell
-                    else { return UICollectionViewCell() }
-                    cell.configure(text: "지난 여행이 없어요 🤷‍♂️")
-                    return cell
-                default:
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: TravelCardCell.identifier,
-                        for: indexPath) as? TravelCardCell
-                    else { return UICollectionViewCell() }
-                    cell.configure(with: item)
+                        withReuseIdentifier: MessageCell.identifier,
+                        for: indexPath) as? MessageCell
+                    else { return MessageCell() }
                     return cell
                 }
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: CommentCell.identifier,
+                    for: indexPath) as? CommentCell
+                else { return UICollectionViewCell() }
+                cell.configure(
+                    text: self.createMessage(with: indexPath.section)
+                )
+                return cell
+            }
+//            switch (section, item.flag) {
+//            case (Travel.Section.reserved.index, -1):
+//                guard let cell = collectionView.dequeueReusableCell(
+//                    withReuseIdentifier: CommentCell.identifier,
+//                    for: indexPath) as? CommentCell
+//                else { return UICollectionViewCell() }
+//                cell.configure(text: "예정된 여행이 없어요 🤷‍♀️")
+//                return cell
+//            case (Travel.Section.ongoing.index, -1):
+//                guard let cell = collectionView.dequeueReusableCell(
+//                    withReuseIdentifier: CommentCell.identifier,
+//                    for: indexPath) as? CommentCell
+//                else { return UICollectionViewCell() }
+//                cell.configure(text: "진행중인 여행이 없어요 🤷")
+//                return cell
+//            case (Travel.Section.outdated.index, -1):
+//                guard let cell = collectionView.dequeueReusableCell(
+//                    withReuseIdentifier: CommentCell.identifier,
+//                    for: indexPath) as? CommentCell
+//                else { return UICollectionViewCell() }
+//                cell.configure(text: "지난 여행이 없어요 🤷‍♂️")
+//                return cell
+//            default:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: TravelCardCell.identifier,
+                for: indexPath) as? TravelCardCell
+            else { return UICollectionViewCell() }
+            cell.configure(with: item)
+            return cell
         }
         dataSource.supplementaryViewProvider = configureSupplementaryView(
             collectionView:kind:indexPath:
         )
         return dataSource
+    }
+
+    private func createMessage(with index: Int) -> String {
+        let dictionary = ["",
+                          "예정된 여행이 없어요 🤷‍♀️",
+                          "진행중인 여행이 없어요 🤷",
+                          "지난 여행이 없어요 🤷‍♂️"]
+        return dictionary[index]
     }
 
     private func configureSupplementaryView(
@@ -221,7 +261,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         ) as? TravelSectionHeader
         else { return UICollectionReusableView() }
 
-        let title = ["예정된 여행", "진행중인 여행", "지난 여행"]
+        let title = ["", "예정된 여행", "진행중인 여행", "지난 여행"]
         sectionHeader.configure(sectionTitle: title[indexPath.section])
         return sectionHeader
     }
