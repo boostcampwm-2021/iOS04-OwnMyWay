@@ -43,14 +43,14 @@ class CoreDataTravelRepository: TravelRepository {
         do {
             let travels = try context.fetch(TravelMO.fetchRequest())
             return .success(travels.map { $0.toTravel() })
-        } catch let error {
-            return .failure(error)
+        } catch {
+            return .failure(RepositoryError.saveError)
         }
     }
 
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error> {
         guard let entity = NSEntityDescription.entity(forEntityName: "TravelMO", in: context) else {
-            return .failure(NSError.init())
+            return .failure(RepositoryError.fetchError)
         }
         let travel = TravelMO(entity: entity, insertInto: context)
         travel.setValue(UUID(), forKey: "uuid")
@@ -61,8 +61,8 @@ class CoreDataTravelRepository: TravelRepository {
         do {
             try context.save()
             return .success(travel.toTravel())
-        } catch let error {
-            return .failure(error)
+        } catch {
+            return .failure(RepositoryError.saveError)
         }
     }
 
