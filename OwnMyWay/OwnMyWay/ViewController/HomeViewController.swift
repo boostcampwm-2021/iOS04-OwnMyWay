@@ -73,9 +73,9 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             forCellWithReuseIdentifier: CommentCell.identifier
         )
         self.travelCollectionView.register(
-            UINib(nibName: MessageCell.identifier, bundle: nil
-                 ),
-            forCellWithReuseIdentifier: MessageCell.identifier)
+            UINib(nibName: MessageCell.identifier, bundle: nil),
+            forCellWithReuseIdentifier: MessageCell.identifier
+        )
     }
 
     private func configureTravelCollectionView() {
