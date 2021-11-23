@@ -249,14 +249,23 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         let dictionary = ["", "예정된 여행이 없어요 🤷‍♀️",
                           "진행중인 여행이 없어요 🤷",
                           "지난 여행이 없어요 🤷‍♂️"]
-        return sections == 4 ? dictionary[section] : dictionary[section + 1]
+        return dictionary[self.sectionIndex(by: section, with: sections)]
     }
 
     private func createTitle(by section: Int, with sections: Int) -> String {
         let dictionary = ["", "예정된 여행",
                           "진행중인 여행",
                           "지난 여행"]
-        return sections == 4 ? dictionary[section] : dictionary[section + 1]
+        return dictionary[self.sectionIndex(by: section, with: sections)]
+    }
+
+    private func sectionIndex(by section: Int, with sections: Int) -> Int {
+        let allSectionsCount = Travel.Section.allCases.count
+        if allSectionsCount == sections {
+            return section
+        }
+        // If dummy section is removed, section index should be increased by one.
+        return section + 1
     }
 
     private func configureSupplementaryView(
