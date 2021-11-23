@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailImageCoordinator: Coordinator {
+class DetailImageCoordinator: Coordinator, DetailImageCoordinatingDelegate {
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
     var imageURLs: [URL]
@@ -19,7 +19,9 @@ class DetailImageCoordinator: Coordinator {
     }
 
     func start() {
-        let imageVM = DefaultDetailImageViewModel(images: self.imageURLs)
+        let imageVM = DefaultDetailImageViewModel(
+            images: self.imageURLs, coordinatingDelegate: self
+        )
         let imageVC = DetailImageViewController.instantiate(storyboardName: "DetailImage")
         imageVC.bind(viewModel: imageVM)
         imageVC.modalPresentationStyle = .fullScreen
@@ -27,6 +29,10 @@ class DetailImageCoordinator: Coordinator {
         self.navigationController.viewControllers.last?.present(
             imageVC, animated: true
         )
+    }
+
+    func dismissToImageDetail() {
+        navigationController.viewControllers.last?.dismiss(animated: true)
     }
 
 }

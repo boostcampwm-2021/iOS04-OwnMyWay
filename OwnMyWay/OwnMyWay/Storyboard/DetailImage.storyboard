@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,6 +34,23 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="Pjv-j5-ixI"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="bLf-A9-D8B"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xp6-fO-cZ3">
+                                <rect key="frame" x="20" y="64" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="IHx-Ut-P8N"/>
+                                    <constraint firstAttribute="height" constant="44" id="wa0-j7-8hH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchBackButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="k2W-Pe-osM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,6 +60,8 @@
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Zeh-R1-rCi"/>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hXm-n2-JWK"/>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="n6e-Qp-pA2"/>
+                            <constraint firstItem="Xp6-fO-cZ3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="waR-75-vd3"/>
+                            <constraint firstItem="Xp6-fO-cZ3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="xes-JL-icm"/>
                         </constraints>
                     </view>
                     <connections>
@@ -54,4 +74,7 @@
             <point key="canvasLocation" x="37.681159420289859" y="93.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
 </document>

@@ -60,13 +60,14 @@ class DetailImageViewController: UIViewController, Instantiable {
             imageView.trailingAnchor.constraint(equalTo: zoomView.contentLayoutGuide.trailingAnchor)
         ])
     }
+
+    @IBAction func didTouchBackButton(_ sender: Any) {
+        self.viewModel?.didTouchBackButton()
+    }
 }
 
 extension DetailImageViewController: UIScrollViewDelegate {
 
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        scrollView.isPagingEnabled = scrollView.zoomScale == 1.0
-    }
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return scrollView.subviews.first
     }
