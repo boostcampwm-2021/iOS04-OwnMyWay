@@ -33,6 +33,9 @@
                             <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                             <directionalEdgeInsets key="contentInsets" top="15" leading="25" bottom="15" trailing="25"/>
                         </buttonConfiguration>
+                        <connections>
+                            <action selector="didTouchCreateTravelButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="rBa-90-doV"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -47,6 +50,9 @@
                 <constraint firstAttribute="trailing" secondItem="DY1-4V-KRT" secondAttribute="trailing" id="y6U-2r-aNb"/>
             </constraints>
             <size key="customSize" width="387" height="241"/>
+            <connections>
+                <outlet property="createTravelButton" destination="svm-HH-6eH" id="9EJ-n8-qcj"/>
+            </connections>
             <point key="canvasLocation" x="381.8840579710145" y="197.87946428571428"/>
         </collectionViewCell>
     </objects>
