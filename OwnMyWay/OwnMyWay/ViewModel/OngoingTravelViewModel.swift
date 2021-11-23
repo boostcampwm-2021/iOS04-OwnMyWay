@@ -18,7 +18,7 @@ protocol OngoingTravelViewModel {
     func didTouchBackButton()
     func didTouchEditButton()
     func didTouchFinishButton() -> Result<Void, Error>
-    func didUpdateCoordinate(latitude: Double, longitude: Double)
+    func didUpdateCoordinate(latitude: Double, longitude: Double) -> Result<Void, Error>
     func didUpdateRecord(record: Record)
 }
 
@@ -90,9 +90,9 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         }
     }
 
-    func didUpdateCoordinate(latitude: Double, longitude: Double) {
+    func didUpdateCoordinate(latitude: Double, longitude: Double) -> Result<Void, Error> {
         self.travel.locations.append(Location(latitude: latitude, longitude: longitude))
-        self.usecase.executeLocationUpdate(
+        return self.usecase.executeLocationUpdate(
             of: self.travel, latitude: latitude, longitude: longitude
         )
     }

@@ -357,7 +357,14 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
         guard let latitude = lastLocation?.coordinate.latitude,
               let longitude = lastLocation?.coordinate.longitude
         else { return }
-        self.viewModel?.didUpdateCoordinate(latitude: latitude, longitude: longitude)
+        switch self.viewModel?.didUpdateCoordinate(latitude: latitude, longitude: longitude) {
+        case .success:
+            break
+        case .failure(let error):
+            print(error)
+        case .none:
+            print("App 터졌다구~")
+        }
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

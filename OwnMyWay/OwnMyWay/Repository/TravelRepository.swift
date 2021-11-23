@@ -12,6 +12,7 @@ enum RepositoryError: Error {
     case saveError
     case fetchError
     case uuidError
+    case locationError
 }
 
 enum ModelError: Error {
@@ -35,10 +36,8 @@ protocol TravelRepository {
         to travel: Travel,
         with record: Record
     ) -> Result<Travel, Error>
-    @discardableResult func addLocation(
-        to travel: Travel,
-        latitude: Double?,
-        longitude: Double?
+    func addLocation(
+        to travel: Travel, latitude: Double?, longitude: Double?
     ) -> Result<Location, Error>
     func update(travel: Travel) -> Result<Travel, Error>
     func updateRecord(at record: Record) -> Result<Void, Error>
@@ -175,17 +174,14 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
-    @discardableResult
     func addLocation(
-        to travel: Travel,
-        latitude: Double?,
-        longitude: Double?
+        to travel: Travel, latitude: Double?, longitude: Double?
     ) -> Result<Location, Error> {
         guard let travelMO = findTravel(by: travel.uuid ?? UUID())
-        else { return .failure(NSError.init()) }
-        guard let entity = NSEntityDescription.entity(forEntityName: "LocationMO", in: context)
-        else { return .failure(NSError.init()) }
+        else { return .failure(RepositoryError.uuidError) }
 
+        guard let entity = NSEntityDescription.entity(forEntityName: "LocationMO", in: context)
+        else { return .failure(RepositoryError.fetchError) }
         let locationMO = LocationMO(entity: entity, insertInto: context)
         locationMO.setValue(latitude, forKey: "latitude")
         locationMO.setValue(longitude, forKey: "longitude")
@@ -194,8 +190,8 @@ class CoreDataTravelRepository: TravelRepository {
         do {
             try context.save()
             return .success(locationMO.toLocation())
-        } catch let error {
-            return .failure(error)
+        } catch {
+            return .failure(RepositoryError.saveError)
         }
     }
 
@@ -227,11 +223,20 @@ class CoreDataTravelRepository: TravelRepository {
             self?.addRecord(to: travel, with: record)
         }
         newTravel.removeFromLocations(newTravel.locations ?? NSOrderedSet())
+
+        var isResultValid = true
         travel.locations.forEach { [weak self] location in
-            self?.addLocation(
+            switch self?.addLocation(
                 to: travel, latitude: location.latitude, longitude: location.longitude
-            )
+            ) {
+            case .success:
+                break
+            default:
+                isResultValid = false
+            }
         }
+        if !isResultValid { return .failure(RepositoryError.locationError) }
+
         do {
             try context.save()
             return .success(newTravel.toTravel())
