@@ -13,16 +13,3 @@ extension UIImageView {
         self.kf.setImage(with: url)
     }
 }
-
-extension UIImageView {
-    func resize() {
-        guard let image = self.image else { return }
-        let ratio = image.size.width / image.size.height
-        let newWidth = UIScreen.main.bounds.width
-        let newHeight = newWidth / ratio
-        NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: newWidth),
-            heightAnchor.constraint(equalToConstant: newHeight)
-        ])
-    }
-}
