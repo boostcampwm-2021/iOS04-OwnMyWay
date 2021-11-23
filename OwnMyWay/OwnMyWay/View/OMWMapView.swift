@@ -24,7 +24,7 @@ class OMWMapView: MKMapView, MapAvailable {
         self.configureMapView(with: self)
     }
 
-    func configure(with travel: Travel) {
+    func configure(with travel: Travel, isMovingCamera: Bool) {
         let landmarkAnnotations = travel.landmarks.map {
             LandmarkAnnotation.init(landmark: $0)
         }
@@ -44,6 +44,29 @@ class OMWMapView: MKMapView, MapAvailable {
             mapView: self,
             locations: travel.locations
         )
+
+        if isMovingCamera {
+            let locationAnnotations = travel.locations.map {
+                LocationAnnotation.init(location: $0)
+            }
+
+            self.moveRegion(
+                mapView: self,
+                annotations: landmarkAnnotations + recordAnnotations + locationAnnotations,
+                animated: true
+            )
+        }
+    }
+
+    class LocationAnnotation: NSObject, MKAnnotation {
+        var coordinate: CLLocationCoordinate2D
+
+        init(location: Location) {
+            self.coordinate = CLLocationCoordinate2D(
+                latitude: location.latitude ?? 0,
+                longitude: location.longitude ?? 0
+            )
+        }
     }
 }
 
