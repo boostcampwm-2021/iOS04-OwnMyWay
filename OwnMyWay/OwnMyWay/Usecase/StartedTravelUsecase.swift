@@ -15,7 +15,9 @@ protocol StartedTravelUsecase {
     func executeLocationUpdate(
         of travel: Travel, latitude: Double, longitude: Double
     ) -> Result<Void, Error>
-    func executeRecordAddition(to travel: Travel, with record: Record, completion: (Travel) -> Void)
+    func executeRecordAddition(
+        to travel: Travel, with record: Record, completion: (Result<Travel, Error>) -> Void
+    )
 }
 
 struct DefaultStartedTravelUsecase: StartedTravelUsecase {
@@ -56,13 +58,8 @@ struct DefaultStartedTravelUsecase: StartedTravelUsecase {
     }
 
     func executeRecordAddition(
-        to travel: Travel, with record: Record, completion: (Travel) -> Void
+        to travel: Travel, with record: Record, completion: (Result<Travel, Error>) -> Void
     ) {
-        switch self.repository.addRecord(to: travel, with: record) {
-        case .success(let newTravel):
-            completion(newTravel)
-        case .failure(let error):
-            print(error.localizedDescription)
-        }
+        completion(self.repository.addRecord(to: travel, with: record))
     }
 }

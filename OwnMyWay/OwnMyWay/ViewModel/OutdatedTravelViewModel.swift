@@ -11,8 +11,9 @@ protocol OutdatedTravelViewModel {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
 
+    func bind(errorHandler: @escaping (Error) -> Void)
     func didUpdateTravel(to travel: Travel)
-    func didDeleteTravel() -> Result<Void, Error>
+    func didDeleteTravel()
     func didTouchAddRecordButton()
     func didTouchRecordCell(at record: Record)
     func didTouchBackButton()

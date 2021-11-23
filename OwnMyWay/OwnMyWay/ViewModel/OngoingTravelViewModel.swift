@@ -12,13 +12,14 @@ protocol OngoingTravelViewModel {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
 
+    func bind(errorHandler: @escaping (Error) -> Void)
     func didUpdateTravel(to travel: Travel)
     func didTouchAddRecordButton()
     func didTouchRecordCell(at record: Record)
     func didTouchBackButton()
     func didTouchEditButton()
-    func didTouchFinishButton() -> Result<Void, Error>
-    func didUpdateCoordinate(latitude: Double, longitude: Double) -> Result<Void, Error>
+    func didTouchFinishButton()
+    func didUpdateCoordinate(latitude: Double, longitude: Double)
     func didUpdateRecord(record: Record)
 }
 
@@ -38,6 +39,7 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
 
     private let usecase: StartedTravelUsecase
     private weak var coordinatingDelegate: StartedCoordinatingDelegate?
+    private var errorHandler: ((Error) -> Void)?
 
     init(
         travel: Travel,
@@ -49,17 +51,20 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         self.coordinatingDelegate = coordinatingDelegate
     }
 
+    func bind(errorHandler: @escaping (Error) -> Void) {
+        self.errorHandler = errorHandler
+    }
+
     func didUpdateTravel(to travel: Travel) {
         self.travel = travel
     }
 
-    func didDeleteTravel() -> Result<Void, Error> {
+    func didDeleteTravel() {
         switch self.usecase.executeDeletion(of: self.travel) {
         case .success:
             self.coordinatingDelegate?.popToHome()
-            return .success(())
         case .failure(let error):
-            return .failure(error)
+            self.errorHandler?(error)
         }
     }
 
@@ -79,27 +84,36 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         self.coordinatingDelegate?.pushToEditTravel(travel: self.travel)
     }
 
-    func didTouchFinishButton() -> Result<Void, Error> {
+    func didTouchFinishButton() {
         self.travel.flag = Travel.Section.outdated.index
         switch self.usecase.executeFlagUpdate(of: self.travel) {
         case .success:
             self.coordinatingDelegate?.moveToOutdated(travel: self.travel)
-            return .success(())
         case .failure(let error):
-            return .failure(error)
+            self.errorHandler?(error)
         }
     }
 
-    func didUpdateCoordinate(latitude: Double, longitude: Double) -> Result<Void, Error> {
+    func didUpdateCoordinate(latitude: Double, longitude: Double) {
         self.travel.locations.append(Location(latitude: latitude, longitude: longitude))
-        return self.usecase.executeLocationUpdate(
+        switch self.usecase.executeLocationUpdate(
             of: self.travel, latitude: latitude, longitude: longitude
-        )
+        ) {
+        case .success:
+            break
+        case .failure(let error):
+            self.errorHandler?(error)
+        }
     }
 
     func didUpdateRecord(record: Record) {
-        self.usecase.executeRecordAddition(to: self.travel, with: record) { [weak self] travel in
-            self?.travel = travel
+        self.usecase.executeRecordAddition(to: self.travel, with: record) { [weak self] result in
+            switch result {
+            case .success(let travel):
+                self?.travel = travel
+            case .failure(let error):
+                self?.errorHandler?(error)
+            }
         }
     }
 }

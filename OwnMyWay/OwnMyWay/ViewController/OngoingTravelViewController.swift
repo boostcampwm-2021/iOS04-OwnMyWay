@@ -31,6 +31,9 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel?.bind { error in
+            print(error)
+        }
         self.configureNavigation()
         self.configureNibs()
         self.configureCollectionViews()
@@ -144,14 +147,7 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
     }
 
     @IBAction func didTouchFinishButton(_ sender: UIButton) {
-        switch self.viewModel?.didTouchFinishButton() {
-        case .success:
-            break
-        case .failure(let error):
-            print(error)
-        case .none:
-            print("App 터졌다구~")
-        }
+        self.viewModel?.didTouchFinishButton()
     }
 
     @IBAction func didTouchTrackingButton(_ sender: Any) {
@@ -357,14 +353,7 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
         guard let latitude = lastLocation?.coordinate.latitude,
               let longitude = lastLocation?.coordinate.longitude
         else { return }
-        switch self.viewModel?.didUpdateCoordinate(latitude: latitude, longitude: longitude) {
-        case .success:
-            break
-        case .failure(let error):
-            print(error)
-        case .none:
-            print("App 터졌다구~")
-        }
+        self.viewModel?.didUpdateCoordinate(latitude: latitude, longitude: longitude)
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
