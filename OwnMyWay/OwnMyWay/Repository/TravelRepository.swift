@@ -20,6 +20,7 @@ enum RepositoryError: Error {
 enum ModelError: Error {
     case landmarkError
     case recordError
+    case indexError
 }
 
 protocol TravelRepository {

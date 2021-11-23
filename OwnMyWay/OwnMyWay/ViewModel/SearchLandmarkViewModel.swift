@@ -12,6 +12,7 @@ protocol SearchLandmarkViewModel {
     var landmarksPublisher: Published<[Landmark]>.Publisher { get }
 
     func viewDidLoad()
+    func bind(errorHandler: @escaping (Error) -> Void)
     func didChangeSearchText(with text: String)
     func didTouchLandmarkCard(at index: Int)
 }
@@ -30,6 +31,7 @@ class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject 
     @Published private var landmarks: [Landmark]
     @Published private var searchText: String
     private var cancellables: Set<AnyCancellable>
+    private var errorHandler: ((Error) -> Void)?
 
     init(
         usecase: SearchLandmarkUsecase,
@@ -44,9 +46,18 @@ class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject 
     }
 
     func viewDidLoad() {
-        usecase.executeFetch { [weak self] landmarks in
-            self?.landmarks = landmarks
+        usecase.executeFetch { [weak self] result in
+            switch result {
+            case .success(let landmarks):
+                self?.landmarks = landmarks
+            case .failure(let error):
+                self?.errorHandler?(error)
+            }
         }
+    }
+
+    func bind(errorHandler: @escaping (Error) -> Void) {
+        self.errorHandler = errorHandler
     }
 
     func didChangeSearchText(with text: String) {
@@ -54,19 +65,26 @@ class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject 
     }
 
     func didTouchLandmarkCard(at index: Int) {
-        guard landmarks.startIndex..<landmarks.endIndex ~= index else { return }
+        guard landmarks.startIndex..<landmarks.endIndex ~= index
+        else {
+            self.errorHandler?(ModelError.indexError)
+            return
+        }
         self.coordinatingDelegate?.dismissToAddLandmark(landmark: landmarks[index])
     }
 
     // MARK: Internal Private Functions
     private func search(with text: String) {
         if text.isEmpty {
-            usecase.executeFetch { [weak self] landmarks in
-                self?.landmarks = landmarks
-            }
+            self.viewDidLoad()
         } else {
             usecase.executeSearch(by: text) { [weak self] searchResult in
-                self?.landmarks = searchResult
+                switch searchResult {
+                case .success(let landmarks):
+                    self?.landmarks = landmarks
+                case .failure(let error):
+                    self?.errorHandler?(error)
+                }
             }
         }
     }
