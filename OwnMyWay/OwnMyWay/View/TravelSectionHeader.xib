@@ -33,7 +33,7 @@
             <connections>
                 <outlet property="sectionTitleLabel" destination="Nnh-i9-9jX" id="owf-zw-v3k"/>
             </connections>
-            <point key="canvasLocation" x="139" y="153"/>
+            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </collectionReusableView>
     </objects>
     <resources>

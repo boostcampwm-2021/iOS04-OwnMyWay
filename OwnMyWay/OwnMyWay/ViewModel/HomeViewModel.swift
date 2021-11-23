@@ -8,15 +8,14 @@
 import Foundation
 
 protocol HomeViewModel {
+    var messagePublisher: Published<[Travel]>.Publisher { get }
     var reservedTravelPublisher: Published<[Travel]>.Publisher { get }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { get }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
 
     func viewDidLoad()
     func didTouchCreateButton()
-    func didTouchReservedTravel(at index: Int)
-    func didTouchOngoingTravel(at index: Int)
-    func didTouchOutdatedTravel(at index: Int)
+    func didTouchTravel(flag: Int, item: Int)
 }
 
 protocol HomeCoordinatingDelegate: AnyObject {
@@ -28,16 +27,19 @@ protocol HomeCoordinatingDelegate: AnyObject {
 
 class DefaultHomeViewModel: HomeViewModel {
 
+    var messagePublisher: Published<[Travel]>.Publisher { $travelMessage }
     var reservedTravelPublisher: Published<[Travel]>.Publisher { $reservedTravels }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { $ongoingTravels }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { $outdatedTravels }
 
     private let usecase: HomeUsecase
     private weak var coordinatingDelegate: HomeCoordinatingDelegate?
-    private var reservedComment: Travel
-    private var ongoingComment: Travel
-    private var outdatedComment: Travel
+    private let message: Travel
+    private let reservedComment: Travel
+    private let ongoingComment: Travel
+    private let outdatedComment: Travel
 
+    @Published private var travelMessage: [Travel]
     @Published private var reservedTravels: [Travel]
     @Published private var ongoingTravels: [Travel]
     @Published private var outdatedTravels: [Travel]
@@ -48,6 +50,9 @@ class DefaultHomeViewModel: HomeViewModel {
         self.reservedTravels = []
         self.ongoingTravels = []
         self.outdatedTravels = []
+        self.travelMessage = []
+
+        self.message = Travel.dummy(section: .dummy)
         self.reservedComment = Travel.dummy(section: .dummy)
         self.ongoingComment = Travel.dummy(section: .dummy)
         self.outdatedComment = Travel.dummy(section: .dummy)
@@ -58,6 +63,7 @@ class DefaultHomeViewModel: HomeViewModel {
             guard let self = self else { return }
             let reserveds = travels.filter { $0.flag == Travel.Section.reserved.index }
             self.reservedTravels = reserveds.isEmpty ? [self.reservedComment] : reserveds
+            self.travelMessage = reserveds.isEmpty ? [self.message] : []
             let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
             self.ongoingTravels = ongoings.isEmpty ? [self.ongoingComment] : ongoings
             let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }
@@ -69,17 +75,30 @@ class DefaultHomeViewModel: HomeViewModel {
         self.coordinatingDelegate?.pushToCreateTravel()
     }
 
-    func didTouchReservedTravel(at index: Int) {
+    func didTouchTravel(flag: Int, item: Int) {
+        switch flag {
+        case Travel.Section.reserved.index:
+            self.didTouchReservedTravel(at: item)
+        case Travel.Section.ongoing.index:
+            self.didTouchOngoingTravel(at: item)
+        case Travel.Section.outdated.index:
+            self.didTouchOutdatedTravel(at: item)
+        default:
+            return
+        }
+    }
+
+    private func didTouchReservedTravel(at index: Int) {
         guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else { return }
         self.coordinatingDelegate?.pushToReservedTravel(travel: reservedTravels[index])
     }
 
-    func didTouchOngoingTravel(at index: Int) {
+    private func didTouchOngoingTravel(at index: Int) {
         guard ongoingTravels.startIndex..<ongoingTravels.endIndex ~= index else { return }
         self.coordinatingDelegate?.pushToOngoingTravel(travel: ongoingTravels[index])
     }
 
-    func didTouchOutdatedTravel(at index: Int) {
+    private func didTouchOutdatedTravel(at index: Int) {
         guard outdatedTravels.startIndex..<outdatedTravels.endIndex ~= index else { return }
         self.coordinatingDelegate?.pushToOutdatedTravel(travel: outdatedTravels[index])
     }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MessageCell" id="gTV-IL-0wX" customClass="MessageCell" customModule="OwnMyWay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="243"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="243"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😱 예정된 여행이 없어요. 새로운 여행을 계획해보세요!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DY1-4V-KRT">
+                        <rect key="frame" x="25" y="10" width="368" height="149"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="25"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svm-HH-6eH">
+                        <rect key="frame" x="129.5" y="179" width="159.5" height="54"/>
+                        <color key="backgroundColor" name="IdentityBlue"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="여행 계획하기">
+                            <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
+                            <directionalEdgeInsets key="contentInsets" top="15" leading="25" bottom="15" trailing="25"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="didTouchCreateTravelButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="rBa-90-doV"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" name="HomeContent"/>
+            <constraints>
+                <constraint firstItem="svm-HH-6eH" firstAttribute="centerX" secondItem="DY1-4V-KRT" secondAttribute="centerX" id="Y6F-6G-Yk9"/>
+                <constraint firstItem="DY1-4V-KRT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="25" id="aEZ-B8-bvO"/>
+                <constraint firstAttribute="bottom" secondItem="svm-HH-6eH" secondAttribute="bottom" constant="10" id="eWH-uP-cCT"/>
+                <constraint firstItem="DY1-4V-KRT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="fgU-iE-23j"/>
+                <constraint firstItem="svm-HH-6eH" firstAttribute="top" secondItem="DY1-4V-KRT" secondAttribute="bottom" constant="20" id="igo-Af-vvS"/>
+                <constraint firstAttribute="trailing" secondItem="DY1-4V-KRT" secondAttribute="trailing" id="y6U-2r-aNb"/>
+            </constraints>
+            <size key="customSize" width="387" height="241"/>
+            <connections>
+                <outlet property="createTravelButton" destination="svm-HH-6eH" id="9EJ-n8-qcj"/>
+            </connections>
+            <point key="canvasLocation" x="381.8840579710145" y="197.87946428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="HomeContent">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="IdentityBlue">
+            <color red="0.18000000715255737" green="0.66699999570846558" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
