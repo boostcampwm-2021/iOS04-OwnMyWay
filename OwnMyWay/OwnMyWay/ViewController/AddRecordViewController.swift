@@ -40,6 +40,9 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel?.bind { error in
+            print(error)
+        }
         self.configureTextView()
         self.configureGestureRecognizer()
         self.configureNotifications()
