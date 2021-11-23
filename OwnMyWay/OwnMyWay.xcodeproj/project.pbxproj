@@ -85,7 +85,6 @@
 		AF82FDB8273BF3C600A094B6 /* OutdatedTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */; };
 		AF82FDBA273BF3D900A094B6 /* OutdatedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */; };
 		AF82FDBC273BF3E300A094B6 /* OutdatedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */; };
-		AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */; };
 		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
 		AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA5E25A2742294100DD94D9 /* LocationManager.swift */; };
 		AFA6ED7A2744F6BD007B251C /* CompleteEditingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */; };
@@ -215,7 +214,6 @@
 		AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutdatedTravel.storyboard; sourceTree = "<group>"; };
 		AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewController.swift; sourceTree = "<group>"; };
 		AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewModel.swift; sourceTree = "<group>"; };
-		AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelUsecase.swift; sourceTree = "<group>"; };
 		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
 		AFA5E25A2742294100DD94D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditingCoordinator.swift; sourceTree = "<group>"; };
@@ -305,6 +303,7 @@
 				AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */,
 				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
 				AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */,
+				AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */,
 				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
 				29E9BA37273253130040B70A /* LandmarkCartViewController.swift */,
 				DB8831C62732861500487D33 /* Instantiable.swift */,
@@ -316,7 +315,6 @@
 				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
 				3FB987972742C3BF008F0E08 /* ImageFileManager.swift */,
 				AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */,
-				AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */,
 				3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */,
 			);
 			path = ViewController;
@@ -366,10 +364,10 @@
 				AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */,
 				294897C5273BF181003185E7 /* DetailRecordViewModel.swift */,
 				AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */,
+				AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */,
 				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
 				DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */,
 				AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */,
-				AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -385,7 +383,6 @@
 				AF1108E5273B8C18009FE728 /* StartedTravelUsecase.swift */,
 				294897C9273BF3D7003185E7 /* DetailRecordUsecase.swift */,
 				AF82FDAF273BEC0900A094B6 /* AddRecordUsecase.swift */,
-				AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */,
 				AFA6ED812744F869007B251C /* CompleteEditingUsecase.swift */,
 			);
 			path = Usecase;
@@ -700,7 +697,6 @@
 				AF6C7917273942E800FAB0FE /* TravelUpdatable.swift in Sources */,
 				294897C6273BF181003185E7 /* DetailRecordViewModel.swift in Sources */,
 				3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */,
-				AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */,
 				294897BF273BA993003185E7 /* RecordCardCell.swift in Sources */,
 				3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */,
 				3F113A17273A5FD600EA91AA /* CompleteCreationCoordinator.swift in Sources */,
