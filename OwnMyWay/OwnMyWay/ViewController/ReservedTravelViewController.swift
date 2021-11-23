@@ -27,6 +27,9 @@ class ReservedTravelViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel?.bind { error in
+            print(error)
+        }
         self.configureDescription()
         self.configureStartButton()
         self.configureCancellable()
@@ -62,25 +65,11 @@ class ReservedTravelViewController: UIViewController,
         if let cartVC = self.children.first as? LandmarkCartViewController {
             cartVC.didUpdateTravel(to: travel)
         }
-        switch self.viewModel?.didUpdateTravel(to: travel) {
-        case .success:
-            break
-        case .failure(let error):
-            print(error)
-        case .none:
-            print("App 터졌다구~")
-        }
+        self.viewModel?.didUpdateTravel(to: travel)
     }
 
     func didDeleteLandmark(at landmark: Landmark) {
-        switch self.viewModel?.didDeleteLandmark(at: landmark) {
-        case .success:
-            break
-        case .failure(let error):
-            print(error)
-        case .none:
-            print("App 터졌다구~")
-        }
+        self.viewModel?.didDeleteLandmark(at: landmark)
     }
 
     private func configureButtonConstraint() {
@@ -144,14 +133,7 @@ class ReservedTravelViewController: UIViewController,
             preferredStyle: .alert
         )
         let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
-            switch self?.viewModel?.didDeleteTravel() {
-            case .success:
-                break
-            case .failure(let error):
-                print(error)
-            case .none:
-                print("App 터졌다구~")
-            }
+            self?.viewModel?.didDeleteTravel()
         }
         let noAction = UIAlertAction(title: "아니오", style: .cancel)
         alert.addAction(yesAction)
@@ -160,14 +142,6 @@ class ReservedTravelViewController: UIViewController,
     }
 
     @IBAction func didTouchStartButton(_ sender: Any) {
-        switch self.viewModel?.didTouchStartButton() {
-        case .success:
-            break
-        case .failure(let error):
-            print(error)
-        case .none:
-            print("App 터졌다구~")
-        }
+        self.viewModel?.didTouchStartButton()
     }
-
 }

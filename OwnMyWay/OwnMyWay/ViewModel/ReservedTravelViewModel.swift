@@ -12,12 +12,13 @@ protocol ReservedTravelViewModel {
     var isPossibleStart: Bool { get }
     var travelPublisher: Published<Travel>.Publisher { get }
 
-    func didDeleteTravel() -> Result<Void, Error>
-    func didUpdateTravel(to travel: Travel) -> Result<Void, Error>
+    func bind(errorHandler: @escaping (Error) -> Void)
+    func didDeleteTravel()
+    func didUpdateTravel(to travel: Travel)
     func didEditTravel(to travel: Travel)
-    func didDeleteLandmark(at landmark: Landmark) -> Result<Void, Error>
+    func didDeleteLandmark(at landmark: Landmark)
     func didTouchBackButton()
-    func didTouchStartButton() -> Result<Void, Error>
+    func didTouchStartButton()
     func didTouchEditButton()
 }
 
@@ -34,6 +35,7 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
 
     private let usecase: ReservedTravelUsecase
     private weak var coordinatingDelegate: ReservedTravelCoordinatingDelegate?
+    private var errorHandler: ((Error) -> Void)?
 
     init(
         usecase: ReservedTravelUsecase,
@@ -50,44 +52,59 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         self.coordinatingDelegate = coordinatingDelegate
     }
 
-    func didDeleteTravel() -> Result<Void, Error> {
+    func bind(errorHandler: @escaping (Error) -> Void) {
+        self.errorHandler = errorHandler
+    }
+
+    func didDeleteTravel() {
         switch self.usecase.executeDeletion(of: self.travel) {
         case .success:
             self.coordinatingDelegate?.popToHome()
-            return .success(())
         case .failure(let error):
-            return .failure(error)
+            self.errorHandler?(error)
         }
     }
 
-    func didUpdateTravel(to travel: Travel) -> Result<Void, Error> {
+    func didUpdateTravel(to travel: Travel) {
         self.travel = travel // 자기자신에 업데이트
-        return self.usecase.executeLandmarkAddition(of: travel) // coreData에 업데이트
+        switch self.usecase.executeLandmarkAddition(of: travel) {
+        case .success:
+            break
+        case .failure(let error):
+            self.errorHandler?(error)
+        }
     }
 
     func didEditTravel(to travel: Travel) {
         self.travel = travel
     }
 
-    func didDeleteLandmark(at landmark: Landmark) -> Result<Void, Error> {
-        guard let index = self.travel.landmarks.firstIndex(of: landmark)
-        else { return .failure(ModelError.landmarkError) }
+    func didDeleteLandmark(at landmark: Landmark) {
+        guard let index = self.travel.landmarks.firstIndex(of: landmark) else {
+            self.errorHandler?(ModelError.landmarkError)
+            return
+        }
         self.travel.landmarks.remove(at: index)
-        return self.usecase.executeLandmarkDeletion(at: landmark)
+
+        switch self.usecase.executeLandmarkDeletion(at: landmark) {
+        case .success:
+            break
+        case .failure(let error):
+            self.errorHandler?(error)
+        }
     }
 
     func didTouchBackButton() {
         self.coordinatingDelegate?.popToHome()
     }
 
-    func didTouchStartButton() -> Result<Void, Error> {
+    func didTouchStartButton() {
         self.travel.flag = Travel.Section.ongoing.index // 자기자신에 업데이트
         switch self.usecase.executeFlagUpdate(of: self.travel) {
         case .success:
             self.coordinatingDelegate?.moveToOngoing(travel: self.travel)
-            return .success(())
         case .failure(let error):
-            return .failure(error)
+            self.errorHandler?(error)
         }
     }
 
