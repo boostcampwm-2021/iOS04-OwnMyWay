@@ -11,11 +11,16 @@ class DetailImageViewController: UIViewController, Instantiable {
 
     @IBOutlet weak var imageStackView: UIStackView!
     @IBOutlet weak var imageScrollView: UIScrollView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
+
     private var viewModel: DetailImageViewModel?
+    private var selectedIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageScrollView.delegate = self
+        self.configureScrollView()
+        self.configurePageControl()
         self.viewModel?.imageURLs.forEach { url in
             let imageView = configureImageView(with: url)
             let zoomView = configureZoomView()
@@ -23,8 +28,21 @@ class DetailImageViewController: UIViewController, Instantiable {
         }
     }
 
+    override func viewWillLayoutSubviews() {
+        guard let selectedIndex = self.viewModel?.selectedIndex else { return }
+        let imageWidth = self.imageScrollView.frame.size.width
+        self.imageScrollView.setContentOffset(
+            CGPoint(x: Int(imageWidth) * selectedIndex, y: 0), animated: false
+        )
+    }
+
     func bind(viewModel: DetailImageViewModel) {
         self.viewModel = viewModel
+        self.selectedIndex = viewModel.selectedIndex
+    }
+
+    private func configureScrollView() {
+        self.imageScrollView.delegate = self
     }
 
     private func configureImageView(with url: URL) -> UIImageView {
@@ -61,6 +79,10 @@ class DetailImageViewController: UIViewController, Instantiable {
         ])
     }
 
+    private func configurePageControl() {
+        self.pageControl.numberOfPages = self.viewModel?.imageURLs.count ?? 0
+    }
+
     @IBAction func didTouchBackButton(_ sender: Any) {
         self.viewModel?.didTouchBackButton()
     }
@@ -70,5 +92,20 @@ extension DetailImageViewController: UIScrollViewDelegate {
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return scrollView.subviews.first
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let value = self.imageScrollView.contentOffset.x / self.imageScrollView.frame.size.width
+        self.pageControl.currentPage = Int(round(value))
+    }
+
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        self.backButton.isHidden = true
+        self.pageControl.isHidden = true
+    }
+
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        self.backButton.isHidden = false
+        self.pageControl.isHidden = false
     }
 }

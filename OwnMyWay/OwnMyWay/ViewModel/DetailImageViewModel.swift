@@ -8,7 +8,8 @@
 import Foundation
 
 protocol DetailImageViewModel {
-    var imageURLs: [URL] { get }
+    var imageURLs: [URL] { get set }
+    var selectedIndex: Int { get set }
     func didTouchBackButton()
 }
 
@@ -18,11 +19,13 @@ protocol DetailImageCoordinatingDelegate {
 
 class DefaultDetailImageViewModel: DetailImageViewModel {
     var imageURLs: [URL]
+    var selectedIndex: Int
     var coordinatingDelegate: DetailImageCoordinatingDelegate?
 
-    init(images: [URL], coordinatingDelegate: DetailImageCoordinatingDelegate) {
+    init(coordinatingDelegate: DetailImageCoordinatingDelegate, images: [URL], index: Int) {
         self.coordinatingDelegate = coordinatingDelegate
         self.imageURLs = images
+        self.selectedIndex = index
     }
     
     func didTouchBackButton() {

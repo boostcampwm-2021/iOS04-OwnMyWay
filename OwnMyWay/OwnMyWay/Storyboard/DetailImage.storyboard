@@ -51,6 +51,9 @@
                                     <action selector="didTouchBackButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="k2W-Pe-osM"/>
                                 </connections>
                             </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="R5J-Af-tuI">
+                                <rect key="frame" x="129" y="816" width="156" height="26"/>
+                            </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -58,15 +61,19 @@
                         <constraints>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="3Rr-Zg-kUy"/>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Zeh-R1-rCi"/>
+                            <constraint firstItem="R5J-Af-tuI" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-20" id="fnL-Qy-XC4"/>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hXm-n2-JWK"/>
+                            <constraint firstItem="R5J-Af-tuI" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="j1G-CV-LGe"/>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="n6e-Qp-pA2"/>
                             <constraint firstItem="Xp6-fO-cZ3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="waR-75-vd3"/>
                             <constraint firstItem="Xp6-fO-cZ3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="xes-JL-icm"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="Xp6-fO-cZ3" id="lNt-5Q-YXj"/>
                         <outlet property="imageScrollView" destination="loZ-PL-P0K" id="rIC-qc-EKR"/>
                         <outlet property="imageStackView" destination="mzs-rH-k0t" id="blV-7M-iHD"/>
+                        <outlet property="pageControl" destination="R5J-Af-tuI" id="dOw-tH-vX1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

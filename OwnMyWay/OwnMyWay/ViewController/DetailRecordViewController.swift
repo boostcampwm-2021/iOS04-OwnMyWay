@@ -128,7 +128,7 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     }
 
     @IBAction func didTouchImageView(_ sender: UITapGestureRecognizer) {
-        self.viewModel?.didTouchImageView()
+        self.viewModel?.didTouchImageView(index: self.pageControl.currentPage)
     }
 }
 
