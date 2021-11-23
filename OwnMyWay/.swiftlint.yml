@@ -12,6 +12,7 @@ disabled_rules:
 
 indentation: 4
 line_length: 100
+file_length: 450
 identifier_name:
   min_length: 4
   excluded:
