@@ -54,8 +54,8 @@ extension LocationManager: CLLocationManagerDelegate {
         switch self.repository.addLocation(to: travel, latitude: latitude, longitude: longitude) {
         case .success:
             break
-        case .failure(let error):
-            print(error)
+        case .failure:
+            break
         }
     }
 

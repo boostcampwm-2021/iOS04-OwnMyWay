@@ -24,8 +24,8 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { error in
-            print(error)
+        self.viewModel?.bind { [weak self] error in
+            ErrorManager.showAlert(with: error, to: self)
         }
         self.configureScrollView()
         self.configureSettingButton()

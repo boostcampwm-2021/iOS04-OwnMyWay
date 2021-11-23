@@ -22,7 +22,9 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
     // MARK: Override Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { error in print(error) }
+        self.viewModel?.bind { [weak self] error in
+            ErrorManager.showAlert(with: error, to: self)
+        }
         self.configureNibs()
         self.collectionView.collectionViewLayout = configureCompositionalLayout()
         self.diffableDataSource = configureDiffableDataSource()

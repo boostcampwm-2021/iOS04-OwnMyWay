@@ -29,6 +29,9 @@ class OutdatedTravelViewController: UIViewController, Instantiable,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel?.bind { [weak self] error in
+            ErrorManager.showAlert(with: error, to: self)
+        }
         self.configureNavigation()
         self.configureNibs()
         self.configureCollectionViews()

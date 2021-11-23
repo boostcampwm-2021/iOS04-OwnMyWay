@@ -8,21 +8,6 @@
 import CoreData
 import UIKit
 
-enum RepositoryError: Error {
-    case saveError
-    case fetchError
-    case uuidError
-    case locationError
-    case recordError
-    case landmarkError
-}
-
-enum ModelError: Error {
-    case landmarkError
-    case recordError
-    case indexError
-}
-
 protocol TravelRepository {
     func fetchAllTravels() -> Result<[Travel], Error>
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error>
