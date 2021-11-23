@@ -21,25 +21,28 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fold" translatesAutoresizingMaskIntoConstraints="NO" id="do2-Vp-ntx">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMo-vB-gBh">
                     <rect key="frame" x="290" y="20" width="30" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="JrS-he-8IH"/>
-                        <constraint firstAttribute="height" constant="30" id="pKh-3P-SdK"/>
+                        <constraint firstAttribute="height" constant="30" id="HTH-bM-6bE"/>
+                        <constraint firstAttribute="width" constant="30" id="gi5-AQ-QTr"/>
                     </constraints>
-                </imageView>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="Fold"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <color key="backgroundColor" name="HomeContent"/>
             <constraints>
+                <constraint firstItem="eMo-vB-gBh" firstAttribute="trailing" secondItem="VXr-Tz-HHm" secondAttribute="trailing" id="3K6-l9-UwR"/>
                 <constraint firstItem="Nnh-i9-9jX" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="49x-YX-uqN"/>
-                <constraint firstAttribute="trailing" secondItem="do2-Vp-ntx" secondAttribute="trailing" id="M1I-uk-W8p"/>
+                <constraint firstItem="eMo-vB-gBh" firstAttribute="bottom" secondItem="VXr-Tz-HHm" secondAttribute="bottom" id="CoR-Ap-Ykb"/>
                 <constraint firstAttribute="trailing" secondItem="Nnh-i9-9jX" secondAttribute="trailing" id="OuO-fb-3m4"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="Nnh-i9-9jX" secondAttribute="bottom" id="bGK-hh-MdX"/>
-                <constraint firstItem="do2-Vp-ntx" firstAttribute="bottom" secondItem="Nnh-i9-9jX" secondAttribute="bottom" id="tH2-bq-kBa"/>
                 <constraint firstItem="Nnh-i9-9jX" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="30" id="tTc-zG-88s"/>
             </constraints>
             <connections>
+                <outlet property="foldButton" destination="eMo-vB-gBh" id="BJg-IT-jCJ"/>
                 <outlet property="sectionTitleLabel" destination="Nnh-i9-9jX" id="owf-zw-v3k"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>

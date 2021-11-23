@@ -263,6 +263,9 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
         let title = ["", "예정된 여행", "진행중인 여행", "지난 여행"]
         sectionHeader.configure(sectionTitle: title[indexPath.section])
+        if indexPath.section == 0 {
+            sectionHeader.disableButton()
+        }
         return sectionHeader
     }
 
