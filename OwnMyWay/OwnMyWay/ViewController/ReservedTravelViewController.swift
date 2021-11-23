@@ -66,7 +66,14 @@ class ReservedTravelViewController: UIViewController,
     }
 
     func didDeleteLandmark(at landmark: Landmark) {
-        self.viewModel?.didDeleteLandmark(at: landmark)
+        switch self.viewModel?.didDeleteLandmark(at: landmark) {
+        case .success:
+            break
+        case .failure(let error):
+            print(error)
+        case .none:
+            print("App 터졌다구~")
+        }
     }
 
     private func configureButtonConstraint() {

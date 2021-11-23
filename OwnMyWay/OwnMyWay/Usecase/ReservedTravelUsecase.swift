@@ -10,7 +10,7 @@ import Foundation
 protocol ReservedTravelUsecase {
     func executeDeletion(of travel: Travel) -> Result<Void, Error>
     func executeLandmarkAddition(of travel: Travel)
-    func executeLandmarkDeletion(at landmark: Landmark)
+    func executeLandmarkDeletion(at landmark: Landmark) -> Result<Void, Error>
     func executeFlagUpdate(of travel: Travel)
 }
 
@@ -39,8 +39,8 @@ struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
         )
     }
 
-    func executeLandmarkDeletion(at landmark: Landmark) {
-        self.repository.deleteLandmark(at: landmark)
+    func executeLandmarkDeletion(at landmark: Landmark) -> Result<Void, Error> {
+        return self.repository.deleteLandmark(at: landmark)
     }
 
     func executeFlagUpdate(of travel: Travel) {

@@ -15,7 +15,7 @@ protocol ReservedTravelViewModel {
     func didDeleteTravel() -> Result<Void, Error>
     func didUpdateTravel(to travel: Travel)
     func didEditTravel(to travel: Travel)
-    func didDeleteLandmark(at landmark: Landmark)
+    func didDeleteLandmark(at landmark: Landmark) -> Result<Void, Error>
     func didTouchBackButton()
     func didTouchStartButton()
     func didTouchEditButton()
@@ -69,10 +69,11 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         self.travel = travel
     }
 
-    func didDeleteLandmark(at landmark: Landmark) {
-        guard let index = self.travel.landmarks.firstIndex(of: landmark) else { return }
+    func didDeleteLandmark(at landmark: Landmark) -> Result<Void, Error> {
+        guard let index = self.travel.landmarks.firstIndex(of: landmark)
+        else { return .failure(ModelError.landmarkError) }
         self.travel.landmarks.remove(at: index)
-        self.usecase.executeLandmarkDeletion(at: landmark)
+        return self.usecase.executeLandmarkDeletion(at: landmark)
     }
 
     func didTouchBackButton() {
