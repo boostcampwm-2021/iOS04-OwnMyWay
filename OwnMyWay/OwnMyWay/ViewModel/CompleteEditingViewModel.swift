@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CompleteEditingViewModel {
-    func didTouchCompleteButton()
+    func didTouchCompleteButton() -> Result<Void, Error>
 }
 
 protocol CompleteEditingCoordinatingDelegate: AnyObject {
@@ -31,9 +31,13 @@ class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
         self.travel = travel
     }
 
-    func didTouchCompleteButton() {
-        self.usecase.executeUpdate(travel: travel)
-        self.coordinatingDelegate?.popToTravelViewController(travel: travel)
+    func didTouchCompleteButton() -> Result<Void, Error> {
+        switch self.usecase.executeUpdate(travel: travel) {
+        case .success:
+            self.coordinatingDelegate?.popToTravelViewController(travel: travel)
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
-
 }

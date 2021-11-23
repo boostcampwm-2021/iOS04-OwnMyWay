@@ -17,7 +17,7 @@ protocol ReservedTravelViewModel {
     func didEditTravel(to travel: Travel)
     func didDeleteLandmark(at landmark: Landmark) -> Result<Void, Error>
     func didTouchBackButton()
-    func didTouchStartButton()
+    func didTouchStartButton() -> Result<Void, Error>
     func didTouchEditButton()
 }
 
@@ -80,10 +80,15 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         self.coordinatingDelegate?.popToHome()
     }
 
-    func didTouchStartButton() {
+    func didTouchStartButton() -> Result<Void, Error> {
         self.travel.flag = Travel.Section.ongoing.index // 자기자신에 업데이트
-        self.usecase.executeFlagUpdate(of: self.travel) // coreData에 업데이트
-        self.coordinatingDelegate?.moveToOngoing(travel: self.travel)
+        switch self.usecase.executeFlagUpdate(of: self.travel) {
+        case .success:
+            self.coordinatingDelegate?.moveToOngoing(travel: self.travel)
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 
     func didTouchEditButton() {

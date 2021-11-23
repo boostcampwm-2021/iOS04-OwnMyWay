@@ -153,7 +153,14 @@ class ReservedTravelViewController: UIViewController,
     }
 
     @IBAction func didTouchStartButton(_ sender: Any) {
-        self.viewModel?.didTouchStartButton()
+        switch self.viewModel?.didTouchStartButton() {
+        case .success:
+            break
+        case .failure(let error):
+            print(error)
+        case .none:
+            print("App 터졌다구~")
+        }
     }
 
 }

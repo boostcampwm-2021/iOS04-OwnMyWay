@@ -54,9 +54,7 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         LocationManager.shared.delegate = LocationManager.shared
-        if self.isMovingFromParent {
-            self.viewModel?.didTouchBackButton()
-        }
+        if self.isMovingFromParent { self.viewModel?.didTouchBackButton() }
     }
 
     func bind(viewModel: OngoingTravelViewModel) {
@@ -146,7 +144,14 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
     }
 
     @IBAction func didTouchFinishButton(_ sender: UIButton) {
-        self.viewModel?.didTouchFinishButton()
+        switch self.viewModel?.didTouchFinishButton() {
+        case .success:
+            break
+        case .failure(let error):
+            print(error)
+        case .none:
+            print("App 터졌다구~")
+        }
     }
 
     @IBAction func didTouchTrackingButton(_ sender: Any) {
@@ -184,7 +189,6 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 }
 
 extension OngoingTravelViewController: UICollectionViewDelegate {
-
     private func configureNibs() {
         self.recordCollectionView.register(
             UINib(nibName: RecordCardCell.identifier, bundle: nil),
@@ -296,7 +300,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             guard let title = self?.recordDataSource?.snapshot()
                     .sectionIdentifiers[indexPath.section]
             else { return UICollectionReusableView() }
-
             sectionHeader.configure(with: title)
             return sectionHeader
         }
@@ -329,7 +332,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
         let dataSource = DataSource(
             collectionView: self.landmarkCollectionView
         ) { collectionView, indexPath, item in
-
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: LandmarkCardCell.identifier, for: indexPath
             ) as? LandmarkCardCell
@@ -360,10 +362,8 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.fetchAuthorizationStatus() {
-        case .authorizedWhenInUse:
-            manager.requestAlwaysAuthorization()
-        default:
-            break
+        case .authorizedWhenInUse: manager.requestAlwaysAuthorization()
+        default: break
         }
     }
 }

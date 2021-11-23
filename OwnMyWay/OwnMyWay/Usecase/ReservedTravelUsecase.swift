@@ -11,7 +11,7 @@ protocol ReservedTravelUsecase {
     func executeDeletion(of travel: Travel) -> Result<Void, Error>
     func executeLandmarkAddition(of travel: Travel)
     func executeLandmarkDeletion(at landmark: Landmark) -> Result<Void, Error>
-    func executeFlagUpdate(of travel: Travel)
+    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error>
 }
 
 struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
@@ -43,7 +43,12 @@ struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
         return self.repository.deleteLandmark(at: landmark)
     }
 
-    func executeFlagUpdate(of travel: Travel) {
-        self.repository.update(travel: travel)
+    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error> {
+        switch self.repository.update(travel: travel) {
+        case .success:
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 }

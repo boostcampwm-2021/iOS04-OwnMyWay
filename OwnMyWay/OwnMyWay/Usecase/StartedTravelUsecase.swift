@@ -10,7 +10,7 @@ import Foundation
 protocol StartedTravelUsecase {
     func executeFetch()
     func executeFinishingTravel()
-    func executeFlagUpdate(of travel: Travel)
+    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error>
     func executeDeletion(of travel: Travel) -> Result<Void, Error>
     func executeLocationUpdate(of travel: Travel, latitude: Double, longitude: Double)
     func executeRecordAddition(to travel: Travel, with record: Record, completion: (Travel) -> Void)
@@ -31,8 +31,13 @@ struct DefaultStartedTravelUsecase: StartedTravelUsecase {
         return self.repository.delete(travel: travel)
     }
 
-    func executeFlagUpdate(of travel: Travel) {
-        self.repository.update(travel: travel)
+    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error> {
+        switch self.repository.update(travel: travel) {
+        case .success:
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 
     func executeLocationUpdate(of travel: Travel, latitude: Double, longitude: Double) {

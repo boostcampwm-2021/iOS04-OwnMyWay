@@ -32,7 +32,14 @@ class CompleteEditingViewController: UIViewController, Instantiable {
     }
 
     @IBAction func didTouchCompleteButton(_ sender: UIButton) {
-        self.viewModel?.didTouchCompleteButton()
+        switch self.viewModel?.didTouchCompleteButton() {
+        case .success:
+            break
+        case .failure(let error):
+            print(error)
+        case .none:
+            print("App 터졌다구~")
+        }
     }
 
 }

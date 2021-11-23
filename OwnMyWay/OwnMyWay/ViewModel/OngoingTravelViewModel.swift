@@ -17,7 +17,7 @@ protocol OngoingTravelViewModel {
     func didTouchRecordCell(at record: Record)
     func didTouchBackButton()
     func didTouchEditButton()
-    func didTouchFinishButton()
+    func didTouchFinishButton() -> Result<Void, Error>
     func didUpdateCoordinate(latitude: Double, longitude: Double)
     func didUpdateRecord(record: Record)
 }
@@ -79,10 +79,15 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         self.coordinatingDelegate?.pushToEditTravel(travel: self.travel)
     }
 
-    func didTouchFinishButton() {
+    func didTouchFinishButton() -> Result<Void, Error> {
         self.travel.flag = Travel.Section.outdated.index
-        self.usecase.executeFlagUpdate(of: self.travel)
-        self.coordinatingDelegate?.moveToOutdated(travel: self.travel)
+        switch self.usecase.executeFlagUpdate(of: self.travel) {
+        case .success:
+            self.coordinatingDelegate?.moveToOutdated(travel: self.travel)
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 
     func didUpdateCoordinate(latitude: Double, longitude: Double) {

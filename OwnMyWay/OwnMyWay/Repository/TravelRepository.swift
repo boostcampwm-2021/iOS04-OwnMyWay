@@ -40,7 +40,7 @@ protocol TravelRepository {
         latitude: Double?,
         longitude: Double?
     ) -> Result<Location, Error>
-    @discardableResult func update(travel: Travel) -> Result<Travel, Error>
+    func update(travel: Travel) -> Result<Travel, Error>
     func updateRecord(at record: Record) -> Result<Void, Error>
     func delete(travel: Travel) -> Result<Void, Error>
     func deleteLandmark(at landmark: Landmark) -> Result<Void, Error>
@@ -199,18 +199,16 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
-    @discardableResult
     func update(travel: Travel) -> Result<Travel, Error> {
         guard let uuid = travel.uuid as CVarArg?
-        else { return .failure(NSError.init()) }
+        else { return .failure(RepositoryError.uuidError) }
 
         let request = TravelMO.fetchRequest()
         let predicate = NSPredicate(format: "uuid == %@", uuid)
         request.predicate = predicate
-
         guard let travels = try? context.fetch(request) as [TravelMO],
               let newTravel = travels.first
-        else { return .failure(NSError.init()) }
+        else { return .failure(RepositoryError.fetchError) }
 
         newTravel.uuid = travel.uuid
         newTravel.flag = Int64(travel.flag)
@@ -237,8 +235,8 @@ class CoreDataTravelRepository: TravelRepository {
         do {
             try context.save()
             return .success(newTravel.toTravel())
-        } catch let error {
-            return .failure(error)
+        } catch {
+            return .failure(RepositoryError.saveError)
         }
     }
 
