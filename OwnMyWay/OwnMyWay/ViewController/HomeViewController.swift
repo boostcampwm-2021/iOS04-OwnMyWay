@@ -206,7 +206,8 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func isMessageCell(section: Int, sections: Int) -> Bool {
-        return sections == 4 && section == 0
+        let allSectionsCount = Travel.Section.allCases.count
+        return sections == allSectionsCount && section == 0
     }
 
     private func dequeueMessageCell(
