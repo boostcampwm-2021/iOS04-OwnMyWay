@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HomeViewModel {
-    var messagePublisher: Published<Travel>.Publisher { get }
+    var messagePublisher: Published<[Travel]>.Publisher { get }
     var reservedTravelPublisher: Published<[Travel]>.Publisher { get }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { get }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
@@ -27,18 +27,19 @@ protocol HomeCoordinatingDelegate: AnyObject {
 
 class DefaultHomeViewModel: HomeViewModel {
 
-    var messagePublisher: Published<Travel>.Publisher { $travelMessage }
+    var messagePublisher: Published<[Travel]>.Publisher { $travelMessage }
     var reservedTravelPublisher: Published<[Travel]>.Publisher { $reservedTravels }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { $ongoingTravels }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { $outdatedTravels }
 
     private let usecase: HomeUsecase
     private weak var coordinatingDelegate: HomeCoordinatingDelegate?
+    private let message: Travel
     private let reservedComment: Travel
     private let ongoingComment: Travel
     private let outdatedComment: Travel
 
-    @Published private var travelMessage: Travel
+    @Published private var travelMessage: [Travel]
     @Published private var reservedTravels: [Travel]
     @Published private var ongoingTravels: [Travel]
     @Published private var outdatedTravels: [Travel]
@@ -49,7 +50,9 @@ class DefaultHomeViewModel: HomeViewModel {
         self.reservedTravels = []
         self.ongoingTravels = []
         self.outdatedTravels = []
-        self.travelMessage = Travel.dummy(section: .dummy)
+        self.travelMessage = []
+
+        self.message = Travel.dummy(section: .dummy)
         self.reservedComment = Travel.dummy(section: .dummy)
         self.ongoingComment = Travel.dummy(section: .dummy)
         self.outdatedComment = Travel.dummy(section: .dummy)
@@ -60,6 +63,7 @@ class DefaultHomeViewModel: HomeViewModel {
             guard let self = self else { return }
             let reserveds = travels.filter { $0.flag == Travel.Section.reserved.index }
             self.reservedTravels = reserveds.isEmpty ? [self.reservedComment] : reserveds
+            self.travelMessage = reserveds.isEmpty ? [self.message] : []
             let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
             self.ongoingTravels = ongoings.isEmpty ? [self.ongoingComment] : ongoings
             let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }

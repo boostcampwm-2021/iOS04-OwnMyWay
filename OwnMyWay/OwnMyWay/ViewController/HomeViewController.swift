@@ -93,12 +93,17 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     private func configureCancellable() {
         self.viewModel?.messagePublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] travel in
+            .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
                 snapshot.deleteSections([.dummy])
-                snapshot.appendSections([.dummy])
-                snapshot.appendItems([travel], toSection: .dummy)
-                snapshot.moveSection(.dummy, beforeSection: .reserved)
+                if travels.isEmpty {
+                    self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                    return
+                }
+                snapshot.insertSections([.dummy], beforeSection: .reserved)
+//                snapshot.appendSections([.dummy])
+                snapshot.appendItems(travels, toSection: .dummy)
+//                snapshot.moveSection(.dummy, beforeSection: .reserved)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &self.cancellables)
@@ -191,7 +196,8 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             collectionView: self.travelCollectionView
         ) { collectionView, indexPath, item in
             if item.flag == -1 {
-                if indexPath.section == 0 {
+                let sections = collectionView.numberOfSections
+                if sections == 4 && indexPath.section == 0 {
                     guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: MessageCell.identifier,
                         for: indexPath) as? MessageCell
@@ -204,7 +210,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
                     for: indexPath) as? CommentCell
                 else { return UICollectionViewCell() }
                 cell.configure(
-                    text: self.createMessage(with: indexPath.section)
+                    text: self.createMessage(by: indexPath.section, with: sections)
                 )
                 return cell
             }
@@ -244,12 +250,18 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         return dataSource
     }
 
-    private func createMessage(with index: Int) -> String {
-        let dictionary = ["",
-                          "예정된 여행이 없어요 🤷‍♀️",
+    private func createMessage(by section: Int, with sections: Int) -> String {
+        let dictionary = ["", "예정된 여행이 없어요 🤷‍♀️",
                           "진행중인 여행이 없어요 🤷",
                           "지난 여행이 없어요 🤷‍♂️"]
-        return dictionary[index]
+        return sections == 4 ? dictionary[section] : dictionary[section + 1]
+    }
+
+    private func createTitle(by section: Int, with sections: Int) -> String {
+        let dictionary = ["", "예정된 여행",
+                          "진행중인 여행",
+                          "지난 여행"]
+        return sections == 4 ? dictionary[section] : dictionary[section + 1]
     }
 
     private func configureSupplementaryView(
@@ -261,12 +273,10 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             for: indexPath
         ) as? TravelSectionHeader
         else { return UICollectionReusableView() }
-
-        let title = ["", "예정된 여행", "진행중인 여행", "지난 여행"]
-        sectionHeader.configure(sectionTitle: title[indexPath.section])
-        if indexPath.section == 0 {
-            sectionHeader.disableButton()
-        }
+        let sections = collectionView.numberOfSections
+        sectionHeader.configure(
+            sectionTitle: self.createTitle(by: indexPath.section, with: sections)
+        )
         return sectionHeader
     }
 
