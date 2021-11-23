@@ -21,22 +21,32 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fold" translatesAutoresizingMaskIntoConstraints="NO" id="do2-Vp-ntx">
+                    <rect key="frame" x="290" y="20" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="JrS-he-8IH"/>
+                        <constraint firstAttribute="height" constant="30" id="pKh-3P-SdK"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <color key="backgroundColor" name="HomeContent"/>
             <constraints>
                 <constraint firstItem="Nnh-i9-9jX" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="49x-YX-uqN"/>
+                <constraint firstAttribute="trailing" secondItem="do2-Vp-ntx" secondAttribute="trailing" id="M1I-uk-W8p"/>
                 <constraint firstAttribute="trailing" secondItem="Nnh-i9-9jX" secondAttribute="trailing" id="OuO-fb-3m4"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="Nnh-i9-9jX" secondAttribute="bottom" id="bGK-hh-MdX"/>
+                <constraint firstItem="do2-Vp-ntx" firstAttribute="bottom" secondItem="Nnh-i9-9jX" secondAttribute="bottom" id="tH2-bq-kBa"/>
                 <constraint firstItem="Nnh-i9-9jX" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="30" id="tTc-zG-88s"/>
             </constraints>
             <connections>
                 <outlet property="sectionTitleLabel" destination="Nnh-i9-9jX" id="owf-zw-v3k"/>
             </connections>
-            <point key="canvasLocation" x="139" y="153"/>
+            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </collectionReusableView>
     </objects>
     <resources>
+        <image name="Fold" width="48" height="48"/>
         <namedColor name="HomeContent">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
