@@ -71,6 +71,7 @@ class DefaultHomeViewModel: HomeViewModel {
                 guard let self = self else { return }
                 let reserveds = travels.filter { $0.flag == Travel.Section.reserved.index }
                 self.reservedTravels = reserveds.isEmpty ? [self.reservedComment] : reserveds
+                self.travelMessage = reserveds.isEmpty ? [self.message] : []
                 let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
                 self.ongoingTravels = ongoings.isEmpty ? [self.ongoingComment] : ongoings
                 let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }
@@ -78,8 +79,6 @@ class DefaultHomeViewModel: HomeViewModel {
             case .failure(let error):
                 self?.errorHandler?(error)
             }
-
-            self.travelMessage = reserveds.isEmpty ? [self.message] : []
         }
     }
 
@@ -101,8 +100,6 @@ class DefaultHomeViewModel: HomeViewModel {
     }
 
     private func didTouchReservedTravel(at index: Int) {
-        guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else { return }
-    func didTouchReservedTravel(at index: Int) {
         guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else {
             self.errorHandler?(ModelError.indexError)
             return
@@ -111,8 +108,6 @@ class DefaultHomeViewModel: HomeViewModel {
     }
 
     private func didTouchOngoingTravel(at index: Int) {
-        guard ongoingTravels.startIndex..<ongoingTravels.endIndex ~= index else { return }
-    func didTouchOngoingTravel(at index: Int) {
         guard ongoingTravels.startIndex..<ongoingTravels.endIndex ~= index else {
             self.errorHandler?(ModelError.indexError)
             return
@@ -121,8 +116,6 @@ class DefaultHomeViewModel: HomeViewModel {
     }
 
     private func didTouchOutdatedTravel(at index: Int) {
-        guard outdatedTravels.startIndex..<outdatedTravels.endIndex ~= index else { return }
-    func didTouchOutdatedTravel(at index: Int) {
         guard outdatedTravels.startIndex..<outdatedTravels.endIndex ~= index else {
             self.errorHandler?(ModelError.indexError)
             return
