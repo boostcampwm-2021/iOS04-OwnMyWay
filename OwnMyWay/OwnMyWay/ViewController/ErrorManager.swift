@@ -9,7 +9,7 @@ import UIKit
 
 class ErrorManager {
     static func showAlert(with error: Error, to viewController: UIViewController?) {
-        // TODO: 청수님 구현 해줘
+        viewController?.showToast(message: error.localizedDescription)
     }
 }
 
