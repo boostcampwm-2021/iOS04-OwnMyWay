@@ -8,10 +8,15 @@
 import CoreData
 import UIKit
 
+enum RepositoryError: Error {
+    case saveError
+    case fetchError
+}
+
 protocol TravelRepository {
     func fetchAllTravels() -> Result<[Travel], Error>
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error>
-    func save(travel: Travel)
+    func save(travel: Travel) -> Result<Void, Error>
     @discardableResult func addLandmark(
         to travel: Travel,
         uuid: UUID?,
@@ -75,12 +80,12 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
-    func save(travel: Travel) {
+    func save(travel: Travel) -> Result<Void, Error> {
         guard let travelEntity = NSEntityDescription.entity(forEntityName: "TravelMO", in: context),
               let landmarkEntity = NSEntityDescription.entity(
                 forEntityName: "LandmarkMO", in: context
               )
-        else { return }
+        else { return .failure(RepositoryError.fetchError) }
         let travelMO = TravelMO(entity: travelEntity, insertInto: context)
         travelMO.setValue(travel.uuid, forKey: "uuid")
         travelMO.setValue(Travel.Section.reserved.index, forKey: "flag")
@@ -97,7 +102,12 @@ class CoreDataTravelRepository: TravelRepository {
             landmarkMO.setValue(landmark.longitude, forKey: "longitude")
             travelMO.addToLandmarks(landmarkMO)
         }
-        try? context.save()
+        do {
+            try context.save()
+            return .success(())
+        } catch {
+            return .failure(RepositoryError.saveError)
+        }
     }
 
     @discardableResult

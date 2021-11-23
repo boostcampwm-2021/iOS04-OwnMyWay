@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CompleteCreationUsecase {
-    func executeCreation(travel: Travel)
+    func executeCreation(travel: Travel) -> Result<Void, Error>
 }
 
 struct DefaultCompleteCreationUsecase: CompleteCreationUsecase {
@@ -19,8 +19,8 @@ struct DefaultCompleteCreationUsecase: CompleteCreationUsecase {
         self.repository = repository
     }
 
-    func executeCreation(travel: Travel) {
-        self.repository.save(travel: travel)
+    func executeCreation(travel: Travel) -> Result<Void, Error> {
+        return self.repository.save(travel: travel)
     }
 
 }
