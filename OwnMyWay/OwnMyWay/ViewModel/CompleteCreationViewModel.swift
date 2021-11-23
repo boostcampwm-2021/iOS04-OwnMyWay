@@ -8,7 +8,8 @@
 import Foundation
 
 protocol CompleteCreationViewModel {
-    func didTouchCompleteButton() -> Result<Void, Error>
+    func bind(errorHandler: @escaping (Error) -> Void)
+    func didTouchCompleteButton()
 }
 
 protocol CompleteCreationCoordinatingDelegate: AnyObject {
@@ -20,6 +21,7 @@ class DefaultCompleteCreationViewModel: CompleteCreationViewModel {
     private let usecase: CompleteCreationUsecase
     private weak var coordinatingDelegate: CompleteCreationCoordinatingDelegate?
     private let travel: Travel
+    private var errorHandler: ((Error) -> Void)?
 
     init(
         usecase: CompleteCreationUsecase,
@@ -31,14 +33,16 @@ class DefaultCompleteCreationViewModel: CompleteCreationViewModel {
         self.travel = travel
     }
 
-    func didTouchCompleteButton() -> Result<Void, Error> {
+    func bind(errorHandler: @escaping (Error) -> Void) {
+        self.errorHandler = errorHandler
+    }
+
+    func didTouchCompleteButton() {
         switch self.usecase.executeCreation(travel: travel) {
         case .success:
             self.coordinatingDelegate?.popToHome()
-            return .success(())
         case .failure(let error):
-            return .failure(error)
+            self.errorHandler?(error)
         }
     }
-
 }
