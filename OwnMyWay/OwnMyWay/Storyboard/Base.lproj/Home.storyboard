@@ -22,8 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bTO-GI-HaZ">
-                                <rect key="frame" x="0.0" y="126" width="414" height="736"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bTO-GI-HaZ">
+                                <rect key="frame" x="15" y="126" width="384" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fk3-m1-D6M">
                                     <size key="itemSize" width="128" height="128"/>
@@ -85,8 +85,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bTO-GI-HaZ" secondAttribute="bottom" id="INo-3q-aVt"/>
                             <constraint firstItem="yoc-4Z-nKU" firstAttribute="leading" secondItem="gJz-Al-pp6" secondAttribute="trailing" constant="20" id="IWA-I7-Gwa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mDb-bZ-nOw" secondAttribute="trailing" constant="20" id="SCJ-2r-mH3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bTO-GI-HaZ" secondAttribute="trailing" id="Tgj-7s-SjR"/>
-                            <constraint firstItem="bTO-GI-HaZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="b4E-HW-RvD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bTO-GI-HaZ" secondAttribute="trailing" constant="15" id="Tgj-7s-SjR"/>
+                            <constraint firstItem="bTO-GI-HaZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="b4E-HW-RvD"/>
                             <constraint firstItem="Bxk-zD-EC4" firstAttribute="centerY" secondItem="gJz-Al-pp6" secondAttribute="centerY" id="lvF-Ce-Z9m"/>
                             <constraint firstItem="mDb-bZ-nOw" firstAttribute="centerY" secondItem="gJz-Al-pp6" secondAttribute="centerY" id="sEs-6n-bE4"/>
                             <constraint firstItem="mDb-bZ-nOw" firstAttribute="leading" secondItem="yoc-4Z-nKU" secondAttribute="trailing" constant="10" id="sfs-cI-ndG"/>
