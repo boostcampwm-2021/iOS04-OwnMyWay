@@ -24,12 +24,12 @@ protocol EnterDateCoordinatingDelegate: AnyObject {
 }
 
 enum CalendarState {
-    case fullfill, firstDateEntered, empty, existDates
+    case fulfilled, firstDateEntered, empty, datesExisted
 }
 
 class DefaultEnterDateViewModel: EnterDateViewModel, ObservableObject {
     var calendarStatePublisher: Published<CalendarState>.Publisher { $calendarState }
-    @Published private var calendarState: CalendarState = .existDates
+    @Published private var calendarState: CalendarState = .datesExisted
 
     private let usecase: EnterDateUsecase
     private weak var coordinatingDelegate: EnterDateCoordinatingDelegate?
@@ -48,7 +48,7 @@ class DefaultEnterDateViewModel: EnterDateViewModel, ObservableObject {
         self.isEditingMode = isEditingMode
         self.travel = travel
         if travel.startDate != nil, travel.endDate != nil {
-            calendarState = .existDates
+            calendarState = .datesExisted
         } else {
             calendarState = .empty
         }
@@ -63,11 +63,13 @@ class DefaultEnterDateViewModel: EnterDateViewModel, ObservableObject {
     }
 
     func didEnterDate(at date: Date) {
-        if self.travel.startDate != nil, self.travel.endDate != nil { // 두 개의 날짜가 입력되어 있을 때
+        switch self.calendarState {
+        case .fulfilled, .datesExisted:
             self.travel.startDate = nil
             self.travel.endDate = nil
             self.calendarState = .empty
-        } else if let firstDate = self.firstDate { // 한 개의 날짜만 입력되어 있을 때
+        case .firstDateEntered:
+            guard let firstDate = firstDate else { return }
             self.usecase.executeEnteringDate(
                 firstDate: firstDate,
                 secondDate: date
@@ -75,9 +77,9 @@ class DefaultEnterDateViewModel: EnterDateViewModel, ObservableObject {
                 self.firstDate = nil
                 self.travel.startDate = dates.first
                 self.travel.endDate = dates.last
-                self.calendarState = .fullfill
+                self.calendarState = .fulfilled
             }
-        } else { // 비어 있을 때
+        case .empty:
             self.firstDate = date
             self.calendarState = .firstDateEntered
         }

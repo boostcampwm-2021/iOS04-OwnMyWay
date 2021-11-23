@@ -48,9 +48,9 @@ class EnterDateViewController: UIViewController, Instantiable {
             .receive(on: RunLoop.main)
             .sink { [weak self] state in
                 switch state {
-                case .existDates:
+                case .datesExisted:
                     self?.nextButton.setAvailability(to: true)
-                case .fullfill:
+                case .fulfilled:
                     self?.presentAlert(calendar: self?.calendarView)
                     self?.nextButton.setAvailability(to: true)
                 case .firstDateEntered:
