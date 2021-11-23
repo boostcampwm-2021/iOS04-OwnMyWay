@@ -9,14 +9,14 @@ import UIKit
 
 class DetailImageViewController: UIViewController, Instantiable {
 
-    @IBOutlet weak var imageStackView: UIStackView!
-    @IBOutlet weak var imageScrollView: UIScrollView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet private weak var imageStackView: UIStackView!
+    @IBOutlet private weak var imageScrollView: UIScrollView!
+    @IBOutlet private weak var backButton: UIButton!
+    @IBOutlet private weak var pageControl: UIPageControl!
 
     private var viewModel: DetailImageViewModel?
     private var selectedIndex: Int?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureScrollView()
@@ -104,7 +104,9 @@ extension DetailImageViewController: UIScrollViewDelegate {
         self.pageControl.isHidden = true
     }
 
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+    func scrollViewDidEndZooming(
+        _ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat
+    ) {
         self.backButton.isHidden = false
         self.pageControl.isHidden = false
     }

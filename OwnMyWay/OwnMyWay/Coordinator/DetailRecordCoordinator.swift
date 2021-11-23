@@ -50,7 +50,7 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
         self.childCoordinators.append(addRecordCoordinator)
         addRecordCoordinator.start()
     }
-    
+
     func presentDetailImage(images: [URL], index: Int) {
         let detailImageCoordinator = DetailImageCoordinator(
             navigationController: self.navigationController, images: images, index: index

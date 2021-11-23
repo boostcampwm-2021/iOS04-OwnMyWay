@@ -36,7 +36,7 @@ class DetailImageCoordinator: Coordinator, DetailImageCoordinatingDelegate {
     }
 
     func dismissToImageDetail() {
-        navigationController.viewControllers.last?.dismiss(animated: true)
+        self.navigationController.viewControllers.last?.dismiss(animated: true)
     }
 
 }
