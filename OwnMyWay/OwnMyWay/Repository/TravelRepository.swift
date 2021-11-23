@@ -13,6 +13,8 @@ enum RepositoryError: Error {
     case fetchError
     case uuidError
     case locationError
+    case recordError
+    case landmarkError
 }
 
 enum ModelError: Error {
@@ -24,18 +26,11 @@ protocol TravelRepository {
     func fetchAllTravels() -> Result<[Travel], Error>
     func addTravel(title: String, startDate: Date, endDate: Date) -> Result<Travel, Error>
     func save(travel: Travel) -> Result<Void, Error>
-    @discardableResult func addLandmark(
-        to travel: Travel,
-        uuid: UUID?,
-        title: String?,
-        image: URL?,
-        latitude: Double?,
-        longitude: Double?
+    func addLandmark(
+        to travel: Travel, uuid: UUID?, title: String?,
+        image: URL?, latitude: Double?, longitude: Double?
     ) -> Result<Landmark, Error>
-    @discardableResult func addRecord(
-        to travel: Travel,
-        with record: Record
-    ) -> Result<Travel, Error>
+    func addRecord(to travel: Travel, with record: Record) -> Result<Travel, Error>
     func addLocation(
         to travel: Travel, latitude: Double?, longitude: Double?
     ) -> Result<Location, Error>
@@ -115,20 +110,15 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
-    @discardableResult
     func addLandmark(
-        to travel: Travel,
-        uuid: UUID?,
-        title: String?,
-        image: URL?,
-        latitude: Double?,
-        longitude: Double?
+        to travel: Travel, uuid: UUID?, title: String?,
+        image: URL?, latitude: Double?, longitude: Double?
     ) -> Result<Landmark, Error> {
         guard let travelMO = findTravel(by: travel.uuid ?? UUID())
-        else { return .failure(NSError.init()) }
-        guard let entity = NSEntityDescription.entity(forEntityName: "LandmarkMO", in: context)
-        else { return .failure(NSError.init()) }
+        else { return .failure(RepositoryError.uuidError) }
 
+        guard let entity = NSEntityDescription.entity(forEntityName: "LandmarkMO", in: context)
+        else { return .failure(RepositoryError.fetchError) }
         let landmarkMO = LandmarkMO(entity: entity, insertInto: context)
         landmarkMO.setValue(uuid, forKey: "uuid")
         landmarkMO.setValue(title, forKey: "title")
@@ -140,21 +130,17 @@ class CoreDataTravelRepository: TravelRepository {
         do {
             try context.save()
             return .success(landmarkMO.toLandmark())
-        } catch let error {
-            return .failure(error)
+        } catch {
+            return .failure(RepositoryError.saveError)
         }
     }
 
-    @discardableResult
-    func addRecord(
-        to travel: Travel,
-        with record: Record
-    ) -> Result<Travel, Error> {
+    func addRecord(to travel: Travel, with record: Record) -> Result<Travel, Error> {
         guard let travelMO = findTravel(by: travel.uuid ?? UUID())
-        else { return .failure(NSError.init()) }
-        guard let entity = NSEntityDescription.entity(forEntityName: "RecordMO", in: context)
-        else { return .failure(NSError.init()) }
+        else { return .failure(RepositoryError.uuidError) }
 
+        guard let entity = NSEntityDescription.entity(forEntityName: "RecordMO", in: context)
+        else { return .failure(RepositoryError.fetchError) }
         let recordMO = RecordMO(entity: entity, insertInto: context)
         recordMO.setValue(record.uuid, forKey: "uuid")
         recordMO.setValue(record.photoURLs, forKey: "photoURLs")
@@ -169,8 +155,8 @@ class CoreDataTravelRepository: TravelRepository {
         do {
             try context.save()
             return .success(travelMO.toTravel())
-        } catch let error {
-            return .failure(error)
+        } catch {
+            return .failure(RepositoryError.saveError)
         }
     }
 
@@ -211,20 +197,36 @@ class CoreDataTravelRepository: TravelRepository {
         newTravel.title = travel.title
         newTravel.startDate = travel.startDate
         newTravel.endDate = travel.endDate
+
+        var isLandmarkResultValid = true
         newTravel.removeFromLandmarks(newTravel.landmarks ?? NSOrderedSet())
         travel.landmarks.forEach { [weak self] landmark in
-            self?.addLandmark(
+            switch self?.addLandmark(
                 to: travel, uuid: landmark.uuid, title: landmark.title,
                 image: landmark.image, latitude: landmark.latitude, longitude: landmark.longitude
-            )
+            ) {
+            case .success:
+                break
+            default:
+                isLandmarkResultValid = false
+            }
         }
+        if !isLandmarkResultValid { return .failure(RepositoryError.landmarkError) }
+
+        var isRecordResultValid = true
         newTravel.removeFromRecords(newTravel.records ?? NSOrderedSet())
         travel.records.forEach { [weak self] record in
-            self?.addRecord(to: travel, with: record)
+            switch self?.addRecord(to: travel, with: record) {
+            case .success:
+                break
+            default:
+                isRecordResultValid = false
+            }
         }
-        newTravel.removeFromLocations(newTravel.locations ?? NSOrderedSet())
+        if !isRecordResultValid { return .failure(RepositoryError.recordError) }
 
-        var isResultValid = true
+        var isLocationResultValid = true
+        newTravel.removeFromLocations(newTravel.locations ?? NSOrderedSet())
         travel.locations.forEach { [weak self] location in
             switch self?.addLocation(
                 to: travel, latitude: location.latitude, longitude: location.longitude
@@ -232,10 +234,10 @@ class CoreDataTravelRepository: TravelRepository {
             case .success:
                 break
             default:
-                isResultValid = false
+                isLocationResultValid = false
             }
         }
-        if !isResultValid { return .failure(RepositoryError.locationError) }
+        if !isLocationResultValid { return .failure(RepositoryError.locationError) }
 
         do {
             try context.save()

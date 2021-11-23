@@ -62,7 +62,14 @@ class ReservedTravelViewController: UIViewController,
         if let cartVC = self.children.first as? LandmarkCartViewController {
             cartVC.didUpdateTravel(to: travel)
         }
-        self.viewModel?.didUpdateTravel(to: travel)
+        switch self.viewModel?.didUpdateTravel(to: travel) {
+        case .success:
+            break
+        case .failure(let error):
+            print(error)
+        case .none:
+            print("App 터졌다구~")
+        }
     }
 
     func didDeleteLandmark(at landmark: Landmark) {

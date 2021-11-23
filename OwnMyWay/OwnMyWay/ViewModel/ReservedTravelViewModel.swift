@@ -13,7 +13,7 @@ protocol ReservedTravelViewModel {
     var travelPublisher: Published<Travel>.Publisher { get }
 
     func didDeleteTravel() -> Result<Void, Error>
-    func didUpdateTravel(to travel: Travel)
+    func didUpdateTravel(to travel: Travel) -> Result<Void, Error>
     func didEditTravel(to travel: Travel)
     func didDeleteLandmark(at landmark: Landmark) -> Result<Void, Error>
     func didTouchBackButton()
@@ -60,9 +60,9 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         }
     }
 
-    func didUpdateTravel(to travel: Travel) {
+    func didUpdateTravel(to travel: Travel) -> Result<Void, Error> {
         self.travel = travel // 자기자신에 업데이트
-        self.usecase.executeLandmarkAddition(of: travel) // coreData에 업데이트
+        return self.usecase.executeLandmarkAddition(of: travel) // coreData에 업데이트
     }
 
     func didEditTravel(to travel: Travel) {
