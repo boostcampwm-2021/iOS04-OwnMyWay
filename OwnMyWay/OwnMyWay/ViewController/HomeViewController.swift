@@ -192,57 +192,57 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         ) { collectionView, indexPath, item in
             if item.flag == -1 {
                 let sections = collectionView.numberOfSections
-                if sections == 4 && indexPath.section == 0 {
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: MessageCell.identifier,
-                        for: indexPath) as? MessageCell
-                    else { return MessageCell() }
-                    cell.delegate = self
-                    return cell
+                if self.isMessageCell(section: indexPath.section, sections: sections) {
+                    return self.dequeueMessageCell(in: collectionView, with: indexPath)
                 }
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: CommentCell.identifier,
-                    for: indexPath) as? CommentCell
-                else { return UICollectionViewCell() }
-                cell.configure(
-                    text: self.createMessage(by: indexPath.section, with: sections)
-                )
-                return cell
+                return self.dequeueCommentCell(in: collectionView, with: indexPath)
             }
-//            switch (section, item.flag) {
-//            case (Travel.Section.reserved.index, -1):
-//                guard let cell = collectionView.dequeueReusableCell(
-//                    withReuseIdentifier: CommentCell.identifier,
-//                    for: indexPath) as? CommentCell
-//                else { return UICollectionViewCell() }
-//                cell.configure(text: "예정된 여행이 없어요 🤷‍♀️")
-//                return cell
-//            case (Travel.Section.ongoing.index, -1):
-//                guard let cell = collectionView.dequeueReusableCell(
-//                    withReuseIdentifier: CommentCell.identifier,
-//                    for: indexPath) as? CommentCell
-//                else { return UICollectionViewCell() }
-//                cell.configure(text: "진행중인 여행이 없어요 🤷")
-//                return cell
-//            case (Travel.Section.outdated.index, -1):
-//                guard let cell = collectionView.dequeueReusableCell(
-//                    withReuseIdentifier: CommentCell.identifier,
-//                    for: indexPath) as? CommentCell
-//                else { return UICollectionViewCell() }
-//                cell.configure(text: "지난 여행이 없어요 🤷‍♂️")
-//                return cell
-//            default:
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: TravelCardCell.identifier,
-                for: indexPath) as? TravelCardCell
-            else { return UICollectionViewCell() }
-            cell.configure(with: item)
-            return cell
+            return self.dequeueTravelCardCell(in: collectionView, with: indexPath, using: item)
         }
         dataSource.supplementaryViewProvider = configureSupplementaryView(
             collectionView:kind:indexPath:
         )
         return dataSource
+    }
+
+    private func isMessageCell(section: Int, sections: Int) -> Bool {
+        return sections == 4 && section == 0
+    }
+
+    private func dequeueMessageCell(
+        in collectionView: UICollectionView, with indexPath: IndexPath
+    ) -> MessageCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: MessageCell.identifier,
+            for: indexPath) as? MessageCell
+        else { return MessageCell() }
+        cell.delegate = self
+        return cell
+    }
+
+    private func dequeueCommentCell(
+        in collectionView: UICollectionView, with indexPath: IndexPath
+    ) -> CommentCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CommentCell.identifier,
+            for: indexPath) as? CommentCell
+        else { return CommentCell() }
+        let sections = collectionView.numberOfSections
+        cell.configure(
+            text: self.createMessage(by: indexPath.section, with: sections)
+        )
+        return cell
+    }
+
+    private func dequeueTravelCardCell(
+        in collectionView: UICollectionView, with indexPath: IndexPath, using item: Travel
+    ) -> TravelCardCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: TravelCardCell.identifier,
+            for: indexPath) as? TravelCardCell
+        else { return TravelCardCell() }
+        cell.configure(with: item)
+        return cell
     }
 
     private func createMessage(by section: Int, with sections: Int) -> String {
