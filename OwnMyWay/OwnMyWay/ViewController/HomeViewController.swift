@@ -196,6 +196,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
                         withReuseIdentifier: MessageCell.identifier,
                         for: indexPath) as? MessageCell
                     else { return MessageCell() }
+                    cell.delegate = self
                     return cell
                 }
                 guard let cell = collectionView.dequeueReusableCell(
@@ -277,7 +278,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
 }
 
-extension HomeViewController: UICollectionViewDelegate {
+extension HomeViewController: UICollectionViewDelegate, MessageCellDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let travel = self.diffableDataSource?.itemIdentifier(for: indexPath)
@@ -300,6 +301,10 @@ extension HomeViewController: UICollectionViewDelegate {
             return
         }
 
+    }
+
+    func didTouchButton() {
+        self.viewModel?.didTouchCreateButton()
     }
 
 }
