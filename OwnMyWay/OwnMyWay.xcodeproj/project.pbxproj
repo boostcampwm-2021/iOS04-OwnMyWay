@@ -116,6 +116,10 @@
 		DB22BB73272F83DB0004444B /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DB22BB72272F83DB0004444B /* .swiftlint.yml */; };
 		DB2823BD273BC0C2007D8801 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */; };
 		DB2823BE273BC0C2007D8801 /* DateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */; };
+		DB5DAEDC274BF535001B8627 /* DetailImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */; };
+		DB5DAEDE274BF5BC001B8627 /* DetailImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */; };
+		DB5DAEE0274BF5D9001B8627 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */; };
+		DB5DAEE2274BF5F3001B8627 /* DetailImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */; };
 		DB7C12A92742336A00ED30F3 /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */; };
 		DB7C12AA2742336A00ED30F3 /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A82742336A00ED30F3 /* RecordMO+CoreDataProperties.swift */; };
 		DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B3273132A000487D33 /* LandmarkDTO.swift */; };
@@ -252,6 +256,10 @@
 		DB22BB72272F83DB0004444B /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateHeaderView.xib; sourceTree = "<group>"; };
+		DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCoordinator.swift; sourceTree = "<group>"; };
+		DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewModel.swift; sourceTree = "<group>"; };
+		DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
+		DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailImage.storyboard; sourceTree = "<group>"; };
 		DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordMO+CoreDataClass.swift"; path = "../../RecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DB7C12A82742336A00ED30F3 /* RecordMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordMO+CoreDataProperties.swift"; path = "../../RecordMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DB8831AD2730FDB500487D33 /* TravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRepository.swift; sourceTree = "<group>"; };
@@ -328,6 +336,7 @@
 				AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */,
 				AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */,
 				3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */,
+				DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */,
 				29966F80274CA61B00729D39 /* EnterDateViewController.swift */,
 			);
 			path = ViewController;
@@ -381,6 +390,7 @@
 				AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */,
 				AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */,
 				AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */,
+				DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */,
 				29966F82274CA63700729D39 /* EnterDateViewModel.swift */,
 			);
 			path = ViewModel;
@@ -451,6 +461,7 @@
 				AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */,
 				AF2F6CD42746179500EA3601 /* SearchLocation.storyboard */,
 				AFA6ED7B2744F77C007B251C /* CompleteEditing.storyboard */,
+				DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -530,6 +541,7 @@
 				AF82FDAD273BEB5700A094B6 /* AddRecordCoordinator.swift */,
 				AF82FDB3273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift */,
 				AF2F6CDA274620BE00EA3601 /* SearchLocationCoordinator.swift */,
+				DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -613,6 +625,7 @@
 				DB22BB66272F82780004444B /* Assets.xcassets in Resources */,
 				AFA6ED7C2744F77C007B251C /* CompleteEditing.storyboard in Resources */,
 				DB22BB61272F82770004444B /* Home.storyboard in Resources */,
+				DB5DAEE2274BF5F3001B8627 /* DetailImage.storyboard in Resources */,
 				29966F7D274CA37D00729D39 /* EnterDate.storyboard in Resources */,
 				AF2F6CD927461D6900EA3601 /* LocationTableViewCell.xib in Resources */,
 				29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */,
@@ -701,6 +714,7 @@
 				AFA6ED7E2744F7A0007B251C /* CompleteEditingViewController.swift in Sources */,
 				DB2823BD273BC0C2007D8801 /* DateHeaderView.swift in Sources */,
 				AF82FDB2273BEC1300A094B6 /* AddRecordViewModel.swift in Sources */,
+				DB5DAEE0274BF5D9001B8627 /* DetailImageViewController.swift in Sources */,
 				AF1108E8273B8C2D009FE728 /* OngoingTravelCoordinator.swift in Sources */,
 				3F113A0D273A56E000EA91AA /* CompleteCreationViewController.swift in Sources */,
 				AF0BAA64274B82200091F642 /* OMWMapView.swift in Sources */,
@@ -715,6 +729,7 @@
 				AF82FDB0273BEC0900A094B6 /* AddRecordUsecase.swift in Sources */,
 				DBFC040C27390DD700031EDF /* CreateTravelCoordinator.swift in Sources */,
 				AF6C7917273942E800FAB0FE /* TravelUpdatable.swift in Sources */,
+				DB5DAEDC274BF535001B8627 /* DetailImageCoordinator.swift in Sources */,
 				294897C6273BF181003185E7 /* DetailRecordViewModel.swift in Sources */,
 				3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */,
 				AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */,
@@ -743,6 +758,7 @@
 				29966F85274CA64900729D39 /* EnterDateUsecase.swift in Sources */,
 				29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */,
 				293646BA2738F6590030ED78 /* Date+.swift in Sources */,
+				DB5DAEDE274BF5BC001B8627 /* DetailImageViewModel.swift in Sources */,
 				DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */,
 				AF2F6CD827461D6900EA3601 /* LocationTableViewCell.swift in Sources */,
 				3FF20BBA27461BC4007AFF78 /* TravelEditableViewController.swift in Sources */,

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,6 +41,7 @@
                                                         <rect key="frame" x="0.0" y="388" width="414" height="26"/>
                                                     </pageControl>
                                                 </subviews>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="sYp-Nq-Jix" firstAttribute="trailing" secondItem="ftR-z3-1I4" secondAttribute="trailing" id="0QB-Pw-vZq"/>
                                                     <constraint firstAttribute="width" secondItem="Raa-wO-QXk" secondAttribute="height" multiplier="1:1" id="7gp-Q5-cH3"/>
@@ -54,6 +55,9 @@
                                                 </constraints>
                                                 <viewLayoutGuide key="contentLayoutGuide" id="ftR-z3-1I4"/>
                                                 <viewLayoutGuide key="frameLayoutGuide" id="We6-vb-Iv2"/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="WZx-3J-uYY" appends="YES" id="dfB-rZ-jMQ"/>
+                                                </connections>
                                             </scrollView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="ift-GF-IeE">
                                                 <rect key="frame" x="20" y="444" width="374" height="139.5"/>
@@ -117,6 +121,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="WZx-3J-uYY">
+                    <connections>
+                        <action selector="didTouchImageView:" destination="Y6W-OH-hqX" id="6Xe-DQ-n6C"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="132" y="85"/>
         </scene>
