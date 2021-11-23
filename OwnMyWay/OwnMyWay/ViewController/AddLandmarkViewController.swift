@@ -21,6 +21,9 @@ class AddLandmarkViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel?.bind { error in
+            print(error)
+        }
         self.bindContainerVC?(self.cartView)
     }
 

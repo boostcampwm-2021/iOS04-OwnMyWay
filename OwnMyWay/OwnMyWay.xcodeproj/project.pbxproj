@@ -314,19 +314,19 @@
 				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
 				AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */,
 				AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */,
-				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
+				29966F80274CA61B00729D39 /* EnterDateViewController.swift */,
 				29E9BA37273253130040B70A /* LandmarkCartViewController.swift */,
+				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
+				AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */,
+				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
+				3FB987972742C3BF008F0E08 /* ImageFileManager.swift */,
 				DB8831C62732861500487D33 /* Instantiable.swift */,
 				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
 				AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */,
 				AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */,
 				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
 				2985B1E427427AE900428098 /* LandmarkDeletable.swift */,
-				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
-				3FB987972742C3BF008F0E08 /* ImageFileManager.swift */,
-				AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */,
 				3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */,
-				29966F80274CA61B00729D39 /* EnterDateViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -376,10 +376,10 @@
 				294897C5273BF181003185E7 /* DetailRecordViewModel.swift */,
 				AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */,
 				AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */,
+				29966F82274CA63700729D39 /* EnterDateViewModel.swift */,
 				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
 				DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */,
 				AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */,
-				29966F82274CA63700729D39 /* EnterDateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
