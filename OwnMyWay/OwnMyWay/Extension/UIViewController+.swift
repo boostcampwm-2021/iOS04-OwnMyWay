@@ -19,6 +19,7 @@ extension UIViewController {
         ) ?? UIFont.systemFont(ofSize: 15)
         toastLabel.textAlignment = .center
         toastLabel.text = message
+        toastLabel.numberOfLines = 0
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 10
         toastLabel.clipsToBounds = true
