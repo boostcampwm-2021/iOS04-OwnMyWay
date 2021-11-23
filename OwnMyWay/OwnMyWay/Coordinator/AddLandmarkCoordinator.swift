@@ -61,10 +61,10 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
         completeEditingCoordinator.start()
     }
 
-    func popToCreateTravel(travel: Travel) {
-        guard let createTravelVC = self.navigationController.children.last
-                as? CreateTravelViewController else { return }
+    func popToEnterDate(travel: Travel) {
+        guard let enterDateVC = self.navigationController.children.last
+                as? EnterDateViewController else { return }
 
-        createTravelVC.travelDidChanged(to: travel)
+        enterDateVC.travelDidChanged(to: travel)
     }
 }
