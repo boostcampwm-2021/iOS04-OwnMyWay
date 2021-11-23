@@ -16,6 +16,7 @@ enum RepositoryError: Error {
 
 enum ModelError: Error {
     case landmarkError
+    case recordError
 }
 
 protocol TravelRepository {
@@ -43,7 +44,7 @@ protocol TravelRepository {
     func updateRecord(at record: Record) -> Result<Void, Error>
     func delete(travel: Travel) -> Result<Void, Error>
     func deleteLandmark(at landmark: Landmark) -> Result<Void, Error>
-    func deleteRecord(at record: Record)
+    func deleteRecord(at record: Record) -> Result<Void, Error>
 }
 
 class CoreDataTravelRepository: TravelRepository {
@@ -308,21 +309,23 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
-    func deleteRecord(at record: Record) {
+    func deleteRecord(at record: Record) -> Result<Void, Error> {
         guard let uuid = record.uuid as CVarArg?
-        else { return }
+        else { return .failure(RepositoryError.uuidError) }
 
         let request = RecordMO.fetchRequest()
         let predicate = NSPredicate(format: "uuid == %@", uuid)
         request.predicate = predicate
         guard let records = try? context.fetch(request) as [RecordMO],
               let record = records.first
-        else { return }
+        else { return .failure(RepositoryError.fetchError) }
         context.delete(record)
+
         do {
             try context.save()
+            return .success(())
         } catch {
-            return
+            return .failure(RepositoryError.saveError)
         }
     }
 

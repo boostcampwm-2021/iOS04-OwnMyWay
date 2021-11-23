@@ -12,7 +12,7 @@ protocol DetailRecordViewModel {
     var recordPublisher: Published<Record>.Publisher { get }
 
     func didTouchBackButton()
-    func didTouchDeleteButton()
+    func didTouchDeleteButton() -> Result<Void, Error>
     func didTouchEditButton()
     func didUpdateRecord(record: Record) -> Result<Void, Error>
 }
@@ -65,11 +65,17 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
         }
     }
 
-    func didTouchDeleteButton() {
-        self.usecase.executeRecordDeletion(at: self.record)
-        guard let index = self.travel.records.firstIndex(where: { $0 == self.record })
-        else { return }
-        self.travel.records.remove(at: index)
-        self.coordinatingDelegate?.popToParent(with: self.travel, isPopable: true)
+    func didTouchDeleteButton() -> Result<Void, Error> {
+        switch self.usecase.executeRecordDeletion(at: self.record) {
+        case .success:
+            guard let index = self.travel.records.firstIndex(where: { $0 == self.record })
+            else { return .failure(ModelError.recordError) }
+            self.travel.records.remove(at: index)
+            self.coordinatingDelegate?.popToParent(with: self.travel, isPopable: true)
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
+
     }
 }
