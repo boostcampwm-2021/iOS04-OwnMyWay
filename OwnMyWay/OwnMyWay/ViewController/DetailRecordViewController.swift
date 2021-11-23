@@ -129,6 +129,10 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true)
     }
+
+    @IBAction func didTouchImageView(_ sender: UITapGestureRecognizer) {
+        self.viewModel?.didTouchImageView(index: self.pageControl.currentPage)
+    }
 }
 
 // MARK: - UIScollViewDelegate
