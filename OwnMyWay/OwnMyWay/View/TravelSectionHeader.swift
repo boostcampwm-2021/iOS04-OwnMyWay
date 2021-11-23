@@ -11,15 +11,9 @@ class TravelSectionHeader: UICollectionReusableView {
     static let identifier = "TravelSectionHeader"
 
     @IBOutlet private weak var sectionTitleLabel: UILabel!
-    @IBOutlet private weak var foldButton: UIButton!
 
     func configure(sectionTitle: String) {
         self.sectionTitleLabel.text = sectionTitle
-        self.foldButton.setTitle("", for: .normal)
-    }
-
-    func disableButton() {
-        self.foldButton.setImage(UIImage(), for: .normal)
     }
 
 }
