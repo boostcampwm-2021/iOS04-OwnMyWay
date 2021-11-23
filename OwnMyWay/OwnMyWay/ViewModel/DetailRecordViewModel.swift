@@ -11,10 +11,11 @@ protocol DetailRecordViewModel {
     var record: Record { get }
     var recordPublisher: Published<Record>.Publisher { get }
 
+    func bind(errorHandler: @escaping (Error) -> Void)
     func didTouchBackButton()
-    func didTouchDeleteButton() -> Result<Void, Error>
+    func didTouchDeleteButton()
     func didTouchEditButton()
-    func didUpdateRecord(record: Record) -> Result<Void, Error>
+    func didUpdateRecord(record: Record)
 }
 
 protocol DetailRecordCoordinatingDelegate: AnyObject {
@@ -31,6 +32,7 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
 
     private let usecase: DetailRecordUsecase
     private weak var coordinatingDelegate: DetailRecordCoordinatingDelegate?
+    private var errorHandler: ((Error) -> Void)?
 
     init(
         record: Record,
@@ -44,6 +46,10 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
         self.coordinatingDelegate = coordinatingDelegate
     }
 
+    func bind(errorHandler: @escaping (Error) -> Void) {
+        self.errorHandler = errorHandler
+    }
+
     func didTouchBackButton() {
         self.coordinatingDelegate?.popToParent(with: self.travel, isPopable: false)
     }
@@ -52,30 +58,32 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
         self.coordinatingDelegate?.pushToAddRecord(record: self.record)
     }
 
-    func didUpdateRecord(record: Record) -> Result<Void, Error> {
+    func didUpdateRecord(record: Record) {
         self.record = record
         switch self.usecase.executeRecordUpdate(record: record) {
         case .success:
             guard let index = self.travel.records.firstIndex(where: { $0.uuid == record.uuid })
-            else { return .failure(RepositoryError.uuidError) }
+            else {
+                self.errorHandler?(RepositoryError.uuidError)
+                return
+            }
             self.travel.records[index] = record
-            return .success(())
         case .failure(let error):
-            return .failure(error)
+            self.errorHandler?(error)
         }
     }
 
-    func didTouchDeleteButton() -> Result<Void, Error> {
+    func didTouchDeleteButton() {
         switch self.usecase.executeRecordDeletion(at: self.record) {
         case .success:
-            guard let index = self.travel.records.firstIndex(where: { $0 == self.record })
-            else { return .failure(ModelError.recordError) }
+            guard let index = self.travel.records.firstIndex(where: { $0 == self.record }) else {
+                self.errorHandler?(ModelError.recordError)
+                return
+            }
             self.travel.records.remove(at: index)
             self.coordinatingDelegate?.popToParent(with: self.travel, isPopable: true)
-            return .success(())
         case .failure(let error):
-            return .failure(error)
+            self.errorHandler?(error)
         }
-
     }
 }

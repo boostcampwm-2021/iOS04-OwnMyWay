@@ -24,6 +24,9 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel?.bind { error in
+            print(error)
+        }
         self.configureScrollView()
         self.configureSettingButton()
         self.configureDocumentInteractionController()
@@ -42,14 +45,7 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     }
 
     func didUpdateRecord(record: Record) {
-        switch self.viewModel?.didUpdateRecord(record: record) {
-        case .success:
-            break
-        case .failure(let error):
-            print(error)
-        case .none:
-            print("App 터졌다구~")
-        }
+        self.viewModel?.didUpdateRecord(record: record)
     }
 
     private func configureScrollView() {
@@ -105,14 +101,7 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
                                       message: "기록을 삭제하실건가요?\n소중한 기록은 삭제되면 되돌릴 수 없어요😭",
                                       preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "네", style: .destructive) { [weak self] _ in
-            switch self?.viewModel?.didTouchDeleteButton() {
-            case .success:
-                break
-            case .failure(let error):
-                print(error)
-            case .none:
-                print("App 터졌다구~")
-            }
+            self?.viewModel?.didTouchDeleteButton()
         }
         let noAction = UIAlertAction(title: "아니오", style: .cancel)
         alert.addAction(yesAction)
