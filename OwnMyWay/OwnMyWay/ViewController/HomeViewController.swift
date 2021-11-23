@@ -101,9 +101,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
                     return
                 }
                 snapshot.insertSections([.dummy], beforeSection: .reserved)
-//                snapshot.appendSections([.dummy])
                 snapshot.appendItems(travels, toSection: .dummy)
-//                snapshot.moveSection(.dummy, beforeSection: .reserved)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &self.cancellables)
@@ -113,9 +111,8 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
                 snapshot.deleteSections([.reserved])
-                snapshot.appendSections([.reserved])
+                snapshot.insertSections([.reserved], beforeSection: .ongoing)
                 snapshot.appendItems(travels, toSection: .reserved)
-                snapshot.moveSection(.reserved, beforeSection: .ongoing)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &self.cancellables)
@@ -125,9 +122,8 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
                 snapshot.deleteSections([.ongoing])
-                snapshot.appendSections([.ongoing])
+                snapshot.insertSections([.ongoing], afterSection: .reserved)
                 snapshot.appendItems(travels, toSection: .ongoing)
-                snapshot.moveSection(.ongoing, afterSection: .reserved)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &self.cancellables)
@@ -137,9 +133,8 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
                 snapshot.deleteSections([.outdated])
-                snapshot.appendSections([.outdated])
+                snapshot.insertSections([.outdated], afterSection: .ongoing)
                 snapshot.appendItems(travels, toSection: .outdated)
-                snapshot.moveSection(.outdated, afterSection: .ongoing)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &self.cancellables)
