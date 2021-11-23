@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailRecordUsecase {
-    func executeRecordUpdate(record: Record)
+    func executeRecordUpdate(record: Record) -> Result<Void, Error>
     func executeRecordDeletion(at record: Record)
 }
 
@@ -20,8 +20,8 @@ struct DefaultDetailRecordUsecase: DetailRecordUsecase {
         self.repository = repository
     }
 
-    func executeRecordUpdate(record: Record) {
-        self.repository.updateRecord(at: record)
+    func executeRecordUpdate(record: Record) -> Result<Void, Error> {
+        return self.repository.updateRecord(at: record)
     }
 
     func executeRecordDeletion(at record: Record) {

@@ -42,7 +42,14 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     }
 
     func didUpdateRecord(record: Record) {
-        self.viewModel?.didUpdateRecord(record: record)
+        switch self.viewModel?.didUpdateRecord(record: record) {
+        case .success:
+            break
+        case .failure(let error):
+            print(error)
+        case .none:
+            print("App 터졌다구~")
+        }
     }
 
     private func configureScrollView() {

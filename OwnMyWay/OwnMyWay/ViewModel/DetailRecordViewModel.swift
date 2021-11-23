@@ -14,7 +14,7 @@ protocol DetailRecordViewModel {
     func didTouchBackButton()
     func didTouchDeleteButton()
     func didTouchEditButton()
-    func didUpdateRecord(record: Record)
+    func didUpdateRecord(record: Record) -> Result<Void, Error>
 }
 
 protocol DetailRecordCoordinatingDelegate: AnyObject {
@@ -52,13 +52,17 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
         self.coordinatingDelegate?.pushToAddRecord(record: self.record)
     }
 
-    func didUpdateRecord(record: Record) {
+    func didUpdateRecord(record: Record) -> Result<Void, Error> {
         self.record = record
-        self.usecase.executeRecordUpdate(record: record)
-
-        guard let index = self.travel.records.firstIndex(where: { $0.uuid == record.uuid })
-        else { return }
-        self.travel.records[index] = record
+        switch self.usecase.executeRecordUpdate(record: record) {
+        case .success:
+            guard let index = self.travel.records.firstIndex(where: { $0.uuid == record.uuid })
+            else { return .failure(RepositoryError.uuidError) }
+            self.travel.records[index] = record
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 
     func didTouchDeleteButton() {
