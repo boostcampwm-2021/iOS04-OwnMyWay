@@ -1,42 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="PlusCell" id="gTV-IL-0wX" customClass="PlusCell" customModule="OwnMyWay" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="312" height="191"/>
+            <rect key="frame" x="0.0" y="0.0" width="150" height="194"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="312" height="191"/>
+                <rect key="frame" x="0.0" y="0.0" width="150" height="194"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bup-jP-mdA">
-                        <rect key="frame" x="0.0" y="0.0" width="312" height="191"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRT-Da-Gfs">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="194"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ssw-mu-jTy">
+                                <rect key="frame" x="37.5" y="48.5" width="75" height="97"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainIcon" translatesAutoresizingMaskIntoConstraints="NO" id="fbX-Tb-k9N">
+                                        <rect key="frame" x="12.5" y="0.0" width="50" height="43.5"/>
+                                        <color key="tintColor" name="PlusCard"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="fbX-Tb-k9N" secondAttribute="height" multiplier="45:39" id="etq-tT-BLx"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="관광명소 추가" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vl-RQ-yhk">
+                                        <rect key="frame" x="6.5" y="53.5" width="62.5" height="43.5"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                        <color key="textColor" name="PlusCard"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="fbX-Tb-k9N" firstAttribute="width" secondItem="ssw-mu-jTy" secondAttribute="width" multiplier="2/3" id="AXp-K7-wma"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="bup-jP-mdA" secondAttribute="height" multiplier="312:191" priority="750" id="X37-Xd-mxJ"/>
+                            <constraint firstItem="ssw-mu-jTy" firstAttribute="centerY" secondItem="QRT-Da-Gfs" secondAttribute="centerY" id="0ZQ-0h-mSp"/>
+                            <constraint firstItem="ssw-mu-jTy" firstAttribute="width" secondItem="QRT-Da-Gfs" secondAttribute="width" multiplier="1/2" id="P9O-Jt-EwJ"/>
+                            <constraint firstItem="ssw-mu-jTy" firstAttribute="centerX" secondItem="QRT-Da-Gfs" secondAttribute="centerX" id="eFS-Oe-A9z"/>
                         </constraints>
-                        <color key="tintColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
-                    </button>
+                    </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="bup-jP-mdA" secondAttribute="bottom" id="LcZ-X0-SQp"/>
-                <constraint firstItem="bup-jP-mdA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="THt-fd-tBd"/>
-                <constraint firstAttribute="trailing" secondItem="bup-jP-mdA" secondAttribute="trailing" id="q9x-eC-Jkc"/>
-                <constraint firstItem="bup-jP-mdA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qyG-Ao-Zad"/>
+                <constraint firstItem="QRT-Da-Gfs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="1e2-6u-cQW"/>
+                <constraint firstAttribute="bottom" secondItem="QRT-Da-Gfs" secondAttribute="bottom" id="5L2-fb-eUv"/>
+                <constraint firstAttribute="trailing" secondItem="QRT-Da-Gfs" secondAttribute="trailing" id="IhH-WQ-XXi"/>
+                <constraint firstItem="QRT-Da-Gfs" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ffM-p6-wtE"/>
             </constraints>
-            <size key="customSize" width="293" height="201"/>
-            <point key="canvasLocation" x="313" y="144"/>
+            <size key="customSize" width="131" height="204"/>
+            <point key="canvasLocation" x="194.20289855072465" y="161.38392857142856"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="MainIcon" width="590" height="502"/>
+        <namedColor name="PlusCard">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
