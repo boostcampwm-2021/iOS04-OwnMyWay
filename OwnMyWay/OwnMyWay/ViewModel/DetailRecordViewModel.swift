@@ -15,11 +15,13 @@ protocol DetailRecordViewModel {
     func didTouchDeleteButton()
     func didTouchEditButton()
     func didUpdateRecord(record: Record)
+    func didTouchImageView()
 }
 
 protocol DetailRecordCoordinatingDelegate: AnyObject {
     func pushToAddRecord(record: Record)
     func popToParent(with travel: Travel, isPopable: Bool)
+    func presentDetailImage(images: [URL])
 }
 
 class DefaultDetailRecordViewModel: DetailRecordViewModel {
@@ -67,5 +69,10 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
         else { return }
         self.travel.records.remove(at: index)
         self.coordinatingDelegate?.popToParent(with: self.travel, isPopable: true)
+    }
+
+    func didTouchImageView() {
+        guard let images = self.record.photoURLs else { return }
+        self.coordinatingDelegate?.presentDetailImage(images: images)
     }
 }
