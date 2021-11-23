@@ -247,16 +247,16 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func createMessage(by section: Int, with sections: Int) -> String {
-        let dictionary = ["", "예정된 여행이 없어요 🤷‍♀️",
-                          "진행중인 여행이 없어요 🤷",
-                          "지난 여행이 없어요 🤷‍♂️"]
+        let dictionary = [
+            "", "예정된 여행이 없어요 🤷‍♀️", "진행중인 여행이 없어요 🤷", "지난 여행이 없어요 🤷‍♂️"
+        ]
         return dictionary[self.sectionIndex(by: section, with: sections)]
     }
 
     private func createTitle(by section: Int, with sections: Int) -> String {
-        let dictionary = ["", "예정된 여행",
-                          "진행중인 여행",
-                          "지난 여행"]
+        let dictionary = [
+            "", "예정된 여행", "진행중인 여행", "지난 여행"
+        ]
         return dictionary[self.sectionIndex(by: section, with: sections)]
     }
 
