@@ -12,6 +12,7 @@ protocol HomeViewModel {
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { get }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
 
+    func bind(errorHandler: @escaping (Error) -> Void)
     func viewDidLoad()
     func didTouchCreateButton()
     func didTouchReservedTravel(at index: Int)
@@ -37,6 +38,7 @@ class DefaultHomeViewModel: HomeViewModel {
     private var reservedComment: Travel
     private var ongoingComment: Travel
     private var outdatedComment: Travel
+    private var errorHandler: ((Error) -> Void)?
 
     @Published private var reservedTravels: [Travel]
     @Published private var ongoingTravels: [Travel]
@@ -53,15 +55,25 @@ class DefaultHomeViewModel: HomeViewModel {
         self.outdatedComment = Travel.dummy(section: .dummy)
     }
 
+    func bind(errorHandler: @escaping (Error) -> Void) {
+        self.errorHandler = errorHandler
+    }
+
     func viewDidLoad() {
-        self.usecase.executeFetch { [weak self] travels in
-            guard let self = self else { return }
-            let reserveds = travels.filter { $0.flag == Travel.Section.reserved.index }
-            self.reservedTravels = reserveds.isEmpty ? [self.reservedComment] : reserveds
-            let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
-            self.ongoingTravels = ongoings.isEmpty ? [self.ongoingComment] : ongoings
-            let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }
-            self.outdatedTravels = outdateds.isEmpty ? [self.outdatedComment] : outdateds
+        self.usecase.executeFetch { [weak self] result in
+            switch result {
+            case .success(let travels):
+                guard let self = self else { return }
+                let reserveds = travels.filter { $0.flag == Travel.Section.reserved.index }
+                self.reservedTravels = reserveds.isEmpty ? [self.reservedComment] : reserveds
+                let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
+                self.ongoingTravels = ongoings.isEmpty ? [self.ongoingComment] : ongoings
+                let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }
+                self.outdatedTravels = outdateds.isEmpty ? [self.outdatedComment] : outdateds
+            case .failure(let error):
+                self?.errorHandler?(error)
+            }
+
         }
     }
 
@@ -70,17 +82,26 @@ class DefaultHomeViewModel: HomeViewModel {
     }
 
     func didTouchReservedTravel(at index: Int) {
-        guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else { return }
+        guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else {
+            self.errorHandler?(ModelError.indexError)
+            return
+        }
         self.coordinatingDelegate?.pushToReservedTravel(travel: reservedTravels[index])
     }
 
     func didTouchOngoingTravel(at index: Int) {
-        guard ongoingTravels.startIndex..<ongoingTravels.endIndex ~= index else { return }
+        guard ongoingTravels.startIndex..<ongoingTravels.endIndex ~= index else {
+            self.errorHandler?(ModelError.indexError)
+            return
+        }
         self.coordinatingDelegate?.pushToOngoingTravel(travel: ongoingTravels[index])
     }
 
     func didTouchOutdatedTravel(at index: Int) {
-        guard outdatedTravels.startIndex..<outdatedTravels.endIndex ~= index else { return }
+        guard outdatedTravels.startIndex..<outdatedTravels.endIndex ~= index else {
+            self.errorHandler?(ModelError.indexError)
+            return
+        }
         self.coordinatingDelegate?.pushToOutdatedTravel(travel: outdatedTravels[index])
     }
 }

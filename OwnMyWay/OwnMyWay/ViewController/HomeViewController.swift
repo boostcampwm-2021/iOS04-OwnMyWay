@@ -22,6 +22,9 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel?.bind { error in
+            print(error)
+        }
         self.configureButton()
         self.configureNibs()
         self.configureTravelCollectionView()
