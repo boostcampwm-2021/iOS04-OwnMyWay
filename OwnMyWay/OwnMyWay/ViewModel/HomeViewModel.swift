@@ -34,9 +34,9 @@ class DefaultHomeViewModel: HomeViewModel {
 
     private let usecase: HomeUsecase
     private weak var coordinatingDelegate: HomeCoordinatingDelegate?
-    private var reservedComment: Travel
-    private var ongoingComment: Travel
-    private var outdatedComment: Travel
+    private let reservedComment: Travel
+    private let ongoingComment: Travel
+    private let outdatedComment: Travel
 
     @Published private var reservedTravels: [Travel]
     @Published private var ongoingTravels: [Travel]
