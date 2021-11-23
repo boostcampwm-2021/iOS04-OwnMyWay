@@ -13,21 +13,21 @@ protocol DetailImageViewModel {
     func didTouchBackButton()
 }
 
-protocol DetailImageCoordinatingDelegate {
+protocol DetailImageCoordinatingDelegate: AnyObject {
     func dismissToImageDetail()
 }
 
 class DefaultDetailImageViewModel: DetailImageViewModel {
     var imageURLs: [URL]
     var selectedIndex: Int
-    var coordinatingDelegate: DetailImageCoordinatingDelegate?
+    private weak var coordinatingDelegate: DetailImageCoordinatingDelegate?
 
     init(coordinatingDelegate: DetailImageCoordinatingDelegate, images: [URL], index: Int) {
         self.coordinatingDelegate = coordinatingDelegate
         self.imageURLs = images
         self.selectedIndex = index
     }
-    
+
     func didTouchBackButton() {
         self.coordinatingDelegate?.dismissToImageDetail()
     }
