@@ -15,11 +15,15 @@ class MessageCell: UICollectionViewCell {
     static let identifier = "MessageCell"
 
     @IBOutlet private weak var createTravelButton: UIButton!
-    weak var delegate: MessageCellDelegate?
+    private weak var delegate: MessageCellDelegate?
 
     override func layoutSubviews() {
         super.layoutSubviews()
         self.createTravelButton.layer.cornerRadius = 10
+    }
+
+    func bind(delegate: MessageCellDelegate) {
+        self.delegate = delegate
     }
 
     @IBAction func didTouchCreateTravelButton(_ sender: UIButton) {

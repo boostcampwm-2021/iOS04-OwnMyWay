@@ -217,7 +217,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             withReuseIdentifier: MessageCell.identifier,
             for: indexPath) as? MessageCell
         else { return MessageCell() }
-        cell.delegate = self
+        cell.bind(delegate: self)
         return cell
     }
 
