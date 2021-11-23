@@ -18,7 +18,7 @@ protocol AddLandmarkViewModel {
 protocol AddLandmarkCoordinatingDelegate: AnyObject {
     func pushToCompleteCreation(travel: Travel)
     func pushToCompleteEditing(travel: Travel)
-    func popToCreateTravel(travel: Travel)
+    func popToEnterDate(travel: Travel)
 }
 
 class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
@@ -44,7 +44,7 @@ class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
     }
 
     func didTouchBackButton() {
-        self.coordinatingDelegate?.popToCreateTravel(travel: travel)
+        self.coordinatingDelegate?.popToEnterDate(travel: travel)
     }
 
     func didUpdateTravel(to travel: Travel) {
