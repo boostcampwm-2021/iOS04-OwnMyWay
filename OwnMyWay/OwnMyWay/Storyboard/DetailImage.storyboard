@@ -35,7 +35,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="bLf-A9-D8B"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xp6-fO-cZ3">
-                                <rect key="frame" x="20" y="64" width="44" height="44"/>
+                                <rect key="frame" x="350" y="64" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="IHx-Ut-P8N"/>
                                     <constraint firstAttribute="height" constant="44" id="wa0-j7-8hH"/>
@@ -60,12 +60,12 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="3Rr-Zg-kUy"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Xp6-fO-cZ3" secondAttribute="trailing" constant="20" id="A00-sZ-d1L"/>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Zeh-R1-rCi"/>
                             <constraint firstItem="R5J-Af-tuI" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-20" id="fnL-Qy-XC4"/>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hXm-n2-JWK"/>
                             <constraint firstItem="R5J-Af-tuI" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="j1G-CV-LGe"/>
                             <constraint firstItem="loZ-PL-P0K" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="n6e-Qp-pA2"/>
-                            <constraint firstItem="Xp6-fO-cZ3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="waR-75-vd3"/>
                             <constraint firstItem="Xp6-fO-cZ3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="xes-JL-icm"/>
                         </constraints>
                     </view>
