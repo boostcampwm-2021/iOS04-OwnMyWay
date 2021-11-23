@@ -25,7 +25,7 @@ class PlusCell: UICollectionViewCell {
 
             shapeLayer.frame = self.bounds
             shapeLayer.fillColor = UIColor.clear.cgColor
-            shapeLayer.strokeColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).cgColor
+            shapeLayer.strokeColor = UIColor.init(named: "PlusCard")?.cgColor
             shapeLayer.lineWidth = 2
             shapeLayer.lineDashPattern = [6, 3]
             shapeLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 10).cgPath

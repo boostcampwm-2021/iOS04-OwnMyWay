@@ -220,7 +220,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             self.emptyLandmarkLabel.isHidden = !travel.landmarks.isEmpty
             self.navigationItem.title = travel.title
             self.periodLabel.text = startDate + " ~ " + endDate
-            (self.mapView as? OMWMapView)?.configure(with: travel)
+            (self.mapView as? OMWMapView)?.configure(with: travel, isMovingCamera: false)
 
             var recordSnapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
