@@ -75,6 +75,10 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             UINib(nibName: CommentCell.identifier, bundle: nil),
             forCellWithReuseIdentifier: CommentCell.identifier
         )
+        self.travelCollectionView.register(
+            UINib(nibName: MessageCell.identifier, bundle: nil),
+            forCellWithReuseIdentifier: MessageCell.identifier
+        )
     }
 
     private func configureTravelCollectionView() {
@@ -85,46 +89,58 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
     private func configureDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Travel.Section, Travel>()
-        snapshot.appendSections([.reserved, .ongoing, .outdated])
+        snapshot.appendSections([.dummy, .reserved, .ongoing, .outdated])
         self.diffableDataSource?.apply(snapshot, animatingDifferences: false)
     }
 
     private func configureCancellable() {
+        self.viewModel?.messagePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] travels in
+                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
+                snapshot.deleteSections([.dummy])
+                if travels.isEmpty {
+                    self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                    return
+                }
+                snapshot.insertSections([.dummy], beforeSection: .reserved)
+                snapshot.appendItems(travels, toSection: .dummy)
+                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+            }
+            .store(in: &self.cancellables)
+
         self.viewModel?.reservedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
                 snapshot.deleteSections([.reserved])
-                snapshot.appendSections([.reserved])
+                snapshot.insertSections([.reserved], beforeSection: .ongoing)
                 snapshot.appendItems(travels, toSection: .reserved)
-                snapshot.moveSection(.reserved, beforeSection: .ongoing)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
-            .store(in: &cancellables)
+            .store(in: &self.cancellables)
 
         self.viewModel?.ongoingTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
                 snapshot.deleteSections([.ongoing])
-                snapshot.appendSections([.ongoing])
+                snapshot.insertSections([.ongoing], afterSection: .reserved)
                 snapshot.appendItems(travels, toSection: .ongoing)
-                snapshot.moveSection(.ongoing, afterSection: .reserved)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
-            .store(in: &cancellables)
+            .store(in: &self.cancellables)
 
         self.viewModel?.outdatedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
                 snapshot.deleteSections([.outdated])
-                snapshot.appendSections([.outdated])
+                snapshot.insertSections([.outdated], afterSection: .ongoing)
                 snapshot.appendItems(travels, toSection: .outdated)
-                snapshot.moveSection(.outdated, afterSection: .ongoing)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
-            .store(in: &cancellables)
+            .store(in: &self.cancellables)
     }
 
     private func createCompositionalLayout() -> UICollectionViewLayout {
@@ -177,41 +193,83 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         let dataSource = HomeDataSource(
             collectionView: self.travelCollectionView
         ) { collectionView, indexPath, item in
-                switch (indexPath.section, item.flag) {
-                case (Travel.Section.reserved.index, -1):
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: CommentCell.identifier,
-                        for: indexPath) as? CommentCell
-                    else { return UICollectionViewCell() }
-                    cell.configure(text: "예정된 여행이 없어요 🤷‍♀️")
-                    return cell
-                case (Travel.Section.ongoing.index, -1):
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: CommentCell.identifier,
-                        for: indexPath) as? CommentCell
-                    else { return UICollectionViewCell() }
-                    cell.configure(text: "진행중인 여행이 없어요 🤷")
-                    return cell
-                case (Travel.Section.outdated.index, -1):
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: CommentCell.identifier,
-                        for: indexPath) as? CommentCell
-                    else { return UICollectionViewCell() }
-                    cell.configure(text: "지난 여행이 없어요 🤷‍♂️")
-                    return cell
-                default:
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: TravelCardCell.identifier,
-                        for: indexPath) as? TravelCardCell
-                    else { return UICollectionViewCell() }
-                    cell.configure(with: item)
-                    return cell
+            if item.flag == -1 {
+                let sections = collectionView.numberOfSections
+                if self.isMessageCell(section: indexPath.section, sections: sections) {
+                    return self.dequeueMessageCell(in: collectionView, with: indexPath)
                 }
+                return self.dequeueCommentCell(in: collectionView, with: indexPath)
+            }
+            return self.dequeueTravelCardCell(in: collectionView, with: indexPath, using: item)
         }
         dataSource.supplementaryViewProvider = configureSupplementaryView(
             collectionView:kind:indexPath:
         )
         return dataSource
+    }
+
+    private func isMessageCell(section: Int, sections: Int) -> Bool {
+        let allSectionsCount = Travel.Section.allCases.count
+        return sections == allSectionsCount && section == 0
+    }
+
+    private func dequeueMessageCell(
+        in collectionView: UICollectionView, with indexPath: IndexPath
+    ) -> MessageCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: MessageCell.identifier,
+            for: indexPath) as? MessageCell
+        else { return MessageCell() }
+        cell.bind(delegate: self)
+        return cell
+    }
+
+    private func dequeueCommentCell(
+        in collectionView: UICollectionView, with indexPath: IndexPath
+    ) -> CommentCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CommentCell.identifier,
+            for: indexPath) as? CommentCell
+        else { return CommentCell() }
+        let sections = collectionView.numberOfSections
+        cell.configure(
+            text: self.createMessage(by: indexPath.section, with: sections)
+        )
+        return cell
+    }
+
+    private func dequeueTravelCardCell(
+        in collectionView: UICollectionView, with indexPath: IndexPath, using item: Travel
+    ) -> TravelCardCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: TravelCardCell.identifier,
+            for: indexPath) as? TravelCardCell
+        else { return TravelCardCell() }
+        cell.configure(with: item)
+        return cell
+    }
+
+    private func createMessage(by section: Int, with sections: Int) -> String {
+        let dictionary = [
+            "", "예정된 여행이 없어요 🤷‍♀️", "진행중인 여행이 없어요 🤷", "지난 여행이 없어요 🤷‍♂️"
+        ]
+        return dictionary[self.sectionIndex(by: section, with: sections)]
+    }
+
+    private func createTitle(by section: Int, with sections: Int) -> String {
+        let dictionary = [
+            "", "예정된 여행", "진행중인 여행", "지난 여행"
+        ]
+        return dictionary[self.sectionIndex(by: section, with: sections)]
+    }
+
+    private func sectionIndex(by section: Int, with sections: Int) -> Int {
+        let allSectionsCount = Travel.Section.allCases.count
+        if allSectionsCount == sections {
+            return section
+        }
+        // If dummy section is removed, section index should be increased by one.
+        return section + 1
     }
 
     private func configureSupplementaryView(
@@ -223,9 +281,10 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             for: indexPath
         ) as? TravelSectionHeader
         else { return UICollectionReusableView() }
-
-        let title = ["예정된 여행", "진행중인 여행", "지난 여행"]
-        sectionHeader.configure(sectionTitle: title[indexPath.section])
+        let sections = collectionView.numberOfSections
+        sectionHeader.configure(
+            sectionTitle: self.createTitle(by: indexPath.section, with: sections)
+        )
         return sectionHeader
     }
 
@@ -237,29 +296,18 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
 }
 
-extension HomeViewController: UICollectionViewDelegate {
+extension HomeViewController: UICollectionViewDelegate, MessageCellDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let travel = self.diffableDataSource?.itemIdentifier(for: indexPath)
         else { return }
-        if indexPath.section == Travel.Section.reserved.index,
-           travel.flag == Travel.Section.dummy.index {
-            self.viewModel?.didTouchCreateButton()
-            return
-        } else if travel.flag == Travel.Section.dummy.index {
-            return
-        }
-        switch indexPath.section {
-        case Travel.Section.reserved.index:
-            self.viewModel?.didTouchReservedTravel(at: indexPath.item)
-        case Travel.Section.ongoing.index:
-            self.viewModel?.didTouchOngoingTravel(at: indexPath.item)
-        case Travel.Section.outdated.index:
-            self.viewModel?.didTouchOutdatedTravel(at: indexPath.item)
-        default:
-            return
-        }
+        self.viewModel?.didTouchTravel(
+            flag: travel.flag, item: indexPath.item
+        )
+    }
 
+    func didTouchButton() {
+        self.viewModel?.didTouchCreateButton()
     }
 
 }

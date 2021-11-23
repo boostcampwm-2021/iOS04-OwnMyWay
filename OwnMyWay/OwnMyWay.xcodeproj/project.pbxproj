@@ -52,6 +52,8 @@
 		3F3F8670274B628E0075B9A0 /* DancingScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F866F274B628E0075B9A0 /* DancingScript-Regular.ttf */; };
 		3F3F8673274B9E340075B9A0 /* HomeBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F8671274B9E340075B9A0 /* HomeBackgroundView.swift */; };
 		3F3F8674274B9E340075B9A0 /* HomeBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */; };
+		3F3F867B274CC3400075B9A0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F8679274CC3400075B9A0 /* MessageCell.swift */; };
+		3F3F867C274CC3400075B9A0 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F867A274CC3400075B9A0 /* MessageCell.xib */; };
 		3FB914BE273409530084FF1C /* TravelCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914BC273409530084FF1C /* TravelCardCell.swift */; };
 		3FB914BF273409530084FF1C /* TravelCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB914BD273409530084FF1C /* TravelCardCell.xib */; };
 		3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914C027340E410084FF1C /* HomeViewModel.swift */; };
@@ -190,6 +192,8 @@
 		3F3F866F274B628E0075B9A0 /* DancingScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DancingScript-Regular.ttf"; sourceTree = "<group>"; };
 		3F3F8671274B9E340075B9A0 /* HomeBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBackgroundView.swift; sourceTree = "<group>"; };
 		3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeBackgroundView.xib; sourceTree = "<group>"; };
+		3F3F8679274CC3400075B9A0 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		3F3F867A274CC3400075B9A0 /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		3FB914BC273409530084FF1C /* TravelCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelCardCell.swift; sourceTree = "<group>"; };
 		3FB914BD273409530084FF1C /* TravelCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TravelCardCell.xib; sourceTree = "<group>"; };
 		3FB914C027340E410084FF1C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -369,6 +373,8 @@
 				AF0BAA63274B82200091F642 /* OMWMapView.swift */,
 				3F3F8671274B9E340075B9A0 /* HomeBackgroundView.swift */,
 				3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */,
+				3F3F8679274CC3400075B9A0 /* MessageCell.swift */,
+				3F3F867A274CC3400075B9A0 /* MessageCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -639,6 +645,7 @@
 				3F3F8674274B9E340075B9A0 /* HomeBackgroundView.xib in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
 				3FB914EA2737DAC70084FF1C /* TravelSectionHeader.xib in Resources */,
+				3F3F867C274CC3400075B9A0 /* MessageCell.xib in Resources */,
 				AF2F6CD52746179500EA3601 /* SearchLocation.storyboard in Resources */,
 				3F113A11273A571100EA91AA /* CompleteCreation.storyboard in Resources */,
 				AF82FDA8273BEB1700A094B6 /* AddRecord.storyboard in Resources */,
@@ -719,6 +726,7 @@
 				AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */,
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
 				2985B1E727448DFD00428098 /* UIView+.swift in Sources */,
+				3F3F867B274CC3400075B9A0 /* MessageCell.swift in Sources */,
 				AFA6ED7A2744F6BD007B251C /* CompleteEditingCoordinator.swift in Sources */,
 				AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */,
 				DB1D5CB7273CE1C100B30448 /* Location.swift in Sources */,
