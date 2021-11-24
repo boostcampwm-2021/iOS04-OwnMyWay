@@ -46,11 +46,7 @@ class EnterDateViewController: UIViewController, Instantiable {
     private func configureNavigationController() {
         self.navigationController?.navigationBar.topItem?.title = ""
         guard let isEditingMode = self.viewModel?.isEditingMode else { return }
-        if isEditingMode {
-            self.navigationItem.title = "여행 편집하기"
-        } else {
-            self.navigationItem.title = "새로운 여행"
-        }
+        self.navigationItem.title = isEditingMode ? "여행 편집하기" : "새로운 여행"
     }
 
     private func configureButtonConstraint() {

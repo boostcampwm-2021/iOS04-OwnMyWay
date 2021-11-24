@@ -97,11 +97,7 @@ class AddRecordViewController: UIViewController, Instantiable {
             action: #selector(submitButtonAction)
         )
         guard let isEditingMode = self.viewModel?.isEditingMode else { return }
-        if isEditingMode {
-            self.navigationItem.title = "게시물 편집"
-        } else {
-            self.navigationItem.title = "게시물 작성"
-        }
+        self.navigationItem.title = isEditingMode ? "게시물 편집" : "게시물 작성"
     }
 
     private func configureCancellable() {
