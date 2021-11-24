@@ -237,11 +237,13 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
             guard let url = Bundle.main.url(forResource: "addImage", withExtension: "png")
             else { return UICollectionViewCell() }
             cell.configure(url: url)
+            cell.configureAccessibility(index: indexPath.item)
             return cell
         default:
             guard let url = self.viewModel?.record.photoURLs?[indexPath.item - 1]
             else { return UICollectionViewCell() }
             cell.configure(url: url)
+            cell.configureAccessibility(index: indexPath.item)
             return cell
         }
     }
