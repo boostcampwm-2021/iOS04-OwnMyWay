@@ -152,6 +152,7 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
     }
 
     @IBAction func didTouchFinishButton(_ sender: UIButton) {
+        LocationManager.shared.stopUpdatingLocation()
         self.viewModel?.didTouchFinishButton()
     }
 
@@ -382,17 +383,11 @@ extension OngoingTravelViewController: OMWSegmentedControlDelegate {
     func change(to index: Int) {
         switch index {
         case 0:
-            self.scrollView.scrollRectToVisible(
-                self.recordCollectionView.frame, animated: true
-            )
+            self.scrollView.scrollRectToVisible(self.recordCollectionView.frame, animated: true)
         case 1:
-            self.scrollView.scrollRectToVisible(
-                self.mapView.frame, animated: true
-            )
+            self.scrollView.scrollRectToVisible(self.mapView.frame, animated: true)
         case 2:
-            self.scrollView.scrollRectToVisible(
-                self.landmarkCollectionView.frame, animated: true
-            )
+            self.scrollView.scrollRectToVisible(self.landmarkCollectionView.frame, animated: true)
         default:
             break
         }
