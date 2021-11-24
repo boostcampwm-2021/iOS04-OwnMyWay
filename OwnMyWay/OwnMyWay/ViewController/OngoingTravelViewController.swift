@@ -31,9 +31,6 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { [weak self] error in
-            ErrorManager.showAlert(with: error, to: self)
-        }
         self.configureNavigation()
         self.configureNibs()
         self.configureCollectionViews()
@@ -239,6 +236,14 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             landmarkSnapshot.appendItems(travel.landmarks, toSection: .main)
             self.landmarkDataSource?.apply(landmarkSnapshot, animatingDifferences: true)
         }.store(in: &cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showAlert(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     private func configureRecordCompositionalLayout() -> UICollectionViewLayout {
@@ -346,7 +351,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
 }
 
 // MARK: - extension OngoingTravelViewController for CLLocationManagerDelegate
-
 extension OngoingTravelViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let lastLocation = locations.last
@@ -365,7 +369,6 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
 }
 
 // MARK: - extension OngoingTravelViewController for RecordUpdatable
-
 extension OngoingTravelViewController: RecordUpdatable {
     func didUpdateRecord(record: Record) {
         self.viewModel?.didUpdateRecord(record: record)
@@ -373,7 +376,6 @@ extension OngoingTravelViewController: RecordUpdatable {
 }
 
 // MARK: - extension OngoingTravelViewController for OMWSegmentedControlDelegate
-
 extension OngoingTravelViewController: OMWSegmentedControlDelegate {
     func change(to index: Int) {
         switch index {

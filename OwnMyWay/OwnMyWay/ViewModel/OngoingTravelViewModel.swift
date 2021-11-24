@@ -11,8 +11,8 @@ import Foundation
 protocol OngoingTravelViewModel {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
 
-    func bind(errorHandler: @escaping (Error) -> Void)
     func didUpdateTravel(to travel: Travel)
     func didTouchAddRecordButton()
     func didTouchRecordCell(at record: Record)
@@ -34,12 +34,13 @@ protocol StartedCoordinatingDelegate: AnyObject {
 class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewModel {
 
     var travelPublisher: Published<Travel>.Publisher { $travel }
+    var errorPublisher: Published<Error?>.Publisher { $error }
 
     @Published private(set) var travel: Travel
+    @Published private var error: Error?
 
     private let usecase: StartedTravelUsecase
     private weak var coordinatingDelegate: StartedCoordinatingDelegate?
-    private var errorHandler: ((Error) -> Void)?
 
     init(
         travel: Travel,
@@ -51,10 +52,6 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         self.coordinatingDelegate = coordinatingDelegate
     }
 
-    func bind(errorHandler: @escaping (Error) -> Void) {
-        self.errorHandler = errorHandler
-    }
-
     func didUpdateTravel(to travel: Travel) {
         self.travel = travel
     }
@@ -64,7 +61,7 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         case .success:
             self.coordinatingDelegate?.popToHome()
         case .failure(let error):
-            self.errorHandler?(error)
+            self.error = error
         }
     }
 
@@ -90,7 +87,7 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         case .success:
             self.coordinatingDelegate?.moveToOutdated(travel: self.travel)
         case .failure(let error):
-            self.errorHandler?(error)
+            self.error = error
         }
     }
 
@@ -102,7 +99,7 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
         case .success:
             break
         case .failure(let error):
-            self.errorHandler?(error)
+            self.error = error
         }
     }
 
@@ -112,7 +109,7 @@ class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewM
             case .success(let travel):
                 self?.travel = travel
             case .failure(let error):
-                self?.errorHandler?(error)
+                self?.error = error
             }
         }
     }

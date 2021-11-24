@@ -29,9 +29,6 @@ class OutdatedTravelViewController: UIViewController, Instantiable,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { [weak self] error in
-            ErrorManager.showAlert(with: error, to: self)
-        }
         self.configureNavigation()
         self.configureNibs()
         self.configureCollectionViews()
@@ -192,6 +189,14 @@ extension OutdatedTravelViewController: UICollectionViewDelegate {
             landmarkSnapshot.appendItems(travel.landmarks, toSection: .main)
             self.landmarkDataSource?.apply(landmarkSnapshot, animatingDifferences: true)
         }.store(in: &cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showAlert(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     private func configureRecordCompositionalLayout() -> UICollectionViewLayout {
