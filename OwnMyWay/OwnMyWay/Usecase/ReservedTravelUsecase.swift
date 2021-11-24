@@ -8,10 +8,10 @@
 import Foundation
 
 protocol ReservedTravelUsecase {
-    func executeDeletion(of travel: Travel)
-    func executeLandmarkAddition(of travel: Travel)
-    func executeLandmarkDeletion(at landmark: Landmark)
-    func executeFlagUpdate(of travel: Travel)
+    func executeDeletion(of travel: Travel) -> Result<Void, Error>
+    func executeLandmarkAddition(of travel: Travel) -> Result<Void, Error>
+    func executeLandmarkDeletion(at landmark: Landmark) -> Result<Void, Error>
+    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error>
 }
 
 struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
@@ -22,28 +22,39 @@ struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
         self.repository = repository
     }
 
-    func executeDeletion(of travel: Travel) {
-        self.repository.delete(travel: travel)
+    func executeDeletion(of travel: Travel) -> Result<Void, Error> {
+        return self.repository.delete(travel: travel)
     }
 
-    func executeLandmarkAddition(of travel: Travel) {
+    func executeLandmarkAddition(of travel: Travel) -> Result<Void, Error> {
         guard let newLandmark = travel.landmarks.last
-        else { return }
-        self.repository.addLandmark(
+        else { return .failure(ModelError.landmarkError) }
+
+        switch self.repository.addLandmark(
             to: travel,
             uuid: newLandmark.uuid,
             title: newLandmark.title,
             image: newLandmark.image,
             latitude: newLandmark.latitude,
             longitude: newLandmark.longitude
-        )
+        ) {
+        case .success:
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 
-    func executeLandmarkDeletion(at landmark: Landmark) {
-        self.repository.deleteLandmark(at: landmark)
+    func executeLandmarkDeletion(at landmark: Landmark) -> Result<Void, Error> {
+        return self.repository.deleteLandmark(at: landmark)
     }
 
-    func executeFlagUpdate(of travel: Travel) {
-        self.repository.update(travel: travel)
+    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error> {
+        switch self.repository.update(travel: travel) {
+        case .success:
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
+        }
     }
 }

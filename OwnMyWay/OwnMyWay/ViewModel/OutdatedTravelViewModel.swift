@@ -10,6 +10,7 @@ import Foundation
 protocol OutdatedTravelViewModel {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
 
     func didUpdateTravel(to travel: Travel)
     func didDeleteTravel()

@@ -12,6 +12,7 @@ import MapKit
 protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
     var recordPublisher: Published<Record>.Publisher { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
     var record: Record { get }
     var isEditingMode: Bool { get }
 
@@ -37,12 +38,14 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
     var recordPublisher: Published<Record>.Publisher { $record }
+    var errorPublisher: Published<Error?>.Publisher { $error }
 
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
 
     @Published private var validateResult: Bool?
     @Published private(set) var record: Record
+    @Published private var error: Error?
     private var tempPhotoURLs: [URL]
     private var deletedPhotoURLs: [URL]
     private(set) var isEditingMode: Bool
@@ -126,7 +129,10 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.usecase.executePickingPhoto(with: url) { [weak self] url, error in
             guard error == nil,
                   let copiedURL = url
-            else { return }
+            else {
+                self?.error = error
+                return
+            }
             self?.record.photoURLs?.append(copiedURL)
             self?.tempPhotoURLs.append(copiedURL)
             self?.isValidPhotos = true
@@ -134,7 +140,10 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     }
 
     func didRemovePhoto(at index: Int) {
-        guard let url = self.record.photoURLs?[index] else { return }
+        guard let url = self.record.photoURLs?[index] else {
+            self.error = ModelError.indexError
+            return
+        }
         self.deletedPhotoURLs.append(url)
         self.record.photoURLs?.remove(at: index)
         self.isValidPhotos = self.record.photoURLs?.count == 0 ? false : true
@@ -142,7 +151,14 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didTouchSubmitButton() {
         self.deletedPhotoURLs.forEach { [weak self] url in
-            self?.usecase.executeRemovingPhoto(url: url) { _ in }
+            self?.usecase.executeRemovingPhoto(url: url) { result in
+                switch result {
+                case .success:
+                    break
+                case .failure(let error):
+                    self?.error = error
+                }
+            }
         }
         self.coordinatingDelegate?.popToParent(with: record)
     }
@@ -153,7 +169,14 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didTouchBackButton() {
         self.tempPhotoURLs.forEach { [weak self] url in
-            self?.usecase.executeRemovingPhoto(url: url) { _ in }
+            self?.usecase.executeRemovingPhoto(url: url) { result in
+                switch result {
+                case .success:
+                    break
+                case .failure(let error):
+                    self?.error = error
+                }
+            }
         }
     }
 

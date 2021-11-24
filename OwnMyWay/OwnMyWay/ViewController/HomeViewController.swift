@@ -15,7 +15,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     @IBOutlet private weak var travelCollectionView: UICollectionView!
     @IBOutlet private weak var settingButton: UIButton!
     @IBOutlet private weak var createButton: UIButton!
-
     private var viewModel: HomeViewModel?
     private var diffableDataSource: HomeDataSource?
     private var cancellables: Set<AnyCancellable> = []
@@ -139,6 +138,14 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
             }
             .store(in: &self.cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showToast(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     private func createCompositionalLayout() -> UICollectionViewLayout {
@@ -183,7 +190,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 30
         layout.configuration = config
-
         return layout
     }
 
@@ -248,35 +254,26 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func createMessage(by section: Int, with sections: Int) -> String {
-        let dictionary = [
-            "", "예정된 여행이 없어요 🤷‍♀️", "진행중인 여행이 없어요 🤷", "지난 여행이 없어요 🤷‍♂️"
-        ]
+        let dictionary = ["", "예정된 여행이 없어요 🤷‍♀️", "진행중인 여행이 없어요 🤷", "지난 여행이 없어요 🤷‍♂️"]
         return dictionary[self.sectionIndex(by: section, with: sections)]
     }
 
     private func createTitle(by section: Int, with sections: Int) -> String {
-        let dictionary = [
-            "", "예정된 여행", "진행중인 여행", "지난 여행"
-        ]
+        let dictionary = ["", "예정된 여행", "진행중인 여행", "지난 여행"]
         return dictionary[self.sectionIndex(by: section, with: sections)]
     }
 
     private func sectionIndex(by section: Int, with sections: Int) -> Int {
         let allSectionsCount = Travel.Section.allCases.count
-        if allSectionsCount == sections {
-            return section
-        }
-        // If dummy section is removed, section index should be increased by one.
-        return section + 1
+        if allSectionsCount == sections { return section }
+        return section + 1 // If dummy section is removed, section index should be increased by one.
     }
 
     private func configureSupplementaryView(
         collectionView: UICollectionView, kind: String, indexPath: IndexPath
     ) -> UICollectionReusableView? {
         guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-            ofKind: kind,
-            withReuseIdentifier: TravelSectionHeader.identifier,
-            for: indexPath
+            ofKind: kind, withReuseIdentifier: TravelSectionHeader.identifier, for: indexPath
         ) as? TravelSectionHeader
         else { return UICollectionReusableView() }
         let sections = collectionView.numberOfSections
@@ -307,7 +304,6 @@ extension HomeViewController: UICollectionViewDelegate, MessageCellDelegate {
     func didTouchButton() {
         self.viewModel?.didTouchCreateButton()
     }
-
 }
 
 fileprivate extension HomeViewController {
@@ -315,5 +311,4 @@ fileprivate extension HomeViewController {
     struct ElementKind {
         static let background = "homeBackground"
     }
-
 }

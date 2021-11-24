@@ -51,7 +51,12 @@ extension LocationManager: CLLocationManagerDelegate {
               let longitude = lastLocation?.coordinate.longitude,
               let travel = self.travel
         else { return }
-        self.repository.addLocation(to: travel, latitude: latitude, longitude: longitude)
+        switch self.repository.addLocation(to: travel, latitude: latitude, longitude: longitude) {
+        case .success:
+            break
+        case .failure:
+            break
+        }
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

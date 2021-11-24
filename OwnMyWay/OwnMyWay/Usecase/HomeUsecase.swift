@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HomeUsecase {
-    func executeFetch(completion: @escaping ([Travel]) -> Void)
+    func executeFetch(completion: @escaping (Result<[Travel], Error>) -> Void)
 }
 
 struct DefaultHomeUsecase: HomeUsecase {
@@ -19,14 +19,8 @@ struct DefaultHomeUsecase: HomeUsecase {
         self.repository = repository
     }
 
-    func executeFetch(completion: @escaping ([Travel]) -> Void) {
-        let result = repository.fetchAllTravels()
-        switch result {
-        case .success(let travels):
-            completion(travels)
-        case .failure(let error):
-            print(error)
-        }
+    func executeFetch(completion: @escaping (Result<[Travel], Error>) -> Void) {
+        completion(repository.fetchAllTravels())
     }
 
 }

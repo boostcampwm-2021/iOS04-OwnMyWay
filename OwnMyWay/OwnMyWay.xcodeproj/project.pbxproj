@@ -65,6 +65,7 @@
 		3FB987A6274373CB008F0E08 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB987A4274373CB008F0E08 /* PhotoCell.xib */; };
 		3FB987A827439030008F0E08 /* addImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB987A727439030008F0E08 /* addImage.png */; };
 		3FD3D984274E098A0051E2AC /* nanum_handwriting.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3D983274E098A0051E2AC /* nanum_handwriting.ttf */; };
+		3FD3D980274CF9D20051E2AC /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */; };
 		3FF20BBA27461BC4007AFF78 /* TravelEditableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */; };
 		AF0BAA64274B82200091F642 /* OMWMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA63274B82200091F642 /* OMWMapView.swift */; };
 		AF0BAA68274BAB620091F642 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA67274BAB620091F642 /* UIButton+.swift */; };
@@ -74,6 +75,7 @@
 		AF1108E4273B8C04009FE728 /* OngoingTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */; };
 		AF1108E6273B8C18009FE728 /* StartedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E5273B8C18009FE728 /* StartedTravelUsecase.swift */; };
 		AF1108E8273B8C2D009FE728 /* OngoingTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E7273B8C2D009FE728 /* OngoingTravelCoordinator.swift */; };
+		AF11A498274CF6B60005B0D0 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF11A497274CF6B60005B0D0 /* ErrorManager.swift */; };
 		AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */; };
 		AF2F6CCF274616B700EA3601 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */; };
 		AF2F6CD52746179500EA3601 /* SearchLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2F6CD42746179500EA3601 /* SearchLocation.storyboard */; };
@@ -93,7 +95,6 @@
 		AF82FDB8273BF3C600A094B6 /* OutdatedTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */; };
 		AF82FDBA273BF3D900A094B6 /* OutdatedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */; };
 		AF82FDBC273BF3E300A094B6 /* OutdatedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */; };
-		AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */; };
 		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
 		AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA5E25A2742294100DD94D9 /* LocationManager.swift */; };
 		AFA6ED7A2744F6BD007B251C /* CompleteEditingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */; };
@@ -207,6 +208,7 @@
 		3FB987A4274373CB008F0E08 /* PhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		3FB987A727439030008F0E08 /* addImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImage.png; sourceTree = "<group>"; };
 		3FD3D983274E098A0051E2AC /* nanum_handwriting.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nanum_handwriting.ttf; sourceTree = "<group>"; };
+		3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelEditableViewController.swift; sourceTree = "<group>"; };
 		AF0BAA63274B82200091F642 /* OMWMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMWMapView.swift; sourceTree = "<group>"; };
 		AF0BAA67274BAB620091F642 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelViewModel.swift; sourceTree = "<group>"; };
 		AF1108E5273B8C18009FE728 /* StartedTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedTravelUsecase.swift; sourceTree = "<group>"; };
 		AF1108E7273B8C2D009FE728 /* OngoingTravelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingTravelCoordinator.swift; sourceTree = "<group>"; };
+		AF11A497274CF6B60005B0D0 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkAnnotationView.swift; sourceTree = "<group>"; };
 		AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		AF2F6CD42746179500EA3601 /* SearchLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLocation.storyboard; sourceTree = "<group>"; };
@@ -235,7 +238,6 @@
 		AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutdatedTravel.storyboard; sourceTree = "<group>"; };
 		AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewController.swift; sourceTree = "<group>"; };
 		AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewModel.swift; sourceTree = "<group>"; };
-		AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelUsecase.swift; sourceTree = "<group>"; };
 		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
 		AFA5E25A2742294100DD94D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditingCoordinator.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				2985B1E627448DFC00428098 /* UIView+.swift */,
 				DBA6F68D27461E0C00F3244E /* CLLocationManager+.swift */,
 				AF0BAA67274BAB620091F642 /* UIButton+.swift */,
+				3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -320,27 +323,28 @@
 		29E5FB38272F8BA500F35733 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				DB22BB5D272F82770004444B /* HomeViewController.swift */,
 				29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */,
-				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
 				AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */,
-				29E9BA37273253130040B70A /* LandmarkCartViewController.swift */,
+				DB22BB5D272F82770004444B /* HomeViewController.swift */,
 				29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */,
+				3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */,
+				AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */,
+				AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */,
+				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
+				AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */,
+				AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */,
+				29E9BA37273253130040B70A /* LandmarkCartViewController.swift */,
+				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
+				AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */,
+				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
+				3FB987972742C3BF008F0E08 /* ImageFileManager.swift */,
+				AF11A497274CF6B60005B0D0 /* ErrorManager.swift */,
 				DB8831C62732861500487D33 /* Instantiable.swift */,
 				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
 				AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */,
 				AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */,
 				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
 				2985B1E427427AE900428098 /* LandmarkDeletable.swift */,
-				3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */,
-				AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */,
-				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
-				AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */,
-				AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */,
-				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
-				3FB987972742C3BF008F0E08 /* ImageFileManager.swift */,
-				AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */,
-				AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */,
 				3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */,
 				DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */,
 				29966F80274CA61B00729D39 /* EnterDateViewController.swift */,
@@ -387,19 +391,19 @@
 			children = (
 				29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */,
 				DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */,
-				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
 				3FB914C027340E410084FF1C /* HomeViewModel.swift */,
 				29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */,
-				DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */,
 				3F113A12273A59C500EA91AA /* CompleteCreationViewModel.swift */,
 				AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */,
+				AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */,
 				294897C5273BF181003185E7 /* DetailRecordViewModel.swift */,
 				AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */,
-				AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */,
-				AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */,
 				AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */,
 				DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */,
 				29966F82274CA63700729D39 /* EnterDateViewModel.swift */,
+				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
+				DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */,
+				AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -415,7 +419,6 @@
 				AF1108E5273B8C18009FE728 /* StartedTravelUsecase.swift */,
 				294897C9273BF3D7003185E7 /* DetailRecordUsecase.swift */,
 				AF82FDAF273BEC0900A094B6 /* AddRecordUsecase.swift */,
-				AF82FDBD273BF3ED00A094B6 /* OutdatedTravelUsecase.swift */,
 				AFA6ED812744F869007B251C /* CompleteEditingUsecase.swift */,
 				29966F84274CA64900729D39 /* EnterDateUsecase.swift */,
 			);
@@ -700,6 +703,7 @@
 				AFA6ED822744F869007B251C /* CompleteEditingUsecase.swift in Sources */,
 				AF0C3F1E2743825C007217AF /* RecordUpdatable.swift in Sources */,
 				AF1108E2273B88A5009FE728 /* OngoingTravelViewController.swift in Sources */,
+				AF11A498274CF6B60005B0D0 /* ErrorManager.swift in Sources */,
 				3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */,
 				29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */,
 				29966F83274CA63700729D39 /* EnterDateViewModel.swift in Sources */,
@@ -744,7 +748,6 @@
 				DB5DAEDC274BF535001B8627 /* DetailImageCoordinator.swift in Sources */,
 				294897C6273BF181003185E7 /* DetailRecordViewModel.swift in Sources */,
 				3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */,
-				AF82FDBE273BF3ED00A094B6 /* OutdatedTravelUsecase.swift in Sources */,
 				294897BF273BA993003185E7 /* RecordCardCell.swift in Sources */,
 				3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */,
 				3F113A17273A5FD600EA91AA /* CompleteCreationCoordinator.swift in Sources */,
@@ -759,6 +762,7 @@
 				DBA6F68E27461E0C00F3244E /* CLLocationManager+.swift in Sources */,
 				3FB914E92737DAC70084FF1C /* TravelSectionHeader.swift in Sources */,
 				29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */,
+				3FD3D980274CF9D20051E2AC /* UIViewController+.swift in Sources */,
 				DB1D5CB2273CE17800B30448 /* LocationMO+CoreDataClass.swift in Sources */,
 				DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */,
 				AF2F6CDB274620BE00EA3601 /* SearchLocationCoordinator.swift in Sources */,
