@@ -19,5 +19,13 @@ class RecordCardCell: UICollectionViewCell {
         guard let photos = record.photoURLs else { return }
         self.recordCardImageView.setImage(with: photos.first)
         self.recordContentLabel.text = record.title
+        self.configureAccessibility(with: record)
+    }
+    
+    func configureAccessibility(with record: Record) {
+        guard let title = record.title else { return }
+        self.isAccessibilityElement = true
+        self.accessibilityValue = "기록: \(title)"
+        self.accessibilityHint = "눌러서 기록을 자세히 볼 수 있어요."
     }
 }

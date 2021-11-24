@@ -30,6 +30,14 @@ class LandmarkCardCell: UICollectionViewCell {
     func configure(with landmark: Landmark) {
         self.imageView.setImage(with: landmark.image)
         self.titleLabel.text = landmark.title
+        self.configureAccessibility(with: landmark)
+    }
+
+    func configureAccessibility(with landmark: Landmark) {
+        guard let title = landmark.title
+        else { return }
+        self.isAccessibilityElement = true
+        self.accessibilityValue = "관광명소: \(title)"
     }
 
     func shake() {

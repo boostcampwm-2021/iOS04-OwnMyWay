@@ -37,7 +37,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="labelColor"/>
                                                     </stackView>
-                                                    <pageControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="gbb-bY-geS">
+                                                    <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="gbb-bY-geS">
                                                         <rect key="frame" x="0.0" y="388" width="414" height="26"/>
                                                     </pageControl>
                                                 </subviews>

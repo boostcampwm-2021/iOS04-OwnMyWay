@@ -56,6 +56,11 @@ class OMWMapView: MKMapView, MapAvailable {
                 animated: true
             )
         }
+        self.configureAccessibility()
+    }
+
+    func configureAccessibility() {
+        self.isAccessibilityElement = false
     }
 
     class LocationAnnotation: NSObject, MKAnnotation {
