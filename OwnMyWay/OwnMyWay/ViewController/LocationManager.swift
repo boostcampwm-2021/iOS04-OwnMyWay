@@ -9,7 +9,10 @@ import CoreLocation
 import UIKit
 
 class LocationManager: CLLocationManager {
-    private let repository = CoreDataTravelRepository()
+
+    private let repository = CoreDataTravelRepository(
+        contextFetcher: (UIApplication.shared.delegate as? AppDelegate) ?? AppDelegate()
+    )
     private var travel: Travel?
     private(set) var isUpdatingLocation = false
 

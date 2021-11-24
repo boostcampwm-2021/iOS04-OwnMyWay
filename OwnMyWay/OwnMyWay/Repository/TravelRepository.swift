@@ -6,7 +6,6 @@
 //
 
 import CoreData
-import UIKit
 
 protocol TravelRepository {
     func fetchAllTravels() -> Result<[Travel], Error>
@@ -27,17 +26,21 @@ protocol TravelRepository {
     func deleteRecord(at record: Record) -> Result<Void, Error>
 }
 
+protocol ContextAccessable {
+    func fetchContext() -> NSManagedObjectContext
+}
+
 class CoreDataTravelRepository: TravelRepository {
 
+    private var contextFetcher: ContextAccessable
+
     private lazy var context: NSManagedObjectContext = {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return NSManagedObjectContext.init(concurrencyType: .privateQueueConcurrencyType)
-        }
-        let newContext = appDelegate.persistentContainer.newBackgroundContext()
-        newContext.automaticallyMergesChangesFromParent = true
-        newContext.retainsRegisteredObjects = true
-        return newContext
+        return self.contextFetcher.fetchContext()
     }()
+
+    init(contextFetcher: ContextAccessable) {
+        self.contextFetcher = contextFetcher
+    }
 
     func fetchAllTravels() -> Result<[Travel], Error> {
         do {

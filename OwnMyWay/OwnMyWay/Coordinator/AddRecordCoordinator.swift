@@ -22,7 +22,9 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultAddRecordUsecase(
             repository: repository,
             imageFileManager: ImageFileManager.shared
