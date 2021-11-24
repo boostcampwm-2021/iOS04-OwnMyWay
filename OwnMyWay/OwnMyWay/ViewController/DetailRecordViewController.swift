@@ -24,9 +24,6 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { [weak self] error in
-            ErrorManager.showAlert(with: error, to: self)
-        }
         self.configureScrollView()
         self.configureSettingButton()
         self.configureDocumentInteractionController()
@@ -85,6 +82,14 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
             }
             self?.configurePageControl(record: record)
         }.store(in: &self.cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showAlert(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     private func configurePageControl(record: Record) {
