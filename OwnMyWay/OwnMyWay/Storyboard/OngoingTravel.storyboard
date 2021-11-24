@@ -117,6 +117,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTj-i7-2hB">
                                                         <rect key="frame" x="764" y="615.5" width="44" height="44"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <accessibility key="accessibilityConfiguration" label="현재위치로"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="LOy-hh-7KF"/>
                                                             <constraint firstAttribute="width" constant="44" id="bKf-eT-wpL"/>

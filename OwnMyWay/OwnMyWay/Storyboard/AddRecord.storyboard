@@ -52,6 +52,7 @@
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제목을 입력해주세요 (20자 이내)" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Fp1-Qy-IFd">
                                                                 <rect key="frame" x="0.0" y="0.0" width="384" height="22"/>
+                                                                <accessibility key="accessibilityConfiguration" label="여기에 여행 제목을 입력하세요."/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                                 <connections>
@@ -188,6 +189,7 @@
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJV-ax-cwc">
                                                                         <rect key="frame" x="25" y="4" width="359" height="32"/>
+                                                                        <accessibility key="accessibilityConfiguration" label="눌러서 위치를 변경할 수도 있어요."/>
                                                                         <color key="tintColor" systemColor="labelColor"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <buttonConfiguration key="configuration" style="plain" title="🤷‍♂️ 위치를 입력해주세요.">
@@ -230,6 +232,7 @@
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Here comes the content" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="heF-yB-gah" userLabel="contentTextView">
                                                         <rect key="frame" x="0.0" y="49" width="384" height="200"/>
                                                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                        <accessibility key="accessibilityConfiguration" label="여기에 여행 내용을 입력하세요."/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="200" id="Zf8-M3-Qvi"/>
                                                         </constraints>

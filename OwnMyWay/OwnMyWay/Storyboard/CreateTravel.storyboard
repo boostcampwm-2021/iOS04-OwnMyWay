@@ -40,6 +40,7 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="친구들과 제주도 3박 4일!" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cs1-WO-d5D">
                                 <rect key="frame" x="20.5" y="190.5" width="373" height="31.5"/>
+                                <accessibility key="accessibilityConfiguration" label="여기에 여행 제목을 입력하세요."/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
