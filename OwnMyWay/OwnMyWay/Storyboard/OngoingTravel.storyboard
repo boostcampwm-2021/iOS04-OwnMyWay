@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -27,7 +27,9 @@
                                         <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="여행 종료하기"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="여행 종료하기">
+                                            <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="didTouchFinishButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="yFx-lc-T4c"/>
                                         </connections>
@@ -37,7 +39,9 @@
                                         <color key="backgroundColor" name="IdentityBlue"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="게시물 추가하기"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="게시물 추가하기">
+                                            <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="didTouchAddRecordButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="6eX-gD-Wl9"/>
                                         </connections>
@@ -52,13 +56,13 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="792"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021.04.12 ~ 2021.04.23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqs-4v-106">
-                                        <rect key="frame" x="139.5" y="0.0" width="135" height="16"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                        <rect key="frame" x="145" y="0.0" width="124.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxQ-jD-bnQ">
-                                        <rect key="frame" x="67" y="28" width="280" height="34"/>
+                                        <rect key="frame" x="67" y="26.5" width="280" height="34"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="280" id="DmH-8L-JvI"/>
@@ -66,13 +70,13 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yC-7M-NGa">
-                                        <rect key="frame" x="0.0" y="74" width="414" height="718"/>
+                                        <rect key="frame" x="0.0" y="72.5" width="414" height="719.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOk-wv-iEs">
-                                                <rect key="frame" x="0.0" y="0.0" width="1242" height="718"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="1242" height="719.5"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="89f-99-tcf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="718"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="719.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bC9-KT-HRU">
                                                             <size key="itemSize" width="128" height="128"/>
@@ -83,7 +87,7 @@
                                                         <cells/>
                                                     </collectionView>
                                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-bw-xKs" customClass="OMWMapView" customModule="OwnMyWay" customModuleProvider="target">
-                                                        <rect key="frame" x="414" y="0.0" width="414" height="718"/>
+                                                        <rect key="frame" x="414" y="0.0" width="414" height="719.5"/>
                                                     </mapView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86h-Fk-UvI">
                                                         <rect key="frame" x="690" y="10" width="118" height="43"/>
@@ -111,7 +115,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTj-i7-2hB">
-                                                        <rect key="frame" x="764" y="614" width="44" height="44"/>
+                                                        <rect key="frame" x="764" y="615.5" width="44" height="44"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="LOy-hh-7KF"/>
@@ -127,7 +131,7 @@
                                                         </connections>
                                                     </button>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bm5-h6-oKq">
-                                                        <rect key="frame" x="828" y="0.0" width="414" height="718"/>
+                                                        <rect key="frame" x="828" y="0.0" width="414" height="719.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7qo-oT-CHb">
                                                             <size key="itemSize" width="128" height="128"/>
@@ -138,37 +142,30 @@
                                                         <cells/>
                                                     </collectionView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvW-1u-Dfk">
-                                                        <rect key="frame" x="57" y="209" width="300" height="300"/>
+                                                        <rect key="frame" x="57" y="210" width="300" height="300"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="300" id="NOl-b6-vrF"/>
                                                             <constraint firstAttribute="width" constant="300" id="NQZ-qQ-GoI"/>
                                                         </constraints>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="어이구야! ">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content="아직 ">
+                                                            <fragment content="어이구야! 아직 ">
                                                                 <attributes>
                                                                     <color key="NSColor" systemColor="labelColor"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment content="게시물">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
-                                                            <fragment content="을 추가하지 않았어요! ">
+                                                            <fragment content="을 추가하지 않았어요 ">
                                                                 <attributes>
                                                                     <color key="NSColor" systemColor="labelColor"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -183,7 +180,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXq-6w-xYA">
-                                                        <rect key="frame" x="885" y="209" width="300" height="300"/>
+                                                        <rect key="frame" x="885" y="210" width="300" height="300"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="300" id="22O-Wb-h86"/>
                                                             <constraint firstAttribute="height" constant="300" id="TYL-fk-Kvq"/>
