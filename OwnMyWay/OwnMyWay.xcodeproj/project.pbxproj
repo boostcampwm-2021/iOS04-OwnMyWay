@@ -64,6 +64,7 @@
 		3FB987A5274373CB008F0E08 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987A3274373CB008F0E08 /* PhotoCell.swift */; };
 		3FB987A6274373CB008F0E08 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB987A4274373CB008F0E08 /* PhotoCell.xib */; };
 		3FB987A827439030008F0E08 /* addImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB987A727439030008F0E08 /* addImage.png */; };
+		3FD3D984274E098A0051E2AC /* nanum_handwriting.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3D983274E098A0051E2AC /* nanum_handwriting.ttf */; };
 		3FF20BBA27461BC4007AFF78 /* TravelEditableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */; };
 		AF0BAA64274B82200091F642 /* OMWMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA63274B82200091F642 /* OMWMapView.swift */; };
 		AF0BAA68274BAB620091F642 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA67274BAB620091F642 /* UIButton+.swift */; };
@@ -205,6 +206,7 @@
 		3FB987A3274373CB008F0E08 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		3FB987A4274373CB008F0E08 /* PhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		3FB987A727439030008F0E08 /* addImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImage.png; sourceTree = "<group>"; };
+		3FD3D983274E098A0051E2AC /* nanum_handwriting.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nanum_handwriting.ttf; sourceTree = "<group>"; };
 		3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelEditableViewController.swift; sourceTree = "<group>"; };
 		AF0BAA63274B82200091F642 /* OMWMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMWMapView.swift; sourceTree = "<group>"; };
 		AF0BAA67274BAB620091F642 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 		3F3F866C274B62540075B9A0 /* BundleFont */ = {
 			isa = PBXGroup;
 			children = (
+				3FD3D983274E098A0051E2AC /* nanum_handwriting.ttf */,
 				3F3F866D274B62640075B9A0 /* DancingScript-Bold.ttf */,
 				3F3F866F274B628E0075B9A0 /* DancingScript-Regular.ttf */,
 			);
@@ -645,6 +648,7 @@
 				3F3F866E274B62640075B9A0 /* DancingScript-Bold.ttf in Resources */,
 				3FB987A6274373CB008F0E08 /* PhotoCell.xib in Resources */,
 				3F3F8674274B9E340075B9A0 /* HomeBackgroundView.xib in Resources */,
+				3FD3D984274E098A0051E2AC /* nanum_handwriting.ttf in Resources */,
 				AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */,
 				3FB914EA2737DAC70084FF1C /* TravelSectionHeader.xib in Resources */,
 				3F3F867C274CC3400075B9A0 /* MessageCell.xib in Resources */,
