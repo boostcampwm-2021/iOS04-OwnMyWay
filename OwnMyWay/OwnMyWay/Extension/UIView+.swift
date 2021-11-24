@@ -25,7 +25,7 @@ extension UIView {
         photoImageView.setImage(with: record.photoURLs?.first)
 
         let titleLabel = UILabel()
-        titleLabel.text = record.content
+        titleLabel.text = record.title
         titleLabel.font = UIFont(name: "NanumMiNiSonGeurSsi", size: 23)
         titleLabel.textColor = .black
 
