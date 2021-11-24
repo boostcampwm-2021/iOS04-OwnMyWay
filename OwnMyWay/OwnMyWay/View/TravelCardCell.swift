@@ -35,5 +35,6 @@ class TravelCardCell: UICollectionViewCell {
                          "\(startDate.toKorean())부터 \(endDate.toKorean())까지"
         self.isAccessibilityElement = true
         self.accessibilityValue = "여행: \(title), \(dateString)"
+        self.accessibilityHint = "눌러서 여행 정보를 볼 수 있어요."
     }
 }
