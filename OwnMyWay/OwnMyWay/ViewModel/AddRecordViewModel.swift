@@ -13,6 +13,7 @@ protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
     var recordPublisher: Published<Record>.Publisher { get }
     var record: Record { get }
+    var maxPhotosCount: Int { get }
     var isEditingMode: Bool { get }
 
     func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double)
@@ -43,6 +44,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     @Published private var validateResult: Bool?
     @Published private(set) var record: Record
+    private(set) var maxPhotosCount: Int = 10
     private var tempPhotoURLs: [URL]
     private var deletedPhotoURLs: [URL]
     private(set) var isEditingMode: Bool

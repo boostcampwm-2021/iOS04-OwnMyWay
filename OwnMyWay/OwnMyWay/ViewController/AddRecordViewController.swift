@@ -241,10 +241,14 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case 0:
-            if #available(iOS 14.0, *) {
-                self.openPicker()
+            if self.viewModel?.record.photoURLs?.count == self.viewModel?.maxPhotosCount {
+                self.showToast(text: "사진은 \(self.viewModel?.record.maxPhotoCount ?? 0)장까지 추가할 수 있어요")
             } else {
-                self.openImagePicker()
+                if #available(iOS 14.0, *) {
+                    self.openPicker()
+                } else {
+                    self.openImagePicker()
+                }
             }
         default:
             self.viewModel?.didRemovePhoto(at: indexPath.item - 1)
@@ -284,8 +288,8 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                     self?.present(alert, animated: true)
                 default:
                     var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
-
-                    config.selectionLimit = 0
+                    guard let photoURLsCount = self?.viewModel?.record.photoURLs?.count, let maxPhotoCount = self?.viewModel?.maxPhotosCount else { return }
+                    config.selectionLimit = maxPhotoCount - photoURLsCount
                     config.filter = PHPickerFilter.images
 
                     let pickerViewController = PHPickerViewController(configuration: config)
