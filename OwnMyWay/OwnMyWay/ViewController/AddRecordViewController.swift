@@ -118,6 +118,14 @@ class AddRecordViewController: UIViewController, Instantiable {
                 self?.contentTextView.text = record.content
             }
             .store(in: &cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showToast(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     @objc private func submitButtonAction() {

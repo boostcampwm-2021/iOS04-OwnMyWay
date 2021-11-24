@@ -9,7 +9,9 @@ import Foundation
 
 protocol AddLandmarkViewModel {
     var travel: Travel { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
     var isEditingMode: Bool { get }
+
     func didTouchNextButton()
     func didTouchBackButton()
     func didUpdateTravel(to travel: Travel)
@@ -23,9 +25,12 @@ protocol AddLandmarkCoordinatingDelegate: AnyObject {
 }
 
 class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
-
+    var errorPublisher: Published<Error?>.Publisher { $error }
     private(set) var travel: Travel
+
     private(set) var isEditingMode: Bool
+    @Published private var error: Error?
+
     private weak var coordinatingDelegate: AddLandmarkCoordinatingDelegate?
 
     init(
@@ -53,7 +58,10 @@ class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
     }
 
     func didDeleteLandmark(at landmark: Landmark) {
-        guard let index = self.travel.landmarks.firstIndex(of: landmark) else { return }
+        guard let index = self.travel.landmarks.firstIndex(of: landmark) else {
+            self.error = ModelError.indexError
+            return
+        }
         self.travel.landmarks.remove(at: index)
     }
 }

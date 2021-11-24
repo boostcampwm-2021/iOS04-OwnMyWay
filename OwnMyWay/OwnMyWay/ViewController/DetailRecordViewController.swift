@@ -91,6 +91,14 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
             }
             self?.configurePageControl(record: record)
         }.store(in: &self.cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showToast(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     private func configurePageControl(record: Record) {

@@ -12,6 +12,7 @@ protocol HomeViewModel {
     var reservedTravelPublisher: Published<[Travel]>.Publisher { get }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { get }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
 
     func viewDidLoad()
     func didTouchCreateButton()
@@ -31,6 +32,7 @@ class DefaultHomeViewModel: HomeViewModel {
     var reservedTravelPublisher: Published<[Travel]>.Publisher { $reservedTravels }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { $ongoingTravels }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { $outdatedTravels }
+    var errorPublisher: Published<Error?>.Publisher { $error }
 
     private let usecase: HomeUsecase
     private weak var coordinatingDelegate: HomeCoordinatingDelegate?
@@ -43,6 +45,7 @@ class DefaultHomeViewModel: HomeViewModel {
     @Published private var reservedTravels: [Travel]
     @Published private var ongoingTravels: [Travel]
     @Published private var outdatedTravels: [Travel]
+    @Published private var error: Error?
 
     init(usecase: HomeUsecase, coordinatingDelegate: HomeCoordinatingDelegate) {
         self.usecase = usecase
@@ -59,15 +62,20 @@ class DefaultHomeViewModel: HomeViewModel {
     }
 
     func viewDidLoad() {
-        self.usecase.executeFetch { [weak self] travels in
-            guard let self = self else { return }
-            let reserveds = travels.filter { $0.flag == Travel.Section.reserved.index }
-            self.reservedTravels = reserveds.isEmpty ? [self.reservedComment] : reserveds
-            self.travelMessage = reserveds.isEmpty ? [self.message] : []
-            let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
-            self.ongoingTravels = ongoings.isEmpty ? [self.ongoingComment] : ongoings
-            let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }
-            self.outdatedTravels = outdateds.isEmpty ? [self.outdatedComment] : outdateds
+        self.usecase.executeFetch { [weak self] result in
+            switch result {
+            case .success(let travels):
+                guard let self = self else { return }
+                let reserveds = travels.filter { $0.flag == Travel.Section.reserved.index }
+                self.reservedTravels = reserveds.isEmpty ? [self.reservedComment] : reserveds
+                self.travelMessage = reserveds.isEmpty ? [self.message] : []
+                let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
+                self.ongoingTravels = ongoings.isEmpty ? [self.ongoingComment] : ongoings
+                let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }
+                self.outdatedTravels = outdateds.isEmpty ? [self.outdatedComment] : outdateds
+            case .failure(let error):
+                self?.error = error
+            }
         }
     }
 
@@ -89,17 +97,26 @@ class DefaultHomeViewModel: HomeViewModel {
     }
 
     private func didTouchReservedTravel(at index: Int) {
-        guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else { return }
+        guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else {
+            self.error = ModelError.indexError
+            return
+        }
         self.coordinatingDelegate?.pushToReservedTravel(travel: reservedTravels[index])
     }
 
     private func didTouchOngoingTravel(at index: Int) {
-        guard ongoingTravels.startIndex..<ongoingTravels.endIndex ~= index else { return }
+        guard ongoingTravels.startIndex..<ongoingTravels.endIndex ~= index else {
+            self.error = ModelError.indexError
+            return
+        }
         self.coordinatingDelegate?.pushToOngoingTravel(travel: ongoingTravels[index])
     }
 
     private func didTouchOutdatedTravel(at index: Int) {
-        guard outdatedTravels.startIndex..<outdatedTravels.endIndex ~= index else { return }
+        guard outdatedTravels.startIndex..<outdatedTravels.endIndex ~= index else {
+            self.error = ModelError.indexError
+            return
+        }
         self.coordinatingDelegate?.pushToOutdatedTravel(travel: outdatedTravels[index])
     }
 }

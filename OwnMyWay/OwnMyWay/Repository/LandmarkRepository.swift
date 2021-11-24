@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+enum JSONError: Error {
+    case assetError
+    case decodeError
+}
+
 protocol LandmarkRepository {
     func fetchLandmarks(completion: @escaping (Result<[Landmark], Error>) -> Void)
 }
@@ -16,13 +21,17 @@ class LocalJSONLandmarkRepository: LandmarkRepository {
 
     func fetchLandmarks(completion: @escaping (Result<[Landmark], Error>) -> Void) {
         guard let jsonFile = NSDataAsset.init(name: "landmark")
-        else { return }
+        else {
+            completion(.failure(JSONError.assetError))
+            return
+        }
+
         do {
             let landmarkDTOs = try JSONDecoder()
                 .decode([LandmarkDTO].self, from: jsonFile.data)
             completion(.success(landmarkDTOs.map { $0.toLandmark() }))
-        } catch let error {
-            completion(.failure(error))
+        } catch {
+            completion(.failure(JSONError.decodeError))
         }
     }
 

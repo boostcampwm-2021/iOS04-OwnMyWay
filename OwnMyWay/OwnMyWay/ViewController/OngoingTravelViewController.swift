@@ -59,9 +59,7 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         LocationManager.shared.delegate = LocationManager.shared
-        if self.isMovingFromParent {
-            self.viewModel?.didTouchBackButton()
-        }
+        if self.isMovingFromParent { self.viewModel?.didTouchBackButton() }
     }
 
     func bind(viewModel: OngoingTravelViewModel) {
@@ -88,10 +86,8 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 
     private func configureNavigation() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "ellipsis"),
-            style: .plain,
-            target: self,
-            action: #selector(self.didTouchSettingButton)
+            image: UIImage(systemName: "ellipsis"), style: .plain,
+            target: self, action: #selector(self.didTouchSettingButton)
         )
     }
 
@@ -169,7 +165,6 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
                 self.mapView.setUserTrackingMode(.follow, animated: true)
                 LocationManager.shared.startUpdatingLocation()
             }
-
         } else {
             let alert = UIAlertController(
                 title: "권한 설정이 필요합니다.",
@@ -177,11 +172,8 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
                 preferredStyle: .alert
             )
             let action = UIAlertAction(title: "이동", style: .default) { _ in
-                guard let url = URL(string: UIApplication.openSettingsURLString)
-                else { return }
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }
             }
             alert.addAction(action)
             self.present(alert, animated: true)
@@ -194,7 +186,6 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 }
 
 extension OngoingTravelViewController: UICollectionViewDelegate {
-
     private func configureNibs() {
         self.recordCollectionView.register(
             UINib(nibName: RecordCardCell.identifier, bundle: nil),
@@ -235,8 +226,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             var recordSnapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
             recordListList.forEach { recordList in
-                guard let date = recordList.first?.date
-                else { return }
+                guard let date = recordList.first?.date else { return }
                 recordSnapshot.appendSections([date.toKorean()])
                 recordSnapshot.appendItems(recordList, toSection: date.toKorean())
             }
@@ -249,6 +239,14 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             landmarkSnapshot.appendItems(travel.landmarks, toSection: .main)
             self.landmarkDataSource?.apply(landmarkSnapshot, animatingDifferences: true)
         }.store(in: &cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showToast(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     private func configureRecordCompositionalLayout() -> UICollectionViewLayout {
@@ -268,7 +266,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
                     top: 0, leading: 0, bottom: 60, trailing: 0
                 )
             }
-
             let headerSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
             )
@@ -306,7 +303,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             guard let title = self?.recordDataSource?.snapshot()
                     .sectionIdentifiers[indexPath.section]
             else { return UICollectionReusableView() }
-
             sectionHeader.configure(with: title)
             return sectionHeader
         }
@@ -339,7 +335,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
         let dataSource = DataSource(
             collectionView: self.landmarkCollectionView
         ) { collectionView, indexPath, item in
-
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: LandmarkCardCell.identifier, for: indexPath
             ) as? LandmarkCardCell
@@ -358,7 +353,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
 }
 
 // MARK: - extension OngoingTravelViewController for CLLocationManagerDelegate
-
 extension OngoingTravelViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let lastLocation = locations.last
@@ -370,16 +364,13 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.fetchAuthorizationStatus() {
-        case .authorizedWhenInUse:
-            manager.requestAlwaysAuthorization()
-        default:
-            break
+        case .authorizedWhenInUse: manager.requestAlwaysAuthorization()
+        default: break
         }
     }
 }
 
 // MARK: - extension OngoingTravelViewController for RecordUpdatable
-
 extension OngoingTravelViewController: RecordUpdatable {
     func didUpdateRecord(record: Record) {
         self.viewModel?.didUpdateRecord(record: record)
@@ -387,7 +378,6 @@ extension OngoingTravelViewController: RecordUpdatable {
 }
 
 // MARK: - extension OngoingTravelViewController for OMWSegmentedControlDelegate
-
 extension OngoingTravelViewController: OMWSegmentedControlDelegate {
     func change(to index: Int) {
         switch index {
