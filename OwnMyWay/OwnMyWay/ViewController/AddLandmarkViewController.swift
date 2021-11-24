@@ -5,6 +5,7 @@
 //  Created by 유한준 on 2021/11/03.
 //
 
+import Combine
 import UIKit
 
 class AddLandmarkViewController: UIViewController,
@@ -18,13 +19,12 @@ class AddLandmarkViewController: UIViewController,
 
     private var bindContainerVC: ((UIView) -> Void)?
     private var viewModel: AddLandmarkViewModel?
+    private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { [weak self] error in
-            ErrorManager.showAlert(with: error, to: self)
-        }
         self.bindContainerVC?(self.cartView)
+        self.configureCancellables()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -51,6 +51,16 @@ class AddLandmarkViewController: UIViewController,
 
     func didDeleteLandmark(at landmark: Landmark) {
         self.viewModel?.didDeleteLandmark(at: landmark)
+    }
+
+    private func configureCancellables() {
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showAlert(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     private func configureButtonConstraint() {
