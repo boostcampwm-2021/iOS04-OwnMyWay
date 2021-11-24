@@ -51,7 +51,7 @@
                                     <action selector="didTouchBackButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="k2W-Pe-osM"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="R5J-Af-tuI">
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="R5J-Af-tuI">
                                 <rect key="frame" x="129" y="816" width="156" height="26"/>
                             </pageControl>
                         </subviews>
