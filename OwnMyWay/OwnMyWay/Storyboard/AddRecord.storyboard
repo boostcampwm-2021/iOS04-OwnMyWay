@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -187,10 +187,12 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJV-ax-cwc">
-                                                                        <rect key="frame" x="25" y="4.5" width="359" height="31"/>
+                                                                        <rect key="frame" x="25" y="4" width="359" height="32"/>
                                                                         <color key="tintColor" systemColor="labelColor"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" title="🤷‍♂️ 위치를 입력해주세요."/>
+                                                                        <buttonConfiguration key="configuration" style="plain" title="🤷‍♂️ 위치를 입력해주세요.">
+                                                                            <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
+                                                                        </buttonConfiguration>
                                                                         <connections>
                                                                             <action selector="didChangeLocation:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jS5-UH-u92"/>
                                                                         </connections>
@@ -232,7 +234,7 @@
                                                             <constraint firstAttribute="height" constant="200" id="Zf8-M3-Qvi"/>
                                                         </constraints>
                                                         <color key="textColor" systemColor="labelColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                 </subviews>
@@ -290,7 +292,7 @@
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="flag" catalog="system" width="128" height="121"/>
         <namedColor name="IdentityBlue">
-            <color red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18000000715255737" green="0.66699999570846558" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
