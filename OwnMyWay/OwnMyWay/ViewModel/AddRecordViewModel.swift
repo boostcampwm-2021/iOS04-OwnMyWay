@@ -12,9 +12,9 @@ import MapKit
 protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
     var recordPublisher: Published<Record>.Publisher { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
     var record: Record { get }
 
-    func bind(errorHandler: @escaping (Error) -> Void)
     func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double)
     func didEnterTitle(with text: String?)
     func didEnterTime(with date: Date?)
@@ -37,15 +37,16 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
     var recordPublisher: Published<Record>.Publisher { $record }
+    var errorPublisher: Published<Error?>.Publisher { $error }
 
     private let usecase: AddRecordUsecase
     private weak var coordinatingDelegate: AddRecordCoordinatingDelegate?
 
     @Published private var validateResult: Bool?
     @Published private(set) var record: Record
+    @Published private var error: Error?
     private var tempPhotoURLs: [URL]
     private var deletedPhotoURLs: [URL]
-    private var errorHandler: ((Error) -> Void)?
 
     private var isValidTitle: Bool = false {
         didSet {
@@ -90,10 +91,6 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.configureRecord()
     }
 
-    func bind(errorHandler: @escaping (Error) -> Void) {
-        self.errorHandler = errorHandler
-    }
-
     func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double) {
         self.record.placeDescription = recordPlace
         self.record.latitude = latitude
@@ -129,7 +126,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             guard error == nil,
                   let copiedURL = url
             else {
-                self?.errorHandler?(error ?? NSError.init())
+                self?.error = error
                 return
             }
             self?.record.photoURLs?.append(copiedURL)
@@ -140,7 +137,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didRemovePhoto(at index: Int) {
         guard let url = self.record.photoURLs?[index] else {
-            self.errorHandler?(ModelError.indexError)
+            self.error = ModelError.indexError
             return
         }
         self.deletedPhotoURLs.append(url)
@@ -155,7 +152,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
                 case .success:
                     break
                 case .failure(let error):
-                    self?.errorHandler?(error)
+                    self?.error = error
                 }
             }
         }
@@ -173,7 +170,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
                 case .success:
                     break
                 case .failure(let error):
-                    self?.errorHandler?(error)
+                    self?.error = error
                 }
             }
         }
