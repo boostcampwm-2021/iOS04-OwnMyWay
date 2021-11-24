@@ -17,14 +17,11 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
     // MARK: Internal Variable
     private var viewModel: SearchLandmarkViewModel?
     private var diffableDataSource: DataSource?
-    private var cancellable: AnyCancellable?
+    private var cancellables: Set<AnyCancellable> = []
 
     // MARK: Override Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { [weak self] error in
-            ErrorManager.showAlert(with: error, to: self)
-        }
         self.configureNibs()
         self.collectionView.collectionViewLayout = configureCompositionalLayout()
         self.diffableDataSource = configureDiffableDataSource()
@@ -46,14 +43,23 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
     }
 
     private func configureCancellable() {
-        self.cancellable = self.viewModel?.landmarksPublisher.sink { [weak self] items in
-            var snapshot = NSDiffableDataSourceSnapshot<
-                LandmarkCartViewController.Section, Landmark
-            >()
-            snapshot.appendSections([.main])
-            snapshot.appendItems(items, toSection: .main)
-            self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
-        }
+        self.viewModel?.landmarksPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] items in
+                var snapshot = NSDiffableDataSourceSnapshot<
+                    LandmarkCartViewController.Section, Landmark
+                >()
+                snapshot.appendSections([.main])
+                snapshot.appendItems(items, toSection: .main)
+                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+            }.store(in: &cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showAlert(with: error, to: self)
+            }.store(in: &cancellables)
     }
 
     private func configureCompositionalLayout() -> UICollectionViewLayout {

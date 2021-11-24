@@ -10,9 +10,9 @@ import Foundation
 
 protocol SearchLandmarkViewModel {
     var landmarksPublisher: Published<[Landmark]>.Publisher { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
 
     func viewDidLoad()
-    func bind(errorHandler: @escaping (Error) -> Void)
     func didChangeSearchText(with text: String)
     func didTouchLandmarkCard(at index: Int)
 }
@@ -24,14 +24,15 @@ protocol SearchLandmarkCoordinatingDelegate: AnyObject {
 class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject {
 
     var landmarksPublisher: Published<[Landmark]>.Publisher { $landmarks }
+    var errorPublisher: Published<Error?>.Publisher { $error }
 
     private let usecase: SearchLandmarkUsecase
     private weak var coordinatingDelegate: SearchLandmarkCoordinatingDelegate?
 
     @Published private var landmarks: [Landmark]
     @Published private var searchText: String
+    @Published private var error: Error?
     private var cancellables: Set<AnyCancellable>
-    private var errorHandler: ((Error) -> Void)?
 
     init(
         usecase: SearchLandmarkUsecase,
@@ -51,13 +52,9 @@ class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject 
             case .success(let landmarks):
                 self?.landmarks = landmarks
             case .failure(let error):
-                self?.errorHandler?(error)
+                self?.error = error
             }
         }
-    }
-
-    func bind(errorHandler: @escaping (Error) -> Void) {
-        self.errorHandler = errorHandler
     }
 
     func didChangeSearchText(with text: String) {
@@ -65,9 +62,8 @@ class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject 
     }
 
     func didTouchLandmarkCard(at index: Int) {
-        guard landmarks.startIndex..<landmarks.endIndex ~= index
-        else {
-            self.errorHandler?(ModelError.indexError)
+        guard landmarks.startIndex..<landmarks.endIndex ~= index else {
+            self.error = ModelError.indexError
             return
         }
         self.coordinatingDelegate?.dismissToAddLandmark(landmark: landmarks[index])
@@ -83,7 +79,7 @@ class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject 
                 case .success(let landmarks):
                     self?.landmarks = landmarks
                 case .failure(let error):
-                    self?.errorHandler?(error)
+                    self?.error = error
                 }
             }
         }
