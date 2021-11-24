@@ -14,5 +14,12 @@ class DateHeaderView: UICollectionReusableView {
 
     func configure(with text: String) {
         self.dateLabel.text = text
+        self.configureAccessibility(with: text)
+    }
+
+    func configureAccessibility(with text: String) {
+        self.isAccessibilityElement = true
+        self.accessibilityTraits = .header
+        self.accessibilityValue = text
     }
 }
