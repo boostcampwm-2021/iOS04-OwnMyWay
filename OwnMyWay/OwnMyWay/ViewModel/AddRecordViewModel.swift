@@ -134,6 +134,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     }
 
     func didEnterPhotoURL(with url: URL) {
+        self.record.photoURLs?.append(url)
+        let index = (record.photoURLs?.count ?? 0) - 1
         self.usecase.executePickingPhoto(with: url) { [weak self] url, error in
             guard error == nil,
                   let copiedURL = url
@@ -141,7 +143,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
                 self?.error = error
                 return
             }
-            self?.record.photoURLs?.append(copiedURL)
+            self?.record.photoURLs?[index] = copiedURL
             self?.tempPhotoURLs.append(copiedURL)
             self?.isValidPhotos = true
         }
