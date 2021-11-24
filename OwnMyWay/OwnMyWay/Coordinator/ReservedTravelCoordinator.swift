@@ -20,7 +20,9 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultReservedTravelUsecase(repository: repository)
         let reservedVM = DefaultReservedTravelViewModel(
             usecase: usecase,

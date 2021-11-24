@@ -20,7 +20,9 @@ class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultStartedTravelUsecase(repository: repository)
         let ongoingVM = DefaultStartedTravelViewModel(
             travel: self.travel, usecase: usecase, coordinatingDelegate: self

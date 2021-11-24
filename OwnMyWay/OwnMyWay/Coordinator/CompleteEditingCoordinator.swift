@@ -20,7 +20,9 @@ class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelega
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultCompleteEditingUsecase(repository: repository)
         let completeEditingVM = DefaultCompleteEditingViewModel(
             usecase: usecase, coordinatingDelegate: self, travel: self.travel

@@ -22,7 +22,9 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultDetailRecordUsecase(repository: repository)
         let detailRecordVM = DefaultDetailRecordViewModel(
             record: self.record, travel: self.travel, usecase: usecase, coordinatingDelegate: self
