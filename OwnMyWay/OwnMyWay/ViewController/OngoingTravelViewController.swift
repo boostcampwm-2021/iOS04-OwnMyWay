@@ -46,6 +46,11 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
         self.configureButtonConstraint()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LocationManager.shared.delegate = self
@@ -69,6 +74,11 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 
     func didUpdateTravel(to travel: Travel) {
         self.viewModel?.didUpdateTravel(to: travel)
+    }
+
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = self.viewModel?.travel.title
     }
 
     private func configureButtonConstraint() {

@@ -38,6 +38,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = ""
     }
 
     func bind(viewModel: HomeViewModel) {

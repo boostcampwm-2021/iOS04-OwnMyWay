@@ -13,6 +13,7 @@ protocol AddRecordViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
     var recordPublisher: Published<Record>.Publisher { get }
     var record: Record { get }
+    var isEditingMode: Bool { get }
 
     func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double)
     func didEnterTitle(with text: String?)
@@ -44,6 +45,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     @Published private(set) var record: Record
     private var tempPhotoURLs: [URL]
     private var deletedPhotoURLs: [URL]
+    private(set) var isEditingMode: Bool
 
     private var isValidTitle: Bool = false {
         didSet {
@@ -74,7 +76,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     init(
         record: Record?,
         usecase: AddRecordUsecase,
-        coordinatingDelegate: AddRecordCoordinatingDelegate
+        coordinatingDelegate: AddRecordCoordinatingDelegate,
+        isEditingMode: Bool
     ) {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
@@ -85,6 +88,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
             date: nil, latitude: nil, longitude: nil,
             photoURLs: [], placeDescription: nil
         )
+        self.isEditingMode = isEditingMode
         self.configureRecord()
     }
 

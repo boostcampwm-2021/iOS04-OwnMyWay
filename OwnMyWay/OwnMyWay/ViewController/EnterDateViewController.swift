@@ -33,9 +33,20 @@ class EnterDateViewController: UIViewController, Instantiable {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.configureButtonConstraint()
+    }
+
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        guard let isEditingMode = self.viewModel?.isEditingMode else { return }
+        self.navigationItem.title = isEditingMode ? "여행 편집하기" : "새로운 여행"
     }
 
     private func configureButtonConstraint() {

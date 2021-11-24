@@ -42,7 +42,7 @@ class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
 
     func pushToAddRecord(record: Record?) {
         let addRecordCoordinator = AddRecordCoordinator(
-            navigationController: self.navigationController, record: record
+            navigationController: self.navigationController, record: record, isEditingMode: false
         )
         self.childCoordinators.append(addRecordCoordinator)
         addRecordCoordinator.start()
