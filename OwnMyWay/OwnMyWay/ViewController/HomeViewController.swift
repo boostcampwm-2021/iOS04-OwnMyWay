@@ -15,16 +15,12 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     @IBOutlet private weak var travelCollectionView: UICollectionView!
     @IBOutlet private weak var settingButton: UIButton!
     @IBOutlet private weak var createButton: UIButton!
-
     private var viewModel: HomeViewModel?
     private var diffableDataSource: HomeDataSource?
     private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { [weak self] error in
-            ErrorManager.showAlert(with: error, to: self)
-        }
         self.configureButton()
         self.configureNibs()
         self.configureTravelCollectionView()
@@ -139,6 +135,14 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
                 snapshot.insertSections([.outdated], afterSection: .ongoing)
                 snapshot.appendItems(travels, toSection: .outdated)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+            }
+            .store(in: &self.cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showAlert(with: error, to: self)
             }
             .store(in: &self.cancellables)
     }
@@ -265,20 +269,15 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
     private func sectionIndex(by section: Int, with sections: Int) -> Int {
         let allSectionsCount = Travel.Section.allCases.count
-        if allSectionsCount == sections {
-            return section
-        }
-        // If dummy section is removed, section index should be increased by one.
-        return section + 1
+        if allSectionsCount == sections { return section }
+        return section + 1 // If dummy section is removed, section index should be increased by one.
     }
 
     private func configureSupplementaryView(
         collectionView: UICollectionView, kind: String, indexPath: IndexPath
     ) -> UICollectionReusableView? {
         guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-            ofKind: kind,
-            withReuseIdentifier: TravelSectionHeader.identifier,
-            for: indexPath
+            ofKind: kind, withReuseIdentifier: TravelSectionHeader.identifier, for: indexPath
         ) as? TravelSectionHeader
         else { return UICollectionReusableView() }
         let sections = collectionView.numberOfSections

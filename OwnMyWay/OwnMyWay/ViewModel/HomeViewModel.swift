@@ -12,8 +12,8 @@ protocol HomeViewModel {
     var reservedTravelPublisher: Published<[Travel]>.Publisher { get }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { get }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
 
-    func bind(errorHandler: @escaping (Error) -> Void)
     func viewDidLoad()
     func didTouchCreateButton()
     func didTouchTravel(flag: Int, item: Int)
@@ -32,6 +32,7 @@ class DefaultHomeViewModel: HomeViewModel {
     var reservedTravelPublisher: Published<[Travel]>.Publisher { $reservedTravels }
     var ongoingTravelPublisher: Published<[Travel]>.Publisher { $ongoingTravels }
     var outdatedTravelPublisher: Published<[Travel]>.Publisher { $outdatedTravels }
+    var errorPublisher: Published<Error?>.Publisher { $error }
 
     private let usecase: HomeUsecase
     private weak var coordinatingDelegate: HomeCoordinatingDelegate?
@@ -39,12 +40,12 @@ class DefaultHomeViewModel: HomeViewModel {
     private let reservedComment: Travel
     private let ongoingComment: Travel
     private let outdatedComment: Travel
-    private var errorHandler: ((Error) -> Void)?
 
     @Published private var travelMessage: [Travel]
     @Published private var reservedTravels: [Travel]
     @Published private var ongoingTravels: [Travel]
     @Published private var outdatedTravels: [Travel]
+    @Published private var error: Error?
 
     init(usecase: HomeUsecase, coordinatingDelegate: HomeCoordinatingDelegate) {
         self.usecase = usecase
@@ -60,10 +61,6 @@ class DefaultHomeViewModel: HomeViewModel {
         self.outdatedComment = Travel.dummy(section: .dummy)
     }
 
-    func bind(errorHandler: @escaping (Error) -> Void) {
-        self.errorHandler = errorHandler
-    }
-
     func viewDidLoad() {
         self.usecase.executeFetch { [weak self] result in
             switch result {
@@ -77,7 +74,7 @@ class DefaultHomeViewModel: HomeViewModel {
                 let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }
                 self.outdatedTravels = outdateds.isEmpty ? [self.outdatedComment] : outdateds
             case .failure(let error):
-                self?.errorHandler?(error)
+                self?.error = error
             }
         }
     }
@@ -101,7 +98,7 @@ class DefaultHomeViewModel: HomeViewModel {
 
     private func didTouchReservedTravel(at index: Int) {
         guard reservedTravels.startIndex..<reservedTravels.endIndex ~= index else {
-            self.errorHandler?(ModelError.indexError)
+            self.error = ModelError.indexError
             return
         }
         self.coordinatingDelegate?.pushToReservedTravel(travel: reservedTravels[index])
@@ -109,7 +106,7 @@ class DefaultHomeViewModel: HomeViewModel {
 
     private func didTouchOngoingTravel(at index: Int) {
         guard ongoingTravels.startIndex..<ongoingTravels.endIndex ~= index else {
-            self.errorHandler?(ModelError.indexError)
+            self.error = ModelError.indexError
             return
         }
         self.coordinatingDelegate?.pushToOngoingTravel(travel: ongoingTravels[index])
@@ -117,7 +114,7 @@ class DefaultHomeViewModel: HomeViewModel {
 
     private func didTouchOutdatedTravel(at index: Int) {
         guard outdatedTravels.startIndex..<outdatedTravels.endIndex ~= index else {
-            self.errorHandler?(ModelError.indexError)
+            self.error = ModelError.indexError
             return
         }
         self.coordinatingDelegate?.pushToOutdatedTravel(travel: outdatedTravels[index])
