@@ -58,7 +58,7 @@ class SearchLandmarkViewController: UIViewController, Instantiable {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
-                ErrorManager.showAlert(with: error, to: self)
+                ErrorManager.showToast(with: error, to: self)
             }.store(in: &cancellables)
     }
 

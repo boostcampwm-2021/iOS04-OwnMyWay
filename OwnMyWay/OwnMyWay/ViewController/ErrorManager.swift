@@ -8,7 +8,7 @@
 import UIKit
 
 class ErrorManager {
-    static func showAlert(with error: Error, to viewController: UIViewController?) {
+    static func showToast(with error: Error, to viewController: UIViewController?) {
         viewController?.showToast(message: error.localizedDescription)
     }
 }

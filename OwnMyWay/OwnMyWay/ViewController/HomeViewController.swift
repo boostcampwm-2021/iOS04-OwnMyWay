@@ -143,7 +143,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             .receive(on: DispatchQueue.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
-                ErrorManager.showAlert(with: error, to: self)
+                ErrorManager.showToast(with: error, to: self)
             }
             .store(in: &self.cancellables)
     }
@@ -190,7 +190,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 30
         layout.configuration = config
-
         return layout
     }
 
@@ -255,16 +254,12 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func createMessage(by section: Int, with sections: Int) -> String {
-        let dictionary = [
-            "", "예정된 여행이 없어요 🤷‍♀️", "진행중인 여행이 없어요 🤷", "지난 여행이 없어요 🤷‍♂️"
-        ]
+        let dictionary = ["", "예정된 여행이 없어요 🤷‍♀️", "진행중인 여행이 없어요 🤷", "지난 여행이 없어요 🤷‍♂️"]
         return dictionary[self.sectionIndex(by: section, with: sections)]
     }
 
     private func createTitle(by section: Int, with sections: Int) -> String {
-        let dictionary = [
-            "", "예정된 여행", "진행중인 여행", "지난 여행"
-        ]
+        let dictionary = ["", "예정된 여행", "진행중인 여행", "지난 여행"]
         return dictionary[self.sectionIndex(by: section, with: sections)]
     }
 
@@ -309,7 +304,6 @@ extension HomeViewController: UICollectionViewDelegate, MessageCellDelegate {
     func didTouchButton() {
         self.viewModel?.didTouchCreateButton()
     }
-
 }
 
 fileprivate extension HomeViewController {
@@ -317,5 +311,4 @@ fileprivate extension HomeViewController {
     struct ElementKind {
         static let background = "homeBackground"
     }
-
 }

@@ -123,7 +123,7 @@ class AddRecordViewController: UIViewController, Instantiable {
             .receive(on: RunLoop.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
-                ErrorManager.showAlert(with: error, to: self)
+                ErrorManager.showToast(with: error, to: self)
             }
             .store(in: &self.cancellables)
     }

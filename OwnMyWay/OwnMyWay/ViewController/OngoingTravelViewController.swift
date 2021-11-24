@@ -86,10 +86,8 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
 
     private func configureNavigation() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "ellipsis"),
-            style: .plain,
-            target: self,
-            action: #selector(self.didTouchSettingButton)
+            image: UIImage(systemName: "ellipsis"), style: .plain,
+            target: self, action: #selector(self.didTouchSettingButton)
         )
     }
 
@@ -167,7 +165,6 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
                 self.mapView.setUserTrackingMode(.follow, animated: true)
                 LocationManager.shared.startUpdatingLocation()
             }
-
         } else {
             let alert = UIAlertController(
                 title: "권한 설정이 필요합니다.",
@@ -175,11 +172,8 @@ class OngoingTravelViewController: UIViewController, Instantiable, TravelEditabl
                 preferredStyle: .alert
             )
             let action = UIAlertAction(title: "이동", style: .default) { _ in
-                guard let url = URL(string: UIApplication.openSettingsURLString)
-                else { return }
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url) }
             }
             alert.addAction(action)
             self.present(alert, animated: true)
@@ -232,8 +226,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             var recordSnapshot = NSDiffableDataSourceSnapshot<String, Record>()
             let recordListList = travel.classifyRecords()
             recordListList.forEach { recordList in
-                guard let date = recordList.first?.date
-                else { return }
+                guard let date = recordList.first?.date else { return }
                 recordSnapshot.appendSections([date.toKorean()])
                 recordSnapshot.appendItems(recordList, toSection: date.toKorean())
             }
@@ -251,7 +244,7 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
             .receive(on: RunLoop.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
-                ErrorManager.showAlert(with: error, to: self)
+                ErrorManager.showToast(with: error, to: self)
             }
             .store(in: &self.cancellables)
     }
@@ -273,7 +266,6 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
                     top: 0, leading: 0, bottom: 60, trailing: 0
                 )
             }
-
             let headerSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
             )
