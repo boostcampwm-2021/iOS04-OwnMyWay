@@ -27,9 +27,6 @@ class ReservedTravelViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { [weak self] error in
-            ErrorManager.showAlert(with: error, to: self)
-        }
         self.configureDescription()
         self.configureStartButton()
         self.configureCancellable()
@@ -99,6 +96,14 @@ class ReservedTravelViewController: UIViewController,
                 }
             }
             .store(in: &cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showAlert(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     @objc private func backButtonAction() {

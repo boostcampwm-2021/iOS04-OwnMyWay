@@ -11,8 +11,8 @@ protocol ReservedTravelViewModel {
     var travel: Travel { get }
     var isPossibleStart: Bool { get }
     var travelPublisher: Published<Travel>.Publisher { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
 
-    func bind(errorHandler: @escaping (Error) -> Void)
     func didDeleteTravel()
     func didUpdateTravel(to travel: Travel)
     func didEditTravel(to travel: Travel)
@@ -30,12 +30,13 @@ protocol ReservedTravelCoordinatingDelegate: AnyObject {
 
 class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject {
     @Published private(set) var travel: Travel
+    @Published private var error: Error?
     private(set) var isPossibleStart: Bool
     var travelPublisher: Published<Travel>.Publisher { $travel }
+    var errorPublisher: Published<Error?>.Publisher { $error }
 
     private let usecase: ReservedTravelUsecase
     private weak var coordinatingDelegate: ReservedTravelCoordinatingDelegate?
-    private var errorHandler: ((Error) -> Void)?
 
     init(
         usecase: ReservedTravelUsecase,
@@ -52,16 +53,12 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         self.coordinatingDelegate = coordinatingDelegate
     }
 
-    func bind(errorHandler: @escaping (Error) -> Void) {
-        self.errorHandler = errorHandler
-    }
-
     func didDeleteTravel() {
         switch self.usecase.executeDeletion(of: self.travel) {
         case .success:
             self.coordinatingDelegate?.popToHome()
         case .failure(let error):
-            self.errorHandler?(error)
+            self.error = error
         }
     }
 
@@ -71,7 +68,7 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         case .success:
             break
         case .failure(let error):
-            self.errorHandler?(error)
+            self.error = error
         }
     }
 
@@ -81,7 +78,7 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
 
     func didDeleteLandmark(at landmark: Landmark) {
         guard let index = self.travel.landmarks.firstIndex(of: landmark) else {
-            self.errorHandler?(ModelError.landmarkError)
+            self.error = ModelError.landmarkError
             return
         }
         self.travel.landmarks.remove(at: index)
@@ -90,7 +87,7 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         case .success:
             break
         case .failure(let error):
-            self.errorHandler?(error)
+            self.error = error
         }
     }
 
@@ -104,7 +101,7 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         case .success:
             self.coordinatingDelegate?.moveToOngoing(travel: self.travel)
         case .failure(let error):
-            self.errorHandler?(error)
+            self.error = error
         }
     }
 
