@@ -5,6 +5,7 @@
 //  Created by 강현준 on 2021/11/17.
 //
 
+import Combine
 import UIKit
 
 class CompleteEditingViewController: UIViewController, Instantiable {
@@ -12,12 +13,11 @@ class CompleteEditingViewController: UIViewController, Instantiable {
     @IBOutlet private weak var nextButtonHeightConstraint: NSLayoutConstraint!
 
     private var viewModel: CompleteEditingViewModel?
+    private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel?.bind { [weak self] error in
-            ErrorManager.showAlert(with: error, to: self)
-        }
+        self.configureCancellables()
     }
 
     override func viewWillLayoutSubviews() {
@@ -27,6 +27,16 @@ class CompleteEditingViewController: UIViewController, Instantiable {
 
     func bind(viewModel: CompleteEditingViewModel) {
         self.viewModel = viewModel
+    }
+
+    private func configureCancellables() {
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showAlert(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     private func configureButtonConstraint() {
