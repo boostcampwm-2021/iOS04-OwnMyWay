@@ -24,21 +24,21 @@
                                     <fragment content="여행 편집이 ">
                                         <attributes>
                                             <color key="NSColor" systemColor="labelColor"/>
-                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="완료">
                                         <attributes>
                                             <color key="NSColor" red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="되었어요!">
                                         <attributes>
                                             <color key="NSColor" systemColor="labelColor"/>
-                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -53,7 +53,9 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="여행 편집 완료하기"/>
+                                <buttonConfiguration key="configuration" style="plain" title="여행 편집 완료하기">
+                                    <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="didTouchCompleteButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="oS9-9i-P3r"/>
                                 </connections>
