@@ -250,7 +250,7 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
         switch indexPath.item {
         case 0:
             if self.viewModel?.record.photoURLs?.count == self.viewModel?.maxPhotosCount {
-                self.showToast(text: "사진은 \(self.viewModel?.record.maxPhotoCount ?? 0)장까지 추가할 수 있어요")
+                self.showToast(message: "사진은 \(self.viewModel?.maxPhotosCount ?? 0)장까지 추가할 수 있어요")
             } else {
                 if #available(iOS 14.0, *) {
                     self.openPicker()
