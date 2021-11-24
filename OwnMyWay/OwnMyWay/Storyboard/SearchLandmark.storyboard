@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="b5d-aj-iN7">
+                            <searchBar contentMode="redraw" placeholder="관광명소를 입력해주세요" translatesAutoresizingMaskIntoConstraints="NO" id="b5d-aj-iN7">
                                 <rect key="frame" x="0.0" y="44" width="414" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="a1g-bo-EoY"/>
