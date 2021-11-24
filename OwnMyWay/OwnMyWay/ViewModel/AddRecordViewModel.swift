@@ -14,6 +14,8 @@ protocol AddRecordViewModel {
     var recordPublisher: Published<Record>.Publisher { get }
     var errorPublisher: Published<Error?>.Publisher { get }
     var record: Record { get }
+    var maxPhotosCount: Int { get }
+    var isPhotoAddable: Bool { get }
     var isEditingMode: Bool { get }
 
     func locationDidUpdate(recordPlace: String?, latitude: Double, longitude: Double)
@@ -46,9 +48,15 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     @Published private var validateResult: Bool?
     @Published private(set) var record: Record
     @Published private var error: Error?
+
     private var tempPhotoURLs: [URL]
     private var deletedPhotoURLs: [URL]
+
+    private(set) var maxPhotosCount: Int = 10
     private(set) var isEditingMode: Bool
+    var isPhotoAddable: Bool {
+        self.record.photoURLs?.count != self.maxPhotosCount
+    }
 
     private var isValidTitle: Bool = false {
         didSet {
@@ -126,6 +134,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     }
 
     func didEnterPhotoURL(with url: URL) {
+        self.record.photoURLs?.append(url)
+        let index = (record.photoURLs?.count ?? 0) - 1
         self.usecase.executePickingPhoto(with: url) { [weak self] url, error in
             guard error == nil,
                   let copiedURL = url
@@ -133,7 +143,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
                 self?.error = error
                 return
             }
-            self?.record.photoURLs?.append(copiedURL)
+            self?.record.photoURLs?[index] = copiedURL
             self?.tempPhotoURLs.append(copiedURL)
             self?.isValidPhotos = true
         }
