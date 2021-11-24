@@ -27,6 +27,7 @@ class LandmarkAnnotationView: MKAnnotationView {
     func configure() {
         self.canShowCallout = true
         self.image = UIImage(named: "LandmarkPin")
+        self.frame.size = CGSize(width: 40, height: 40)
         self.configureDetailView()
     }
 
