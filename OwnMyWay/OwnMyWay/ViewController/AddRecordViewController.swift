@@ -249,7 +249,7 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case 0:
-            if self.viewModel?.record.photoURLs?.count == self.viewModel?.maxPhotosCount {
+            if self.viewModel?.isPhotoAddable == false {
                 self.showToast(message: "사진은 \(self.viewModel?.maxPhotosCount ?? 0)장까지 추가할 수 있어요")
             } else {
                 if #available(iOS 14.0, *) {
@@ -296,7 +296,9 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                     self?.present(alert, animated: true)
                 default:
                     var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
-                    guard let photoURLsCount = self?.viewModel?.record.photoURLs?.count, let maxPhotoCount = self?.viewModel?.maxPhotosCount else { return }
+                    guard let photoURLsCount = self?.viewModel?.record.photoURLs?.count,
+                          let maxPhotoCount = self?.viewModel?.maxPhotosCount
+                    else { return }
                     config.selectionLimit = maxPhotoCount - photoURLsCount
                     config.filter = PHPickerFilter.images
 
