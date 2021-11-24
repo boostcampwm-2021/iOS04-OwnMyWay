@@ -14,6 +14,12 @@ class TravelSectionHeader: UICollectionReusableView {
 
     func configure(sectionTitle: String) {
         self.sectionTitleLabel.text = sectionTitle
+        self.configureAccessibility(with: sectionTitle)
     }
 
+    func configureAccessibility(with sectionTitle: String) {
+        self.isAccessibilityElement = sectionTitle != ""
+        self.accessibilityTraits = .header
+        self.accessibilityValue = sectionTitle
+    }
 }
