@@ -17,8 +17,6 @@ class CreateTravelViewController: UIViewController, Instantiable {
 
     private var viewModel: CreateTravelViewModel?
     private var cancellables: Set<AnyCancellable> = []
-    private var prevDate: Date?
-    private var isSelectionComplete: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +24,10 @@ class CreateTravelViewController: UIViewController, Instantiable {
         self.configureGestureRecognizer()
         self.travelTitleField.delegate = self
         self.configureLabels()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
     }
 
     override func viewWillLayoutSubviews() {
@@ -39,6 +41,16 @@ class CreateTravelViewController: UIViewController, Instantiable {
 
     func travelDidChanged(to travel: Travel) {
         self.viewModel?.travelDidChanged(to: travel)
+    }
+
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        guard let isEditingMode = self.viewModel?.isEditingMode else { return }
+        if isEditingMode {
+            self.navigationItem.title = "여행 편집하기"
+        } else {
+            self.navigationItem.title = "새로운 여행"
+        }
     }
 
     private func configureButtonConstraint() {
@@ -57,11 +69,12 @@ class CreateTravelViewController: UIViewController, Instantiable {
 
     private func configureLabels() {
         self.viewModel?.viewDidLoad { [weak self] title in
-            guard let title = title
-            else { return }
-            self?.isSelectionComplete = true
-            self?.navigationItem.title = "기록 편집하기"
-            self?.travelTitleField.text = title
+            if let title = title {
+                self?.navigationItem.title = "여행 편집하기"
+                self?.travelTitleField.text = title
+            } else {
+                self?.navigationItem.title = "새로운 여행"
+            }
         }
     }
 

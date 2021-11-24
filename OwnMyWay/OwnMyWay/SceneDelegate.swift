@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
         let navigationController = UINavigationController()
+        navigationController.navigationBar.tintColor = .label
         coordinator = HomeCoordinator(navigationController: navigationController)
         coordinator?.start()
         window?.rootViewController = navigationController

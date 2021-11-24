@@ -32,6 +32,11 @@ class AddLandmarkViewController: UIViewController,
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.configureButtonConstraint()
@@ -53,6 +58,16 @@ class AddLandmarkViewController: UIViewController,
     private func configureButtonConstraint() {
         let bottomPadding = self.view.safeAreaInsets.bottom
         self.nextButtonHeightConstraint.constant = 60 + bottomPadding
+    }
+
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        guard let isEditingMode = self.viewModel?.isEditingMode else { return }
+        if isEditingMode {
+            self.navigationItem.title = "여행 편집하기"
+        } else {
+            self.navigationItem.title = "새로운 여행"
+        }
     }
 
     @IBAction func didTouchNextButton(_ sender: Any) {

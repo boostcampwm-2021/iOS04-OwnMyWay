@@ -12,11 +12,13 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
     private var record: Record?
+    private var isEditingMode: Bool
 
-    init(navigationController: UINavigationController, record: Record?) {
+    init(navigationController: UINavigationController, record: Record?, isEditingMode: Bool) {
         self.childCoordinators = []
         self.navigationController = navigationController
         self.record = record
+        self.isEditingMode = isEditingMode
     }
 
     func start() {
@@ -26,7 +28,10 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
             imageFileManager: ImageFileManager.shared
         )
         let addRecordVM = DefaultAddRecordViewModel(
-            record: self.record, usecase: usecase, coordinatingDelegate: self
+            record: self.record,
+            usecase: usecase,
+            coordinatingDelegate: self,
+            isEditingMode: self.isEditingMode
         )
         let addRecordVC = AddRecordViewController.instantiate(storyboardName: "AddRecord")
         addRecordVC.bind(viewModel: addRecordVM)

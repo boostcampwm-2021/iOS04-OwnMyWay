@@ -9,6 +9,7 @@ import Foundation
 
 protocol AddLandmarkViewModel {
     var travel: Travel { get }
+    var isEditingMode: Bool { get }
     func didTouchNextButton()
     func didTouchBackButton()
     func didUpdateTravel(to travel: Travel)
@@ -24,8 +25,8 @@ protocol AddLandmarkCoordinatingDelegate: AnyObject {
 class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
 
     private(set) var travel: Travel
+    private(set) var isEditingMode: Bool
     private weak var coordinatingDelegate: AddLandmarkCoordinatingDelegate?
-    private var isEditingMode: Bool
 
     init(
         travel: Travel, coordinatingDelegate: AddLandmarkCoordinatingDelegate, isEditingMode: Bool

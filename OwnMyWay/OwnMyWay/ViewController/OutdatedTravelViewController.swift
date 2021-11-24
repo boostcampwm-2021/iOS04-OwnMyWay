@@ -29,11 +29,15 @@ class OutdatedTravelViewController: UIViewController, Instantiable,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureNavigation()
         self.configureNibs()
         self.configureCollectionViews()
         self.configureCancellable()
         self.configureSegment()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
     }
 
     override func viewWillLayoutSubviews() {
@@ -65,13 +69,15 @@ class OutdatedTravelViewController: UIViewController, Instantiable,
         self.finishButtonHeightConstraint.constant = 60 + bottomPadding
     }
 
-    private func configureNavigation() {
+    private func configureNavigationController() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "ellipsis"),
             style: .plain,
             target: self,
             action: #selector(self.didTouchSettingButton)
         )
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = self.viewModel?.travel.title
     }
 
     private func configureSegment() {

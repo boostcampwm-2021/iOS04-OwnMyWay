@@ -45,8 +45,12 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.configureNotifications()
         self.configureNibs()
         self.configurePhotoCollectionView()
-        self.configureNavigation()
         self.configureCancellable()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -84,14 +88,20 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.photoCollectionView.dataSource = self
     }
 
-    private func configureNavigation() {
-        self.navigationItem.title = "게시물 작성"
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "완료",
             style: .plain,
             target: self,
             action: #selector(submitButtonAction)
         )
+        guard let isEditingMode = self.viewModel?.isEditingMode else { return }
+        if isEditingMode {
+            self.navigationItem.title = "게시물 편집"
+        } else {
+            self.navigationItem.title = "게시물 작성"
+        }
     }
 
     private func configureCancellable() {
