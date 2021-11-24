@@ -33,6 +33,11 @@ class ReservedTravelViewController: UIViewController,
         self.bindContainerVC?(self.cartView)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.bindContainerVC = nil
@@ -67,6 +72,11 @@ class ReservedTravelViewController: UIViewController,
 
     func didDeleteLandmark(at landmark: Landmark) {
         self.viewModel?.didDeleteLandmark(at: landmark)
+    }
+
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = self.viewModel?.travel.title
     }
 
     private func configureButtonConstraint() {

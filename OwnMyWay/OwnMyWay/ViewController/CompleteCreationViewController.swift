@@ -20,6 +20,11 @@ class CompleteCreationViewController: UIViewController, Instantiable {
         self.configureCancellables()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.configureButtonConstraint()
@@ -27,6 +32,11 @@ class CompleteCreationViewController: UIViewController, Instantiable {
 
     func bind(viewModel: CompleteCreationViewModel) {
         self.viewModel = viewModel
+    }
+
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = "새로운 여행"
     }
 
     private func configureCancellables() {

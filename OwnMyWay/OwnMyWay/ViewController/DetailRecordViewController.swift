@@ -30,6 +30,11 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         self.configureCancellable()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if self.isMovingFromParent {
@@ -47,6 +52,10 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
 
     private func configureScrollView() {
         self.imageScrollView.delegate = self
+    }
+
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
 
     private func configureDocumentInteractionController() {

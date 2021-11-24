@@ -10,6 +10,7 @@ import Foundation
 protocol AddLandmarkViewModel {
     var travel: Travel { get }
     var errorPublisher: Published<Error?>.Publisher { get }
+    var isEditingMode: Bool { get }
 
     func didTouchNextButton()
     func didTouchBackButton()
@@ -27,10 +28,10 @@ class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
     var errorPublisher: Published<Error?>.Publisher { $error }
     private(set) var travel: Travel
 
+    private(set) var isEditingMode: Bool
     @Published private var error: Error?
 
     private weak var coordinatingDelegate: AddLandmarkCoordinatingDelegate?
-    private var isEditingMode: Bool
 
     init(
         travel: Travel, coordinatingDelegate: AddLandmarkCoordinatingDelegate, isEditingMode: Bool

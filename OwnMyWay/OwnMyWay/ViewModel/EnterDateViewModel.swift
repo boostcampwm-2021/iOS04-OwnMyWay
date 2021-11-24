@@ -9,6 +9,7 @@ import Foundation
 
 protocol EnterDateViewModel {
     var travel: Travel { get }
+    var isEditingMode: Bool { get }
     var calendarStatePublisher: Published<CalendarState>.Publisher { get }
     func viewDidLoad(completion: (Date?, Date?) -> Void)
     func travelDidChanged(to travel: Travel)
@@ -34,8 +35,8 @@ class DefaultEnterDateViewModel: EnterDateViewModel, ObservableObject {
     private let usecase: EnterDateUsecase
     private weak var coordinatingDelegate: EnterDateCoordinatingDelegate?
     private(set) var travel: Travel
+    private(set) var isEditingMode: Bool
     private var firstDate: Date?
-    private var isEditingMode: Bool
 
     init(
         usecase: EnterDateUsecase,

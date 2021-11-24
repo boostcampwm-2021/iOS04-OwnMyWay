@@ -20,6 +20,11 @@ class CompleteEditingViewController: UIViewController, Instantiable {
         self.configureCancellables()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.configureButtonConstraint()
@@ -37,6 +42,11 @@ class CompleteEditingViewController: UIViewController, Instantiable {
                 ErrorManager.showAlert(with: error, to: self)
             }
             .store(in: &self.cancellables)
+    }
+
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = "여행 편집하기"
     }
 
     private func configureButtonConstraint() {

@@ -10,7 +10,7 @@ import Foundation
 
 protocol CreateTravelViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
-
+    var isEditingMode: Bool { get }
     func viewDidLoad(completion: (String?) -> Void)
     func travelDidChanged(to travel: Travel)
     func didChangeTitle(text: String?)
@@ -33,7 +33,7 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
     private var travelTitle: String?
     private var travelStartDate: Date?
     private var travelEndDate: Date?
-    private var isEditingMode: Bool
+    private(set) var isEditingMode: Bool
 
     init(
         usecase: CreateTravelUsecase,
