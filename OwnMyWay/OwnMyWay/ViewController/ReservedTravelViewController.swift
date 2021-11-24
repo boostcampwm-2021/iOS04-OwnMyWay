@@ -106,6 +106,14 @@ class ReservedTravelViewController: UIViewController,
                 }
             }
             .store(in: &cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showToast(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     @objc private func backButtonAction() {
@@ -151,5 +159,4 @@ class ReservedTravelViewController: UIViewController,
     @IBAction func didTouchStartButton(_ sender: Any) {
         self.viewModel?.didTouchStartButton()
     }
-
 }
