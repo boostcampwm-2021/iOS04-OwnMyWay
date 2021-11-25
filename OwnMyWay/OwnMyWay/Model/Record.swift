@@ -14,7 +14,7 @@ struct Record {
     var date: Date?
     var latitude: Double?
     var longitude: Double?
-    var photoURLs: [URL]?
+    var photoIDs: [String]?
     var placeDescription: String?
 
     static func dummy() -> Record {
@@ -32,7 +32,7 @@ extension Record: Hashable {
         lhs.date == rhs.date &&
         lhs.latitude == rhs.latitude &&
         lhs.longitude == rhs.longitude &&
-        lhs.photoURLs == rhs.photoURLs &&
+        lhs.photoIDs == rhs.photoIDs &&
         lhs.placeDescription == rhs.placeDescription
     }
 
@@ -43,7 +43,7 @@ extension Record: Hashable {
         hasher.combine(date)
         hasher.combine(latitude)
         hasher.combine(longitude)
-        hasher.combine(photoURLs)
+        hasher.combine(photoIDs)
         hasher.combine(placeDescription)
     }
 }

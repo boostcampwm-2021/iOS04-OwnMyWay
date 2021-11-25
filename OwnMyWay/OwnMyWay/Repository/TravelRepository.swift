@@ -160,7 +160,7 @@ class CoreDataTravelRepository: TravelRepository {
         }
         let recordMO = RecordMO(entity: entity, insertInto: context)
         recordMO.setValue(record.uuid, forKey: "uuid")
-        recordMO.setValue(record.photoURLs, forKey: "photoURLs")
+        recordMO.setValue(record.photoIDs, forKey: "photoIDs")
         recordMO.setValue(record.title, forKey: "title")
         recordMO.setValue(record.placeDescription, forKey: "placeDescription")
         recordMO.setValue(record.longitude, forKey: "longitude")
@@ -316,7 +316,7 @@ class CoreDataTravelRepository: TravelRepository {
         newRecord.latitude = record.latitude ?? 0
         newRecord.longitude = record.longitude ?? 0
         newRecord.placeDescription = record.placeDescription
-        newRecord.photoURLs = record.photoURLs
+        newRecord.photoIDs = record.photoIDs
         newRecord.content = record.content
 
         do {
