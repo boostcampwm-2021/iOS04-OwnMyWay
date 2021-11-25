@@ -78,4 +78,25 @@ class ImageFileManager {
         return self.documentURL()?.appendingPathComponent(self.appDirectory)
     }
 
+    private func cacheURL() -> URL? {
+        return self.fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first
+    }
+
+    func imageInCache(url: URL) -> URL? {
+        guard var cacheURL = self.cacheURL() else { return nil }
+        cacheURL.appendPathComponent(url.absoluteString.replacingOccurrences(of: "/", with: ""))
+        if self.fileManager.fileExists(atPath: cacheURL.path) {
+            print(cacheURL)
+            return cacheURL
+        } else {
+            return nil
+        }
+    }
+
+    func saveToCache(data: Data, url: URL) -> URL? {
+        guard var cacheURL = self.cacheURL() else { return nil }
+        cacheURL.appendPathComponent(url.absoluteString.replacingOccurrences(of: "/", with: ""))
+        fileManager.createFile(atPath: cacheURL.path, contents: data)
+        return cacheURL
+    }
 }
