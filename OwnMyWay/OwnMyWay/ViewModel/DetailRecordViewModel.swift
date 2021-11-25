@@ -22,7 +22,7 @@ protocol DetailRecordViewModel {
 protocol DetailRecordCoordinatingDelegate: AnyObject {
     func pushToAddRecord(record: Record)
     func popToParent(with travel: Travel, isPopable: Bool)
-    func presentDetailImage(images: [URL], index: Int)
+    func presentDetailImage(images: [String], index: Int)
 }
 
 class DefaultDetailRecordViewModel: DetailRecordViewModel {
@@ -87,7 +87,7 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
     }
 
     func didTouchImageView(index: Int) {
-        guard let images = self.record.photoURLs else { return }
-        self.coordinatingDelegate?.presentDetailImage(images: images, index: index)
+        guard let imageIDs = self.record.photoIDs else { return }
+        self.coordinatingDelegate?.presentDetailImage(images: imageIDs, index: index)
     }
 }

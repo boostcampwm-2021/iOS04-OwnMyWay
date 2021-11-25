@@ -23,7 +23,11 @@ class ImageFileManager {
         }
     }
 
-    func copyPhoto(from source: URL, completion: (URL?, Error?) -> Void) {
+    func imageInDocuemtDirectory(image: String) -> URL? {
+        return self.appURL()?.appendingPathComponent(image)
+    }
+
+    func copyPhoto(from source: URL, completion: (Result<String, Error>) -> Void) {
         guard let destinationURL = self.appURL()?
                 .appendingPathComponent(UUID().uuidString)
                 .appendingPathExtension(source.pathExtension)
@@ -33,12 +37,16 @@ class ImageFileManager {
                 try self.fileManager.copyItem(at: source, to: destinationURL)
             }
         } catch let error {
-            completion(nil, error)
+            completion(.failure(error))
         }
-        completion(destinationURL, nil)
+        completion(.success(destinationURL.lastPathComponent))
     }
 
-    func removePhoto(at url: URL, completion: (Result<Void, Error>) -> Void) {
+    func removePhoto(of photoID: String, completion: (Result<Void, Error>) -> Void) {
+        guard let url = self.imageInDocuemtDirectory(image: photoID) else {
+            completion(.failure(NSError.init()))
+            return
+        }
         do {
             if self.photoExists(at: url) {
                 try self.fileManager.removeItem(at: url)

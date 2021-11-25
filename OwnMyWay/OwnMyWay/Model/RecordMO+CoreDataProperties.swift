@@ -2,12 +2,13 @@
 //  RecordMO+CoreDataProperties.swift
 //  OwnMyWay
 //
-//  Created by 김우재 on 2021/11/15.
+//  Created by 김우재 on 2021/11/25.
 //
 //
 
-import CoreData
 import Foundation
+import CoreData
+
 
 extension RecordMO {
 
@@ -19,14 +20,14 @@ extension RecordMO {
     @NSManaged public var date: Date?
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var uuid: UUID?
-    @NSManaged public var title: String?
-    @NSManaged public var photoURLs: [URL]?
+    @NSManaged public var photoIDs: [String]?
     @NSManaged public var placeDescription: String?
+    @NSManaged public var title: String?
+    @NSManaged public var uuid: UUID?
     @NSManaged public var travel: TravelMO?
 
 }
 
-extension RecordMO: Identifiable {
+extension RecordMO : Identifiable {
 
 }

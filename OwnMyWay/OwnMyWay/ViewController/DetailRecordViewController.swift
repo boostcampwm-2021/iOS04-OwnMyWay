@@ -79,9 +79,11 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
             = "\(record.date?.relativeDateTime() ?? "nil"), \(record.placeDescription ?? "nil")에서"
             self?.contentLabel.text = record.content
             self?.imageStackView.removeAllArranged()
-            record.photoURLs?.forEach { url in
+            record.photoIDs?.forEach { photoID in
                 let imageView = UIImageView()
-                imageView.setImage(with: url)
+                imageView.setImage(
+                    with: ImageFileManager.shared.imageInDocuemtDirectory(image: photoID)
+                )
                 imageView.contentMode = .scaleAspectFill
                 imageView.clipsToBounds = true
                 NSLayoutConstraint.activate([
@@ -102,7 +104,7 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
     }
 
     private func configurePageControl(record: Record) {
-        guard let numberOfPages = record.photoURLs?.count else { return }
+        guard let numberOfPages = record.photoIDs?.count else { return }
         self.pageControl.numberOfPages = numberOfPages
     }
 

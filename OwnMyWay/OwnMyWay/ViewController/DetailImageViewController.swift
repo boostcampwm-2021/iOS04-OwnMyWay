@@ -21,8 +21,8 @@ class DetailImageViewController: UIViewController, Instantiable {
         super.viewDidLoad()
         self.configureScrollView()
         self.configurePageControl()
-        self.viewModel?.imageURLs.forEach { url in
-            let imageView = configureImageView(with: url)
+        self.viewModel?.imageIDs.forEach { url in
+            let imageView = configureImageView(with: ImageFileManager.shared.imageInDocuemtDirectory(image: url))
             let zoomView = configureZoomView()
             self.addSubViewAndConfigureConstraints(imageView: imageView, zoomView: zoomView)
         }
@@ -45,7 +45,7 @@ class DetailImageViewController: UIViewController, Instantiable {
         self.imageScrollView.delegate = self
     }
 
-    private func configureImageView(with url: URL) -> UIImageView {
+    private func configureImageView(with url: URL?) -> UIImageView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -80,7 +80,7 @@ class DetailImageViewController: UIViewController, Instantiable {
     }
 
     private func configurePageControl() {
-        self.pageControl.numberOfPages = self.viewModel?.imageURLs.count ?? 0
+        self.pageControl.numberOfPages = self.viewModel?.imageIDs.count ?? 0
     }
 
     @IBAction func didTouchBackButton(_ sender: Any) {

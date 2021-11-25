@@ -11,8 +11,8 @@ protocol AddRecordUsecase {
     func executeValidationTitle(with title: String?) -> Bool
     func executeValidationDate(with date: Date?) -> Bool
     func executeValidationCoordinate(with coordinate: Location) -> Bool
-    func executePickingPhoto(with url: URL, completion: (URL?, Error?) -> Void)
-    func executeRemovingPhoto(url: URL, completion: (Result<Void, Error>) -> Void)
+    func executePickingPhoto(with url: URL, completion: (Result<String, Error>) -> Void)
+    func executeRemovingPhoto(of photoID: String, completion: (Result<Void, Error>) -> Void)
 }
 
 struct DefaultAddRecordUsecase: AddRecordUsecase {
@@ -40,12 +40,12 @@ struct DefaultAddRecordUsecase: AddRecordUsecase {
         return (-90...90) ~= latitude && (-180...180) ~= longitude
     }
 
-    func executePickingPhoto(with url: URL, completion: (URL?, Error?) -> Void) {
+    func executePickingPhoto(with url: URL, completion: (Result<String, Error>) -> Void) {
         self.imageFileManager.copyPhoto(from: url, completion: completion)
     }
 
-    func executeRemovingPhoto(url: URL, completion: (Result<Void, Error>) -> Void) {
-        self.imageFileManager.removePhoto(at: url) { result in
+    func executeRemovingPhoto(of photoID: String, completion: (Result<Void, Error>) -> Void) {
+        self.imageFileManager.removePhoto(of: photoID) { result in
             completion(result)
         }
     }

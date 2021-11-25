@@ -16,7 +16,7 @@ public class RecordMO: NSManagedObject {
         return Record(
             uuid: self.uuid, title: self.title, content: self.content, date: self.date,
             latitude: self.latitude, longitude: self.longitude,
-            photoURLs: self.photoURLs, placeDescription: self.placeDescription
+            photoIDs: self.photoIDs, placeDescription: self.placeDescription
         )
     }
 
@@ -27,7 +27,7 @@ public class RecordMO: NSManagedObject {
         self.date = record.date
         self.latitude = record.latitude ?? 0
         self.longitude = record.longitude ?? 0
-        self.photoURLs = record.photoURLs
+        self.photoIDs = record.photoIDs
         self.placeDescription = record.placeDescription
     }
 

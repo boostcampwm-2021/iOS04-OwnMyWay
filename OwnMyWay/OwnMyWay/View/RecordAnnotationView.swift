@@ -63,8 +63,9 @@ class RecordAnnotation: NSObject, MKAnnotation {
             latitude: record.latitude ?? 0,
             longitude: record.longitude ?? 0
         )
-        guard let photos = record.photoURLs else { return }
-        self.image = photos.first ?? nil
+        guard let photos = record.photoIDs else { return }
+        let photoURLs = photos.map { ImageFileManager.shared.imageInDocuemtDirectory(image: $0) }
+        self.image = photoURLs.first ?? nil
         self.title = record.title
     }
 }

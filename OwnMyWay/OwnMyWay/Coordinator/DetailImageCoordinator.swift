@@ -10,20 +10,20 @@ import UIKit
 class DetailImageCoordinator: Coordinator, DetailImageCoordinatingDelegate {
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
-    var imageURLs: [URL]
+    var imageIDs: [String]
     var selectedIndex: Int
 
-    init(navigationController: UINavigationController, images: [URL], index: Int) {
+    init(navigationController: UINavigationController, images: [String], index: Int) {
         self.navigationController = navigationController
         self.childCoordinators = []
-        self.imageURLs = images
+        self.imageIDs = images
         self.selectedIndex = index
     }
 
     func start() {
         let imageVM = DefaultDetailImageViewModel(
             coordinatingDelegate: self,
-            images: self.imageURLs,
+            images: self.imageIDs,
             index: selectedIndex
         )
         let imageVC = DetailImageViewController.instantiate(storyboardName: "DetailImage")
