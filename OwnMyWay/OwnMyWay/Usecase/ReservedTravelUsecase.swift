@@ -8,10 +8,19 @@
 import Foundation
 
 protocol ReservedTravelUsecase {
-    func executeDeletion(of travel: Travel) -> Result<Void, Error>
-    func executeLandmarkAddition(of travel: Travel) -> Result<Void, Error>
-    func executeLandmarkDeletion(at landmark: Landmark) -> Result<Void, Error>
-    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error>
+    func executeDeletion(of travel: Travel, completion: @escaping (Result<Void, Error>) -> Void)
+    func executeLandmarkAddition(
+        of travel: Travel,
+        completion: @escaping (Result<Void, Error>) -> Void
+    )
+    func executeLandmarkDeletion(
+        at landmark: Landmark,
+        completion: @escaping (Result<Void, Error>) -> Void
+    )
+    func executeFlagUpdate(
+        of travel: Travel,
+        completion: @escaping (Result<Travel, Error>) -> Void
+    )
 }
 
 struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
@@ -22,39 +31,54 @@ struct DefaultReservedTravelUsecase: ReservedTravelUsecase {
         self.repository = repository
     }
 
-    func executeDeletion(of travel: Travel) -> Result<Void, Error> {
-        return self.repository.delete(travel: travel)
+    func executeDeletion(of travel: Travel, completion: @escaping (Result<Void, Error>) -> Void) {
+        self.repository.delete(travel: travel) { result in
+            completion(result)
+        }
     }
 
-    func executeLandmarkAddition(of travel: Travel) -> Result<Void, Error> {
+    func executeLandmarkAddition(
+        of travel: Travel,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
         guard let newLandmark = travel.landmarks.last
-        else { return .failure(ModelError.landmarkError) }
+        else {
+            completion(.failure(ModelError.landmarkError))
+            return
+        }
 
-        switch self.repository.addLandmark(
+        self.repository.addLandmark(
             to: travel,
             uuid: newLandmark.uuid,
             title: newLandmark.title,
             image: newLandmark.image,
             latitude: newLandmark.latitude,
             longitude: newLandmark.longitude
-        ) {
-        case .success:
-            return .success(())
-        case .failure(let error):
-            return .failure(error)
+        ) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 
-    func executeLandmarkDeletion(at landmark: Landmark) -> Result<Void, Error> {
-        return self.repository.deleteLandmark(at: landmark)
+    func executeLandmarkDeletion(
+        at landmark: Landmark,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        self.repository.deleteLandmark(at: landmark) { result in
+            completion(result)
+        }
     }
 
-    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error> {
-        switch self.repository.update(travel: travel) {
-        case .success:
-            return .success(())
-        case .failure(let error):
-            return .failure(error)
+    func executeFlagUpdate(
+        of travel: Travel,
+        completion: @escaping (Result<Travel, Error>) -> Void
+    ) {
+        self.repository.update(travel: travel) { result in
+            completion(result)
         }
     }
 }

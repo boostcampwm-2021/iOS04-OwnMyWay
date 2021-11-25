@@ -35,11 +35,13 @@ class DefaultCompleteCreationViewModel: CompleteCreationViewModel {
     }
 
     func didTouchCompleteButton() {
-        switch self.usecase.executeCreation(travel: travel) {
-        case .success:
-            self.coordinatingDelegate?.popToHome()
-        case .failure(let error):
-            self.error = error
+        self.usecase.executeCreation(travel: travel) { [weak self] result in
+            switch result {
+            case .success:
+                self?.coordinatingDelegate?.popToHome()
+            case .failure(let error):
+                self?.error = error
+            }
         }
     }
 }

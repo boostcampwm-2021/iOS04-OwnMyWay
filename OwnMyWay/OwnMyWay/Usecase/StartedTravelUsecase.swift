@@ -10,13 +10,15 @@ import Foundation
 protocol StartedTravelUsecase {
     func executeFetch()
     func executeFinishingTravel()
-    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error>
-    func executeDeletion(of travel: Travel) -> Result<Void, Error>
+    func executeFlagUpdate(of travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void)
+    func executeDeletion(of travel: Travel, completion: @escaping (Result<Void, Error>) -> Void)
     func executeLocationUpdate(
-        of travel: Travel, latitude: Double, longitude: Double
-    ) -> Result<Void, Error>
+        of travel: Travel, latitude: Double, longitude: Double,
+        completion: @escaping (Result<Location, Error>) -> Void
+    )
     func executeRecordAddition(
-        to travel: Travel, with record: Record, completion: (Result<Travel, Error>) -> Void
+        to travel: Travel, with record: Record,
+        completion: @escaping (Result<Travel, Error>) -> Void
     )
 }
 
@@ -31,35 +33,37 @@ struct DefaultStartedTravelUsecase: StartedTravelUsecase {
     func executeFetch() {}
     func executeFinishingTravel() {}
 
-    func executeDeletion(of travel: Travel) -> Result<Void, Error> {
-        return self.repository.delete(travel: travel)
+    func executeFlagUpdate(of travel: Travel,
+                           completion: @escaping (Result<Travel, Error>) -> Void
+    ) {
+        self.repository.update(travel: travel) { result in
+            completion(result)
+        }
     }
 
-    func executeFlagUpdate(of travel: Travel) -> Result<Void, Error> {
-        switch self.repository.update(travel: travel) {
-        case .success:
-            return .success(())
-        case .failure(let error):
-            return .failure(error)
+    func executeDeletion(of travel: Travel, completion: @escaping (Result<Void, Error>) -> Void) {
+        self.repository.delete(travel: travel) { result in
+            completion(result)
         }
     }
 
     func executeLocationUpdate(
-        of travel: Travel, latitude: Double, longitude: Double
-    ) -> Result<Void, Error> {
-        switch self.repository.addLocation(
+        of travel: Travel, latitude: Double, longitude: Double,
+        completion: @escaping (Result<Location, Error>) -> Void
+    ) {
+        self.repository.addLocation(
             to: travel, latitude: latitude, longitude: longitude
-        ) {
-        case .success:
-            return .success(())
-        case .failure(let error):
-            return .failure(error)
+        ) { result in
+            completion(result)
         }
     }
 
     func executeRecordAddition(
-        to travel: Travel, with record: Record, completion: (Result<Travel, Error>) -> Void
+        to travel: Travel, with record: Record,
+        completion: @escaping (Result<Travel, Error>) -> Void
     ) {
-        completion(self.repository.addRecord(to: travel, with: record))
+        self.repository.addRecord(to: travel, with: record) { result in
+            completion(result)
+        }
     }
 }
