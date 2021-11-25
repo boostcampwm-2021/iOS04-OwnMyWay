@@ -149,6 +149,51 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func createCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex, _)
+            -> NSCollectionLayoutSection? in
+            let sectionLayout = Travel.Section.allCases[sectionIndex]
+            switch sectionLayout {
+            case .dummy:
+                return self.createMessageSection()
+            default:
+                return self.createLayoutSection()
+            }
+        }
+        layout.register(
+            UINib(nibName: HomeBackgroundView.identifier, bundle: nil),
+            forDecorationViewOfKind: ElementKind.background
+        )
+
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 30
+        layout.configuration = config
+        return layout
+    }
+
+    private func createMessageSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize, subitems: [item]
+        )
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 30, leading: 0, bottom: 30, trailing: 0
+        )
+        section.decorationItems = [
+            NSCollectionLayoutDecorationItem.background(elementKind: ElementKind.background)
+        ]
+        return section
+    }
+
+    private func createLayoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
         )
@@ -162,7 +207,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         )
 
         let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(30)
         )
         let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -180,17 +225,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             NSCollectionLayoutDecorationItem.background(elementKind: ElementKind.background)
         ]
         section.boundarySupplementaryItems = [headerElement]
-
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        layout.register(
-            UINib(nibName: HomeBackgroundView.identifier, bundle: nil),
-            forDecorationViewOfKind: ElementKind.background
-        )
-
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 30
-        layout.configuration = config
-        return layout
+        return section
     }
 
     private func createDiffableDataSource() -> HomeDataSource {
