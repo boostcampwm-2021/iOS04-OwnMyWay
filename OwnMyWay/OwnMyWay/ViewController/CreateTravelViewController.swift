@@ -6,7 +6,6 @@
 //
 
 import Combine
-import FSCalendar
 import UIKit
 
 final class CreateTravelViewController: UIViewController, Instantiable {

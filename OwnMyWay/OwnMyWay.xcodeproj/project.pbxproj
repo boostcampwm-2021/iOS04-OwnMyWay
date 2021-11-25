@@ -47,7 +47,6 @@
 		3F113A13273A59C500EA91AA /* CompleteCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A12273A59C500EA91AA /* CompleteCreationViewModel.swift */; };
 		3F113A15273A5AA300EA91AA /* CompleteCreationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A14273A5AA300EA91AA /* CompleteCreationUsecase.swift */; };
 		3F113A17273A5FD600EA91AA /* CompleteCreationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A16273A5FD600EA91AA /* CompleteCreationCoordinator.swift */; };
-		3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3F20606527314AAE0005D8F4 /* FSCalendar */; };
 		3F20606A2733A2610005D8F4 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2060692733A2610005D8F4 /* NextButton.swift */; };
 		3F3F866E274B62640075B9A0 /* DancingScript-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F866D274B62640075B9A0 /* DancingScript-Bold.ttf */; };
 		3F3F8670274B628E0075B9A0 /* DancingScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F866F274B628E0075B9A0 /* DancingScript-Regular.ttf */; };
@@ -55,6 +54,7 @@
 		3F3F8674274B9E340075B9A0 /* HomeBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */; };
 		3F3F867B274CC3400075B9A0 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F8679274CC3400075B9A0 /* MessageCell.swift */; };
 		3F3F867C274CC3400075B9A0 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F867A274CC3400075B9A0 /* MessageCell.xib */; };
+		3F5B3689274F9D8E00330413 /* CalendarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */; };
 		3FB914BE273409530084FF1C /* TravelCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914BC273409530084FF1C /* TravelCardCell.swift */; };
 		3FB914BF273409530084FF1C /* TravelCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB914BD273409530084FF1C /* TravelCardCell.xib */; };
 		3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914C027340E410084FF1C /* HomeViewModel.swift */; };
@@ -105,6 +105,9 @@
 		AFA6ED802744F811007B251C /* CompleteEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */; };
 		AFA6ED822744F869007B251C /* CompleteEditingUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED812744F869007B251C /* CompleteEditingUsecase.swift */; };
 		AFB62667273132A3007BF780 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
+		AFBAEE36274F25CF00236DEC /* OMWCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAEE35274F25CF00236DEC /* OMWCalendar.swift */; };
+		AFBAEE3F274F736F00236DEC /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAEE3D274F736F00236DEC /* CalendarCell.swift */; };
+		AFBAEE40274F736F00236DEC /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFBAEE3E274F736F00236DEC /* CalendarCell.xib */; };
 		AFF88422273CDD49004FCE5C /* RecordAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
 		AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB96172730F76100F23A46 /* PlusCell.xib */; };
@@ -200,6 +203,7 @@
 		3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeBackgroundView.xib; sourceTree = "<group>"; };
 		3F3F8679274CC3400075B9A0 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		3F3F867A274CC3400075B9A0 /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDataSource.swift; sourceTree = "<group>"; };
 		3FB914BC273409530084FF1C /* TravelCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelCardCell.swift; sourceTree = "<group>"; };
 		3FB914BD273409530084FF1C /* TravelCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TravelCardCell.xib; sourceTree = "<group>"; };
 		3FB914C027340E410084FF1C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -250,6 +254,9 @@
 		AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditingViewModel.swift; sourceTree = "<group>"; };
 		AFA6ED812744F869007B251C /* CompleteEditingUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditingUsecase.swift; sourceTree = "<group>"; };
 		AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModel.swift; sourceTree = "<group>"; };
+		AFBAEE35274F25CF00236DEC /* OMWCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMWCalendar.swift; sourceTree = "<group>"; };
+		AFBAEE3D274F736F00236DEC /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		AFBAEE3E274F736F00236DEC /* CalendarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 		AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAnnotationView.swift; sourceTree = "<group>"; };
 		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
 		AFFB96172730F76100F23A46 /* PlusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlusCell.xib; sourceTree = "<group>"; };
@@ -304,7 +311,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F20606627314AAE0005D8F4 /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +359,7 @@
 				3FF20BB927461BC4007AFF78 /* TravelEditable.swift */,
 				DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */,
 				29966F80274CA61B00729D39 /* EnterDateViewController.swift */,
+				3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -387,6 +394,9 @@
 				3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */,
 				3F3F8679274CC3400075B9A0 /* MessageCell.swift */,
 				3F3F867A274CC3400075B9A0 /* MessageCell.xib */,
+				AFBAEE35274F25CF00236DEC /* OMWCalendar.swift */,
+				AFBAEE3D274F736F00236DEC /* CalendarCell.swift */,
+				AFBAEE3E274F736F00236DEC /* CalendarCell.xib */,
 				29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */,
 			);
 			path = View;
@@ -591,7 +601,6 @@
 			);
 			name = OwnMyWay;
 			packageProductDependencies = (
-				3F20606527314AAE0005D8F4 /* FSCalendar */,
 			);
 			productName = OwnMyWay;
 			productReference = DB22BB56272F82770004444B /* OwnMyWay.app */;
@@ -623,7 +632,6 @@
 			mainGroup = DB22BB4D272F82770004444B;
 			packageReferences = (
 				DB22BB70272F83560004444B /* XCRemoteSwiftPackageReference "SwiftLint" */,
-				3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = DB22BB57272F82770004444B /* Products */;
 			projectDirPath = "";
@@ -663,6 +671,7 @@
 				DB2823BE273BC0C2007D8801 /* DateHeaderView.xib in Resources */,
 				294897C0273BA993003185E7 /* RecordCardCell.xib in Resources */,
 				3F3F866E274B62640075B9A0 /* DancingScript-Bold.ttf in Resources */,
+				AFBAEE40274F736F00236DEC /* CalendarCell.xib in Resources */,
 				3FB987A6274373CB008F0E08 /* PhotoCell.xib in Resources */,
 				3F3F8674274B9E340075B9A0 /* HomeBackgroundView.xib in Resources */,
 				3FD3D984274E098A0051E2AC /* nanum_handwriting.ttf in Resources */,
@@ -765,7 +774,9 @@
 				294897C6273BF181003185E7 /* DetailRecordViewModel.swift in Sources */,
 				3FB914C127340E410084FF1C /* HomeViewModel.swift in Sources */,
 				294897BF273BA993003185E7 /* RecordCardCell.swift in Sources */,
+				3F5B3689274F9D8E00330413 /* CalendarDataSource.swift in Sources */,
 				3FB914C32734129F0084FF1C /* HomeUsecase.swift in Sources */,
+				AFBAEE36274F25CF00236DEC /* OMWCalendar.swift in Sources */,
 				3F113A17273A5FD600EA91AA /* CompleteCreationCoordinator.swift in Sources */,
 				AF82FDB4273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift in Sources */,
 				DBC39F0C2733C42700FB7939 /* Record.swift in Sources */,
@@ -773,6 +784,7 @@
 				AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */,
 				3FB987A5274373CB008F0E08 /* PhotoCell.swift in Sources */,
 				DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */,
+				AFBAEE3F274F736F00236DEC /* CalendarCell.swift in Sources */,
 				294897BC273B5D71003185E7 /* UIImageView+.swift in Sources */,
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
 				DBA6F68E27461E0C00F3244E /* CLLocationManager+.swift in Sources */,
@@ -1043,14 +1055,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 		DB22BB70272F83560004444B /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint";
@@ -1060,14 +1064,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		3F20606527314AAE0005D8F4 /* FSCalendar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3F20606427314AAE0005D8F4 /* XCRemoteSwiftPackageReference "FSCalendar" */;
-			productName = FSCalendar;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */ = {
