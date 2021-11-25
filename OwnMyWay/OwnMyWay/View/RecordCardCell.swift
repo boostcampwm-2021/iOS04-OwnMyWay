@@ -18,7 +18,7 @@ class RecordCardCell: UICollectionViewCell {
         self.makeShadow()
         guard let photos = record.photoIDs else { return }
         let photoURLs = photos.map { ImageFileManager.shared.imageInDocuemtDirectory(image: $0) }
-        self.recordCardImageView.setImage(with: photoURLs.first ?? nil)
+        self.recordCardImageView.setLocalImage(with: photoURLs.first ?? nil)
         self.recordContentLabel.text = record.title
         self.configureAccessibility(with: record)
     }

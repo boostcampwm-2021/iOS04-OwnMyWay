@@ -18,7 +18,7 @@ class TravelCardCell: UICollectionViewCell {
         self.travelTitleLabel.text = travel.title
         self.travelDateLabel.text = travel.startDate?.format(endDate: travel.endDate) ?? ""
         if let landmark = travel.landmarks.randomElement() {
-            self.travelCardImageView.setImage(with: landmark.image)
+            self.travelCardImageView.setNetworkImage(with: landmark.image)
         }
         self.travelCardImageView.layer.cornerRadius = 10
         self.travelCardImageView.clipsToBounds = true

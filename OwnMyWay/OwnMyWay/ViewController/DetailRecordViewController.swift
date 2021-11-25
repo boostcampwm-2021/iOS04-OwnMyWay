@@ -81,7 +81,7 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
             self?.imageStackView.removeAllArranged()
             record.photoIDs?.forEach { photoID in
                 let imageView = UIImageView()
-                imageView.setImage(
+                imageView.setLocalImage(
                     with: ImageFileManager.shared.imageInDocuemtDirectory(image: photoID)
                 )
                 imageView.contentMode = .scaleAspectFill

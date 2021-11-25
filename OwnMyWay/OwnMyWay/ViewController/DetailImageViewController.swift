@@ -50,7 +50,7 @@ class DetailImageViewController: UIViewController, Instantiable {
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.setImage(with: url)
+        imageView.setLocalImage(with: url)
         return imageView
     }
 

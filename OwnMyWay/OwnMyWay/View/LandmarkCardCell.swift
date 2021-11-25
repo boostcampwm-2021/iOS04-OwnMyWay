@@ -28,7 +28,7 @@ class LandmarkCardCell: UICollectionViewCell {
     }
 
     func configure(with landmark: Landmark) {
-        self.imageView.setImage(with: landmark.image)
+        self.imageView.setNetworkImage(with: landmark.image)
         self.titleLabel.text = landmark.title
         self.configureAccessibility(with: landmark)
     }
