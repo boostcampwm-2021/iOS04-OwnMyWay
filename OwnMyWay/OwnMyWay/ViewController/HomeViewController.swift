@@ -185,7 +185,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
-            top: 30, leading: 0, bottom: 30, trailing: 0
+            top: 0, leading: 0, bottom: 0, trailing: 0
         )
         section.decorationItems = [
             NSCollectionLayoutDecorationItem.background(elementKind: ElementKind.background)

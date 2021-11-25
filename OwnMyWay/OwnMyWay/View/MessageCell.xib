@@ -19,13 +19,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😱 예정된 여행이 없어요. 새로운 여행을 계획해보세요!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DY1-4V-KRT">
-                        <rect key="frame" x="0.0" y="10" width="393" height="158"/>
+                        <rect key="frame" x="0.0" y="45" width="393" height="98"/>
                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="25"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svm-HH-6eH">
-                        <rect key="frame" x="116.5" y="188" width="160" height="45"/>
+                        <rect key="frame" x="116.5" y="163" width="160" height="45"/>
                         <color key="backgroundColor" name="IdentityBlue"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="160" id="aIF-WX-gLQ"/>
@@ -42,13 +42,11 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" name="HomeContent"/>
             <constraints>
                 <constraint firstItem="svm-HH-6eH" firstAttribute="centerX" secondItem="DY1-4V-KRT" secondAttribute="centerX" id="Y6F-6G-Yk9"/>
                 <constraint firstItem="DY1-4V-KRT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="aEZ-B8-bvO"/>
-                <constraint firstAttribute="bottom" secondItem="svm-HH-6eH" secondAttribute="bottom" constant="10" id="eWH-uP-cCT"/>
-                <constraint firstItem="DY1-4V-KRT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="fgU-iE-23j"/>
-                <constraint firstAttribute="bottom" secondItem="svm-HH-6eH" secondAttribute="bottom" constant="10" id="g3O-cs-Rt8"/>
+                <constraint firstItem="DY1-4V-KRT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="45" id="fgU-iE-23j"/>
+                <constraint firstAttribute="bottom" secondItem="svm-HH-6eH" secondAttribute="bottom" constant="35" id="g3O-cs-Rt8"/>
                 <constraint firstItem="svm-HH-6eH" firstAttribute="top" secondItem="DY1-4V-KRT" secondAttribute="bottom" constant="20" id="igo-Af-vvS"/>
                 <constraint firstAttribute="trailing" secondItem="DY1-4V-KRT" secondAttribute="trailing" id="y6U-2r-aNb"/>
             </constraints>
@@ -60,9 +58,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="HomeContent">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="IdentityBlue">
             <color red="0.18000000715255737" green="0.66699999570846558" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
