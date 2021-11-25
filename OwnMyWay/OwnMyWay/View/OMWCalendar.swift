@@ -42,6 +42,8 @@ class OMWCalendar: UIView {
         let label = UILabel()
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.init(name: "AppleSDGothicNeo-Regular", size: 18)
         return label
     }()
 
@@ -56,6 +58,8 @@ class OMWCalendar: UIView {
         dates.forEach { date in
             let dateLabel = UILabel()
             dateLabel.text = date
+            dateLabel.textAlignment = .center
+            dateLabel.font = UIFont.init(name: "AppleSDGothicNeo-Regular", size: 18)
             stackView.addArrangedSubview(dateLabel)
         }
         return stackView
@@ -120,6 +124,10 @@ class OMWCalendar: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureCalendar()
+    }
+
+    override func draw(_ rect: CGRect) {
+        self.scrollView.scrollRectToVisible(self.currentCalendar.frame, animated: false)
     }
 
     private func configureCalendar() {
@@ -190,7 +198,7 @@ class OMWCalendar: UIView {
     }
 
     private func configureTitleLabel(with date: Date) {
-        self.titleLabel.text = "\(date.month)월 \(date.year)"
+        self.titleLabel.text = "\(date.year)년 \(date.month)월"
     }
 
     private func configure(collectionView: UICollectionView) {
@@ -257,6 +265,7 @@ extension OMWCalendar: UICollectionViewDelegate {
 }
 
 extension OMWCalendar: UIScrollViewDelegate {
+
     func scrollViewWillEndDragging(
         _ scrollView: UIScrollView,
         withVelocity velocity: CGPoint,
