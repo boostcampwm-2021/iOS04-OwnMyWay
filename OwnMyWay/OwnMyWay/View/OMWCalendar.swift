@@ -7,8 +7,61 @@
 
 import UIKit
 
-typealias CalendarDataSource = UICollectionViewDiffableDataSource <OMWCalendar.Section,
-                                                                    CalendarItem>
+protocol OMWCalendarDelegate: AnyObject {
+    func didSelect(date: Date)
+}
+
+class CalendarDataSource: NSObject, UICollectionViewDataSource {
+    var date: Date {
+        didSet {
+            var items = [CalendarItem]()
+            for index in 0..<7 - date.firstWeekDayCount {
+                items.append(CalendarItem(isDummy: true, date: date.addingTimeInterval(Double(index))))
+            }
+            for index in 0..<date.numberOfDays {
+                items.append(CalendarItem(
+                    isDummy: false,
+                    date: date.firstDayOfTheMonth.addingTimeInterval(86400 * Double(index))
+                ))
+            }
+            self.items = items
+        }
+    }
+    private var items: [CalendarItem]
+    private var startDate: Date?
+    private var endDate: Date?
+
+    override init() {
+        self.date = Date()
+        self.items = []
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.items.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CalendarCell.identifier, for: indexPath
+        ) as? CalendarCell
+        else { return UICollectionViewCell() }
+        let item = self.items[indexPath.item]
+        cell.configure(item: item)
+        if let startDate = self.startDate,
+           let endDate = self.endDate,
+           startDate <= item.date && endDate >= item.date,
+           !item.isDummy {
+            cell.didSelect()
+        }
+        return cell
+    }
+
+    func configureDate(from startDate: Date?, to endDate: Date?) {
+        self.startDate = startDate
+        self.endDate = endDate
+    }
+
+}
 
 struct CalendarItem: Hashable {
     var isDummy: Bool
@@ -27,9 +80,10 @@ class OMWCalendar: UIView {
         case none
     }
 
-    private var previousDataSource: CalendarDataSource?
-    private var currentDataSource: CalendarDataSource?
-    private var nextDataSource: CalendarDataSource?
+    weak var delegate: OMWCalendarDelegate?
+    private var previousDataSource = CalendarDataSource()
+    private var currentDataSource = CalendarDataSource()
+    private var nextDataSource = CalendarDataSource()
     private var scrollDirection: Direction = .none
     private var currentMonth: Date = Date.init(timeIntervalSinceNow: 0) {
         didSet {
@@ -37,6 +91,8 @@ class OMWCalendar: UIView {
             self.configureTitleLabel(with: self.currentMonth)
         }
     }
+    private var startDate: Date?
+    private var endDate: Date?
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -79,8 +135,8 @@ class OMWCalendar: UIView {
         collectionView.isScrollEnabled = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.allowsMultipleSelection = false
+        collectionView.dataSource = self.previousDataSource
         self.configure(collectionView: collectionView)
-        self.previousDataSource = self.createDiffableDataSource(collectionView: collectionView)
         return collectionView
     }()
 
@@ -93,8 +149,8 @@ class OMWCalendar: UIView {
         collectionView.isScrollEnabled = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.allowsMultipleSelection = false
+        collectionView.dataSource = self.currentDataSource
         self.configure(collectionView: collectionView)
-        self.currentDataSource = self.createDiffableDataSource(collectionView: collectionView)
         return collectionView
     }()
 
@@ -107,8 +163,8 @@ class OMWCalendar: UIView {
         collectionView.isScrollEnabled = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.allowsMultipleSelection = false
+        collectionView.dataSource = self.nextDataSource
         self.configure(collectionView: collectionView)
-        self.nextDataSource = self.createDiffableDataSource(collectionView: collectionView)
         return collectionView
     }()
 
@@ -120,6 +176,32 @@ class OMWCalendar: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureCalendar()
+    }
+
+    func redraw() {
+        self.configureCollectionViews()
+        self.previousCalendar.reloadData()
+        self.currentCalendar.reloadData()
+        self.nextCalendar.reloadData()
+    }
+
+    func selectDate(date: Date) {
+        if let startDate = startDate {
+            self.startDate = startDate <= date ? startDate : date
+            self.endDate = startDate <= date ? date : startDate
+        } else {
+            self.startDate = date
+        }
+    }
+
+    func deselectAll() {
+        self.deselectDate()
+        self.configureCollectionViews()
+    }
+
+    private func deselectDate() {
+        self.startDate = nil
+        self.endDate = nil
     }
 
     private func configureCalendar() {
@@ -177,15 +259,15 @@ class OMWCalendar: UIView {
     }
 
     private func configureCollectionViews() {
-        self.previousDataSource?.apply(
-            makeSnapshot(date: self.currentMonth.previousMonth), animatingDifferences: false
-        )
-        self.currentDataSource?.apply(
-            makeSnapshot(date: self.currentMonth), animatingDifferences: false
-        )
-        self.nextDataSource?.apply(
-            makeSnapshot(date: self.currentMonth.nextMonth), animatingDifferences: false
-        )
+        self.previousDataSource.date = currentMonth.previousMonth
+        self.previousDataSource.configureDate(from: self.startDate, to: self.endDate)
+        self.previousCalendar.reloadData()
+        self.currentDataSource.date = currentMonth
+        self.currentDataSource.configureDate(from: self.startDate, to: self.endDate)
+        self.currentCalendar.reloadData()
+        self.nextDataSource.date = currentMonth.nextMonth
+        self.nextDataSource.configureDate(from: self.startDate, to: self.endDate)
+        self.nextCalendar.reloadData()
         self.scrollView.scrollRectToVisible(self.currentCalendar.frame, animated: false)
     }
 
@@ -218,41 +300,33 @@ class OMWCalendar: UIView {
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-
-    private func createDiffableDataSource(collectionView: UICollectionView) -> CalendarDataSource {
-        let dataSource = CalendarDataSource(
-            collectionView: collectionView
-        ) { collectionView, indexPath, item in
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: CalendarCell.identifier, for: indexPath
-            ) as? CalendarCell
-            else { return UICollectionViewCell() }
-            cell.configure(item: item)
-            return cell
-        }
-       return dataSource
-    }
-
-    private func makeSnapshot(date: Date) -> NSDiffableDataSourceSnapshot<Section, CalendarItem> {
-        var items = [CalendarItem]()
-        for index in 0..<7 - date.firstWeekDayCount {
-            items.append(CalendarItem(isDummy: true, date: date.addingTimeInterval(Double(index))))
-        }
-        for index in 0..<date.numberOfDays {
-            items.append(CalendarItem(
-                isDummy: false,
-                date: date.firstDayOfTheMonth.addingTimeInterval(86400 * Double(index))
-            ))
-        }
-
-        var snapshot = NSDiffableDataSourceSnapshot<Section, CalendarItem>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(items, toSection: .main)
-        return snapshot
-    }
 }
 
 extension OMWCalendar: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let dayNumber = indexPath.item - 7 + currentMonth.firstWeekDayCount
+        guard dayNumber >= 0
+        else { return }
+        let date = generateDate(
+            year: currentMonth.year, month: currentMonth.month, dayNumber: dayNumber
+        )
+        self.delegate?.didSelect(date: date)
+        if self.startDate != nil && self.endDate != nil {
+            self.deselectAll()
+        } else {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? CalendarCell
+            else { return }
+            cell.didSelect()
+            self.selectDate(date: date)
+        }
+    }
+
+    private func generateDate(year: Int, month: Int, dayNumber: Int) -> Date {
+        return Calendar.current.date(
+            from: DateComponents(year: year, month: month, day: dayNumber + 1)
+        ) ?? Date()
+    }
 
 }
 
@@ -324,5 +398,11 @@ extension Date {
         Calendar.current.date(
             from: Calendar.current.dateComponents([.year, .month], from: self)
         ) ?? Date()
+    }
+
+    var scaledDate: Date {
+        let date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: self)) ?? self
+        print(date)
+        return date
     }
 }

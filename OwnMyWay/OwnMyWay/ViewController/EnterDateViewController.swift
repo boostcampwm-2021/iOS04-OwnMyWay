@@ -11,7 +11,7 @@ import FSCalendar
 
 class EnterDateViewController: UIViewController, Instantiable {
 
-    @IBOutlet private weak var calendarView: FSCalendar!
+    @IBOutlet private weak var calendarView: OMWCalendar!
     @IBOutlet private weak var nextButton: NextButton!
     @IBOutlet private weak var nextButtonHeightConstraint: NSLayoutConstraint!
 
@@ -76,7 +76,6 @@ class EnterDateViewController: UIViewController, Instantiable {
 
     private func configureCalendar() {
         self.calendarView.delegate = self
-        self.calendarView.placeholderType = FSCalendarPlaceholderType.none
     }
 
     private func configureLabels() {
@@ -85,10 +84,13 @@ class EnterDateViewController: UIViewController, Instantiable {
                   let endDate = endDate
             else { return }
             self?.navigationItem.title = "기록 편집하기"
-            let dayInterval: TimeInterval = 60 * 60 * 24
-            stride(from: startDate, through: endDate, by: dayInterval).forEach {
-                self?.calendarView.select($0)
-            }
+//            let dayInterval: TimeInterval = 60 * 60 * 24
+//            stride(from: startDate, through: endDate, by: dayInterval).forEach {
+//                self?.calendarView.select($0)
+//            }
+            self?.calendarView.selectDate(date: startDate)
+            self?.calendarView.selectDate(date: endDate)
+            self?.calendarView.redraw()
         }
     }
 
@@ -105,21 +107,12 @@ class EnterDateViewController: UIViewController, Instantiable {
     }
 }
 
-extension EnterDateViewController: FSCalendarDelegate {
-
-    func calendar(_ calendar: FSCalendar,
-                  didSelect date: Date,
-                  at monthPosition: FSCalendarMonthPosition) {
+extension EnterDateViewController: OMWCalendarDelegate {
+    func didSelect(date: Date) {
         self.viewModel?.didEnterDate(at: date)
     }
 
-    func calendar(_ calendar: FSCalendar,
-                  didDeselect date: Date,
-                  at monthPosition: FSCalendarMonthPosition) {
-        self.viewModel?.didEnterDate(at: date)
-    }
-
-    private func presentAlert(calendar: FSCalendar?) {
+    private func presentAlert(calendar: OMWCalendar?) {
         guard let calendar = calendar,
               let startDate = self.viewModel?.travel.startDate,
               let endDate = self.viewModel?.travel.endDate
@@ -131,19 +124,15 @@ extension EnterDateViewController: FSCalendarDelegate {
             preferredStyle: .alert
         )
         let yesAction = UIAlertAction(title: "네", style: .destructive) { _ in
-            let dayInterval: TimeInterval = 60 * 60 * 24
-            stride(from: startDate, through: endDate, by: dayInterval).forEach {
-                calendar.select($0)
-            }
+            self.calendarView.redraw()
         }
         let noAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
             self?.viewModel?.didTouchNoButton()
-            calendar.deselect(startDate)
-            calendar.deselect(endDate)
+            calendar.deselectAll()
         }
         alert.addAction(yesAction)
         alert.addAction(noAction)
-        present(alert, animated: true)
+        self.present(alert, animated: true)
     }
 
     private func alertMessage(startDate: Date, endDate: Date) -> String {
@@ -152,15 +141,4 @@ extension EnterDateViewController: FSCalendarDelegate {
         }
         return "여행 기간을 \(startDate.localize())부터 \(endDate.localize())로 설정할까요?"
     }
-}
-
-fileprivate extension FSCalendar {
-
-    func deselectAll() {
-        let dates = self.selectedDates
-        dates.forEach { [weak self] date in
-            self?.deselect(date)
-        }
-    }
-
 }
