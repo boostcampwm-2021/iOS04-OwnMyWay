@@ -20,7 +20,8 @@ struct DefaultHomeUsecase: HomeUsecase {
     }
 
     func executeFetch(completion: @escaping (Result<[Travel], Error>) -> Void) {
-        completion(repository.fetchAllTravels())
+        self.repository.fetchAllTravels { result in
+            completion(result)
+        }
     }
-
 }

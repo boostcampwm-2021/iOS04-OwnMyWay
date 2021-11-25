@@ -47,7 +47,7 @@ class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject 
     }
 
     func viewDidLoad() {
-        usecase.executeFetch { [weak self] result in
+        self.usecase.executeFetch { [weak self] result in
             switch result {
             case .success(let landmarks):
                 self?.landmarks = landmarks
@@ -74,7 +74,7 @@ class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject 
         if text.isEmpty {
             self.viewDidLoad()
         } else {
-            usecase.executeSearch(by: text) { [weak self] searchResult in
+            self.usecase.executeSearch(by: text) { [weak self] searchResult in
                 switch searchResult {
                 case .success(let landmarks):
                     self?.landmarks = landmarks
