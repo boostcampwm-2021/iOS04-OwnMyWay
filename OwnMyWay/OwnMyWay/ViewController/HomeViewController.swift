@@ -96,10 +96,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             .sink { [weak self] travels in
                 guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
                 snapshot.deleteSections([.dummy])
-                if travels.isEmpty {
-                    self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
-                    return
-                }
                 snapshot.insertSections([.dummy], beforeSection: .reserved)
                 snapshot.appendItems(travels, toSection: .dummy)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
@@ -339,6 +335,11 @@ extension HomeViewController: UICollectionViewDelegate, MessageCellDelegate {
     func didTouchButton() {
         self.viewModel?.didTouchCreateButton()
     }
+
+    func didTouchCloseButton() {
+        self.viewModel?.didTouchCloseMessage()
+    }
+
 }
 
 fileprivate extension HomeViewController {
