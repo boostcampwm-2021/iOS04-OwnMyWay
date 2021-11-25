@@ -16,7 +16,6 @@ final class TravelCardCell: OMWCollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.travelCardImageView.image = nil
     }
 
     func configure(with travel: Travel) {
