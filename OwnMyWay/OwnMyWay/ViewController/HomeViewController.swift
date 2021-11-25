@@ -94,44 +94,28 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         self.viewModel?.messagePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
-                snapshot.deleteSections([.dummy])
-                snapshot.insertSections([.dummy], beforeSection: .reserved)
-                snapshot.appendItems(travels, toSection: .dummy)
-                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                self?.dataSourceChanged(to: travels, in: .dummy)
             }
             .store(in: &self.cancellables)
 
         self.viewModel?.reservedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
-                snapshot.deleteSections([.reserved])
-                snapshot.insertSections([.reserved], beforeSection: .ongoing)
-                snapshot.appendItems(travels, toSection: .reserved)
-                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                self?.dataSourceChanged(to: travels, in: .reserved)
             }
             .store(in: &self.cancellables)
 
         self.viewModel?.ongoingTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
-                snapshot.deleteSections([.ongoing])
-                snapshot.insertSections([.ongoing], afterSection: .reserved)
-                snapshot.appendItems(travels, toSection: .ongoing)
-                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                self?.dataSourceChanged(to: travels, in: .ongoing)
             }
             .store(in: &self.cancellables)
 
         self.viewModel?.outdatedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
-                snapshot.deleteSections([.outdated])
-                snapshot.insertSections([.outdated], afterSection: .ongoing)
-                snapshot.appendItems(travels, toSection: .outdated)
-                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                self?.dataSourceChanged(to: travels, in: .outdated)
             }
             .store(in: &self.cancellables)
 
@@ -144,22 +128,29 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             .store(in: &self.cancellables)
     }
 
+    private func dataSourceChanged(to travels: [Travel], in section: Travel.Section) {
+        guard var snapshot = self.diffableDataSource?.snapshot() else { return }
+        snapshot.deleteSections([section])
+        switch section {
+        case .dummy: snapshot.insertSections([.dummy], beforeSection: .reserved)
+        case .reserved: snapshot.insertSections([.reserved], beforeSection: .ongoing)
+        case .ongoing: snapshot.insertSections([.ongoing], afterSection: .reserved)
+        case .outdated: snapshot.insertSections([.outdated], afterSection: .ongoing)
+        }
+        snapshot.appendItems(travels, toSection: section)
+        self.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, _)
             -> NSCollectionLayoutSection? in
-            let sectionLayout = Travel.Section.allCases[sectionIndex]
-            switch sectionLayout {
-            case .dummy:
-                return self.createMessageSection()
-            default:
-                return self.createLayoutSection()
-            }
+            let section = Travel.Section.allCases[sectionIndex]
+            return section == .dummy ? self.createMessageSection() : self.createLayoutSection()
         }
         layout.register(
             UINib(nibName: HomeBackgroundView.identifier, bundle: nil),
             forDecorationViewOfKind: ElementKind.background
         )
-
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 30
         layout.configuration = config
@@ -167,41 +158,20 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func createMessageSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize, subitems: [item]
-        )
-
-        let section = NSCollectionLayoutSection(group: group)
+        let section = self.createSection(fractionalWidth: 1.0)
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 0, leading: 0, bottom: 0, trailing: 0
         )
-        section.decorationItems = [
-            NSCollectionLayoutDecorationItem.background(elementKind: ElementKind.background)
-        ]
         return section
     }
 
     private func createLayoutSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
+        let section = self.createSection(fractionalWidth: 0.8)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 25, leading: 20, bottom: 40, trailing: 20
         )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(100)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize, subitems: [item]
-        )
-
+        section.interGroupSpacing = 25
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(30)
         )
@@ -210,17 +180,23 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
+        section.boundarySupplementaryItems = [headerElement]
+        return section
+    }
 
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 25, leading: 20, bottom: 40, trailing: 20
+    private func createSection(fractionalWidth: Double) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
         )
-        section.interGroupSpacing = 25
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .estimated(100)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
         section.decorationItems = [
             NSCollectionLayoutDecorationItem.background(elementKind: ElementKind.background)
         ]
-        section.boundarySupplementaryItems = [headerElement]
         return section
     }
 
@@ -244,8 +220,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func isMessageCell(section: Int, sections: Int) -> Bool {
-        let allSectionsCount = Travel.Section.allCases.count
-        return sections == allSectionsCount && section == 0
+        return sections == Travel.Section.allCases.count && section == 0
     }
 
     private func dequeueMessageCell(
@@ -295,8 +270,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func sectionIndex(by section: Int, with sections: Int) -> Int {
-        let allSectionsCount = Travel.Section.allCases.count
-        if allSectionsCount == sections { return section }
+        if Travel.Section.allCases.count == sections { return section }
         return section + 1 // If dummy section is removed, section index should be increased by one.
     }
 
