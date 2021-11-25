@@ -23,7 +23,7 @@ final class TravelCardCell: OMWCollectionViewCell {
         self.travelTitleLabel.text = travel.title
         self.travelDateLabel.text = travel.startDate?.format(endDate: travel.endDate) ?? ""
         if let landmark = travel.landmarks.randomElement() {
-            self.downloadTask = self.travelCardImageView.setNetworkImage(with: landmark.image)
+            self.task = self.travelCardImageView.setNetworkImage(with: landmark.image)
         }
         self.travelCardImageView.layer.cornerRadius = 10
         self.travelCardImageView.clipsToBounds = true

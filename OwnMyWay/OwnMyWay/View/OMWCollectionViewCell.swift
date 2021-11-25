@@ -8,9 +8,9 @@
 import UIKit
 
 class OMWCollectionViewCell: UICollectionViewCell {
-    var downloadTask: Cancellable?
+    var task: Cancellable?
 
     override func prepareForReuse() {
-        self.downloadTask?.cancelFetch()
+        self.task?.cancelFetch()
     }
 }

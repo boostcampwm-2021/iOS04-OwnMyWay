@@ -37,7 +37,4 @@ extension UIImageView {
         return dataTask
     }
 
-    func cancelFetch(downloadTask: Cancellable?) {
-        downloadTask?.cancelFetch()
-    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LandmarkCardCell: UICollectionViewCell {
+final class LandmarkCardCell: OMWCollectionViewCell {
     static let identifier: String = "LandmarkCardCell"
 
     @IBOutlet weak var imageView: UIImageView!
@@ -29,7 +29,7 @@ final class LandmarkCardCell: UICollectionViewCell {
     }
 
     func configure(with landmark: Landmark) {
-        self.downloadTask = self.imageView.setNetworkImage(with: landmark.image)
+        self.task = self.imageView.setNetworkImage(with: landmark.image)
         self.titleLabel.text = landmark.title
         self.configureAccessibility(with: landmark)
     }
