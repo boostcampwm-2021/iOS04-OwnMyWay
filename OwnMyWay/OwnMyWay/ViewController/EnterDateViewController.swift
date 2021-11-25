@@ -7,7 +7,6 @@
 
 import Combine
 import UIKit
-import FSCalendar
 
 final class EnterDateViewController: UIViewController, Instantiable {
 
@@ -84,10 +83,6 @@ final class EnterDateViewController: UIViewController, Instantiable {
                   let endDate = endDate
             else { return }
             self?.navigationItem.title = "기록 편집하기"
-//            let dayInterval: TimeInterval = 60 * 60 * 24
-//            stride(from: startDate, through: endDate, by: dayInterval).forEach {
-//                self?.calendarView.select($0)
-//            }
             self?.calendarView.selectDate(date: startDate)
             self?.calendarView.selectDate(date: endDate)
             self?.calendarView.reloadCalendar()
