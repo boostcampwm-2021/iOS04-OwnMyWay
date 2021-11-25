@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
+final class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -53,7 +53,7 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
         addRecordCoordinator.start()
     }
 
-    func presentDetailImage(images: [URL], index: Int) {
+    func presentDetailImage(images: [String], index: Int) {
         let detailImageCoordinator = DetailImageCoordinator(
             navigationController: self.navigationController, images: images, index: index
         )

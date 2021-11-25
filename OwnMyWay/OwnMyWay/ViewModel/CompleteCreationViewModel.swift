@@ -17,7 +17,7 @@ protocol CompleteCreationCoordinatingDelegate: AnyObject {
     func popToHome()
 }
 
-class DefaultCompleteCreationViewModel: CompleteCreationViewModel {
+final class DefaultCompleteCreationViewModel: CompleteCreationViewModel {
     var errorPublisher: Published<Error?>.Publisher { $error }
     private let usecase: CompleteCreationUsecase
     private weak var coordinatingDelegate: CompleteCreationCoordinatingDelegate?
@@ -35,11 +35,13 @@ class DefaultCompleteCreationViewModel: CompleteCreationViewModel {
     }
 
     func didTouchCompleteButton() {
-        switch self.usecase.executeCreation(travel: travel) {
-        case .success:
-            self.coordinatingDelegate?.popToHome()
-        case .failure(let error):
-            self.error = error
+        self.usecase.executeCreation(travel: travel) { [weak self] result in
+            switch result {
+            case .success:
+                self?.coordinatingDelegate?.popToHome()
+            case .failure(let error):
+                self?.error = error
+            }
         }
     }
 }

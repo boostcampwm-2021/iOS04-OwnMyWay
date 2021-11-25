@@ -16,7 +16,7 @@ protocol SearchLocationCoordinatingDelegate: AnyObject {
     func dismissToAddRecord(title: String?, latitude: Double, longitude: Double)
 }
 
-class DefaultSearchLocationViewModel: SearchLocationViewModel {
+final class DefaultSearchLocationViewModel: SearchLocationViewModel {
 
     private weak var coordinatingDelegate: SearchLocationCoordinatingDelegate?
 

@@ -22,10 +22,10 @@ protocol DetailRecordViewModel {
 protocol DetailRecordCoordinatingDelegate: AnyObject {
     func pushToAddRecord(record: Record)
     func popToParent(with travel: Travel, isPopable: Bool)
-    func presentDetailImage(images: [URL], index: Int)
+    func presentDetailImage(images: [String], index: Int)
 }
 
-class DefaultDetailRecordViewModel: DetailRecordViewModel {
+final class DefaultDetailRecordViewModel: DetailRecordViewModel {
 
     var recordPublisher: Published<Record>.Publisher { $record }
     var errorPublisher: Published<Error?>.Publisher { $error }
@@ -59,35 +59,40 @@ class DefaultDetailRecordViewModel: DetailRecordViewModel {
 
     func didUpdateRecord(record: Record) {
         self.record = record
-        switch self.usecase.executeRecordUpdate(record: record) {
-        case .success:
-            guard let index = self.travel.records.firstIndex(where: { $0.uuid == record.uuid })
-            else {
-                self.error = RepositoryError.uuidError
-                return
+        self.usecase.executeRecordUpdate(record: record) { [weak self] result in
+            switch result {
+            case .success:
+                guard self?.travel.records.firstIndex(where: { $0.uuid == record.uuid }) != nil
+                else {
+                    self?.error = RepositoryError.uuidError
+                    return
+                }
+            case .failure(let error):
+                self?.error = error
             }
-            self.travel.records[index] = record
-        case .failure(let error):
-            self.error = error
         }
     }
 
     func didTouchDeleteButton() {
-        switch self.usecase.executeRecordDeletion(at: self.record) {
-        case .success:
-            guard let index = self.travel.records.firstIndex(where: { $0 == self.record }) else {
-                self.error = ModelError.recordError
-                return
+        self.usecase.executeRecordDeletion(at: self.record) { [weak self] result in
+            switch result {
+            case .success:
+                guard let index = self?.travel.records.firstIndex(where: { $0 == self?.record })
+                else {
+                    self?.error = ModelError.recordError
+                    return
+                }
+                self?.travel.records.remove(at: index)
+                guard let travel = self?.travel else { return }
+                self?.coordinatingDelegate?.popToParent(with: travel, isPopable: true)
+            case .failure(let error):
+                self?.error = error
             }
-            self.travel.records.remove(at: index)
-            self.coordinatingDelegate?.popToParent(with: self.travel, isPopable: true)
-        case .failure(let error):
-            self.error = error
         }
     }
 
     func didTouchImageView(index: Int) {
-        guard let images = self.record.photoURLs else { return }
-        self.coordinatingDelegate?.presentDetailImage(images: images, index: index)
+        guard let imageIDs = self.record.photoIDs else { return }
+        self.coordinatingDelegate?.presentDetailImage(images: imageIDs, index: index)
     }
 }

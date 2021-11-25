@@ -22,7 +22,9 @@ extension UIView {
         let photoImageView = UIImageView()
         photoImageView.contentMode = .scaleAspectFill
         photoImageView.clipsToBounds = true
-        photoImageView.setImage(with: record.photoURLs?.first)
+        photoImageView.setLocalImage(
+          with: ImageFileManager.shared.imageInDocuemtDirectory(image: record.photoIDs?.first ?? "")
+        )
 
         let titleLabel = UILabel()
         titleLabel.text = record.title

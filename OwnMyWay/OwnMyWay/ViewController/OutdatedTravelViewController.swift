@@ -9,7 +9,7 @@ import Combine
 import MapKit
 import UIKit
 
-class OutdatedTravelViewController: UIViewController, Instantiable,
+final class OutdatedTravelViewController: UIViewController, Instantiable,
                                         TravelUpdatable, TravelEditable {
 
     @IBOutlet private weak var finishButtonHeightConstraint: NSLayoutConstraint!

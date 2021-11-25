@@ -16,7 +16,7 @@ protocol LandmarkRepository {
     func fetchLandmarks(completion: @escaping (Result<[Landmark], Error>) -> Void)
 }
 
-class LocalJSONLandmarkRepository: LandmarkRepository {
+final class LocalJSONLandmarkRepository: LandmarkRepository {
 
     func fetchLandmarks(completion: @escaping (Result<[Landmark], Error>) -> Void) {
         guard let path = Bundle.main.path(forResource: "landmark", ofType: "json"),

@@ -7,14 +7,14 @@
 
 import UIKit
 
-class PhotoCell: UICollectionViewCell {
+final class PhotoCell: UICollectionViewCell {
     static let identifier = "PhotoCell"
 
     @IBOutlet weak var imageView: UIImageView!
 
-    func configure(url: URL) {
+    func configure(url: URL?) {
         self.layer.cornerRadius = 10
-        self.imageView.setImage(with: url)
+        self.imageView.setLocalImage(with: url)
     }
 
     func configureAccessibility(index: Int) {

@@ -28,7 +28,7 @@ enum CalendarState {
     case fulfilled, firstDateEntered, empty, datesExisted
 }
 
-class DefaultEnterDateViewModel: EnterDateViewModel, ObservableObject {
+final class DefaultEnterDateViewModel: EnterDateViewModel, ObservableObject {
     var calendarStatePublisher: Published<CalendarState>.Publisher { $calendarState }
     @Published private var calendarState: CalendarState = .datesExisted
 

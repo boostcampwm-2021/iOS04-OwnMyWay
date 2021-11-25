@@ -7,18 +7,23 @@
 
 import UIKit
 
-class TravelCardCell: UICollectionViewCell {
+final class TravelCardCell: OMWCollectionViewCell {
     static let identifier = "TravelCardCell"
 
     @IBOutlet private weak var travelTitleLabel: UILabel!
     @IBOutlet private weak var travelDateLabel: UILabel!
     @IBOutlet weak var travelCardImageView: UIImageView!
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.travelCardImageView.image = nil
+    }
+
     func configure(with travel: Travel) {
         self.travelTitleLabel.text = travel.title
         self.travelDateLabel.text = travel.startDate?.format(endDate: travel.endDate) ?? ""
         if let landmark = travel.landmarks.randomElement() {
-            self.travelCardImageView.setImage(with: landmark.image)
+            self.task = self.travelCardImageView.setNetworkImage(with: landmark.image)
         }
         self.travelCardImageView.layer.cornerRadius = 10
         self.travelCardImageView.clipsToBounds = true

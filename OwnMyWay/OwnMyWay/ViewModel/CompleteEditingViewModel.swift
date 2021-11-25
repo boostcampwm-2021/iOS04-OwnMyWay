@@ -17,7 +17,7 @@ protocol CompleteEditingCoordinatingDelegate: AnyObject {
     func popToTravelViewController(travel: Travel)
 }
 
-class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
+final class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
     var errorPublisher: Published<Error?>.Publisher { $error }
     private let usecase: CompleteEditingUsecase
     private weak var coordinatingDelegate: CompleteEditingCoordinatingDelegate?
@@ -35,11 +35,13 @@ class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
     }
 
     func didTouchCompleteButton() {
-        switch self.usecase.executeUpdate(travel: travel) {
-        case .success:
-            self.coordinatingDelegate?.popToTravelViewController(travel: travel)
-        case .failure(let error):
-            self.error = error
+        self.usecase.executeUpdate(travel: travel) { [weak self] result in
+            switch result {
+            case .success(let travel):
+                self?.coordinatingDelegate?.popToTravelViewController(travel: travel)
+            case .failure(let error):
+                self?.error = error
+            }
         }
     }
 }

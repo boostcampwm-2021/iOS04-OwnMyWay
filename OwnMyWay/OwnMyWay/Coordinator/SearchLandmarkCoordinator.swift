@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchLandmarkCoordinator: Coordinator, SearchLandmarkCoordinatingDelegate {
+final class SearchLandmarkCoordinator: Coordinator, SearchLandmarkCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController

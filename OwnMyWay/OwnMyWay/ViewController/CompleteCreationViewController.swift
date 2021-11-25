@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-class CompleteCreationViewController: UIViewController, Instantiable {
+final class CompleteCreationViewController: UIViewController, Instantiable {
 
     @IBOutlet private weak var nextButtonHeightConstraint: NSLayoutConstraint!
 

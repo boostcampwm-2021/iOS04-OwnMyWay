@@ -5,6 +5,7 @@
 //  Created by 이청수 on 2021/11/04.
 //
 
+import Combine
 import Foundation
 
 protocol HomeViewModel {
@@ -17,6 +18,7 @@ protocol HomeViewModel {
     func viewDidLoad()
     func didTouchCreateButton()
     func didTouchTravel(flag: Int, item: Int)
+    func didTouchCloseMessage()
 }
 
 protocol HomeCoordinatingDelegate: AnyObject {
@@ -26,7 +28,7 @@ protocol HomeCoordinatingDelegate: AnyObject {
     func pushToOutdatedTravel(travel: Travel)
 }
 
-class DefaultHomeViewModel: HomeViewModel {
+final class DefaultHomeViewModel: HomeViewModel {
 
     var messagePublisher: Published<[Travel]>.Publisher { $travelMessage }
     var reservedTravelPublisher: Published<[Travel]>.Publisher { $reservedTravels }
@@ -40,11 +42,13 @@ class DefaultHomeViewModel: HomeViewModel {
     private let reservedComment: Travel
     private let ongoingComment: Travel
     private let outdatedComment: Travel
+    private var cancellables: Set<AnyCancellable>
 
     @Published private var travelMessage: [Travel]
     @Published private var reservedTravels: [Travel]
     @Published private var ongoingTravels: [Travel]
     @Published private var outdatedTravels: [Travel]
+    @Published private var messageEnabled: Bool
     @Published private var error: Error?
 
     init(usecase: HomeUsecase, coordinatingDelegate: HomeCoordinatingDelegate) {
@@ -54,11 +58,15 @@ class DefaultHomeViewModel: HomeViewModel {
         self.ongoingTravels = []
         self.outdatedTravels = []
         self.travelMessage = []
+        self.messageEnabled = true
+        self.cancellables = []
 
         self.message = Travel.dummy(section: .dummy)
         self.reservedComment = Travel.dummy(section: .dummy)
         self.ongoingComment = Travel.dummy(section: .dummy)
         self.outdatedComment = Travel.dummy(section: .dummy)
+
+        self.configureCancellable()
     }
 
     func viewDidLoad() {
@@ -68,7 +76,7 @@ class DefaultHomeViewModel: HomeViewModel {
                 guard let self = self else { return }
                 let reserveds = travels.filter { $0.flag == Travel.Section.reserved.index }
                 self.reservedTravels = reserveds.isEmpty ? [self.reservedComment] : reserveds
-                self.travelMessage = reserveds.isEmpty ? [self.message] : []
+                self.travelMessage = reserveds.isEmpty && self.messageEnabled ? [self.message] : []
                 let ongoings = travels.filter { $0.flag == Travel.Section.ongoing.index }
                 self.ongoingTravels = ongoings.isEmpty ? [self.ongoingComment] : ongoings
                 let outdateds = travels.filter { $0.flag == Travel.Section.outdated.index }
@@ -94,6 +102,20 @@ class DefaultHomeViewModel: HomeViewModel {
         default:
             return
         }
+    }
+
+    func didTouchCloseMessage() {
+        self.messageEnabled = false
+    }
+
+    private func configureCancellable() {
+        self.$messageEnabled
+            .sink { [weak self] enabled in
+                guard let self = self
+                else { return }
+                self.travelMessage = enabled ? self.travelMessage : []
+            }
+            .store(in: &self.cancellables)
     }
 
     private func didTouchReservedTravel(at index: Int) {

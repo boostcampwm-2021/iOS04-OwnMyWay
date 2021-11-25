@@ -28,7 +28,7 @@ protocol ReservedTravelCoordinatingDelegate: AnyObject {
     func pushToEditTravel(travel: Travel)
 }
 
-class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject {
+final class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject {
     @Published private(set) var travel: Travel
     @Published private var error: Error?
     private(set) var isPossibleStart: Bool
@@ -54,21 +54,25 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
     }
 
     func didDeleteTravel() {
-        switch self.usecase.executeDeletion(of: self.travel) {
-        case .success:
-            self.coordinatingDelegate?.popToHome()
-        case .failure(let error):
-            self.error = error
+        self.usecase.executeDeletion(of: self.travel) { [weak self] result in
+            switch result {
+            case .success:
+                self?.coordinatingDelegate?.popToHome()
+            case .failure(let error):
+                self?.error = error
+            }
         }
     }
 
     func didUpdateTravel(to travel: Travel) {
         self.travel = travel // 자기자신에 업데이트
-        switch self.usecase.executeLandmarkAddition(of: travel) {
-        case .success:
-            break
-        case .failure(let error):
-            self.error = error
+        self.usecase.executeLandmarkAddition(of: travel) { [weak self] result in
+            switch result {
+            case .success:
+                break
+            case .failure(let error):
+                self?.error = error
+            }
         }
     }
 
@@ -83,11 +87,13 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
         }
         self.travel.landmarks.remove(at: index)
 
-        switch self.usecase.executeLandmarkDeletion(at: landmark) {
-        case .success:
-            break
-        case .failure(let error):
-            self.error = error
+        self.usecase.executeLandmarkDeletion(at: landmark) { [weak self] result in
+            switch result {
+            case .success:
+                break
+            case .failure(let error):
+                self?.error = error
+            }
         }
     }
 
@@ -97,11 +103,13 @@ class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject 
 
     func didTouchStartButton() {
         self.travel.flag = Travel.Section.ongoing.index // 자기자신에 업데이트
-        switch self.usecase.executeFlagUpdate(of: self.travel) {
-        case .success:
-            self.coordinatingDelegate?.moveToOngoing(travel: self.travel)
-        case .failure(let error):
-            self.error = error
+        self.usecase.executeFlagUpdate(of: self.travel) { [weak self] result in
+            switch result {
+            case .success(let travel):
+                self?.coordinatingDelegate?.moveToOngoing(travel: travel)
+            case .failure(let error):
+                self?.error = error
+            }
         }
     }
 

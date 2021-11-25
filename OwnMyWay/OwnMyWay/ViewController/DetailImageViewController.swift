@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailImageViewController: UIViewController, Instantiable {
+final class DetailImageViewController: UIViewController, Instantiable {
 
     @IBOutlet private weak var imageStackView: UIStackView!
     @IBOutlet private weak var imageScrollView: UIScrollView!
@@ -21,8 +21,8 @@ class DetailImageViewController: UIViewController, Instantiable {
         super.viewDidLoad()
         self.configureScrollView()
         self.configurePageControl()
-        self.viewModel?.imageURLs.forEach { url in
-            let imageView = configureImageView(with: url)
+        self.viewModel?.imageIDs.forEach { url in
+            let imageView = configureImageView(with: ImageFileManager.shared.imageInDocuemtDirectory(image: url))
             let zoomView = configureZoomView()
             self.addSubViewAndConfigureConstraints(imageView: imageView, zoomView: zoomView)
         }
@@ -45,12 +45,12 @@ class DetailImageViewController: UIViewController, Instantiable {
         self.imageScrollView.delegate = self
     }
 
-    private func configureImageView(with url: URL) -> UIImageView {
+    private func configureImageView(with url: URL?) -> UIImageView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.setImage(with: url)
+        imageView.setLocalImage(with: url)
         return imageView
     }
 
@@ -80,7 +80,7 @@ class DetailImageViewController: UIViewController, Instantiable {
     }
 
     private func configurePageControl() {
-        self.pageControl.numberOfPages = self.viewModel?.imageURLs.count ?? 0
+        self.pageControl.numberOfPages = self.viewModel?.imageIDs.count ?? 0
     }
 
     @IBAction func didTouchBackButton(_ sender: Any) {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
+final class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -67,4 +67,5 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
 
         enterDateVC.travelDidChanged(to: travel)
     }
+
 }

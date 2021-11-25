@@ -88,14 +88,7 @@
                                                             <constraint firstAttribute="height" constant="300" id="gDg-qc-M1P"/>
                                                         </constraints>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="허걱!">
-                                                                <attributes>
-                                                                    <color key="NSColor" systemColor="labelColor"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content=" 아직 ">
+                                                            <fragment content="허걱! 아직 ">
                                                                 <attributes>
                                                                     <color key="NSColor" systemColor="labelColor"/>
                                                                     <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
@@ -135,35 +128,35 @@
                                                         <attributedString key="attributedText">
                                                             <fragment content="호잇챠!">
                                                                 <attributes>
-                                                                    <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <color key="NSColor" systemColor="labelColor"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment content=" ">
                                                                 <attributes>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment content="아직">
                                                                 <attributes>
                                                                     <color key="NSColor" systemColor="labelColor"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment content=" 관광명소">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                             <fragment content="를 추가하지 않았어요! ">
                                                                 <attributes>
                                                                     <color key="NSColor" systemColor="labelColor"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
@@ -176,7 +169,7 @@
                                                             <fragment content="  우측 상단의 버튼을 눌러 여행을 수정해보세요!">
                                                                 <attributes>
                                                                     <color key="NSColor" systemColor="labelColor"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
+                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>

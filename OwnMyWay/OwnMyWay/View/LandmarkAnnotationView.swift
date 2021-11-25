@@ -9,7 +9,7 @@ import CoreLocation
 import Foundation
 import MapKit
 
-class LandmarkAnnotationView: MKAnnotationView {
+final class LandmarkAnnotationView: MKAnnotationView {
     static let identifier = "LandmarkAnnotationView"
 
     override var annotation: MKAnnotation? { didSet { configureDetailView() } }
@@ -39,7 +39,7 @@ class LandmarkAnnotationView: MKAnnotationView {
         let detailView = UIView()
         let imageView = UIImageView(frame: rect)
         detailView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.setImage(with: annotation.image)
+        imageView.setLocalImage(with: annotation.image)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         detailView.addSubview(imageView)

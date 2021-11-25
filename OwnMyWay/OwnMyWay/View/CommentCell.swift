@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommentCell: UICollectionViewCell {
+final class CommentCell: UICollectionViewCell {
     static let identifier = "CommentCell"
 
     @IBOutlet private weak var commentLabel: UILabel!

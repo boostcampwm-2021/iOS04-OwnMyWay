@@ -10,7 +10,7 @@ import CoreData
 import Foundation
 
 @objc(LandmarkMO)
-public class LandmarkMO: NSManagedObject {
+final public class LandmarkMO: NSManagedObject {
 
     // MO 객체에서 Landmark 생성
     func toLandmark() -> Landmark {

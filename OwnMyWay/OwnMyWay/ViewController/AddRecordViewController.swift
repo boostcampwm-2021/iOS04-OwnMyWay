@@ -26,7 +26,7 @@ enum TransitionType {
     case cancel, submit
 }
 
-class AddRecordViewController: UIViewController, Instantiable {
+final class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var photoCollectionView: UICollectionView!
     @IBOutlet private weak var titleTextField: UITextField!
@@ -221,7 +221,7 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(
         _ collectionView: UICollectionView, numberOfItemsInSection section: Int
     ) -> Int {
-        return (self.viewModel?.record.photoURLs?.count ?? 0) + 1
+        return (self.viewModel?.record.photoIDs?.count ?? 0) + 1
     }
 
     func collectionView(
@@ -240,9 +240,9 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.configureAccessibility(index: indexPath.item)
             return cell
         default:
-            guard let url = self.viewModel?.record.photoURLs?[indexPath.item - 1]
+            guard let url = self.viewModel?.record.photoIDs?[indexPath.item - 1]
             else { return UICollectionViewCell() }
-            cell.configure(url: url)
+            cell.configure(url: ImageFileManager.shared.imageInDocuemtDirectory(image: url))
             cell.configureAccessibility(index: indexPath.item)
             return cell
         }
@@ -298,7 +298,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                     self?.present(alert, animated: true)
                 default:
                     var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
-                    guard let photoURLsCount = self?.viewModel?.record.photoURLs?.count,
+                    guard let photoURLsCount = self?.viewModel?.record.photoIDs?.count,
                           let maxPhotoCount = self?.viewModel?.maxPhotosCount
                     else { return }
                     config.selectionLimit = maxPhotoCount - photoURLsCount
@@ -319,7 +319,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
           return
         }
 
-        if self.viewModel?.record.photoURLs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
+        if self.viewModel?.record.photoIDs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
             guard let assetId = results[0].assetIdentifier else { return }
             let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
             let date = assetResults.firstObject?.creationDate ?? Date()
@@ -399,7 +399,7 @@ extension AddRecordViewController: UIImagePickerControllerDelegate,
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
     ) {
-        if self.viewModel?.record.photoURLs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
+        if self.viewModel?.record.photoIDs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
             if let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset {
                 let date = asset.creationDate ?? Date()
                 let coordinate = asset.location?.coordinate

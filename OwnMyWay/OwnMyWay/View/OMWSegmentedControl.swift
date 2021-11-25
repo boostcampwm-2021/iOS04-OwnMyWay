@@ -10,7 +10,7 @@ protocol OMWSegmentedControlDelegate: AnyObject {
     func change(to index: Int)
 }
 
-class OMWSegmentedControl: UIView {
+final class OMWSegmentedControl: UIView {
 
     private var buttonTitles: [String] = []
     private var buttons: [UIButton] = []
