@@ -39,7 +39,7 @@ final class LandmarkAnnotationView: MKAnnotationView {
         let detailView = UIView()
         let imageView = UIImageView(frame: rect)
         detailView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.setLocalImage(with: annotation.image)
+        let _ = imageView.setNetworkImage(with: annotation.image)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         detailView.addSubview(imageView)
