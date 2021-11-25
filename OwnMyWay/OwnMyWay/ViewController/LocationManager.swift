@@ -54,11 +54,15 @@ extension LocationManager: CLLocationManagerDelegate {
               let longitude = lastLocation?.coordinate.longitude,
               let travel = self.travel
         else { return }
-        switch self.repository.addLocation(to: travel, latitude: latitude, longitude: longitude) {
-        case .success:
-            break
-        case .failure:
-            break
+        self.repository.addLocation(
+            to: travel, latitude: latitude, longitude: longitude
+        ) { result in
+            switch result {
+            case .success:
+                break
+            case .failure:
+                break
+            }
         }
     }
 
