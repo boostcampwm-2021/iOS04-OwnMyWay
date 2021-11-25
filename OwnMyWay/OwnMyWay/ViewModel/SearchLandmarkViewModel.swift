@@ -21,7 +21,7 @@ protocol SearchLandmarkCoordinatingDelegate: AnyObject {
     func dismissToAddLandmark(landmark: Landmark)
 }
 
-class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject {
+final class DefaultSearchLandmarkViewModel: SearchLandmarkViewModel, ObservableObject {
 
     var landmarksPublisher: Published<[Landmark]>.Publisher { $landmarks }
     var errorPublisher: Published<Error?>.Publisher { $error }

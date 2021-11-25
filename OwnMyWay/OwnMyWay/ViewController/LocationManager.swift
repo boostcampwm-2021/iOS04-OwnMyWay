@@ -8,7 +8,7 @@
 import CoreLocation
 import UIKit
 
-class LocationManager: CLLocationManager {
+final class LocationManager: CLLocationManager {
 
     private let repository = CoreDataTravelRepository(
         contextFetcher: (UIApplication.shared.delegate as? AppDelegate) ?? AppDelegate()

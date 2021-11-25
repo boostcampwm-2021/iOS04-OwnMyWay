@@ -25,7 +25,7 @@ protocol DetailRecordCoordinatingDelegate: AnyObject {
     func presentDetailImage(images: [String], index: Int)
 }
 
-class DefaultDetailRecordViewModel: DetailRecordViewModel {
+final class DefaultDetailRecordViewModel: DetailRecordViewModel {
 
     var recordPublisher: Published<Record>.Publisher { $record }
     var errorPublisher: Published<Error?>.Publisher { $error }

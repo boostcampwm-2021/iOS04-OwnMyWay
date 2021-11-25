@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EnterDateCoordinator: Coordinator, EnterDateCoordinatingDelegate {
+final class EnterDateCoordinator: Coordinator, EnterDateCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -50,4 +50,5 @@ class EnterDateCoordinator: Coordinator, EnterDateCoordinatingDelegate {
 
         createTravelVC.travelDidChanged(to: travel)
     }
+
 }

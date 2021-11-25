@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-class AddLandmarkViewController: UIViewController,
+final class AddLandmarkViewController: UIViewController,
                                  Instantiable,
                                  TravelUpdatable,
                                  LandmarkDeletable {

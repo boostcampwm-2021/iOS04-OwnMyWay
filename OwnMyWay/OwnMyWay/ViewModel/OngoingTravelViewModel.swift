@@ -31,7 +31,7 @@ protocol StartedCoordinatingDelegate: AnyObject {
     func pushToDetailRecord(record: Record, travel: Travel)
 }
 
-class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewModel {
+final class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewModel {
 
     var travelPublisher: Published<Travel>.Publisher { $travel }
     var errorPublisher: Published<Error?>.Publisher { $error }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationTableViewCell: UITableViewCell {
+final class LocationTableViewCell: UITableViewCell {
     static let identifier = "LocationTableViewCell"
 
     @IBOutlet weak var titleLabel: UILabel!

@@ -10,7 +10,7 @@ import CoreData
 import Foundation
 
 @objc(LocationMO)
-public class LocationMO: NSManagedObject {
+final public class LocationMO: NSManagedObject {
 
     func toLocation() -> Location {
         return Location(latitude: self.latitude, longitude: self.longitude)

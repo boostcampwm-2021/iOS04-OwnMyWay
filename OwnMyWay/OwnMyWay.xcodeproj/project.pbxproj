@@ -66,7 +66,7 @@
 		3FB987A827439030008F0E08 /* addImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB987A727439030008F0E08 /* addImage.png */; };
 		3FD3D980274CF9D20051E2AC /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */; };
 		3FD3D984274E098A0051E2AC /* nanum_handwriting.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3D983274E098A0051E2AC /* nanum_handwriting.ttf */; };
-		3FF20BBA27461BC4007AFF78 /* TravelEditableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */; };
+		3FF20BBA27461BC4007AFF78 /* TravelEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF20BB927461BC4007AFF78 /* TravelEditable.swift */; };
 		AF0BAA64274B82200091F642 /* OMWMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA63274B82200091F642 /* OMWMapView.swift */; };
 		AF0BAA68274BAB620091F642 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA67274BAB620091F642 /* UIButton+.swift */; };
 		AF0C3F1E2743825C007217AF /* RecordUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */; };
@@ -209,7 +209,7 @@
 		3FB987A727439030008F0E08 /* addImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addImage.png; sourceTree = "<group>"; };
 		3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		3FD3D983274E098A0051E2AC /* nanum_handwriting.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nanum_handwriting.ttf; sourceTree = "<group>"; };
-		3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelEditableViewController.swift; sourceTree = "<group>"; };
+		3FF20BB927461BC4007AFF78 /* TravelEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelEditable.swift; sourceTree = "<group>"; };
 		AF0BAA63274B82200091F642 /* OMWMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMWMapView.swift; sourceTree = "<group>"; };
 		AF0BAA67274BAB620091F642 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUpdatable.swift; sourceTree = "<group>"; };
@@ -345,7 +345,7 @@
 				AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */,
 				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
 				2985B1E427427AE900428098 /* LandmarkDeletable.swift */,
-				3FF20BB927461BC4007AFF78 /* TravelEditableViewController.swift */,
+				3FF20BB927461BC4007AFF78 /* TravelEditable.swift */,
 				DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */,
 				29966F80274CA61B00729D39 /* EnterDateViewController.swift */,
 			);
@@ -785,7 +785,7 @@
 				DB5DAEDE274BF5BC001B8627 /* DetailImageViewModel.swift in Sources */,
 				DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */,
 				AF2F6CD827461D6900EA3601 /* LocationTableViewCell.swift in Sources */,
-				3FF20BBA27461BC4007AFF78 /* TravelEditableViewController.swift in Sources */,
+				3FF20BBA27461BC4007AFF78 /* TravelEditable.swift in Sources */,
 				2984F58F274B348F00DDCA2D /* OMWSegmentedControl.swift in Sources */,
 				3F3F8673274B9E340075B9A0 /* HomeBackgroundView.swift in Sources */,
 				AFA6ED802744F811007B251C /* CompleteEditingViewModel.swift in Sources */,

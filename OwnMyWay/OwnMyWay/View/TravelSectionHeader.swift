@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TravelSectionHeader: UICollectionReusableView {
+final class TravelSectionHeader: UICollectionReusableView {
     static let identifier = "TravelSectionHeader"
 
     @IBOutlet private weak var sectionTitleLabel: UILabel!

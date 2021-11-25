@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
+final class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController

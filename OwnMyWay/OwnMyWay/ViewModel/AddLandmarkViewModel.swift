@@ -24,7 +24,7 @@ protocol AddLandmarkCoordinatingDelegate: AnyObject {
     func popToEnterDate(travel: Travel)
 }
 
-class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
+final class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
     var errorPublisher: Published<Error?>.Publisher { $error }
     private(set) var travel: Travel
 

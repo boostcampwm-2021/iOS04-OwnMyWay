@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LandmarkCardCell: UICollectionViewCell {
+final class LandmarkCardCell: UICollectionViewCell {
     static let identifier: String = "LandmarkCardCell"
 
     @IBOutlet weak var imageView: UIImageView!

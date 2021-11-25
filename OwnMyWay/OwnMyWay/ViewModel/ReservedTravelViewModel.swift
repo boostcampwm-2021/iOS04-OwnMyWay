@@ -28,7 +28,7 @@ protocol ReservedTravelCoordinatingDelegate: AnyObject {
     func pushToEditTravel(travel: Travel)
 }
 
-class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject {
+final class DefaultReservedTravelViewModel: ReservedTravelViewModel, ObservableObject {
     @Published private(set) var travel: Travel
     @Published private var error: Error?
     private(set) var isPossibleStart: Bool

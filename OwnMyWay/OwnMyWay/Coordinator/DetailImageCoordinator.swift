@@ -7,7 +7,8 @@
 
 import UIKit
 
-class DetailImageCoordinator: Coordinator, DetailImageCoordinatingDelegate {
+final class DetailImageCoordinator: Coordinator, DetailImageCoordinatingDelegate {
+
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
     var imageIDs: [String]

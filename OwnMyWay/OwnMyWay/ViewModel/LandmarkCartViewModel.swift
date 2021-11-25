@@ -27,7 +27,7 @@ protocol LandmarkCartCoordinatingDelegate: AnyObject {
     func presentSearchLandmarkModally()
 }
 
-class DefaultLandmarkCartViewModel: LandmarkCartViewModel,
+final class DefaultLandmarkCartViewModel: LandmarkCartViewModel,
                                     ObservableObject {
 
     @Published private(set) var travel: Travel

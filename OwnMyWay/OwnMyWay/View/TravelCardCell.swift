@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TravelCardCell: UICollectionViewCell {
+final class TravelCardCell: UICollectionViewCell {
     static let identifier = "TravelCardCell"
 
     @IBOutlet private weak var travelTitleLabel: UILabel!

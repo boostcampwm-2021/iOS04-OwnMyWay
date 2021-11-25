@@ -26,7 +26,7 @@ enum TransitionType {
     case cancel, submit
 }
 
-class AddRecordViewController: UIViewController, Instantiable {
+final class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var photoCollectionView: UICollectionView!
     @IBOutlet private weak var titleTextField: UITextField!

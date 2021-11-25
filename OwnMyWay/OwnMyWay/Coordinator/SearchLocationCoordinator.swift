@@ -7,7 +7,8 @@
 
 import UIKit
 
-class SearchLocationCoordinator: Coordinator, SearchLocationCoordinatingDelegate {
+final class SearchLocationCoordinator: Coordinator, SearchLocationCoordinatingDelegate {
+
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
 
@@ -31,4 +32,5 @@ class SearchLocationCoordinator: Coordinator, SearchLocationCoordinatingDelegate
             parent.update(recordPlace: title, latitude: latitude, longitude: longitude)
         }
     }
+
 }
