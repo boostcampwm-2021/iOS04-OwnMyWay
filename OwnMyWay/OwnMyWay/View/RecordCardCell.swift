@@ -22,7 +22,7 @@ class RecordCardCell: UICollectionViewCell {
         self.recordContentLabel.text = record.title
         self.configureAccessibility(with: record)
     }
-    
+
     func configureAccessibility(with record: Record) {
         guard let title = record.title else { return }
         self.isAccessibilityElement = true
