@@ -25,5 +25,7 @@ extension LandmarkMO {
 }
 
 extension LandmarkMO : Identifiable {
-
+    static func == (lhs: LandmarkMO, rhs: LandmarkMO) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
 }

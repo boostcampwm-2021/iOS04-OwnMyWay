@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Enter Date View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="EnterDateViewController" id="Y6W-OH-hqX" customClass="EnterDateViewController" customModule="OwnMyWay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmK-tN-Tst">
+                                <rect key="frame" x="20.5" y="129.5" width="393.5" height="36"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="날짜">
+                                        <attributes>
+                                            <color key="NSColor" red="0.1803921568627451" green="0.66666666666666663" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="를 선택해주세요">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="labelColor"/>
+                                            <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gy7-DM-dHC" customClass="NextButton" customModule="OwnMyWay" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
+                                <color key="backgroundColor" name="IdentityBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="jwK-Ja-x5x"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="다음">
+                                    <fontDescription key="titleFontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTouchNextButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="kgM-ab-dwW"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DiI-nu-LN7" customClass="OMWCalendar" customModule="OwnMyWay" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="185.5" width="414" height="650.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DiI-nu-LN7" firstAttribute="top" secondItem="UmK-tN-Tst" secondAttribute="bottom" constant="20" id="2hb-n0-GLf"/>
+                            <constraint firstItem="DiI-nu-LN7" firstAttribute="bottom" secondItem="Gy7-DM-dHC" secondAttribute="top" id="3D6-7x-TpZ"/>
+                            <constraint firstItem="DiI-nu-LN7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="9n1-DN-M7Q"/>
+                            <constraint firstItem="Gy7-DM-dHC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="NrR-LF-cmW"/>
+                            <constraint firstAttribute="bottom" secondItem="Gy7-DM-dHC" secondAttribute="bottom" id="SRf-tw-Esl"/>
+                            <constraint firstItem="Gy7-DM-dHC" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Z4m-Uz-L6q"/>
+                            <constraint firstItem="UmK-tN-Tst" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="trailing" multiplier="0.05" id="bCy-z7-siX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="DiI-nu-LN7" secondAttribute="trailing" id="dLm-kZ-UzZ"/>
+                            <constraint firstItem="UmK-tN-Tst" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="bottom" multiplier="0.15" id="l93-Vm-cDY"/>
+                            <constraint firstAttribute="trailing" secondItem="UmK-tN-Tst" secondAttribute="trailing" id="nvq-HJ-9Gx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="calendarView" destination="DiI-nu-LN7" id="UCn-2X-hOU"/>
+                        <outlet property="nextButton" destination="Gy7-DM-dHC" id="l2L-yw-app"/>
+                        <outlet property="nextButtonHeightConstraint" destination="jwK-Ja-x5x" id="7wn-PM-hE0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="94" y="35"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="IdentityBlue">
+            <color red="0.18000000715255737" green="0.66699999570846558" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

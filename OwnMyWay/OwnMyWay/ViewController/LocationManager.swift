@@ -8,8 +8,11 @@
 import CoreLocation
 import UIKit
 
-class LocationManager: CLLocationManager {
-    private let repository = CoreDataTravelRepository()
+final class LocationManager: CLLocationManager {
+
+    private let repository = CoreDataTravelRepository(
+        contextFetcher: (UIApplication.shared.delegate as? AppDelegate) ?? AppDelegate()
+    )
     private var travel: Travel?
     private(set) var isUpdatingLocation = false
 
@@ -51,7 +54,16 @@ extension LocationManager: CLLocationManagerDelegate {
               let longitude = lastLocation?.coordinate.longitude,
               let travel = self.travel
         else { return }
-        self.repository.addLocation(to: travel, latitude: latitude, longitude: longitude)
+        self.repository.addLocation(
+            to: travel, latitude: latitude, longitude: longitude
+        ) { result in
+            switch result {
+            case .success:
+                break
+            case .failure:
+                break
+            }
+        }
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

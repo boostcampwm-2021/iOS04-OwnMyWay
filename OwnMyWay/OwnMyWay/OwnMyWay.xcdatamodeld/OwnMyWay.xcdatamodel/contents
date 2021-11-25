@@ -18,7 +18,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="photoURLs" optional="YES" attributeType="Transformable" customClassName="[URL]"/>
+        <attribute name="photoIDs" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="placeDescription" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -37,7 +37,7 @@
     <elements>
         <element name="LandmarkMO" positionX="-51.3515625" positionY="221.359375" width="128" height="133"/>
         <element name="LocationMO" positionX="289.9140625" positionY="246.36328125" width="128" height="88"/>
-        <element name="RecordMO" positionX="290.28125" positionY="9.48828125" width="128" height="178"/>
+        <element name="RecordMO" positionX="290.28125" positionY="9.48828125" width="128" height="164"/>
         <element name="TravelMO" positionX="-36" positionY="9" width="128" height="163"/>
     </elements>
 </model>

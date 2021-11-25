@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
+final class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -22,7 +22,9 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultDetailRecordUsecase(repository: repository)
         let detailRecordVM = DefaultDetailRecordViewModel(
             record: self.record, travel: self.travel, usecase: usecase, coordinatingDelegate: self
@@ -45,10 +47,18 @@ class DetailRecordCoordinator: Coordinator, DetailRecordCoordinatingDelegate {
 
     func pushToAddRecord(record: Record) {
         let addRecordCoordinator = AddRecordCoordinator(
-            navigationController: self.navigationController, record: record
+            navigationController: self.navigationController, record: record, isEditingMode: true
         )
         self.childCoordinators.append(addRecordCoordinator)
         addRecordCoordinator.start()
+    }
+
+    func presentDetailImage(images: [String], index: Int) {
+        let detailImageCoordinator = DetailImageCoordinator(
+            navigationController: self.navigationController, images: images, index: index
+        )
+        self.childCoordinators.append(detailImageCoordinator)
+        detailImageCoordinator.start()
     }
 
 }

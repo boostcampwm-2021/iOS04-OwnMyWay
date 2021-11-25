@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate {
+final class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -20,7 +20,9 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultReservedTravelUsecase(repository: repository)
         let reservedVM = DefaultReservedTravelViewModel(
             usecase: usecase,
@@ -32,7 +34,7 @@ class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate
             navigationController: self.navigationController,
             travel: travel
         )
-        let cartVC = landmarkCartCoordinator.pass()
+        let cartVC = landmarkCartCoordinator.pass(from: .reserved)
         self.childCoordinators.append(landmarkCartCoordinator)
         reservedVC.bind(viewModel: reservedVM) { cartView in
             reservedVC.addChild(cartVC)

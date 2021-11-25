@@ -8,6 +8,8 @@
 import Foundation
 
 protocol CompleteEditingViewModel {
+    var errorPublisher: Published<Error?>.Publisher { get }
+
     func didTouchCompleteButton()
 }
 
@@ -15,11 +17,12 @@ protocol CompleteEditingCoordinatingDelegate: AnyObject {
     func popToTravelViewController(travel: Travel)
 }
 
-class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
-
+final class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
+    var errorPublisher: Published<Error?>.Publisher { $error }
     private let usecase: CompleteEditingUsecase
     private weak var coordinatingDelegate: CompleteEditingCoordinatingDelegate?
     private let travel: Travel
+    @Published private var error: Error?
 
     init(
         usecase: CompleteEditingUsecase,
@@ -32,8 +35,13 @@ class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
     }
 
     func didTouchCompleteButton() {
-        self.usecase.executeUpdate(travel: travel)
-        self.coordinatingDelegate?.popToTravelViewController(travel: travel)
+        self.usecase.executeUpdate(travel: travel) { [weak self] result in
+            switch result {
+            case .success(let travel):
+                self?.coordinatingDelegate?.popToTravelViewController(travel: travel)
+            case .failure(let error):
+                self?.error = error
+            }
+        }
     }
-
 }

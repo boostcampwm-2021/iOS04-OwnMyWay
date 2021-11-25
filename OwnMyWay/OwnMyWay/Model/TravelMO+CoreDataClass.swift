@@ -10,7 +10,7 @@ import CoreData
 import Foundation
 
 @objc(TravelMO)
-public class TravelMO: NSManagedObject {
+final public class TravelMO: NSManagedObject {
     func toTravel() -> Travel {
         var result = Travel(
             uuid: self.uuid,

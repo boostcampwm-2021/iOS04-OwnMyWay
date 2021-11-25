@@ -9,7 +9,7 @@ import CoreLocation
 import Foundation
 import MapKit
 
-class LandmarkAnnotationView: MKAnnotationView {
+final class LandmarkAnnotationView: MKAnnotationView {
     static let identifier = "LandmarkAnnotationView"
 
     override var annotation: MKAnnotation? { didSet { configureDetailView() } }
@@ -27,6 +27,7 @@ class LandmarkAnnotationView: MKAnnotationView {
     func configure() {
         self.canShowCallout = true
         self.image = UIImage(named: "LandmarkPin")
+        self.frame.size = CGSize(width: 40, height: 40)
         self.configureDetailView()
     }
 
@@ -38,7 +39,7 @@ class LandmarkAnnotationView: MKAnnotationView {
         let detailView = UIView()
         let imageView = UIImageView(frame: rect)
         detailView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.setImage(with: annotation.image)
+        let _ = imageView.setNetworkImage(with: annotation.image)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         detailView.addSubview(imageView)

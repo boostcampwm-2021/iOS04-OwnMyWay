@@ -8,10 +8,15 @@
 import Combine
 import Foundation
 
+enum SuperVC {
+    case create
+    case reserved
+}
+
 protocol LandmarkCartViewModel: TravelUpdatable {
     var travel: Travel { get }
     var travelPublisher: Published<Travel>.Publisher { get }
-
+    var superVC: SuperVC { get }
     func didAddLandmark(with landmark: Landmark)
     func didDeleteLandmark(at index: Int) -> Landmark
     func didTouchPlusButton()
@@ -22,20 +27,23 @@ protocol LandmarkCartCoordinatingDelegate: AnyObject {
     func presentSearchLandmarkModally()
 }
 
-class DefaultLandmarkCartViewModel: LandmarkCartViewModel,
+final class DefaultLandmarkCartViewModel: LandmarkCartViewModel,
                                     ObservableObject {
 
     @Published private(set) var travel: Travel
     var travelPublisher: Published<Travel>.Publisher { $travel }
+    var superVC: SuperVC
 
     private weak var coordinatingDelegate: LandmarkCartCoordinatingDelegate?
 
     init(
         coordinatingDelegate: LandmarkCartCoordinatingDelegate,
-        travel: Travel
+        travel: Travel,
+        superVC: SuperVC
     ) {
         self.coordinatingDelegate = coordinatingDelegate
         self.travel = travel
+        self.superVC = superVC
     }
 
     func didAddLandmark(with landmark: Landmark) {

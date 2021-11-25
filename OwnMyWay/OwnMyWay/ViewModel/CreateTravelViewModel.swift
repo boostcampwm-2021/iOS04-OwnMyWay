@@ -10,41 +10,30 @@ import Foundation
 
 protocol CreateTravelViewModel {
     var validatePublisher: Published<Bool?>.Publisher { get }
-
-    func viewDidLoad(completion: (String?, Date?, Date?) -> Void)
+    var isEditingMode: Bool { get }
+    func viewDidLoad(completion: (String?) -> Void)
     func travelDidChanged(to travel: Travel)
     func didChangeTitle(text: String?)
-    func didEnterDate(from startDate: Date?, to endDate: Date?)
     func didTouchNextButton()
 }
 
 protocol CreateTravelCoordinatingDelegate: AnyObject {
-    func pushToAddLandmark(travel: Travel, isEditingMode: Bool)
+    func pushToEnterDate(travel: Travel, isEditingMode: Bool)
 }
 
-class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
-    var validatePublisher: Published<Bool?>.Publisher { $validateResult }
+final class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
+
+    var validatePublisher: Published<Bool?>.Publisher { $isValidTitle }
 
     private let usecase: CreateTravelUsecase
     private weak var coordinatingDelegate: CreateTravelCoordinatingDelegate?
 
-    @Published private var validateResult: Bool?
-
+    @Published private var isValidTitle: Bool?
     private var travel: Travel
     private var travelTitle: String?
     private var travelStartDate: Date?
     private var travelEndDate: Date?
-    private var isEditingMode: Bool
-    private var isValidTitle: Bool = false {
-        didSet {
-            validateResult = isValidTitle && isValidDate
-        }
-    }
-    private var isValidDate: Bool = false {
-        didSet {
-            validateResult = isValidTitle && isValidDate
-        }
-    }
+    private(set) var isEditingMode: Bool
 
     init(
         usecase: CreateTravelUsecase,
@@ -56,11 +45,10 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
         self.isEditingMode = travel == nil ? false : true
         self.travel = travel ?? Travel.dummy(section: .reserved)
         self.didChangeTitle(text: travel?.title)
-        self.didEnterDate(from: travel?.startDate, to: travel?.endDate)
     }
 
-    func viewDidLoad(completion: (String?, Date?, Date?) -> Void) {
-        completion(self.travelTitle, self.travelStartDate, self.travelEndDate)
+    func viewDidLoad(completion: (String?) -> Void) {
+        completion(self.travelTitle)
     }
 
     func travelDidChanged(to travel: Travel) {
@@ -80,23 +68,9 @@ class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
         }
     }
 
-    func didEnterDate(from startDate: Date?, to endDate: Date?) {
-        self.travelStartDate = startDate
-        self.travelEndDate = endDate
-        var isValid = false
-        if let startDate = startDate,
-           let endDate = endDate,
-           startDate <= endDate {
-            isValid = true
-        }
-        self.isValidDate = isValid
-    }
-
     func didTouchNextButton() {
         self.travel.title = self.travelTitle
-        self.travel.startDate = self.travelStartDate
-        self.travel.endDate = self.travelEndDate
-        self.coordinatingDelegate?.pushToAddLandmark(
+        self.coordinatingDelegate?.pushToEnterDate(
             travel: self.travel, isEditingMode: self.isEditingMode
         )
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
+final class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -20,7 +20,9 @@ class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultStartedTravelUsecase(repository: repository)
         let ongoingVM = DefaultStartedTravelViewModel(
             travel: self.travel, usecase: usecase, coordinatingDelegate: self
@@ -42,7 +44,7 @@ class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
 
     func pushToAddRecord(record: Record?) {
         let addRecordCoordinator = AddRecordCoordinator(
-            navigationController: self.navigationController, record: record
+            navigationController: self.navigationController, record: record, isEditingMode: false
         )
         self.childCoordinators.append(addRecordCoordinator)
         addRecordCoordinator.start()
@@ -74,4 +76,5 @@ class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
         self.childCoordinators.append(outdatedTravelCoordinator)
         outdatedTravelCoordinator.start()
     }
+
 }

@@ -9,7 +9,7 @@ import CoreLocation
 import Foundation
 import MapKit
 
-class RecordAnnotationView: MKAnnotationView {
+final class RecordAnnotationView: MKAnnotationView {
     static let identifier = "RecordAnnotationView"
 
     override var annotation: MKAnnotation? { didSet { configureDetailView() } }
@@ -27,6 +27,7 @@ class RecordAnnotationView: MKAnnotationView {
     func configure() {
         self.canShowCallout = true
         self.image = UIImage(named: "RecordPin")
+        self.frame.size = CGSize(width: 40, height: 40)
         self.configureDetailView()
     }
 
@@ -38,7 +39,7 @@ class RecordAnnotationView: MKAnnotationView {
         let detailView = UIView()
         let imageView = UIImageView(frame: rect)
         detailView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.setImage(with: annotation.image)
+        imageView.setLocalImage(with: annotation.image)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         detailView.addSubview(imageView)
@@ -62,8 +63,9 @@ class RecordAnnotation: NSObject, MKAnnotation {
             latitude: record.latitude ?? 0,
             longitude: record.longitude ?? 0
         )
-        guard let photos = record.photoURLs else { return }
-        self.image = photos.first ?? nil
+        guard let photos = record.photoIDs else { return }
+        let photoURLs = photos.map { ImageFileManager.shared.imageInDocuemtDirectory(image: $0) }
+        self.image = photoURLs.first ?? nil
         self.title = record.title
     }
 }

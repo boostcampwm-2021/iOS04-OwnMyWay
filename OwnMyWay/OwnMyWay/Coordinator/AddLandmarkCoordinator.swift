@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
+final class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -30,7 +30,7 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
             navigationController: self.navigationController,
             travel: self.travel
         )
-        let cartVC = landmarkCartCoordinator.pass()
+        let cartVC = landmarkCartCoordinator.pass(from: .create)
         self.childCoordinators.append(landmarkCartCoordinator)
         addLandmarkVC.bind(viewModel: addLandmarkVM) { cartView in
             addLandmarkVC.addChild(cartVC)
@@ -61,10 +61,11 @@ class AddLandmarkCoordinator: Coordinator, AddLandmarkCoordinatingDelegate {
         completeEditingCoordinator.start()
     }
 
-    func popToCreateTravel(travel: Travel) {
-        guard let createTravelVC = self.navigationController.children.last
-                as? CreateTravelViewController else { return }
+    func popToEnterDate(travel: Travel) {
+        guard let enterDateVC = self.navigationController.children.last
+                as? EnterDateViewController else { return }
 
-        createTravelVC.travelDidChanged(to: travel)
+        enterDateVC.travelDidChanged(to: travel)
     }
+
 }

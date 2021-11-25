@@ -8,9 +8,10 @@
 import Combine
 import UIKit
 
-class ReservedTravelViewController: UIViewController,
+final class ReservedTravelViewController: UIViewController,
                                     Instantiable,
                                     TravelEditable,
+                                    TravelUpdatable,
                                     LandmarkDeletable {
 
     @IBOutlet private weak var contentView: UIView!
@@ -32,6 +33,11 @@ class ReservedTravelViewController: UIViewController,
         self.bindContainerVC?(self.cartView)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.bindContainerVC = nil
@@ -45,19 +51,16 @@ class ReservedTravelViewController: UIViewController,
         self.configureButtonConstraint()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let mapViewHeight: CGFloat = UIScreen.main.bounds.width
-        let collectionViewHeight: CGFloat = 220
-        contentView.heightAnchor
-            .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
-            .isActive = true
-        view.layoutIfNeeded()
-    }
-
     func bind(viewModel: ReservedTravelViewModel, closure: @escaping (UIView) -> Void) {
         self.viewModel = viewModel
         self.bindContainerVC = closure
+    }
+
+    func didEditTravel(to travel: Travel) {
+        if let cartVC = self.children.first as? LandmarkCartViewController {
+            cartVC.didUpdateTravel(to: travel)
+        }
+        self.viewModel?.didEditTravel(to: travel)
     }
 
     func didUpdateTravel(to travel: Travel) {
@@ -71,13 +74,17 @@ class ReservedTravelViewController: UIViewController,
         self.viewModel?.didDeleteLandmark(at: landmark)
     }
 
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = self.viewModel?.travel.title
+    }
+
     private func configureButtonConstraint() {
         let bottomPadding = self.view.safeAreaInsets.bottom
         self.startButtonHeightConstraint.constant = 60 + bottomPadding
     }
 
     private func configureDescription() {
-        self.travelTypeLabel.text = "예정된 여행"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "ellipsis"),
             style: .plain,
@@ -99,6 +106,14 @@ class ReservedTravelViewController: UIViewController,
                 }
             }
             .store(in: &cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showToast(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     @objc private func backButtonAction() {
@@ -144,5 +159,4 @@ class ReservedTravelViewController: UIViewController,
     @IBAction func didTouchStartButton(_ sender: Any) {
         self.viewModel?.didTouchStartButton()
     }
-
 }

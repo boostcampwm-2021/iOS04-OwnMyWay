@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompleteCreationCoordinator: Coordinator, CompleteCreationCoordinatingDelegate {
+final class CompleteCreationCoordinator: Coordinator, CompleteCreationCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -20,7 +20,9 @@ class CompleteCreationCoordinator: Coordinator, CompleteCreationCoordinatingDele
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultCompleteCreationUsecase(repository: repository)
         let completeCreationVM = DefaultCompleteCreationViewModel(
             usecase: usecase, coordinatingDelegate: self, travel: self.travel

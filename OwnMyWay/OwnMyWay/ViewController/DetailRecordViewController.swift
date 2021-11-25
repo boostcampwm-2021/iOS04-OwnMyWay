@@ -8,15 +8,14 @@
 import Combine
 import UIKit
 
-class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatable {
+final class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatable {
 
-    @IBOutlet weak var imageScrollView: UIScrollView!
-    @IBOutlet weak var imageStackView: UIStackView!
-    @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet private weak var imageScrollView: UIScrollView!
+    @IBOutlet private weak var imageStackView: UIStackView!
+    @IBOutlet private weak var pageControl: UIPageControl!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var timeAndLocationLabel: UILabel!
+    @IBOutlet private weak var contentLabel: UILabel!
 
     private var viewModel: DetailRecordViewModel?
     private var cancellables: Set<AnyCancellable> = []
@@ -29,6 +28,11 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         self.configureSettingButton()
         self.configureDocumentInteractionController()
         self.configureCancellable()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -50,6 +54,10 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         self.imageScrollView.delegate = self
     }
 
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+    }
+
     private func configureDocumentInteractionController() {
         self.documentInteractionController.delegate = self
     }
@@ -67,14 +75,17 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         self.viewModel?.recordPublisher.sink { [weak self] record in
             self?.navigationItem.title = "게시물"
             self?.titleLabel.text = record.title
-            self?.timeLabel.text = record.date?.dateTime()
-            self?.locationLabel.text = record.placeDescription
+            self?.timeAndLocationLabel.text
+            = "\(record.date?.relativeDateTime() ?? "nil"), \(record.placeDescription ?? "nil")에서"
             self?.contentLabel.text = record.content
             self?.imageStackView.removeAllArranged()
-            record.photoURLs?.forEach { url in
+            record.photoIDs?.forEach { photoID in
                 let imageView = UIImageView()
-                imageView.setImage(with: url)
-                imageView.contentMode = .scaleAspectFit
+                imageView.setLocalImage(
+                    with: ImageFileManager.shared.imageInDocuemtDirectory(image: photoID)
+                )
+                imageView.contentMode = .scaleAspectFill
+                imageView.clipsToBounds = true
                 NSLayoutConstraint.activate([
                     imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
                 ])
@@ -82,10 +93,18 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
             }
             self?.configurePageControl(record: record)
         }.store(in: &self.cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showToast(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     private func configurePageControl(record: Record) {
-        guard let numberOfPages = record.photoURLs?.count else { return }
+        guard let numberOfPages = record.photoIDs?.count else { return }
         self.pageControl.numberOfPages = numberOfPages
     }
 
@@ -125,6 +144,10 @@ class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatabl
         actionSheet.addAction(shareAction)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true)
+    }
+
+    @IBAction func didTouchImageView(_ sender: UITapGestureRecognizer) {
+        self.viewModel?.didTouchImageView(index: self.pageControl.currentPage)
     }
 }
 

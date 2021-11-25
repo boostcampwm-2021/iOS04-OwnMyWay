@@ -7,26 +7,33 @@
 
 import UIKit
 
-class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
+final class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
     private var record: Record?
+    private var isEditingMode: Bool
 
-    init(navigationController: UINavigationController, record: Record?) {
+    init(navigationController: UINavigationController, record: Record?, isEditingMode: Bool) {
         self.childCoordinators = []
         self.navigationController = navigationController
         self.record = record
+        self.isEditingMode = isEditingMode
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultAddRecordUsecase(
             repository: repository,
             imageFileManager: ImageFileManager.shared
         )
         let addRecordVM = DefaultAddRecordViewModel(
-            record: self.record, usecase: usecase, coordinatingDelegate: self
+            record: self.record,
+            usecase: usecase,
+            coordinatingDelegate: self,
+            isEditingMode: self.isEditingMode
         )
         let addRecordVC = AddRecordViewController.instantiate(storyboardName: "AddRecord")
         addRecordVC.bind(viewModel: addRecordVM)
@@ -47,4 +54,5 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
         self.childCoordinators.append(searchLocationCoordinator)
         searchLocationCoordinator.start()
     }
+
 }

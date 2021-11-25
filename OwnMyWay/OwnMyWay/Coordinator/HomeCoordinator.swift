@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
+final class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -18,7 +18,9 @@ class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultHomeUsecase(repository: repository)
         let homeVM = DefaultHomeViewModel(usecase: usecase, coordinatingDelegate: self)
         let homeVC = HomeViewController.instantiate(storyboardName: "Home")
@@ -59,4 +61,5 @@ class HomeCoordinator: Coordinator, HomeCoordinatingDelegate {
         self.childCoordinators.append(outdatedTravelCoordinator)
         outdatedTravelCoordinator.start()
     }
+
 }

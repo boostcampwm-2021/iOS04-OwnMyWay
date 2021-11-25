@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecordCardCell: UICollectionViewCell {
+final class RecordCardCell: UICollectionViewCell {
 
     static let identifier = "RecordCardCell"
 
@@ -16,8 +16,17 @@ class RecordCardCell: UICollectionViewCell {
 
     func configure(with record: Record) {
         self.makeShadow()
-        guard let photos = record.photoURLs else { return }
-        self.recordCardImageView.setImage(with: photos.first)
+        guard let photos = record.photoIDs else { return }
+        let photoURLs = photos.map { ImageFileManager.shared.imageInDocuemtDirectory(image: $0) }
+        self.recordCardImageView.setLocalImage(with: photoURLs.first ?? nil)
         self.recordContentLabel.text = record.title
+        self.configureAccessibility(with: record)
+    }
+
+    func configureAccessibility(with record: Record) {
+        guard let title = record.title else { return }
+        self.isAccessibilityElement = true
+        self.accessibilityValue = "기록: \(title)"
+        self.accessibilityHint = "눌러서 기록을 자세히 볼 수 있어요."
     }
 }

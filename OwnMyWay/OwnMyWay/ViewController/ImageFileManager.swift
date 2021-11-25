@@ -7,15 +7,19 @@
 
 import Foundation
 
-class ImageFileManager {
+final class ImageFileManager {
     private let fileManager: FileManager
     private let appDirectory: String
+    private let cache: URLCache
 
     static let shared = ImageFileManager(fileManager: FileManager.default)
 
     private init(fileManager: FileManager) {
         self.fileManager = fileManager
         self.appDirectory = "OwnMyWay"
+        let cachesURL = self.fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
+        cache = .init(memoryCapacity: 0, diskCapacity: 100_000_000, directory: diskCacheURL)
         do {
             try self.configureAppURL()
         } catch let error {
@@ -23,7 +27,11 @@ class ImageFileManager {
         }
     }
 
-    func copyPhoto(from source: URL, completion: (URL?, Error?) -> Void) {
+    func imageInDocuemtDirectory(image: String) -> URL? {
+        return self.appURL()?.appendingPathComponent(image)
+    }
+
+    func copyPhoto(from source: URL, completion: (Result<String, Error>) -> Void) {
         guard let destinationURL = self.appURL()?
                 .appendingPathComponent(UUID().uuidString)
                 .appendingPathExtension(source.pathExtension)
@@ -33,12 +41,16 @@ class ImageFileManager {
                 try self.fileManager.copyItem(at: source, to: destinationURL)
             }
         } catch let error {
-            completion(nil, error)
+            completion(.failure(error))
         }
-        completion(destinationURL, nil)
+        completion(.success(destinationURL.lastPathComponent))
     }
 
-    func removePhoto(at url: URL, completion: (Result<Void, Error>) -> Void) {
+    func removePhoto(of photoID: String, completion: (Result<Void, Error>) -> Void) {
+        guard let url = self.imageInDocuemtDirectory(image: photoID) else {
+            completion(.failure(NSError.init()))
+            return
+        }
         do {
             if self.photoExists(at: url) {
                 try self.fileManager.removeItem(at: url)
@@ -68,6 +80,16 @@ class ImageFileManager {
 
     private func appURL() -> URL? {
         return self.documentURL()?.appendingPathComponent(self.appDirectory)
+    }
+
+    func cachedData(request: URLRequest) -> Data? {
+        return self.cache.cachedResponse(for: request)?.data
+    }
+
+    func saveToCache(request: URLRequest, response: URLResponse, data: Data) {
+        self.cache.storeCachedResponse(
+            CachedURLResponse(response: response, data: data), for: request
+        )
     }
 
 }

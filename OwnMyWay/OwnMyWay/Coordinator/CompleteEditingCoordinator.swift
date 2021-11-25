@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelegate {
+final class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -20,7 +20,9 @@ class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelega
     }
 
     func start() {
-        let repository = CoreDataTravelRepository()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        else { return }
+        let repository = CoreDataTravelRepository(contextFetcher: appDelegate)
         let usecase = DefaultCompleteEditingUsecase(repository: repository)
         let completeEditingVM = DefaultCompleteEditingViewModel(
             usecase: usecase, coordinatingDelegate: self, travel: self.travel
@@ -39,7 +41,7 @@ class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelega
         }
         guard let travelVC = travelVC as? UIViewController & TravelEditable
         else { return }
-        travelVC.didUpdateTravel(to: travel)
+        travelVC.didEditTravel(to: travel)
         self.navigationController.popToViewController(travelVC, animated: true)
     }
 

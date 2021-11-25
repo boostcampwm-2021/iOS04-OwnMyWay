@@ -7,13 +7,14 @@
 
 import UIKit
 
-class LandmarkCardCell: UICollectionViewCell {
+final class LandmarkCardCell: OMWCollectionViewCell {
     static let identifier: String = "LandmarkCardCell"
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         self.imageView.image = nil
     }
 
@@ -28,8 +29,16 @@ class LandmarkCardCell: UICollectionViewCell {
     }
 
     func configure(with landmark: Landmark) {
-        self.imageView.setImage(with: landmark.image)
+        self.task = self.imageView.setNetworkImage(with: landmark.image)
         self.titleLabel.text = landmark.title
+        self.configureAccessibility(with: landmark)
+    }
+
+    func configureAccessibility(with landmark: Landmark) {
+        guard let title = landmark.title
+        else { return }
+        self.isAccessibilityElement = true
+        self.accessibilityValue = "관광명소: \(title)"
     }
 
     func shake() {

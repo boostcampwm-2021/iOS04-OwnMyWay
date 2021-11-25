@@ -6,24 +6,33 @@
 //
 
 import Foundation
-import UIKit
+
+enum JSONError: Error {
+    case fileError
+    case decodeError
+}
 
 protocol LandmarkRepository {
     func fetchLandmarks(completion: @escaping (Result<[Landmark], Error>) -> Void)
 }
 
-class LocalJSONLandmarkRepository: LandmarkRepository {
+final class LocalJSONLandmarkRepository: LandmarkRepository {
 
     func fetchLandmarks(completion: @escaping (Result<[Landmark], Error>) -> Void) {
-        guard let jsonFile = NSDataAsset.init(name: "landmark")
-        else { return }
+        guard let path = Bundle.main.path(forResource: "landmark", ofType: "json"),
+              let jsonString = try? String(contentsOfFile: path),
+              let data = jsonString.data(using: .utf8)
+        else {
+            completion(.failure(JSONError.fileError))
+            return
+        }
+
         do {
             let landmarkDTOs = try JSONDecoder()
-                .decode([LandmarkDTO].self, from: jsonFile.data)
+                .decode([LandmarkDTO].self, from: data)
             completion(.success(landmarkDTOs.map { $0.toLandmark() }))
-        } catch let error {
-            completion(.failure(error))
+        } catch {
+            completion(.failure(JSONError.decodeError))
         }
     }
-
 }

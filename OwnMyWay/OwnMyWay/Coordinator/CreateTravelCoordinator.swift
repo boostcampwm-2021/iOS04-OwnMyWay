@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
+final class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -31,13 +31,14 @@ class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
         self.navigationController.pushViewController(createTravelVC, animated: true)
     }
 
-    func pushToAddLandmark(travel: Travel, isEditingMode: Bool) {
-        let addLandmarkCoordinator = AddLandmarkCoordinator(
+    func pushToEnterDate(travel: Travel, isEditingMode: Bool) {
+        let enterDateCoordinator = EnterDateCoordinator(
             navigationController: self.navigationController,
             travel: travel,
             isEditingMode: isEditingMode
         )
-        self.childCoordinators.append(addLandmarkCoordinator)
-        addLandmarkCoordinator.start()
+        self.childCoordinators.append(enterDateCoordinator)
+        enterDateCoordinator.start()
     }
+
 }

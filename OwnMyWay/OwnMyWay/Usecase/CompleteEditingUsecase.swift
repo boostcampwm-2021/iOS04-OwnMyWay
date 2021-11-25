@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CompleteEditingUsecase {
-    func executeUpdate(travel: Travel)
+    func executeUpdate(travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void)
 }
 
 struct DefaultCompleteEditingUsecase: CompleteEditingUsecase {
@@ -19,8 +19,9 @@ struct DefaultCompleteEditingUsecase: CompleteEditingUsecase {
         self.repository = repository
     }
 
-    func executeUpdate(travel: Travel) {
-        self.repository.update(travel: travel)
+    func executeUpdate(travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void) {
+        self.repository.update(travel: travel) { result in
+            completion(result)
+        }
     }
-
 }

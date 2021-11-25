@@ -5,9 +5,10 @@
 //  Created by 유한준 on 2021/11/03.
 //
 
+import Combine
 import UIKit
 
-class AddLandmarkViewController: UIViewController,
+final class AddLandmarkViewController: UIViewController,
                                  Instantiable,
                                  TravelUpdatable,
                                  LandmarkDeletable {
@@ -18,10 +19,12 @@ class AddLandmarkViewController: UIViewController,
 
     private var bindContainerVC: ((UIView) -> Void)?
     private var viewModel: AddLandmarkViewModel?
+    private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bindContainerVC?(self.cartView)
+        self.configureCancellables()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -32,14 +35,9 @@ class AddLandmarkViewController: UIViewController,
         }
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let mapViewHeight: CGFloat = UIScreen.main.bounds.width
-        let collectionViewHeight: CGFloat = 220
-        self.contentView.heightAnchor
-            .constraint(equalToConstant: mapViewHeight + collectionViewHeight)
-            .isActive = true
-        self.view.layoutIfNeeded()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
     }
 
     override func viewWillLayoutSubviews() {
@@ -60,9 +58,25 @@ class AddLandmarkViewController: UIViewController,
         self.viewModel?.didDeleteLandmark(at: landmark)
     }
 
+    private func configureCancellables() {
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showToast(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
+    }
+
     private func configureButtonConstraint() {
         let bottomPadding = self.view.safeAreaInsets.bottom
         self.nextButtonHeightConstraint.constant = 60 + bottomPadding
+    }
+
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        guard let isEditingMode = self.viewModel?.isEditingMode else { return }
+        self.navigationItem.title = isEditingMode ? "여행 편집하기" : "새로운 여행"
     }
 
     @IBAction func didTouchNextButton(_ sender: Any) {

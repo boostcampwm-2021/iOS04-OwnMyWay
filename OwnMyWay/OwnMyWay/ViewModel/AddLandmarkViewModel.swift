@@ -9,6 +9,9 @@ import Foundation
 
 protocol AddLandmarkViewModel {
     var travel: Travel { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
+    var isEditingMode: Bool { get }
+
     func didTouchNextButton()
     func didTouchBackButton()
     func didUpdateTravel(to travel: Travel)
@@ -18,14 +21,17 @@ protocol AddLandmarkViewModel {
 protocol AddLandmarkCoordinatingDelegate: AnyObject {
     func pushToCompleteCreation(travel: Travel)
     func pushToCompleteEditing(travel: Travel)
-    func popToCreateTravel(travel: Travel)
+    func popToEnterDate(travel: Travel)
 }
 
-class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
-
+final class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
+    var errorPublisher: Published<Error?>.Publisher { $error }
     private(set) var travel: Travel
+
+    private(set) var isEditingMode: Bool
+    @Published private var error: Error?
+
     private weak var coordinatingDelegate: AddLandmarkCoordinatingDelegate?
-    private var isEditingMode: Bool
 
     init(
         travel: Travel, coordinatingDelegate: AddLandmarkCoordinatingDelegate, isEditingMode: Bool
@@ -44,7 +50,7 @@ class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
     }
 
     func didTouchBackButton() {
-        self.coordinatingDelegate?.popToCreateTravel(travel: travel)
+        self.coordinatingDelegate?.popToEnterDate(travel: travel)
     }
 
     func didUpdateTravel(to travel: Travel) {
@@ -52,7 +58,10 @@ class DefaultAddLandmarkViewModel: AddLandmarkViewModel {
     }
 
     func didDeleteLandmark(at landmark: Landmark) {
-        guard let index = self.travel.landmarks.firstIndex(of: landmark) else { return }
+        guard let index = self.travel.landmarks.firstIndex(of: landmark) else {
+            self.error = ModelError.indexError
+            return
+        }
         self.travel.landmarks.remove(at: index)
     }
 }

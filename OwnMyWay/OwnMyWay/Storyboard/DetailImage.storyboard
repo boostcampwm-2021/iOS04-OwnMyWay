@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detail Image View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="DetailImageViewController" id="Y6W-OH-hqX" customClass="DetailImageViewController" customModule="OwnMyWay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="loZ-PL-P0K">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mzs-rH-k0t">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="mzs-rH-k0t" firstAttribute="height" secondItem="bLf-A9-D8B" secondAttribute="height" id="CVL-iC-L6z"/>
+                                    <constraint firstItem="mzs-rH-k0t" firstAttribute="bottom" secondItem="Pjv-j5-ixI" secondAttribute="bottom" id="KMK-6B-sCe"/>
+                                    <constraint firstItem="mzs-rH-k0t" firstAttribute="top" secondItem="Pjv-j5-ixI" secondAttribute="top" id="LgO-Yb-ueX"/>
+                                    <constraint firstItem="mzs-rH-k0t" firstAttribute="leading" secondItem="Pjv-j5-ixI" secondAttribute="leading" id="eW7-ao-Oh6"/>
+                                    <constraint firstItem="mzs-rH-k0t" firstAttribute="trailing" secondItem="Pjv-j5-ixI" secondAttribute="trailing" id="z9u-NY-AHB"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Pjv-j5-ixI"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="bLf-A9-D8B"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xp6-fO-cZ3">
+                                <rect key="frame" x="350" y="64" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="IHx-Ut-P8N"/>
+                                    <constraint firstAttribute="height" constant="44" id="wa0-j7-8hH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchBackButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="k2W-Pe-osM"/>
+                                </connections>
+                            </button>
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="R5J-Af-tuI">
+                                <rect key="frame" x="129" y="816" width="156" height="26"/>
+                            </pageControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="loZ-PL-P0K" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="3Rr-Zg-kUy"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Xp6-fO-cZ3" secondAttribute="trailing" constant="20" id="A00-sZ-d1L"/>
+                            <constraint firstItem="loZ-PL-P0K" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Zeh-R1-rCi"/>
+                            <constraint firstItem="R5J-Af-tuI" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-20" id="fnL-Qy-XC4"/>
+                            <constraint firstItem="loZ-PL-P0K" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hXm-n2-JWK"/>
+                            <constraint firstItem="R5J-Af-tuI" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="j1G-CV-LGe"/>
+                            <constraint firstItem="loZ-PL-P0K" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="n6e-Qp-pA2"/>
+                            <constraint firstItem="Xp6-fO-cZ3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="xes-JL-icm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="Xp6-fO-cZ3" id="lNt-5Q-YXj"/>
+                        <outlet property="imageScrollView" destination="loZ-PL-P0K" id="rIC-qc-EKR"/>
+                        <outlet property="imageStackView" destination="mzs-rH-k0t" id="blV-7M-iHD"/>
+                        <outlet property="pageControl" destination="R5J-Af-tuI" id="dOw-tH-vX1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="37.681159420289859" y="93.75"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+    </resources>
+</document>

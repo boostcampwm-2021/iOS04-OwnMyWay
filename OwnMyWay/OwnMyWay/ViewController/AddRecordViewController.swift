@@ -22,30 +22,40 @@ let supportedPhotoExtensions = [
     UTType.gif.identifier
 ]
 
-class AddRecordViewController: UIViewController, Instantiable {
+enum TransitionType {
+    case cancel, submit
+}
+
+final class AddRecordViewController: UIViewController, Instantiable {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var photoCollectionView: UICollectionView!
     @IBOutlet private weak var titleTextField: UITextField!
-    @IBOutlet private weak var contentTextField: UITextField!
+    @IBOutlet private weak var contentTextView: UITextView!
     @IBOutlet private weak var datePicker: UIDatePicker!
     @IBOutlet private weak var locationButton: UIButton!
 
     private var viewModel: AddRecordViewModel?
     private var cancellables: Set<AnyCancellable> = []
+    private var transitionType: TransitionType = .cancel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureTextView()
         self.configureGestureRecognizer()
         self.configureNotifications()
         self.configureNibs()
         self.configurePhotoCollectionView()
-        self.configureNavigation()
         self.configureCancellable()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.configureNavigationController()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if self.isMovingFromParent {
+        if self.isMovingFromParent && self.transitionType == .cancel {
             self.viewModel?.didTouchBackButton()
         }
     }
@@ -60,6 +70,12 @@ class AddRecordViewController: UIViewController, Instantiable {
         )
     }
 
+    private func configureTextView() {
+        self.contentTextView.layer.cornerRadius = 10
+        self.contentTextView.textContainerInset = .init(top: 20, left: 15, bottom: 20, right: 15)
+        self.contentTextView.delegate = self
+    }
+
     private func configureNibs() {
         self.photoCollectionView.register(
             UINib(nibName: PhotoCell.identifier, bundle: nil),
@@ -72,14 +88,16 @@ class AddRecordViewController: UIViewController, Instantiable {
         self.photoCollectionView.dataSource = self
     }
 
-    private func configureNavigation() {
-        self.navigationItem.title = "게시물 작성"
+    private func configureNavigationController() {
+        self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "완료",
             style: .plain,
             target: self,
             action: #selector(submitButtonAction)
         )
+        guard let isEditingMode = self.viewModel?.isEditingMode else { return }
+        self.navigationItem.title = isEditingMode ? "게시물 편집" : "게시물 작성"
     }
 
     private func configureCancellable() {
@@ -97,21 +115,26 @@ class AddRecordViewController: UIViewController, Instantiable {
                 self?.locationButton.setTitle(record.placeDescription, for: .normal)
                 self?.datePicker.date = record.date ?? Date()
                 self?.titleTextField.text = record.title
-                self?.contentTextField.text = record.content
+                self?.contentTextView.text = record.content
             }
             .store(in: &cancellables)
+
+        self.viewModel?.errorPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] optionalError in
+                guard let error = optionalError else { return }
+                ErrorManager.showToast(with: error, to: self)
+            }
+            .store(in: &self.cancellables)
     }
 
     @objc private func submitButtonAction() {
+        self.transitionType = .submit
         self.viewModel?.didTouchSubmitButton()
     }
 
     @IBAction func didChangeTitle(_ sender: UITextField) {
         self.viewModel?.didEnterTitle(with: sender.text)
-    }
-
-    @IBAction func didChangeContent(_ sender: UITextField) {
-        self.viewModel?.didEnterContent(with: sender.text)
     }
 
     @IBAction func didChangeDate(_ sender: UIDatePicker) {
@@ -120,6 +143,19 @@ class AddRecordViewController: UIViewController, Instantiable {
 
     @IBAction func didChangeLocation(_ sender: Any) {
         self.viewModel?.didTouchLocationButton()
+    }
+}
+
+extension AddRecordViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        self.viewModel?.didEnterContent(with: textView.text)
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        let scrollPoint: CGPoint = CGPoint.init(
+            x: 0, y: textView.frame.origin.y + textView.frame.height
+        )
+        self.scrollView.setContentOffset(scrollPoint, animated: true)
     }
 }
 
@@ -185,7 +221,7 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(
         _ collectionView: UICollectionView, numberOfItemsInSection section: Int
     ) -> Int {
-        return (self.viewModel?.record.photoURLs?.count ?? 0) + 1
+        return (self.viewModel?.record.photoIDs?.count ?? 0) + 1
     }
 
     func collectionView(
@@ -201,11 +237,13 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
             guard let url = Bundle.main.url(forResource: "addImage", withExtension: "png")
             else { return UICollectionViewCell() }
             cell.configure(url: url)
+            cell.configureAccessibility(index: indexPath.item)
             return cell
         default:
-            guard let url = self.viewModel?.record.photoURLs?[indexPath.item - 1]
+            guard let url = self.viewModel?.record.photoIDs?[indexPath.item - 1]
             else { return UICollectionViewCell() }
-            cell.configure(url: url)
+            cell.configure(url: ImageFileManager.shared.imageInDocuemtDirectory(image: url))
+            cell.configureAccessibility(index: indexPath.item)
             return cell
         }
     }
@@ -213,13 +251,14 @@ extension AddRecordViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case 0:
-            if #available(iOS 14.0, *) {
-                self.openPicker()
+            if self.viewModel?.isPhotoAddable == false {
+                self.showToast(message: "사진은 \(self.viewModel?.maxPhotosCount ?? 0)장까지 추가할 수 있어요")
             } else {
-                guard let url = URL(string: "https://www.apple.com/kr/iphone/?afid=p238%7CsO8L3jewZ-dc_mtid_18707vxu38484_pcrid_554483931491_pgrid_16348496961_&cid=aos-kr-kwgo-Brand--slid-zkwkkO5G--product--"),
-                      UIApplication.shared.canOpenURL(url)
-                else { return }
-                UIApplication.shared.open(url, options: [:])
+                if #available(iOS 14.0, *) {
+                    self.openPicker()
+                } else {
+                    self.openImagePicker()
+                }
             }
         default:
             self.viewModel?.didRemovePhoto(at: indexPath.item - 1)
@@ -259,8 +298,10 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                     self?.present(alert, animated: true)
                 default:
                     var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
-
-                    config.selectionLimit = 0
+                    guard let photoURLsCount = self?.viewModel?.record.photoIDs?.count,
+                          let maxPhotoCount = self?.viewModel?.maxPhotosCount
+                    else { return }
+                    config.selectionLimit = maxPhotoCount - photoURLsCount
                     config.filter = PHPickerFilter.images
 
                     let pickerViewController = PHPickerViewController(configuration: config)
@@ -278,7 +319,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
           return
         }
 
-        if self.viewModel?.record.photoURLs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
+        if self.viewModel?.record.photoIDs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
             guard let assetId = results[0].assetIdentifier else { return }
             let assetResults = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil)
             let date = assetResults.firstObject?.creationDate ?? Date()
@@ -305,9 +346,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                     ) { url, error in
                         guard error == nil,
                               let url = url else { return }
-                        DispatchQueue.global().sync {
-                            self?.viewModel?.didEnterPhotoURL(with: url)
-                        }
+                        self?.viewModel?.didEnterPhotoURL(with: url)
                     }
                     break
                 }
@@ -315,11 +354,74 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
         }
         self.dismiss(animated: true, completion: nil)
     }
+}
 
+extension AddRecordViewController: UIImagePickerControllerDelegate,
+                                   UINavigationControllerDelegate {
+    func openImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        let status = PHPhotoLibrary.authorizationStatus()
+
+        switch status {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { newStatus in
+                if newStatus == .authorized {
+                    self.present(imagePicker, animated: true)
+                }
+            }
+        case .restricted, .denied:
+            let alert = UIAlertController(
+                title: "권한 설정이 필요합니다.",
+                message: "Setting -> OwnMyWay -> 사진 -> 선택한 사진 또는 모든 사진",
+                preferredStyle: .alert
+            )
+            let moveAction = UIAlertAction(title: "이동", style: .default) { _ in
+                guard let url = URL(string: UIApplication.openSettingsURLString)
+                else { return }
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(moveAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true)
+        case .authorized, .limited:
+            self.present(imagePicker, animated: true)
+        @unknown default:
+            break
+        }
+    }
+
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
+        if self.viewModel?.record.photoIDs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
+            if let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset {
+                let date = asset.creationDate ?? Date()
+                let coordinate = asset.location?.coordinate
+                self.viewModel?.didEnterTime(with: date)
+                self.viewModel?.didEnterCoordinate(
+                    latitude: coordinate?.latitude.magnitude,
+                    longitude: coordinate?.longitude.magnitude
+                )
+                self.viewModel?.configurePlace(
+                    latitude: coordinate?.latitude.magnitude,
+                    longitude: coordinate?.longitude.magnitude
+                )
+            }
+        }
+        if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            self.viewModel?.didEnterPhotoURL(with: imageURL)
+        }
+        picker.dismiss(animated: true)
+    }
 }
 
 // MARK: - fileprivate extension for UIView
-
 fileprivate extension UIView {
     var firstResponder: UIView? {
         guard !self.isFirstResponder else { return self }

@@ -21,11 +21,15 @@ extension UIView {
     func makePolaroid(with record: Record) {
         let photoImageView = UIImageView()
         photoImageView.contentMode = .scaleAspectFill
-        photoImageView.setImage(with: record.photoURLs?.first)
+        photoImageView.clipsToBounds = true
+        photoImageView.setLocalImage(
+          with: ImageFileManager.shared.imageInDocuemtDirectory(image: record.photoIDs?.first ?? "")
+        )
 
         let titleLabel = UILabel()
-        titleLabel.text = record.content
-        titleLabel.font = UIFont(name: "Chalkduster", size: 17)
+        titleLabel.text = record.title
+        titleLabel.font = UIFont(name: "NanumMiNiSonGeurSsi", size: 23)
+        titleLabel.textColor = .black
 
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
