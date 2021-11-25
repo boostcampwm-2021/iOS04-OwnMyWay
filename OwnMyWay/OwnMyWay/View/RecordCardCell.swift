@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecordCardCell: UICollectionViewCell {
+final class RecordCardCell: UICollectionViewCell {
 
     static let identifier = "RecordCardCell"
 

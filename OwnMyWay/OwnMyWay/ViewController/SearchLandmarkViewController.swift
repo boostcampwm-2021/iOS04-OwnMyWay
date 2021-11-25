@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-class SearchLandmarkViewController: UIViewController, Instantiable {
+final class SearchLandmarkViewController: UIViewController, Instantiable {
 
     // MARK: IBOutlet
     @IBOutlet private weak var searchBar: UISearchBar!

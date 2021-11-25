@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailImageViewController: UIViewController, Instantiable {
+final class DetailImageViewController: UIViewController, Instantiable {
 
     @IBOutlet private weak var imageStackView: UIStackView!
     @IBOutlet private weak var imageScrollView: UIScrollView!

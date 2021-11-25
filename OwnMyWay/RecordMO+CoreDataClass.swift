@@ -10,7 +10,7 @@ import CoreData
 import Foundation
 
 @objc(RecordMO)
-public class RecordMO: NSManagedObject {
+final public class RecordMO: NSManagedObject {
 
     func toRecord() -> Record {
         return Record(

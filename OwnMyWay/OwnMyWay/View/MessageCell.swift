@@ -12,7 +12,7 @@ protocol MessageCellDelegate: AnyObject {
     func didTouchCloseButton()
 }
 
-class MessageCell: UICollectionViewCell {
+final class MessageCell: UICollectionViewCell {
     static let identifier = "MessageCell"
 
     @IBOutlet private weak var createTravelButton: UIButton!

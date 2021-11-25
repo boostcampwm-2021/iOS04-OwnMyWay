@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TravelCardCell: OMWCollectionViewCell {
+final class TravelCardCell: OMWCollectionViewCell {
     static let identifier = "TravelCardCell"
 
     @IBOutlet private weak var travelTitleLabel: UILabel!

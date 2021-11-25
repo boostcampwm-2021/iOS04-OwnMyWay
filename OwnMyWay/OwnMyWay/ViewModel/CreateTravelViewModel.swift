@@ -21,7 +21,7 @@ protocol CreateTravelCoordinatingDelegate: AnyObject {
     func pushToEnterDate(travel: Travel, isEditingMode: Bool)
 }
 
-class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
+final class DefaultCreateTravelViewModel: CreateTravelViewModel, ObservableObject {
 
     var validatePublisher: Published<Bool?>.Publisher { $isValidTitle }
 

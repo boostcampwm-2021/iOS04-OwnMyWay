@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LandmarkCartCoordinator: Coordinator, LandmarkCartCoordinatingDelegate {
+final class LandmarkCartCoordinator: Coordinator, LandmarkCartCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController

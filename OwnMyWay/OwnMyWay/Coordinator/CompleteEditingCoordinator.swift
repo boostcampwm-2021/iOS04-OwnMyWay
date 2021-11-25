@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelegate {
+final class CompleteEditingCoordinator: Coordinator, CompleteEditingCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController

@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "OwnMyWay.svg",
       "idiom" : "universal"
     }
   ],

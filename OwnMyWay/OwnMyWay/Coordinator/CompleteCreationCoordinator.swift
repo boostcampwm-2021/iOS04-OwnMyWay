@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompleteCreationCoordinator: Coordinator, CompleteCreationCoordinatingDelegate {
+final class CompleteCreationCoordinator: Coordinator, CompleteCreationCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController

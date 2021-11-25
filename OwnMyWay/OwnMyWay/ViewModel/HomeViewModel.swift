@@ -28,7 +28,7 @@ protocol HomeCoordinatingDelegate: AnyObject {
     func pushToOutdatedTravel(travel: Travel)
 }
 
-class DefaultHomeViewModel: HomeViewModel {
+final class DefaultHomeViewModel: HomeViewModel {
 
     var messagePublisher: Published<[Travel]>.Publisher { $travelMessage }
     var reservedTravelPublisher: Published<[Travel]>.Publisher { $reservedTravels }

@@ -36,7 +36,7 @@ protocol AddRecordCoordinatingDelegate: AnyObject {
     func presentToSearchLocation()
 }
 
-class DefaultAddRecordViewModel: AddRecordViewModel {
+final class DefaultAddRecordViewModel: AddRecordViewModel {
 
     var validatePublisher: Published<Bool?>.Publisher { $validateResult }
     var recordPublisher: Published<Record>.Publisher { $record }

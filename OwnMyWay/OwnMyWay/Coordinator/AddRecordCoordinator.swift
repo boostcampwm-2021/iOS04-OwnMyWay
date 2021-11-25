@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
+final class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -54,4 +54,5 @@ class AddRecordCoordinator: Coordinator, AddRecordCoordinatingDelegate {
         self.childCoordinators.append(searchLocationCoordinator)
         searchLocationCoordinator.start()
     }
+
 }

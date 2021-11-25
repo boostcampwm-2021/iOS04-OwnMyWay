@@ -17,7 +17,7 @@ protocol CompleteEditingCoordinatingDelegate: AnyObject {
     func popToTravelViewController(travel: Travel)
 }
 
-class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
+final class DefaultCompleteEditingViewModel: CompleteEditingViewModel {
     var errorPublisher: Published<Error?>.Publisher { $error }
     private let usecase: CompleteEditingUsecase
     private weak var coordinatingDelegate: CompleteEditingCoordinatingDelegate?

@@ -17,7 +17,7 @@ protocol DetailImageCoordinatingDelegate: AnyObject {
     func dismissToImageDetail()
 }
 
-class DefaultDetailImageViewModel: DetailImageViewModel {
+final class DefaultDetailImageViewModel: DetailImageViewModel {
     var imageIDs: [String]
     var selectedIndex: Int
     private weak var coordinatingDelegate: DetailImageCoordinatingDelegate?

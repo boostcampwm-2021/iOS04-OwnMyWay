@@ -17,7 +17,7 @@ protocol CompleteCreationCoordinatingDelegate: AnyObject {
     func popToHome()
 }
 
-class DefaultCompleteCreationViewModel: CompleteCreationViewModel {
+final class DefaultCompleteCreationViewModel: CompleteCreationViewModel {
     var errorPublisher: Published<Error?>.Publisher { $error }
     private let usecase: CompleteCreationUsecase
     private weak var coordinatingDelegate: CompleteCreationCoordinatingDelegate?

@@ -9,7 +9,7 @@ import Combine
 import UIKit
 import FSCalendar
 
-class EnterDateViewController: UIViewController, Instantiable {
+final class EnterDateViewController: UIViewController, Instantiable {
 
     @IBOutlet private weak var calendarView: FSCalendar!
     @IBOutlet private weak var nextButton: NextButton!

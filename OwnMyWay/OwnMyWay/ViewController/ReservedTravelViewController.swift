@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-class ReservedTravelViewController: UIViewController,
+final class ReservedTravelViewController: UIViewController,
                                     Instantiable,
                                     TravelEditable,
                                     TravelUpdatable,

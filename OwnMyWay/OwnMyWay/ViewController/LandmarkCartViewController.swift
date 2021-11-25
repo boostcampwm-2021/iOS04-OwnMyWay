@@ -13,13 +13,11 @@ import UIKit
 typealias DataSource = UICollectionViewDiffableDataSource <LandmarkCartViewController.Section,
                                                            Landmark>
 
-class LandmarkCartViewController: UIViewController,
+final class LandmarkCartViewController: UIViewController,
                                   Instantiable,
                                   TravelUpdatable,
                                   MapAvailable,
                                   OMWSegmentedControlDelegate {
-
-//    static let badgeElementKind = "badge-element-kind"
 
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var descriptionLabel: UILabel!

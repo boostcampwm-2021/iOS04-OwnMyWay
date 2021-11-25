@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
+final class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -76,4 +76,5 @@ class OngoingTravelCoordinator: Coordinator, StartedCoordinatingDelegate {
         self.childCoordinators.append(outdatedTravelCoordinator)
         outdatedTravelCoordinator.start()
     }
+
 }

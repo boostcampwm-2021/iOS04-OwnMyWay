@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ImageFileManager {
+final class ImageFileManager {
     private let fileManager: FileManager
     private let appDirectory: String
     private let cache: URLCache

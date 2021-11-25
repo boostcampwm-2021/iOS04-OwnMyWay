@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhotoCell: UICollectionViewCell {
+final class PhotoCell: UICollectionViewCell {
     static let identifier = "PhotoCell"
 
     @IBOutlet weak var imageView: UIImageView!

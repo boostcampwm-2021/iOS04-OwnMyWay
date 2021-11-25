@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DateHeaderView: UICollectionReusableView {
+final class DateHeaderView: UICollectionReusableView {
     static let identifier = "DateHeaderView"
 
     @IBOutlet private weak var dateLabel: UILabel!
