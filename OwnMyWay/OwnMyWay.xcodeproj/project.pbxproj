@@ -31,6 +31,7 @@
 		29966F81274CA61B00729D39 /* EnterDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F80274CA61B00729D39 /* EnterDateViewController.swift */; };
 		29966F83274CA63700729D39 /* EnterDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F82274CA63700729D39 /* EnterDateViewModel.swift */; };
 		29966F85274CA64900729D39 /* EnterDateUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F84274CA64900729D39 /* EnterDateUsecase.swift */; };
+		29966F89274F942B00729D39 /* OMWCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */; };
 		29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */; };
 		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
 		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
@@ -121,6 +122,7 @@
 		DB22BB73272F83DB0004444B /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DB22BB72272F83DB0004444B /* .swiftlint.yml */; };
 		DB2823BD273BC0C2007D8801 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */; };
 		DB2823BE273BC0C2007D8801 /* DateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */; };
+		DB2ED007274FAB470001AB8F /* URLSessionDataTask+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2ED006274FAB470001AB8F /* URLSessionDataTask+.swift */; };
 		DB5DAEDC274BF535001B8627 /* DetailImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */; };
 		DB5DAEDE274BF5BC001B8627 /* DetailImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */; };
 		DB5DAEE0274BF5D9001B8627 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */; };
@@ -175,6 +177,7 @@
 		29966F80274CA61B00729D39 /* EnterDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDateViewController.swift; sourceTree = "<group>"; };
 		29966F82274CA63700729D39 /* EnterDateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDateViewModel.swift; sourceTree = "<group>"; };
 		29966F84274CA64900729D39 /* EnterDateUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDateUsecase.swift; sourceTree = "<group>"; };
+		29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMWCollectionViewCell.swift; sourceTree = "<group>"; };
 		29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewModel.swift; sourceTree = "<group>"; };
 		29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelUsecase.swift; sourceTree = "<group>"; };
 		29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +268,7 @@
 		DB22BB72272F83DB0004444B /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateHeaderView.xib; sourceTree = "<group>"; };
+		DB2ED006274FAB470001AB8F /* URLSessionDataTask+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionDataTask+.swift"; sourceTree = "<group>"; };
 		DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCoordinator.swift; sourceTree = "<group>"; };
 		DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewModel.swift; sourceTree = "<group>"; };
 		DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 				DBA6F68D27461E0C00F3244E /* CLLocationManager+.swift */,
 				AF0BAA67274BAB620091F642 /* UIButton+.swift */,
 				3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */,
+				DB2ED006274FAB470001AB8F /* URLSessionDataTask+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 				3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */,
 				3F3F8679274CC3400075B9A0 /* MessageCell.swift */,
 				3F3F867A274CC3400075B9A0 /* MessageCell.xib */,
+				29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -703,8 +709,10 @@
 				294897C2273BECE6003185E7 /* DetailRecordCoordinator.swift in Sources */,
 				AF1108E4273B8C04009FE728 /* OngoingTravelViewModel.swift in Sources */,
 				DB1D5CD3273CEB8B00B30448 /* TravelRepository.swift in Sources */,
+				DB2ED007274FAB470001AB8F /* URLSessionDataTask+.swift in Sources */,
 				DB9366602739086400B39BC1 /* Coordinator.swift in Sources */,
 				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
+				29966F89274F942B00729D39 /* OMWCollectionViewCell.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
 				3F113A15273A5AA300EA91AA /* CompleteCreationUsecase.swift in Sources */,
 				AF1108E6273B8C18009FE728 /* StartedTravelUsecase.swift in Sources */,

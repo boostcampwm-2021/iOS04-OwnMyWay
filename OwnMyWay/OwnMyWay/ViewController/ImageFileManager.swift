@@ -10,12 +10,16 @@ import Foundation
 final class ImageFileManager {
     private let fileManager: FileManager
     private let appDirectory: String
+    private let cache: URLCache
 
     static let shared = ImageFileManager(fileManager: FileManager.default)
 
     private init(fileManager: FileManager) {
         self.fileManager = fileManager
         self.appDirectory = "OwnMyWay"
+        let cachesURL = self.fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
+        cache = .init(memoryCapacity: 0, diskCapacity: 100_000_000, directory: diskCacheURL)
         do {
             try self.configureAppURL()
         } catch let error {
@@ -76,6 +80,16 @@ final class ImageFileManager {
 
     private func appURL() -> URL? {
         return self.documentURL()?.appendingPathComponent(self.appDirectory)
+    }
+
+    func cachedData(request: URLRequest) -> Data? {
+        return self.cache.cachedResponse(for: request)?.data
+    }
+
+    func saveToCache(request: URLRequest, response: URLResponse, data: Data) {
+        self.cache.storeCachedResponse(
+            CachedURLResponse(response: response, data: data), for: request
+        )
     }
 
 }

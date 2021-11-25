@@ -6,22 +6,35 @@
 //
 
 import UIKit
-import Kingfisher
 
 extension UIImageView {
     func setLocalImage(with url: URL?) {
         self.image = UIImage(contentsOfFile: url?.path ?? "")
     }
 
-    func setNetworkImage(with url: URL?) {
-        guard let url = url else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else {
-                return
+    func setNetworkImage(with url: URL?) -> Cancellable? {
+        guard let url = url else { return nil }
+        let request = URLRequest(url: url)
+
+        if let cachedData = ImageFileManager.shared.cachedData(request: request) {
+            DispatchQueue.main.async {
+                self.image = UIImage(data: cachedData)
             }
+            return nil
+        }
+
+        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else { return }
+            guard let response = response,
+                  let data = data
+            else { return }
             DispatchQueue.main.async {
                 self.image = UIImage(data: data)
             }
-        }.resume()
+            ImageFileManager.shared.saveToCache(request: request, response: response, data: data)
+        }
+        dataTask.resumeFetch()
+        return dataTask
     }
+
 }
