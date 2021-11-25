@@ -49,13 +49,13 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     @Published private(set) var record: Record
     @Published private var error: Error?
 
-    private var tempPhotoURLs: [URL]
-    private var deletedPhotoURLs: [URL]
+    private var tempPhotoIDs: [String]
+    private var deletedPhotoIDs: [String]
 
     private(set) var maxPhotosCount: Int = 10
     private(set) var isEditingMode: Bool
     var isPhotoAddable: Bool {
-        self.record.photoURLs?.count != self.maxPhotosCount
+        self.record.photoIDs?.count != self.maxPhotosCount
     }
 
     private var isValidTitle: Bool = false {
@@ -92,12 +92,12 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     ) {
         self.usecase = usecase
         self.coordinatingDelegate = coordinatingDelegate
-        self.tempPhotoURLs = []
-        self.deletedPhotoURLs = []
+        self.tempPhotoIDs = []
+        self.deletedPhotoIDs = []
         self.record = record ?? Record(
             uuid: UUID(), title: nil, content: nil,
             date: nil, latitude: nil, longitude: nil,
-            photoURLs: [], placeDescription: nil
+            photoIDs: [], placeDescription: nil
         )
         self.isEditingMode = isEditingMode
         self.configureRecord()
@@ -134,34 +134,34 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     }
 
     func didEnterPhotoURL(with url: URL) {
-        self.record.photoURLs?.append(url)
-        let index = (record.photoURLs?.count ?? 0) - 1
-        self.usecase.executePickingPhoto(with: url) { [weak self] url, error in
-            guard error == nil,
-                  let copiedURL = url
-            else {
-                self?.error = error
+        self.record.photoIDs?.append(url.path)
+        let index = (record.photoIDs?.count ?? 0) - 1
+        self.usecase.executePickingPhoto(with: url) { [weak self] result in
+            switch result {
+            case .success(let copiedURL):
+                self?.record.photoIDs?[index] = copiedURL
+                self?.tempPhotoIDs.append(copiedURL)
+                self?.isValidPhotos = true
+            case .failure(let error):
+                print(error)
                 return
             }
-            self?.record.photoURLs?[index] = copiedURL
-            self?.tempPhotoURLs.append(copiedURL)
-            self?.isValidPhotos = true
         }
     }
 
     func didRemovePhoto(at index: Int) {
-        guard let url = self.record.photoURLs?[index] else {
+        guard let url = self.record.photoIDs?[index] else {
             self.error = ModelError.indexError
             return
         }
-        self.deletedPhotoURLs.append(url)
-        self.record.photoURLs?.remove(at: index)
-        self.isValidPhotos = self.record.photoURLs?.count == 0 ? false : true
+        self.deletedPhotoIDs.append(url)
+        self.record.photoIDs?.remove(at: index)
+        self.isValidPhotos = self.record.photoIDs?.count == 0 ? false : true
     }
 
     func didTouchSubmitButton() {
-        self.deletedPhotoURLs.forEach { [weak self] url in
-            self?.usecase.executeRemovingPhoto(url: url) { result in
+        self.deletedPhotoIDs.forEach { [weak self] photoID in
+            self?.usecase.executeRemovingPhoto(of: photoID) { result in
                 switch result {
                 case .success:
                     break
@@ -178,8 +178,8 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
     }
 
     func didTouchBackButton() {
-        self.tempPhotoURLs.forEach { [weak self] url in
-            self?.usecase.executeRemovingPhoto(url: url) { result in
+        self.tempPhotoIDs.forEach { [weak self] photoID in
+            self?.usecase.executeRemovingPhoto(of: photoID) { result in
                 switch result {
                 case .success:
                     break
@@ -212,7 +212,7 @@ class DefaultAddRecordViewModel: AddRecordViewModel {
         self.didEnterTitle(with: self.record.title)
         self.didEnterTime(with: self.record.date)
         self.didEnterCoordinate(latitude: self.record.latitude, longitude: self.record.longitude)
-        if record.photoURLs?.count != 0 { self.isValidPhotos = true }
+        if record.photoIDs?.count != 0 { self.isValidPhotos = true }
     }
 
     private func checkValidation() {

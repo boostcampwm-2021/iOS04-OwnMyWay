@@ -12,9 +12,9 @@ class PhotoCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
 
-    func configure(url: URL) {
+    func configure(url: URL?) {
         self.layer.cornerRadius = 10
-        self.imageView.setImage(with: url)
+        self.imageView.setLocalImage(with: url)
     }
 
     func configureAccessibility(index: Int) {
