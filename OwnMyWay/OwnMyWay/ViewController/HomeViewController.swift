@@ -13,7 +13,6 @@ typealias HomeDataSource = UICollectionViewDiffableDataSource <Travel.Section, T
 final class HomeViewController: UIViewController, Instantiable, TravelFetchable {
 
     @IBOutlet private weak var travelCollectionView: UICollectionView!
-    @IBOutlet private weak var settingButton: UIButton!
     @IBOutlet private weak var createButton: UIButton!
     private var viewModel: HomeViewModel?
     private var diffableDataSource: HomeDataSource?
@@ -21,7 +20,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureButton()
         self.configureNibs()
         self.configureTravelCollectionView()
         self.configureDataSource()
@@ -46,12 +44,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
 
     func fetchTravel() {
         self.viewModel?.viewDidLoad()
-    }
-
-    private func configureButton() {
-        let emptyTitle = ""
-        self.settingButton.setTitle(emptyTitle, for: .normal)
-        self.createButton.setTitle(emptyTitle, for: .normal)
     }
 
     private func configureNibs() {
@@ -94,48 +86,28 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         self.viewModel?.messagePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
-                snapshot.deleteSections([.dummy])
-                if travels.isEmpty {
-                    self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
-                    return
-                }
-                snapshot.insertSections([.dummy], beforeSection: .reserved)
-                snapshot.appendItems(travels, toSection: .dummy)
-                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                self?.dataSourceChanged(to: travels, in: .dummy)
             }
             .store(in: &self.cancellables)
 
         self.viewModel?.reservedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
-                snapshot.deleteSections([.reserved])
-                snapshot.insertSections([.reserved], beforeSection: .ongoing)
-                snapshot.appendItems(travels, toSection: .reserved)
-                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                self?.dataSourceChanged(to: travels, in: .reserved)
             }
             .store(in: &self.cancellables)
 
         self.viewModel?.ongoingTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
-                snapshot.deleteSections([.ongoing])
-                snapshot.insertSections([.ongoing], afterSection: .reserved)
-                snapshot.appendItems(travels, toSection: .ongoing)
-                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                self?.dataSourceChanged(to: travels, in: .ongoing)
             }
             .store(in: &self.cancellables)
 
         self.viewModel?.outdatedTravelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
-                guard var snapshot = self?.diffableDataSource?.snapshot() else { return }
-                snapshot.deleteSections([.outdated])
-                snapshot.insertSections([.outdated], afterSection: .ongoing)
-                snapshot.appendItems(travels, toSection: .outdated)
-                self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+                self?.dataSourceChanged(to: travels, in: .outdated)
             }
             .store(in: &self.cancellables)
 
@@ -148,49 +120,76 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             .store(in: &self.cancellables)
     }
 
+    private func dataSourceChanged(to travels: [Travel], in section: Travel.Section) {
+        guard var snapshot = self.diffableDataSource?.snapshot() else { return }
+        snapshot.deleteSections([section])
+        switch section {
+        case .dummy: snapshot.insertSections([.dummy], beforeSection: .reserved)
+        case .reserved: snapshot.insertSections([.reserved], beforeSection: .ongoing)
+        case .ongoing: snapshot.insertSections([.ongoing], afterSection: .reserved)
+        case .outdated: snapshot.insertSections([.outdated], afterSection: .ongoing)
+        }
+        snapshot.appendItems(travels, toSection: section)
+        self.diffableDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+
     private func createCompositionalLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex, _)
+            -> NSCollectionLayoutSection? in
+            let section = Travel.Section.allCases[sectionIndex]
+            return section == .dummy ? self.createMessageSection() : self.createLayoutSection()
+        }
+        layout.register(
+            UINib(nibName: HomeBackgroundView.identifier, bundle: nil),
+            forDecorationViewOfKind: ElementKind.background
         )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 30
+        layout.configuration = config
+        return layout
+    }
 
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(100)
+    private func createMessageSection() -> NSCollectionLayoutSection {
+        let section = self.createSection(fractionalWidth: 1.0)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 0, leading: 0, bottom: 0, trailing: 0
         )
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize, subitems: [item]
-        )
+        return section
+    }
 
+    private func createLayoutSection() -> NSCollectionLayoutSection {
+        let section = self.createSection(fractionalWidth: 0.8)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 25, leading: 20, bottom: 40, trailing: 20
+        )
+        section.interGroupSpacing = 25
         let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60)
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(30)
         )
         let headerElement = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
+        section.boundarySupplementaryItems = [headerElement]
+        return section
+    }
 
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 25, leading: 20, bottom: 40, trailing: 20
+    private func createSection(fractionalWidth: Double) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)
         )
-        section.interGroupSpacing = 25
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .estimated(100)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
         section.decorationItems = [
             NSCollectionLayoutDecorationItem.background(elementKind: ElementKind.background)
         ]
-        section.boundarySupplementaryItems = [headerElement]
-
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        layout.register(
-            UINib(nibName: HomeBackgroundView.identifier, bundle: nil),
-            forDecorationViewOfKind: ElementKind.background
-        )
-
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 30
-        layout.configuration = config
-        return layout
+        return section
     }
 
     private func createDiffableDataSource() -> HomeDataSource {
@@ -213,8 +212,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func isMessageCell(section: Int, sections: Int) -> Bool {
-        let allSectionsCount = Travel.Section.allCases.count
-        return sections == allSectionsCount && section == 0
+        return sections == Travel.Section.allCases.count && section == 0
     }
 
     private func dequeueMessageCell(
@@ -264,8 +262,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
     }
 
     private func sectionIndex(by section: Int, with sections: Int) -> Int {
-        let allSectionsCount = Travel.Section.allCases.count
-        if allSectionsCount == sections { return section }
+        if Travel.Section.allCases.count == sections { return section }
         return section + 1 // If dummy section is removed, section index should be increased by one.
     }
 
@@ -282,8 +279,6 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         )
         return sectionHeader
     }
-
-    @IBAction func didTouchSettingButton(_ sender: UIButton) {}
 
     @IBAction func didTouchCreateButton(_ sender: UIButton) {
         self.viewModel?.didTouchCreateButton()
@@ -304,6 +299,11 @@ extension HomeViewController: UICollectionViewDelegate, MessageCellDelegate {
     func didTouchButton() {
         self.viewModel?.didTouchCreateButton()
     }
+
+    func didTouchCloseButton() {
+        self.viewModel?.didTouchCloseMessage()
+    }
+
 }
 
 fileprivate extension HomeViewController {
