@@ -50,7 +50,7 @@ class CoreDataTravelRepository: TravelRepository {
         self.contextFetcher = contextFetcher
     }
 
-    func fetchAllTravels(completion: @escaping (Result<[Travel], Error>) -> Void){
+    func fetchAllTravels(completion: @escaping (Result<[Travel], Error>) -> Void) {
         do {
             let travels = try context.fetch(TravelMO.fetchRequest())
             completion(.success(travels.map { $0.toTravel() }))
