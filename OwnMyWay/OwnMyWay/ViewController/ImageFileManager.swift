@@ -10,12 +10,16 @@ import Foundation
 class ImageFileManager {
     private let fileManager: FileManager
     private let appDirectory: String
+    private let cache: URLCache
 
     static let shared = ImageFileManager(fileManager: FileManager.default)
 
     private init(fileManager: FileManager) {
         self.fileManager = fileManager
         self.appDirectory = "OwnMyWay"
+        let cachesURL = self.fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
+        cache = .init(memoryCapacity: 0, diskCapacity: 100_000_000, directory: diskCacheURL)
         do {
             try self.configureAppURL()
         } catch let error {
@@ -78,25 +82,14 @@ class ImageFileManager {
         return self.documentURL()?.appendingPathComponent(self.appDirectory)
     }
 
-    private func cacheURL() -> URL? {
-        return self.fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first
+    func cachedData(request: URLRequest) -> Data? {
+        return self.cache.cachedResponse(for: request)?.data
     }
 
-    func imageInCache(url: URL) -> URL? {
-        guard var cacheURL = self.cacheURL() else { return nil }
-        cacheURL.appendPathComponent(url.absoluteString.replacingOccurrences(of: "/", with: ""))
-        if self.fileManager.fileExists(atPath: cacheURL.path) {
-            print(cacheURL)
-            return cacheURL
-        } else {
-            return nil
-        }
+    func saveToCache(request: URLRequest, response: URLResponse, data: Data) {
+        self.cache.storeCachedResponse(
+            CachedURLResponse(response: response, data: data), for: request
+        )
     }
 
-    func saveToCache(data: Data, url: URL) -> URL? {
-        guard var cacheURL = self.cacheURL() else { return nil }
-        cacheURL.appendPathComponent(url.absoluteString.replacingOccurrences(of: "/", with: ""))
-        fileManager.createFile(atPath: cacheURL.path, contents: data)
-        return cacheURL
-    }
 }
