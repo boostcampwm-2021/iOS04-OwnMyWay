@@ -14,7 +14,7 @@ extension UIImageView {
     }
 
     func setNetworkImage(with url: URL?) {
-        guard let url = url else { print("1"); return }
+        guard let url = url else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 return
