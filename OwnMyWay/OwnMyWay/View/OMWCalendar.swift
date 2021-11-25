@@ -11,70 +11,9 @@ protocol OMWCalendarDelegate: AnyObject {
     func didSelect(date: Date)
 }
 
-class CalendarDataSource: NSObject, UICollectionViewDataSource {
-    var date: Date {
-        didSet {
-            var items = [CalendarItem]()
-            for index in 0..<7 - date.firstWeekDayCount {
-                items.append(CalendarItem(isDummy: true, date: date.addingTimeInterval(Double(index))))
-            }
-            for index in 0..<date.numberOfDays {
-                items.append(CalendarItem(
-                    isDummy: false,
-                    date: date.firstDayOfTheMonth.addingTimeInterval(86400 * Double(index))
-                ))
-            }
-            self.items = items
-        }
-    }
-    private var items: [CalendarItem]
-    private var startDate: Date?
-    private var endDate: Date?
-
-    override init() {
-        self.date = Date()
-        self.items = []
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.items.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CalendarCell.identifier, for: indexPath
-        ) as? CalendarCell
-        else { return UICollectionViewCell() }
-        let item = self.items[indexPath.item]
-        cell.configure(item: item)
-        if let startDate = self.startDate,
-           let endDate = self.endDate,
-           startDate <= item.date && endDate >= item.date,
-           !item.isDummy {
-            cell.didSelect()
-        }
-        return cell
-    }
-
-    func configureDate(from startDate: Date?, to endDate: Date?) {
-        self.startDate = startDate
-        self.endDate = endDate
-    }
-
-}
-
-struct CalendarItem: Hashable {
-    var isDummy: Bool
-    var date: Date
-}
-
 class OMWCalendar: UIView {
 
-    enum Section {
-        case main
-    }
-
-    enum Direction {
+    private enum Direction {
         case left
         case right
         case none
@@ -186,11 +125,8 @@ class OMWCalendar: UIView {
         self.scrollView.scrollRectToVisible(self.currentCalendar.frame, animated: false)
     }
 
-    func redraw() {
+    func reloadCalendar() {
         self.configureCollectionViews()
-        self.previousCalendar.reloadData()
-        self.currentCalendar.reloadData()
-        self.nextCalendar.reloadData()
     }
 
     func selectDate(date: Date) {
@@ -203,13 +139,9 @@ class OMWCalendar: UIView {
     }
 
     func deselectAll() {
-        self.deselectDate()
-        self.configureCollectionViews()
-    }
-
-    private func deselectDate() {
         self.startDate = nil
         self.endDate = nil
+        self.configureCollectionViews()
     }
 
     private func configureCalendar() {
@@ -219,7 +151,12 @@ class OMWCalendar: UIView {
         self.scrollView.addSubview(self.previousCalendar)
         self.scrollView.addSubview(self.currentCalendar)
         self.scrollView.addSubview(self.nextCalendar)
+        self.configureConstraint()
+        self.configureCollectionViews()
+        self.configureTitleLabel(with: self.currentMonth)
+    }
 
+    private func configureConstraint() {
         NSLayoutConstraint.activate([
             self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
             self.titleLabel.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1 / 7),
@@ -229,7 +166,6 @@ class OMWCalendar: UIView {
             self.dateStack.heightAnchor.constraint(equalTo: self.titleLabel.heightAnchor),
             self.dateStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.dateStack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-
             self.scrollView.topAnchor.constraint(equalTo: self.dateStack.bottomAnchor),
             self.scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -261,9 +197,6 @@ class OMWCalendar: UIView {
                 equalTo: self.nextCalendar.trailingAnchor
             )
         ])
-
-        self.configureCollectionViews()
-        self.configureTitleLabel(with: self.currentMonth)
     }
 
     private func configureCollectionViews() {
@@ -367,51 +300,4 @@ extension OMWCalendar: UIScrollViewDelegate {
               self.currentMonth = self.currentMonth.nextMonth
           }
       }
-}
-
-extension Date {
-    var previousMonth: Date {
-        Calendar.current.date(byAdding: .month, value: -1, to: self) ?? Date()
-    }
-
-    var nextMonth: Date {
-        Calendar.current.date(byAdding: .month, value: 1, to: self) ?? Date()
-    }
-
-    var weekday: Int {
-        Calendar.current.component(.weekday, from: self)
-    }
-
-    var dayNumber: Int {
-        Calendar.current.component(.day, from: self)
-    }
-
-    var month: Int {
-        Calendar.current.component(.month, from: self)
-    }
-
-    var year: Int {
-        Calendar.current.component(.year, from: self)
-    }
-
-    var firstWeekDayCount: Int {
-        return 8 - self.firstDayOfTheMonth.weekday
-    }
-
-    var numberOfDays: Int {
-        let days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-        return self.month == 2 ? self.year.isMultiple(of: 4) ? 29 : 28 : days[self.month - 1]
-    }
-
-    var firstDayOfTheMonth: Date {
-        Calendar.current.date(
-            from: Calendar.current.dateComponents([.year, .month], from: self)
-        ) ?? Date()
-    }
-
-    var scaledDate: Date {
-        let date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: self)) ?? self
-        print(date)
-        return date
-    }
 }

@@ -14,17 +14,15 @@ class CalendarCell: UICollectionViewCell {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var backgroundCellView: UIView!
 
-    func configure(item: CalendarItem) {
+    func configure(item: CalendarDataSource.CalendarItem) {
         self.dateLabel.text = item.isDummy ? "" : "\(item.date.dayNumber)"
         self.backgroundCellView.backgroundColor = .clear
         self.dateLabel.textColor = .label
     }
 
     func didSelect() {
-//        UIView.animate(withDuration: 0.20) {
-            self.backgroundCellView.backgroundColor = UIColor(named: "IdentityBlue") ?? .blue
-            self.dateLabel.textColor = .white
-//        }
+        self.backgroundCellView.backgroundColor = UIColor(named: "IdentityBlue") ?? .blue
+        self.dateLabel.textColor = .white
     }
 
 }

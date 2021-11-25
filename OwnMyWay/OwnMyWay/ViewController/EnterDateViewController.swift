@@ -90,7 +90,7 @@ class EnterDateViewController: UIViewController, Instantiable {
 //            }
             self?.calendarView.selectDate(date: startDate)
             self?.calendarView.selectDate(date: endDate)
-            self?.calendarView.redraw()
+            self?.calendarView.reloadCalendar()
         }
     }
 
@@ -124,7 +124,7 @@ extension EnterDateViewController: OMWCalendarDelegate {
             preferredStyle: .alert
         )
         let yesAction = UIAlertAction(title: "네", style: .destructive) { _ in
-            self.calendarView.redraw()
+            self.calendarView.reloadCalendar()
         }
         let noAction = UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
             self?.viewModel?.didTouchNoButton()
