@@ -13,6 +13,7 @@ class CalendarCell: UICollectionViewCell {
 
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var backgroundCellView: UIView!
+    private let dates = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -36,6 +37,10 @@ class CalendarCell: UICollectionViewCell {
         } else {
             self.backgroundCellView.backgroundColor = .clear
         }
+
+        let hint = "\(item.date.dayNumber)일 \(dates[item.date.weekday - 1])입니다. 눌러서 여행 기간을 선택해주세요."
+        self.isAccessibilityElement = !item.isDummy
+        self.accessibilityHint = hint
     }
 
     func didSelect() {

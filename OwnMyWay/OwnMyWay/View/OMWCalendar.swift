@@ -50,6 +50,7 @@ class OMWCalendar: UIView {
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .center
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityLabel = "이전달"
         button.accessibilityHint = "눌러서 이전 달로 가세요"
         return button
     }()
@@ -62,6 +63,7 @@ class OMWCalendar: UIView {
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .center
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityLabel = "다음달"
         button.accessibilityHint = "눌러서 다음 달로 가세요"
         return button
     }()
