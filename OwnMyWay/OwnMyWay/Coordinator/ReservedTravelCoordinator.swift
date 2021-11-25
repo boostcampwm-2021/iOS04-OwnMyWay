@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate {
+final class ReservedTravelCoordinator: Coordinator, ReservedTravelCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController

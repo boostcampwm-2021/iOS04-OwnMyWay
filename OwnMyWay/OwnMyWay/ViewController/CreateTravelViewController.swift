@@ -9,7 +9,7 @@ import Combine
 import FSCalendar
 import UIKit
 
-class CreateTravelViewController: UIViewController, Instantiable {
+final class CreateTravelViewController: UIViewController, Instantiable {
 
     @IBOutlet private weak var travelTitleField: UITextField!
     @IBOutlet private weak var nextButton: NextButton!

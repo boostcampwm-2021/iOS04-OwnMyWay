@@ -8,7 +8,7 @@
 import MapKit
 import UIKit
 
-class OMWMapView: MKMapView, MapAvailable {
+final class OMWMapView: MKMapView, MapAvailable {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configure()

@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class SearchLocationViewController: UIViewController, Instantiable {
+final class SearchLocationViewController: UIViewController, Instantiable {
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var mapView: MKMapView!
@@ -51,7 +51,7 @@ class SearchLocationViewController: UIViewController, Instantiable {
 
 extension SearchLocationViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText == "" {
+        if searchText.isEmpty {
             self.searchResults.removeAll()
             self.tableView.reloadData()
         }

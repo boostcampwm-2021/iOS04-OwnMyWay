@@ -9,7 +9,7 @@ import CoreLocation
 import Foundation
 import MapKit
 
-class RecordAnnotationView: MKAnnotationView {
+final class RecordAnnotationView: MKAnnotationView {
     static let identifier = "RecordAnnotationView"
 
     override var annotation: MKAnnotation? { didSet { configureDetailView() } }

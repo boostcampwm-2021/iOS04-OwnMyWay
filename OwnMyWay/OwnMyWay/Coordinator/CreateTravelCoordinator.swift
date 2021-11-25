@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
+final class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
 
     var childCoordinators: [Coordinator]
     var navigationController: UINavigationController
@@ -40,4 +40,5 @@ class CreateTravelCoordinator: Coordinator, CreateTravelCoordinatingDelegate {
         self.childCoordinators.append(enterDateCoordinator)
         enterDateCoordinator.start()
     }
+
 }

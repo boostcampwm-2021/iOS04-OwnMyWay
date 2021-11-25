@@ -38,7 +38,7 @@ protocol ContextAccessable {
     func fetchContext() -> NSManagedObjectContext
 }
 
-class CoreDataTravelRepository: TravelRepository {
+final class CoreDataTravelRepository: TravelRepository {
 
     private var contextFetcher: ContextAccessable
 
@@ -59,7 +59,10 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
-    func addTravel(title: String, startDate: Date, endDate: Date, completion: @escaping (Result<Travel, Error>) -> Void) {
+    func addTravel(
+        title: String, startDate: Date, endDate: Date,
+        completion: @escaping (Result<Travel, Error>) -> Void
+    ) {
         guard let entity = NSEntityDescription.entity(forEntityName: "TravelMO", in: context) else {
             completion(.failure(RepositoryError.fetchError))
             return
@@ -146,7 +149,10 @@ class CoreDataTravelRepository: TravelRepository {
         }
     }
 
-    func addRecord(to travel: Travel, with record: Record, completion: @escaping (Result<Travel, Error>) -> Void) {
+    func addRecord(
+        to travel: Travel, with record: Record,
+        completion: @escaping (Result<Travel, Error>) -> Void
+    ) {
         guard let travelMO = findTravel(by: travel.uuid ?? UUID())
         else {
             completion(.failure(RepositoryError.uuidError))

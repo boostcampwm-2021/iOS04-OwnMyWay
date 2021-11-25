@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-class CompleteEditingViewController: UIViewController, Instantiable {
+final class CompleteEditingViewController: UIViewController, Instantiable {
 
     @IBOutlet private weak var nextButtonHeightConstraint: NSLayoutConstraint!
 

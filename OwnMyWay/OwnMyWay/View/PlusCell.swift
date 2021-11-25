@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlusCell: UICollectionViewCell {
+final class PlusCell: UICollectionViewCell {
     static let identifier = "PlusCell"
 
     private var dashedLayer: CAShapeLayer?

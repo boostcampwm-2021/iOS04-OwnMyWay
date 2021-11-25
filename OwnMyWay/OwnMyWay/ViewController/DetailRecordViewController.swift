@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatable {
+final class DetailRecordViewController: UIViewController, Instantiable, RecordUpdatable {
 
     @IBOutlet private weak var imageScrollView: UIScrollView!
     @IBOutlet private weak var imageStackView: UIStackView!
