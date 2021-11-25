@@ -88,14 +88,7 @@
                                                             <constraint firstAttribute="height" constant="300" id="gDg-qc-M1P"/>
                                                         </constraints>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="허걱!">
-                                                                <attributes>
-                                                                    <color key="NSColor" systemColor="labelColor"/>
-                                                                    <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content=" 아직 ">
+                                                            <fragment content="허걱! 아직 ">
                                                                 <attributes>
                                                                     <color key="NSColor" systemColor="labelColor"/>
                                                                     <font key="NSFont" size="30" name="AppleSDGothicNeo-SemiBold"/>
@@ -135,7 +128,7 @@
                                                         <attributedString key="attributedText">
                                                             <fragment content="호잇챠!">
                                                                 <attributes>
-                                                                    <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="NSColor" systemColor="labelColor"/>
                                                                     <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>

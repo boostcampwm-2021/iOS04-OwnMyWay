@@ -189,7 +189,7 @@
                                                         <attributedString key="attributedText">
                                                             <fragment content="아차차!">
                                                                 <attributes>
-                                                                    <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="NSColor" systemColor="labelColor"/>
                                                                     <font key="NSFont" size="30" name="AppleSDGothicNeo-Bold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
