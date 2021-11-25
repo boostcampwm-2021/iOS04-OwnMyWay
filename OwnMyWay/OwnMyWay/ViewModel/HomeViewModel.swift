@@ -5,6 +5,7 @@
 //  Created by 이청수 on 2021/11/04.
 //
 
+import Combine
 import Foundation
 
 protocol HomeViewModel {
@@ -17,6 +18,7 @@ protocol HomeViewModel {
     func viewDidLoad()
     func didTouchCreateButton()
     func didTouchTravel(flag: Int, item: Int)
+    func didTouchCloseMessage()
 }
 
 protocol HomeCoordinatingDelegate: AnyObject {
@@ -94,6 +96,10 @@ class DefaultHomeViewModel: HomeViewModel {
         default:
             return
         }
+    }
+
+    func didTouchCloseMessage() {
+        self.messageEnabled = false
     }
 
     private func didTouchReservedTravel(at index: Int) {
