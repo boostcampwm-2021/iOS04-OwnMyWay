@@ -42,6 +42,30 @@ class OMWCalendar: UIView {
         return label
     }()
 
+    private lazy var leftButton: UIButton = {
+        var button = UIButton()
+        button.addTarget(self, action: #selector(leftButtonTouched), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.tintColor = .label
+        button.contentVerticalAlignment = .center
+        button.contentHorizontalAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityHint = "눌러서 이전 달로 가세요"
+        return button
+    }()
+
+    private lazy var rightButton: UIButton = {
+        var button = UIButton()
+        button.addTarget(self, action: #selector(rightButtonTouched), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.tintColor = .label
+        button.contentVerticalAlignment = .center
+        button.contentHorizontalAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityHint = "눌러서 다음 달로 가세요"
+        return button
+    }()
+
     private lazy var dateStack: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
@@ -66,6 +90,7 @@ class OMWCalendar: UIView {
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
+        scrollView.isAccessibilityElement = false
         return scrollView
     }()
 
@@ -148,6 +173,8 @@ class OMWCalendar: UIView {
         self.addSubview(self.titleLabel)
         self.addSubview(self.dateStack)
         self.addSubview(self.scrollView)
+        self.addSubview(self.leftButton)
+        self.addSubview(self.rightButton)
         self.scrollView.addSubview(self.previousCalendar)
         self.scrollView.addSubview(self.currentCalendar)
         self.scrollView.addSubview(self.nextCalendar)
@@ -162,6 +189,14 @@ class OMWCalendar: UIView {
             self.titleLabel.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1 / 7),
             self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.leftButton.topAnchor.constraint(equalTo: self.titleLabel.topAnchor),
+            self.leftButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            self.leftButton.heightAnchor.constraint(equalTo: self.titleLabel.heightAnchor),
+            self.leftButton.widthAnchor.constraint(equalTo: self.leftButton.heightAnchor),
+            self.rightButton.topAnchor.constraint(equalTo: self.titleLabel.topAnchor),
+            self.rightButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            self.rightButton.heightAnchor.constraint(equalTo: self.titleLabel.heightAnchor),
+            self.rightButton.widthAnchor.constraint(equalTo: self.rightButton.heightAnchor),
             self.dateStack.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor),
             self.dateStack.heightAnchor.constraint(equalTo: self.titleLabel.heightAnchor),
             self.dateStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -240,6 +275,14 @@ class OMWCalendar: UIView {
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
+    }
+
+    @objc private func leftButtonTouched() {
+        self.currentMonth = self.currentMonth.previousMonth
+    }
+
+    @objc private func rightButtonTouched() {
+        self.currentMonth = self.currentMonth.nextMonth
     }
 }
 
