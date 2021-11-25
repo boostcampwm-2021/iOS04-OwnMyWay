@@ -38,7 +38,7 @@ class OMWCalendar: UIView {
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont.init(name: "AppleSDGothicNeo-Regular", size: 18)
+        label.font = UIFont.init(name: "AppleSDGothicNeo-SemiBold", size: 22)
         return label
     }()
 
@@ -78,6 +78,11 @@ class OMWCalendar: UIView {
             let dateLabel = UILabel()
             dateLabel.text = date
             dateLabel.textAlignment = .center
+            if date == "Sun" {
+                dateLabel.textColor = .red
+            } else if date == "Sat" {
+                dateLabel.textColor = .blue
+            }
             dateLabel.font = UIFont.init(name: "AppleSDGothicNeo-Regular", size: 18)
             stackView.addArrangedSubview(dateLabel)
         }
