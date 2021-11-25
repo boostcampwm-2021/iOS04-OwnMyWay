@@ -60,6 +60,7 @@ final class EnterDateViewController: UIViewController, Instantiable {
                 switch state {
                 case .datesExisted:
                     self?.nextButton.setAvailability(to: true)
+                    self?.calendarView.reloadCalendar()
                 case .fulfilled:
                     self?.presentAlert(calendar: self?.calendarView)
                     self?.nextButton.setAvailability(to: true)
@@ -85,7 +86,6 @@ final class EnterDateViewController: UIViewController, Instantiable {
             self?.navigationItem.title = "기록 편집하기"
             self?.calendarView.selectDate(date: startDate)
             self?.calendarView.selectDate(date: endDate)
-            self?.calendarView.reloadCalendar()
         }
     }
 
