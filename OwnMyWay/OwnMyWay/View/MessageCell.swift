@@ -9,6 +9,7 @@ import UIKit
 
 protocol MessageCellDelegate: AnyObject {
     func didTouchButton()
+    func didTouchCloseButton()
 }
 
 class MessageCell: UICollectionViewCell {
@@ -28,6 +29,10 @@ class MessageCell: UICollectionViewCell {
 
     @IBAction func didTouchCreateTravelButton(_ sender: UIButton) {
         self.delegate?.didTouchButton()
+    }
+
+    @IBAction func didTouchCloseButton(_ sender: UIButton) {
+        self.delegate?.didTouchCloseButton()
     }
 
 }
