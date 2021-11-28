@@ -102,6 +102,25 @@ extension DetailImageViewController: UIScrollViewDelegate {
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         self.backButton.isHidden = true
         self.pageControl.isHidden = true
+        if scrollView.zoomScale > 0.1 {
+            if  let imageView = scrollView.subviews.first as? UIImageView,
+                let image = imageView.image {
+                let ratioW = imageView.frame.width / image.size.width
+                let ratioH = imageView.frame.height / image.size.height
+                let ratio = ratioW < ratioH ? ratioW:ratioH
+                let newWidth = image.size.width * ratio
+                let newHeight = image.size.height * ratio
+                let leftInset = (newWidth * scrollView.zoomScale > imageView.frame.width ?
+                           newWidth - imageView.frame.width :
+                           scrollView.frame.width - scrollView.contentSize.width) / 2
+                let topInset = (newHeight * scrollView.zoomScale > imageView.frame.height ?
+                          newHeight - imageView.frame.height :
+                          scrollView.frame.height - scrollView.contentSize.height) / 2
+                scrollView.contentInset = UIEdgeInsets(
+                    top: topInset, left: leftInset, bottom: topInset, right: leftInset
+                )
+            }
+        }
     }
 
     func scrollViewDidEndZooming(
