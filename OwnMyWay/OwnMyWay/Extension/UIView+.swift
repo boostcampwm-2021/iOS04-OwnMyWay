@@ -77,3 +77,13 @@ extension UIView {
         self.layoutIfNeeded()
     }
 }
+
+extension UIView {
+    var firstResponder: UIView? {
+        guard !self.isFirstResponder else { return self }
+        for subview in subviews {
+            if let firstResponder = subview.firstResponder { return firstResponder }
+        }
+        return nil
+    }
+}
