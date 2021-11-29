@@ -23,7 +23,8 @@ protocol AddRecordViewModel {
     func didEnterTime(with date: Date?)
     func didEnterCoordinate(latitude: Double?, longitude: Double?)
     func didEnterContent(with text: String?)
-    func didEnterPhotoURL(with url: URL)
+    func allocateImages(size: Int)
+    func didEnterPhotoURL(with url: URL, at indexFromBack: Int)
     func didRemovePhoto(at index: Int)
     func didTouchSubmitButton()
     func didTouchLocationButton()
@@ -133,13 +134,18 @@ final class DefaultAddRecordViewModel: AddRecordViewModel {
         self.record.content = text
     }
 
-    func didEnterPhotoURL(with url: URL) {
-        self.record.photoIDs?.append(url.path)
-        let index = (record.photoIDs?.count ?? 0) - 1
+    func allocateImages(size: Int) {
+        self.record.photoIDs?.append(contentsOf: [String].init(repeating: "", count: size))
+    }
+
+    func didEnterPhotoURL(with url: URL, at indexFromBack: Int) {
+        guard let count = self.record.photoIDs?.count else { return }
+        let indexFromFront = count - indexFromBack
+
         self.usecase.executePickingPhoto(with: url) { [weak self] result in
             switch result {
             case .success(let copiedURL):
-                self?.record.photoIDs?[index] = copiedURL
+                self?.record.photoIDs?[indexFromFront] = copiedURL
                 self?.tempPhotoIDs.append(copiedURL)
                 self?.isValidPhotos = true
             case .failure(let error):
