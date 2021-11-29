@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Image references" minToolsVersion="12.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,11 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="loZ-PL-P0K">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="loZ-PL-P0K">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mzs-rH-k0t">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -35,7 +34,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="bLf-A9-D8B"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xp6-fO-cZ3">
-                                <rect key="frame" x="350" y="64" width="44" height="44"/>
+                                <rect key="frame" x="350" y="60" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="IHx-Ut-P8N"/>
                                     <constraint firstAttribute="height" constant="44" id="wa0-j7-8hH"/>
@@ -52,21 +51,20 @@
                                 </connections>
                             </button>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="R5J-Af-tuI">
-                                <rect key="frame" x="129" y="816" width="156" height="26"/>
+                                <rect key="frame" x="129" y="850" width="156" height="26"/>
                             </pageControl>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="loZ-PL-P0K" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="3Rr-Zg-kUy"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Xp6-fO-cZ3" secondAttribute="trailing" constant="20" id="A00-sZ-d1L"/>
-                            <constraint firstItem="loZ-PL-P0K" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Zeh-R1-rCi"/>
-                            <constraint firstItem="R5J-Af-tuI" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-20" id="fnL-Qy-XC4"/>
-                            <constraint firstItem="loZ-PL-P0K" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="hXm-n2-JWK"/>
-                            <constraint firstItem="R5J-Af-tuI" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="j1G-CV-LGe"/>
-                            <constraint firstItem="loZ-PL-P0K" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="n6e-Qp-pA2"/>
-                            <constraint firstItem="Xp6-fO-cZ3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="xes-JL-icm"/>
+                            <constraint firstItem="loZ-PL-P0K" firstAttribute="trailing" secondItem="5EZ-qb-Rvc" secondAttribute="trailing" id="3Rr-Zg-kUy"/>
+                            <constraint firstAttribute="trailing" secondItem="Xp6-fO-cZ3" secondAttribute="trailing" constant="20" id="A00-sZ-d1L"/>
+                            <constraint firstItem="loZ-PL-P0K" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Zeh-R1-rCi"/>
+                            <constraint firstItem="R5J-Af-tuI" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" constant="-20" id="fnL-Qy-XC4"/>
+                            <constraint firstItem="loZ-PL-P0K" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="hXm-n2-JWK"/>
+                            <constraint firstItem="R5J-Af-tuI" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="j1G-CV-LGe"/>
+                            <constraint firstItem="loZ-PL-P0K" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="n6e-Qp-pA2"/>
+                            <constraint firstItem="Xp6-fO-cZ3" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="60" id="xes-JL-icm"/>
                         </constraints>
                     </view>
                     <connections>

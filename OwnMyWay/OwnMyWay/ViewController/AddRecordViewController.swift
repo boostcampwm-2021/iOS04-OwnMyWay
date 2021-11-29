@@ -9,19 +9,6 @@ import Combine
 import UIKit
 import PhotosUI
 
-@available(iOS 14.0, *)
-let supportedPhotoExtensions = [
-    UTType.rawImage.identifier,
-    UTType.tiff.identifier,
-    UTType.bmp.identifier,
-    UTType.png.identifier,
-    UTType.heif.identifier,
-    UTType.heic.identifier,
-    UTType.jpeg.identifier,
-    UTType.webP.identifier,
-    UTType.gif.identifier
-]
-
 enum TransitionType {
     case cancel, submit
 }
@@ -167,14 +154,12 @@ extension AddRecordViewController {
     }
 
     private func configureNotifications() {
-        NotificationCenter.default.addObserver(
-            self,
+        NotificationCenter.default.addObserver( self,
             selector: #selector(keyboardWillShowAction(_:)),
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-        NotificationCenter.default.addObserver(
-            self,
+        NotificationCenter.default.addObserver( self,
             selector: #selector(keyboardWillHideAction(_:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil
@@ -291,10 +276,8 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                     }
 
                     let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-
                     alert.addAction(moveAction)
                     alert.addAction(cancelAction)
-
                     self?.present(alert, animated: true)
                 default:
                     var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
@@ -315,8 +298,8 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
     @available (iOS 14.0, *)
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         guard !results.isEmpty else {
-          dismiss(animated: true, completion: nil)
-          return
+            self.dismiss(animated: true, completion: nil)
+            return
         }
 
         if self.viewModel?.record.photoIDs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
@@ -334,22 +317,13 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                 longitude: coordinate?.longitude.magnitude
             )
         }
-
-        results.forEach { [weak self] result in
-            for type in supportedPhotoExtensions {
-                if result.itemProvider.hasRepresentationConforming(
-                    toTypeIdentifier: type,
-                    fileOptions: .init()
-                ) {
-                    result.itemProvider.loadFileRepresentation(
-                        forTypeIdentifier: type
-                    ) { url, error in
-                        guard error == nil,
-                              let url = url else { return }
-                        self?.viewModel?.didEnterPhotoURL(with: url)
-                    }
-                    break
-                }
+        self.viewModel?.allocateImages(size: results.count)
+        results.enumerated().forEach { [weak self] index, result in
+            result.itemProvider.loadFileRepresentation(
+                forTypeIdentifier: UTType.image.identifier
+            ) { url, error in
+                guard error == nil, let url = url else { return }
+                self?.viewModel?.didEnterPhotoURL(with: url, at: results.count - index - 1)
             }
         }
         self.dismiss(animated: true, completion: nil)
@@ -368,7 +342,9 @@ extension AddRecordViewController: UIImagePickerControllerDelegate,
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { newStatus in
                 if newStatus == .authorized {
-                    self.present(imagePicker, animated: true)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.present(imagePicker, animated: true)
+                    }
                 }
             }
         case .restricted, .denied:
@@ -414,20 +390,10 @@ extension AddRecordViewController: UIImagePickerControllerDelegate,
                 )
             }
         }
+        self.viewModel?.allocateImages(size: 1)
         if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            self.viewModel?.didEnterPhotoURL(with: imageURL)
+            self.viewModel?.didEnterPhotoURL(with: imageURL, at: 0)
         }
         picker.dismiss(animated: true)
-    }
-}
-
-// MARK: - fileprivate extension for UIView
-fileprivate extension UIView {
-    var firstResponder: UIView? {
-        guard !self.isFirstResponder else { return self }
-        for subview in subviews {
-            if let firstResponder = subview.firstResponder { return firstResponder }
-        }
-        return nil
     }
 }
