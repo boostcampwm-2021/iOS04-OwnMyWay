@@ -111,6 +111,7 @@ class OMWCalendar: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.allowsMultipleSelection = false
         collectionView.dataSource = self.previousDataSource
+        collectionView.backgroundColor = .clear
         self.configure(collectionView: collectionView)
         return collectionView
     }()
@@ -125,6 +126,7 @@ class OMWCalendar: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.allowsMultipleSelection = false
         collectionView.dataSource = self.currentDataSource
+        collectionView.backgroundColor = .clear
         self.configure(collectionView: collectionView)
         return collectionView
     }()
@@ -139,6 +141,7 @@ class OMWCalendar: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.allowsMultipleSelection = false
         collectionView.dataSource = self.nextDataSource
+        collectionView.backgroundColor = .clear
         self.configure(collectionView: collectionView)
         return collectionView
     }()
