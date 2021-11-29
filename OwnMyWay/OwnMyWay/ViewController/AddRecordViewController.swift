@@ -298,8 +298,8 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
     @available (iOS 14.0, *)
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         guard !results.isEmpty else {
-          dismiss(animated: true, completion: nil)
-          return
+            self.dismiss(animated: true, completion: nil)
+            return
         }
 
         if self.viewModel?.record.photoIDs?.count == 0 { // dummy만 있을 경우 (사진이 없을 때)
@@ -323,7 +323,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                 forTypeIdentifier: UTType.image.identifier
             ) { url, error in
                 guard error == nil, let url = url else { return }
-                self?.viewModel?.didEnterPhotoURL(with: url, at: results.count - index)
+                self?.viewModel?.didEnterPhotoURL(with: url, at: results.count - index - 1)
             }
         }
         self.dismiss(animated: true, completion: nil)
@@ -342,7 +342,9 @@ extension AddRecordViewController: UIImagePickerControllerDelegate,
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { newStatus in
                 if newStatus == .authorized {
-                    self.present(imagePicker, animated: true)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.present(imagePicker, animated: true)
+                    }
                 }
             }
         case .restricted, .denied:
@@ -395,4 +397,3 @@ extension AddRecordViewController: UIImagePickerControllerDelegate,
         picker.dismiss(animated: true)
     }
 }
-
