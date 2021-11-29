@@ -105,9 +105,9 @@ extension DetailImageViewController: UIScrollViewDelegate {
         if scrollView.zoomScale > 0.1 {
             if  let imageView = scrollView.subviews.first as? UIImageView,
                 let image = imageView.image {
-                let ratioW = imageView.frame.width / image.size.width
-                let ratioH = imageView.frame.height / image.size.height
-                let ratio = ratioW < ratioH ? ratioW:ratioH
+                let ratioWidth = imageView.frame.width / image.size.width
+                let ratioHeight = imageView.frame.height / image.size.height
+                let ratio = ratioWidth < ratioHeight ? ratioWidth:ratioHeight
                 let newWidth = image.size.width * ratio
                 let newHeight = image.size.height * ratio
                 let leftInset = (newWidth * scrollView.zoomScale > imageView.frame.width ?

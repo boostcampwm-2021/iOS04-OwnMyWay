@@ -317,7 +317,7 @@ extension AddRecordViewController: PHPickerViewControllerDelegate {
                 longitude: coordinate?.longitude.magnitude
             )
         }
-        self.viewModel?.allocImages(size: results.count)
+        self.viewModel?.allocateImages(size: results.count)
         results.enumerated().forEach { [weak self] index, result in
             result.itemProvider.loadFileRepresentation(
                 forTypeIdentifier: UTType.image.identifier
@@ -388,7 +388,7 @@ extension AddRecordViewController: UIImagePickerControllerDelegate,
                 )
             }
         }
-        self.viewModel?.allocImages(size: 1)
+        self.viewModel?.allocateImages(size: 1)
         if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
             self.viewModel?.didEnterPhotoURL(with: imageURL, at: 0)
         }
