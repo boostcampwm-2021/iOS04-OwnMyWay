@@ -140,7 +140,6 @@ final class DefaultAddRecordViewModel: AddRecordViewModel {
 
     func didEnterPhotoURL(with url: URL, at indexFromBack: Int) {
         guard let count = self.record.photoIDs?.count else { return }
-        print(count, indexFromBack)
         let indexFromFront = count - indexFromBack - 1
 
         self.usecase.executePickingPhoto(with: url) { [weak self] result in
