@@ -10,8 +10,8 @@ import XCTest
 
 class EnterDateViewModelTest: XCTestCase {
 
-    var viewModel: DefaultEnterDateViewModel!
-    var coordinator: MockCoordinator!
+    private var viewModel: DefaultEnterDateViewModel!
+    private var coordinator: MockCoordinator!
 
     class MockCoordinator: EnterDateCoordinatingDelegate {
         var travel: Travel?
@@ -43,7 +43,7 @@ class EnterDateViewModelTest: XCTestCase {
         super.tearDown()
     }
 
-    func test_날짜입력_한번만_입력한_경우() {
+    private func test_날짜입력_한번만_입력한_경우() {
         // Given
         let expectation = XCTestExpectation()
         let expectedStatus: [CalendarState] = [.empty, .firstDateEntered]
@@ -65,7 +65,7 @@ class EnterDateViewModelTest: XCTestCase {
         XCTAssert(expectedStatus == actualStatus)
     }
     
-    func test_날짜입력_2번_입력한_경우() {
+    private func test_날짜입력_2번_입력한_경우() {
         // Given
         let expectation = XCTestExpectation()
         let expectedStatus: [CalendarState] = [.empty, .firstDateEntered, .fulfilled]
@@ -88,7 +88,7 @@ class EnterDateViewModelTest: XCTestCase {
         XCTAssert(expectedStatus == actualStatus)
     }
 
-    func test_날짜입력_3번_입력한_경우() {
+    private func test_날짜입력_3번_입력한_경우() {
         // Given
         let expectation = XCTestExpectation()
         let expectedStatus: [CalendarState] = [.empty, .firstDateEntered, .fulfilled, .empty]
