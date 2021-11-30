@@ -1185,7 +1185,6 @@
 				AFBAEE35274F25CF00236DEC /* OMWCalendar.swift */,
 				AFBAEE3D274F736F00236DEC /* CalendarCell.swift */,
 				AFBAEE3E274F736F00236DEC /* CalendarCell.xib */,
-				29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */,
 				3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */,
 			);
 			path = OMWCalendar;
@@ -1228,6 +1227,7 @@
 				3FB914BD273409530084FF1C /* TravelCardCell.xib */,
 				29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */,
 				29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */,
+				29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";

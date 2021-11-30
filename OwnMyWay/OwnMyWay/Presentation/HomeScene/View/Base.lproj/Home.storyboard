@@ -22,22 +22,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9TS-im-TPN">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bTO-GI-HaZ">
                                 <rect key="frame" x="15" y="126" width="384" height="736"/>
-                                <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bTO-GI-HaZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="736"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fk3-m1-D6M">
-                                            <size key="itemSize" width="128" height="128"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells/>
-                                    </collectionView>
-                                </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fk3-m1-D6M">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoc-4Z-nKU">
                                 <rect key="frame" x="364" y="70" width="30" height="30"/>
                                 <constraints>
@@ -68,16 +63,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="HomeBackground"/>
                         <constraints>
-                            <constraint firstItem="9TS-im-TPN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="3cC-Nb-3tg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9TS-im-TPN" secondAttribute="trailing" constant="15" id="79r-CA-UQf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bTO-GI-HaZ" secondAttribute="trailing" constant="15" id="6ao-of-9Jp"/>
                             <constraint firstItem="yoc-4Z-nKU" firstAttribute="centerY" secondItem="gJz-Al-pp6" secondAttribute="centerY" id="8bD-J4-8vM"/>
-                            <constraint firstItem="9TS-im-TPN" firstAttribute="top" secondItem="gJz-Al-pp6" secondAttribute="bottom" constant="20" id="H9O-AI-2lG"/>
+                            <constraint firstItem="bTO-GI-HaZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="DMS-Dt-Cxq"/>
                             <constraint firstItem="yoc-4Z-nKU" firstAttribute="leading" secondItem="gJz-Al-pp6" secondAttribute="trailing" constant="20" id="IWA-I7-Gwa"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yoc-4Z-nKU" secondAttribute="trailing" constant="20" id="Wtf-ob-VRW"/>
+                            <constraint firstItem="bTO-GI-HaZ" firstAttribute="top" secondItem="gJz-Al-pp6" secondAttribute="bottom" constant="20" id="ZYK-Hs-Vo4"/>
                             <constraint firstItem="Bxk-zD-EC4" firstAttribute="centerY" secondItem="gJz-Al-pp6" secondAttribute="centerY" id="lvF-Ce-Z9m"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bTO-GI-HaZ" secondAttribute="bottom" id="seT-rU-AdP"/>
                             <constraint firstItem="Bxk-zD-EC4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="tnc-qT-3y3"/>
                             <constraint firstItem="gJz-Al-pp6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="utf-SJ-cFh"/>
-                            <constraint firstItem="9TS-im-TPN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="vCa-Nu-9Do"/>
                             <constraint firstItem="gJz-Al-pp6" firstAttribute="leading" secondItem="Bxk-zD-EC4" secondAttribute="trailing" constant="10" id="yzd-FP-Xjw"/>
                         </constraints>
                     </view>
