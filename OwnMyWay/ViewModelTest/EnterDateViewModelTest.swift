@@ -38,11 +38,15 @@ class EnterDateViewModelTest: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        let emtpyTravel = Travel(
+            uuid: nil, flag: 0, title: nil, startDate: nil,
+            endDate: nil, landmarks: [], records: [], locations: []
+        )
         self.coordinator = MockCoordinator()
         self.viewModel = DefaultEnterDateViewModel(
             usecase: MockUsecase(),
             coordinatingDelegate: self.coordinator,
-            travel: Travel.dummy(section: .dummy),
+            travel: emtpyTravel,
             isEditingMode: false
         )
     }
