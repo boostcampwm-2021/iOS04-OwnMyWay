@@ -24,6 +24,7 @@ type_name:
 function_parameter_count: 6
 
 excluded:
+  - UsecaseTest/
   - ViewModelTest/
   - OwnMyWay/Application/AppDelegate.swift
   - OwnMyWay/Application/SceneDelegate.swift
