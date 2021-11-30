@@ -56,6 +56,23 @@ class EnterDateViewModelTest: XCTestCase {
         super.tearDown()
     }
 
+    func test_초기_뷰_로드() {
+        // Given
+        let expectation = XCTestExpectation()
+        let expect: (Date?, Date?) = (nil, nil)
+        var actual: (Date?, Date?)
+
+        // When
+        self.viewModel.viewDidLoad { firstDate, secondDate in
+            actual = (firstDate, secondDate)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: self.timeout)
+
+        // Then
+        XCTAssert(expect.0 == actual.0 && expect.1 == actual.1)
+    }
+
     func test_날짜입력_한번만_입력한_경우() {
         // Given
         let expectation = XCTestExpectation()
