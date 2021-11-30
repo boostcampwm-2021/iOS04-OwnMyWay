@@ -5,6 +5,7 @@
 //  Created by 김우재 on 2021/11/30.
 //
 
+import Combine
 import XCTest
 
 class DetailRecordViewModelTest: XCTestCase {
@@ -51,6 +52,7 @@ class DetailRecordViewModelTest: XCTestCase {
     
     var viewModel: DetailRecordViewModel!
     var coordinator: MockCoordinator!
+    var cancellables: Set<AnyCancellable>!
     
     override func setUp() {
         let uuid = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
@@ -63,11 +65,13 @@ class DetailRecordViewModelTest: XCTestCase {
             usecase: MockUsecase(),
             coordinatingDelegate: self.coordinator
         )
+        self.cancellables = []
     }
 
     override func tearDown() {
         self.coordinator = nil
         self.viewModel = nil
+        self.cancellables = nil
     }
 
     func test_뒤로가기_버튼() {
@@ -93,11 +97,13 @@ class DetailRecordViewModelTest: XCTestCase {
 
         let expectation = XCTestExpectation()
 
-        var cancellable = self.viewModel.errorPublisher.sink { error in
-            if error == nil { return }
-            XCTAssertNotNil(error as? EnterTitleError)
-            expectation.fulfill()
-        }
+        self.viewModel.errorPublisher
+            .sink { error in
+                if error == nil { return }
+                XCTAssertNotNil(error as? EnterTitleError)
+                expectation.fulfill()
+            }
+            .store(in: &self.cancellables)
 
         self.viewModel.didUpdateRecord(record: Record(uuid: nil, title: "업데이트 테스트", content: "업데이트 테스트 내용", date: Date(), latitude: 100, longitude: 100, photoIDs: [], placeDescription: "업데이트 테스트 장소"))
         wait(for: [expectation], timeout: 2.0)
@@ -107,11 +113,13 @@ class DetailRecordViewModelTest: XCTestCase {
         
         let expectation = XCTestExpectation()
 
-        var cancellable = self.viewModel.errorPublisher.sink { error in
-            if error == nil { return }
-            XCTAssertNotNil(error as? RepositoryError)
-            expectation.fulfill()
-        }
+        self.viewModel.errorPublisher
+            .sink { error in
+                if error == nil { return }
+                XCTAssertNotNil(error as? RepositoryError)
+                expectation.fulfill()
+            }
+            .store(in: &self.cancellables)
 
         self.viewModel.didUpdateRecord(record: Record(uuid: UUID(), title: "업데이트 테스트", content: "업데이트 테스트 내용", date: Date(), latitude: 100, longitude: 100, photoIDs: [], placeDescription: "업데이트 테스트 장소"))
         wait(for: [expectation], timeout: 2.0)
@@ -120,14 +128,16 @@ class DetailRecordViewModelTest: XCTestCase {
     func test_업데이트_버튼_성공_레코드_있음() {
         let expectation = XCTestExpectation()
         
-        var cancellable = self.viewModel.recordPublisher.sink { record in
-            if record.title != "업데이트 테스트" { return }
-            XCTAssertTrue(record.title == "업데이트 테스트")
-            XCTAssertTrue(record.content == "업데이트 테스트 내용")
-            XCTAssertTrue(record.placeDescription == "업데이트 테스트 장소")
-            XCTAssertTrue(record.latitude == 100)
-            expectation.fulfill()
-        }
+        self.viewModel.recordPublisher
+            .sink { record in
+                if record.title != "업데이트 테스트" { return }
+                XCTAssertTrue(record.title == "업데이트 테스트")
+                XCTAssertTrue(record.content == "업데이트 테스트 내용")
+                XCTAssertTrue(record.placeDescription == "업데이트 테스트 장소")
+                XCTAssertTrue(record.latitude == 100)
+                expectation.fulfill()
+            }
+            .store(in: &self.cancellables)
         
         let uuid = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
         self.viewModel.didUpdateRecord(record: Record(uuid: uuid, title: "업데이트 테스트", content: "업데이트 테스트 내용", date: Date(), latitude: 100, longitude: 100, photoIDs: [], placeDescription: "업데이트 테스트 장소"))

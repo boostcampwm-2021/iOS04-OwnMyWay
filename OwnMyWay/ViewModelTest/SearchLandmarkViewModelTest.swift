@@ -38,6 +38,7 @@ class SearchLandmarkViewModelTest: XCTestCase {
 
     var viewModel: SearchLandmarkViewModel!
     var coordinator: MockCoordinator!
+    var cancellables: Set<AnyCancellable>!
     
     override func setUp() {
         self.coordinator = MockCoordinator()
@@ -45,25 +46,29 @@ class SearchLandmarkViewModelTest: XCTestCase {
             usecase: MockUsecase(),
             coordinatingDelegate: self.coordinator
         )
+        self.cancellables = []
     }
 
     override func tearDown() {
         self.coordinator = nil
         self.viewModel = nil
+        self.cancellables = nil
     }
     
     func test_관광명소_초기설정() {
         let expectation = XCTestExpectation()
         
-        var cancellable = self.viewModel.landmarksPublisher.sink { landmarks in
-            if landmarks.count == 0 { return }
-            XCTAssertTrue(landmarks.count == 2)
-            XCTAssertTrue(landmarks[0].title == "테스트1")
-            XCTAssertTrue(landmarks[0].latitude == 10.0)
-            XCTAssertTrue(landmarks[1].title == "테스트2")
-            XCTAssertTrue(landmarks[1].longitude == 10.0)
-            expectation.fulfill()
-        }
+        self.viewModel.landmarksPublisher
+            .sink { landmarks in
+                if landmarks.count == 0 { return }
+                XCTAssertTrue(landmarks.count == 2)
+                XCTAssertTrue(landmarks[0].title == "테스트1")
+                XCTAssertTrue(landmarks[0].latitude == 10.0)
+                XCTAssertTrue(landmarks[1].title == "테스트2")
+                XCTAssertTrue(landmarks[1].longitude == 10.0)
+                expectation.fulfill()
+            }
+            .store(in: &self.cancellables)
         
         self.viewModel.viewDidLoad()
         wait(for: [expectation], timeout: 2.0)
@@ -72,14 +77,16 @@ class SearchLandmarkViewModelTest: XCTestCase {
     func test_찾는_단어_변경_성공() {
         let expectation = XCTestExpectation()
         
-        var cancellable = self.viewModel.landmarksPublisher.sink { landmarks in
-            if landmarks.count == 0 { return }
-            XCTAssertTrue(landmarks.count == 1)
-            XCTAssertTrue(landmarks[0].title == "헬로키티 성공")
-            XCTAssertTrue(landmarks[0].longitude == 2.0)
-            XCTAssertTrue(landmarks[0].latitude == 1.0)
-            expectation.fulfill()
-        }
+        self.viewModel.landmarksPublisher
+            .sink { landmarks in
+                if landmarks.count == 0 { return }
+                XCTAssertTrue(landmarks.count == 1)
+                XCTAssertTrue(landmarks[0].title == "헬로키티 성공")
+                XCTAssertTrue(landmarks[0].longitude == 2.0)
+                XCTAssertTrue(landmarks[0].latitude == 1.0)
+                expectation.fulfill()
+            }
+            .store(in: &self.cancellables)
 
         self.viewModel.didChangeSearchText(with: "헬로키티")
         wait(for: [expectation], timeout: 2.0)
@@ -88,11 +95,13 @@ class SearchLandmarkViewModelTest: XCTestCase {
     func test_찾는_단어_변경_실패() {
         let expectation = XCTestExpectation()
         
-        var cancellable = self.viewModel.errorPublisher.sink { error in
-            if error == nil { return }
-            XCTAssertNotNil(error as? JSONError)
-            expectation.fulfill()
-        }
+        self.viewModel.errorPublisher
+            .sink { error in
+                if error == nil { return }
+                XCTAssertNotNil(error as? JSONError)
+                expectation.fulfill()
+            }
+            .store(in: &self.cancellables)
 
         self.viewModel.didChangeSearchText(with: "그 외")
         wait(for: [expectation], timeout: 2.0)
@@ -108,11 +117,13 @@ class SearchLandmarkViewModelTest: XCTestCase {
     func test_관광명소_추가_실패() {
         let expectation = XCTestExpectation()
         
-        var cancellable = self.viewModel.errorPublisher.sink { error in
-            if error == nil { return }
-            XCTAssertNotNil(error as? ModelError)
-            expectation.fulfill()
-        }
+        self.viewModel.errorPublisher
+            .sink { error in
+                if error == nil { return }
+                XCTAssertNotNil(error as? ModelError)
+                expectation.fulfill()
+            }
+            .store(in: &self.cancellables)
 
         self.viewModel.viewDidLoad()
         self.viewModel.didTouchLandmarkCard(at: 2)
