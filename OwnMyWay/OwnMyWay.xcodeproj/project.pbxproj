@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29117A912755E631009E17CB /* JSONError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A902755E631009E17CB /* JSONError.swift */; };
+		29117A932755E66A009E17CB /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A922755E66A009E17CB /* RepositoryError.swift */; };
+		29117A952755E68B009E17CB /* ModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A942755E68B009E17CB /* ModelError.swift */; };
+		29117A972755E6D7009E17CB /* LandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A962755E6D7009E17CB /* LandmarkRepository.swift */; };
+		29117A992755E6FE009E17CB /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A982755E6FE009E17CB /* TravelRepository.swift */; };
+		29117A9B2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A9A2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift */; };
 		29274EF92733FC4500DDEBFF /* ReservedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */; };
 		29274EFB2733FD2400DDEBFF /* ReservedTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */; };
 		29274EFD2734000500DDEBFF /* ReservedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */; };
@@ -32,10 +38,10 @@
 		29966F83274CA63700729D39 /* EnterDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F82274CA63700729D39 /* EnterDateViewModel.swift */; };
 		29966F85274CA64900729D39 /* EnterDateUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F84274CA64900729D39 /* EnterDateUsecase.swift */; };
 		29966F89274F942B00729D39 /* OMWCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */; };
-		29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */; };
-		29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */; };
-		29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */; };
-		29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */; };
+		29E9BA1E2730F2DA0040B70A /* EnterTitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* EnterTitleViewModel.swift */; };
+		29E9BA242730FC050040B70A /* EnterTitleUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* EnterTitleUsecase.swift */; };
+		29E9BA2627312C2D0040B70A /* EnterTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* EnterTitleViewController.swift */; };
+		29E9BA2827312C5F0040B70A /* EnterTitle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA2727312C5F0040B70A /* EnterTitle.storyboard */; };
 		29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA31273220C60040B70A /* AddLandmark.storyboard */; };
 		29E9BA34273246600040B70A /* AddLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA33273246600040B70A /* AddLandmarkViewController.swift */; };
 		29E9BA36273251BE0040B70A /* LandmarkCart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */; };
@@ -114,7 +120,7 @@
 		DB1D5CB2273CE17800B30448 /* LocationMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */; };
 		DB1D5CB3273CE17800B30448 /* LocationMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */; };
 		DB1D5CB7273CE1C100B30448 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CB6273CE1C100B30448 /* Location.swift */; };
-		DB1D5CD3273CEB8B00B30448 /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* TravelRepository.swift */; };
+		DB1D5CD3273CEB8B00B30448 /* CoreDataTravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* CoreDataTravelRepository.swift */; };
 		DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
 		DB22BB5C272F82770004444B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5B272F82770004444B /* SceneDelegate.swift */; };
 		DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5D272F82770004444B /* HomeViewController.swift */; };
@@ -132,7 +138,7 @@
 		DB5DAEE2274BF5F3001B8627 /* DetailImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */; };
 		DB7C12A92742336A00ED30F3 /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */; };
 		DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B3273132A000487D33 /* LandmarkDTO.swift */; };
-		DB8831BE2731990000487D33 /* LandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LandmarkRepository.swift */; };
+		DB8831BE2731990000487D33 /* LocalJSONLandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LocalJSONLandmarkRepository.swift */; };
 		DB8831C127319B6400487D33 /* SearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */; };
 		DB8831C327319D3C00487D33 /* SearchLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */; };
 		DB8831C72732861500487D33 /* Instantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C62732861500487D33 /* Instantiable.swift */; };
@@ -147,7 +153,7 @@
 		DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
 		DBC39F0C2733C42700FB7939 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F0B2733C42700FB7939 /* Record.swift */; };
 		DBE57B72274F2ED100FA5DE7 /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE57B71274F2ED100FA5DE7 /* RecordMO+CoreDataProperties.swift */; };
-		DBFC040C27390DD700031EDF /* CreateTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040B27390DD700031EDF /* CreateTravelCoordinator.swift */; };
+		DBFC040C27390DD700031EDF /* EnterTitleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040B27390DD700031EDF /* EnterTitleCoordinator.swift */; };
 		DBFC040E2739128E00031EDF /* AddLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */; };
 		DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */; };
 		DBFC04122739170900031EDF /* LandmarkCartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */; };
@@ -156,6 +162,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29117A902755E631009E17CB /* JSONError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONError.swift; sourceTree = "<group>"; };
+		29117A922755E66A009E17CB /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
+		29117A942755E68B009E17CB /* ModelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelError.swift; sourceTree = "<group>"; };
+		29117A962755E6D7009E17CB /* LandmarkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRepository.swift; sourceTree = "<group>"; };
+		29117A982755E6FE009E17CB /* TravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRepository.swift; sourceTree = "<group>"; };
+		29117A9A2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedTravelCoordinatingDelegate.swift; sourceTree = "<group>"; };
 		29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewController.swift; sourceTree = "<group>"; };
 		29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReservedTravel.storyboard; sourceTree = "<group>"; };
 		29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewModel.swift; sourceTree = "<group>"; };
@@ -181,10 +193,10 @@
 		29966F82274CA63700729D39 /* EnterDateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDateViewModel.swift; sourceTree = "<group>"; };
 		29966F84274CA64900729D39 /* EnterDateUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDateUsecase.swift; sourceTree = "<group>"; };
 		29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMWCollectionViewCell.swift; sourceTree = "<group>"; };
-		29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewModel.swift; sourceTree = "<group>"; };
-		29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelUsecase.swift; sourceTree = "<group>"; };
-		29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
-		29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateTravel.storyboard; sourceTree = "<group>"; };
+		29E9BA1D2730F2DA0040B70A /* EnterTitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTitleViewModel.swift; sourceTree = "<group>"; };
+		29E9BA232730FC050040B70A /* EnterTitleUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTitleUsecase.swift; sourceTree = "<group>"; };
+		29E9BA2527312C2D0040B70A /* EnterTitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTitleViewController.swift; sourceTree = "<group>"; };
+		29E9BA2727312C5F0040B70A /* EnterTitle.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EnterTitle.storyboard; sourceTree = "<group>"; };
 		29E9BA31273220C60040B70A /* AddLandmark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddLandmark.storyboard; sourceTree = "<group>"; };
 		29E9BA33273246600040B70A /* AddLandmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkViewController.swift; sourceTree = "<group>"; };
 		29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LandmarkCart.storyboard; sourceTree = "<group>"; };
@@ -269,7 +281,7 @@
 		DB22BB5D272F82770004444B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DB22BB60272F82770004444B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		DB22BB63272F82770004444B /* OwnMyWay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OwnMyWay.xcdatamodel; sourceTree = "<group>"; };
-		DB22BB65272F82780004444B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = OwnMyWay/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		DB22BB65272F82780004444B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = OwnMyWay/Resource/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		DB22BB68272F82780004444B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB22BB6A272F82780004444B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB22BB72272F83DB0004444B /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -281,9 +293,9 @@
 		DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
 		DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailImage.storyboard; sourceTree = "<group>"; };
 		DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordMO+CoreDataClass.swift"; path = "../../RecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DB8831AD2730FDB500487D33 /* TravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRepository.swift; sourceTree = "<group>"; };
+		DB8831AD2730FDB500487D33 /* CoreDataTravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTravelRepository.swift; sourceTree = "<group>"; };
 		DB8831B3273132A000487D33 /* LandmarkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTO.swift; sourceTree = "<group>"; };
-		DB8831BD2731990000487D33 /* LandmarkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRepository.swift; sourceTree = "<group>"; };
+		DB8831BD2731990000487D33 /* LocalJSONLandmarkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJSONLandmarkRepository.swift; sourceTree = "<group>"; };
 		DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkUsecase.swift; sourceTree = "<group>"; };
 		DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewModel.swift; sourceTree = "<group>"; };
 		DB8831C62732861500487D33 /* Instantiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instantiable.swift; sourceTree = "<group>"; };
@@ -298,7 +310,7 @@
 		DBC39F092733C41000FB7939 /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
 		DBC39F0B2733C42700FB7939 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		DBE57B71274F2ED100FA5DE7 /* RecordMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DBFC040B27390DD700031EDF /* CreateTravelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelCoordinator.swift; sourceTree = "<group>"; };
+		DBFC040B27390DD700031EDF /* EnterTitleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTitleCoordinator.swift; sourceTree = "<group>"; };
 		DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkCoordinator.swift; sourceTree = "<group>"; };
 		DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkViewModel.swift; sourceTree = "<group>"; };
 		DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartCoordinator.swift; sourceTree = "<group>"; };
@@ -317,39 +329,655 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29117A492755C44E009E17CB /* HomeScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A4C2755C58E009E17CB /* Coordinator */,
+				29117A4B2755C516009E17CB /* View */,
+				29117A4A2755C50B009E17CB /* ViewModel */,
+			);
+			path = HomeScene;
+			sourceTree = "<group>";
+		};
+		29117A4A2755C50B009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3FB914C027340E410084FF1C /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A4B2755C516009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB22BB5F272F82770004444B /* Home.storyboard */,
+				DB22BB5D272F82770004444B /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A4C2755C58E009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DB936661273908BA00B39BC1 /* HomeCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A4D2755C64E009E17CB /* EnterTitleScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A4E2755C65F009E17CB /* Coordinator */,
+				29117A4F2755C668009E17CB /* View */,
+				29117A502755C66D009E17CB /* ViewModel */,
+			);
+			path = EnterTitleScene;
+			sourceTree = "<group>";
+		};
+		29117A4E2755C65F009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DBFC040B27390DD700031EDF /* EnterTitleCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A4F2755C668009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				29E9BA2527312C2D0040B70A /* EnterTitleViewController.swift */,
+				29E9BA2727312C5F0040B70A /* EnterTitle.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A502755C66D009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				29E9BA1D2730F2DA0040B70A /* EnterTitleViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A512755C6B6009E17CB /* EnterDateScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A522755C6BE009E17CB /* Coordinator */,
+				29117A532755C6C7009E17CB /* View */,
+				29117A542755C6CF009E17CB /* ViewModel */,
+			);
+			path = EnterDateScene;
+			sourceTree = "<group>";
+		};
+		29117A522755C6BE009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				29966F7E274CA59300729D39 /* EnterDateCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A532755C6C7009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				29966F7C274CA37D00729D39 /* EnterDate.storyboard */,
+				29966F80274CA61B00729D39 /* EnterDateViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A542755C6CF009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				29966F82274CA63700729D39 /* EnterDateViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A552755C72E009E17CB /* AddLanmarkScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A582755C745009E17CB /* Coordinator */,
+				29117A572755C741009E17CB /* View */,
+				29117A562755C73C009E17CB /* ViewModel */,
+			);
+			path = AddLanmarkScene;
+			sourceTree = "<group>";
+		};
+		29117A562755C73C009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A572755C741009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				29E9BA31273220C60040B70A /* AddLandmark.storyboard */,
+				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A582755C745009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A592755C77B009E17CB /* LandmarkCartScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A5F2755C7D1009E17CB /* Coordinator */,
+				29117A5E2755C7CF009E17CB /* View */,
+				29117A5A2755C7A9009E17CB /* ViewModel */,
+			);
+			path = LandmarkCartScene;
+			sourceTree = "<group>";
+		};
+		29117A5A2755C7A9009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A5E2755C7CF009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */,
+				29E9BA37273253130040B70A /* LandmarkCartViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A5F2755C7D1009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A602755C7FC009E17CB /* CompleteScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A612755C810009E17CB /* CompleteCreation */,
+				29117A622755C81D009E17CB /* CompleteEditing */,
+			);
+			path = CompleteScene;
+			sourceTree = "<group>";
+		};
+		29117A612755C810009E17CB /* CompleteCreation */ = {
+			isa = PBXGroup;
+			children = (
+				29117A682755C86B009E17CB /* Coordinator */,
+				29117A672755C867009E17CB /* View */,
+				29117A662755C861009E17CB /* ViewModel */,
+			);
+			path = CompleteCreation;
+			sourceTree = "<group>";
+		};
+		29117A622755C81D009E17CB /* CompleteEditing */ = {
+			isa = PBXGroup;
+			children = (
+				29117A652755C837009E17CB /* Coordinator */,
+				29117A642755C832009E17CB /* View */,
+				29117A632755C828009E17CB /* ViewModel */,
+			);
+			path = CompleteEditing;
+			sourceTree = "<group>";
+		};
+		29117A632755C828009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A642755C832009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AFA6ED7B2744F77C007B251C /* CompleteEditing.storyboard */,
+				AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A652755C837009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A662755C861009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3F113A12273A59C500EA91AA /* CompleteCreationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A672755C867009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3F113A10273A571100EA91AA /* CompleteCreation.storyboard */,
+				3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A682755C86B009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				3F113A16273A5FD600EA91AA /* CompleteCreationCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A692755C89C009E17CB /* TravelScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A6C2755C8B5009E17CB /* ReservedTravel */,
+				29117A6B2755C8B0009E17CB /* OngoingTravel */,
+				29117A6A2755C8A5009E17CB /* OutdatedTravel */,
+				29117A9A2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift */,
+			);
+			path = TravelScene;
+			sourceTree = "<group>";
+		};
+		29117A6A2755C8A5009E17CB /* OutdatedTravel */ = {
+			isa = PBXGroup;
+			children = (
+				29117A752755C930009E17CB /* Coordinator */,
+				29117A742755C92B009E17CB /* View */,
+				29117A732755C927009E17CB /* ViewModel */,
+			);
+			path = OutdatedTravel;
+			sourceTree = "<group>";
+		};
+		29117A6B2755C8B0009E17CB /* OngoingTravel */ = {
+			isa = PBXGroup;
+			children = (
+				29117A722755C901009E17CB /* Coordinator */,
+				29117A712755C8FF009E17CB /* View */,
+				29117A702755C8FA009E17CB /* ViewModel */,
+			);
+			path = OngoingTravel;
+			sourceTree = "<group>";
+		};
+		29117A6C2755C8B5009E17CB /* ReservedTravel */ = {
+			isa = PBXGroup;
+			children = (
+				29117A6F2755C8C3009E17CB /* Coordinator */,
+				29117A6E2755C8C1009E17CB /* View */,
+				29117A6D2755C8BB009E17CB /* ViewModel */,
+			);
+			path = ReservedTravel;
+			sourceTree = "<group>";
+		};
+		29117A6D2755C8BB009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A6E2755C8C1009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */,
+				29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A6F2755C8C3009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A702755C8FA009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A712755C8FF009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */,
+				AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A722755C901009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AF1108E7273B8C2D009FE728 /* OngoingTravelCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A732755C927009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A742755C92B009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */,
+				AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A752755C930009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AF82FDB3273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A762755C965009E17CB /* SearchLandmarkScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A7B2755C991009E17CB /* Coordinator */,
+				29117A7A2755C98C009E17CB /* View */,
+				29117A772755C978009E17CB /* ViewModel */,
+			);
+			path = SearchLandmarkScene;
+			sourceTree = "<group>";
+		};
+		29117A772755C978009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A7A2755C98C009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */,
+				AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A7B2755C991009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A7C2755C9B9009E17CB /* AddRecordScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A7F2755C9E7009E17CB /* Coordinator */,
+				29117A7E2755C9E3009E17CB /* View */,
+				29117A7D2755C9C9009E17CB /* ViewModel */,
+			);
+			path = AddRecordScene;
+			sourceTree = "<group>";
+		};
+		29117A7D2755C9C9009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A7E2755C9E3009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF82FDA7273BEB1700A094B6 /* AddRecord.storyboard */,
+				AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A7F2755C9E7009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AF82FDAD273BEB5700A094B6 /* AddRecordCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A802755CA14009E17CB /* DetailRecordScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A832755CA2D009E17CB /* Coordinator */,
+				29117A822755CA2A009E17CB /* View */,
+				29117A812755CA22009E17CB /* ViewModel */,
+			);
+			path = DetailRecordScene;
+			sourceTree = "<group>";
+		};
+		29117A812755CA22009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				294897C5273BF181003185E7 /* DetailRecordViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A822755CA2A009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				294897C7273BF1F1003185E7 /* DetailRecord.storyboard */,
+				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A832755CA2D009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				294897C1273BECE6003185E7 /* DetailRecordCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A842755CA55009E17CB /* DetailImageScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A872755CA8E009E17CB /* Coordinator */,
+				29117A862755CA8B009E17CB /* View */,
+				29117A852755CA87009E17CB /* ViewModel */,
+			);
+			path = DetailImageScene;
+			sourceTree = "<group>";
+		};
+		29117A852755CA87009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A862755CA8B009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */,
+				DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A872755CA8E009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A882755CAAE009E17CB /* SearchLocationScene */ = {
+			isa = PBXGroup;
+			children = (
+				29117A8C2755CACE009E17CB /* Coordinator */,
+				29117A8B2755CACA009E17CB /* View */,
+				29117A892755CAC0009E17CB /* ViewModel */,
+			);
+			path = SearchLocationScene;
+			sourceTree = "<group>";
+		};
+		29117A892755CAC0009E17CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		29117A8B2755CACA009E17CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */,
+				AF2F6CD42746179500EA3601 /* SearchLocation.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29117A8C2755CACE009E17CB /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AF2F6CDA274620BE00EA3601 /* SearchLocationCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		29117A8D2755E50F009E17CB /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				DB8831BD2731990000487D33 /* LocalJSONLandmarkRepository.swift */,
+				DB8831AD2730FDB500487D33 /* CoreDataTravelRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		29117A8E2755E561009E17CB /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				29117A8F2755E56D009E17CB /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		29117A8F2755E56D009E17CB /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				29117A962755E6D7009E17CB /* LandmarkRepository.swift */,
+				29117A982755E6FE009E17CB /* TravelRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		293646B82738F3990030ED78 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				293646B92738F6590030ED78 /* Date+.swift */,
-				294897BB273B5D71003185E7 /* UIImageView+.swift */,
-				2985B1E627448DFC00428098 /* UIView+.swift */,
-				DBA6F68D27461E0C00F3244E /* CLLocationManager+.swift */,
-				AF0BAA67274BAB620091F642 /* UIButton+.swift */,
-				3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */,
 				DB2ED006274FAB470001AB8F /* URLSessionDataTask+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		29E5FB38272F8BA500F35733 /* ViewController */ = {
+		2996CF3C2755B8E500DB5CAE /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				29E9BA2527312C2D0040B70A /* CreateTravelViewController.swift */,
-				AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */,
-				DB22BB5D272F82770004444B /* HomeViewController.swift */,
-				29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */,
-				3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */,
-				AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */,
-				AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */,
-				294897C3273BF161003185E7 /* DetailRecordViewController.swift */,
-				AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */,
-				AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */,
-				29E9BA37273253130040B70A /* LandmarkCartViewController.swift */,
-				29E9BA33273246600040B70A /* AddLandmarkViewController.swift */,
-				AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */,
-				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
-				3FB987972742C3BF008F0E08 /* ImageFileManager.swift */,
-				AF11A497274CF6B60005B0D0 /* ErrorManager.swift */,
+				DB22BB59272F82770004444B /* AppDelegate.swift */,
+				DB22BB5B272F82770004444B /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		2996CF3D2755B8F500DB5CAE /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				29117A8E2755E561009E17CB /* Interfaces */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		2996CF3E2755B8FB00DB5CAE /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				29117A492755C44E009E17CB /* HomeScene */,
+				29117A4D2755C64E009E17CB /* EnterTitleScene */,
+				29117A512755C6B6009E17CB /* EnterDateScene */,
+				29117A552755C72E009E17CB /* AddLanmarkScene */,
+				29117A592755C77B009E17CB /* LandmarkCartScene */,
+				29117A602755C7FC009E17CB /* CompleteScene */,
+				29117A692755C89C009E17CB /* TravelScene */,
+				29117A762755C965009E17CB /* SearchLandmarkScene */,
+				29117A7C2755C9B9009E17CB /* AddRecordScene */,
+				29117A802755CA14009E17CB /* DetailRecordScene */,
+				29117A842755CA55009E17CB /* DetailImageScene */,
+				29117A882755CAAE009E17CB /* SearchLocationScene */,
+				2996CF402755BAB800DB5CAE /* Utils */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		2996CF3F2755B90600DB5CAE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				29117A8D2755E50F009E17CB /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		2996CF402755BAB800DB5CAE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DB93665F2739086400B39BC1 /* Coordinator.swift */,
+				2996CF422755BB0000DB5CAE /* Protocol */,
+				2996CF412755BAC500DB5CAE /* Extension */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2996CF412755BAC500DB5CAE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2985B1E627448DFC00428098 /* UIView+.swift */,
+				294897BB273B5D71003185E7 /* UIImageView+.swift */,
+				AF0BAA67274BAB620091F642 /* UIButton+.swift */,
+				3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		2996CF422755BB0000DB5CAE /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
 				DB8831C62732861500487D33 /* Instantiable.swift */,
 				AF9695A827339AC700A08C34 /* MapAvailable.swift */,
 				AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */,
@@ -357,11 +985,75 @@
 				293646BB27395BAA0030ED78 /* TravelFetchable.swift */,
 				2985B1E427427AE900428098 /* LandmarkDeletable.swift */,
 				3FF20BB927461BC4007AFF78 /* TravelEditable.swift */,
-				DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */,
-				29966F80274CA61B00729D39 /* EnterDateViewController.swift */,
-				3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */,
 			);
-			path = ViewController;
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		2996CF432755C01700DB5CAE /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				2996CF462755C04600DB5CAE /* Error */,
+				2996CF452755C03F00DB5CAE /* File */,
+				2996CF442755C03700DB5CAE /* Location */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		2996CF442755C03700DB5CAE /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				2996CF472755C0A100DB5CAE /* Utils */,
+				AFA5E25A2742294100DD94D9 /* LocationManager.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		2996CF452755C03F00DB5CAE /* File */ = {
+			isa = PBXGroup;
+			children = (
+				3FB987972742C3BF008F0E08 /* ImageFileManager.swift */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		2996CF462755C04600DB5CAE /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				AF11A497274CF6B60005B0D0 /* ErrorManager.swift */,
+				29117A942755E68B009E17CB /* ModelError.swift */,
+				29117A902755E631009E17CB /* JSONError.swift */,
+				29117A922755E66A009E17CB /* RepositoryError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		2996CF472755C0A100DB5CAE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2996CF482755C0AC00DB5CAE /* Extension */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2996CF482755C0AC00DB5CAE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DBA6F68D27461E0C00F3244E /* CLLocationManager+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		2996CF492755C0EA00DB5CAE /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DB22BB65272F82780004444B /* Assets.xcassets */,
+				DB22BB6A272F82780004444B /* Info.plist */,
+				DB22BB67272F82780004444B /* LaunchScreen.storyboard */,
+				AF1213E9274E1DD500B49AB8 /* BundleJSON */,
+				3F3F866C274B62540075B9A0 /* BundleFont */,
+				3FB987A927439114008F0E08 /* BundleImage */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		29E5FB3A272F8BC600F35733 /* View */ = {
@@ -398,36 +1090,15 @@
 				AFBAEE3D274F736F00236DEC /* CalendarCell.swift */,
 				AFBAEE3E274F736F00236DEC /* CalendarCell.xib */,
 				29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */,
+				3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		29E5FB3C272F8BD400F35733 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				29E9BA1D2730F2DA0040B70A /* CreateTravelViewModel.swift */,
-				DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */,
-				3FB914C027340E410084FF1C /* HomeViewModel.swift */,
-				29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */,
-				3F113A12273A59C500EA91AA /* CompleteCreationViewModel.swift */,
-				AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */,
-				AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */,
-				294897C5273BF181003185E7 /* DetailRecordViewModel.swift */,
-				AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */,
-				AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */,
-				DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */,
-				29966F82274CA63700729D39 /* EnterDateViewModel.swift */,
-				AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */,
-				DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */,
-				AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		29E5FB3D272F8BDC00F35733 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
-				29E9BA232730FC050040B70A /* CreateTravelUsecase.swift */,
+				29E9BA232730FC050040B70A /* EnterTitleUsecase.swift */,
 				DB8831C027319B6400487D33 /* SearchLandmarkUsecase.swift */,
 				3FB914C22734129F0084FF1C /* HomeUsecase.swift */,
 				29274EFE273401AE00DDEBFF /* ReservedTravelUsecase.swift */,
@@ -439,15 +1110,6 @@
 				29966F84274CA64900729D39 /* EnterDateUsecase.swift */,
 			);
 			path = Usecase;
-			sourceTree = "<group>";
-		};
-		29E5FB3E272F8BF300F35733 /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				DB8831AD2730FDB500487D33 /* TravelRepository.swift */,
-				DB8831BD2731990000487D33 /* LandmarkRepository.swift */,
-			);
-			path = Repository;
 			sourceTree = "<group>";
 		};
 		29E5FB3F272F8C0000F35733 /* Model */ = {
@@ -468,29 +1130,6 @@
 				DB1D5CB6273CE1C100B30448 /* Location.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		29E5FB40272F8D0700F35733 /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				DB22BB5F272F82770004444B /* Home.storyboard */,
-				DB22BB67272F82780004444B /* LaunchScreen.storyboard */,
-				29E9BA2727312C5F0040B70A /* CreateTravel.storyboard */,
-				29966F7C274CA37D00729D39 /* EnterDate.storyboard */,
-				29E9BA31273220C60040B70A /* AddLandmark.storyboard */,
-				29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */,
-				AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */,
-				29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */,
-				3F113A10273A571100EA91AA /* CompleteCreation.storyboard */,
-				AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */,
-				294897C7273BF1F1003185E7 /* DetailRecord.storyboard */,
-				AF82FDA7273BEB1700A094B6 /* AddRecord.storyboard */,
-				AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */,
-				AF2F6CD42746179500EA3601 /* SearchLocation.storyboard */,
-				AFA6ED7B2744F77C007B251C /* CompleteEditing.storyboard */,
-				DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */,
-			);
-			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		3F3F866C274B62540075B9A0 /* BundleFont */ = {
@@ -539,48 +1178,19 @@
 		DB22BB58272F82770004444B /* OwnMyWay */ = {
 			isa = PBXGroup;
 			children = (
-				AF1213E9274E1DD500B49AB8 /* BundleJSON */,
-				3F3F866C274B62540075B9A0 /* BundleFont */,
-				3FB987A927439114008F0E08 /* BundleImage */,
+				2996CF492755C0EA00DB5CAE /* Resource */,
+				2996CF432755C01700DB5CAE /* Infrastructure */,
+				2996CF3C2755B8E500DB5CAE /* Application */,
+				2996CF3D2755B8F500DB5CAE /* Domain */,
+				2996CF3E2755B8FB00DB5CAE /* Presentation */,
+				2996CF3F2755B90600DB5CAE /* Data */,
 				293646B82738F3990030ED78 /* Extension */,
 				29E5FB3F272F8C0000F35733 /* Model */,
-				29E5FB3E272F8BF300F35733 /* Repository */,
 				29E5FB3D272F8BDC00F35733 /* Usecase */,
-				29E5FB3C272F8BD400F35733 /* ViewModel */,
-				29E5FB38272F8BA500F35733 /* ViewController */,
 				29E5FB3A272F8BC600F35733 /* View */,
-				29E5FB40272F8D0700F35733 /* Storyboard */,
-				DB93665E2739084D00B39BC1 /* Coordinator */,
-				DB22BB59272F82770004444B /* AppDelegate.swift */,
-				DB22BB5B272F82770004444B /* SceneDelegate.swift */,
-				DB22BB65272F82780004444B /* Assets.xcassets */,
-				DB22BB6A272F82780004444B /* Info.plist */,
 				DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */,
 			);
 			path = OwnMyWay;
-			sourceTree = "<group>";
-		};
-		DB93665E2739084D00B39BC1 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				DB93665F2739086400B39BC1 /* Coordinator.swift */,
-				DB936661273908BA00B39BC1 /* HomeCoordinator.swift */,
-				DBFC040B27390DD700031EDF /* CreateTravelCoordinator.swift */,
-				29966F7E274CA59300729D39 /* EnterDateCoordinator.swift */,
-				DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */,
-				DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */,
-				DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */,
-				DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */,
-				3F113A16273A5FD600EA91AA /* CompleteCreationCoordinator.swift */,
-				AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */,
-				AF1108E7273B8C2D009FE728 /* OngoingTravelCoordinator.swift */,
-				294897C1273BECE6003185E7 /* DetailRecordCoordinator.swift */,
-				AF82FDAD273BEB5700A094B6 /* AddRecordCoordinator.swift */,
-				AF82FDB3273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift */,
-				AF2F6CDA274620BE00EA3601 /* SearchLocationCoordinator.swift */,
-				DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */,
-			);
-			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -664,7 +1274,7 @@
 				AF2F6CD927461D6900EA3601 /* LocationTableViewCell.xib in Resources */,
 				29E9BA32273220C60040B70A /* AddLandmark.storyboard in Resources */,
 				3FB987A827439030008F0E08 /* addImage.png in Resources */,
-				29E9BA2827312C5F0040B70A /* CreateTravel.storyboard in Resources */,
+				29E9BA2827312C5F0040B70A /* EnterTitle.storyboard in Resources */,
 				AF6CBB672733F0AA00E87533 /* SearchLandmark.storyboard in Resources */,
 				29274EFB2733FD2400DDEBFF /* ReservedTravel.storyboard in Resources */,
 				AF1108E0273B8872009FE728 /* OngoingTravel.storyboard in Resources */,
@@ -717,13 +1327,15 @@
 				AF1E8A712732BD1100E3956C /* LandmarkAnnotationView.swift in Sources */,
 				294897C2273BECE6003185E7 /* DetailRecordCoordinator.swift in Sources */,
 				AF1108E4273B8C04009FE728 /* OngoingTravelViewModel.swift in Sources */,
-				DB1D5CD3273CEB8B00B30448 /* TravelRepository.swift in Sources */,
+				DB1D5CD3273CEB8B00B30448 /* CoreDataTravelRepository.swift in Sources */,
 				DB2ED007274FAB470001AB8F /* URLSessionDataTask+.swift in Sources */,
 				DB9366602739086400B39BC1 /* Coordinator.swift in Sources */,
 				DB8831B4273132A000487D33 /* LandmarkDTO.swift in Sources */,
+				29117A992755E6FE009E17CB /* TravelRepository.swift in Sources */,
 				29966F89274F942B00729D39 /* OMWCollectionViewCell.swift in Sources */,
 				DB22BB64272F82770004444B /* OwnMyWay.xcdatamodeld in Sources */,
 				3F113A15273A5AA300EA91AA /* CompleteCreationUsecase.swift in Sources */,
+				29117A952755E68B009E17CB /* ModelError.swift in Sources */,
 				AF1108E6273B8C18009FE728 /* StartedTravelUsecase.swift in Sources */,
 				AFA6ED822744F869007B251C /* CompleteEditingUsecase.swift in Sources */,
 				AF0C3F1E2743825C007217AF /* RecordUpdatable.swift in Sources */,
@@ -738,9 +1350,10 @@
 				29E9BA38273253130040B70A /* LandmarkCartViewController.swift in Sources */,
 				DB22BB5E272F82770004444B /* HomeViewController.swift in Sources */,
 				DBC39F082733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift in Sources */,
+				29117A932755E66A009E17CB /* RepositoryError.swift in Sources */,
 				DBFC04122739170900031EDF /* LandmarkCartCoordinator.swift in Sources */,
 				DB7C12A92742336A00ED30F3 /* RecordMO+CoreDataClass.swift in Sources */,
-				DB8831BE2731990000487D33 /* LandmarkRepository.swift in Sources */,
+				DB8831BE2731990000487D33 /* LocalJSONLandmarkRepository.swift in Sources */,
 				DBC39F032733ABB200FB7939 /* TravelMO+CoreDataClass.swift in Sources */,
 				DB8831C72732861500487D33 /* Instantiable.swift in Sources */,
 				AF0BAA68274BAB620091F642 /* UIButton+.swift in Sources */,
@@ -762,13 +1375,14 @@
 				DB22BB5A272F82770004444B /* AppDelegate.swift in Sources */,
 				2985B1E727448DFD00428098 /* UIView+.swift in Sources */,
 				3F3F867B274CC3400075B9A0 /* MessageCell.swift in Sources */,
+				29117A9B2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift in Sources */,
 				AFA6ED7A2744F6BD007B251C /* CompleteEditingCoordinator.swift in Sources */,
 				AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */,
 				DB1D5CB7273CE1C100B30448 /* Location.swift in Sources */,
 				AF82FDAA273BEB2400A094B6 /* AddRecordViewController.swift in Sources */,
 				DB936662273908BA00B39BC1 /* HomeCoordinator.swift in Sources */,
 				AF82FDB0273BEC0900A094B6 /* AddRecordUsecase.swift in Sources */,
-				DBFC040C27390DD700031EDF /* CreateTravelCoordinator.swift in Sources */,
+				DBFC040C27390DD700031EDF /* EnterTitleCoordinator.swift in Sources */,
 				AF6C7917273942E800FAB0FE /* TravelUpdatable.swift in Sources */,
 				DB5DAEDC274BF535001B8627 /* DetailImageCoordinator.swift in Sources */,
 				294897C6273BF181003185E7 /* DetailRecordViewModel.swift in Sources */,
@@ -783,6 +1397,7 @@
 				29E9BA3B273294DB0040B70A /* LandmarkCardCell.swift in Sources */,
 				AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */,
 				3FB987A5274373CB008F0E08 /* PhotoCell.swift in Sources */,
+				29117A912755E631009E17CB /* JSONError.swift in Sources */,
 				DBFC0410273913F700031EDF /* AddLandmarkViewModel.swift in Sources */,
 				AFBAEE3F274F736F00236DEC /* CalendarCell.swift in Sources */,
 				294897BC273B5D71003185E7 /* UIImageView+.swift in Sources */,
@@ -797,11 +1412,12 @@
 				3FB987982742C3C0008F0E08 /* ImageFileManager.swift in Sources */,
 				AF82FDBA273BF3D900A094B6 /* OutdatedTravelViewController.swift in Sources */,
 				DBFC0416273925FD00031EDF /* ReservedTravelCoordinator.swift in Sources */,
-				29E9BA242730FC050040B70A /* CreateTravelUsecase.swift in Sources */,
+				29E9BA242730FC050040B70A /* EnterTitleUsecase.swift in Sources */,
 				AF82FDBC273BF3E300A094B6 /* OutdatedTravelViewModel.swift in Sources */,
 				29966F85274CA64900729D39 /* EnterDateUsecase.swift in Sources */,
-				29E9BA1E2730F2DA0040B70A /* CreateTravelViewModel.swift in Sources */,
+				29E9BA1E2730F2DA0040B70A /* EnterTitleViewModel.swift in Sources */,
 				293646BA2738F6590030ED78 /* Date+.swift in Sources */,
+				29117A972755E6D7009E17CB /* LandmarkRepository.swift in Sources */,
 				DB5DAEDE274BF5BC001B8627 /* DetailImageViewModel.swift in Sources */,
 				DBC39F072733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift in Sources */,
 				AF2F6CD827461D6900EA3601 /* LocationTableViewCell.swift in Sources */,
@@ -813,7 +1429,7 @@
 				3F113A13273A59C500EA91AA /* CompleteCreationViewModel.swift in Sources */,
 				AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */,
 				29966F7F274CA59300729D39 /* EnterDateCoordinator.swift in Sources */,
-				29E9BA2627312C2D0040B70A /* CreateTravelViewController.swift in Sources */,
+				29E9BA2627312C2D0040B70A /* EnterTitleViewController.swift in Sources */,
 				DBFC040E2739128E00031EDF /* AddLandmarkCoordinator.swift in Sources */,
 				29274EFD2734000500DDEBFF /* ReservedTravelViewModel.swift in Sources */,
 				DBC39F0A2733C41000FB7939 /* Landmark.swift in Sources */,
@@ -975,7 +1591,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OwnMyWay/Info.plist;
+				INFOPLIST_FILE = OwnMyWay/Resource/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Access to Location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Access to Location";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진에 접근해도 되겠습니까? ";
@@ -1008,7 +1624,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OwnMyWay/Info.plist;
+				INFOPLIST_FILE = OwnMyWay/Resource/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Access to Location";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Access to Location";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진에 접근해도 되겠습니까? ";

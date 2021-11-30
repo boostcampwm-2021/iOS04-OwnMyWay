@@ -24,8 +24,8 @@ type_name:
 function_parameter_count: 6
 
 excluded:
-  - OwnMyWay/AppDelegate.swift
-  - OwnMyWay/SceneDelegate.swift
+  - OwnMyWay/Application/AppDelegate.swift
+  - OwnMyWay/Application/SceneDelegate.swift
   - OwnMyWay/Model/TravelMO+CoreDataClass.swift
   - OwnMyWay/Model/TravelMO+CoreDataProperties.swift
   - OwnMyWay/Model/RecordMO+CoreDataClass.swift
