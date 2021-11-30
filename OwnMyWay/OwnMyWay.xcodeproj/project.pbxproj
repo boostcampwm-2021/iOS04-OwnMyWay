@@ -954,6 +954,7 @@
 		29117AA02755ECD9009E17CB /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */,
 				DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */,
 				DBE57B71274F2ED100FA5DE7 /* RecordMO+CoreDataProperties.swift */,
 				DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */,
@@ -1178,6 +1179,69 @@
 			path = Usecase;
 			sourceTree = "<group>";
 		};
+		29117AD2275603F4009E17CB /* OMWCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				AFBAEE35274F25CF00236DEC /* OMWCalendar.swift */,
+				AFBAEE3D274F736F00236DEC /* CalendarCell.swift */,
+				AFBAEE3E274F736F00236DEC /* CalendarCell.xib */,
+				29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */,
+				3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */,
+			);
+			path = OMWCalendar;
+			sourceTree = "<group>";
+		};
+		29117AD32756041D009E17CB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				29117AD52756046F009E17CB /* CollectionView */,
+				29117AD6275604C6009E17CB /* MapView */,
+				29117AD2275603F4009E17CB /* OMWCalendar */,
+				3F2060692733A2610005D8F4 /* NextButton.swift */,
+				AF2F6CD627461D6900EA3601 /* LocationTableViewCell.swift */,
+				AF2F6CD727461D6900EA3601 /* LocationTableViewCell.xib */,
+				2984F58E274B348F00DDCA2D /* OMWSegmentedControl.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		29117AD52756046F009E17CB /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				3F3F8671274B9E340075B9A0 /* HomeBackgroundView.swift */,
+				3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */,
+				3F3F8679274CC3400075B9A0 /* MessageCell.swift */,
+				3F3F867A274CC3400075B9A0 /* MessageCell.xib */,
+				3FB987A3274373CB008F0E08 /* PhotoCell.swift */,
+				3FB987A4274373CB008F0E08 /* PhotoCell.xib */,
+				3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */,
+				3FB914E82737DAC70084FF1C /* TravelSectionHeader.xib */,
+				294897BD273BA993003185E7 /* RecordCardCell.swift */,
+				294897BE273BA993003185E7 /* RecordCardCell.xib */,
+				DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */,
+				DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */,
+				294897CB273CDCF1003185E7 /* CommentCell.swift */,
+				294897CC273CDCF1003185E7 /* CommentCell.xib */,
+				AFFB96162730F76100F23A46 /* PlusCell.swift */,
+				AFFB96172730F76100F23A46 /* PlusCell.xib */,
+				3FB914BC273409530084FF1C /* TravelCardCell.swift */,
+				3FB914BD273409530084FF1C /* TravelCardCell.xib */,
+				29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */,
+				29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		29117AD6275604C6009E17CB /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				AF0BAA63274B82200091F642 /* OMWMapView.swift */,
+				AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */,
+				AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */,
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
 		2996CF3C2755B8E500DB5CAE /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -1200,6 +1264,7 @@
 		2996CF3E2755B8FB00DB5CAE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				29117AD32756041D009E17CB /* Common */,
 				29117A492755C44E009E17CB /* HomeScene */,
 				29117A4D2755C64E009E17CB /* EnterTitleScene */,
 				29117A512755C6B6009E17CB /* EnterDateScene */,
@@ -1332,45 +1397,6 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		29E5FB3A272F8BC600F35733 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				AFFB96162730F76100F23A46 /* PlusCell.swift */,
-				AFFB96172730F76100F23A46 /* PlusCell.xib */,
-				3FB914BC273409530084FF1C /* TravelCardCell.swift */,
-				3FB914BD273409530084FF1C /* TravelCardCell.xib */,
-				29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */,
-				29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */,
-				3F2060692733A2610005D8F4 /* NextButton.swift */,
-				AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */,
-				AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */,
-				3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */,
-				3FB914E82737DAC70084FF1C /* TravelSectionHeader.xib */,
-				294897BD273BA993003185E7 /* RecordCardCell.swift */,
-				294897BE273BA993003185E7 /* RecordCardCell.xib */,
-				DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */,
-				DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */,
-				294897CB273CDCF1003185E7 /* CommentCell.swift */,
-				294897CC273CDCF1003185E7 /* CommentCell.xib */,
-				3FB987A3274373CB008F0E08 /* PhotoCell.swift */,
-				3FB987A4274373CB008F0E08 /* PhotoCell.xib */,
-				AF2F6CD627461D6900EA3601 /* LocationTableViewCell.swift */,
-				AF2F6CD727461D6900EA3601 /* LocationTableViewCell.xib */,
-				2984F58E274B348F00DDCA2D /* OMWSegmentedControl.swift */,
-				AF0BAA63274B82200091F642 /* OMWMapView.swift */,
-				3F3F8671274B9E340075B9A0 /* HomeBackgroundView.swift */,
-				3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */,
-				3F3F8679274CC3400075B9A0 /* MessageCell.swift */,
-				3F3F867A274CC3400075B9A0 /* MessageCell.xib */,
-				AFBAEE35274F25CF00236DEC /* OMWCalendar.swift */,
-				AFBAEE3D274F736F00236DEC /* CalendarCell.swift */,
-				AFBAEE3E274F736F00236DEC /* CalendarCell.xib */,
-				29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */,
-				3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		3F3F866C274B62540075B9A0 /* BundleFont */ = {
 			isa = PBXGroup;
 			children = (
@@ -1423,8 +1449,6 @@
 				2996CF3D2755B8F500DB5CAE /* Domain */,
 				2996CF3E2755B8FB00DB5CAE /* Presentation */,
 				2996CF3F2755B90600DB5CAE /* Data */,
-				29E5FB3A272F8BC600F35733 /* View */,
-				DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */,
 			);
 			path = OwnMyWay;
 			sourceTree = "<group>";
