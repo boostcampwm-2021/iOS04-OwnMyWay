@@ -30,3 +30,5 @@ class StartedTravelViewModelTest: XCTestCase {
     }
 
 }
+
+// 우재

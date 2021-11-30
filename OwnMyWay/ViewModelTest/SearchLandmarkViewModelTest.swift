@@ -30,3 +30,5 @@ class SearchLandmarkViewModelTest: XCTestCase {
     }
 
 }
+
+// 현준
