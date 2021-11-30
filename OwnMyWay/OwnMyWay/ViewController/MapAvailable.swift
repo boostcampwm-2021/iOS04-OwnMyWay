@@ -8,14 +8,8 @@
 import MapKit
 import Foundation
 
-protocol Coordinatable {
-    var latitude: Double { get set }
-    var longitude: Double { get set }
-}
-
 protocol MapAvailable {
     func configureMapView(with mapView: MKMapView)
-    func moveRegion(mapView: MKMapView, points: [Coordinatable], animated: Bool)
     func moveRegion(mapView: MKMapView, annotations: [MKAnnotation], animated: Bool)
     func drawRecordAnnotations(mapView: MKMapView, annotations: [MKAnnotation])
     func drawLandmarkAnnotations(mapView: MKMapView, annotations: [MKAnnotation])
@@ -31,30 +25,6 @@ extension MapAvailable {
         mapView.register(
             RecordAnnotationView.self,
             forAnnotationViewWithReuseIdentifier: RecordAnnotationView.identifier
-        )
-    }
-
-    func moveRegion(mapView: MKMapView, points: [Coordinatable], animated: Bool) {
-        guard !points.isEmpty else { return }
-
-        var zoomRect = MKMapRect.null
-        points.forEach { point in
-            let annotationPoint = MKMapPoint(
-                CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
-            )
-            let pointRect = MKMapRect(
-                x: annotationPoint.x - 5000,
-                y: annotationPoint.y - 5000,
-                width: 10000,
-                height: 10000
-            )
-            zoomRect = zoomRect.union(pointRect)
-        }
-
-        mapView.setVisibleMapRect(
-            zoomRect,
-            edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50),
-            animated: true
         )
     }
 
