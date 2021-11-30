@@ -12,17 +12,16 @@ class EnterDateViewModelTest: XCTestCase {
 
     private var viewModel: DefaultEnterDateViewModel!
     private var coordinator: MockCoordinator!
+    private var cancellable: AnyCancellable!
+    private let timeout: TimeInterval = 3
 
     class MockCoordinator: EnterDateCoordinatingDelegate {
         var travel: Travel?
 
-        func pushToEnterDate(travel: Travel, isEditingMode: Bool) {
-            self.travel = travel
-            return
-        }
+        func pushToEnterDate(travel: Travel, isEditingMode: Bool) {}
 
         func pushToAddLandmark(travel: Travel, isEditingMode: Bool) {}
-        
+
         func popToCreateTravel(travel: Travel) {}
     }
 
@@ -57,12 +56,12 @@ class EnterDateViewModelTest: XCTestCase {
         super.tearDown()
     }
 
-    private func test_날짜입력_한번만_입력한_경우() {
+    func test_날짜입력_한번만_입력한_경우() {
         // Given
         let expectation = XCTestExpectation()
         let expectedStatus: [CalendarState] = [.empty, .firstDateEntered]
         var actualStatus: [CalendarState] = []
-        let cancellable = self.viewModel
+        self.cancellable = self.viewModel
             .calendarStatePublisher
             .sink { status in
             actualStatus.append(status)
@@ -73,18 +72,18 @@ class EnterDateViewModelTest: XCTestCase {
 
         // When
         self.viewModel.didEnterDate(at: Date())
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: self.timeout)
 
         // Then
         XCTAssert(expectedStatus == actualStatus)
     }
     
-    private func test_날짜입력_2번_입력한_경우() {
+    func test_날짜입력_2번_입력한_경우() {
         // Given
         let expectation = XCTestExpectation()
         let expectedStatus: [CalendarState] = [.empty, .firstDateEntered, .fulfilled]
         var actualStatus: [CalendarState] = []
-        let cancellable = self.viewModel
+        self.cancellable = self.viewModel
             .calendarStatePublisher
             .sink { status in
             actualStatus.append(status)
@@ -96,18 +95,18 @@ class EnterDateViewModelTest: XCTestCase {
         // When
         self.viewModel.didEnterDate(at: Date())
         self.viewModel.didEnterDate(at: Date())
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: self.timeout)
 
         // Then
         XCTAssert(expectedStatus == actualStatus)
     }
 
-    private func test_날짜입력_3번_입력한_경우() {
+    func test_날짜입력_3번_입력한_경우() {
         // Given
         let expectation = XCTestExpectation()
         let expectedStatus: [CalendarState] = [.empty, .firstDateEntered, .fulfilled, .empty]
         var actualStatus: [CalendarState] = []
-        let cancellable = self.viewModel
+        self.cancellable = self.viewModel
             .calendarStatePublisher
             .sink { status in
             actualStatus.append(status)
@@ -120,13 +119,19 @@ class EnterDateViewModelTest: XCTestCase {
         self.viewModel.didEnterDate(at: Date())
         self.viewModel.didEnterDate(at: Date())
         self.viewModel.didEnterDate(at: Date())
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: self.timeout)
 
         // Then
         XCTAssert(expectedStatus == actualStatus)
     }
 
+    func test_아니오_버튼_터치한_경우() {
+        // When
+        self.viewModel.didTouchBackButton()
+
+        // Then
+        XCTAssertNil(self.viewModel.travel.startDate)
+        XCTAssertNil(self.viewModel.travel.endDate)
+    }
 
 }
-
-// 청수
