@@ -24,7 +24,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         self.configureTravelCollectionView()
         self.configureDataSource()
         self.configureCancellable()
-        self.viewModel?.viewDidLoad()
+        self.fetchTravel()
     }
 
     override func viewWillAppear(_ animated: Bool) {

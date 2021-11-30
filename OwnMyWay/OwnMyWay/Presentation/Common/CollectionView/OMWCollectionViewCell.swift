@@ -11,6 +11,7 @@ class OMWCollectionViewCell: UICollectionViewCell {
     var task: Cancellable?
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         self.task?.cancelFetch()
     }
 }
