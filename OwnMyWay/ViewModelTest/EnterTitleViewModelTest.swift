@@ -10,7 +10,7 @@ import XCTest
 
 class EnterTitleViewModelTest: XCTestCase {
 
-    var viewModel: DefaultEnterTitleViewModel!
+    var viewModel: EnterTitleViewModel!
     var coordinator: MockCoordinator!
     
     class MockCoordinator: EnterTitleCoordinatingDelegate {

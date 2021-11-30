@@ -49,7 +49,7 @@ class DetailRecordViewModelTest: XCTestCase {
         }
     }
     
-    var viewModel: DefaultDetailRecordViewModel!
+    var viewModel: DetailRecordViewModel!
     var coordinator: MockCoordinator!
     
     override func setUp() {

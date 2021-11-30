@@ -36,7 +36,7 @@ class SearchLandmarkViewModelTest: XCTestCase {
         }
     }
 
-    var viewModel: DefaultSearchLandmarkViewModel!
+    var viewModel: SearchLandmarkViewModel!
     var coordinator: MockCoordinator!
     
     override func setUp() {
