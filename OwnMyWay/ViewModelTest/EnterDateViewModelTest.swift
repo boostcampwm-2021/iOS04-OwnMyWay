@@ -11,6 +11,7 @@ import XCTest
 class EnterDateViewModelTest: XCTestCase {
 
     private var creatingViewModel: EnterDateViewModel!
+    private var editingViewModel: EnterDateViewModel!
     private var coordinator: MockCoordinator!
     private var cancellable: AnyCancellable!
     private let timeout: TimeInterval = 3
@@ -33,15 +34,28 @@ class EnterDateViewModelTest: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        self.coordinator = MockCoordinator()
+
         let emtpyTravel = Travel(
             uuid: nil, flag: 0, title: nil, startDate: nil,
             endDate: nil, landmarks: [], records: [], locations: []
         )
-        self.coordinator = MockCoordinator()
         self.creatingViewModel = DefaultEnterDateViewModel(
             usecase: MockUsecase(),
             coordinatingDelegate: self.coordinator,
             travel: emtpyTravel,
+            isEditingMode: false
+        )
+
+        let startDate = Date(timeIntervalSince1970: 0)
+        let endDate = Date(timeIntervalSince1970: 100)
+        let travel = Travel(
+            uuid: nil, flag: 0, title: nil, startDate: startDate,
+            endDate: endDate, landmarks: [], records: [], locations: [])
+        self.editingViewModel = DefaultEnterDateViewModel(
+            usecase: MockUsecase(),
+            coordinatingDelegate: self.coordinator,
+            travel: travel,
             isEditingMode: false
         )
     }
