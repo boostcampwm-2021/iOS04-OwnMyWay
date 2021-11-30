@@ -87,3 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ContextAccessable {
         return newContext
     }
 }
+
+protocol ContextAccessable {
+    func fetchContext() -> NSManagedObjectContext
+}

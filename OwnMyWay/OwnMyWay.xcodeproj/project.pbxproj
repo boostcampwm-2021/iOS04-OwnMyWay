@@ -13,6 +13,7 @@
 		29117A972755E6D7009E17CB /* LandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A962755E6D7009E17CB /* LandmarkRepository.swift */; };
 		29117A992755E6FE009E17CB /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A982755E6FE009E17CB /* TravelRepository.swift */; };
 		29117A9B2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A9A2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift */; };
+		29117A9E2755EAB9009E17CB /* StartedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A9D2755EAB9009E17CB /* StartedTravelViewModel.swift */; };
 		29274EF92733FC4500DDEBFF /* ReservedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */; };
 		29274EFB2733FD2400DDEBFF /* ReservedTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */; };
 		29274EFD2734000500DDEBFF /* ReservedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */; };
@@ -168,6 +169,7 @@
 		29117A962755E6D7009E17CB /* LandmarkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkRepository.swift; sourceTree = "<group>"; };
 		29117A982755E6FE009E17CB /* TravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRepository.swift; sourceTree = "<group>"; };
 		29117A9A2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedTravelCoordinatingDelegate.swift; sourceTree = "<group>"; };
+		29117A9D2755EAB9009E17CB /* StartedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedTravelViewModel.swift; sourceTree = "<group>"; };
 		29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewController.swift; sourceTree = "<group>"; };
 		29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReservedTravel.storyboard; sourceTree = "<group>"; };
 		29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewModel.swift; sourceTree = "<group>"; };
@@ -292,7 +294,7 @@
 		DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewModel.swift; sourceTree = "<group>"; };
 		DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
 		DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailImage.storyboard; sourceTree = "<group>"; };
-		DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RecordMO+CoreDataClass.swift"; path = "../../RecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DB8831AD2730FDB500487D33 /* CoreDataTravelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTravelRepository.swift; sourceTree = "<group>"; };
 		DB8831B3273132A000487D33 /* LandmarkDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkDTO.swift; sourceTree = "<group>"; };
 		DB8831BD2731990000487D33 /* LocalJSONLandmarkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJSONLandmarkRepository.swift; sourceTree = "<group>"; };
@@ -586,10 +588,8 @@
 		29117A692755C89C009E17CB /* TravelScene */ = {
 			isa = PBXGroup;
 			children = (
+				29117A9C2755EA95009E17CB /* StartedTravel */,
 				29117A6C2755C8B5009E17CB /* ReservedTravel */,
-				29117A6B2755C8B0009E17CB /* OngoingTravel */,
-				29117A6A2755C8A5009E17CB /* OutdatedTravel */,
-				29117A9A2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift */,
 			);
 			path = TravelScene;
 			sourceTree = "<group>";
@@ -900,11 +900,53 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		29117A9C2755EA95009E17CB /* StartedTravel */ = {
+			isa = PBXGroup;
+			children = (
+				29117A9A2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift */,
+				29117A9D2755EAB9009E17CB /* StartedTravelViewModel.swift */,
+				29117A6A2755C8A5009E17CB /* OutdatedTravel */,
+				29117A6B2755C8B0009E17CB /* OngoingTravel */,
+			);
+			path = StartedTravel;
+			sourceTree = "<group>";
+		};
+		29117A9F2755ECC3009E17CB /* Persistent */ = {
+			isa = PBXGroup;
+			children = (
+				29117AA02755ECD9009E17CB /* CoreData */,
+			);
+			path = Persistent;
+			sourceTree = "<group>";
+		};
+		29117AA02755ECD9009E17CB /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */,
+				DBE57B71274F2ED100FA5DE7 /* RecordMO+CoreDataProperties.swift */,
+				DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */,
+				DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */,
+				29117AA12755ECE2009E17CB /* DataMapping */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		29117AA12755ECE2009E17CB /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */,
+				DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */,
+				DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */,
+				DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
 		293646B82738F3990030ED78 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				293646B92738F6590030ED78 /* Date+.swift */,
 				DB2ED006274FAB470001AB8F /* URLSessionDataTask+.swift */,
+				293646B92738F6590030ED78 /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -949,6 +991,7 @@
 		2996CF3F2755B90600DB5CAE /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				29117A9F2755ECC3009E17CB /* Persistent */,
 				29117A8D2755E50F009E17CB /* Repositories */,
 			);
 			path = Data;
@@ -1115,14 +1158,6 @@
 		29E5FB3F272F8C0000F35733 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */,
-				DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */,
-				DBE57B71274F2ED100FA5DE7 /* RecordMO+CoreDataProperties.swift */,
-				DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */,
-				DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */,
-				DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */,
-				DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */,
-				DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */,
 				DB8831B3273132A000487D33 /* LandmarkDTO.swift */,
 				DBC39EEB2733929000FB7939 /* Travel.swift */,
 				DBC39F0B2733C42700FB7939 /* Record.swift */,
@@ -1403,6 +1438,7 @@
 				294897BC273B5D71003185E7 /* UIImageView+.swift in Sources */,
 				DBC39EEC2733929000FB7939 /* Travel.swift in Sources */,
 				DBA6F68E27461E0C00F3244E /* CLLocationManager+.swift in Sources */,
+				29117A9E2755EAB9009E17CB /* StartedTravelViewModel.swift in Sources */,
 				3FB914E92737DAC70084FF1C /* TravelSectionHeader.swift in Sources */,
 				29274EFF273401AE00DDEBFF /* ReservedTravelUsecase.swift in Sources */,
 				3FD3D980274CF9D20051E2AC /* UIViewController+.swift in Sources */,

@@ -7,10 +7,6 @@
 
 import CoreData
 
-protocol ContextAccessable {
-    func fetchContext() -> NSManagedObjectContext
-}
-
 final class CoreDataTravelRepository: TravelRepository {
 
     private var contextFetcher: ContextAccessable

@@ -1,29 +1,15 @@
 //
-//  OngoingViewModel.swift
+//  StartedTravelViewModel.swift
 //  OwnMyWay
 //
-//  Created by 강현준 on 2021/11/10.
+//  Created by 유한준 on 2021/11/30.
 //
 
-import Combine
 import Foundation
 
-protocol OngoingTravelViewModel {
-    var travel: Travel { get }
-    var travelPublisher: Published<Travel>.Publisher { get }
-    var errorPublisher: Published<Error?>.Publisher { get }
+typealias StartedTravelViewModel = OngoingTravelViewModel & OutdatedTravelViewModel
 
-    func didUpdateTravel(to travel: Travel)
-    func didTouchAddRecordButton()
-    func didTouchRecordCell(at record: Record)
-    func didTouchBackButton()
-    func didTouchEditButton()
-    func didTouchFinishButton()
-    func didUpdateCoordinate(latitude: Double, longitude: Double)
-    func didUpdateRecord(record: Record)
-}
-
-final class DefaultStartedTravelViewModel: OngoingTravelViewModel, OutdatedTravelViewModel {
+final class DefaultStartedTravelViewModel: StartedTravelViewModel {
 
     var travelPublisher: Published<Travel>.Publisher { $travel }
     var errorPublisher: Published<Error?>.Publisher { $error }

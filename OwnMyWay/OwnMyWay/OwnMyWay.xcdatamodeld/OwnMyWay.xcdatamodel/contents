@@ -35,9 +35,9 @@
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="RecordMO" inverseName="travel" inverseEntity="RecordMO"/>
     </entity>
     <elements>
-        <element name="LandmarkMO" positionX="-51.3515625" positionY="221.359375" width="128" height="133"/>
-        <element name="LocationMO" positionX="289.9140625" positionY="246.36328125" width="128" height="88"/>
+        <element name="LandmarkMO" positionX="-51.3515625" positionY="221.359375" width="128" height="119"/>
+        <element name="LocationMO" positionX="289.9140625" positionY="246.36328125" width="128" height="74"/>
         <element name="RecordMO" positionX="290.28125" positionY="9.48828125" width="128" height="164"/>
-        <element name="TravelMO" positionX="-36" positionY="9" width="128" height="163"/>
+        <element name="TravelMO" positionX="-36" positionY="9" width="128" height="149"/>
     </elements>
 </model>
