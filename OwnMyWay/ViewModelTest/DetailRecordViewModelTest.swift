@@ -30,3 +30,5 @@ class DetailRecordViewModelTest: XCTestCase {
     }
 
 }
+
+// 현준

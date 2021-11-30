@@ -65,3 +65,5 @@ class AddLandmarkViewModelTest: XCTestCase {
         XCTAssertNotEqual(self.viewModel.travel.landmarks, [], "관광명소가 삭제되면 안되는데 삭제되었습니다.ㅌ")
     }
 }
+
+// 한준

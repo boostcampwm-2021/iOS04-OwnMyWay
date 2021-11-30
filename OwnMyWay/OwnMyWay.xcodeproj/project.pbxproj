@@ -305,15 +305,11 @@
 		DB5544D227561EE90083A45D /* EnterDateViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544D127561EE90083A45D /* EnterDateViewModelTest.swift */; };
 		DB5544D427561EF30083A45D /* AddLandmarkViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544D327561EF30083A45D /* AddLandmarkViewModelTest.swift */; };
 		DB5544D627561EFE0083A45D /* LandmarkCartViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544D527561EFE0083A45D /* LandmarkCartViewModelTest.swift */; };
-		DB5544D827561F160083A45D /* CompleteCreationViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544D727561F160083A45D /* CompleteCreationViewModelTest.swift */; };
-		DB5544DA27561F290083A45D /* CompleteEditingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544D927561F290083A45D /* CompleteEditingViewModelTest.swift */; };
 		DB5544DC27561F3A0083A45D /* StartedTravelViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544DB27561F3A0083A45D /* StartedTravelViewModelTest.swift */; };
 		DB5544DE27561F440083A45D /* ReservedTravelViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544DD27561F440083A45D /* ReservedTravelViewModelTest.swift */; };
 		DB5544E027561F4F0083A45D /* SearchLandmarkViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544DF27561F4F0083A45D /* SearchLandmarkViewModelTest.swift */; };
 		DB5544E227561F570083A45D /* AddRecordViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544E127561F570083A45D /* AddRecordViewModelTest.swift */; };
 		DB5544E427561F640083A45D /* DetailRecordViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544E327561F640083A45D /* DetailRecordViewModelTest.swift */; };
-		DB5544E627561F6E0083A45D /* DetailImageViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544E527561F6E0083A45D /* DetailImageViewModelTest.swift */; };
-		DB5544E827561F760083A45D /* SearchLocationViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544E727561F760083A45D /* SearchLocationViewModelTest.swift */; };
 		DB5DAEDC274BF535001B8627 /* DetailImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */; };
 		DB5DAEDE274BF5BC001B8627 /* DetailImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */; };
 		DB5DAEE0274BF5D9001B8627 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */; };
@@ -498,15 +494,11 @@
 		DB5544D127561EE90083A45D /* EnterDateViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDateViewModelTest.swift; sourceTree = "<group>"; };
 		DB5544D327561EF30083A45D /* AddLandmarkViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkViewModelTest.swift; sourceTree = "<group>"; };
 		DB5544D527561EFE0083A45D /* LandmarkCartViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModelTest.swift; sourceTree = "<group>"; };
-		DB5544D727561F160083A45D /* CompleteCreationViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCreationViewModelTest.swift; sourceTree = "<group>"; };
-		DB5544D927561F290083A45D /* CompleteEditingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditingViewModelTest.swift; sourceTree = "<group>"; };
 		DB5544DB27561F3A0083A45D /* StartedTravelViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedTravelViewModelTest.swift; sourceTree = "<group>"; };
 		DB5544DD27561F440083A45D /* ReservedTravelViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewModelTest.swift; sourceTree = "<group>"; };
 		DB5544DF27561F4F0083A45D /* SearchLandmarkViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewModelTest.swift; sourceTree = "<group>"; };
 		DB5544E127561F570083A45D /* AddRecordViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewModelTest.swift; sourceTree = "<group>"; };
 		DB5544E327561F640083A45D /* DetailRecordViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewModelTest.swift; sourceTree = "<group>"; };
-		DB5544E527561F6E0083A45D /* DetailImageViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewModelTest.swift; sourceTree = "<group>"; };
-		DB5544E727561F760083A45D /* SearchLocationViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewModelTest.swift; sourceTree = "<group>"; };
 		DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCoordinator.swift; sourceTree = "<group>"; };
 		DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewModel.swift; sourceTree = "<group>"; };
 		DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
@@ -1665,15 +1657,11 @@
 				DB5544D127561EE90083A45D /* EnterDateViewModelTest.swift */,
 				DB5544D327561EF30083A45D /* AddLandmarkViewModelTest.swift */,
 				DB5544D527561EFE0083A45D /* LandmarkCartViewModelTest.swift */,
-				DB5544D727561F160083A45D /* CompleteCreationViewModelTest.swift */,
-				DB5544D927561F290083A45D /* CompleteEditingViewModelTest.swift */,
 				DB5544DB27561F3A0083A45D /* StartedTravelViewModelTest.swift */,
 				DB5544DD27561F440083A45D /* ReservedTravelViewModelTest.swift */,
 				DB5544DF27561F4F0083A45D /* SearchLandmarkViewModelTest.swift */,
 				DB5544E127561F570083A45D /* AddRecordViewModelTest.swift */,
 				DB5544E327561F640083A45D /* DetailRecordViewModelTest.swift */,
-				DB5544E527561F6E0083A45D /* DetailImageViewModelTest.swift */,
-				DB5544E727561F760083A45D /* SearchLocationViewModelTest.swift */,
 			);
 			path = ViewModelTest;
 			sourceTree = "<group>";
@@ -2038,13 +2026,11 @@
 				DB55446E27561CB10083A45D /* HomeCoordinator.swift in Sources */,
 				DB55446F27561CB10083A45D /* Home.storyboard in Sources */,
 				DB55447027561CB10083A45D /* HomeViewController.swift in Sources */,
-				DB5544E627561F6E0083A45D /* DetailImageViewModelTest.swift in Sources */,
 				DB5544DC27561F3A0083A45D /* StartedTravelViewModelTest.swift in Sources */,
 				DB55447127561CB10083A45D /* HomeViewModel.swift in Sources */,
 				DB55447227561CB10083A45D /* EnterTitleUsecase.swift in Sources */,
 				DB55447327561CB10083A45D /* EnterTitleCoordinator.swift in Sources */,
 				DB55447427561CB10083A45D /* EnterTitleViewController.swift in Sources */,
-				DB5544D827561F160083A45D /* CompleteCreationViewModelTest.swift in Sources */,
 				DB55447527561CB10083A45D /* EnterTitle.storyboard in Sources */,
 				DB55447627561CB10083A45D /* EnterTitleViewModel.swift in Sources */,
 				DB55447727561CB10083A45D /* EnterDateUsecase.swift in Sources */,
@@ -2074,7 +2060,6 @@
 				DB55448D27561CB10083A45D /* CompleteEditingViewModel.swift in Sources */,
 				DB55448E27561CB10083A45D /* StartedTravelUsecase.swift in Sources */,
 				DB55448F27561CB10083A45D /* StartedTravelCoordinatingDelegate.swift in Sources */,
-				DB5544E827561F760083A45D /* SearchLocationViewModelTest.swift in Sources */,
 				DB55449027561CB10083A45D /* StartedTravelViewModel.swift in Sources */,
 				DB55449127561CB10083A45D /* OutdatedTravelCoordinator.swift in Sources */,
 				DB55449227561CB10083A45D /* OutdatedTravel.storyboard in Sources */,
@@ -2097,7 +2082,6 @@
 				DB5544A227561CB10083A45D /* SearchLandmarkViewModel.swift in Sources */,
 				DB5544A327561CB10083A45D /* AddRecordUsecase.swift in Sources */,
 				DB5544A427561CB10083A45D /* AddRecordCoordinator.swift in Sources */,
-				DB5544DA27561F290083A45D /* CompleteEditingViewModelTest.swift in Sources */,
 				DB5544A527561CB10083A45D /* AddRecord.storyboard in Sources */,
 				DB5544A627561CB10083A45D /* AddRecordViewController.swift in Sources */,
 				DB5544A727561CB10083A45D /* AddRecordViewModel.swift in Sources */,
