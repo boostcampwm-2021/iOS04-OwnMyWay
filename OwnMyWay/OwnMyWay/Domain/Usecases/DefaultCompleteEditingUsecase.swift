@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol CompleteEditingUsecase {
-    func executeUpdate(travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void)
-}
-
 struct DefaultCompleteEditingUsecase: CompleteEditingUsecase {
 
     private let repository: TravelRepository

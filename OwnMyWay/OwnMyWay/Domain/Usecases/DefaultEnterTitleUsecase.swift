@@ -7,18 +7,6 @@
 
 import Foundation
 
-enum EnterTitleError: Error {
-    case nilTitle
-//    case impossibleTravel
-}
-
-protocol EnterTitleUsecase {
-    func executeTitleValidation(
-        with title: String,
-        completion: @escaping (Result<String, Error>) -> Void
-    )
-}
-
 struct DefaultEnterTitleUsecase: EnterTitleUsecase {
 
     func executeTitleValidation(

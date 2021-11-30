@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol SearchLandmarkUsecase {
-    func executeFetch(completion: @escaping (Result<[Landmark], Error>) -> Void)
-    func executeSearch(by text: String, completion: @escaping (Result<[Landmark], Error>) -> Void)
-}
-
 struct DefaultSearchLandmarkUsecase: SearchLandmarkUsecase {
 
     private let repository: LandmarkRepository

@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol CompleteCreationUsecase {
-    func executeCreation(travel: Travel, completion: @escaping (Result<Void, Error>) -> Void)
-}
-
 struct DefaultCompleteCreationUsecase: CompleteCreationUsecase {
 
     private let repository: TravelRepository

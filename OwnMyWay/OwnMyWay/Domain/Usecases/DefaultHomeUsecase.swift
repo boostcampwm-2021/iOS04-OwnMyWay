@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol HomeUsecase {
-    func executeFetch(completion: @escaping (Result<[Travel], Error>) -> Void)
-}
-
 struct DefaultHomeUsecase: HomeUsecase {
 
     let repository: TravelRepository
