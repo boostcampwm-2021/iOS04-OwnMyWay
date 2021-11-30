@@ -12,7 +12,6 @@ class EnterDateViewModelTest: XCTestCase {
 
     private var creatingViewModel: EnterDateViewModel!
     private var editingViewModel: EnterDateViewModel!
-    private var coordinator: MockCoordinator!
     private var cancellable: AnyCancellable!
     private let timeout: TimeInterval = 3
     private let startDate = Date(timeIntervalSince1970: 0)
@@ -31,20 +30,20 @@ class EnterDateViewModelTest: XCTestCase {
     class MockUsecase: EnterDateUsecase {
         func executeEnteringDate(
             firstDate: Date, secondDate: Date, completion: ([Date]) -> Void
-        ) {}
+        ) {
+            completion([firstDate, secondDate])
+        }
     }
 
     override func setUp() {
         super.setUp()
-        self.coordinator = MockCoordinator()
-
         let emtpyTravel = Travel(
             uuid: nil, flag: 0, title: nil, startDate: nil,
             endDate: nil, landmarks: [], records: [], locations: []
         )
         self.creatingViewModel = DefaultEnterDateViewModel(
             usecase: MockUsecase(),
-            coordinatingDelegate: self.coordinator,
+            coordinatingDelegate: MockCoordinator(),
             travel: emtpyTravel,
             isEditingMode: false
         )
@@ -54,15 +53,16 @@ class EnterDateViewModelTest: XCTestCase {
             endDate: endDate, landmarks: [], records: [], locations: [])
         self.editingViewModel = DefaultEnterDateViewModel(
             usecase: MockUsecase(),
-            coordinatingDelegate: self.coordinator,
+            coordinatingDelegate: MockCoordinator(),
             travel: travel,
-            isEditingMode: false
+            isEditingMode: true
         )
     }
 
     override func tearDown() {
-        self.coordinator = nil
         self.creatingViewModel = nil
+        self.editingViewModel = nil
+        self.cancellable = nil
         super.tearDown()
     }
 
@@ -100,6 +100,32 @@ class EnterDateViewModelTest: XCTestCase {
         XCTAssert(expect.0 == actual.0 && expect.1 == actual.1)
     }
 
+    func test_여행_업데이트() {
+        // Given
+        let updatedTravel = Travel(
+            uuid: nil, flag: 0, title: "업데이트", startDate: nil,
+            endDate: nil, landmarks: [], records: [], locations: [])
+        
+        // When
+        self.creatingViewModel.travelDidChanged(to: updatedTravel)
+
+        // Then
+        XCTAssertEqual(self.creatingViewModel.travel, updatedTravel)
+    }
+
+    func test_여행_업데이트_수정할때() {
+        // Given
+        let updatedTravel = Travel(
+            uuid: nil, flag: 0, title: "업데이트", startDate: nil,
+            endDate: nil, landmarks: [], records: [], locations: [])
+        
+        // When
+        self.editingViewModel.travelDidChanged(to: updatedTravel)
+
+        // Then
+        XCTAssertEqual(self.editingViewModel.travel, updatedTravel)
+    }
+
     func test_날짜입력_한번만_입력한_경우() {
         // Given
         let expectation = XCTestExpectation()
@@ -108,11 +134,11 @@ class EnterDateViewModelTest: XCTestCase {
         self.cancellable = self.creatingViewModel
             .calendarStatePublisher
             .sink { status in
-            actualStatus.append(status)
-            if actualStatus.count == 2 {
-                expectation.fulfill()
+                actualStatus.append(status)
+                if actualStatus.count == expectedStatus.count {
+                    expectation.fulfill()
+                }
             }
-        }
 
         // When
         self.creatingViewModel.didEnterDate(at: Date())
@@ -130,11 +156,11 @@ class EnterDateViewModelTest: XCTestCase {
         self.cancellable = self.creatingViewModel
             .calendarStatePublisher
             .sink { status in
-            actualStatus.append(status)
-            if actualStatus.count == 3 {
-                expectation.fulfill()
+                actualStatus.append(status)
+                if actualStatus.count == expectedStatus.count {
+                    expectation.fulfill()
+                }
             }
-        }
 
         // When
         self.creatingViewModel.didEnterDate(at: Date())
@@ -153,11 +179,11 @@ class EnterDateViewModelTest: XCTestCase {
         self.cancellable = self.creatingViewModel
             .calendarStatePublisher
             .sink { status in
-            actualStatus.append(status)
-                if actualStatus.count == 4 {
-                expectation.fulfill()
+                actualStatus.append(status)
+                if actualStatus.count == expectedStatus.count {
+                    expectation.fulfill()
+                }
             }
-        }
 
         // When
         self.creatingViewModel.didEnterDate(at: Date())
@@ -177,12 +203,11 @@ class EnterDateViewModelTest: XCTestCase {
         self.cancellable = self.editingViewModel
             .calendarStatePublisher
             .sink { status in
-                print(actualStatus)
-            actualStatus.append(status)
-                if actualStatus.count == 2 {
-                expectation.fulfill()
+                actualStatus.append(status)
+                if actualStatus.count == expectedStatus.count {
+                    expectation.fulfill()
+                }
             }
-        }
 
         // When
         self.editingViewModel.didEnterDate(at: Date())
