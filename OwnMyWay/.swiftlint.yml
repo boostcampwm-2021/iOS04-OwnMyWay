@@ -27,11 +27,11 @@ excluded:
   - ViewModelTest/
   - OwnMyWay/Application/AppDelegate.swift
   - OwnMyWay/Application/SceneDelegate.swift
-  - OwnMyWay/Model/TravelMO+CoreDataClass.swift
-  - OwnMyWay/Model/TravelMO+CoreDataProperties.swift
-  - OwnMyWay/Model/RecordMO+CoreDataClass.swift
-  - OwnMyWay/Model/RecordMO+CoreDataProperties.swift
-  - OwnMyWay/Model/LandmarkMO+CoreDataClass.swift
-  - OwnMyWay/Model/LandmarkMO+CoreDataProperties.swift
-  - OwnMyWay/Model/LocationMO+CoreDataClass.swift
-  - OwnMyWay/Model/LocationMO+CoreDataProperties.swift
+  - OwnMyWay/Data/Persistent/CoreData/DataMapping/TravelMO+CoreDataClass.swift
+  - OwnMyWay/Data/Persistent/CoreData/TravelMO+CoreDataProperties.swift
+  - OwnMyWay/Data/Persistent/CoreData/DataMapping/RecordMO+CoreDataClass.swift
+  - OwnMyWay/Data/Persistent/CoreData/RecordMO+CoreDataProperties.swift
+  - OwnMyWay/Data/Persistent/CoreData/DataMapping/LandmarkMO+CoreDataClass.swift
+  - OwnMyWay/Data/Persistent/CoreData/LandmarkMO+CoreDataProperties.swift
+  - OwnMyWay/Data/Persistent/CoreData/DataMapping/LocationMO+CoreDataClass.swift
+  - OwnMyWay/Data/Persistent/CoreData/LocationMO+CoreDataProperties.swift
