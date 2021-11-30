@@ -10,7 +10,7 @@ import XCTest
 
 class EnterDateViewModelTest: XCTestCase {
 
-    private var viewModel: DefaultEnterDateViewModel!
+    private var creatingViewModel: EnterDateViewModel!
     private var coordinator: MockCoordinator!
     private var cancellable: AnyCancellable!
     private let timeout: TimeInterval = 3
@@ -26,13 +26,9 @@ class EnterDateViewModelTest: XCTestCase {
     }
 
     class MockUsecase: EnterDateUsecase {
-
         func executeEnteringDate(
             firstDate: Date, secondDate: Date, completion: ([Date]) -> Void
-        ) {
-            completion([])
-        }
-
+        ) {}
     }
 
     override func setUp() {
@@ -42,7 +38,7 @@ class EnterDateViewModelTest: XCTestCase {
             endDate: nil, landmarks: [], records: [], locations: []
         )
         self.coordinator = MockCoordinator()
-        self.viewModel = DefaultEnterDateViewModel(
+        self.creatingViewModel = DefaultEnterDateViewModel(
             usecase: MockUsecase(),
             coordinatingDelegate: self.coordinator,
             travel: emtpyTravel,
@@ -52,7 +48,7 @@ class EnterDateViewModelTest: XCTestCase {
 
     override func tearDown() {
         self.coordinator = nil
-        self.viewModel = nil
+        self.creatingViewModel = nil
         super.tearDown()
     }
 
@@ -63,7 +59,7 @@ class EnterDateViewModelTest: XCTestCase {
         var actual: (Date?, Date?)
 
         // When
-        self.viewModel.viewDidLoad { firstDate, secondDate in
+        self.creatingViewModel.viewDidLoad { firstDate, secondDate in
             actual = (firstDate, secondDate)
             expectation.fulfill()
         }
@@ -78,7 +74,7 @@ class EnterDateViewModelTest: XCTestCase {
         let expectation = XCTestExpectation()
         let expectedStatus: [CalendarState] = [.empty, .firstDateEntered]
         var actualStatus: [CalendarState] = []
-        self.cancellable = self.viewModel
+        self.cancellable = self.creatingViewModel
             .calendarStatePublisher
             .sink { status in
             actualStatus.append(status)
@@ -88,7 +84,7 @@ class EnterDateViewModelTest: XCTestCase {
         }
 
         // When
-        self.viewModel.didEnterDate(at: Date())
+        self.creatingViewModel.didEnterDate(at: Date())
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
@@ -100,7 +96,7 @@ class EnterDateViewModelTest: XCTestCase {
         let expectation = XCTestExpectation()
         let expectedStatus: [CalendarState] = [.empty, .firstDateEntered, .fulfilled]
         var actualStatus: [CalendarState] = []
-        self.cancellable = self.viewModel
+        self.cancellable = self.creatingViewModel
             .calendarStatePublisher
             .sink { status in
             actualStatus.append(status)
@@ -110,8 +106,8 @@ class EnterDateViewModelTest: XCTestCase {
         }
 
         // When
-        self.viewModel.didEnterDate(at: Date())
-        self.viewModel.didEnterDate(at: Date())
+        self.creatingViewModel.didEnterDate(at: Date())
+        self.creatingViewModel.didEnterDate(at: Date())
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
@@ -123,7 +119,7 @@ class EnterDateViewModelTest: XCTestCase {
         let expectation = XCTestExpectation()
         let expectedStatus: [CalendarState] = [.empty, .firstDateEntered, .fulfilled, .empty]
         var actualStatus: [CalendarState] = []
-        self.cancellable = self.viewModel
+        self.cancellable = self.creatingViewModel
             .calendarStatePublisher
             .sink { status in
             actualStatus.append(status)
@@ -133,9 +129,9 @@ class EnterDateViewModelTest: XCTestCase {
         }
 
         // When
-        self.viewModel.didEnterDate(at: Date())
-        self.viewModel.didEnterDate(at: Date())
-        self.viewModel.didEnterDate(at: Date())
+        self.creatingViewModel.didEnterDate(at: Date())
+        self.creatingViewModel.didEnterDate(at: Date())
+        self.creatingViewModel.didEnterDate(at: Date())
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
@@ -144,11 +140,11 @@ class EnterDateViewModelTest: XCTestCase {
 
     func test_아니오_버튼_터치한_경우() {
         // When
-        self.viewModel.didTouchBackButton()
+        self.creatingViewModel.didTouchBackButton()
 
         // Then
-        XCTAssertNil(self.viewModel.travel.startDate)
-        XCTAssertNil(self.viewModel.travel.endDate)
+        XCTAssertNil(self.creatingViewModel.travel.startDate)
+        XCTAssertNil(self.creatingViewModel.travel.endDate)
     }
 
 }
