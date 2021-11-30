@@ -115,6 +115,32 @@
 		AF82FDB8273BF3C600A094B6 /* OutdatedTravel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */; };
 		AF82FDBA273BF3D900A094B6 /* OutdatedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */; };
 		AF82FDBC273BF3E300A094B6 /* OutdatedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */; };
+		AF86CB8E27561767007DEB72 /* AddRecordUsecaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF86CB8D27561767007DEB72 /* AddRecordUsecaseTest.swift */; };
+		AF86CB96275618E1007DEB72 /* AddRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AD027560009009E17CB /* AddRecordUsecase.swift */; };
+		AF86CB97275618ED007DEB72 /* DefaultAddRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDAF273BEC0900A094B6 /* DefaultAddRecordUsecase.swift */; };
+		AF86CB9827561948007DEB72 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CB6273CE1C100B30448 /* Location.swift */; };
+		AF86CB9927561953007DEB72 /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A982755E6FE009E17CB /* TravelRepository.swift */; };
+		AF86CB9A275619BD007DEB72 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987972742C3BF008F0E08 /* ImageFileManager.swift */; };
+		AF86CB9B275619BD007DEB72 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EEB2733929000FB7939 /* Travel.swift */; };
+		AF86CB9C275619BD007DEB72 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F0B2733C42700FB7939 /* Record.swift */; };
+		AF86CB9D275619BD007DEB72 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
+		AF86CB9E27561A00007DEB72 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646B92738F6590030ED78 /* Date+.swift */; };
+		AF86CB9F27561B23007DEB72 /* CoreDataTravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* CoreDataTravelRepository.swift */; };
+		AF86CBA027561B9A007DEB72 /* ModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A942755E68B009E17CB /* ModelError.swift */; };
+		AF86CBA127561B9A007DEB72 /* JSONError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A902755E631009E17CB /* JSONError.swift */; };
+		AF86CBA227561B9A007DEB72 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A922755E66A009E17CB /* RepositoryError.swift */; };
+		AF86CBA327561B9A007DEB72 /* EnterTitleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AAC2755FD9D009E17CB /* EnterTitleError.swift */; };
+		AF86CBA427561BC0007DEB72 /* TravelMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */; };
+		AF86CBA527561BC0007DEB72 /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE57B71274F2ED100FA5DE7 /* RecordMO+CoreDataProperties.swift */; };
+		AF86CBA627561BC0007DEB72 /* LandmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */; };
+		AF86CBA727561BC0007DEB72 /* LocationMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */; };
+		AF86CBA827561BC0007DEB72 /* TravelMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */; };
+		AF86CBA927561BC0007DEB72 /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */; };
+		AF86CBAA27561BC0007DEB72 /* LandmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */; };
+		AF86CBAB27561BC0007DEB72 /* LocationMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */; };
+		AF86CBAC27561C04007DEB72 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA5E25A2742294100DD94D9 /* LocationManager.swift */; };
+		AF86CBAD27561C0F007DEB72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
+		AF86CBAE27561C2B007DEB72 /* CLLocationManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA6F68D27461E0C00F3244E /* CLLocationManager+.swift */; };
 		AF9695A927339AC700A08C34 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
 		AFA5E25B2742294100DD94D9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA5E25A2742294100DD94D9 /* LocationManager.swift */; };
 		AFA6ED7A2744F6BD007B251C /* CompleteEditingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */; };
@@ -172,6 +198,16 @@
 		DBFC041427391EDB00031EDF /* SearchLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */; };
 		DBFC0416273925FD00031EDF /* ReservedTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AF86CB8F27561767007DEB72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB22BB4E272F82770004444B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB22BB55272F82770004444B;
+			remoteInfo = OwnMyWay;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		29117A902755E631009E17CB /* JSONError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONError.swift; sourceTree = "<group>"; };
@@ -282,6 +318,8 @@
 		AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OutdatedTravel.storyboard; sourceTree = "<group>"; };
 		AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewController.swift; sourceTree = "<group>"; };
 		AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutdatedTravelViewModel.swift; sourceTree = "<group>"; };
+		AF86CB8B27561767007DEB72 /* UsecaseTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsecaseTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF86CB8D27561767007DEB72 /* AddRecordUsecaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordUsecaseTest.swift; sourceTree = "<group>"; };
 		AF9695A827339AC700A08C34 /* MapAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAvailable.swift; sourceTree = "<group>"; };
 		AFA5E25A2742294100DD94D9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditingCoordinator.swift; sourceTree = "<group>"; };
@@ -343,6 +381,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AF86CB8827561767007DEB72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB22BB53272F82770004444B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1423,11 +1468,20 @@
 			path = BundleJSON;
 			sourceTree = "<group>";
 		};
+		AF86CB8C27561767007DEB72 /* UsecaseTest */ = {
+			isa = PBXGroup;
+			children = (
+				AF86CB8D27561767007DEB72 /* AddRecordUsecaseTest.swift */,
+			);
+			path = UsecaseTest;
+			sourceTree = "<group>";
+		};
 		DB22BB4D272F82770004444B = {
 			isa = PBXGroup;
 			children = (
 				DB22BB72272F83DB0004444B /* .swiftlint.yml */,
 				DB22BB58272F82770004444B /* OwnMyWay */,
+				AF86CB8C27561767007DEB72 /* UsecaseTest */,
 				DB22BB57272F82770004444B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1436,6 +1490,7 @@
 			isa = PBXGroup;
 			children = (
 				DB22BB56272F82770004444B /* OwnMyWay.app */,
+				AF86CB8B27561767007DEB72 /* UsecaseTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1456,6 +1511,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AF86CB8A27561767007DEB72 /* UsecaseTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF86CB9327561767007DEB72 /* Build configuration list for PBXNativeTarget "UsecaseTest" */;
+			buildPhases = (
+				AF86CB8727561767007DEB72 /* Sources */,
+				AF86CB8827561767007DEB72 /* Frameworks */,
+				AF86CB8927561767007DEB72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AF86CB9027561767007DEB72 /* PBXTargetDependency */,
+			);
+			name = UsecaseTest;
+			productName = UsecaseTest;
+			productReference = AF86CB8B27561767007DEB72 /* UsecaseTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DB22BB55272F82770004444B /* OwnMyWay */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB22BB6D272F82780004444B /* Build configuration list for PBXNativeTarget "OwnMyWay" */;
@@ -1483,9 +1556,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1300;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
+					AF86CB8A27561767007DEB72 = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					DB22BB55272F82770004444B = {
 						CreatedOnToolsVersion = 13.0;
 					};
@@ -1508,11 +1584,19 @@
 			projectRoot = "";
 			targets = (
 				DB22BB55272F82770004444B /* OwnMyWay */,
+				AF86CB8A27561767007DEB72 /* UsecaseTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AF86CB8927561767007DEB72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB22BB54272F82770004444B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1578,6 +1662,39 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AF86CB8727561767007DEB72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF86CBAE27561C2B007DEB72 /* CLLocationManager+.swift in Sources */,
+				AF86CBAD27561C0F007DEB72 /* AppDelegate.swift in Sources */,
+				AF86CBAC27561C04007DEB72 /* LocationManager.swift in Sources */,
+				AF86CBA427561BC0007DEB72 /* TravelMO+CoreDataProperties.swift in Sources */,
+				AF86CBA527561BC0007DEB72 /* RecordMO+CoreDataProperties.swift in Sources */,
+				AF86CBA627561BC0007DEB72 /* LandmarkMO+CoreDataProperties.swift in Sources */,
+				AF86CBA727561BC0007DEB72 /* LocationMO+CoreDataProperties.swift in Sources */,
+				AF86CBA827561BC0007DEB72 /* TravelMO+CoreDataClass.swift in Sources */,
+				AF86CBA927561BC0007DEB72 /* RecordMO+CoreDataClass.swift in Sources */,
+				AF86CBAA27561BC0007DEB72 /* LandmarkMO+CoreDataClass.swift in Sources */,
+				AF86CBAB27561BC0007DEB72 /* LocationMO+CoreDataClass.swift in Sources */,
+				AF86CBA027561B9A007DEB72 /* ModelError.swift in Sources */,
+				AF86CBA127561B9A007DEB72 /* JSONError.swift in Sources */,
+				AF86CBA227561B9A007DEB72 /* RepositoryError.swift in Sources */,
+				AF86CBA327561B9A007DEB72 /* EnterTitleError.swift in Sources */,
+				AF86CB9F27561B23007DEB72 /* CoreDataTravelRepository.swift in Sources */,
+				AF86CB9E27561A00007DEB72 /* Date+.swift in Sources */,
+				AF86CB9A275619BD007DEB72 /* ImageFileManager.swift in Sources */,
+				AF86CB9B275619BD007DEB72 /* Travel.swift in Sources */,
+				AF86CB9C275619BD007DEB72 /* Record.swift in Sources */,
+				AF86CB9D275619BD007DEB72 /* Landmark.swift in Sources */,
+				AF86CB9927561953007DEB72 /* TravelRepository.swift in Sources */,
+				AF86CB9827561948007DEB72 /* Location.swift in Sources */,
+				AF86CB97275618ED007DEB72 /* DefaultAddRecordUsecase.swift in Sources */,
+				AF86CB96275618E1007DEB72 /* AddRecordUsecase.swift in Sources */,
+				AF86CB8E27561767007DEB72 /* AddRecordUsecaseTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB22BB52272F82770004444B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1717,6 +1834,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AF86CB9027561767007DEB72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB22BB55272F82770004444B /* OwnMyWay */;
+			targetProxy = AF86CB8F27561767007DEB72 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		DB22BB5F272F82770004444B /* Home.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1737,6 +1862,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AF86CB9127561767007DEB72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.OwnMyWay.UsecaseTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AF86CB9227561767007DEB72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.OwnMyWay.UsecaseTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		DB22BB6B272F82780004444B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1922,6 +2091,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AF86CB9327561767007DEB72 /* Build configuration list for PBXNativeTarget "UsecaseTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF86CB9127561767007DEB72 /* Debug */,
+				AF86CB9227561767007DEB72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DB22BB51272F82770004444B /* Build configuration list for PBXProject "OwnMyWay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
