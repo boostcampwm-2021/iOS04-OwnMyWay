@@ -18,8 +18,8 @@ class LandmarkCartViewModelTest: XCTestCase {
     var coordinator: LandmarkCartCoordinatingDelegate!
     var cancellables: [AnyCancellable]!
     
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() {
+        super.setUp()
         self.coordinator = LandmarkCartCoordinatorMock()
         self.viewModel = DefaultLandmarkCartViewModel(
             coordinatingDelegate: self.coordinator, travel: Travel.dummy(section: .dummy), superVC: .create
@@ -27,11 +27,11 @@ class LandmarkCartViewModelTest: XCTestCase {
         self.cancellables = []
     }
 
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
+    override func tearDown() {
         self.coordinator = nil
         self.viewModel = nil
         self.cancellables = nil
+        super.tearDown()
     }
     
     func test_관광명소_삽입_성공() {

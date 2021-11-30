@@ -19,17 +19,17 @@ class AddLandmarkViewModelTest: XCTestCase {
     var viewModel: AddLandmarkViewModel!
     var coordinator: AddLandmarkCoordinatingDelegate!
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() {
+        super.setUp()
         self.coordinator = AddLandmarkCoordinatorMock()
         self.viewModel = DefaultAddLandmarkViewModel(travel: Travel.dummy(section: .dummy), coordinatingDelegate: self.coordinator, isEditingMode: true)
 
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         self.viewModel = nil
         self.coordinator = nil
-        try super.tearDownWithError()
+        super.tearDown()
     }
     
     func test_여행_업데이트_성공() {
