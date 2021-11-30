@@ -26,11 +26,21 @@ class EnterDateViewModelTest: XCTestCase {
         func popToCreateTravel(travel: Travel) {}
     }
 
+    class MockUsecase: EnterDateUsecase {
+
+        func executeEnteringDate(
+            firstDate: Date, secondDate: Date, completion: ([Date]) -> Void
+        ) {
+            completion([])
+        }
+
+    }
+
     override func setUp() {
         super.setUp()
         self.coordinator = MockCoordinator()
         self.viewModel = DefaultEnterDateViewModel(
-            usecase: DefaultEnterDateUsecase(),
+            usecase: MockUsecase(),
             coordinatingDelegate: self.coordinator,
             travel: Travel.dummy(section: .dummy),
             isEditingMode: false
@@ -111,6 +121,7 @@ class EnterDateViewModelTest: XCTestCase {
         // Then
         XCTAssert(expectedStatus == actualStatus)
     }
+
 
 }
 
