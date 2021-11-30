@@ -8,20 +8,20 @@
 import Combine
 import XCTest
 
+class AddLandmarkCoordinatorMock: AddLandmarkCoordinatingDelegate {
+    func pushToCompleteCreation(travel: Travel) { return }
+    func pushToCompleteEditing(travel: Travel) { return }
+    func popToEnterDate(travel: Travel) { return }
+}
+
 class AddLandmarkViewModelTest: XCTestCase {
     
     var viewModel: AddLandmarkViewModel!
-    var coordinator: MockCoordinator!
-
-    class MockCoordinator: AddLandmarkCoordinatingDelegate {
-        func pushToCompleteCreation(travel: Travel) { return }
-        func pushToCompleteEditing(travel: Travel) { return }
-        func popToEnterDate(travel: Travel) { return }
-    }
+    var coordinator: AddLandmarkCoordinatingDelegate!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        self.coordinator = MockCoordinator()
+        self.coordinator = AddLandmarkCoordinatorMock()
         self.viewModel = DefaultAddLandmarkViewModel(travel: Travel.dummy(section: .dummy), coordinatingDelegate: self.coordinator, isEditingMode: true)
 
     }

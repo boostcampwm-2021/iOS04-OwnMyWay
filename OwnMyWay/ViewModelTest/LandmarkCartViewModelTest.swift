@@ -8,19 +8,19 @@
 import Combine
 import XCTest
 
+class LandmarkCartCoordinatorMock: LandmarkCartCoordinatingDelegate {
+    func presentSearchLandmarkModally() { return }
+}
+
 class LandmarkCartViewModelTest: XCTestCase {
 
     var viewModel: LandmarkCartViewModel!
-    var coordinator: MockCoordinator!
+    var coordinator: LandmarkCartCoordinatingDelegate!
     var cancellables: [AnyCancellable]!
-    
-    class MockCoordinator: LandmarkCartCoordinatingDelegate {
-        func presentSearchLandmarkModally() { return }
-    }
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        self.coordinator = MockCoordinator()
+        self.coordinator = LandmarkCartCoordinatorMock()
         self.viewModel = DefaultLandmarkCartViewModel(
             coordinatingDelegate: self.coordinator, travel: Travel.dummy(section: .dummy), superVC: .create
         )
