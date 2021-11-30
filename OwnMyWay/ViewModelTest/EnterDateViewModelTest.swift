@@ -88,6 +88,30 @@ class EnterDateViewModelTest: XCTestCase {
         XCTAssert(expectedStatus == actualStatus)
     }
 
+    func test_날짜입력_3번_입력한_경우() {
+        // Given
+        let expectation = XCTestExpectation()
+        let expectedStatus: [CalendarState] = [.empty, .firstDateEntered, .fulfilled, .empty]
+        var actualStatus: [CalendarState] = []
+        let cancellable = self.viewModel
+            .calendarStatePublisher
+            .sink { status in
+            actualStatus.append(status)
+                if actualStatus.count == 4 {
+                expectation.fulfill()
+            }
+        }
+
+        // When
+        self.viewModel.didEnterDate(at: Date())
+        self.viewModel.didEnterDate(at: Date())
+        self.viewModel.didEnterDate(at: Date())
+        wait(for: [expectation], timeout: 3)
+
+        // Then
+        XCTAssert(expectedStatus == actualStatus)
+    }
+
 }
 
 // 청수
