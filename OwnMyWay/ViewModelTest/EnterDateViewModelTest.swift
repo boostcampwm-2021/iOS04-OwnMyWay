@@ -5,28 +5,42 @@
 //  Created by 김우재 on 2021/11/30.
 //
 
+import Combine
 import XCTest
 
 class EnterDateViewModelTest: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    var viewModel: DefaultEnterDateViewModel!
+    var coordinator: MockCoordinator!
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    class MockCoordinator: EnterDateCoordinatingDelegate {
+        var travel: Travel?
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        func pushToEnterDate(travel: Travel, isEditingMode: Bool) {
+            self.travel = travel
+            return
         }
+
+        func pushToAddLandmark(travel: Travel, isEditingMode: Bool) {}
+        
+        func popToCreateTravel(travel: Travel) {}
+    }
+
+    override func setUp() {
+        super.setUp()
+        self.coordinator = MockCoordinator()
+        self.viewModel = DefaultEnterDateViewModel(
+            usecase: DefaultEnterDateUsecase(),
+            coordinatingDelegate: self.coordinator,
+            travel: Travel.dummy(section: .dummy),
+            isEditingMode: false
+        )
+    }
+
+    override func tearDown() {
+        self.coordinator = nil
+        self.viewModel = nil
+        super.tearDown()
     }
 
 }
