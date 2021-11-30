@@ -15,6 +15,8 @@ class EnterDateViewModelTest: XCTestCase {
     private var coordinator: MockCoordinator!
     private var cancellable: AnyCancellable!
     private let timeout: TimeInterval = 3
+    private let startDate = Date(timeIntervalSince1970: 0)
+    private let endDate = Date(timeIntervalSince1970: 100)
 
     class MockCoordinator: EnterDateCoordinatingDelegate {
         var travel: Travel?
@@ -47,8 +49,6 @@ class EnterDateViewModelTest: XCTestCase {
             isEditingMode: false
         )
 
-        let startDate = Date(timeIntervalSince1970: 0)
-        let endDate = Date(timeIntervalSince1970: 100)
         let travel = Travel(
             uuid: nil, flag: 0, title: nil, startDate: startDate,
             endDate: endDate, landmarks: [], records: [], locations: [])
@@ -74,6 +74,23 @@ class EnterDateViewModelTest: XCTestCase {
 
         // When
         self.creatingViewModel.viewDidLoad { firstDate, secondDate in
+            actual = (firstDate, secondDate)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: self.timeout)
+
+        // Then
+        XCTAssert(expect.0 == actual.0 && expect.1 == actual.1)
+    }
+
+    func test_초기_뷰_로드_수정할때() {
+        // Given
+        let expectation = XCTestExpectation()
+        let expect: (Date?, Date?) = (self.startDate, self.endDate)
+        var actual: (Date?, Date?)
+
+        // When
+        self.editingViewModel.viewDidLoad { firstDate, secondDate in
             actual = (firstDate, secondDate)
             expectation.fulfill()
         }
@@ -146,6 +163,29 @@ class EnterDateViewModelTest: XCTestCase {
         self.creatingViewModel.didEnterDate(at: Date())
         self.creatingViewModel.didEnterDate(at: Date())
         self.creatingViewModel.didEnterDate(at: Date())
+        wait(for: [expectation], timeout: self.timeout)
+
+        // Then
+        XCTAssert(expectedStatus == actualStatus)
+    }
+
+    func test_날짜입력_수정하는_경우() {
+        // Given
+        let expectation = XCTestExpectation()
+        let expectedStatus: [CalendarState] = [.datesExisted, .empty]
+        var actualStatus: [CalendarState] = []
+        self.cancellable = self.editingViewModel
+            .calendarStatePublisher
+            .sink { status in
+                print(actualStatus)
+            actualStatus.append(status)
+                if actualStatus.count == 2 {
+                expectation.fulfill()
+            }
+        }
+
+        // When
+        self.editingViewModel.didEnterDate(at: Date())
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
