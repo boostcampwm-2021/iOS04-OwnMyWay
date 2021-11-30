@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="312" height="191"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" insetsLayoutMarginsFromSafeArea="NO" image="airplane" translatesAutoresizingMaskIntoConstraints="NO" id="huJ-9l-55E">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="airplane" translatesAutoresizingMaskIntoConstraints="NO" id="huJ-9l-55E">
                         <rect key="frame" x="0.0" y="0.0" width="312" height="191"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="huJ-9l-55E" secondAttribute="height" multiplier="312:191" id="nyG-iF-agP"/>

@@ -24,7 +24,7 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
         self.configureTravelCollectionView()
         self.configureDataSource()
         self.configureCancellable()
-        self.viewModel?.viewDidLoad()
+        self.fetchTravel()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +108,11 @@ final class HomeViewController: UIViewController, Instantiable, TravelFetchable 
             .receive(on: DispatchQueue.main)
             .sink { [weak self] travels in
                 self?.dataSourceChanged(to: travels, in: .outdated)
+                if #available(iOS 15.0, *) {
+                    return
+                } else {
+                    self?.travelCollectionView.collectionViewLayout.invalidateLayout()
+                }
             }
             .store(in: &self.cancellables)
 
