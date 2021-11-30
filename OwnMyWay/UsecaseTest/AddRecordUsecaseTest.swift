@@ -16,7 +16,7 @@ class AddRecordUsecaseTest: XCTestCase {
         }
     }
     
-    var usecase: DefaultAddRecordUsecase!
+    var usecase: AddRecordUsecase!
     
     override func setUpWithError() throws {
         self.usecase = DefaultAddRecordUsecase(
