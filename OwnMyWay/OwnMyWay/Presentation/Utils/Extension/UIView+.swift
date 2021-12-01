@@ -18,12 +18,14 @@ extension UIView {
         self.layer.masksToBounds = false
     }
 
-    func makePolaroid(with record: Record) {
+    func makePolaroid(with record: Record, at index: Int) {
         let photoImageView = UIImageView()
         photoImageView.contentMode = .scaleAspectFill
         photoImageView.clipsToBounds = true
         photoImageView.setLocalImage(
-          with: ImageFileManager.shared.imageInDocuemtDirectory(image: record.photoIDs?.first ?? "")
+            with: ImageFileManager.shared.imageInDocuemtDirectory(
+                image: record.photoIDs?[index] ?? ""
+            )
         )
 
         let titleLabel = UILabel()
@@ -36,8 +38,6 @@ extension UIView {
 
         self.addSubview(photoImageView)
         self.addSubview(titleLabel)
-
-        self.makeShadow()
 
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(
@@ -73,7 +73,6 @@ extension UIView {
                 constant: -24
             )
         ])
-
         self.layoutIfNeeded()
     }
 }
