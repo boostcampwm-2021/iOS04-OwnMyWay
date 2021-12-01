@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Combine
 
 class AddRecordViewModelTest: XCTestCase {
 
@@ -16,7 +17,8 @@ class AddRecordViewModelTest: XCTestCase {
     var creatingViewModel: AddRecordViewModel!
     var editingViewModel: AddRecordViewModel!
     private let testDate = Date(timeIntervalSince1970: 0)
-
+    var cancellables: Set<AnyCancellable>!
+    
     class MockCoordinator: AddRecordCoordinatingDelegate {
         func popToParent(with record: Record) {}
         
@@ -44,7 +46,7 @@ class AddRecordViewModelTest: XCTestCase {
         
         func executePickingPhoto(with url: URL, completion: (Result<String, Error>) -> Void) {
             if self.isValidateUsecase {
-                completion(.success("성공"))
+                completion(.success("https://www.naver.com"))
             } else {
                 let error = TestError.error
                 completion(.failure(error))
@@ -63,6 +65,7 @@ class AddRecordViewModelTest: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        self.cancellables = []
         self.creatingViewModel = DefaultAddRecordViewModel(
             record: nil, usecase: MockUsecase(isValidate: true),
             coordinatingDelegate: MockCoordinator(), isEditingMode: false
@@ -78,6 +81,7 @@ class AddRecordViewModelTest: XCTestCase {
     override func tearDown() {
         self.creatingViewModel = nil
         self.editingViewModel = nil
+        self.cancellables = nil
         super.tearDown()
     }
 
@@ -121,22 +125,14 @@ class AddRecordViewModelTest: XCTestCase {
     }
 
     func test_사진_URL_입력() {
-        
+        let url = URL(string: "https://www.naver.com")
+        XCTAssertNotNil(url, "잘못된 URL입니다!")
+        self.creatingViewModel.allocateImages(size: 1)
+        self.creatingViewModel.didEnterPhotoURL(with: url!, at: 0)
+        XCTAssertEqual(self.creatingViewModel.record.photoIDs?.count, 1)
     }
 
     func test_사진제거() {
-        
-    }
-
-    func test_제출버튼_터치() {
-        
-    }
-
-    func test_장소버튼_터치() {
-        
-    }
-
-    func test_뒤로버튼_터치() {
         
     }
 
@@ -145,7 +141,20 @@ class AddRecordViewModelTest: XCTestCase {
     }
 
     func test_장소이름() {
-        
-    }
+        let expectation = XCTestExpectation()
 
+        var arr: [Record] = []
+        self.creatingViewModel.recordPublisher
+            .sink { result in
+                arr.append(result)
+                if arr.count == 2 {
+                    expectation.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+        
+        self.creatingViewModel.configurePlace(latitude: 0, longitude: 0)
+        wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(self.creatingViewModel.record.placeDescription, "North Atlantic Ocean")
+    }
 }
