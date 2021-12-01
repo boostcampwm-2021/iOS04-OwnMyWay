@@ -105,5 +105,3 @@ class LandmarkCartViewModelTest: XCTestCase {
         XCTAssertEqual(resultTravel, travel, "여행이 업데이트되지 않았습니다.")
     }
 }
-
-// 한준

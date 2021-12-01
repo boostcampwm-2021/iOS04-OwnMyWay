@@ -24,6 +24,7 @@ class EnterTitleViewModelTest: XCTestCase {
     }
     
     override func setUp() {
+        super.setUp()
         coordinator = MockCoordinator()
         viewModel = DefaultEnterTitleViewModel(
             usecase: DefaultEnterTitleUsecase(),
@@ -37,6 +38,7 @@ class EnterTitleViewModelTest: XCTestCase {
         coordinator = nil
         viewModel = nil
         cancellables = nil
+        super.tearDown()
     }
     
     func test_텍스트_입력() {
@@ -78,10 +80,11 @@ class EnterTitleViewModelTest: XCTestCase {
     }
 
     func test_다음_버튼_클릭() {
-        self.viewModel.didChangeTitle(text: "테스트입니다.")
+        let expectedTitle = "테스트입니다."
+        self.viewModel.didChangeTitle(text: expectedTitle)
         self.viewModel.didTouchNextButton()
         XCTAssertNotNil(self.coordinator.travel)
-        XCTAssertTrue(self.coordinator.travel?.title == "테스트입니다.")
+        XCTAssertEqual(self.coordinator.travel?.title, expectedTitle)
     }
 
 }
