@@ -129,6 +129,162 @@
 		AFF88422273CDD49004FCE5C /* RecordAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */; };
 		AFFB96182730F76100F23A46 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
 		AFFB96192730F76100F23A46 /* PlusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFB96172730F76100F23A46 /* PlusCell.xib */; };
+		AFFDF1112756660E00073731 /* AddRecordUsecaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFDF1102756660E00073731 /* AddRecordUsecaseTest.swift */; };
+		AFFDF117275666AC00073731 /* ModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A942755E68B009E17CB /* ModelError.swift */; };
+		AFFDF118275666AC00073731 /* JSONError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A902755E631009E17CB /* JSONError.swift */; };
+		AFFDF119275666AC00073731 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A922755E66A009E17CB /* RepositoryError.swift */; };
+		AFFDF11A275666AC00073731 /* EnterTitleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AAC2755FD9D009E17CB /* EnterTitleError.swift */; };
+		AFFDF11B275666AC00073731 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987972742C3BF008F0E08 /* ImageFileManager.swift */; };
+		AFFDF11C275666AC00073731 /* CLLocationManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA6F68D27461E0C00F3244E /* CLLocationManager+.swift */; };
+		AFFDF11D275666AC00073731 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA5E25A2742294100DD94D9 /* LocationManager.swift */; };
+		AFFDF11E275666AC00073731 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
+		AFFDF11F275666AC00073731 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EEB2733929000FB7939 /* Travel.swift */; };
+		AFFDF120275666AC00073731 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F0B2733C42700FB7939 /* Record.swift */; };
+		AFFDF121275666AC00073731 /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
+		AFFDF122275666AC00073731 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CB6273CE1C100B30448 /* Location.swift */; };
+		AFFDF123275666AC00073731 /* DefaultAddRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDAF273BEC0900A094B6 /* DefaultAddRecordUsecase.swift */; };
+		AFFDF124275666AC00073731 /* LandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A962755E6D7009E17CB /* LandmarkRepository.swift */; };
+		AFFDF125275666AC00073731 /* TravelMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */; };
+		AFFDF126275666AC00073731 /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE57B71274F2ED100FA5DE7 /* RecordMO+CoreDataProperties.swift */; };
+		AFFDF127275666AC00073731 /* LandmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */; };
+		AFFDF128275666AC00073731 /* LocationMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */; };
+		AFFDF129275666AC00073731 /* TravelMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */; };
+		AFFDF12A275666AD00073731 /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */; };
+		AFFDF12B275666AD00073731 /* LandmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */; };
+		AFFDF12C275666AD00073731 /* LocationMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */; };
+		AFFDF12D275666DE00073731 /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A982755E6FE009E17CB /* TravelRepository.swift */; };
+		AFFDF12E2756672600073731 /* AddRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AD027560009009E17CB /* AddRecordUsecase.swift */; };
+		AFFDF12F2756672600073731 /* AddRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDAD273BEB5700A094B6 /* AddRecordCoordinator.swift */; };
+		AFFDF1302756673E00073731 /* CoreDataTravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* CoreDataTravelRepository.swift */; };
+		AFFDF1312756676900073731 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB93665F2739086400B39BC1 /* Coordinator.swift */; };
+		AFFDF1322756677600073731 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646B92738F6590030ED78 /* Date+.swift */; };
+		AFFDF1332756679E00073731 /* AddRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */; };
+		AFFDF1342756679E00073731 /* AddRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */; };
+		AFFDF13C275667E200073731 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF11A497274CF6B60005B0D0 /* ErrorManager.swift */; };
+		AFFDF13D275667E200073731 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5B272F82770004444B /* SceneDelegate.swift */; };
+		AFFDF13E275667E200073731 /* DefaultHomeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914C22734129F0084FF1C /* DefaultHomeUsecase.swift */; };
+		AFFDF13F275667E300073731 /* DefaultEnterTitleUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* DefaultEnterTitleUsecase.swift */; };
+		AFFDF140275667E300073731 /* DefaultEnterDateUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F84274CA64900729D39 /* DefaultEnterDateUsecase.swift */; };
+		AFFDF141275667E300073731 /* DefaultCompleteCreationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A14273A5AA300EA91AA /* DefaultCompleteCreationUsecase.swift */; };
+		AFFDF142275667E300073731 /* DefaultCompleteEditingUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED812744F869007B251C /* DefaultCompleteEditingUsecase.swift */; };
+		AFFDF143275667E300073731 /* DefaultStartedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E5273B8C18009FE728 /* DefaultStartedTravelUsecase.swift */; };
+		AFFDF144275667E300073731 /* DefaultReservedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFE273401AE00DDEBFF /* DefaultReservedTravelUsecase.swift */; };
+		AFFDF145275667E300073731 /* DefaultSearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C027319B6400487D33 /* DefaultSearchLandmarkUsecase.swift */; };
+		AFFDF146275667E300073731 /* DefaultDetailRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C9273BF3D7003185E7 /* DefaultDetailRecordUsecase.swift */; };
+		AFFDF147275667E300073731 /* HomeBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F8671274B9E340075B9A0 /* HomeBackgroundView.swift */; };
+		AFFDF148275667E300073731 /* HomeBackgroundView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */; };
+		AFFDF149275667E300073731 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F8679274CC3400075B9A0 /* MessageCell.swift */; };
+		AFFDF14A275667E300073731 /* MessageCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F867A274CC3400075B9A0 /* MessageCell.xib */; };
+		AFFDF14B275667E300073731 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987A3274373CB008F0E08 /* PhotoCell.swift */; };
+		AFFDF14C275667E300073731 /* PhotoCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987A4274373CB008F0E08 /* PhotoCell.xib */; };
+		AFFDF14D275667E300073731 /* TravelSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */; };
+		AFFDF14E275667E300073731 /* TravelSectionHeader.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914E82737DAC70084FF1C /* TravelSectionHeader.xib */; };
+		AFFDF14F275667E300073731 /* RecordCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897BD273BA993003185E7 /* RecordCardCell.swift */; };
+		AFFDF150275667E300073731 /* RecordCardCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 294897BE273BA993003185E7 /* RecordCardCell.xib */; };
+		AFFDF151275667E300073731 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */; };
+		AFFDF152275667E300073731 /* DateHeaderView.xib in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */; };
+		AFFDF153275667E300073731 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897CB273CDCF1003185E7 /* CommentCell.swift */; };
+		AFFDF154275667E300073731 /* CommentCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 294897CC273CDCF1003185E7 /* CommentCell.xib */; };
+		AFFDF155275667E300073731 /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
+		AFFDF156275667E300073731 /* PlusCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96172730F76100F23A46 /* PlusCell.xib */; };
+		AFFDF157275667E300073731 /* TravelCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914BC273409530084FF1C /* TravelCardCell.swift */; };
+		AFFDF158275667E300073731 /* TravelCardCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914BD273409530084FF1C /* TravelCardCell.xib */; };
+		AFFDF159275667E300073731 /* LandmarkCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */; };
+		AFFDF15A275667E300073731 /* LandmarkCardCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */; };
+		AFFDF15B275667E300073731 /* OMWCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */; };
+		AFFDF15C275667E300073731 /* OMWMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA63274B82200091F642 /* OMWMapView.swift */; };
+		AFFDF15D275667E300073731 /* LandmarkAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */; };
+		AFFDF15E275667E300073731 /* RecordAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */; };
+		AFFDF15F275667E300073731 /* OMWCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAEE35274F25CF00236DEC /* OMWCalendar.swift */; };
+		AFFDF160275667E300073731 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAEE3D274F736F00236DEC /* CalendarCell.swift */; };
+		AFFDF161275667E300073731 /* CalendarCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = AFBAEE3E274F736F00236DEC /* CalendarCell.xib */; };
+		AFFDF162275667E300073731 /* CalendarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */; };
+		AFFDF163275667E300073731 /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2060692733A2610005D8F4 /* NextButton.swift */; };
+		AFFDF164275667E300073731 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CD627461D6900EA3601 /* LocationTableViewCell.swift */; };
+		AFFDF165275667E300073731 /* LocationTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CD727461D6900EA3601 /* LocationTableViewCell.xib */; };
+		AFFDF166275667E300073731 /* OMWSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2984F58E274B348F00DDCA2D /* OMWSegmentedControl.swift */; };
+		AFFDF167275667E300073731 /* HomeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AAF2755FE39009E17CB /* HomeUsecase.swift */; };
+		AFFDF168275667E300073731 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB936661273908BA00B39BC1 /* HomeCoordinator.swift */; };
+		AFFDF169275667E300073731 /* Home.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5F272F82770004444B /* Home.storyboard */; };
+		AFFDF16A275667E300073731 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5D272F82770004444B /* HomeViewController.swift */; };
+		AFFDF16B275667E300073731 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914C027340E410084FF1C /* HomeViewModel.swift */; };
+		AFFDF16C275667E300073731 /* EnterTitleUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AAA2755FD42009E17CB /* EnterTitleUsecase.swift */; };
+		AFFDF16D275667E300073731 /* EnterTitleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040B27390DD700031EDF /* EnterTitleCoordinator.swift */; };
+		AFFDF16E275667E300073731 /* EnterTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* EnterTitleViewController.swift */; };
+		AFFDF16F275667E300073731 /* EnterTitle.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2727312C5F0040B70A /* EnterTitle.storyboard */; };
+		AFFDF170275667E300073731 /* EnterTitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* EnterTitleViewModel.swift */; };
+		AFFDF171275667E300073731 /* EnterDateUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AB32755FE66009E17CB /* EnterDateUsecase.swift */; };
+		AFFDF172275667E300073731 /* EnterDateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F7E274CA59300729D39 /* EnterDateCoordinator.swift */; };
+		AFFDF173275667E300073731 /* EnterDate.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29966F7C274CA37D00729D39 /* EnterDate.storyboard */; };
+		AFFDF174275667E300073731 /* EnterDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F80274CA61B00729D39 /* EnterDateViewController.swift */; };
+		AFFDF175275667E300073731 /* EnterDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F82274CA63700729D39 /* EnterDateViewModel.swift */; };
+		AFFDF176275667E300073731 /* AddLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */; };
+		AFFDF177275667E300073731 /* AddLandmark.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA31273220C60040B70A /* AddLandmark.storyboard */; };
+		AFFDF178275667E300073731 /* AddLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA33273246600040B70A /* AddLandmarkViewController.swift */; };
+		AFFDF179275667E300073731 /* AddLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */; };
+		AFFDF17A275667E300073731 /* LandmarkCartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */; };
+		AFFDF17B275667E300073731 /* LandmarkCart.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */; };
+		AFFDF17C275667E300073731 /* LandmarkCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA37273253130040B70A /* LandmarkCartViewController.swift */; };
+		AFFDF17D275667E300073731 /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
+		AFFDF17E275667E300073731 /* CompleteCreationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AB72755FEA5009E17CB /* CompleteCreationUsecase.swift */; };
+		AFFDF17F275667E300073731 /* CompleteCreationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A16273A5FD600EA91AA /* CompleteCreationCoordinator.swift */; };
+		AFFDF180275667E300073731 /* CompleteCreation.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A10273A571100EA91AA /* CompleteCreation.storyboard */; };
+		AFFDF181275667E300073731 /* CompleteCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */; };
+		AFFDF182275667E300073731 /* CompleteCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A12273A59C500EA91AA /* CompleteCreationViewModel.swift */; };
+		AFFDF183275667E300073731 /* CompleteEditingUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117ABB2755FEE1009E17CB /* CompleteEditingUsecase.swift */; };
+		AFFDF184275667E300073731 /* CompleteEditingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */; };
+		AFFDF185275667E300073731 /* CompleteEditing.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED7B2744F77C007B251C /* CompleteEditing.storyboard */; };
+		AFFDF186275667E300073731 /* CompleteEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */; };
+		AFFDF187275667E300073731 /* CompleteEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */; };
+		AFFDF188275667E300073731 /* StartedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AC02755FF17009E17CB /* StartedTravelUsecase.swift */; };
+		AFFDF189275667E300073731 /* StartedTravelCoordinatingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A9A2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift */; };
+		AFFDF18A275667E300073731 /* StartedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A9D2755EAB9009E17CB /* StartedTravelViewModel.swift */; };
+		AFFDF18B275667E300073731 /* OutdatedTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB3273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift */; };
+		AFFDF18C275667E300073731 /* OutdatedTravel.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */; };
+		AFFDF18D275667E300073731 /* OutdatedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */; };
+		AFFDF18E275667E300073731 /* OutdatedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */; };
+		AFFDF18F275667E300073731 /* OngoingTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E7273B8C2D009FE728 /* OngoingTravelCoordinator.swift */; };
+		AFFDF190275667E300073731 /* OngoingTravel.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */; };
+		AFFDF191275667E300073731 /* OngoingTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */; };
+		AFFDF192275667E300073731 /* OngoingTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */; };
+		AFFDF193275667E300073731 /* ReservedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AC42755FF51009E17CB /* ReservedTravelUsecase.swift */; };
+		AFFDF194275667E300073731 /* ReservedTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */; };
+		AFFDF195275667E300073731 /* ReservedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */; };
+		AFFDF196275667E300073731 /* ReservedTravel.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */; };
+		AFFDF197275667E300073731 /* ReservedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */; };
+		AFFDF198275667E300073731 /* SearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AC82755FF9F009E17CB /* SearchLandmarkUsecase.swift */; };
+		AFFDF199275667E300073731 /* SearchLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */; };
+		AFFDF19A275667E300073731 /* SearchLandmark.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */; };
+		AFFDF19B275667E300073731 /* SearchLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */; };
+		AFFDF19C275667E300073731 /* SearchLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */; };
+		AFFDF19D275667E300073731 /* AddRecord.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDA7273BEB1700A094B6 /* AddRecord.storyboard */; };
+		AFFDF19E275667E300073731 /* DetailRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117ACC2755FFCE009E17CB /* DetailRecordUsecase.swift */; };
+		AFFDF19F275667E300073731 /* DetailRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C1273BECE6003185E7 /* DetailRecordCoordinator.swift */; };
+		AFFDF1A0275667E300073731 /* DetailRecord.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 294897C7273BF1F1003185E7 /* DetailRecord.storyboard */; };
+		AFFDF1A1275667E300073731 /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C3273BF161003185E7 /* DetailRecordViewController.swift */; };
+		AFFDF1A2275667E300073731 /* DetailRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C5273BF181003185E7 /* DetailRecordViewModel.swift */; };
+		AFFDF1A3275667E300073731 /* DetailImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */; };
+		AFFDF1A4275667E300073731 /* DetailImage.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */; };
+		AFFDF1A5275667E300073731 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */; };
+		AFFDF1A6275667E300073731 /* DetailImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */; };
+		AFFDF1A7275667E300073731 /* SearchLocationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CDA274620BE00EA3601 /* SearchLocationCoordinator.swift */; };
+		AFFDF1A8275667E300073731 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */; };
+		AFFDF1A9275667E300073731 /* SearchLocation.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CD42746179500EA3601 /* SearchLocation.storyboard */; };
+		AFFDF1AA275667E300073731 /* SearchLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */; };
+		AFFDF1AB275667E300073731 /* Instantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C62732861500487D33 /* Instantiable.swift */; };
+		AFFDF1AC275667E300073731 /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
+		AFFDF1AD275667E300073731 /* RecordUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */; };
+		AFFDF1AE275667E300073731 /* TravelUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */; };
+		AFFDF1AF275667E300073731 /* TravelFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646BB27395BAA0030ED78 /* TravelFetchable.swift */; };
+		AFFDF1B0275667E300073731 /* LandmarkDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985B1E427427AE900428098 /* LandmarkDeletable.swift */; };
+		AFFDF1B1275667E300073731 /* TravelEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF20BB927461BC4007AFF78 /* TravelEditable.swift */; };
+		AFFDF1B2275667E300073731 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985B1E627448DFC00428098 /* UIView+.swift */; };
+		AFFDF1B3275667E300073731 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897BB273B5D71003185E7 /* UIImageView+.swift */; };
+		AFFDF1B4275667E300073731 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA67274BAB620091F642 /* UIButton+.swift */; };
+		AFFDF1B5275667E300073731 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */; };
+		AFFDF1B6275667E300073731 /* URLSessionDataTask+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2ED006274FAB470001AB8F /* URLSessionDataTask+.swift */; };
+		AFFDF1B7275667E300073731 /* LandmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B3273132A000487D33 /* LandmarkDTO.swift */; };
+		AFFDF1B8275667E300073731 /* LocalJSONLandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LocalJSONLandmarkRepository.swift */; };
 		DB1D5CB2273CE17800B30448 /* LocationMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */; };
 		DB1D5CB3273CE17800B30448 /* LocationMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */; };
 		DB1D5CB7273CE1C100B30448 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CB6273CE1C100B30448 /* Location.swift */; };
@@ -144,6 +300,172 @@
 		DB2823BD273BC0C2007D8801 /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */; };
 		DB2823BE273BC0C2007D8801 /* DateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */; };
 		DB2ED007274FAB470001AB8F /* URLSessionDataTask+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2ED006274FAB470001AB8F /* URLSessionDataTask+.swift */; };
+		DB55443227561BBB0083A45D /* HomeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB55438627561A3C0083A45D /* HomeViewModelTest.swift */; };
+		DB55443327561CB10083A45D /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF11A497274CF6B60005B0D0 /* ErrorManager.swift */; };
+		DB55443427561CB10083A45D /* ModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A942755E68B009E17CB /* ModelError.swift */; };
+		DB55443527561CB10083A45D /* JSONError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A902755E631009E17CB /* JSONError.swift */; };
+		DB55443627561CB10083A45D /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A922755E66A009E17CB /* RepositoryError.swift */; };
+		DB55443727561CB10083A45D /* EnterTitleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AAC2755FD9D009E17CB /* EnterTitleError.swift */; };
+		DB55443827561CB10083A45D /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987972742C3BF008F0E08 /* ImageFileManager.swift */; };
+		DB55443927561CB10083A45D /* CLLocationManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA6F68D27461E0C00F3244E /* CLLocationManager+.swift */; };
+		DB55443A27561CB10083A45D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA5E25A2742294100DD94D9 /* LocationManager.swift */; };
+		DB55443B27561CB10083A45D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB59272F82770004444B /* AppDelegate.swift */; };
+		DB55443C27561CB10083A45D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5B272F82770004444B /* SceneDelegate.swift */; };
+		DB55443D27561CB10083A45D /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EEB2733929000FB7939 /* Travel.swift */; };
+		DB55443E27561CB10083A45D /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F0B2733C42700FB7939 /* Record.swift */; };
+		DB55443F27561CB10083A45D /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F092733C41000FB7939 /* Landmark.swift */; };
+		DB55444027561CB10083A45D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CB6273CE1C100B30448 /* Location.swift */; };
+		DB55444127561CB10083A45D /* DefaultHomeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914C22734129F0084FF1C /* DefaultHomeUsecase.swift */; };
+		DB55444227561CB10083A45D /* DefaultEnterTitleUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA232730FC050040B70A /* DefaultEnterTitleUsecase.swift */; };
+		DB55444327561CB10083A45D /* DefaultEnterDateUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F84274CA64900729D39 /* DefaultEnterDateUsecase.swift */; };
+		DB55444427561CB10083A45D /* DefaultCompleteCreationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A14273A5AA300EA91AA /* DefaultCompleteCreationUsecase.swift */; };
+		DB55444527561CB10083A45D /* DefaultCompleteEditingUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED812744F869007B251C /* DefaultCompleteEditingUsecase.swift */; };
+		DB55444627561CB10083A45D /* DefaultStartedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E5273B8C18009FE728 /* DefaultStartedTravelUsecase.swift */; };
+		DB55444727561CB10083A45D /* DefaultReservedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFE273401AE00DDEBFF /* DefaultReservedTravelUsecase.swift */; };
+		DB55444827561CB10083A45D /* DefaultSearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C027319B6400487D33 /* DefaultSearchLandmarkUsecase.swift */; };
+		DB55444927561CB10083A45D /* DefaultDetailRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C9273BF3D7003185E7 /* DefaultDetailRecordUsecase.swift */; };
+		DB55444A27561CB10083A45D /* DefaultAddRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDAF273BEC0900A094B6 /* DefaultAddRecordUsecase.swift */; };
+		DB55444B27561CB10083A45D /* LandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A962755E6D7009E17CB /* LandmarkRepository.swift */; };
+		DB55444C27561CB10083A45D /* TravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A982755E6FE009E17CB /* TravelRepository.swift */; };
+		DB55444D27561CB10083A45D /* HomeBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F8671274B9E340075B9A0 /* HomeBackgroundView.swift */; };
+		DB55444E27561CB10083A45D /* HomeBackgroundView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F8672274B9E340075B9A0 /* HomeBackgroundView.xib */; };
+		DB55444F27561CB10083A45D /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F8679274CC3400075B9A0 /* MessageCell.swift */; };
+		DB55445027561CB10083A45D /* MessageCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F867A274CC3400075B9A0 /* MessageCell.xib */; };
+		DB55445127561CB10083A45D /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987A3274373CB008F0E08 /* PhotoCell.swift */; };
+		DB55445227561CB10083A45D /* PhotoCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3FB987A4274373CB008F0E08 /* PhotoCell.xib */; };
+		DB55445327561CB10083A45D /* TravelSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914E72737DAC70084FF1C /* TravelSectionHeader.swift */; };
+		DB55445427561CB10083A45D /* TravelSectionHeader.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914E82737DAC70084FF1C /* TravelSectionHeader.xib */; };
+		DB55445527561CB10083A45D /* RecordCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897BD273BA993003185E7 /* RecordCardCell.swift */; };
+		DB55445627561CB10083A45D /* RecordCardCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 294897BE273BA993003185E7 /* RecordCardCell.xib */; };
+		DB55445727561CB10083A45D /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */; };
+		DB55445827561CB10083A45D /* DateHeaderView.xib in Sources */ = {isa = PBXBuildFile; fileRef = DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */; };
+		DB55445927561CB10083A45D /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897CB273CDCF1003185E7 /* CommentCell.swift */; };
+		DB55445A27561CB10083A45D /* CommentCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 294897CC273CDCF1003185E7 /* CommentCell.xib */; };
+		DB55445B27561CB10083A45D /* PlusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96162730F76100F23A46 /* PlusCell.swift */; };
+		DB55445C27561CB10083A45D /* PlusCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = AFFB96172730F76100F23A46 /* PlusCell.xib */; };
+		DB55445D27561CB10083A45D /* TravelCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914BC273409530084FF1C /* TravelCardCell.swift */; };
+		DB55445E27561CB10083A45D /* TravelCardCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914BD273409530084FF1C /* TravelCardCell.xib */; };
+		DB55445F27561CB10083A45D /* LandmarkCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA39273294DA0040B70A /* LandmarkCardCell.swift */; };
+		DB55446027561CB10083A45D /* LandmarkCardCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA3A273294DB0040B70A /* LandmarkCardCell.xib */; };
+		DB55446127561CB10083A45D /* OMWMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA63274B82200091F642 /* OMWMapView.swift */; };
+		DB55446227561CB10083A45D /* LandmarkAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1E8A702732BD1100E3956C /* LandmarkAnnotationView.swift */; };
+		DB55446327561CB10083A45D /* RecordAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */; };
+		DB55446427561CB10083A45D /* OMWCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAEE35274F25CF00236DEC /* OMWCalendar.swift */; };
+		DB55446527561CB10083A45D /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBAEE3D274F736F00236DEC /* CalendarCell.swift */; };
+		DB55446627561CB10083A45D /* CalendarCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = AFBAEE3E274F736F00236DEC /* CalendarCell.xib */; };
+		DB55446727561CB10083A45D /* OMWCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F88274F942A00729D39 /* OMWCollectionViewCell.swift */; };
+		DB55446827561CB10083A45D /* CalendarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5B3688274F9D8E00330413 /* CalendarDataSource.swift */; };
+		DB55446927561CB10083A45D /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2060692733A2610005D8F4 /* NextButton.swift */; };
+		DB55446A27561CB10083A45D /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CD627461D6900EA3601 /* LocationTableViewCell.swift */; };
+		DB55446B27561CB10083A45D /* LocationTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CD727461D6900EA3601 /* LocationTableViewCell.xib */; };
+		DB55446C27561CB10083A45D /* OMWSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2984F58E274B348F00DDCA2D /* OMWSegmentedControl.swift */; };
+		DB55446D27561CB10083A45D /* HomeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AAF2755FE39009E17CB /* HomeUsecase.swift */; };
+		DB55446E27561CB10083A45D /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB936661273908BA00B39BC1 /* HomeCoordinator.swift */; };
+		DB55446F27561CB10083A45D /* Home.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5F272F82770004444B /* Home.storyboard */; };
+		DB55447027561CB10083A45D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB5D272F82770004444B /* HomeViewController.swift */; };
+		DB55447127561CB10083A45D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB914C027340E410084FF1C /* HomeViewModel.swift */; };
+		DB55447227561CB10083A45D /* EnterTitleUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AAA2755FD42009E17CB /* EnterTitleUsecase.swift */; };
+		DB55447327561CB10083A45D /* EnterTitleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040B27390DD700031EDF /* EnterTitleCoordinator.swift */; };
+		DB55447427561CB10083A45D /* EnterTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2527312C2D0040B70A /* EnterTitleViewController.swift */; };
+		DB55447527561CB10083A45D /* EnterTitle.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA2727312C5F0040B70A /* EnterTitle.storyboard */; };
+		DB55447627561CB10083A45D /* EnterTitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA1D2730F2DA0040B70A /* EnterTitleViewModel.swift */; };
+		DB55447727561CB10083A45D /* EnterDateUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AB32755FE66009E17CB /* EnterDateUsecase.swift */; };
+		DB55447827561CB10083A45D /* EnterDateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F7E274CA59300729D39 /* EnterDateCoordinator.swift */; };
+		DB55447927561CB10083A45D /* EnterDate.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29966F7C274CA37D00729D39 /* EnterDate.storyboard */; };
+		DB55447A27561CB10083A45D /* EnterDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F80274CA61B00729D39 /* EnterDateViewController.swift */; };
+		DB55447B27561CB10083A45D /* EnterDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29966F82274CA63700729D39 /* EnterDateViewModel.swift */; };
+		DB55447C27561CB10083A45D /* AddLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040D2739128E00031EDF /* AddLandmarkCoordinator.swift */; };
+		DB55447D27561CB10083A45D /* AddLandmark.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA31273220C60040B70A /* AddLandmark.storyboard */; };
+		DB55447E27561CB10083A45D /* AddLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA33273246600040B70A /* AddLandmarkViewController.swift */; };
+		DB55447F27561CB10083A45D /* AddLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC040F273913F700031EDF /* AddLandmarkViewModel.swift */; };
+		DB55448027561CB10083A45D /* LandmarkCartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC04112739170900031EDF /* LandmarkCartCoordinator.swift */; };
+		DB55448127561CB10083A45D /* LandmarkCart.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA35273251BE0040B70A /* LandmarkCart.storyboard */; };
+		DB55448227561CB10083A45D /* LandmarkCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E9BA37273253130040B70A /* LandmarkCartViewController.swift */; };
+		DB55448327561CB10083A45D /* LandmarkCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB62666273132A3007BF780 /* LandmarkCartViewModel.swift */; };
+		DB55448427561CB10083A45D /* CompleteCreationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AB72755FEA5009E17CB /* CompleteCreationUsecase.swift */; };
+		DB55448527561CB10083A45D /* CompleteCreationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A16273A5FD600EA91AA /* CompleteCreationCoordinator.swift */; };
+		DB55448627561CB10083A45D /* CompleteCreation.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A10273A571100EA91AA /* CompleteCreation.storyboard */; };
+		DB55448727561CB10083A45D /* CompleteCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A0C273A56E000EA91AA /* CompleteCreationViewController.swift */; };
+		DB55448827561CB10083A45D /* CompleteCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F113A12273A59C500EA91AA /* CompleteCreationViewModel.swift */; };
+		DB55448927561CB10083A45D /* CompleteEditingUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117ABB2755FEE1009E17CB /* CompleteEditingUsecase.swift */; };
+		DB55448A27561CB10083A45D /* CompleteEditingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED792744F6BD007B251C /* CompleteEditingCoordinator.swift */; };
+		DB55448B27561CB10083A45D /* CompleteEditing.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED7B2744F77C007B251C /* CompleteEditing.storyboard */; };
+		DB55448C27561CB10083A45D /* CompleteEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED7D2744F7A0007B251C /* CompleteEditingViewController.swift */; };
+		DB55448D27561CB10083A45D /* CompleteEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6ED7F2744F811007B251C /* CompleteEditingViewModel.swift */; };
+		DB55448E27561CB10083A45D /* StartedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AC02755FF17009E17CB /* StartedTravelUsecase.swift */; };
+		DB55448F27561CB10083A45D /* StartedTravelCoordinatingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A9A2755E8F1009E17CB /* StartedTravelCoordinatingDelegate.swift */; };
+		DB55449027561CB10083A45D /* StartedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117A9D2755EAB9009E17CB /* StartedTravelViewModel.swift */; };
+		DB55449127561CB10083A45D /* OutdatedTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB3273BF3AA00A094B6 /* OutdatedTravelCoordinator.swift */; };
+		DB55449227561CB10083A45D /* OutdatedTravel.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB7273BF3C600A094B6 /* OutdatedTravel.storyboard */; };
+		DB55449327561CB10083A45D /* OutdatedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB9273BF3D900A094B6 /* OutdatedTravelViewController.swift */; };
+		DB55449427561CB10083A45D /* OutdatedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDBB273BF3E300A094B6 /* OutdatedTravelViewModel.swift */; };
+		DB55449527561CB10083A45D /* OngoingTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E7273B8C2D009FE728 /* OngoingTravelCoordinator.swift */; };
+		DB55449627561CB10083A45D /* OngoingTravel.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF1108DF273B8872009FE728 /* OngoingTravel.storyboard */; };
+		DB55449727561CB10083A45D /* OngoingTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E1273B88A5009FE728 /* OngoingTravelViewController.swift */; };
+		DB55449827561CB10083A45D /* OngoingTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1108E3273B8C04009FE728 /* OngoingTravelViewModel.swift */; };
+		DB55449927561CB10083A45D /* ReservedTravelUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AC42755FF51009E17CB /* ReservedTravelUsecase.swift */; };
+		DB55449A27561CB10083A45D /* ReservedTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */; };
+		DB55449B27561CB10083A45D /* ReservedTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EF82733FC4500DDEBFF /* ReservedTravelViewController.swift */; };
+		DB55449C27561CB10083A45D /* ReservedTravel.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFA2733FD2400DDEBFF /* ReservedTravel.storyboard */; };
+		DB55449D27561CB10083A45D /* ReservedTravelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29274EFC2734000500DDEBFF /* ReservedTravelViewModel.swift */; };
+		DB55449E27561CB10083A45D /* SearchLandmarkUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AC82755FF9F009E17CB /* SearchLandmarkUsecase.swift */; };
+		DB55449F27561CB10083A45D /* SearchLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */; };
+		DB5544A027561CB10083A45D /* SearchLandmark.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF6CBB662733F0AA00E87533 /* SearchLandmark.storyboard */; };
+		DB5544A127561CB10083A45D /* SearchLandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CBB682733F0C400E87533 /* SearchLandmarkViewController.swift */; };
+		DB5544A227561CB10083A45D /* SearchLandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C227319D3C00487D33 /* SearchLandmarkViewModel.swift */; };
+		DB5544A327561CB10083A45D /* AddRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117AD027560009009E17CB /* AddRecordUsecase.swift */; };
+		DB5544A427561CB10083A45D /* AddRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDAD273BEB5700A094B6 /* AddRecordCoordinator.swift */; };
+		DB5544A527561CB10083A45D /* AddRecord.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDA7273BEB1700A094B6 /* AddRecord.storyboard */; };
+		DB5544A627561CB10083A45D /* AddRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDA9273BEB2400A094B6 /* AddRecordViewController.swift */; };
+		DB5544A727561CB10083A45D /* AddRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82FDB1273BEC1300A094B6 /* AddRecordViewModel.swift */; };
+		DB5544A827561CB10083A45D /* DetailRecordUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29117ACC2755FFCE009E17CB /* DetailRecordUsecase.swift */; };
+		DB5544A927561CB10083A45D /* DetailRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C1273BECE6003185E7 /* DetailRecordCoordinator.swift */; };
+		DB5544AA27561CB10083A45D /* DetailRecord.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 294897C7273BF1F1003185E7 /* DetailRecord.storyboard */; };
+		DB5544AB27561CB10083A45D /* DetailRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C3273BF161003185E7 /* DetailRecordViewController.swift */; };
+		DB5544AC27561CB10083A45D /* DetailRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897C5273BF181003185E7 /* DetailRecordViewModel.swift */; };
+		DB5544AD27561CB10083A45D /* DetailImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */; };
+		DB5544AE27561CB10083A45D /* DetailImage.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEE1274BF5F3001B8627 /* DetailImage.storyboard */; };
+		DB5544AF27561CB10083A45D /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */; };
+		DB5544B027561CB10083A45D /* DetailImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */; };
+		DB5544B127561CB10083A45D /* SearchLocationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CDA274620BE00EA3601 /* SearchLocationCoordinator.swift */; };
+		DB5544B227561CB10083A45D /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CCE274616B700EA3601 /* SearchLocationViewController.swift */; };
+		DB5544B327561CB10083A45D /* SearchLocation.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CD42746179500EA3601 /* SearchLocation.storyboard */; };
+		DB5544B427561CB10083A45D /* SearchLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F6CDC2746215400EA3601 /* SearchLocationViewModel.swift */; };
+		DB5544B527561CB10083A45D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB93665F2739086400B39BC1 /* Coordinator.swift */; };
+		DB5544B627561CB10083A45D /* Instantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831C62732861500487D33 /* Instantiable.swift */; };
+		DB5544B727561CB10083A45D /* MapAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9695A827339AC700A08C34 /* MapAvailable.swift */; };
+		DB5544B827561CB10083A45D /* RecordUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C3F1D2743825C007217AF /* RecordUpdatable.swift */; };
+		DB5544B927561CB10083A45D /* TravelUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C7916273942E800FAB0FE /* TravelUpdatable.swift */; };
+		DB5544BA27561CB10083A45D /* TravelFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646BB27395BAA0030ED78 /* TravelFetchable.swift */; };
+		DB5544BB27561CB10083A45D /* LandmarkDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985B1E427427AE900428098 /* LandmarkDeletable.swift */; };
+		DB5544BC27561CB10083A45D /* TravelEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF20BB927461BC4007AFF78 /* TravelEditable.swift */; };
+		DB5544BD27561CB10083A45D /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985B1E627448DFC00428098 /* UIView+.swift */; };
+		DB5544BE27561CB10083A45D /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294897BB273B5D71003185E7 /* UIImageView+.swift */; };
+		DB5544BF27561CB10083A45D /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BAA67274BAB620091F642 /* UIButton+.swift */; };
+		DB5544C027561CB10083A45D /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3D97F274CF9D20051E2AC /* UIViewController+.swift */; };
+		DB5544C127561CB10083A45D /* URLSessionDataTask+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2ED006274FAB470001AB8F /* URLSessionDataTask+.swift */; };
+		DB5544C227561CB10083A45D /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293646B92738F6590030ED78 /* Date+.swift */; };
+		DB5544C327561CB10083A45D /* LandmarkDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831B3273132A000487D33 /* LandmarkDTO.swift */; };
+		DB5544C427561CB10083A45D /* OwnMyWay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB22BB62272F82770004444B /* OwnMyWay.xcdatamodeld */; };
+		DB5544C527561CB10083A45D /* TravelMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFE2733ABB200FB7939 /* TravelMO+CoreDataProperties.swift */; };
+		DB5544C627561CB10083A45D /* RecordMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE57B71274F2ED100FA5DE7 /* RecordMO+CoreDataProperties.swift */; };
+		DB5544C727561CB10083A45D /* LandmarkMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F022733ABB200FB7939 /* LandmarkMO+CoreDataProperties.swift */; };
+		DB5544C827561CB10083A45D /* LocationMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */; };
+		DB5544C927561CB10083A45D /* TravelMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39EFD2733ABB200FB7939 /* TravelMO+CoreDataClass.swift */; };
+		DB5544CA27561CB10083A45D /* RecordMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C12A72742336A00ED30F3 /* RecordMO+CoreDataClass.swift */; };
+		DB5544CB27561CB10083A45D /* LandmarkMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC39F012733ABB200FB7939 /* LandmarkMO+CoreDataClass.swift */; };
+		DB5544CC27561CB10083A45D /* LocationMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */; };
+		DB5544CD27561CB10083A45D /* LocalJSONLandmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831BD2731990000487D33 /* LocalJSONLandmarkRepository.swift */; };
+		DB5544CE27561CB10083A45D /* CoreDataTravelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8831AD2730FDB500487D33 /* CoreDataTravelRepository.swift */; };
+		DB5544D027561EDE0083A45D /* EnterTitleViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544CF27561EDE0083A45D /* EnterTitleViewModelTest.swift */; };
+		DB5544D227561EE90083A45D /* EnterDateViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544D127561EE90083A45D /* EnterDateViewModelTest.swift */; };
+		DB5544D427561EF30083A45D /* AddLandmarkViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544D327561EF30083A45D /* AddLandmarkViewModelTest.swift */; };
+		DB5544D627561EFE0083A45D /* LandmarkCartViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544D527561EFE0083A45D /* LandmarkCartViewModelTest.swift */; };
+		DB5544DC27561F3A0083A45D /* StartedTravelViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544DB27561F3A0083A45D /* StartedTravelViewModelTest.swift */; };
+		DB5544DE27561F440083A45D /* ReservedTravelViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544DD27561F440083A45D /* ReservedTravelViewModelTest.swift */; };
+		DB5544E027561F4F0083A45D /* SearchLandmarkViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544DF27561F4F0083A45D /* SearchLandmarkViewModelTest.swift */; };
+		DB5544E227561F570083A45D /* AddRecordViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544E127561F570083A45D /* AddRecordViewModelTest.swift */; };
+		DB5544E427561F640083A45D /* DetailRecordViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5544E327561F640083A45D /* DetailRecordViewModelTest.swift */; };
 		DB5DAEDC274BF535001B8627 /* DetailImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */; };
 		DB5DAEDE274BF5BC001B8627 /* DetailImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */; };
 		DB5DAEE0274BF5D9001B8627 /* DetailImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */; };
@@ -172,6 +494,23 @@
 		DBFC041427391EDB00031EDF /* SearchLandmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC041327391EDB00031EDF /* SearchLandmarkCoordinator.swift */; };
 		DBFC0416273925FD00031EDF /* ReservedTravelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFC0415273925FD00031EDF /* ReservedTravelCoordinator.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AFFDF1122756660E00073731 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB22BB4E272F82770004444B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB22BB55272F82770004444B;
+			remoteInfo = OwnMyWay;
+		};
+		DB55438827561A3C0083A45D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB22BB4E272F82770004444B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB22BB55272F82770004444B;
+			remoteInfo = OwnMyWay;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		29117A902755E631009E17CB /* JSONError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONError.swift; sourceTree = "<group>"; };
@@ -296,6 +635,8 @@
 		AFF88421273CDD49004FCE5C /* RecordAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAnnotationView.swift; sourceTree = "<group>"; };
 		AFFB96162730F76100F23A46 /* PlusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCell.swift; sourceTree = "<group>"; };
 		AFFB96172730F76100F23A46 /* PlusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlusCell.xib; sourceTree = "<group>"; };
+		AFFDF10E2756660E00073731 /* UsecaseTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UsecaseTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFFDF1102756660E00073731 /* AddRecordUsecaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordUsecaseTest.swift; sourceTree = "<group>"; };
 		DB1D5CAE273CE17800B30448 /* LocationMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DB1D5CAF273CE17800B30448 /* LocationMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DB1D5CB6273CE1C100B30448 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -312,6 +653,17 @@
 		DB2823BB273BC0C1007D8801 /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		DB2823BC273BC0C1007D8801 /* DateHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateHeaderView.xib; sourceTree = "<group>"; };
 		DB2ED006274FAB470001AB8F /* URLSessionDataTask+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionDataTask+.swift"; sourceTree = "<group>"; };
+		DB55438427561A3C0083A45D /* ViewModelTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewModelTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB55438627561A3C0083A45D /* HomeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTest.swift; sourceTree = "<group>"; };
+		DB5544CF27561EDE0083A45D /* EnterTitleViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTitleViewModelTest.swift; sourceTree = "<group>"; };
+		DB5544D127561EE90083A45D /* EnterDateViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterDateViewModelTest.swift; sourceTree = "<group>"; };
+		DB5544D327561EF30083A45D /* AddLandmarkViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLandmarkViewModelTest.swift; sourceTree = "<group>"; };
+		DB5544D527561EFE0083A45D /* LandmarkCartViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCartViewModelTest.swift; sourceTree = "<group>"; };
+		DB5544DB27561F3A0083A45D /* StartedTravelViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedTravelViewModelTest.swift; sourceTree = "<group>"; };
+		DB5544DD27561F440083A45D /* ReservedTravelViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedTravelViewModelTest.swift; sourceTree = "<group>"; };
+		DB5544DF27561F4F0083A45D /* SearchLandmarkViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLandmarkViewModelTest.swift; sourceTree = "<group>"; };
+		DB5544E127561F570083A45D /* AddRecordViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordViewModelTest.swift; sourceTree = "<group>"; };
+		DB5544E327561F640083A45D /* DetailRecordViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecordViewModelTest.swift; sourceTree = "<group>"; };
 		DB5DAEDB274BF535001B8627 /* DetailImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCoordinator.swift; sourceTree = "<group>"; };
 		DB5DAEDD274BF5BC001B8627 /* DetailImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewModel.swift; sourceTree = "<group>"; };
 		DB5DAEDF274BF5D9001B8627 /* DetailImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageViewController.swift; sourceTree = "<group>"; };
@@ -343,7 +695,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AFFDF10B2756660E00073731 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB22BB53272F82770004444B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB55438127561A3C0083A45D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1423,11 +1789,21 @@
 			path = BundleJSON;
 			sourceTree = "<group>";
 		};
+		AFFDF10F2756660E00073731 /* UsecaseTest */ = {
+			isa = PBXGroup;
+			children = (
+				AFFDF1102756660E00073731 /* AddRecordUsecaseTest.swift */,
+			);
+			path = UsecaseTest;
+			sourceTree = "<group>";
+		};
 		DB22BB4D272F82770004444B = {
 			isa = PBXGroup;
 			children = (
 				DB22BB72272F83DB0004444B /* .swiftlint.yml */,
 				DB22BB58272F82770004444B /* OwnMyWay */,
+				DB55438527561A3C0083A45D /* ViewModelTest */,
+				AFFDF10F2756660E00073731 /* UsecaseTest */,
 				DB22BB57272F82770004444B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1436,6 +1812,8 @@
 			isa = PBXGroup;
 			children = (
 				DB22BB56272F82770004444B /* OwnMyWay.app */,
+				DB55438427561A3C0083A45D /* ViewModelTest.xctest */,
+				AFFDF10E2756660E00073731 /* UsecaseTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1453,9 +1831,44 @@
 			path = OwnMyWay;
 			sourceTree = "<group>";
 		};
+		DB55438527561A3C0083A45D /* ViewModelTest */ = {
+			isa = PBXGroup;
+			children = (
+				DB55438627561A3C0083A45D /* HomeViewModelTest.swift */,
+				DB5544CF27561EDE0083A45D /* EnterTitleViewModelTest.swift */,
+				DB5544D127561EE90083A45D /* EnterDateViewModelTest.swift */,
+				DB5544D327561EF30083A45D /* AddLandmarkViewModelTest.swift */,
+				DB5544D527561EFE0083A45D /* LandmarkCartViewModelTest.swift */,
+				DB5544DB27561F3A0083A45D /* StartedTravelViewModelTest.swift */,
+				DB5544DD27561F440083A45D /* ReservedTravelViewModelTest.swift */,
+				DB5544DF27561F4F0083A45D /* SearchLandmarkViewModelTest.swift */,
+				DB5544E127561F570083A45D /* AddRecordViewModelTest.swift */,
+				DB5544E327561F640083A45D /* DetailRecordViewModelTest.swift */,
+			);
+			path = ViewModelTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AFFDF10D2756660E00073731 /* UsecaseTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFFDF1162756660E00073731 /* Build configuration list for PBXNativeTarget "UsecaseTest" */;
+			buildPhases = (
+				AFFDF10A2756660E00073731 /* Sources */,
+				AFFDF10B2756660E00073731 /* Frameworks */,
+				AFFDF10C2756660E00073731 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFFDF1132756660E00073731 /* PBXTargetDependency */,
+			);
+			name = UsecaseTest;
+			productName = UsecaseTest;
+			productReference = AFFDF10E2756660E00073731 /* UsecaseTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DB22BB55272F82770004444B /* OwnMyWay */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB22BB6D272F82780004444B /* Build configuration list for PBXNativeTarget "OwnMyWay" */;
@@ -1476,6 +1889,24 @@
 			productReference = DB22BB56272F82770004444B /* OwnMyWay.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DB55438327561A3C0083A45D /* ViewModelTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB55438C27561A3C0083A45D /* Build configuration list for PBXNativeTarget "ViewModelTest" */;
+			buildPhases = (
+				DB55438027561A3C0083A45D /* Sources */,
+				DB55438127561A3C0083A45D /* Frameworks */,
+				DB55438227561A3C0083A45D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB55438927561A3C0083A45D /* PBXTargetDependency */,
+			);
+			name = ViewModelTest;
+			productName = ViewModelTest;
+			productReference = DB55438427561A3C0083A45D /* ViewModelTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1483,10 +1914,17 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1300;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
+					AFFDF10D2756660E00073731 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = DB22BB55272F82770004444B;
+					};
 					DB22BB55272F82770004444B = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					DB55438327561A3C0083A45D = {
 						CreatedOnToolsVersion = 13.0;
 					};
 				};
@@ -1508,11 +1946,20 @@
 			projectRoot = "";
 			targets = (
 				DB22BB55272F82770004444B /* OwnMyWay */,
+				DB55438327561A3C0083A45D /* ViewModelTest */,
+				AFFDF10D2756660E00073731 /* UsecaseTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AFFDF10C2756660E00073731 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB22BB54272F82770004444B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1555,6 +2002,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DB55438227561A3C0083A45D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1578,6 +2032,169 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AFFDF10A2756660E00073731 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFFDF13C275667E200073731 /* ErrorManager.swift in Sources */,
+				AFFDF13D275667E200073731 /* SceneDelegate.swift in Sources */,
+				AFFDF13E275667E200073731 /* DefaultHomeUsecase.swift in Sources */,
+				AFFDF13F275667E300073731 /* DefaultEnterTitleUsecase.swift in Sources */,
+				AFFDF140275667E300073731 /* DefaultEnterDateUsecase.swift in Sources */,
+				AFFDF141275667E300073731 /* DefaultCompleteCreationUsecase.swift in Sources */,
+				AFFDF142275667E300073731 /* DefaultCompleteEditingUsecase.swift in Sources */,
+				AFFDF143275667E300073731 /* DefaultStartedTravelUsecase.swift in Sources */,
+				AFFDF144275667E300073731 /* DefaultReservedTravelUsecase.swift in Sources */,
+				AFFDF145275667E300073731 /* DefaultSearchLandmarkUsecase.swift in Sources */,
+				AFFDF146275667E300073731 /* DefaultDetailRecordUsecase.swift in Sources */,
+				AFFDF147275667E300073731 /* HomeBackgroundView.swift in Sources */,
+				AFFDF148275667E300073731 /* HomeBackgroundView.xib in Sources */,
+				AFFDF149275667E300073731 /* MessageCell.swift in Sources */,
+				AFFDF14A275667E300073731 /* MessageCell.xib in Sources */,
+				AFFDF14B275667E300073731 /* PhotoCell.swift in Sources */,
+				AFFDF14C275667E300073731 /* PhotoCell.xib in Sources */,
+				AFFDF14D275667E300073731 /* TravelSectionHeader.swift in Sources */,
+				AFFDF14E275667E300073731 /* TravelSectionHeader.xib in Sources */,
+				AFFDF14F275667E300073731 /* RecordCardCell.swift in Sources */,
+				AFFDF150275667E300073731 /* RecordCardCell.xib in Sources */,
+				AFFDF151275667E300073731 /* DateHeaderView.swift in Sources */,
+				AFFDF152275667E300073731 /* DateHeaderView.xib in Sources */,
+				AFFDF153275667E300073731 /* CommentCell.swift in Sources */,
+				AFFDF154275667E300073731 /* CommentCell.xib in Sources */,
+				AFFDF155275667E300073731 /* PlusCell.swift in Sources */,
+				AFFDF156275667E300073731 /* PlusCell.xib in Sources */,
+				AFFDF157275667E300073731 /* TravelCardCell.swift in Sources */,
+				AFFDF158275667E300073731 /* TravelCardCell.xib in Sources */,
+				AFFDF159275667E300073731 /* LandmarkCardCell.swift in Sources */,
+				AFFDF15A275667E300073731 /* LandmarkCardCell.xib in Sources */,
+				AFFDF15B275667E300073731 /* OMWCollectionViewCell.swift in Sources */,
+				AFFDF15C275667E300073731 /* OMWMapView.swift in Sources */,
+				AFFDF15D275667E300073731 /* LandmarkAnnotationView.swift in Sources */,
+				AFFDF15E275667E300073731 /* RecordAnnotationView.swift in Sources */,
+				AFFDF15F275667E300073731 /* OMWCalendar.swift in Sources */,
+				AFFDF160275667E300073731 /* CalendarCell.swift in Sources */,
+				AFFDF161275667E300073731 /* CalendarCell.xib in Sources */,
+				AFFDF162275667E300073731 /* CalendarDataSource.swift in Sources */,
+				AFFDF163275667E300073731 /* NextButton.swift in Sources */,
+				AFFDF164275667E300073731 /* LocationTableViewCell.swift in Sources */,
+				AFFDF165275667E300073731 /* LocationTableViewCell.xib in Sources */,
+				AFFDF166275667E300073731 /* OMWSegmentedControl.swift in Sources */,
+				AFFDF167275667E300073731 /* HomeUsecase.swift in Sources */,
+				AFFDF168275667E300073731 /* HomeCoordinator.swift in Sources */,
+				AFFDF169275667E300073731 /* Home.storyboard in Sources */,
+				AFFDF16A275667E300073731 /* HomeViewController.swift in Sources */,
+				AFFDF16B275667E300073731 /* HomeViewModel.swift in Sources */,
+				AFFDF16C275667E300073731 /* EnterTitleUsecase.swift in Sources */,
+				AFFDF16D275667E300073731 /* EnterTitleCoordinator.swift in Sources */,
+				AFFDF16E275667E300073731 /* EnterTitleViewController.swift in Sources */,
+				AFFDF16F275667E300073731 /* EnterTitle.storyboard in Sources */,
+				AFFDF170275667E300073731 /* EnterTitleViewModel.swift in Sources */,
+				AFFDF171275667E300073731 /* EnterDateUsecase.swift in Sources */,
+				AFFDF172275667E300073731 /* EnterDateCoordinator.swift in Sources */,
+				AFFDF173275667E300073731 /* EnterDate.storyboard in Sources */,
+				AFFDF174275667E300073731 /* EnterDateViewController.swift in Sources */,
+				AFFDF175275667E300073731 /* EnterDateViewModel.swift in Sources */,
+				AFFDF176275667E300073731 /* AddLandmarkCoordinator.swift in Sources */,
+				AFFDF177275667E300073731 /* AddLandmark.storyboard in Sources */,
+				AFFDF178275667E300073731 /* AddLandmarkViewController.swift in Sources */,
+				AFFDF179275667E300073731 /* AddLandmarkViewModel.swift in Sources */,
+				AFFDF17A275667E300073731 /* LandmarkCartCoordinator.swift in Sources */,
+				AFFDF17B275667E300073731 /* LandmarkCart.storyboard in Sources */,
+				AFFDF17C275667E300073731 /* LandmarkCartViewController.swift in Sources */,
+				AFFDF17D275667E300073731 /* LandmarkCartViewModel.swift in Sources */,
+				AFFDF17E275667E300073731 /* CompleteCreationUsecase.swift in Sources */,
+				AFFDF17F275667E300073731 /* CompleteCreationCoordinator.swift in Sources */,
+				AFFDF180275667E300073731 /* CompleteCreation.storyboard in Sources */,
+				AFFDF181275667E300073731 /* CompleteCreationViewController.swift in Sources */,
+				AFFDF182275667E300073731 /* CompleteCreationViewModel.swift in Sources */,
+				AFFDF183275667E300073731 /* CompleteEditingUsecase.swift in Sources */,
+				AFFDF184275667E300073731 /* CompleteEditingCoordinator.swift in Sources */,
+				AFFDF185275667E300073731 /* CompleteEditing.storyboard in Sources */,
+				AFFDF186275667E300073731 /* CompleteEditingViewController.swift in Sources */,
+				AFFDF187275667E300073731 /* CompleteEditingViewModel.swift in Sources */,
+				AFFDF188275667E300073731 /* StartedTravelUsecase.swift in Sources */,
+				AFFDF189275667E300073731 /* StartedTravelCoordinatingDelegate.swift in Sources */,
+				AFFDF18A275667E300073731 /* StartedTravelViewModel.swift in Sources */,
+				AFFDF18B275667E300073731 /* OutdatedTravelCoordinator.swift in Sources */,
+				AFFDF18C275667E300073731 /* OutdatedTravel.storyboard in Sources */,
+				AFFDF18D275667E300073731 /* OutdatedTravelViewController.swift in Sources */,
+				AFFDF18E275667E300073731 /* OutdatedTravelViewModel.swift in Sources */,
+				AFFDF18F275667E300073731 /* OngoingTravelCoordinator.swift in Sources */,
+				AFFDF190275667E300073731 /* OngoingTravel.storyboard in Sources */,
+				AFFDF191275667E300073731 /* OngoingTravelViewController.swift in Sources */,
+				AFFDF192275667E300073731 /* OngoingTravelViewModel.swift in Sources */,
+				AFFDF193275667E300073731 /* ReservedTravelUsecase.swift in Sources */,
+				AFFDF194275667E300073731 /* ReservedTravelCoordinator.swift in Sources */,
+				AFFDF195275667E300073731 /* ReservedTravelViewController.swift in Sources */,
+				AFFDF196275667E300073731 /* ReservedTravel.storyboard in Sources */,
+				AFFDF197275667E300073731 /* ReservedTravelViewModel.swift in Sources */,
+				AFFDF198275667E300073731 /* SearchLandmarkUsecase.swift in Sources */,
+				AFFDF199275667E300073731 /* SearchLandmarkCoordinator.swift in Sources */,
+				AFFDF19A275667E300073731 /* SearchLandmark.storyboard in Sources */,
+				AFFDF19B275667E300073731 /* SearchLandmarkViewController.swift in Sources */,
+				AFFDF19C275667E300073731 /* SearchLandmarkViewModel.swift in Sources */,
+				AFFDF19D275667E300073731 /* AddRecord.storyboard in Sources */,
+				AFFDF19E275667E300073731 /* DetailRecordUsecase.swift in Sources */,
+				AFFDF19F275667E300073731 /* DetailRecordCoordinator.swift in Sources */,
+				AFFDF1A0275667E300073731 /* DetailRecord.storyboard in Sources */,
+				AFFDF1A1275667E300073731 /* DetailRecordViewController.swift in Sources */,
+				AFFDF1A2275667E300073731 /* DetailRecordViewModel.swift in Sources */,
+				AFFDF1A3275667E300073731 /* DetailImageCoordinator.swift in Sources */,
+				AFFDF1A4275667E300073731 /* DetailImage.storyboard in Sources */,
+				AFFDF1A5275667E300073731 /* DetailImageViewController.swift in Sources */,
+				AFFDF1A6275667E300073731 /* DetailImageViewModel.swift in Sources */,
+				AFFDF1A7275667E300073731 /* SearchLocationCoordinator.swift in Sources */,
+				AFFDF1A8275667E300073731 /* SearchLocationViewController.swift in Sources */,
+				AFFDF1A9275667E300073731 /* SearchLocation.storyboard in Sources */,
+				AFFDF1AA275667E300073731 /* SearchLocationViewModel.swift in Sources */,
+				AFFDF1AB275667E300073731 /* Instantiable.swift in Sources */,
+				AFFDF1AC275667E300073731 /* MapAvailable.swift in Sources */,
+				AFFDF1AD275667E300073731 /* RecordUpdatable.swift in Sources */,
+				AFFDF1AE275667E300073731 /* TravelUpdatable.swift in Sources */,
+				AFFDF1AF275667E300073731 /* TravelFetchable.swift in Sources */,
+				AFFDF1B0275667E300073731 /* LandmarkDeletable.swift in Sources */,
+				AFFDF1B1275667E300073731 /* TravelEditable.swift in Sources */,
+				AFFDF1B2275667E300073731 /* UIView+.swift in Sources */,
+				AFFDF1B3275667E300073731 /* UIImageView+.swift in Sources */,
+				AFFDF1B4275667E300073731 /* UIButton+.swift in Sources */,
+				AFFDF1B5275667E300073731 /* UIViewController+.swift in Sources */,
+				AFFDF1B6275667E300073731 /* URLSessionDataTask+.swift in Sources */,
+				AFFDF1B7275667E300073731 /* LandmarkDTO.swift in Sources */,
+				AFFDF1B8275667E300073731 /* LocalJSONLandmarkRepository.swift in Sources */,
+				AFFDF1332756679E00073731 /* AddRecordViewController.swift in Sources */,
+				AFFDF1342756679E00073731 /* AddRecordViewModel.swift in Sources */,
+				AFFDF1322756677600073731 /* Date+.swift in Sources */,
+				AFFDF1312756676900073731 /* Coordinator.swift in Sources */,
+				AFFDF1302756673E00073731 /* CoreDataTravelRepository.swift in Sources */,
+				AFFDF12E2756672600073731 /* AddRecordUsecase.swift in Sources */,
+				AFFDF12F2756672600073731 /* AddRecordCoordinator.swift in Sources */,
+				AFFDF12D275666DE00073731 /* TravelRepository.swift in Sources */,
+				AFFDF117275666AC00073731 /* ModelError.swift in Sources */,
+				AFFDF118275666AC00073731 /* JSONError.swift in Sources */,
+				AFFDF119275666AC00073731 /* RepositoryError.swift in Sources */,
+				AFFDF11A275666AC00073731 /* EnterTitleError.swift in Sources */,
+				AFFDF11B275666AC00073731 /* ImageFileManager.swift in Sources */,
+				AFFDF11C275666AC00073731 /* CLLocationManager+.swift in Sources */,
+				AFFDF11D275666AC00073731 /* LocationManager.swift in Sources */,
+				AFFDF11E275666AC00073731 /* AppDelegate.swift in Sources */,
+				AFFDF11F275666AC00073731 /* Travel.swift in Sources */,
+				AFFDF120275666AC00073731 /* Record.swift in Sources */,
+				AFFDF121275666AC00073731 /* Landmark.swift in Sources */,
+				AFFDF122275666AC00073731 /* Location.swift in Sources */,
+				AFFDF123275666AC00073731 /* DefaultAddRecordUsecase.swift in Sources */,
+				AFFDF124275666AC00073731 /* LandmarkRepository.swift in Sources */,
+				AFFDF125275666AC00073731 /* TravelMO+CoreDataProperties.swift in Sources */,
+				AFFDF126275666AC00073731 /* RecordMO+CoreDataProperties.swift in Sources */,
+				AFFDF127275666AC00073731 /* LandmarkMO+CoreDataProperties.swift in Sources */,
+				AFFDF128275666AC00073731 /* LocationMO+CoreDataProperties.swift in Sources */,
+				AFFDF129275666AC00073731 /* TravelMO+CoreDataClass.swift in Sources */,
+				AFFDF12A275666AD00073731 /* RecordMO+CoreDataClass.swift in Sources */,
+				AFFDF12B275666AD00073731 /* LandmarkMO+CoreDataClass.swift in Sources */,
+				AFFDF12C275666AD00073731 /* LocationMO+CoreDataClass.swift in Sources */,
+				AFFDF1112756660E00073731 /* AddRecordUsecaseTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB22BB52272F82770004444B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1715,7 +2332,193 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DB55438027561A3C0083A45D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB55443327561CB10083A45D /* ErrorManager.swift in Sources */,
+				DB55443427561CB10083A45D /* ModelError.swift in Sources */,
+				DB55443527561CB10083A45D /* JSONError.swift in Sources */,
+				DB55443627561CB10083A45D /* RepositoryError.swift in Sources */,
+				DB55443727561CB10083A45D /* EnterTitleError.swift in Sources */,
+				DB55443827561CB10083A45D /* ImageFileManager.swift in Sources */,
+				DB55443927561CB10083A45D /* CLLocationManager+.swift in Sources */,
+				DB55443A27561CB10083A45D /* LocationManager.swift in Sources */,
+				DB55443B27561CB10083A45D /* AppDelegate.swift in Sources */,
+				DB55443C27561CB10083A45D /* SceneDelegate.swift in Sources */,
+				DB5544D027561EDE0083A45D /* EnterTitleViewModelTest.swift in Sources */,
+				DB55443D27561CB10083A45D /* Travel.swift in Sources */,
+				DB55443E27561CB10083A45D /* Record.swift in Sources */,
+				DB55443F27561CB10083A45D /* Landmark.swift in Sources */,
+				DB55444027561CB10083A45D /* Location.swift in Sources */,
+				DB5544DE27561F440083A45D /* ReservedTravelViewModelTest.swift in Sources */,
+				DB55444127561CB10083A45D /* DefaultHomeUsecase.swift in Sources */,
+				DB55444227561CB10083A45D /* DefaultEnterTitleUsecase.swift in Sources */,
+				DB55444327561CB10083A45D /* DefaultEnterDateUsecase.swift in Sources */,
+				DB55444427561CB10083A45D /* DefaultCompleteCreationUsecase.swift in Sources */,
+				DB55444527561CB10083A45D /* DefaultCompleteEditingUsecase.swift in Sources */,
+				DB55444627561CB10083A45D /* DefaultStartedTravelUsecase.swift in Sources */,
+				DB55444727561CB10083A45D /* DefaultReservedTravelUsecase.swift in Sources */,
+				DB55444827561CB10083A45D /* DefaultSearchLandmarkUsecase.swift in Sources */,
+				DB55444927561CB10083A45D /* DefaultDetailRecordUsecase.swift in Sources */,
+				DB55444A27561CB10083A45D /* DefaultAddRecordUsecase.swift in Sources */,
+				DB55444B27561CB10083A45D /* LandmarkRepository.swift in Sources */,
+				DB55444C27561CB10083A45D /* TravelRepository.swift in Sources */,
+				DB55444D27561CB10083A45D /* HomeBackgroundView.swift in Sources */,
+				DB55444E27561CB10083A45D /* HomeBackgroundView.xib in Sources */,
+				DB55444F27561CB10083A45D /* MessageCell.swift in Sources */,
+				DB55445027561CB10083A45D /* MessageCell.xib in Sources */,
+				DB55445127561CB10083A45D /* PhotoCell.swift in Sources */,
+				DB55445227561CB10083A45D /* PhotoCell.xib in Sources */,
+				DB55445327561CB10083A45D /* TravelSectionHeader.swift in Sources */,
+				DB55445427561CB10083A45D /* TravelSectionHeader.xib in Sources */,
+				DB55445527561CB10083A45D /* RecordCardCell.swift in Sources */,
+				DB55445627561CB10083A45D /* RecordCardCell.xib in Sources */,
+				DB55445727561CB10083A45D /* DateHeaderView.swift in Sources */,
+				DB55445827561CB10083A45D /* DateHeaderView.xib in Sources */,
+				DB55445927561CB10083A45D /* CommentCell.swift in Sources */,
+				DB55445A27561CB10083A45D /* CommentCell.xib in Sources */,
+				DB55445B27561CB10083A45D /* PlusCell.swift in Sources */,
+				DB55445C27561CB10083A45D /* PlusCell.xib in Sources */,
+				DB55445D27561CB10083A45D /* TravelCardCell.swift in Sources */,
+				DB55445E27561CB10083A45D /* TravelCardCell.xib in Sources */,
+				DB55445F27561CB10083A45D /* LandmarkCardCell.swift in Sources */,
+				DB55446027561CB10083A45D /* LandmarkCardCell.xib in Sources */,
+				DB55446127561CB10083A45D /* OMWMapView.swift in Sources */,
+				DB55446227561CB10083A45D /* LandmarkAnnotationView.swift in Sources */,
+				DB55446327561CB10083A45D /* RecordAnnotationView.swift in Sources */,
+				DB55446427561CB10083A45D /* OMWCalendar.swift in Sources */,
+				DB55446527561CB10083A45D /* CalendarCell.swift in Sources */,
+				DB55446627561CB10083A45D /* CalendarCell.xib in Sources */,
+				DB55446727561CB10083A45D /* OMWCollectionViewCell.swift in Sources */,
+				DB55446827561CB10083A45D /* CalendarDataSource.swift in Sources */,
+				DB55446927561CB10083A45D /* NextButton.swift in Sources */,
+				DB5544D427561EF30083A45D /* AddLandmarkViewModelTest.swift in Sources */,
+				DB55446A27561CB10083A45D /* LocationTableViewCell.swift in Sources */,
+				DB55446B27561CB10083A45D /* LocationTableViewCell.xib in Sources */,
+				DB55446C27561CB10083A45D /* OMWSegmentedControl.swift in Sources */,
+				DB55446D27561CB10083A45D /* HomeUsecase.swift in Sources */,
+				DB55446E27561CB10083A45D /* HomeCoordinator.swift in Sources */,
+				DB55446F27561CB10083A45D /* Home.storyboard in Sources */,
+				DB55447027561CB10083A45D /* HomeViewController.swift in Sources */,
+				DB5544DC27561F3A0083A45D /* StartedTravelViewModelTest.swift in Sources */,
+				DB55447127561CB10083A45D /* HomeViewModel.swift in Sources */,
+				DB55447227561CB10083A45D /* EnterTitleUsecase.swift in Sources */,
+				DB55447327561CB10083A45D /* EnterTitleCoordinator.swift in Sources */,
+				DB55447427561CB10083A45D /* EnterTitleViewController.swift in Sources */,
+				DB55447527561CB10083A45D /* EnterTitle.storyboard in Sources */,
+				DB55447627561CB10083A45D /* EnterTitleViewModel.swift in Sources */,
+				DB55447727561CB10083A45D /* EnterDateUsecase.swift in Sources */,
+				DB55447827561CB10083A45D /* EnterDateCoordinator.swift in Sources */,
+				DB55447927561CB10083A45D /* EnterDate.storyboard in Sources */,
+				DB55447A27561CB10083A45D /* EnterDateViewController.swift in Sources */,
+				DB55447B27561CB10083A45D /* EnterDateViewModel.swift in Sources */,
+				DB55447C27561CB10083A45D /* AddLandmarkCoordinator.swift in Sources */,
+				DB55447D27561CB10083A45D /* AddLandmark.storyboard in Sources */,
+				DB55447E27561CB10083A45D /* AddLandmarkViewController.swift in Sources */,
+				DB55447F27561CB10083A45D /* AddLandmarkViewModel.swift in Sources */,
+				DB55448027561CB10083A45D /* LandmarkCartCoordinator.swift in Sources */,
+				DB55448127561CB10083A45D /* LandmarkCart.storyboard in Sources */,
+				DB55448227561CB10083A45D /* LandmarkCartViewController.swift in Sources */,
+				DB55448327561CB10083A45D /* LandmarkCartViewModel.swift in Sources */,
+				DB55448427561CB10083A45D /* CompleteCreationUsecase.swift in Sources */,
+				DB55448527561CB10083A45D /* CompleteCreationCoordinator.swift in Sources */,
+				DB55448627561CB10083A45D /* CompleteCreation.storyboard in Sources */,
+				DB55448727561CB10083A45D /* CompleteCreationViewController.swift in Sources */,
+				DB55448827561CB10083A45D /* CompleteCreationViewModel.swift in Sources */,
+				DB55448927561CB10083A45D /* CompleteEditingUsecase.swift in Sources */,
+				DB55448A27561CB10083A45D /* CompleteEditingCoordinator.swift in Sources */,
+				DB55448B27561CB10083A45D /* CompleteEditing.storyboard in Sources */,
+				DB5544D227561EE90083A45D /* EnterDateViewModelTest.swift in Sources */,
+				DB55448C27561CB10083A45D /* CompleteEditingViewController.swift in Sources */,
+				DB5544E427561F640083A45D /* DetailRecordViewModelTest.swift in Sources */,
+				DB55448D27561CB10083A45D /* CompleteEditingViewModel.swift in Sources */,
+				DB55448E27561CB10083A45D /* StartedTravelUsecase.swift in Sources */,
+				DB55448F27561CB10083A45D /* StartedTravelCoordinatingDelegate.swift in Sources */,
+				DB55449027561CB10083A45D /* StartedTravelViewModel.swift in Sources */,
+				DB55449127561CB10083A45D /* OutdatedTravelCoordinator.swift in Sources */,
+				DB55449227561CB10083A45D /* OutdatedTravel.storyboard in Sources */,
+				DB55449327561CB10083A45D /* OutdatedTravelViewController.swift in Sources */,
+				DB55449427561CB10083A45D /* OutdatedTravelViewModel.swift in Sources */,
+				DB55449527561CB10083A45D /* OngoingTravelCoordinator.swift in Sources */,
+				DB55449627561CB10083A45D /* OngoingTravel.storyboard in Sources */,
+				DB55449727561CB10083A45D /* OngoingTravelViewController.swift in Sources */,
+				DB55449827561CB10083A45D /* OngoingTravelViewModel.swift in Sources */,
+				DB55449927561CB10083A45D /* ReservedTravelUsecase.swift in Sources */,
+				DB55449A27561CB10083A45D /* ReservedTravelCoordinator.swift in Sources */,
+				DB55449B27561CB10083A45D /* ReservedTravelViewController.swift in Sources */,
+				DB55449C27561CB10083A45D /* ReservedTravel.storyboard in Sources */,
+				DB5544E027561F4F0083A45D /* SearchLandmarkViewModelTest.swift in Sources */,
+				DB55449D27561CB10083A45D /* ReservedTravelViewModel.swift in Sources */,
+				DB55449E27561CB10083A45D /* SearchLandmarkUsecase.swift in Sources */,
+				DB55449F27561CB10083A45D /* SearchLandmarkCoordinator.swift in Sources */,
+				DB5544A027561CB10083A45D /* SearchLandmark.storyboard in Sources */,
+				DB5544A127561CB10083A45D /* SearchLandmarkViewController.swift in Sources */,
+				DB5544A227561CB10083A45D /* SearchLandmarkViewModel.swift in Sources */,
+				DB5544A327561CB10083A45D /* AddRecordUsecase.swift in Sources */,
+				DB5544A427561CB10083A45D /* AddRecordCoordinator.swift in Sources */,
+				DB5544A527561CB10083A45D /* AddRecord.storyboard in Sources */,
+				DB5544A627561CB10083A45D /* AddRecordViewController.swift in Sources */,
+				DB5544A727561CB10083A45D /* AddRecordViewModel.swift in Sources */,
+				DB5544A827561CB10083A45D /* DetailRecordUsecase.swift in Sources */,
+				DB5544A927561CB10083A45D /* DetailRecordCoordinator.swift in Sources */,
+				DB5544AA27561CB10083A45D /* DetailRecord.storyboard in Sources */,
+				DB5544AB27561CB10083A45D /* DetailRecordViewController.swift in Sources */,
+				DB5544AC27561CB10083A45D /* DetailRecordViewModel.swift in Sources */,
+				DB5544AD27561CB10083A45D /* DetailImageCoordinator.swift in Sources */,
+				DB5544AE27561CB10083A45D /* DetailImage.storyboard in Sources */,
+				DB5544AF27561CB10083A45D /* DetailImageViewController.swift in Sources */,
+				DB5544B027561CB10083A45D /* DetailImageViewModel.swift in Sources */,
+				DB5544B127561CB10083A45D /* SearchLocationCoordinator.swift in Sources */,
+				DB5544B227561CB10083A45D /* SearchLocationViewController.swift in Sources */,
+				DB5544B327561CB10083A45D /* SearchLocation.storyboard in Sources */,
+				DB5544B427561CB10083A45D /* SearchLocationViewModel.swift in Sources */,
+				DB5544B527561CB10083A45D /* Coordinator.swift in Sources */,
+				DB5544B627561CB10083A45D /* Instantiable.swift in Sources */,
+				DB5544B727561CB10083A45D /* MapAvailable.swift in Sources */,
+				DB5544B827561CB10083A45D /* RecordUpdatable.swift in Sources */,
+				DB5544B927561CB10083A45D /* TravelUpdatable.swift in Sources */,
+				DB5544BA27561CB10083A45D /* TravelFetchable.swift in Sources */,
+				DB5544BB27561CB10083A45D /* LandmarkDeletable.swift in Sources */,
+				DB5544BC27561CB10083A45D /* TravelEditable.swift in Sources */,
+				DB5544BD27561CB10083A45D /* UIView+.swift in Sources */,
+				DB5544BE27561CB10083A45D /* UIImageView+.swift in Sources */,
+				DB5544BF27561CB10083A45D /* UIButton+.swift in Sources */,
+				DB5544C027561CB10083A45D /* UIViewController+.swift in Sources */,
+				DB5544C127561CB10083A45D /* URLSessionDataTask+.swift in Sources */,
+				DB5544C227561CB10083A45D /* Date+.swift in Sources */,
+				DB5544C327561CB10083A45D /* LandmarkDTO.swift in Sources */,
+				DB5544C427561CB10083A45D /* OwnMyWay.xcdatamodeld in Sources */,
+				DB5544C527561CB10083A45D /* TravelMO+CoreDataProperties.swift in Sources */,
+				DB5544C627561CB10083A45D /* RecordMO+CoreDataProperties.swift in Sources */,
+				DB5544C727561CB10083A45D /* LandmarkMO+CoreDataProperties.swift in Sources */,
+				DB5544C827561CB10083A45D /* LocationMO+CoreDataProperties.swift in Sources */,
+				DB5544C927561CB10083A45D /* TravelMO+CoreDataClass.swift in Sources */,
+				DB5544D627561EFE0083A45D /* LandmarkCartViewModelTest.swift in Sources */,
+				DB5544CA27561CB10083A45D /* RecordMO+CoreDataClass.swift in Sources */,
+				DB5544CB27561CB10083A45D /* LandmarkMO+CoreDataClass.swift in Sources */,
+				DB5544CC27561CB10083A45D /* LocationMO+CoreDataClass.swift in Sources */,
+				DB5544CD27561CB10083A45D /* LocalJSONLandmarkRepository.swift in Sources */,
+				DB5544E227561F570083A45D /* AddRecordViewModelTest.swift in Sources */,
+				DB5544CE27561CB10083A45D /* CoreDataTravelRepository.swift in Sources */,
+				DB55443227561BBB0083A45D /* HomeViewModelTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AFFDF1132756660E00073731 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB22BB55272F82770004444B /* OwnMyWay */;
+			targetProxy = AFFDF1122756660E00073731 /* PBXContainerItemProxy */;
+		};
+		DB55438927561A3C0083A45D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB22BB55272F82770004444B /* OwnMyWay */;
+			targetProxy = DB55438827561A3C0083A45D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DB22BB5F272F82770004444B /* Home.storyboard */ = {
@@ -1737,6 +2540,54 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AFFDF1142756660E00073731 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.OwnMyWay.UsecaseTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OwnMyWay.app/OwnMyWay";
+			};
+			name = Debug;
+		};
+		AFFDF1152756660E00073731 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.OwnMyWay.UsecaseTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OwnMyWay.app/OwnMyWay";
+			};
+			name = Release;
+		};
 		DB22BB6B272F82780004444B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1919,9 +2770,62 @@
 			};
 			name = Release;
 		};
+		DB55438A27561A3C0083A45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iOS04.ViewModelTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DB55438B27561A3C0083A45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = iOS04.ViewModelTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AFFDF1162756660E00073731 /* Build configuration list for PBXNativeTarget "UsecaseTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFFDF1142756660E00073731 /* Debug */,
+				AFFDF1152756660E00073731 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DB22BB51272F82770004444B /* Build configuration list for PBXProject "OwnMyWay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1936,6 +2840,15 @@
 			buildConfigurations = (
 				DB22BB6E272F82780004444B /* Debug */,
 				DB22BB6F272F82780004444B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB55438C27561A3C0083A45D /* Build configuration list for PBXNativeTarget "ViewModelTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB55438A27561A3C0083A45D /* Debug */,
+				DB55438B27561A3C0083A45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
