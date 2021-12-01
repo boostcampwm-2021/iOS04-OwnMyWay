@@ -170,7 +170,7 @@ final class OngoingTravelViewController: UIViewController, Instantiable, TravelE
         } else {
             let alert = UIAlertController(
                 title: "권한 설정이 필요합니다.",
-                message: "Setting -> OwnMyWay -> 위치 -> 항상 허용",
+                message: "Setting -> OwnMyWay -> 위치 -> 앱을 사용하는 동안",
                 preferredStyle: .alert
             )
             let action = UIAlertAction(title: "이동", style: .default) { _ in
