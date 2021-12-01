@@ -70,8 +70,8 @@ class AddRecordViewModelTest: XCTestCase {
             record: nil, usecase: MockUsecase(isValidate: true),
             coordinatingDelegate: MockCoordinator(), isEditingMode: false
         )
-
-        let record = Record(uuid: UUID(), title: "테스트제목", content: "테스트내용", date: testDate, latitude: 0, longitude: 0, photoIDs: [], placeDescription: "테스트장소설명")
+        
+        let record = Record(uuid: UUID(), title: "테스트제목", content: "테스트내용", date: testDate, latitude: 0, longitude: 0, photoIDs: ["test1.jpeg", "test2.jpeg"], placeDescription: "테스트장소설명")
         self.editingViewModel = DefaultAddRecordViewModel(
             record: record, usecase: MockUsecase(isValidate: true),
             coordinatingDelegate: MockCoordinator(), isEditingMode: true
@@ -133,11 +133,19 @@ class AddRecordViewModelTest: XCTestCase {
     }
 
     func test_사진제거() {
-        
+        let removeIndex = 0
+        let expectedResult = ["test2.jpeg"]
+        self.editingViewModel.didRemovePhoto(at: removeIndex)
+        XCTAssertEqual(self.editingViewModel.record.photoIDs, expectedResult)
     }
 
     func test_좌표변경() {
-        
+        let newLat = 32.0, newLng = 127.0
+        let newPlace = "독도"
+        self.editingViewModel.locationDidUpdate(recordPlace: newPlace, latitude: newLat, longitude: newLng)
+        XCTAssertEqual(self.editingViewModel.record.placeDescription, newPlace)
+        XCTAssertEqual(self.editingViewModel.record.latitude, newLat)
+        XCTAssertEqual(self.editingViewModel.record.longitude, newLng)
     }
 
     func test_장소이름() {
