@@ -366,6 +366,16 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
         else { return }
         self.viewModel?.didUpdateCoordinate(latitude: latitude, longitude: longitude)
     }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.fetchAuthorizationStatus() {
+        case .restricted, .denied:
+            self.trackingButton.isSelected = false
+            LocationManager.shared.stopUpdatingLocation()
+        default:
+            break
+        }
+    }
 }
 
 // MARK: - extension OngoingTravelViewController for RecordUpdatable

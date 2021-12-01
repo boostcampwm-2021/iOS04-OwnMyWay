@@ -58,4 +58,13 @@ extension LocationManager: CLLocationManagerDelegate {
         else { return }
         self.repository?.addLocation(to: travel, latitude: latitude, longitude: longitude) { _ in }
     }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.fetchAuthorizationStatus() {
+        case .restricted, .denied:
+            self.stopUpdatingLocation()
+        default:
+            break
+        }
+    }
 }
