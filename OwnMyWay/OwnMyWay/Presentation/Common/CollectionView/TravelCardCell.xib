@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TravelCardCell" id="gTV-IL-0wX" customClass="TravelCardCell" customModule="OwnMyWay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="312" height="191"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="312" height="191"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="airplane" translatesAutoresizingMaskIntoConstraints="NO" id="huJ-9l-55E">
+                        <rect key="frame" x="0.0" y="0.0" width="312" height="191"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="huJ-9l-55E" secondAttribute="height" multiplier="312:191" id="nyG-iF-agP"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zjq-bw-Je3">
+                        <rect key="frame" x="113" y="71" width="86" height="49"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여행 제목" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3b-Xe-6K0">
+                                <rect key="frame" x="0.0" y="0.0" width="86" height="28"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여행 날짜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETS-b2-b2D">
+                                <rect key="frame" x="0.0" y="33" width="86" height="16"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="zjq-bw-Je3" firstAttribute="centerX" secondItem="huJ-9l-55E" secondAttribute="centerX" id="5OM-Ab-j92"/>
+                <constraint firstItem="huJ-9l-55E" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7uL-3A-b8T"/>
+                <constraint firstAttribute="bottom" secondItem="huJ-9l-55E" secondAttribute="bottom" priority="750" id="W56-jB-K9f"/>
+                <constraint firstItem="zjq-bw-Je3" firstAttribute="centerY" secondItem="huJ-9l-55E" secondAttribute="centerY" id="YBv-25-STl"/>
+                <constraint firstItem="huJ-9l-55E" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="mhK-CF-4jF"/>
+                <constraint firstAttribute="trailing" secondItem="huJ-9l-55E" secondAttribute="trailing" id="z0e-Qs-Bqk"/>
+            </constraints>
+            <size key="customSize" width="328" height="201"/>
+            <connections>
+                <outlet property="travelCardImageView" destination="huJ-9l-55E" id="cCO-XH-Idb"/>
+                <outlet property="travelDateLabel" destination="ETS-b2-b2D" id="wki-hs-3Wg"/>
+                <outlet property="travelTitleLabel" destination="N3b-Xe-6K0" id="bgn-zl-5tK"/>
+            </connections>
+            <point key="canvasLocation" x="124.6376811594203" y="-105.46875"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="airplane" width="640" height="445"/>
+    </resources>
+</document>
