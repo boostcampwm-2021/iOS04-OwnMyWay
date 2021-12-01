@@ -17,15 +17,17 @@ class AddRecordUsecaseTest: XCTestCase {
     
     var usecase: AddRecordUsecase!
     
-    override func setUpWithError() throws {
+    override func setUp() {
+        super.setUp()
         self.usecase = DefaultAddRecordUsecase(
             repository: CoreDataTravelRepository(contextFetcher: MokContextFetcher()),
             imageFileManager: ImageFileManager.shared
         )
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         self.usecase = nil
+        super.tearDown()
     }
     
     func test_타이틀_검증() {
