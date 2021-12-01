@@ -8,8 +8,7 @@
 import Foundation
 
 protocol StartedTravelUsecase {
-    func executeFetch()
-    func executeFinishingTravel()
+    func executeFetch(of travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void)
     func executeFlagUpdate(of travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void)
     func executeDeletion(of travel: Travel, completion: @escaping (Result<Void, Error>) -> Void)
     func executeLocationUpdate(

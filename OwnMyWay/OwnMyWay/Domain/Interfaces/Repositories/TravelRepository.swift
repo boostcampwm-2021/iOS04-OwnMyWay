@@ -9,6 +9,7 @@ import Foundation
 
 protocol TravelRepository {
     func fetchAllTravels(completion: @escaping (Result<[Travel], Error>) -> Void)
+    func fetchTravel(of travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void)
     func addTravel(
         title: String, startDate: Date, endDate: Date,
         completion: @escaping (Result<Travel, Error>) -> Void

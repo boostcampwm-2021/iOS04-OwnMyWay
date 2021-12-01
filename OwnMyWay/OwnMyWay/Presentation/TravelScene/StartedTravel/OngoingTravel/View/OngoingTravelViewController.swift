@@ -49,6 +49,7 @@ final class OngoingTravelViewController: UIViewController, Instantiable, TravelE
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.configureNavigationController()
+        self.viewModel?.viewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -94,7 +95,7 @@ final class OngoingTravelViewController: UIViewController, Instantiable, TravelE
     private func configureButton() {
         self.userLocationButton.layer.cornerRadius = 10
         self.trackingButton.configureTrackingButton()
-        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
+        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedWhenInUse {
             self.trackingButton.isSelected = LocationManager.shared.isUpdatingLocation
         }
     }
@@ -157,7 +158,7 @@ final class OngoingTravelViewController: UIViewController, Instantiable, TravelE
     }
 
     @IBAction func didTouchTrackingButton(_ sender: Any) {
-        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
+        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedWhenInUse {
             self.trackingButton.isSelected.toggle()
             switch LocationManager.shared.isUpdatingLocation {
             case true:
@@ -364,13 +365,6 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
               let longitude = lastLocation?.coordinate.longitude
         else { return }
         self.viewModel?.didUpdateCoordinate(latitude: latitude, longitude: longitude)
-    }
-
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.fetchAuthorizationStatus() {
-        case .authorizedWhenInUse: manager.requestAlwaysAuthorization()
-        default: break
-        }
     }
 }
 

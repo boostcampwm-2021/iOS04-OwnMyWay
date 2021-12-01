@@ -28,6 +28,15 @@ final class CoreDataTravelRepository: TravelRepository {
         }
     }
 
+    func fetchTravel(of travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void) {
+        guard let travelMO = findTravel(by: travel.uuid ?? UUID())
+        else {
+            completion(.failure(RepositoryError.uuidError))
+            return
+        }
+        completion(.success(travelMO.toTravel()))
+    }
+
     func addTravel(
         title: String, startDate: Date, endDate: Date,
         completion: @escaping (Result<Travel, Error>) -> Void
