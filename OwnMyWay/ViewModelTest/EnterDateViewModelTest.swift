@@ -13,7 +13,7 @@ class EnterDateViewModelTest: XCTestCase {
     private var creatingViewModel: EnterDateViewModel!
     private var editingViewModel: EnterDateViewModel!
     private var cancellable: AnyCancellable!
-    private let timeout: TimeInterval = 3
+    private let timeout: TimeInterval = 1
     private let startDate = Date(timeIntervalSince1970: 0)
     private let endDate = Date(timeIntervalSince1970: 100)
 
@@ -80,7 +80,8 @@ class EnterDateViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
-        XCTAssert(expect.0 == actual.0 && expect.1 == actual.1)
+        XCTAssertEqual(expect.0, actual.0)
+        XCTAssertEqual(expect.1, actual.1)
     }
 
     func test_초기_뷰_로드_수정할때() {
@@ -97,7 +98,8 @@ class EnterDateViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
-        XCTAssert(expect.0 == actual.0 && expect.1 == actual.1)
+        XCTAssertEqual(expect.0, actual.0)
+        XCTAssertEqual(expect.1, actual.1)
     }
 
     func test_여행_업데이트() {
@@ -145,7 +147,7 @@ class EnterDateViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
-        XCTAssert(expectedStatus == actualStatus)
+        XCTAssertEqual(expectedStatus, actualStatus)
     }
     
     func test_날짜입력_2번_입력한_경우() {
@@ -168,7 +170,7 @@ class EnterDateViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
-        XCTAssert(expectedStatus == actualStatus)
+        XCTAssertEqual(expectedStatus, actualStatus)
     }
 
     func test_날짜입력_3번_입력한_경우() {
@@ -192,7 +194,7 @@ class EnterDateViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
-        XCTAssert(expectedStatus == actualStatus)
+        XCTAssertEqual(expectedStatus, actualStatus)
     }
 
     func test_날짜입력_수정하는_경우() {
@@ -214,7 +216,7 @@ class EnterDateViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: self.timeout)
 
         // Then
-        XCTAssert(expectedStatus == actualStatus)
+        XCTAssertEqual(expectedStatus, actualStatus)
     }
 
     func test_아니오_버튼_터치한_경우() {
