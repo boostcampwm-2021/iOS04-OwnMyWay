@@ -43,8 +43,7 @@ class StartedTravelViewModelTest: XCTestCase {
 }
 
 class StartedTravelUsecaseMock: StartedTravelUsecase {
-    func executeFetch() {}
-    func executeFinishingTravel() {}
+    func executeFetch(of travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void) {}
     func executeLocationUpdate(of travel: Travel, latitude: Double, longitude: Double, completion: @escaping (Result<Location, Error>) -> Void) {}
     func executeRecordAddition(to travel: Travel, with record: Record, completion: @escaping (Result<Travel, Error>) -> Void) {}
     func executeFlagUpdate(of travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void) {}

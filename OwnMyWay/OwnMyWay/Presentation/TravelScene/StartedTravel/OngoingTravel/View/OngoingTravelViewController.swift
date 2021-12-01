@@ -49,6 +49,7 @@ final class OngoingTravelViewController: UIViewController, Instantiable, TravelE
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.configureNavigationController()
+        self.viewModel?.viewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -94,7 +95,7 @@ final class OngoingTravelViewController: UIViewController, Instantiable, TravelE
     private func configureButton() {
         self.userLocationButton.layer.cornerRadius = 10
         self.trackingButton.configureTrackingButton()
-        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
+        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedWhenInUse {
             self.trackingButton.isSelected = LocationManager.shared.isUpdatingLocation
         }
     }
@@ -157,7 +158,7 @@ final class OngoingTravelViewController: UIViewController, Instantiable, TravelE
     }
 
     @IBAction func didTouchTrackingButton(_ sender: Any) {
-        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedAlways {
+        if LocationManager.shared.fetchAuthorizationStatus() == .authorizedWhenInUse {
             self.trackingButton.isSelected.toggle()
             switch LocationManager.shared.isUpdatingLocation {
             case true:
@@ -212,37 +213,40 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
     }
 
     private func configureCancellable() {
-        viewModel?.travelPublisher.sink { [weak self] travel in
-            guard let self = self,
-                  let startDate = travel.startDate?.dotLocalize(),
-                  let endDate = travel.endDate?.dotLocalize()
-            else { return }
+        viewModel?.travelPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] travel in
+                guard let self = self,
+                      let startDate = travel.startDate?.dotLocalize(),
+                      let endDate = travel.endDate?.dotLocalize()
+                else { return }
 
-            self.emptyRecordLabel.isHidden = !travel.records.isEmpty
-            self.emptyLandmarkLabel.isHidden = !travel.landmarks.isEmpty
-            self.navigationItem.title = travel.title
-            self.periodLabel.text = startDate + " ~ " + endDate
-            (self.mapView as? OMWMapView)?.configure(with: travel, isMovingCamera: false)
+                self.emptyRecordLabel.isHidden = !travel.records.isEmpty
+                self.emptyLandmarkLabel.isHidden = !travel.landmarks.isEmpty
+                self.navigationItem.title = travel.title
+                self.periodLabel.text = startDate + " ~ " + endDate
+                (self.mapView as? OMWMapView)?.configure(with: travel, isMovingCamera: false)
 
-            var recordSnapshot = NSDiffableDataSourceSnapshot<String, Record>()
-            let recordListList = travel.classifyRecords()
-            recordListList.forEach { recordList in
-                guard let date = recordList.first?.date else { return }
-                recordSnapshot.appendSections([date.toKorean()])
-                recordSnapshot.appendItems(recordList, toSection: date.toKorean())
+                var recordSnapshot = NSDiffableDataSourceSnapshot<String, Record>()
+                let recordListList = travel.classifyRecords()
+                recordListList.forEach { recordList in
+                    guard let date = recordList.first?.date else { return }
+                    recordSnapshot.appendSections([date.toKorean()])
+                    recordSnapshot.appendItems(recordList, toSection: date.toKorean())
+                }
+                self.recordDataSource?.apply(recordSnapshot, animatingDifferences: true)
+
+                var landmarkSnapshot = NSDiffableDataSourceSnapshot<
+                    LandmarkCartViewController.Section, Landmark
+                >()
+                landmarkSnapshot.appendSections([.main])
+                landmarkSnapshot.appendItems(travel.landmarks, toSection: .main)
+                self.landmarkDataSource?.apply(landmarkSnapshot, animatingDifferences: true)
             }
-            self.recordDataSource?.apply(recordSnapshot, animatingDifferences: true)
-
-            var landmarkSnapshot = NSDiffableDataSourceSnapshot<
-                LandmarkCartViewController.Section, Landmark
-            >()
-            landmarkSnapshot.appendSections([.main])
-            landmarkSnapshot.appendItems(travel.landmarks, toSection: .main)
-            self.landmarkDataSource?.apply(landmarkSnapshot, animatingDifferences: true)
-        }.store(in: &cancellables)
+            .store(in: &cancellables)
 
         self.viewModel?.errorPublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
                 ErrorManager.showToast(with: error, to: self)
@@ -365,8 +369,11 @@ extension OngoingTravelViewController: CLLocationManagerDelegate {
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.fetchAuthorizationStatus() {
-        case .authorizedWhenInUse: manager.requestAlwaysAuthorization()
-        default: break
+        case .restricted, .denied:
+            self.trackingButton.isSelected = false
+            LocationManager.shared.stopUpdatingLocation()
+        default:
+            break
         }
     }
 }

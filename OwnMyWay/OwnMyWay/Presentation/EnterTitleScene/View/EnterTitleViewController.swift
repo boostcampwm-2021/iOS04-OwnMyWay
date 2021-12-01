@@ -55,7 +55,7 @@ final class EnterTitleViewController: UIViewController, Instantiable {
 
     private func configureCancellable() {
         self.viewModel?.validatePublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] isValid in
                 self?.nextButton.setAvailability(to: isValid ?? false)
             }

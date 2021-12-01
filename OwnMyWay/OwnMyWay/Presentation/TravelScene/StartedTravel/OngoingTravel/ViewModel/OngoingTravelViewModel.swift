@@ -13,6 +13,7 @@ protocol OngoingTravelViewModel {
     var travelPublisher: Published<Travel>.Publisher { get }
     var errorPublisher: Published<Error?>.Publisher { get }
 
+    func viewWillAppear()
     func didUpdateTravel(to travel: Travel)
     func didTouchAddRecordButton()
     func didTouchRecordCell(at record: Record)

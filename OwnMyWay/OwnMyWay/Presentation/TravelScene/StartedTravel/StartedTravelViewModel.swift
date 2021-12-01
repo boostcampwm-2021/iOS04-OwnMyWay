@@ -45,6 +45,17 @@ final class DefaultStartedTravelViewModel: StartedTravelViewModel {
         }
     }
 
+    func viewWillAppear() {
+        self.usecase.executeFetch(of: self.travel) { [weak self] result in
+            switch result {
+            case .success(let travel):
+                self?.travel = travel
+            case .failure(let error):
+                self?.error = error
+            }
+        }
+    }
+
     func didTouchAddRecordButton() {
         self.coordinatingDelegate?.pushToAddRecord(record: nil)
     }

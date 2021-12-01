@@ -15,8 +15,11 @@ struct DefaultStartedTravelUsecase: StartedTravelUsecase {
         self.repository = repository
     }
 
-    func executeFetch() {}
-    func executeFinishingTravel() {}
+    func executeFetch(of travel: Travel, completion: @escaping (Result<Travel, Error>) -> Void) {
+        self.repository.fetchTravel(of: travel) { result in
+            completion(result)
+        }
+    }
 
     func executeFlagUpdate(of travel: Travel,
                            completion: @escaping (Result<Travel, Error>) -> Void

@@ -52,14 +52,16 @@ final class SearchLandmarkViewController: UIViewController, Instantiable {
                 snapshot.appendSections([.main])
                 snapshot.appendItems(items, toSection: .main)
                 self?.diffableDataSource?.apply(snapshot, animatingDifferences: true)
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
 
         self.viewModel?.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
                 ErrorManager.showToast(with: error, to: self)
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
     }
 
     private func configureCompositionalLayout() -> UICollectionViewLayout {
