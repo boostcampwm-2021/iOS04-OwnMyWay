@@ -10,8 +10,9 @@ import XCTest
 
 class EnterTitleViewModelTest: XCTestCase {
 
-    var viewModel: DefaultEnterTitleViewModel!
+    var viewModel: EnterTitleViewModel!
     var coordinator: MockCoordinator!
+    var cancellables: Set<AnyCancellable>!
     
     class MockCoordinator: EnterTitleCoordinatingDelegate {
         var travel: Travel?
@@ -29,25 +30,29 @@ class EnterTitleViewModelTest: XCTestCase {
             coordinatingDelegate: self.coordinator,
             travel: nil
         )
+        cancellables = []
     }
 
     override func tearDown() {
         coordinator = nil
         viewModel = nil
+        cancellables = nil
     }
     
     func test_텍스트_입력() {
         let expectation = XCTestExpectation()
 
-        var cancellable: AnyCancellable = self.viewModel.validatePublisher.sink { result in
-            if result == nil { return }
-            
-            if result == true {
-                expectation.fulfill()
-            } else {
-                XCTFail()
+        self.viewModel.validatePublisher
+            .sink { result in
+                if result == nil { return }
+                
+                if result == true {
+                    expectation.fulfill()
+                } else {
+                    XCTFail()
+                }
             }
-        }
+            .store(in: &self.cancellables)
         
         self.viewModel.didChangeTitle(text: "테스트입니다.")
         wait(for: [expectation], timeout: 1)
@@ -56,15 +61,17 @@ class EnterTitleViewModelTest: XCTestCase {
     func test_텍스트_입력_실패() {
         let expectation = XCTestExpectation()
 
-        var cancellable: AnyCancellable = self.viewModel.validatePublisher.sink { result in
-            if result == nil { return }
-            
-            if result == true {
-                XCTFail()
-            } else {
-                expectation.fulfill()
+        self.viewModel.validatePublisher
+            .sink { result in
+                if result == nil { return }
+                
+                if result == true {
+                    XCTFail()
+                } else {
+                    expectation.fulfill()
+                }
             }
-        }
+            .store(in: &self.cancellables)
         
         self.viewModel.didChangeTitle(text: "")
         wait(for: [expectation], timeout: 1)

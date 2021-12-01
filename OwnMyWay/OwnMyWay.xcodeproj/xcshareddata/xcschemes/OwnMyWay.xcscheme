@@ -38,6 +38,16 @@
                ReferencedContainer = "container:OwnMyWay.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AFFDF10D2756660E00073731"
+               BuildableName = "UsecaseTest.xctest"
+               BlueprintName = "UsecaseTest"
+               ReferencedContainer = "container:OwnMyWay.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

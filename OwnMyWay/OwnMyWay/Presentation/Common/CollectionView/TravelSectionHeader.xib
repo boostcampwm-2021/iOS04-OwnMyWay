@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnh-i9-9jX">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Section" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnh-i9-9jX">
                     <rect key="frame" x="0.0" y="30" width="320" height="20"/>
                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="25"/>
                     <nil key="textColor"/>
@@ -25,7 +25,7 @@
             <constraints>
                 <constraint firstItem="Nnh-i9-9jX" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="49x-YX-uqN"/>
                 <constraint firstAttribute="trailing" secondItem="Nnh-i9-9jX" secondAttribute="trailing" id="OuO-fb-3m4"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="Nnh-i9-9jX" secondAttribute="bottom" id="bGK-hh-MdX"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="Nnh-i9-9jX" secondAttribute="bottom" priority="750" id="bGK-hh-MdX"/>
                 <constraint firstItem="Nnh-i9-9jX" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="30" id="tTc-zG-88s"/>
             </constraints>
             <connections>
