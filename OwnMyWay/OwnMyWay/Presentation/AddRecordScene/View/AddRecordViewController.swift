@@ -89,14 +89,14 @@ final class AddRecordViewController: UIViewController, Instantiable {
 
     private func configureCancellable() {
         self.viewModel?.validatePublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] isValid in
                 self?.navigationItem.rightBarButtonItem?.isEnabled = isValid ?? false
             }
             .store(in: &cancellables)
 
         self.viewModel?.recordPublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] record in
                 self?.photoCollectionView.reloadData()
                 self?.locationButton.setTitle(record.placeDescription, for: .normal)
@@ -107,7 +107,7 @@ final class AddRecordViewController: UIViewController, Instantiable {
             .store(in: &cancellables)
 
         self.viewModel?.errorPublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
                 ErrorManager.showToast(with: error, to: self)

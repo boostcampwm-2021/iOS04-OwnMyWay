@@ -55,7 +55,7 @@ final class EnterDateViewController: UIViewController, Instantiable {
 
     private func configureCancellable() {
         self.viewModel?.calendarStatePublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
                 switch state {
                 case .datesExisted:

@@ -95,7 +95,7 @@ final class ReservedTravelViewController: UIViewController,
 
     private func configureCancellable() {
         self.viewModel?.travelPublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] travel in
                 let title = travel.title
                 self?.navigationItem.title = title
@@ -108,7 +108,7 @@ final class ReservedTravelViewController: UIViewController,
             .store(in: &cancellables)
 
         self.viewModel?.errorPublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
                 ErrorManager.showToast(with: error, to: self)

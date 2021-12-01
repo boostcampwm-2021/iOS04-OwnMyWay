@@ -212,37 +212,40 @@ extension OngoingTravelViewController: UICollectionViewDelegate {
     }
 
     private func configureCancellable() {
-        viewModel?.travelPublisher.sink { [weak self] travel in
-            guard let self = self,
-                  let startDate = travel.startDate?.dotLocalize(),
-                  let endDate = travel.endDate?.dotLocalize()
-            else { return }
+        viewModel?.travelPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] travel in
+                guard let self = self,
+                      let startDate = travel.startDate?.dotLocalize(),
+                      let endDate = travel.endDate?.dotLocalize()
+                else { return }
 
-            self.emptyRecordLabel.isHidden = !travel.records.isEmpty
-            self.emptyLandmarkLabel.isHidden = !travel.landmarks.isEmpty
-            self.navigationItem.title = travel.title
-            self.periodLabel.text = startDate + " ~ " + endDate
-            (self.mapView as? OMWMapView)?.configure(with: travel, isMovingCamera: false)
+                self.emptyRecordLabel.isHidden = !travel.records.isEmpty
+                self.emptyLandmarkLabel.isHidden = !travel.landmarks.isEmpty
+                self.navigationItem.title = travel.title
+                self.periodLabel.text = startDate + " ~ " + endDate
+                (self.mapView as? OMWMapView)?.configure(with: travel, isMovingCamera: false)
 
-            var recordSnapshot = NSDiffableDataSourceSnapshot<String, Record>()
-            let recordListList = travel.classifyRecords()
-            recordListList.forEach { recordList in
-                guard let date = recordList.first?.date else { return }
-                recordSnapshot.appendSections([date.toKorean()])
-                recordSnapshot.appendItems(recordList, toSection: date.toKorean())
+                var recordSnapshot = NSDiffableDataSourceSnapshot<String, Record>()
+                let recordListList = travel.classifyRecords()
+                recordListList.forEach { recordList in
+                    guard let date = recordList.first?.date else { return }
+                    recordSnapshot.appendSections([date.toKorean()])
+                    recordSnapshot.appendItems(recordList, toSection: date.toKorean())
+                }
+                self.recordDataSource?.apply(recordSnapshot, animatingDifferences: true)
+
+                var landmarkSnapshot = NSDiffableDataSourceSnapshot<
+                    LandmarkCartViewController.Section, Landmark
+                >()
+                landmarkSnapshot.appendSections([.main])
+                landmarkSnapshot.appendItems(travel.landmarks, toSection: .main)
+                self.landmarkDataSource?.apply(landmarkSnapshot, animatingDifferences: true)
             }
-            self.recordDataSource?.apply(recordSnapshot, animatingDifferences: true)
-
-            var landmarkSnapshot = NSDiffableDataSourceSnapshot<
-                LandmarkCartViewController.Section, Landmark
-            >()
-            landmarkSnapshot.appendSections([.main])
-            landmarkSnapshot.appendItems(travel.landmarks, toSection: .main)
-            self.landmarkDataSource?.apply(landmarkSnapshot, animatingDifferences: true)
-        }.store(in: &cancellables)
+            .store(in: &cancellables)
 
         self.viewModel?.errorPublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
                 ErrorManager.showToast(with: error, to: self)

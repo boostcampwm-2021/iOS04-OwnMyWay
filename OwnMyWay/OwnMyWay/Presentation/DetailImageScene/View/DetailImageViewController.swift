@@ -22,7 +22,9 @@ final class DetailImageViewController: UIViewController, Instantiable {
         self.configureScrollView()
         self.configurePageControl()
         self.viewModel?.imageIDs.forEach { url in
-            let imageView = configureImageView(with: ImageFileManager.shared.imageInDocuemtDirectory(image: url))
+            let imageView = configureImageView(
+                with: ImageFileManager.shared.imageInDocuemtDirectory(image: url)
+            )
             let zoomView = configureZoomView()
             self.addSubViewAndConfigureConstraints(imageView: imageView, zoomView: zoomView)
         }

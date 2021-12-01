@@ -72,30 +72,33 @@ final class DetailRecordViewController: UIViewController, Instantiable, RecordUp
     }
 
     private func configureCancellable() {
-        self.viewModel?.recordPublisher.sink { [weak self] record in
-            self?.navigationItem.title = "게시물"
-            self?.titleLabel.text = record.title
-            self?.timeAndLocationLabel.text
-            = "\(record.date?.relativeDateTime() ?? "nil"), \(record.placeDescription ?? "nil")에서"
-            self?.contentLabel.text = record.content
-            self?.imageStackView.removeAllArranged()
-            record.photoIDs?.forEach { photoID in
-                let imageView = UIImageView()
-                imageView.setLocalImage(
-                    with: ImageFileManager.shared.imageInDocuemtDirectory(image: photoID)
-                )
-                imageView.contentMode = .scaleAspectFill
-                imageView.clipsToBounds = true
-                NSLayoutConstraint.activate([
-                    imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
-                ])
-                self?.imageStackView.addArrangedSubview(imageView)
+        self.viewModel?.recordPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] record in
+                self?.navigationItem.title = "게시물"
+                self?.titleLabel.text = record.title
+                self?.timeAndLocationLabel.text
+                = "\(record.date?.relativeDateTime() ?? "nil"), \(record.placeDescription ?? "nil")에서"
+                self?.contentLabel.text = record.content
+                self?.imageStackView.removeAllArranged()
+                record.photoIDs?.forEach { photoID in
+                    let imageView = UIImageView()
+                    imageView.setLocalImage(
+                        with: ImageFileManager.shared.imageInDocuemtDirectory(image: photoID)
+                    )
+                    imageView.contentMode = .scaleAspectFill
+                    imageView.clipsToBounds = true
+                    NSLayoutConstraint.activate([
+                        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
+                    ])
+                    self?.imageStackView.addArrangedSubview(imageView)
+                }
+                self?.configurePageControl(record: record)
             }
-            self?.configurePageControl(record: record)
-        }.store(in: &self.cancellables)
+            .store(in: &self.cancellables)
 
         self.viewModel?.errorPublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
                 ErrorManager.showToast(with: error, to: self)

@@ -36,7 +36,7 @@ final class CompleteEditingViewController: UIViewController, Instantiable {
 
     private func configureCancellables() {
         self.viewModel?.errorPublisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] optionalError in
                 guard let error = optionalError else { return }
                 ErrorManager.showToast(with: error, to: self)
