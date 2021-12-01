@@ -180,7 +180,7 @@ extension DetailRecordViewController: UIDocumentInteractionControllerDelegate {
             polaroidView.widthAnchor.constraint(equalTo: superView.widthAnchor),
             polaroidView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ])
-        polaroidView.makePolaroid(with: viewModel.record)
+        polaroidView.makePolaroid(with: viewModel.record, at: self.pageControl.currentPage)
         let image = self.renderImage(view: polaroidView)
         polaroidView.removeFromSuperview()
         self.documentInteractionController.url = self.save(
